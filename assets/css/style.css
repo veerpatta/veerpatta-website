@@ -1,0 +1,164 @@
+:root {
+  --brand-blue: #5375E2;
+  --brand-green: #84AC64;
+  --brand-yellow: #E2D64B;
+  --brand-bg: #FEFEFE;
+  --text-color: #1e2430;
+  --muted-text: #4f5b75;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: var(--brand-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--brand-blue);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.site-header {
+  background: var(--brand-blue);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+
+.header-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.header-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  background: linear-gradient(160deg, #F8F9FE 0%, #ffffff 100%);
+  border-radius: 24px;
+  padding: 2.75rem 1.75rem;
+  margin: 2.5rem 0;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(83, 117, 226, 0.08);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  color: var(--muted-text);
+  max-width: 640px;
+  margin: 0 auto 1.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-green);
+  color: #ffffff;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(132, 172, 100, 0.28);
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.stats {
+  display: grid;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  border: 1px solid rgba(83, 117, 226, 0.18);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 10px 20px rgba(83, 117, 226, 0.06);
+}
+
+.stat-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--brand-blue);
+}
+
+.section {
+  margin: 3rem 0;
+}
+
+.section h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+}
+
+.section p {
+  color: var(--muted-text);
+}
+
+.section ul {
+  padding-left: 1.2rem;
+}
+
+.site-footer {
+  background: #f4f6ff;
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--muted-text);
+  margin-top: 4rem;
+}
+
+@media (min-width: 600px) {
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
