@@ -21,7 +21,6 @@ body {
   background: var(--brand-bg);
   color: var(--text-color);
   line-height: 1.6;
-  min-width: 360px;
 }
 
 /* Typography for Hindi */
