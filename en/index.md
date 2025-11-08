@@ -96,6 +96,21 @@ lang: en
     </div>
   </section>
 
+  <!-- Admissions Section -->
+  <section class="section" id="admissions">
+    <h2 class="text-center">Admissions</h2>
+    <p>Admissions for the 2025-26 academic year are open from Nursery to Class XII. Visit our school office between 9:00 a.m. and 2:00 p.m., Monday to Saturday, to collect and submit admission forms.</p>
+    <ul>
+      <li>Please bring your child's birth certificate and the latest report card for verification.</li>
+      <li>School transport covers Behror town and nearby villages for convenient daily travel.</li>
+      <li>Scholarship assistance is available for high achievers and students in need.</li>
+    </ul>
+    <div class="admissions-actions">
+      <a class="btn" href="https://wa.me/919413748575?text=Hello,%20I'm%20interested%20in%20admission%20for%20Class%20__%20for%202025-26" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a class="btn btn-secondary" href="tel:+919413748575">Call +91 94137 48575</a>
+    </div>
+  </section>
+
   <!-- Testimonials Section -->
   <section class="section">
     <h2>What Parents Say</h2>

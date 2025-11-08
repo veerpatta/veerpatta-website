@@ -4,7 +4,7 @@
     <nav class="header-nav">
       <a href="{{ "/en/" | relative_url }}" class="nav-link">EN</a>
       <a href="{{ "/hi/" | relative_url }}" class="nav-link">HI</a>
-      <a href="{{ "/#admissions" | relative_url }}" class="nav-link">Admissions</a>
+      <a href="{{ page.url | append: '#admissions' | relative_url }}" class="nav-link">Admissions</a>
     </nav>
   </div>
 </header>

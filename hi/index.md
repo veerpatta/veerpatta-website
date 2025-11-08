@@ -96,6 +96,21 @@ lang: hi
     </div>
   </section>
 
+  <!-- Admissions Section -->
+  <section class="section" id="admissions">
+    <h2 class="text-center">प्रवेश</h2>
+    <p>शैक्षणिक सत्र 2025-26 के लिए नर्सरी से कक्षा 12 तक प्रवेश खुले हैं। प्रवेश प्रपत्र लेने और जमा करने के लिए सोमवार से शनिवार सुबह 9:00 बजे से दोपहर 2:00 बजे के बीच विद्यालय कार्यालय आएं।</p>
+    <ul>
+      <li>कृपया बच्चे का जन्म प्रमाणपत्र और नवीनतम प्रगति पत्र सत्यापन के लिए साथ लाएँ।</li>
+      <li>दैनिक आवागमन के लिए बेहरोड़ शहर और आसपास के गाँवों तक स्कूल परिवहन उपलब्ध है।</li>
+      <li>मेधावी और ज़रूरतमंद विद्यार्थियों के लिए छात्रवृत्ति सहायता उपलब्ध है।</li>
+    </ul>
+    <div class="admissions-actions">
+      <a class="btn" href="https://wa.me/919413748575?text=Hello,%20I'm%20interested%20in%20admission%20for%20Class%20__%20for%202025-26" target="_blank" rel="noopener">व्हाट्सएप पर बात करें</a>
+      <a class="btn btn-secondary" href="tel:+919413748575">कॉल करें: +91 94137 48575</a>
+    </div>
+  </section>
+
   <!-- Testimonials Section -->
   <section class="section">
     <h2>अभिभावक क्या कहते हैं</h2>
