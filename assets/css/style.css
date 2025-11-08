@@ -451,3 +451,73 @@ button:focus-visible {
   font-size: 0.9rem;
   margin: 0;
 }
+
+/* Admission Form */
+.admission-form {
+  display: grid;
+  gap: 10px;
+  max-width: 420px;
+}
+
+.admission-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.admission-form input,
+.admission-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.admission-form input:focus,
+.admission-form select:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Fees Table */
+.fees {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.fees th,
+.fees td {
+  border: 1px solid #eee;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Timeline */
+.timeline {
+  list-style: none;
+  padding: 0;
+  counter-reset: step;
+}
+
+.timeline li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2rem;
+  margin: 8px 0;
+}
+
+.timeline li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--green);
+  color: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+}
