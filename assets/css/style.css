@@ -414,3 +414,40 @@ button:focus-visible {
   outline: 2px solid var(--brand-blue);
   outline-offset: 2px;
 }
+
+/* Additional simplified selectors for homepage-v1 compatibility */
+:root {
+  --blue: #5375E2;
+  --green: #84AC64;
+  --yellow: #E2D64B;
+  --bg: #FEFEFE;
+  --text: #222;
+}
+
+.program {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.program img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.program h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.program p {
+  color: var(--muted-text);
+  font-size: 0.9rem;
+  margin: 0;
+}
