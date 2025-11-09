@@ -544,6 +544,37 @@ button:focus-visible {
   }
 }
 
+/* Language Switcher */
+.lang-switch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid rgba(83, 117, 226, 0.25);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: #fff;
+}
+.lang-btn.current {
+  background: var(--brand-blue);
+  color: #fff;
+  border-color: var(--brand-blue);
+  cursor: default;
+}
+@media (max-width: 640px) {
+  .lang-btn {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.55rem;
+  }
+}
+
 /* WhatsApp Floating Button */
 .whatsapp-float {
   position: fixed;

@@ -7,6 +7,9 @@
   {% assign admissions_path = '/hi/admissions/' %}
   {% assign gallery_path = '/hi/gallery/' %}
   {% assign contact_path = '/hi/contact/' %}
+  {% assign current_lang = 'hi' %}
+  {% assign alt_lang = 'en' %}
+  {% assign alt_path = page.url | replace_first: '/hi/', '/en/' %}
 {% else %}
   {% assign home_path = '/en/' %}
   {% assign about_path = '/en/about/' %}
@@ -14,14 +17,35 @@
   {% assign admissions_path = '/en/admissions/' %}
   {% assign gallery_path = '/en/gallery/' %}
   {% assign contact_path = '/en/contact/' %}
+  {% assign current_lang = 'en' %}
+  {% assign alt_lang = 'hi' %}
+  {% assign alt_path = page.url | replace_first: '/en/', '/hi/' %}
+{% endif %}
+
+{%- comment -%}
+If replace_first doesn't find a match (e.g., homepage edge cases), default to localized homes:
+{%- endcomment -%}
+{% if alt_path == page.url %}
+  {% if current_lang == 'en' %}
+    {% assign alt_path = '/hi/' %}
+  {% else %}
+    {% assign alt_path = '/en/' %}
+  {% endif %}
 {% endif %}
 
 <header class="site-header">
   <div class="container header-bar">
     <div class="header-title"><a href="{{ "/" | relative_url }}" class="header-link">Veer Patta Public School</a></div>
     <nav class="header-nav">
-      <a href="{{ "/en/" | relative_url }}" class="nav-link">EN</a>
-      <a href="{{ "/hi/" | relative_url }}" class="nav-link">HI</a>
+      <div class="lang-switch" role="navigation" aria-label="Language switcher">
+        {% if current_lang == 'en' %}
+          <span class="lang-btn current" lang="en" aria-current="true">English</span>
+          <a class="lang-btn" href="{{ alt_path | relative_url }}" lang="hi" hreflang="hi" aria-label="Switch to Hindi">हिंदी</a>
+        {% else %}
+          <a class="lang-btn" href="{{ alt_path | relative_url }}" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+          <span class="lang-btn current" lang="hi" aria-current="true">हिंदी</span>
+        {% endif %}
+      </div>
       <a class="nav-link" href="{{ about_path | relative_url }}">About</a>
       <a class="nav-link" href="{{ academics_path | relative_url }}">Academics</a>
       <a href="{{ admissions_path | relative_url }}" class="nav-link">Admissions</a>
