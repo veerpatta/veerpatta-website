@@ -92,5 +92,14 @@ title: Home (EN)
   </div>
 </section>
 
+<!-- CONTACT TEASER -->
+<section class="container contact-teaser" id="contact">
+  <div class="about-teaser-card">
+    <h2>Visit or Call Us</h2>
+    <p>Questions about admissions or transport? We're here to help.</p>
+    <p><a class="btn btn-secondary" href="{{ '/en/contact/' | relative_url }}">Contact Page</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}
