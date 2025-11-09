@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About (HI)
+description: 1994 में स्थापित, वीर पट्टा पब्लिक स्कूल मूल्य-आधारित शिक्षा और आधुनिक सीख को जोड़ता है—नोखा, राजस्थान में CBSE अंग्रेज़ी-माध्यम।
 permalink: /hi/about/
 ---
 {% include header.html %}

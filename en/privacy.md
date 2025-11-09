@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Privacy (EN)
+description: We collect minimal information via forms or WhatsApp to respond to your enquiry. We do not sell your data.
 permalink: /en/privacy/
 ---
 {% include header.html %}

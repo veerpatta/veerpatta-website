@@ -1,0 +1,11 @@
+---
+permalink: /sitemap.xml
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% assign pages = "/en/ , /hi/ , /en/about/ , /hi/about/ , /en/academics/ , /hi/academics/ , /en/admissions/ , /hi/admissions/ , /en/gallery/ , /hi/gallery/ , /en/contact/ , /hi/contact/ , /en/privacy/ , /hi/privacy/" | split: "," %}
+  {% for p in pages %}
+  <url><loc>{{ p | strip | relative_url | absolute_url }}</loc></url>
+  {% endfor %}
+</urlset>

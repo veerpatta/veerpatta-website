@@ -1,9 +1,31 @@
 ---
 layout: default
 title: Home (EN)
+description: English-medium school in Nokha (since 1994) with LEAD classrooms, NCC, sports, and caring teachers.
 ---
 {% include header.html %}
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"School",
+  "name":"Veer Patta Public School",
+  "url":"{{ '/en/' | relative_url | absolute_url }}",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"Karmal Road",
+    "addressLocality":"Nokha",
+    "addressRegion":"Rajasthan",
+    "postalCode":"334803",
+    "addressCountry":"IN"
+  },
+  "telephone":"+91 94137 48575",
+  "sameAs":[
+    "https://wa.me/919413748575"
+  ]
+}
+</script>
 
 <!-- HERO -->
 <section class="hero container">
