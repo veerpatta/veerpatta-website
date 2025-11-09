@@ -11,3 +11,8 @@ permalink: pretty
 collections:
   pages:
     output: true
+
+# Analytics (privacy-safe, disabled by default)
+analytics_enabled: false
+analytics_script: "https://plausible.io/js/script.js"
+analytics_domain: "veerpatta.github.io"
