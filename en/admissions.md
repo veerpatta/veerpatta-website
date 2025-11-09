@@ -46,6 +46,33 @@ permalink: /en/admissions/
     </article>
   </section>
 
+  <!-- Fee Structure -->
+  <section class="admissions-fees">
+    <h2>Fee Structure</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monthly</td>
+          <td>₹ 2,083 / month</td>
+        </tr>
+        <tr>
+          <td>Quarterly</td>
+          <td>₹ 6,250 / quarter</td>
+        </tr>
+        <tr>
+          <td>Annual</td>
+          <td>₹ 25,000 / year (10% discount)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
   <!-- Admissions Timeline -->
   <section class="admissions-timeline">
     <h2>Admission Process</h2>
@@ -54,28 +81,21 @@ permalink: /en/admissions/
         <span class="step-number">1</span>
         <div>
           <h3>Inquiry & Registration</h3>
-          <p>Contact us via WhatsApp, phone, or visit in person. Fill out the registration form and submit required documents.</p>
+          <p>Contact us via WhatsApp/phone or visit. Fill the form and submit required documents.</p>
         </div>
       </li>
       <li>
         <span class="step-number">2</span>
         <div>
           <h3>Interaction & Assessment</h3>
-          <p>For new students, we conduct a friendly interaction to understand their learning level and interests. For younger children, this is a play-based observation.</p>
+          <p>Friendly readiness interaction (play-based for younger children).</p>
         </div>
       </li>
       <li>
         <span class="step-number">3</span>
         <div>
           <h3>Admission Confirmation</h3>
-          <p>Once accepted, complete the admission formalities including fee payment. You'll receive a welcome kit and class schedule.</p>
-        </div>
-      </li>
-      <li>
-        <span class="step-number">4</span>
-        <div>
-          <h3>Orientation & Onboarding</h3>
-          <p>Attend our orientation session to meet teachers, understand policies, and help your child settle into their new learning journey.</p>
+          <p>On selection, complete fee formalities and receive the welcome kit.</p>
         </div>
       </li>
     </ol>
