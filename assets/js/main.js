@@ -346,6 +346,85 @@
 })();
 
 /* ============================================
+   MOBILE MENU TOGGLE
+   ============================================ */
+(function initMobileMenu() {
+  const menuToggle = document.getElementById('mobileMenuToggle');
+  const menuClose = document.getElementById('mobileNavClose');
+  const mobileNav = document.getElementById('mobileNavMenu');
+  const overlay = document.getElementById('mobileNavOverlay');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (!menuToggle || !mobileNav || !overlay) return;
+
+  // Open mobile menu
+  function openMenu() {
+    mobileNav.classList.add('active');
+    overlay.classList.add('active');
+    menuToggle.classList.add('active');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    overlay.setAttribute('aria-hidden', 'false');
+
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close mobile menu
+  function closeMenu() {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    menuToggle.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+
+    // Restore body scroll
+    document.body.style.overflow = '';
+  }
+
+  // Toggle menu on button click
+  menuToggle.addEventListener('click', () => {
+    if (mobileNav.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Close menu when close button is clicked
+  if (menuClose) {
+    menuClose.addEventListener('click', closeMenu);
+  }
+
+  // Close menu when overlay is clicked
+  overlay.addEventListener('click', closeMenu);
+
+  // Close menu when a link is clicked
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+
+  // Close menu when window is resized to desktop
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth > 968 && mobileNav.classList.contains('active')) {
+        closeMenu();
+      }
+    }, 250);
+  });
+})();
+
+/* ============================================
    NAVIGATION SCROLL BEHAVIOR
    ============================================ */
 (function initNavScroll() {
@@ -356,11 +435,11 @@
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
-    // Add shadow when scrolled
+    // Add scrolled class and enhanced shadow when scrolled
     if (currentScroll > 10) {
-      header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+      header.classList.add('scrolled');
     } else {
-      header.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
+      header.classList.remove('scrolled');
     }
 
     lastScroll = currentScroll;
