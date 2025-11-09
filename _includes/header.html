@@ -37,14 +37,26 @@ If replace_first doesn't find a match (e.g., homepage edge cases), default to lo
   <div class="container header-bar">
     <div class="header-title"><a href="{{ "/" | relative_url }}" class="header-link">Veer Patta Public School</a></div>
     <nav class="header-nav">
-      <div class="lang-switch" role="navigation" aria-label="Language switcher">
-        {% if current_lang == 'en' %}
-          <span class="lang-btn current" lang="en" aria-current="true">English</span>
-          <a class="lang-btn" href="{{ alt_path | relative_url }}" lang="hi" hreflang="hi" aria-label="Switch to Hindi">हिंदी</a>
-        {% else %}
-          <a class="lang-btn" href="{{ alt_path | relative_url }}" lang="en" hreflang="en" aria-label="Switch to English">English</a>
-          <span class="lang-btn current" lang="hi" aria-current="true">हिंदी</span>
-        {% endif %}
+      <div class="lang-switch-wrap" aria-label="Language">
+        <span class="lang-switch-label">
+          <!-- tiny globe icon -->
+          <svg class="globe" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 010-16 8 8 0 010 16z"/>
+            <path d="M3.5 12h17M12 3.5v17M7 12c0 5 2.2 8.5 5 8.5S17 17 17 12 14.8 3.5 12 3.5 7 7 7 12z" fill="none" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          <span class="visually-hidden">Language</span>
+        </span>
+
+        <nav class="lang-segmented" role="tablist" aria-label="Select language">
+          <span class="seg-track" aria-hidden="true"></span>
+          {% if current_lang == 'en' %}
+            <span class="seg current" role="tab" aria-current="true" lang="en">English</span>
+            <a class="seg" role="tab" href="{{ alt_path | relative_url }}" lang="hi" hreflang="hi" aria-label="Switch to Hindi">हिंदी</a>
+          {% else %}
+            <a class="seg" role="tab" href="{{ alt_path | relative_url }}" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+            <span class="seg current" role="tab" aria-current="true" lang="hi">हिंदी</span>
+          {% endif %}
+        </nav>
       </div>
       <a class="nav-link" href="{{ about_path | relative_url }}">About</a>
       <a class="nav-link" href="{{ academics_path | relative_url }}">Academics</a>
