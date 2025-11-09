@@ -517,3 +517,11 @@ button:focus-visible {
 .gallery-item .ph{background:linear-gradient(135deg,#eef2ff,#f8fafc);aspect-ratio:4/3}
 .gallery-item figcaption{font-size:.9rem;padding:.5rem .6rem;color:var(--muted-text)}
 @media (max-width:600px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Contact Page */
+.contact{display:grid;gap:2rem;margin:2.5rem 0 4rem}
+.contact-hero{background:linear-gradient(160deg,rgba(83,117,226,.08),rgba(132,172,100,.08));padding:clamp(1.25rem,5vw,2rem);border-radius:18px}
+.contact-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.footer-links{list-style:none;padding:0;margin-top:1rem;display:flex;flex-wrap:wrap;gap:.75rem}
+.footer-links a{text-decoration:none}
+@media (max-width:600px){.contact-grid{grid-template-columns:1fr}}

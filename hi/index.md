@@ -92,5 +92,14 @@ title: मुखपृष्ठ (HI)
   </div>
 </section>
 
+<!-- CONTACT TEASER -->
+<section class="container contact-teaser lang-hi" id="contact">
+  <div class="about-teaser-card">
+    <h2>हमसे मिलें या कॉल करें</h2>
+    <p>प्रवेश/परिवहन से जुड़े सवाल? हम मदद के लिए तैयार हैं।</p>
+    <p><a class="btn btn-secondary" href="{{ '/hi/contact/' | relative_url }}">संपर्क पृष्ठ</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}

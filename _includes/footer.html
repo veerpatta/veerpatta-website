@@ -1,5 +1,28 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang_segment = segments[1] %}
+{% if lang_segment == 'hi' %}
+  {% assign about_path = '/hi/about/' %}
+  {% assign academics_path = '/hi/academics/' %}
+  {% assign admissions_path = '/hi/admissions/' %}
+  {% assign gallery_path = '/hi/gallery/' %}
+  {% assign contact_path = '/hi/contact/' %}
+{% else %}
+  {% assign about_path = '/en/about/' %}
+  {% assign academics_path = '/en/academics/' %}
+  {% assign admissions_path = '/en/admissions/' %}
+  {% assign gallery_path = '/en/gallery/' %}
+  {% assign contact_path = '/en/contact/' %}
+{% endif %}
+
 <footer class="site-footer">
   <div class="container">
+    <ul class="footer-links">
+      <li><a href="{{ about_path | relative_url }}">About</a></li>
+      <li><a href="{{ academics_path | relative_url }}">Academics</a></li>
+      <li><a href="{{ admissions_path | relative_url }}">Admissions</a></li>
+      <li><a href="{{ gallery_path | relative_url }}">Gallery</a></li>
+      <li><a href="{{ contact_path | relative_url }}">Contact</a></li>
+    </ul>
     <p>Veer Patta Public School · NH 48, Behror, Rajasthan</p>
     <p>© {{ site.time | date: "%Y" }} Veer Patta Public School</p>
   </div>
