@@ -65,5 +65,14 @@ title: मुखपृष्ठ (HI)
   <blockquote>"मेरा बच्चा अधिक आत्मविश्वासी और अनुशासित हो गया है—धन्यवाद VPS।"</blockquote>
 </section>
 
+<!-- ABOUT TEASER -->
+<section class="container about-teaser lang-hi" id="about">
+  <div class="about-teaser-card">
+    <h2>वीर पट्टा पब्लिक स्कूल के बारे में</h2>
+    <p>मूल्यों में रचा-बसा, आधुनिक शिक्षा पर केंद्रित। 1994 से हम अनुशासन, नैतिकता और गुणवत्तापूर्ण शिक्षा के साथ आत्मविश्वासी विद्यार्थियों का निर्माण कर रहे हैं।</p>
+    <p><a class="btn btn-secondary" href="{{ '/hi/about/' | relative_url }}">और जानें</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}

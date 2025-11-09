@@ -1,14 +1,29 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang_segment = segments[1] %}
+{% if lang_segment == 'hi' %}
+  {% assign home_path = '/hi/' %}
+  {% assign about_path = '/hi/about/' %}
+  {% assign academics_path = '/hi/academics/' %}
+  {% assign admissions_path = '/hi/admissions/' %}
+  {% assign gallery_path = '/hi/gallery/' %}
+  {% assign contact_path = '/hi/contact/' %}
+{% else %}
+  {% assign home_path = '/en/' %}
+  {% assign about_path = '/en/about/' %}
+  {% assign academics_path = '/en/academics/' %}
+  {% assign admissions_path = '/en/admissions/' %}
+  {% assign gallery_path = '/en/gallery/' %}
+  {% assign contact_path = '/en/contact/' %}
+{% endif %}
+
 <header class="site-header">
   <div class="container header-bar">
     <div class="header-title"><a href="{{ "/" | relative_url }}" class="header-link">Veer Patta Public School</a></div>
     <nav class="header-nav">
       <a href="{{ "/en/" | relative_url }}" class="nav-link">EN</a>
       <a href="{{ "/hi/" | relative_url }}" class="nav-link">HI</a>
-      {% assign admissions_url = "/en/admissions/" %}
-      {% if page.url contains "/hi/" or page.path contains "hi/" %}
-        {% assign admissions_url = "/hi/admissions/" %}
-      {% endif %}
-      <a href="{{ admissions_url | relative_url }}" class="nav-link">Admissions</a>
+      <a class="nav-link" href="{{ about_path | relative_url }}">About</a>
+      <a href="{{ admissions_path | relative_url }}" class="nav-link">Admissions</a>
     </nav>
   </div>
 </header>
