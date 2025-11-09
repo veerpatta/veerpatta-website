@@ -21,13 +21,13 @@
   {% assign self_url = page.url | absolute_url %}
   <link rel="alternate" href="{{ self_url }}" hreflang="hi">
   <link rel="alternate" href="{{ alt_en }}" hreflang="en">
-  <link rel="alternate" href="{{ site.url | append: site.baseurl | append: '/en/' }}" hreflang="x-default">
+  <link rel="alternate" href="{{ alt_en }}" hreflang="x-default">
 {% elsif lang_segment == 'en' %}
   {% assign alt_hi = page.url | replace_first: '/en/', '/hi/' | absolute_url %}
   {% assign self_url = page.url | absolute_url %}
   <link rel="alternate" href="{{ self_url }}" hreflang="en">
   <link rel="alternate" href="{{ alt_hi }}" hreflang="hi">
-  <link rel="alternate" href="{{ site.url | append: site.baseurl | append: '/en/' }}" hreflang="x-default">
+  <link rel="alternate" href="{{ self_url }}" hreflang="x-default">
 {% endif %}
 
 <!-- Open Graph -->
