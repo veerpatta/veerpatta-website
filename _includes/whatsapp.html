@@ -1,3 +1,15 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang_segment = segments[1] %}
+{% if lang_segment == 'hi' %}
+  {% assign whatsapp_label = 'VPS प्रवेश टीम से चैट करें' %}
+  {% assign whatsapp_message = 'नमस्ते, मैं अमेट क्षेत्र का अभिभावक हूं। मुझे 2024-25 सत्र में अपने बच्चे का कक्षा 6 में प्रवेश करवाना है। कृपया परासोली मार्ग की विस्तृत शुल्क व परिवहन जानकारी साझा करें। धन्यवाद!' %}
+  {% assign whatsapp_aria = 'त्वरित प्रवेश सहायता (नए टैब में खुलेगा)' %}
+{% else %}
+  {% assign whatsapp_label = 'Chat with VPS Admissions' %}
+  {% assign whatsapp_message = "Hi, I'm a parent from the Amet area. I'd like details for Class 6 admission in 2024-25 at Veer Patta Public School, Amet. Please share the complete fees and transport schedule for the Parasoli route." %}
+  {% assign whatsapp_aria = 'Chat with admissions (opens in a new tab)' %}
+{% endif %}
+
 <style>
   .whatsapp-float {
     position: fixed;
@@ -33,11 +45,11 @@
 </style>
 <a
   class="whatsapp-float"
-  href="https://wa.me/919413748575?text=Hello,%20I%20am%20interested%20in%20admission%20for%20my%20child%20in%20Class%20__%20at%20Veer%20Patta%20School,%20Amet.%20Please%20share%20details."
+  href="https://wa.me/919413748575?text={{ whatsapp_message | uri_escape }}"
   target="_blank"
   rel="noopener"
-  aria-label="Quick Admission Inquiry (opens in a new tab)"
+  aria-label="{{ whatsapp_aria }}"
 >
   <span aria-hidden="true">💬</span>
-  <span class="whatsapp-label">Quick Admission Inquiry</span>
+  <span class="whatsapp-label">{{ whatsapp_label }}</span>
 </a>

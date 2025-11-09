@@ -19,7 +19,7 @@ permalink: /en/contact/
       <p>Veer Patta Public School, Near Karmal Road, Amet, Rajsamand, Rajasthan - 313332</p>
       <p>Phone: <a href="tel:+919413748575">+91 94137 48575</a><br>
          Email: <a href="mailto:veerpatta.school@gmail.com">veerpatta.school@gmail.com</a></p>
-      <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">WhatsApp us</a></p>
+      <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">Chat with VPS Admissions</a></p>
     </article>
 
     <article class="card">
@@ -35,8 +35,9 @@ permalink: /en/contact/
       <h2>Transport Routes</h2>
       <ul>
         <li><strong>Route 1:</strong> Amet Town → Karmal Road → School</li>
-        <li><strong>Route 2:</strong> Surrounding villages (Khempur, Parasoli, etc.)</li>
-        <li>New routes can be arranged based on demand</li>
+        <li><strong>Route 2:</strong> Parasoli → Khempur → School</li>
+        <li><strong>Route 3:</strong> Piplantri → Babarmal → School</li>
+        <li>New routes can be arranged based on parent demand within the 15km radius</li>
       </ul>
     </article>
   </section>
