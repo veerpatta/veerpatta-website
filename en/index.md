@@ -65,5 +65,14 @@ title: Home (EN)
   <blockquote>"My child has become more confident and disciplined—thank you VPS."</blockquote>
 </section>
 
+<!-- ABOUT TEASER -->
+<section class="container about-teaser" id="about">
+  <div class="about-teaser-card">
+    <h2>About Veer Patta Public School</h2>
+    <p>Rooted in values, focused on modern learning. Since 1994, we've nurtured confident, disciplined learners through strong academics and character building.</p>
+    <p><a class="btn btn-secondary" href="{{ '/en/about/' | relative_url }}">Learn more</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}
