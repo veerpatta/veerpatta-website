@@ -1,0 +1,8 @@
+{% comment %}
+  Analytics include - privacy-safe tracking
+  Only loads when site.analytics_enabled is true
+  No cookies, no personal data, async load
+{% endcomment %}
+{% if site.analytics_enabled and site.analytics_script %}
+  <script defer data-domain="{{ site.analytics_domain }}" src="{{ site.analytics_script }}"></script>
+{% endif %}
