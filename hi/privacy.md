@@ -1,5 +1,6 @@
 ---
 layout: default
+lang: hi
 title: गोपनीयता (HI)
 description: हम फॉर्म या व्हाट्सऐप के माध्यम से न्यूनतम जानकारी एकत्र करते हैं। हम आपके डेटा को नहीं बेचते।
 permalink: /hi/privacy/
