@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About (EN)
+description: Founded in 1994, Veer Patta Public School combines values-driven education with modern learning—CBSE English-medium in Nokha, Rajasthan.
 permalink: /en/about/
 ---
 {% include header.html %}

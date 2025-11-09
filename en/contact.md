@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Contact (EN)
+description: Reach Veer Patta Public School on Karmal Road, Nokha, Rajasthan. Call/WhatsApp +91 94137 48575 for admissions, transport, or general queries.
 permalink: /en/contact/
 ---
 {% include header.html %}

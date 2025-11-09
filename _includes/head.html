@@ -1,0 +1,54 @@
+{% comment %} Build absolute canonical safely using site.url + site.baseurl + page.url {% endcomment %}
+{% assign page_canonical = page.url | absolute_url %}
+{% assign site_name = site.title | default: "Veer Patta Public School" %}
+{% assign page_title = page.title | default: site_name %}
+{% assign page_description = page.description | default: "English-medium school in Nokha (since 1994) with LEAD classrooms, NCC, sports, and caring teachers." %}
+
+<!-- Basic meta -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }} | {{ site_name }}</title>
+<meta name="description" content="{{ page_description }}">
+
+<!-- Canonical -->
+<link rel="canonical" href="{{ page_canonical }}">
+
+<!-- Hreflang (English/Hindi alternates) -->
+{% assign url_parts = page.url | split: '/' %}
+{% assign lang_segment = url_parts[1] %}
+{% if lang_segment == 'hi' %}
+  {% assign alt_en = page.url | replace_first: '/hi/', '/en/' | absolute_url %}
+  {% assign self_url = page.url | absolute_url %}
+  <link rel="alternate" href="{{ self_url }}" hreflang="hi">
+  <link rel="alternate" href="{{ alt_en }}" hreflang="en">
+  <link rel="alternate" href="{{ site.url | append: site.baseurl | append: '/en/' }}" hreflang="x-default">
+{% elsif lang_segment == 'en' %}
+  {% assign alt_hi = page.url | replace_first: '/en/', '/hi/' | absolute_url %}
+  {% assign self_url = page.url | absolute_url %}
+  <link rel="alternate" href="{{ self_url }}" hreflang="en">
+  <link rel="alternate" href="{{ alt_hi }}" hreflang="hi">
+  <link rel="alternate" href="{{ site.url | append: site.baseurl | append: '/en/' }}" hreflang="x-default">
+{% endif %}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site_name }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:url" content="{{ page_canonical }}">
+{% if page.og_image %}
+  <meta property="og:image" content="{{ page.og_image | absolute_url }}">
+{% endif %}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title }}">
+<meta name="twitter:description" content="{{ page_description }}">
+{% if page.og_image %}
+  <meta name="twitter:image" content="{{ page.og_image | absolute_url }}">
+{% endif %}
+
+<!-- Robots: noindex for 404 -->
+{% if page.url == '/404.html' or page.noindex == true %}
+  <meta name="robots" content="noindex, nofollow">
+{% endif %}

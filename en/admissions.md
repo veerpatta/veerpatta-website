@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Admissions (EN)
+description: Join Veer Patta Public School in Nokha. Application period Nov-Mar, session starts April. Safe environment, caring teachers, balanced curriculum.
 permalink: /en/admissions/
 ---
 

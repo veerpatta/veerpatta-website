@@ -1,9 +1,31 @@
 ---
 layout: default
 title: मुखपृष्ठ (HI)
+description: नोखा में अंग्रेज़ी-माध्यम विद्यालय (1994 से) LEAD कक्षाएँ, NCC, खेल और संवेदनशील शिक्षकों के साथ।
 ---
 {% include header.html %}
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"School",
+  "name":"Veer Patta Public School",
+  "url":"{{ '/hi/' | relative_url | absolute_url }}",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"Karmal Road",
+    "addressLocality":"Nokha",
+    "addressRegion":"Rajasthan",
+    "postalCode":"334803",
+    "addressCountry":"IN"
+  },
+  "telephone":"+91 94137 48575",
+  "sameAs":[
+    "https://wa.me/919413748575"
+  ]
+}
+</script>
 
 <!-- HERO -->
 <section class="hero container">
