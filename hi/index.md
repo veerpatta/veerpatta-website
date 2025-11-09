@@ -74,5 +74,14 @@ title: मुखपृष्ठ (HI)
   </div>
 </section>
 
+<!-- ACADEMICS TEASER -->
+<section class="container academics-teaser lang-hi" id="academics">
+  <div class="about-teaser-card">
+    <h2>VPS में शैक्षणिक</h2>
+    <p>LEAD के साथ मज़बूत नींव, संवेदनशील शिक्षक और नियमित महारत जाँच।</p>
+    <p><a class="btn btn-secondary" href="{{ '/hi/academics/' | relative_url }}">शैक्षणिक देखें</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}

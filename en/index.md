@@ -74,5 +74,14 @@ title: Home (EN)
   </div>
 </section>
 
+<!-- ACADEMICS TEASER -->
+<section class="container academics-teaser" id="academics">
+  <div class="about-teaser-card">
+    <h2>Academics at VPS</h2>
+    <p>Strong fundamentals with LEAD, caring teachers, and regular mastery checks.</p>
+    <p><a class="btn btn-secondary" href="{{ '/en/academics/' | relative_url }}">Explore Academics</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}
