@@ -114,12 +114,13 @@
 
 /* ============================================
    WHATSAPP BUTTON ATTENTION PULSE
+   Mobile-first: only pulse the sticky mobile button
    ============================================ */
 (function initWhatsAppPulse() {
-  const whatsappBtn = document.querySelector('.whatsapp-float');
+  const whatsappBtn = document.querySelector('.sticky-whatsapp-mobile');
   if (!whatsappBtn) return;
 
-  // Pulse every 10 seconds to draw attention
+  // Pulse every 10 seconds to draw attention on mobile
   setInterval(() => {
     whatsappBtn.classList.add('attention-pulse');
     setTimeout(() => {
@@ -346,43 +347,68 @@
 })();
 
 /* ============================================
-   MOBILE MENU TOGGLE
+   MOBILE MENU TOGGLE - MOBILE-FIRST OPTIMIZED
+   Enhanced for budget Android on 3G networks
    ============================================ */
 (function initMobileMenu() {
-  const menuToggle = document.getElementById('mobileMenuToggle');
-  const menuClose = document.getElementById('mobileNavClose');
-  const mobileNav = document.getElementById('mobileNavMenu');
-  const overlay = document.getElementById('mobileNavOverlay');
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const closeBtn = document.getElementById('mobileCloseBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const overlay = document.getElementById('mobileOverlay');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  const header = document.getElementById('siteHeader');
 
-  if (!menuToggle || !mobileNav || !overlay) return;
+  if (!menuBtn || !mobileNav || !overlay) return;
 
-  // Open mobile menu
+  // Open mobile menu - optimized for performance
   function openMenu() {
-    mobileNav.classList.add('active');
+    // Add body class to prevent scroll
+    document.body.classList.add('menu-open');
+
+    // Show overlay first
     overlay.classList.add('active');
-    menuToggle.classList.add('active');
-    menuToggle.setAttribute('aria-expanded', 'true');
     overlay.setAttribute('aria-hidden', 'false');
 
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = 'hidden';
+    // Then slide in menu (slight delay for smoother animation)
+    requestAnimationFrame(() => {
+      mobileNav.classList.add('active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    });
+
+    // Focus on close button for accessibility
+    if (closeBtn) {
+      setTimeout(() => closeBtn.focus(), 350);
+    }
+
+    // Remove will-change after animation
+    setTimeout(() => {
+      mobileNav.classList.add('animation-complete');
+      overlay.classList.add('animation-complete');
+    }, 300);
   }
 
-  // Close mobile menu
+  // Close mobile menu - optimized for performance
   function closeMenu() {
+    // Remove active states
     mobileNav.classList.remove('active');
     overlay.classList.remove('active');
-    menuToggle.classList.remove('active');
-    menuToggle.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-expanded', 'false');
     overlay.setAttribute('aria-hidden', 'true');
 
-    // Restore body scroll
-    document.body.style.overflow = '';
+    // Restore body scroll after animation completes
+    setTimeout(() => {
+      document.body.classList.remove('menu-open');
+      mobileNav.classList.remove('animation-complete');
+      overlay.classList.remove('animation-complete');
+    }, 300);
+
+    // Return focus to menu button
+    menuBtn.focus();
   }
 
   // Toggle menu on button click
-  menuToggle.addEventListener('click', () => {
+  menuBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     if (mobileNav.classList.contains('active')) {
       closeMenu();
     } else {
@@ -391,8 +417,11 @@
   });
 
   // Close menu when close button is clicked
-  if (menuClose) {
-    menuClose.addEventListener('click', closeMenu);
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeMenu();
+    });
   }
 
   // Close menu when overlay is clicked
@@ -412,15 +441,35 @@
     }
   });
 
-  // Close menu when window is resized to desktop
+  // Close menu when window is resized to tablet/desktop
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (window.innerWidth > 968 && mobileNav.classList.contains('active')) {
+      if (window.innerWidth >= 768 && mobileNav.classList.contains('active')) {
         closeMenu();
       }
     }, 250);
+  });
+
+  // Trap focus inside mobile menu when open
+  mobileNav.addEventListener('keydown', (e) => {
+    if (!mobileNav.classList.contains('active')) return;
+    if (e.key !== 'Tab') return;
+
+    const focusableElements = mobileNav.querySelectorAll(
+      'a[href], button:not([disabled])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault();
+      lastElement.focus();
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault();
+      firstElement.focus();
+    }
   });
 })();
 
