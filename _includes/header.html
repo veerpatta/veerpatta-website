@@ -4,7 +4,11 @@
     <nav class="header-nav">
       <a href="{{ "/en/" | relative_url }}" class="nav-link">EN</a>
       <a href="{{ "/hi/" | relative_url }}" class="nav-link">HI</a>
-      <a href="{{ "/#admissions" | relative_url }}" class="nav-link">Admissions</a>
+      {% assign admissions_url = "/en/admissions" %}
+      {% if page.url contains "/hi/" %}
+        {% assign admissions_url = "/hi/admissions" %}
+      {% endif %}
+      <a href="{{ admissions_url | relative_url }}" class="nav-link">Admissions</a>
     </nav>
   </div>
 </header>

@@ -451,3 +451,34 @@ button:focus-visible {
   font-size: 0.9rem;
   margin: 0;
 }
+
+/* Admissions Page Styles */
+.admissions{display:flex;flex-direction:column;gap:3rem;padding:2.5rem 0 4rem}
+.admissions h1{font-size:clamp(2rem,5vw,2.8rem);margin-bottom:.75rem}
+.admissions-intro p{color:var(--muted-text);max-width:720px;font-size:clamp(1rem,3vw,1.1rem)}
+.admission-form-section h2,.fees h2,.timeline h2{font-size:clamp(1.45rem,4vw,1.85rem);margin-bottom:1rem}
+.admission-form{background:#fff;border-radius:16px;box-shadow:0 16px 40px rgba(83,117,226,.08);padding:1.75rem;display:grid;gap:1.25rem}
+.admission-form .form-group{display:flex;flex-direction:column;gap:.5rem}
+.admission-form label{font-weight:600;font-size:.95rem}
+.admission-form input,.admission-form select{width:100%;padding:.75rem .85rem;border:1px solid #c7cfec;border-radius:12px;font-size:1rem;transition:border-color .2s,box-shadow .2s;background:#fff}
+.admission-form input:focus,.admission-form select:focus{outline:3px solid var(--blue);outline-offset:2px;border-color:var(--blue);box-shadow:0 0 0 4px rgba(83,117,226,.15)}
+.admission-form .form-actions{display:flex;justify-content:flex-end}
+.fees-table-wrapper{overflow-x:auto}
+.fees table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;box-shadow:0 12px 32px rgba(83,117,226,.08)}
+.fees th,.fees td{padding:.85rem;text-align:left;font-size:clamp(.9rem,2.5vw,1rem)}
+.fees thead{background:#f3f5ff}
+.fees tbody tr:nth-child(even){background:#fafbff}
+.fees-note{margin-top:.75rem;color:var(--muted-text);font-size:.9rem}
+.timeline-steps{list-style:none;counter-reset:admission-step;display:grid;gap:1.25rem;padding:0}
+.timeline-steps li{counter-increment:admission-step;position:relative;background:#fff;border-radius:16px;box-shadow:0 12px 32px rgba(83,117,226,.08);padding:1.5rem 1.25rem 1.5rem 3.75rem}
+.timeline-steps li::before{content:counter(admission-step);position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);width:2.25rem;height:2.25rem;border-radius:50%;background:var(--brand-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.timeline-steps li:focus-visible{outline:3px solid var(--brand-green);outline-offset:4px}
+.timeline-steps h3{margin-bottom:.3rem;font-size:1.05rem}
+.timeline-steps p{margin:0;color:var(--muted-text);font-size:.95rem}
+@media (max-width:600px){
+  .admission-form{padding:1.25rem}
+  .admission-form .form-actions{justify-content:stretch}
+  .admission-form .form-actions .btn{width:100%}
+  .timeline-steps li{padding-left:3.25rem}
+  .timeline-steps li::before{left:.85rem}
+}
