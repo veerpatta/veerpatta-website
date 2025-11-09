@@ -4,7 +4,6 @@ title: Home (EN)
 description: Amet's Premier English-medium school (since 1994) with LEAD classrooms, NCC, sports, and caring teachers. RBSE Affiliated, Nursery to Class 12.
 ---
 {% include header.html %}
-<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
 <script type="application/ld+json">
 {

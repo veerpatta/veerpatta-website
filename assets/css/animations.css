@@ -1,0 +1,784 @@
+/* ============================================
+   VEER PATTA PUBLIC SCHOOL - ANIMATIONS
+   Modern, subtle animations for enhanced UX
+   ============================================ */
+
+/* ============================================
+   ANIMATION TIMING VARIABLES
+   ============================================ */
+:root {
+  --animation-duration-fast: 200ms;
+  --animation-duration-normal: 300ms;
+  --animation-duration-slow: 500ms;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --stagger-delay: 100ms;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Fade Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale Animations */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 12px 30px rgba(132, 172, 100, 0.28);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 16px 40px rgba(132, 172, 100, 0.4);
+  }
+}
+
+/* Gentle Pulse for Attention */
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Float Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Shimmer Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+/* Gradient Shift Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Typewriter Animation */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Underline Slide Animation */
+@keyframes underlineSlide {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Glow Animation */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(83, 117, 226, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(83, 117, 226, 0.6), 0 0 30px rgba(83, 117, 226, 0.4);
+  }
+}
+
+/* Number Counter Animation (used with JS) */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   PAGE LOAD ANIMATIONS
+   ============================================ */
+
+/* Page Fade In */
+body {
+  animation: fadeIn 0.4s var(--animation-easing);
+}
+
+/* Header Slide Down */
+.site-header {
+  animation: fadeDown 0.5s var(--animation-easing);
+}
+
+/* ============================================
+   HERO SECTION ANIMATIONS
+   ============================================ */
+
+/* Hero Text Staggered Fade Up */
+.hero h1 {
+  animation: fadeUp 0.6s var(--animation-easing);
+}
+
+.hero p:first-of-type {
+  animation: fadeUp 0.7s var(--animation-easing);
+}
+
+.hero p:has(.btn) {
+  animation: fadeUp 0.8s var(--animation-easing);
+}
+
+/* Hero Image Float */
+.hero img,
+.hero video {
+  animation: fadeIn 1s var(--animation-easing), float 6s ease-in-out infinite;
+  animation-delay: 0.3s, 0.8s;
+}
+
+/* Hero Button Pulse (periodic) */
+.hero .btn {
+  animation: fadeUp 0.8s var(--animation-easing);
+}
+
+.hero .btn.pulse-active {
+  animation: pulse 1s ease-in-out;
+}
+
+/* ============================================
+   SCROLL-TRIGGERED ANIMATION CLASSES
+   ============================================ */
+
+/* Base class for scroll animations (invisible until triggered) */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--animation-easing), transform 0.6s var(--animation-easing);
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation Variants */
+.animate-fadeUp {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.animate-fadeUp.animated {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s var(--animation-easing), transform 0.6s var(--animation-easing);
+}
+
+.animate-slideIn {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.animate-slideIn.animated {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.6s var(--animation-easing), transform 0.6s var(--animation-easing);
+}
+
+.animate-scaleIn {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.animate-scaleIn.animated {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.5s var(--animation-easing), transform 0.5s var(--animation-easing);
+}
+
+/* ============================================
+   STAGGER DELAYS FOR SEQUENTIAL ANIMATIONS
+   ============================================ */
+
+.stagger-1 {
+  transition-delay: calc(1 * var(--stagger-delay)) !important;
+}
+
+.stagger-2 {
+  transition-delay: calc(2 * var(--stagger-delay)) !important;
+}
+
+.stagger-3 {
+  transition-delay: calc(3 * var(--stagger-delay)) !important;
+}
+
+.stagger-4 {
+  transition-delay: calc(4 * var(--stagger-delay)) !important;
+}
+
+.stagger-5 {
+  transition-delay: calc(5 * var(--stagger-delay)) !important;
+}
+
+.stagger-6 {
+  transition-delay: calc(6 * var(--stagger-delay)) !important;
+}
+
+/* ============================================
+   MICRO-INTERACTIONS
+   ============================================ */
+
+/* Button Hover Effects */
+.btn {
+  position: relative;
+  transition: transform var(--animation-duration-fast) var(--animation-easing),
+              box-shadow var(--animation-duration-fast) var(--animation-easing);
+  will-change: transform;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 100ms;
+}
+
+/* Navigation Link Underline Effect */
+.nav-link {
+  position: relative;
+  transition: opacity var(--animation-duration-fast) var(--animation-easing);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width var(--animation-duration-normal) var(--animation-easing);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Card Hover Lift Effect */
+.hover-lift {
+  transition: transform var(--animation-duration-normal) var(--animation-easing),
+              box-shadow var(--animation-duration-normal) var(--animation-easing);
+  will-change: transform;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(83, 117, 226, 0.15);
+}
+
+/* Stat Cards and Program Cards */
+.stat-card,
+.stat,
+.program-card,
+.program {
+  transition: transform var(--animation-duration-normal) var(--animation-easing),
+              box-shadow var(--animation-duration-normal) var(--animation-easing),
+              border-color var(--animation-duration-normal) var(--animation-easing);
+  will-change: transform;
+}
+
+.stat-card:hover,
+.stat:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(83, 117, 226, 0.12);
+}
+
+.program-card:hover,
+.program:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(83, 117, 226, 0.15);
+  border-color: var(--brand-blue);
+}
+
+/* ============================================
+   FORM INPUT ANIMATIONS
+   ============================================ */
+
+.admissions-form input,
+.admissions-form textarea,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  transition: border-color var(--animation-duration-normal) var(--animation-easing),
+              box-shadow var(--animation-duration-normal) var(--animation-easing),
+              transform var(--animation-duration-fast) var(--animation-easing);
+}
+
+.admissions-form input:focus,
+.admissions-form textarea:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(83, 117, 226, 0.15);
+  transform: scale(1.01);
+}
+
+/* Glow Effect Class */
+.hover-glow {
+  transition: box-shadow var(--animation-duration-normal) var(--animation-easing);
+}
+
+.hover-glow:focus,
+.hover-glow:hover {
+  box-shadow: 0 0 0 4px rgba(83, 117, 226, 0.2);
+}
+
+/* ============================================
+   WHATSAPP BUTTON ANIMATIONS
+   ============================================ */
+
+.whatsapp-float {
+  transition: transform var(--animation-duration-normal) var(--animation-easing),
+              box-shadow var(--animation-duration-normal) var(--animation-easing);
+  will-change: transform;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.25);
+  animation: bounce 0.6s ease;
+}
+
+/* Periodic Attention Pulse for WhatsApp */
+.whatsapp-float.attention-pulse {
+  animation: gentlePulse 2s ease-in-out;
+}
+
+/* ============================================
+   GALLERY FILTER ANIMATIONS
+   ============================================ */
+
+.pill {
+  position: relative;
+  transition: all var(--animation-duration-normal) var(--animation-easing);
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(83, 117, 226, 0.2);
+}
+
+.pill.active {
+  transform: scale(1.05);
+}
+
+/* Gallery Items Fade In */
+.gallery-item {
+  transition: opacity var(--animation-duration-normal) var(--animation-easing),
+              transform var(--animation-duration-normal) var(--animation-easing);
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+/* Shimmer Effect for Loading Images */
+.loading-shimmer {
+  background: linear-gradient(
+    to right,
+    #f0f0f0 0%,
+    #e0e0e0 20%,
+    #f0f0f0 40%,
+    #f0f0f0 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Image Lazy Load Fade In */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.4s var(--animation-easing);
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* ============================================
+   TEXT ANIMATIONS
+   ============================================ */
+
+/* Typewriter Effect for Principal's Message */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--brand-blue);
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end), blink 0.75s step-end infinite;
+  display: inline-block;
+}
+
+.typewriter.finished {
+  border-right: none;
+}
+
+/* Highlight Animation for Statistics */
+.stat h3,
+.stat-card h3 {
+  transition: color var(--animation-duration-normal) var(--animation-easing),
+              transform var(--animation-duration-normal) var(--animation-easing);
+}
+
+.stat:hover h3,
+.stat-card:hover h3 {
+  transform: scale(1.1);
+  color: var(--brand-green);
+}
+
+/* Number Counter Class */
+.counter {
+  animation: countUp 0.6s var(--animation-easing);
+}
+
+/* ============================================
+   TESTIMONIAL ANIMATIONS
+   ============================================ */
+
+.testimonial {
+  transition: transform var(--animation-duration-normal) var(--animation-easing),
+              box-shadow var(--animation-duration-normal) var(--animation-easing);
+}
+
+.testimonial:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(83, 117, 226, 0.12);
+}
+
+/* ============================================
+   FORM SUBMISSION ANIMATIONS
+   ============================================ */
+
+/* Loading Spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+/* Success Animation */
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-icon {
+  animation: successPop 0.5s var(--animation-easing-bounce);
+}
+
+/* ============================================
+   GRADIENT BACKGROUND ANIMATION
+   ============================================ */
+
+.hero {
+  background: linear-gradient(
+    160deg,
+    #F8F9FE 0%,
+    #ffffff 50%,
+    #F8F9FE 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* ============================================
+   PARALLAX EFFECT (SUBTLE)
+   ============================================ */
+
+.parallax-element {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+/* Applied via JavaScript based on scroll position */
+
+/* ============================================
+   CUSTOM TEXT SELECTION
+   ============================================ */
+
+::selection {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+}
+
+/* ============================================
+   SMOOTH SCROLLING
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================
+   ACCESSIBILITY: REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable floating and parallax effects */
+  .hero img,
+  .hero video {
+    animation: none !important;
+  }
+
+  .parallax-element {
+    transform: none !important;
+  }
+
+  /* Keep opacity transitions for accessibility */
+  .animate-on-scroll,
+  .animate-fadeUp,
+  .animate-slideIn,
+  .animate-scaleIn {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* Use will-change sparingly for better performance */
+.btn:hover,
+.program-card:hover,
+.stat-card:hover,
+.whatsapp-float:hover {
+  will-change: transform;
+}
+
+/* Remove will-change after animation completes */
+.btn,
+.program-card,
+.stat-card,
+.whatsapp-float {
+  will-change: auto;
+}
+
+/* ============================================
+   UTILITY ANIMATION CLASSES
+   ============================================ */
+
+.fade-in {
+  animation: fadeIn 0.5s var(--animation-easing);
+}
+
+.fade-up {
+  animation: fadeUp 0.6s var(--animation-easing);
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.6s var(--animation-easing);
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s var(--animation-easing);
+}
+
+.scale-in {
+  animation: scaleIn 0.5s var(--animation-easing);
+}
+
+.bounce-once {
+  animation: bounce 0.6s ease;
+}
+
+.pulse-once {
+  animation: pulse 1s ease;
+}
+
+/* ============================================
+   FOCUS VISIBLE ENHANCEMENTS
+   ============================================ */
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+  animation: glow 1.5s ease-in-out infinite;
+}

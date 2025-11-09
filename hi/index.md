@@ -5,7 +5,6 @@ title: मुखपृष्ठ (HI)
 description: अमेट का प्रमुख अंग्रेज़ी-माध्यम विद्यालय (1994 से) LEAD कक्षाएँ, NCC, खेल और संवेदनशील शिक्षकों के साथ। RBSE मान्यता प्राप्त, नर्सरी से कक्षा 12।
 ---
 {% include header.html %}
-<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
 <script type="application/ld+json">
 {

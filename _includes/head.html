@@ -52,3 +52,10 @@
 {% if page.url == '/404.html' or page.noindex == true %}
   <meta name="robots" content="noindex, nofollow">
 {% endif %}
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/animations.css' | relative_url }}">
+
+<!-- JavaScript -->
+<script defer src="{{ '/assets/js/main.js' | relative_url }}"></script>
