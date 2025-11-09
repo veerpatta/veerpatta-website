@@ -451,3 +451,31 @@ button:focus-visible {
   font-size: 0.9rem;
   margin: 0;
 }
+
+/* Admissions Page */
+.admissions{display:grid;gap:3rem;margin:3rem auto 4rem}
+.admissions-hero{text-align:center;background:linear-gradient(160deg,rgba(83,117,226,.08) 0%,rgba(132,172,100,.08) 100%);padding:clamp(2rem,6vw,3.5rem);border-radius:24px;box-shadow:0 24px 48px rgba(83,117,226,.12)}
+.admissions-hero h1{font-size:clamp(2rem,6vw,3rem);margin-bottom:1rem}
+.admissions-hero p{max-width:640px;margin:0 auto 1.5rem;color:var(--muted-text)}
+.admissions-grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.admissions-grid article{background:#fff;padding:2rem;border-radius:20px;box-shadow:0 12px 36px rgba(83,117,226,.08);border:1px solid rgba(83,117,226,.12)}
+.admissions-grid ul{list-style:none;display:grid;gap:.75rem;color:var(--muted-text)}
+.admissions-grid ul li::before{content:"•";color:var(--brand-green);font-weight:700;margin-right:.5rem}
+.admissions-grid dl{margin:0;display:grid;gap:1.25rem;color:var(--muted-text)}
+.admissions-grid dt{font-weight:700}
+.admissions-timeline h2,.admissions-contact h2,.admissions-visit h2{margin-bottom:1.5rem;text-align:center}
+.admissions-timeline ol{list-style:none;margin:0;padding:0;display:grid;gap:1.5rem}
+.admissions-timeline li{display:grid;grid-template-columns:auto 1fr;gap:1rem 1.5rem;align-items:start;background:#fff;padding:1.5rem;border-radius:18px;box-shadow:0 12px 32px rgba(83,117,226,.08);border:1px solid rgba(83,117,226,.1)}
+.admissions-timeline .step-number{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:1.2rem;background:var(--brand-blue);color:#fff}
+.admissions-contact{background:linear-gradient(180deg,rgba(83,117,226,.08) 0%,rgba(132,172,100,.1) 100%);padding:clamp(2rem,6vw,3.5rem);border-radius:24px;box-shadow:0 24px 48px rgba(83,117,226,.1)}
+.admissions-form{display:grid;gap:1rem;max-width:520px;margin:0 auto}
+.admissions-form input,.admissions-form textarea{width:100%;padding:.85rem 1rem;border-radius:12px;border:1px solid rgba(83,117,226,.3);font-size:1rem;transition:border-color .2s,box-shadow .2s}
+.admissions-form input:focus-visible,.admissions-form textarea:focus-visible{outline:2px solid var(--brand-blue);outline-offset:2px;box-shadow:0 0 0 4px rgba(83,117,226,.15)}
+.admissions-help{margin-top:1.5rem;text-align:center;color:var(--muted-text)}
+.admissions-visit{text-align:center;color:var(--muted-text)}
+.admissions-visit a{color:var(--brand-blue);font-weight:600}
+@media (max-width:600px){
+  .admissions{gap:2.5rem}
+  .admissions-timeline li{grid-template-columns:1fr}
+  .admissions-form .btn{justify-self:stretch}
+}
