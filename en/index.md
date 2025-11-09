@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Home (EN)
-description: English-medium school in Nokha (since 1994) with LEAD classrooms, NCC, sports, and caring teachers.
+description: Amet's Premier English-medium school (since 1994) with LEAD classrooms, NCC, sports, and caring teachers. RBSE Affiliated, Nursery to Class 12.
 ---
 {% include header.html %}
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
@@ -14,10 +14,10 @@ description: English-medium school in Nokha (since 1994) with LEAD classrooms, N
   "url":"{{ '/en/' | relative_url | absolute_url }}",
   "address":{
     "@type":"PostalAddress",
-    "streetAddress":"Karmal Road",
-    "addressLocality":"Nokha",
-    "addressRegion":"Rajasthan",
-    "postalCode":"334803",
+    "streetAddress":"Near Karmal Road",
+    "addressLocality":"Amet",
+    "addressRegion":"Rajsamand, Rajasthan",
+    "postalCode":"313332",
     "addressCountry":"IN"
   },
   "telephone":"+91 94137 48575",
@@ -29,9 +29,9 @@ description: English-medium school in Nokha (since 1994) with LEAD classrooms, N
 
 <!-- HERO -->
 <section class="hero container">
-  <h1>Nurturing Tomorrow's Leaders Since 1994</h1>
-  <p>Quality education with values, discipline, and modern learning.</p>
-  <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">Chat on WhatsApp</a></p>
+  <h1>Amet's Premier English Medium School - Empowering Students for 30 Years</h1>
+  <p>RBSE Affiliated | Nursery to Class 12 | Science, Commerce & Arts Streams</p>
+  <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">Quick Admission Inquiry</a></p>
   <!-- placeholder image (no file required yet) -->
   <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}"
        alt="Morning assembly at Veer Patta Public School" loading="lazy" style="display:block;max-width:100%;height:auto;">
@@ -40,9 +40,9 @@ description: English-medium school in Nokha (since 1994) with LEAD classrooms, N
 <!-- STATS -->
 <section class="container">
   <div class="stats">
-    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">30+</div><div>Years</div></div>
-    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">500+</div><div>Students</div></div>
-    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">95%</div><div>Results</div></div>
+    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">Estd. 1994</div><div>Serving Amet</div></div>
+    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">500+</div><div>Students from 20+ Villages</div></div>
+    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">95%</div><div>RBSE Board Results</div></div>
   </div>
 </section>
 
@@ -73,6 +73,33 @@ description: English-medium school in Nokha (since 1994) with LEAD classrooms, N
   </div>
 </section>
 
+<!-- WHY PARENTS CHOOSE VPS -->
+<section class="container">
+  <h2>Why Parents Choose Veer Patta</h2>
+  <div class="card">
+    <ul style="line-height:1.8;">
+      <li><strong>Only English medium school in 10km radius</strong> - Closest alternative is in Rajsamand city</li>
+      <li><strong>Affordable fees with payment flexibility</strong> - Sibling discounts and merit scholarships available</li>
+      <li><strong>Personal attention with 1:20 teacher-student ratio</strong> - Every child receives individual focus</li>
+      <li><strong>Free remedial classes for weak students</strong> - Extra support after school hours at no cost</li>
+      <li><strong>WhatsApp updates for parent communication</strong> - Stay informed about your child's progress</li>
+      <li><strong>Safe campus with CCTV monitoring</strong> - Security is our top priority</li>
+    </ul>
+  </div>
+</section>
+
+<!-- RECENT ACHIEVEMENTS -->
+<section class="container">
+  <h2>Recent Achievements</h2>
+  <div class="card">
+    <ul style="line-height:1.8;">
+      <li>🏆 <strong>3 students selected for district-level science exhibition</strong> - Representing Amet region</li>
+      <li>🎖️ <strong>NCC 'B' Certificate for 15 students</strong> - Leadership and discipline excellence</li>
+      <li>📚 <strong>100% result in Class 10 English and Science</strong> - Academic excellence recognized</li>
+    </ul>
+  </div>
+</section>
+
 <!-- PRINCIPAL -->
 <section class="container">
   <h2>Message from the Principal</h2>
@@ -81,10 +108,11 @@ description: English-medium school in Nokha (since 1994) with LEAD classrooms, N
   <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Principal's Welcome" frameborder="0" allowfullscreen></iframe> -->
 </section>
 
-<!-- TESTIMONIAL -->
+<!-- TESTIMONIALS -->
 <section class="container">
-  <h2>Parent Testimonial</h2>
-  <blockquote>"My child has become more confident and disciplined—thank you VPS."</blockquote>
+  <h2>What Parents Say</h2>
+  <blockquote>"My child improved from 60% to 85% in just one year. The personal attention here is unmatched in the Amet region." <br><em>- Parent from Khempur</em></blockquote>
+  <blockquote>"We chose VPS over city schools because of the values-based education and affordable fees." <br><em>- Parent from Parasoli</em></blockquote>
 </section>
 
 <!-- ABOUT TEASER -->

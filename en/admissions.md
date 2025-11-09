@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Admissions (EN)
-description: Join Veer Patta Public School in Nokha. Application period Nov-Mar, session starts April. Safe environment, caring teachers, balanced curriculum.
+description: Join Veer Patta Public School in Amet. RBSE Affiliated, Nursery to Class 12. Limited seats available - Early bird discounts. Application period Nov-Mar, session starts April.
 permalink: /en/admissions/
 ---
 
@@ -13,6 +13,7 @@ permalink: /en/admissions/
   <section class="admissions-hero">
     <h1>Join Veer Patta Public School</h1>
     <p>Empowering young minds with quality education, rooted in values and excellence. We welcome students from diverse backgrounds to learn, grow, and thrive together.</p>
+    <p style="background:#fef3c7;padding:1rem;border-left:4px solid #f59e0b;margin-top:1rem;"><strong>⚠️ Limited Seats Available:</strong> Only 30 seats per class. Early Bird Discount: 5% off for admissions before January. <br><strong>Current Admissions Open:</strong> Nursery to 9th (Class 10 seats full)</p>
   </section>
 
   <!-- Why VPS + Key Information Grid -->
@@ -32,7 +33,7 @@ permalink: /en/admissions/
       <h2>Key Information</h2>
       <dl>
         <dt>Age Range</dt>
-        <dd>3-16 years (Pre-Primary to Class 10)</dd>
+        <dd>3-18 years (Nursery to Class 12)</dd>
 
         <dt>Application Period</dt>
         <dd>November - March (for next academic year)</dd>
@@ -41,36 +42,41 @@ permalink: /en/admissions/
         <dd>April each year</dd>
 
         <dt>Documents Required</dt>
-        <dd>Birth certificate, address proof, previous school records (if applicable)</dd>
+        <dd>Birth certificate, Aadhaar card, Previous school TC (if applicable), Passport-size photos</dd>
       </dl>
     </article>
   </section>
 
   <!-- Fee Structure -->
   <section class="admissions-fees">
-    <h2>Fee Structure</h2>
+    <h2>Fee Structure (2024-25)</h2>
     <table>
       <thead>
         <tr>
-          <th>Plan</th>
+          <th>Fee Component</th>
           <th>Amount</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Monthly</td>
-          <td>₹ 2,083 / month</td>
+          <td>Admission Fee (one-time)</td>
+          <td>₹5,000</td>
         </tr>
         <tr>
-          <td>Quarterly</td>
-          <td>₹ 6,250 / quarter</td>
+          <td>Annual Tuition Fee</td>
+          <td>₹18,000 - ₹24,000 (varies by class)</td>
         </tr>
         <tr>
-          <td>Annual</td>
-          <td>₹ 25,000 / year (10% discount)</td>
+          <td>Books & Uniform</td>
+          <td>₹3,000 - ₹5,000</td>
+        </tr>
+        <tr>
+          <td>Transport (optional)</td>
+          <td>₹800 - ₹1,200/month (distance-based)</td>
         </tr>
       </tbody>
     </table>
+    <p style="margin-top:1rem;"><strong>Note:</strong> Sibling discount available. Scholarships for meritorious students. Payment plans available for families.</p>
   </section>
 
   <!-- Admissions Timeline -->
@@ -88,23 +94,47 @@ permalink: /en/admissions/
         <span class="step-number">2</span>
         <div>
           <h3>Interaction & Assessment</h3>
-          <p>Friendly readiness interaction (play-based for younger children).</p>
+          <p>Friendly readiness interaction within 3 days (play-based for younger children). No entrance test - only class compatibility check.</p>
         </div>
       </li>
       <li>
         <span class="step-number">3</span>
         <div>
           <h3>Admission Confirmation</h3>
-          <p>On selection, complete fee formalities and receive the welcome kit.</p>
+          <p>Result within 1 day. On selection, complete fee formalities and receive the welcome kit.</p>
         </div>
       </li>
     </ol>
   </section>
 
+  <!-- FAQ Section -->
+  <section class="admissions-faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="card">
+      <h3>What documents are needed for admission?</h3>
+      <p>Birth certificate, Aadhaar card, previous school Transfer Certificate (if applicable), and 2 passport-size photos.</p>
+
+      <h3>Is there an entrance test?</h3>
+      <p>No entrance test. We conduct a friendly interaction to understand the child's learning level and ensure class compatibility.</p>
+
+      <h3>What is the admission process timeline?</h3>
+      <p>Form submission → Interaction within 3 days → Result in 1 day → Admission completion within 1 week.</p>
+
+      <h3>Do you provide transport facilities?</h3>
+      <p>Yes, we provide safe and reliable transport covering a 15km radius around Amet. Routes include Amet town and surrounding villages like Khempur and Parasoli.</p>
+
+      <h3>What about support for weak students?</h3>
+      <p>We provide free remedial classes after school hours for students who need extra support. Personal attention is our strength.</p>
+
+      <h3>Are scholarships available?</h3>
+      <p>Yes, we offer merit-based scholarships and sibling discounts. Financial assistance is considered on a case-by-case basis for deserving students.</p>
+    </div>
+  </section>
+
   <!-- Contact Form Section -->
   <section class="admissions-contact">
     <h2>Apply Now or Request Information</h2>
-    <form class="admissions-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="admissions-form" action="https://formspree.io/f/xgveybpz" method="POST">
       <input type="text" name="name" placeholder="Parent/Guardian Name" required>
       <input type="email" name="email" placeholder="Email Address" required>
       <input type="tel" name="phone" placeholder="Phone Number" required>
@@ -114,7 +144,7 @@ permalink: /en/admissions/
       <button type="submit" class="btn">Submit Application</button>
     </form>
     <div class="admissions-help">
-      <p>Prefer a quick chat? <a href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20know%20about%20admissions%20at%20Veer%20Patta%20Public%20School" class="btn" target="_blank" rel="noopener">WhatsApp Us</a></p>
+      <p>Prefer a quick chat? <a href="https://wa.me/919413748575?text=Hi%2C%20I%27d%20like%20to%20know%20about%20admissions%20at%20Veer%20Patta%20Public%20School" class="btn" target="_blank" rel="noopener">WhatsApp Us</a></p>
     </div>
   </section>
 
@@ -122,11 +152,11 @@ permalink: /en/admissions/
   <section class="admissions-visit">
     <h2>Visit Our Campus</h2>
     <p><strong>Veer Patta Public School</strong><br>
-    123 School Road, Education District<br>
-    City, State - 110001</p>
+    Near Karmal Road, Amet<br>
+    Rajsamand, Rajasthan - 313332</p>
     <p>
-      <a href="tel:+919999999999">+91 99999 99999</a> |
-      <a href="mailto:admissions@veerpatta.edu.in">admissions@veerpatta.edu.in</a>
+      <a href="tel:+919413748575">+91 94137 48575</a> |
+      <a href="mailto:veerpatta.school@gmail.com">veerpatta.school@gmail.com</a>
     </p>
     <p>School Hours: Monday - Saturday, 8:00 AM - 2:00 PM<br>
     Office Hours: Monday - Friday, 9:00 AM - 4:00 PM</p>
