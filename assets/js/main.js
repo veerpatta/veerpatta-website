@@ -8,10 +8,9 @@
   // Check if IntersectionObserver is supported
   if (!('IntersectionObserver' in window)) {
     // Fallback: show all elements immediately for older browsers
-    document.querySelectorAll('.animate-on-scroll, .animate-fadeUp, .animate-wipeUp, .animate-slideIn, .animate-scaleIn').forEach(el => {
+    document.querySelectorAll('.animate-on-scroll, .animate-fadeUp, .animate-slideIn, .animate-scaleIn').forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'none';
-      el.style.clipPath = 'none';
     });
     return;
   }
@@ -34,17 +33,16 @@
 
   // Observe all elements with animation classes
   const animatedElements = document.querySelectorAll(
-    '.animate-on-scroll, .animate-fadeUp, .animate-wipeUp, .animate-slideIn, .animate-scaleIn, .section, .stat, .stat-card, .program, .program-card'
+    '.animate-on-scroll, .animate-fadeUp, .animate-slideIn, .animate-scaleIn, .section, .stat, .stat-card, .program, .program-card'
   );
 
   animatedElements.forEach(el => {
     // Add base animation class if not present
     if (!el.classList.contains('animate-on-scroll') &&
         !el.classList.contains('animate-fadeUp') &&
-        !el.classList.contains('animate-wipeUp') &&
         !el.classList.contains('animate-slideIn') &&
         !el.classList.contains('animate-scaleIn')) {
-      el.classList.add('animate-wipeUp');
+      el.classList.add('animate-fadeUp');
     }
     observer.observe(el);
   });
@@ -342,7 +340,7 @@
   const achievementLists = document.querySelectorAll('.achievements ul li, .card ul li');
   achievementLists.forEach((item, index) => {
     if (index < 6) {
-      item.classList.add('animate-wipeUp', `stagger-${index + 1}`);
+      item.classList.add('animate-fadeUp', `stagger-${index + 1}`);
     }
   });
 })();
@@ -378,34 +376,6 @@
   hoverElements.forEach(el => {
     el.addEventListener('transitionend', () => {
       el.style.willChange = 'auto';
-    });
-  });
-})();
-
-/* ============================================
-   SPOTLIGHT HOVER EFFECT FOR CARDS
-   ============================================ */
-(function initSpotlightHover() {
-  // Check if user prefers reduced motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  const cards = document.querySelectorAll('.program-card, .stat-card, .program, .stat');
-
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.setProperty('--mouse-x', '50%');
-      card.style.setProperty('--mouse-y', '50%');
     });
   });
 })();
