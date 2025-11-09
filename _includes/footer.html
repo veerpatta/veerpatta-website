@@ -7,6 +7,12 @@
   {% assign gallery_path = '/hi/gallery/' %}
   {% assign contact_path = '/hi/contact/' %}
   {% assign privacy_path = '/hi/privacy/' %}
+  {% assign about_label = 'हमारे बारे में' %}
+  {% assign academics_label = 'शैक्षणिक' %}
+  {% assign admissions_label = 'प्रवेश' %}
+  {% assign gallery_label = 'गैलरी' %}
+  {% assign contact_label = 'संपर्क' %}
+  {% assign privacy_label = 'गोपनीयता' %}
 {% else %}
   {% assign about_path = '/en/about/' %}
   {% assign academics_path = '/en/academics/' %}
@@ -14,17 +20,23 @@
   {% assign gallery_path = '/en/gallery/' %}
   {% assign contact_path = '/en/contact/' %}
   {% assign privacy_path = '/en/privacy/' %}
+  {% assign about_label = 'About' %}
+  {% assign academics_label = 'Academics' %}
+  {% assign admissions_label = 'Admissions' %}
+  {% assign gallery_label = 'Gallery' %}
+  {% assign contact_label = 'Contact' %}
+  {% assign privacy_label = 'Privacy' %}
 {% endif %}
 
 <footer class="site-footer">
   <div class="container">
     <ul class="footer-links">
-      <li><a href="{{ about_path | relative_url }}">About</a></li>
-      <li><a href="{{ academics_path | relative_url }}">Academics</a></li>
-      <li><a href="{{ admissions_path | relative_url }}">Admissions</a></li>
-      <li><a href="{{ gallery_path | relative_url }}">Gallery</a></li>
-      <li><a href="{{ contact_path | relative_url }}">Contact</a></li>
-      <li><a href="{{ privacy_path | relative_url }}">Privacy</a></li>
+      <li><a href="{{ about_path | relative_url }}">{{ about_label }}</a></li>
+      <li><a href="{{ academics_path | relative_url }}">{{ academics_label }}</a></li>
+      <li><a href="{{ admissions_path | relative_url }}">{{ admissions_label }}</a></li>
+      <li><a href="{{ gallery_path | relative_url }}">{{ gallery_label }}</a></li>
+      <li><a href="{{ contact_path | relative_url }}">{{ contact_label }}</a></li>
+      <li><a href="{{ privacy_path | relative_url }}">{{ privacy_label }}</a></li>
     </ul>
     <p>Veer Patta Public School · NH 48, Behror, Rajasthan</p>
     <p>© {{ site.time | date: "%Y" }} Veer Patta Public School</p>
