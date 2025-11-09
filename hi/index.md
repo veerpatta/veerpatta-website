@@ -83,5 +83,14 @@ title: मुखपृष्ठ (HI)
   </div>
 </section>
 
+<!-- GALLERY TEASER -->
+<section class="container gallery-teaser lang-hi" id="gallery">
+  <div class="about-teaser-card">
+    <h2>गैलरी</h2>
+    <p>विद्यालय की गतिविधियाँ देखें — सभा, प्रयोगशाला, खेल और उत्सव।</p>
+    <p><a class="btn btn-secondary" href="{{ '/hi/gallery/' | relative_url }}">गैलरी देखें</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}
