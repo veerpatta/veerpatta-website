@@ -1,0 +1,14 @@
+---
+permalink: /404.html
+layout: default
+title: Page Not Found
+---
+{% include header.html %}
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<main class="container">
+  <h1>Page not found</h1>
+  <p>Sorry, that page doesn't exist.</p>
+  <p><a class="btn btn-secondary" href="{{ '/en/' | relative_url }}">Go to English Home</a></p>
+  <p><a class="btn btn-secondary" href="{{ '/hi/' | relative_url }}">हिंदी होम पेज</a></p>
+</main>
+{% include footer.html %}
