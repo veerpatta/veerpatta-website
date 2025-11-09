@@ -346,43 +346,59 @@
 })();
 
 /* ============================================
-   MOBILE MENU TOGGLE
+   MOBILE MENU TOGGLE - Mobile-First Optimized
    ============================================ */
 (function initMobileMenu() {
-  const menuToggle = document.getElementById('mobileMenuToggle');
+  const menuBtn = document.getElementById('mobileMenuToggle');
   const menuClose = document.getElementById('mobileNavClose');
   const mobileNav = document.getElementById('mobileNavMenu');
   const overlay = document.getElementById('mobileNavOverlay');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-item');
 
-  if (!menuToggle || !mobileNav || !overlay) return;
+  if (!menuBtn || !mobileNav || !overlay) return;
 
-  // Open mobile menu
+  // Open mobile menu (optimized for 3G)
   function openMenu() {
-    mobileNav.classList.add('active');
-    overlay.classList.add('active');
-    menuToggle.classList.add('active');
-    menuToggle.setAttribute('aria-expanded', 'true');
-    overlay.setAttribute('aria-hidden', 'false');
+    // Add classes immediately for smooth 60fps animation
+    requestAnimationFrame(() => {
+      mobileNav.classList.add('active');
+      overlay.classList.add('active');
+      menuBtn.classList.add('active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      menuBtn.setAttribute('aria-label', 'Close navigation menu');
+      overlay.setAttribute('aria-hidden', 'false');
 
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = 'hidden';
+      // Prevent body scroll (important for mobile)
+      document.body.style.overflow = 'hidden';
+
+      // Focus first menu item for accessibility
+      const firstLink = mobileNav.querySelector('.mobile-nav-item');
+      if (firstLink) {
+        setTimeout(() => firstLink.focus(), 300);
+      }
+    });
   }
 
   // Close mobile menu
   function closeMenu() {
-    mobileNav.classList.remove('active');
-    overlay.classList.remove('active');
-    menuToggle.classList.remove('active');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    overlay.setAttribute('aria-hidden', 'true');
+    requestAnimationFrame(() => {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+      menuBtn.classList.remove('active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Open navigation menu');
+      overlay.setAttribute('aria-hidden', 'true');
 
-    // Restore body scroll
-    document.body.style.overflow = '';
+      // Restore body scroll
+      document.body.style.overflow = '';
+
+      // Return focus to menu button
+      menuBtn.focus();
+    });
   }
 
   // Toggle menu on button click
-  menuToggle.addEventListener('click', () => {
+  menuBtn.addEventListener('click', () => {
     if (mobileNav.classList.contains('active')) {
       closeMenu();
     } else {
@@ -401,26 +417,46 @@
   // Close menu when a link is clicked
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
-      closeMenu();
+      // Small delay for visual feedback
+      setTimeout(closeMenu, 150);
     });
   });
 
-  // Close menu on escape key
+  // Close menu on escape key (accessibility)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
       closeMenu();
     }
   });
 
-  // Close menu when window is resized to desktop
+  // Close menu when window is resized to desktop (1024px+)
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (window.innerWidth > 968 && mobileNav.classList.contains('active')) {
+      if (window.innerWidth >= 1024 && mobileNav.classList.contains('active')) {
         closeMenu();
       }
     }, 250);
+  });
+
+  // Trap focus within mobile menu when open
+  mobileNav.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab' && mobileNav.classList.contains('active')) {
+      const focusableElements = mobileNav.querySelectorAll(
+        'button, a, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
   });
 })();
 

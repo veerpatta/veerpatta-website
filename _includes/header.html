@@ -1,7 +1,8 @@
 {% comment %}
   =====================================================
   HEADER - Veer Patta Public School
-  Modern, professional header with mobile-first design
+  MOBILE-FIRST design optimized for budget Android devices on 3G
+  Primary audience: 70% mobile traffic from semi-rural Rajasthan
   =====================================================
 {% endcomment %}
 
@@ -64,72 +65,69 @@
 {% endif %}
 
 <header class="site-header" role="banner">
-  <div class="header-container">
 
-    {% comment %} Mobile Menu Toggle {% endcomment %}
-    <button class="mobile-menu-toggle"
+  {% comment %} Main Header Row: Logo + Name + Menu Toggle {% endcomment %}
+  <div class="header-main">
+
+    {% comment %} Logo (mobile: 60x60px, desktop: 80x80px) {% endcomment %}
+    <a href="{{ home_path | relative_url }}" class="header-logo-link" aria-label="Veer Patta Public School Home">
+      <div class="header-logo">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="80" height="80" rx="12" fill="#5375E2"/>
+          <path d="M40 15L50 35H30L40 15Z" fill="#E2D64B"/>
+          <circle cx="40" cy="50" r="12" fill="#84AC64"/>
+          <text x="40" y="72" font-family="Poppins, sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">VPPS</text>
+        </svg>
+      </div>
+    </a>
+
+    {% comment %} School Name (can wrap on mobile) {% endcomment %}
+    <a href="{{ home_path | relative_url }}" class="header-brand-link">
+      <h1 class="header-brand-name">Veer Patta Public School</h1>
+    </a>
+
+    {% comment %} Mobile Menu Toggle (56x56px touch target) {% endcomment %}
+    <button class="mobile-menu-btn"
             id="mobileMenuToggle"
-            aria-label="Toggle navigation menu"
+            type="button"
+            aria-label="Open navigation menu"
             aria-expanded="false"
-            aria-controls="mainNav">
-      <span class="hamburger-icon">
+            aria-controls="mobileNavMenu">
+      <span class="hamburger-icon" aria-hidden="true">
         <span></span>
         <span></span>
         <span></span>
       </span>
-      <span class="menu-label">{{ menu_label }}</span>
+      <span class="menu-text">{{ menu_label }}</span>
     </button>
 
-    {% comment %} Logo {% endcomment %}
-    <div class="header-logo">
-      <a href="{{ home_path | relative_url }}" aria-label="Veer Patta Public School Home">
-        <div class="logo-placeholder">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="80" height="80" rx="12" fill="#5375E2"/>
-            <path d="M40 15L50 35H30L40 15Z" fill="#E2D64B"/>
-            <circle cx="40" cy="50" r="12" fill="#84AC64"/>
-            <text x="40" y="72" font-family="Poppins, sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">VPPS</text>
-          </svg>
-        </div>
-      </a>
-    </div>
-
-    {% comment %} School Name {% endcomment %}
-    <div class="header-brand">
-      <a href="{{ home_path | relative_url }}" class="brand-link">
-        <span class="brand-name">Veer Patta Public School</span>
-      </a>
-    </div>
-
-    {% comment %} Desktop Navigation {% endcomment %}
-    <nav class="header-nav desktop-nav" id="mainNav" role="navigation" aria-label="Main navigation">
-      <a class="nav-link" href="{{ home_path | relative_url }}">{{ nav_home }}</a>
-      <a class="nav-link" href="{{ about_path | relative_url }}">{{ nav_about }}</a>
-      <a class="nav-link" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
-      <a class="nav-link" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
-      <a class="nav-link" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
-      <a class="nav-link" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
+    {% comment %} Desktop Navigation (hidden on mobile) {% endcomment %}
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a class="nav-item" href="{{ home_path | relative_url }}">{{ nav_home }}</a>
+      <a class="nav-item" href="{{ about_path | relative_url }}">{{ nav_about }}</a>
+      <a class="nav-item" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
+      <a class="nav-item" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
+      <a class="nav-item" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
+      <a class="nav-item" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
     </nav>
 
-    {% comment %} Language Switcher {% endcomment %}
-    <div class="header-lang-switch" aria-label="Language selection">
-      <div class="lang-switcher">
-        {% if current_lang == 'en' %}
-          <span class="lang-option active" aria-current="page">{{ lang_label_en }}</span>
-          <a class="lang-option" href="{{ alt_path | relative_url }}" lang="hi" hreflang="hi" aria-label="Switch to Hindi">{{ lang_label_hi }}</a>
-        {% else %}
-          <a class="lang-option" href="{{ alt_path | relative_url }}" lang="en" hreflang="en" aria-label="Switch to English">{{ lang_label_en }}</a>
-          <span class="lang-option active" aria-current="page">{{ lang_label_hi }}</span>
-        {% endif %}
-      </div>
+    {% comment %} Desktop Language Switcher (hidden on mobile) {% endcomment %}
+    <div class="desktop-lang-switch">
+      {% if current_lang == 'en' %}
+        <span class="lang-btn active">{{ lang_label_en }}</span>
+        <a class="lang-btn" href="{{ alt_path | relative_url }}" lang="hi" hreflang="hi">{{ lang_label_hi }}</a>
+      {% else %}
+        <a class="lang-btn" href="{{ alt_path | relative_url }}" lang="en" hreflang="en">{{ lang_label_en }}</a>
+        <span class="lang-btn active">{{ lang_label_hi }}</span>
+      {% endif %}
     </div>
 
-    {% comment %} WhatsApp CTA Button {% endcomment %}
-    <a class="header-whatsapp-btn"
+    {% comment %} Desktop WhatsApp Button {% endcomment %}
+    <a class="desktop-whatsapp-btn"
        href="https://wa.me/919413748575?text=Hello,%20I%20am%20interested%20in%20admission%20for%20my%20child%20at%20Veer%20Patta%20Public%20School.%20Please%20share%20details."
        target="_blank"
        rel="noopener noreferrer"
-       aria-label="Contact us on WhatsApp for admission inquiry">
+       aria-label="Contact on WhatsApp for admission inquiry">
       <svg class="whatsapp-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
       </svg>
@@ -138,41 +136,61 @@
 
   </div>
 
+  {% comment %} Mobile WhatsApp Bar (full-width, visible only on mobile) {% endcomment %}
+  <div class="mobile-whatsapp-bar">
+    <a class="mobile-whatsapp-btn"
+       href="https://wa.me/919413748575?text=Hello,%20I%20am%20interested%20in%20admission%20for%20my%20child%20at%20Veer%20Patta%20Public%20School.%20Please%20share%20details."
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contact on WhatsApp for admission inquiry">
+      <svg class="whatsapp-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+      <span class="whatsapp-text">{{ whatsapp_cta }}</span>
+    </a>
+  </div>
+
   {% comment %} Mobile Navigation Overlay {% endcomment %}
   <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true"></div>
 
-  {% comment %} Mobile Navigation Menu {% endcomment %}
+  {% comment %} Mobile Navigation Menu - Full-screen, slides from right {% endcomment %}
   <nav class="mobile-nav" id="mobileNavMenu" role="navigation" aria-label="Mobile navigation">
+
+    {% comment %} Menu Header with Close Button {% endcomment %}
     <div class="mobile-nav-header">
       <span class="mobile-nav-title">{{ menu_label }}</span>
       <button class="mobile-nav-close"
               id="mobileNavClose"
+              type="button"
               aria-label="Close navigation menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     </div>
-    <div class="mobile-nav-links">
-      <a class="mobile-nav-link" href="{{ home_path | relative_url }}">{{ nav_home }}</a>
-      <a class="mobile-nav-link" href="{{ about_path | relative_url }}">{{ nav_about }}</a>
-      <a class="mobile-nav-link" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
-      <a class="mobile-nav-link" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
-      <a class="mobile-nav-link" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
-      <a class="mobile-nav-link" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
 
-      {% comment %} Language Switcher in Mobile Menu {% endcomment %}
-      <div class="mobile-nav-lang">
-        {% if current_lang == 'en' %}
-          <span class="mobile-lang-option active">{{ lang_label_en }}</span>
-          <a class="mobile-lang-option" href="{{ alt_path | relative_url }}" lang="hi" hreflang="hi">{{ lang_label_hi }}</a>
-        {% else %}
-          <a class="mobile-lang-option" href="{{ alt_path | relative_url }}" lang="en" hreflang="en">{{ lang_label_en }}</a>
-          <span class="mobile-lang-option active">{{ lang_label_hi }}</span>
-        {% endif %}
-      </div>
+    {% comment %} Language Switcher (at top of menu for easy access) {% endcomment %}
+    <div class="mobile-menu-lang">
+      {% if current_lang == 'en' %}
+        <span class="mobile-lang-btn active" aria-current="page">{{ lang_label_en }}</span>
+        <a class="mobile-lang-btn" href="{{ alt_path | relative_url }}" lang="hi" hreflang="hi">{{ lang_label_hi }}</a>
+      {% else %}
+        <a class="mobile-lang-btn" href="{{ alt_path | relative_url }}" lang="en" hreflang="en">{{ lang_label_en }}</a>
+        <span class="mobile-lang-btn active" aria-current="page">{{ lang_label_hi }}</span>
+      {% endif %}
     </div>
+
+    {% comment %} Navigation Links (60px height each for easy tapping) {% endcomment %}
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-item" href="{{ home_path | relative_url }}">{{ nav_home }}</a>
+      <a class="mobile-nav-item" href="{{ about_path | relative_url }}">{{ nav_about }}</a>
+      <a class="mobile-nav-item" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
+      <a class="mobile-nav-item" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
+      <a class="mobile-nav-item" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
+      <a class="mobile-nav-item" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
+    </div>
+
   </nav>
 
 </header>
