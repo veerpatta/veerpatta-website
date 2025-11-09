@@ -2,7 +2,7 @@
 layout: default
 lang: hi
 title: About (HI)
-description: 1994 में स्थापित, वीर पट्टा पब्लिक स्कूल मूल्य-आधारित शिक्षा और आधुनिक सीख को जोड़ता है—नोखा, राजस्थान में CBSE अंग्रेज़ी-माध्यम।
+description: 1994 में स्थापित, वीर पट्टा पब्लिक स्कूल मूल्य-आधारित शिक्षा और आधुनिक सीख को जोड़ता है—अमेट, राजसमंद, राजस्थान में RBSE अंग्रेज़ी-माध्यम।
 permalink: /hi/about/
 ---
 {% include header.html %}
@@ -17,7 +17,7 @@ permalink: /hi/about/
   <section class="about-glance">
     <ul>
       <li><strong>स्थापना:</strong> 1994</li>
-      <li><strong>बोर्ड:</strong> अंग्रेज़ी-माध्यम (CBSE)</li>
+      <li><strong>बोर्ड:</strong> अंग्रेज़ी-माध्यम (RBSE)</li>
       <li><strong>छात्र:</strong> 500+</li>
       <li><strong>कार्यक्रम:</strong> LEAD • NCC • खेल • कला</li>
     </ul>
@@ -31,11 +31,11 @@ permalink: /hi/about/
   <section class="about-timeline">
     <h2>हमारी यात्रा</h2>
     <ol class="about-steps">
-      <li><span class="year">1994</span><p>मूल्यों और अनुशासन पर ध्यान केंद्रित करते हुए स्कूल की स्थापना।</p></li>
-      <li><span class="year">2000</span><p>प्राथमिक और गतिविधि स्थानों का विस्तार।</p></li>
-      <li><span class="year">2010</span><p>नई प्रयोगशालाएं और पुस्तकालय उन्नयन।</p></li>
-      <li><span class="year">2020</span><p>डिजिटल तत्परता और मिश्रित शिक्षा।</p></li>
-      <li><span class="year">2024</span><p>LEAD और NCC नेतृत्व कार्यक्रमों के साथ आधुनिक कक्षाएं।</p></li>
+      <li><span class="year">1994</span><p>दूरदर्शी शिक्षकों द्वारा केवल 50 छात्रों के साथ स्थापना, अमेट में गुणवत्तापूर्ण अंग्रेज़ी-माध्यम शिक्षा लाना।</p></li>
+      <li><span class="year">2000</span><p>कक्षा 10 का पहला बैच 100% उत्तीर्ण परिणाम प्राप्त करता है, VPS को क्षेत्र में एक विश्वसनीय नाम के रूप में स्थापित करता है।</p></li>
+      <li><span class="year">2010</span><p>कंप्यूटर शिक्षा प्रयोगशाला की शुरुआत, सीखने के अनुभव को आधुनिक बनाना।</p></li>
+      <li><span class="year">2018</span><p>NCC कार्यक्रम शुरू, छात्रों में अनुशासन और नेतृत्व स्थापित करना।</p></li>
+      <li><span class="year">2024</span><p>LEAD पाठ्यक्रम कार्यान्वयन, अमेट में अंतरराष्ट्रीय शिक्षण मानक लाना।</p></li>
     </ol>
   </section>
 

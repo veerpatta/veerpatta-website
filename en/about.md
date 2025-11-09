@@ -1,7 +1,7 @@
 ---
 layout: default
 title: About (EN)
-description: Founded in 1994, Veer Patta Public School combines values-driven education with modern learning—CBSE English-medium in Nokha, Rajasthan.
+description: Founded in 1994, Veer Patta Public School combines values-driven education with modern learning—RBSE English-medium in Amet, Rajsamand, Rajasthan.
 permalink: /en/about/
 ---
 {% include header.html %}
@@ -16,7 +16,7 @@ permalink: /en/about/
   <section class="about-glance">
     <ul>
       <li><strong>Founded:</strong> 1994</li>
-      <li><strong>Board:</strong> English-medium (CBSE)</li>
+      <li><strong>Board:</strong> English-medium (RBSE)</li>
       <li><strong>Students:</strong> 500+</li>
       <li><strong>Programs:</strong> LEAD • NCC • Sports • Arts</li>
     </ul>
@@ -30,11 +30,11 @@ permalink: /en/about/
   <section class="about-timeline">
     <h2>Our Journey</h2>
     <ol class="about-steps">
-      <li><span class="year">1994</span><p>School founded with a focus on values and discipline.</p></li>
-      <li><span class="year">2000</span><p>Expansion of primary and activity spaces.</p></li>
-      <li><span class="year">2010</span><p>New labs and library upgrades.</p></li>
-      <li><span class="year">2020</span><p>Digital readiness and blended learning.</p></li>
-      <li><span class="year">2024</span><p>Modern classrooms with LEAD and NCC leadership programs.</p></li>
+      <li><span class="year">1994</span><p>Founded by visionary educators with just 50 students, bringing quality English-medium education to Amet.</p></li>
+      <li><span class="year">2000</span><p>First batch of Class 10 achieves 100% pass result, establishing VPS as a trusted name in the region.</p></li>
+      <li><span class="year">2010</span><p>Introduction of computer education lab, modernizing the learning experience.</p></li>
+      <li><span class="year">2018</span><p>NCC program launched, instilling discipline and leadership in students.</p></li>
+      <li><span class="year">2024</span><p>LEAD curriculum implementation, bringing international teaching standards to Amet.</p></li>
     </ol>
   </section>
 

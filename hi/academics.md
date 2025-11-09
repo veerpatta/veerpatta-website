@@ -26,11 +26,12 @@ permalink: /hi/academics/
 
   <section class="teachers">
     <h2>हमारे शिक्षक</h2>
+    <p><strong>सभी शिक्षक B.Ed योग्य हैं और न्यूनतम 5 वर्ष का अनुभव रखते हैं</strong></p>
     <div class="card-grid">
-      <article class="card"><h3>Priya Sharma</h3><p>English • 8 वर्ष</p></article>
-      <article class="card"><h3>Rahul Verma</h3><p>Mathematics • 10 वर्ष</p></article>
-      <article class="card"><h3>Neha Singh</h3><p>Science • 7 वर्ष</p></article>
-      <article class="card"><h3>Arjun Patel</h3><p>Social Science • 9 वर्ष</p></article>
+      <article class="card"><h3>श्रीमती शर्मा</h3><p>M.A. अंग्रेज़ी, B.Ed<br>12 वर्ष का अनुभव</p></article>
+      <article class="card"><h3>श्री वर्मा</h3><p>M.Sc. गणित<br>15 वर्ष का अनुभव</p></article>
+      <article class="card"><h3>श्रीमती सिंह</h3><p>M.Sc. विज्ञान, B.Ed<br>10 वर्ष का अनुभव</p></article>
+      <article class="card"><h3>श्री पटेल</h3><p>M.A. सामाजिक विज्ञान<br>8 वर्ष का अनुभव</p></article>
     </div>
   </section>
 
