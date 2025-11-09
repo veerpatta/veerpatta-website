@@ -6,12 +6,14 @@
   {% assign admissions_path = '/hi/admissions/' %}
   {% assign gallery_path = '/hi/gallery/' %}
   {% assign contact_path = '/hi/contact/' %}
+  {% assign privacy_path = '/hi/privacy/' %}
 {% else %}
   {% assign about_path = '/en/about/' %}
   {% assign academics_path = '/en/academics/' %}
   {% assign admissions_path = '/en/admissions/' %}
   {% assign gallery_path = '/en/gallery/' %}
   {% assign contact_path = '/en/contact/' %}
+  {% assign privacy_path = '/en/privacy/' %}
 {% endif %}
 
 <footer class="site-footer">
@@ -22,6 +24,7 @@
       <li><a href="{{ admissions_path | relative_url }}">Admissions</a></li>
       <li><a href="{{ gallery_path | relative_url }}">Gallery</a></li>
       <li><a href="{{ contact_path | relative_url }}">Contact</a></li>
+      <li><a href="{{ privacy_path | relative_url }}">Privacy</a></li>
     </ul>
     <p>Veer Patta Public School · NH 48, Behror, Rajasthan</p>
     <p>© {{ site.time | date: "%Y" }} Veer Patta Public School</p>
