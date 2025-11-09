@@ -1,6 +1,6 @@
 # Veer Patta Public School Website
 
-Bilingual (English/Hindi) website for Veer Patta Public School, Nokha.
+Bilingual (English/Hindi) website for Veer Patta Public School, Amet (Rajsamand district).
 
 ## Features
 

@@ -31,10 +31,11 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
 <section class="hero container">
   <h1>Amet's Premier English Medium School - Empowering Students for 30 Years</h1>
   <p>RBSE Affiliated | Nursery to Class 12 | Science, Commerce & Arts Streams</p>
-  <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">Quick Admission Inquiry</a></p>
-  <!-- placeholder image (no file required yet) -->
-  <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}"
-       alt="Morning assembly at Veer Patta Public School" loading="lazy" style="display:block;max-width:100%;height:auto;">
+  <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">Chat with VPS Admissions</a></p>
+  <figure class="hero-media media-placeholder" role="group" aria-labelledby="hero-media-caption-en">
+    <div class="media-placeholder__badge">Campus photo coming soon</div>
+    <figcaption id="hero-media-caption-en">Morning assembly at Veer Patta Public School, Amet</figcaption>
+  </figure>
 </section>
 
 <!-- STATS -->
@@ -51,24 +52,24 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
   <h2>Programs</h2>
   <div class="programs">
     <article class="program">
-      <img src="{{ '/assets/images/lead-program.webp' | relative_url }}" alt="LEAD curriculum" loading="lazy">
+      <div class="program-icon" aria-hidden="true">📘</div>
       <h3>LEAD Curriculum</h3>
-      <p>Concept mastery through modern pedagogy.</p>
+      <p>Concept mastery with LEAD academic coaches visiting from Rajsamand every fortnight.</p>
     </article>
     <article class="program">
-      <img src="{{ '/assets/images/ncc-program.webp' | relative_url }}" alt="NCC activities" loading="lazy">
+      <div class="program-icon" aria-hidden="true">🎖️</div>
       <h3>NCC</h3>
-      <p>Discipline and leadership in action.</p>
+      <p>Discipline drills guided by ex-servicemen from Sardargarh cantonment.</p>
     </article>
     <article class="program">
-      <img src="{{ '/assets/images/sports-program.webp' | relative_url }}" alt="Sports at school" loading="lazy">
+      <div class="program-icon" aria-hidden="true">⚽</div>
       <h3>Sports</h3>
-      <p>Teamwork, fitness, and confidence.</p>
+      <p>Teamwork, fitness, and confidence on our Amet stadium-size ground.</p>
     </article>
     <article class="program">
-      <img src="{{ '/assets/images/arts-program.webp' | relative_url }}" alt="Arts and creativity" loading="lazy">
+      <div class="program-icon" aria-hidden="true">🎨</div>
       <h3>Arts</h3>
-      <p>Creativity through music, art, and drama.</p>
+      <p>Creativity through music, art, and drama coached by local artisans from Piplantri.</p>
     </article>
   </div>
 </section>

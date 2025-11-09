@@ -7,6 +7,11 @@
   {% assign admissions_path = '/hi/admissions/' %}
   {% assign gallery_path = '/hi/gallery/' %}
   {% assign contact_path = '/hi/contact/' %}
+  {% assign about_label = 'हमारे बारे में' %}
+  {% assign academics_label = 'शैक्षणिक' %}
+  {% assign admissions_label = 'प्रवेश' %}
+  {% assign gallery_label = 'गैलरी' %}
+  {% assign contact_label = 'संपर्क' %}
 {% else %}
   {% assign home_path = '/en/' %}
   {% assign about_path = '/en/about/' %}
@@ -14,6 +19,11 @@
   {% assign admissions_path = '/en/admissions/' %}
   {% assign gallery_path = '/en/gallery/' %}
   {% assign contact_path = '/en/contact/' %}
+  {% assign about_label = 'About' %}
+  {% assign academics_label = 'Academics' %}
+  {% assign admissions_label = 'Admissions' %}
+  {% assign gallery_label = 'Gallery' %}
+  {% assign contact_label = 'Contact' %}
 {% endif %}
 
 <header class="site-header">
@@ -22,11 +32,11 @@
     <nav class="header-nav">
       <a href="{{ "/en/" | relative_url }}" class="nav-link">EN</a>
       <a href="{{ "/hi/" | relative_url }}" class="nav-link">HI</a>
-      <a class="nav-link" href="{{ about_path | relative_url }}">About</a>
-      <a class="nav-link" href="{{ academics_path | relative_url }}">Academics</a>
-      <a href="{{ admissions_path | relative_url }}" class="nav-link">Admissions</a>
-      <a class="nav-link" href="{{ gallery_path | relative_url }}">Gallery</a>
-      <a class="nav-link" href="{{ contact_path | relative_url }}">Contact</a>
+      <a class="nav-link" href="{{ about_path | relative_url }}">{{ about_label }}</a>
+      <a class="nav-link" href="{{ academics_path | relative_url }}">{{ academics_label }}</a>
+      <a href="{{ admissions_path | relative_url }}" class="nav-link">{{ admissions_label }}</a>
+      <a class="nav-link" href="{{ gallery_path | relative_url }}">{{ gallery_label }}</a>
+      <a class="nav-link" href="{{ contact_path | relative_url }}">{{ contact_label }}</a>
     </nav>
   </div>
 </header>

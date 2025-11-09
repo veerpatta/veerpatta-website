@@ -130,11 +130,38 @@ img[loading="lazy"] {
   font-size: clamp(0.95rem, 2.5vw, 1.1rem);
 }
 
-.hero img,
-.hero video {
+.hero-media {
   margin: 2rem auto 0;
   border-radius: 16px;
   max-width: 100%;
+}
+
+.media-placeholder {
+  border: 1px dashed rgba(83, 117, 226, 0.4);
+  background: linear-gradient(135deg, rgba(83, 117, 226, 0.06), rgba(132, 172, 100, 0.08));
+  border-radius: 16px;
+  padding: clamp(2rem, 5vw, 3rem);
+  display: grid;
+  place-items: center;
+  gap: 0.75rem;
+  color: var(--muted-text);
+  text-align: center;
+}
+
+.media-placeholder__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(83, 117, 226, 0.12);
+  color: var(--brand-blue);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.media-placeholder figcaption {
+  font-size: 0.9rem;
 }
 
 /* Buttons */
@@ -432,11 +459,17 @@ button:focus-visible {
   text-align: center;
 }
 
-.program img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 0.75rem;
+.program-icon {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  background: rgba(83, 117, 226, 0.12);
+  color: var(--brand-blue);
 }
 
 .program h3 {

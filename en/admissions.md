@@ -144,7 +144,7 @@ permalink: /en/admissions/
       <button type="submit" class="btn">Submit Application</button>
     </form>
     <div class="admissions-help">
-      <p>Prefer a quick chat? <a href="https://wa.me/919413748575?text=Hi%2C%20I%27d%20like%20to%20know%20about%20admissions%20at%20Veer%20Patta%20Public%20School" class="btn" target="_blank" rel="noopener">WhatsApp Us</a></p>
+      <p>Prefer a quick chat with our counsellor? <a href="https://wa.me/919413748575?text=Hi,%20I%27m%20a%20parent%20from%20Parasoli.%20I%20need%20Class%206%20admission%20details%20for%202024-25%20at%20Veer%20Patta%20Public%20School,%20Amet.%20Please%20share%20the%20complete%20fee%20breakup%20and%20Parasoli%20bus%20timings." class="btn" target="_blank" rel="noopener">Chat with VPS Admissions</a></p>
     </div>
   </section>
 

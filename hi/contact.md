@@ -20,7 +20,7 @@ permalink: /hi/contact/
       <p>वीर पट्टा पब्लिक स्कूल, करमल रोड के पास, अमेट, राजसमंद, राजस्थान - 313332</p>
       <p>फोन: <a href="tel:+919413748575">+91 94137 48575</a><br>
          ईमेल: <a href="mailto:veerpatta.school@gmail.com">veerpatta.school@gmail.com</a></p>
-      <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">व्हाट्सऐप करें</a></p>
+      <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">VPS प्रवेश टीम से चैट करें</a></p>
     </article>
 
     <article class="card">
@@ -36,8 +36,9 @@ permalink: /hi/contact/
       <h2>परिवहन मार्ग</h2>
       <ul>
         <li><strong>मार्ग 1:</strong> अमेट शहर → करमल रोड → विद्यालय</li>
-        <li><strong>मार्ग 2:</strong> आसपास के गाँव (खेमपुर, परासोली, आदि)</li>
-        <li>माँग के आधार पर नए मार्ग की व्यवस्था की जा सकती है</li>
+        <li><strong>मार्ग 2:</strong> परासोली → खेमपुर → विद्यालय</li>
+        <li><strong>मार्ग 3:</strong> पिपलंत्री → बाबरमल → विद्यालय</li>
+        <li>15 किमी दायरे में अभिभावक की माँग पर नए मार्ग जोड़े जा सकते हैं</li>
       </ul>
     </article>
   </section>
