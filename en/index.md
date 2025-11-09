@@ -83,5 +83,14 @@ title: Home (EN)
   </div>
 </section>
 
+<!-- GALLERY TEASER -->
+<section class="container gallery-teaser" id="gallery">
+  <div class="about-teaser-card">
+    <h2>Gallery</h2>
+    <p>See our campus in action — assemblies, labs, sports, and celebrations.</p>
+    <p><a class="btn btn-secondary" href="{{ '/en/gallery/' | relative_url }}">Open Gallery</a></p>
+  </div>
+</section>
+
 {% include whatsapp.html %}
 {% include footer.html %}
