@@ -1353,3 +1353,91 @@ button:focus-visible {
     font-size: 1.1rem;
   }
 }
+
+/* =====================================================
+   WHY PARENTS CHOOSE SECTION - DEDICATED STYLES
+   ===================================================== */
+
+.why-parents-section {
+  margin: 3rem 0;
+}
+
+.why-parents-section h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.why-parents-card {
+  background: #ffffff;
+  border: 1px solid rgba(83, 117, 226, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 28px rgba(83, 117, 226, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.why-parents-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(83, 117, 226, 0.12);
+}
+
+.why-parents-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.why-parents-list li {
+  padding-left: 2rem;
+  position: relative;
+  line-height: 1.7;
+  color: var(--muted-text);
+  font-size: 1rem;
+}
+
+.why-parents-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--brand-green);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.7;
+}
+
+.why-parents-list li strong {
+  color: var(--text-color);
+  font-weight: 700;
+  display: inline;
+}
+
+/* Hindi adjustments */
+.lang-hi .why-parents-list li {
+  line-height: 1.9;
+  font-size: 1.05rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .why-parents-card {
+    padding: 1.5rem;
+  }
+
+  .why-parents-list {
+    gap: 1rem;
+  }
+
+  .why-parents-list li {
+    padding-left: 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  .why-parents-list li::before {
+    font-size: 1.1rem;
+  }
+}
