@@ -123,19 +123,32 @@
       <span>{{ whatsapp_cta }}</span>
     </a>
 
-    {% comment %} Hamburger Menu Button - Only visible on mobile {% endcomment %}
-    <button class="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Open navigation menu"
-            aria-expanded="false"
-            aria-controls="mobileNav">
-      <span class="hamburger">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </span>
-      <span class="menu-text">{{ menu_label }}</span>
-    </button>
+    {% comment %} Mobile Header Tools - Language toggle + Hamburger menu (visible on mobile only) {% endcomment %}
+    <div class="mobile-header-tools">
+
+      {% comment %} Mobile Language Toggle - Visible next to hamburger on mobile {% endcomment %}
+      <a class="mobile-lang-toggle language-switch"
+         href="{{ alt_path | relative_url }}"
+         {% if current_lang == 'en' %}lang="hi" hreflang="hi"{% else %}lang="en" hreflang="en"{% endif %}
+         aria-label="{% if current_lang == 'en' %}Switch to Hindi{% else %}Switch to English{% endif %}">
+        {% if current_lang == 'en' %}{{ lang_label_hi }}{% else %}{{ lang_label_en }}{% endif %}
+      </a>
+
+      {% comment %} Hamburger Menu Button - Only visible on mobile {% endcomment %}
+      <button class="mobile-menu-btn"
+              id="mobileMenuBtn"
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+              aria-controls="mobileNav">
+        <span class="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+        <span class="menu-text">{{ menu_label }}</span>
+      </button>
+
+    </div>
 
   </div>
 </header>
