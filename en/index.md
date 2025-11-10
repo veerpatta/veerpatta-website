@@ -73,10 +73,10 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
 </section>
 
 <!-- WHY PARENTS CHOOSE VPS -->
-<section class="container">
+<section class="container why-parents-section">
   <h2>Why Parents Choose Veer Patta</h2>
-  <div class="card">
-    <ul style="line-height:1.8;">
+  <div class="why-parents-card">
+    <ul class="why-parents-list">
       <li><strong>Only English medium school in 10km radius</strong> - Closest alternative is in Rajsamand city</li>
       <li><strong>Affordable fees with payment flexibility</strong> - Sibling discounts and merit scholarships available</li>
       <li><strong>Personal attention with 1:20 teacher-student ratio</strong> - Every child receives individual focus</li>

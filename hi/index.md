@@ -74,10 +74,10 @@ description: अमेट का प्रमुख अंग्रेज़ी-
 </section>
 
 <!-- WHY PARENTS CHOOSE VPS -->
-<section class="container lang-hi">
+<section class="container why-parents-section lang-hi">
   <h2>अभिभावक वीर पट्टा को क्यों चुनते हैं</h2>
-  <div class="card">
-    <ul style="line-height:1.8;">
+  <div class="why-parents-card">
+    <ul class="why-parents-list">
       <li><strong>10 किमी दायरे में एकमात्र अंग्रेज़ी माध्यम विद्यालय</strong> - निकटतम विकल्प राजसमंद शहर में है</li>
       <li><strong>भुगतान लचीलेपन के साथ किफायती शुल्क</strong> - भाई-बहन छूट और योग्यता छात्रवृत्ति उपलब्ध</li>
       <li><strong>1:20 शिक्षक-छात्र अनुपात के साथ व्यक्तिगत ध्यान</strong> - हर बच्चे को व्यक्तिगत फोकस मिलता है</li>
