@@ -156,6 +156,7 @@ img[loading="lazy"] {
 /* Mobile Header Tools - Container for language toggle + hamburger on mobile */
 .mobile-header-tools {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 8px;
   margin-left: auto;
@@ -179,6 +180,7 @@ img[loading="lazy"] {
   transition: all 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   border: 2px solid transparent;
+  flex-shrink: 0;
 }
 
 .mobile-lang-toggle.language-switch:hover {
