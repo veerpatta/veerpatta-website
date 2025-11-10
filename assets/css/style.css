@@ -153,6 +153,49 @@ img[loading="lazy"] {
   display: none;
 }
 
+/* Mobile Header Tools - Container for language toggle + hamburger on mobile */
+.mobile-header-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Mobile Language Toggle - Visible next to hamburger on mobile */
+.mobile-lang-toggle.language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  min-width: 48px;
+  min-height: 48px;
+  background: rgba(83, 117, 226, 0.1);
+  color: var(--brand-blue);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  border: 2px solid transparent;
+}
+
+.mobile-lang-toggle.language-switch:hover {
+  background: rgba(83, 117, 226, 0.15);
+  transform: translateY(-1px);
+}
+
+.mobile-lang-toggle.language-switch:active {
+  transform: translateY(0);
+  background: rgba(83, 117, 226, 0.2);
+}
+
+.mobile-lang-toggle.language-switch:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+}
+
 /* Hamburger Menu Button - VISIBLE on mobile, 56x56px touch target */
 .mobile-menu-btn {
   display: flex;
@@ -423,7 +466,15 @@ body[lang="hi"] .mobile-nav-link,
   }
 
   /* Hide mobile elements */
+  .mobile-header-tools {
+    display: none;
+  }
+
   .mobile-menu-btn {
+    display: none;
+  }
+
+  .mobile-lang-toggle.language-switch {
     display: none;
   }
 
