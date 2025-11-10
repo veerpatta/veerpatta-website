@@ -382,8 +382,8 @@ body[lang="hi"] .mobile-nav-link,
   box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
 }
 
-/* Sticky Mobile WhatsApp Button - Floating bottom-right */
-.sticky-whatsapp-mobile {
+/* WhatsApp Float Button - Floating bottom-right */
+.whatsapp-float {
   position: fixed;
   right: 16px;
   bottom: 16px;
@@ -402,12 +402,12 @@ body[lang="hi"] .mobile-nav-link,
   -webkit-tap-highlight-color: transparent;
 }
 
-.sticky-whatsapp-mobile:active {
+.whatsapp-float:active {
   transform: scale(0.95);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
-.sticky-whatsapp-mobile svg {
+.whatsapp-float svg {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
@@ -427,7 +427,7 @@ body[lang="hi"] .mobile-nav-link,
     display: none;
   }
 
-  .sticky-whatsapp-mobile {
+  .whatsapp-float {
     display: none;
   }
 
