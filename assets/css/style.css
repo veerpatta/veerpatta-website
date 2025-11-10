@@ -1441,3 +1441,88 @@ button:focus-visible {
     font-size: 1.1rem;
   }
 }
+
+/* =====================================================
+   RECENT ACHIEVEMENTS SECTION - DEDICATED STYLES
+   ===================================================== */
+
+.achievements-section {
+  margin: 3rem 0;
+}
+
+.achievements-section h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.achievements-card {
+  background: linear-gradient(160deg, rgba(83, 117, 226, 0.04), rgba(132, 172, 100, 0.04));
+  border: 1px solid rgba(83, 117, 226, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 28px rgba(83, 117, 226, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.achievements-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(83, 117, 226, 0.12);
+}
+
+.achievements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.achievements-list li {
+  padding-left: 2.5rem;
+  position: relative;
+  line-height: 1.7;
+  color: var(--muted-text);
+  font-size: 1rem;
+}
+
+.achievement-emoji {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
+  line-height: 1.7;
+}
+
+.achievements-list li strong {
+  color: var(--text-color);
+  font-weight: 700;
+  display: inline;
+}
+
+/* Hindi adjustments */
+.lang-hi .achievements-list li {
+  line-height: 1.9;
+  font-size: 1.05rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .achievements-card {
+    padding: 1.5rem;
+  }
+
+  .achievements-list {
+    gap: 1rem;
+  }
+
+  .achievements-list li {
+    padding-left: 2.25rem;
+    font-size: 0.95rem;
+  }
+
+  .achievement-emoji {
+    font-size: 1.3rem;
+  }
+}
