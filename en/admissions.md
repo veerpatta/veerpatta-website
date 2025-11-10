@@ -162,6 +162,4 @@ permalink: /en/admissions/
     Office Hours: Monday - Friday, 9:00 AM - 4:00 PM</p>
   </section>
 </main>
-
-{% include whatsapp.html %}
 {% include footer.html %}

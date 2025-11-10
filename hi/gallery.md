@@ -38,6 +38,4 @@ permalink: /hi/gallery/
     <p>जावास्क्रिप्ट बंद है — सभी आइटम दिखाए जा रहे हैं।</p>
   </noscript>
 </main>
-
-{% include whatsapp.html %}
 {% include footer.html %}

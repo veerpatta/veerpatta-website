@@ -41,6 +41,4 @@ permalink: /en/contact/
     </article>
   </section>
 </main>
-
-{% include whatsapp.html %}
 {% include footer.html %}

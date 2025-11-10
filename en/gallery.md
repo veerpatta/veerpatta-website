@@ -38,6 +38,4 @@ permalink: /en/gallery/
     <p>JavaScript is disabled — showing all items.</p>
   </noscript>
 </main>
-
-{% include whatsapp.html %}
 {% include footer.html %}
