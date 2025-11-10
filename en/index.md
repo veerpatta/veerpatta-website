@@ -150,5 +150,4 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
   </div>
 </section>
 
-{% include whatsapp.html %}
 {% include footer.html %}

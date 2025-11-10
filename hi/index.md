@@ -151,5 +151,4 @@ description: अमेट का प्रमुख अंग्रेज़ी-
   </div>
 </section>
 
-{% include whatsapp.html %}
 {% include footer.html %}
