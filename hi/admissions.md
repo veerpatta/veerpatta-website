@@ -163,6 +163,4 @@ permalink: /hi/admissions/
     कार्यालय का समय: सोमवार - शुक्रवार, सुबह 9:00 बजे - शाम 4:00 बजे</p>
   </section>
 </main>
-
-{% include whatsapp.html %}
 {% include footer.html %}

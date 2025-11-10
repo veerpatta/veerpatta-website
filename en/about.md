@@ -48,6 +48,4 @@ permalink: /en/about/
     </ul>
   </section>
 </main>
-
-{% include whatsapp.html %}
 {% include footer.html %}

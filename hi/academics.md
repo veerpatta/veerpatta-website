@@ -44,6 +44,4 @@ permalink: /hi/academics/
     </ul>
   </section>
 </main>
-
-{% include whatsapp.html %}
 {% include footer.html %}
