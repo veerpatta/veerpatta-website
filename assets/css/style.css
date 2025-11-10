@@ -1236,3 +1236,120 @@ button:focus-visible {
   white-space: nowrap;
   border: 0;
 }
+
+/* =====================================================
+   WHY PARENTS CHOOSE US SECTION
+   Professional card styling with green checkmarks
+   ===================================================== */
+
+/* Card container for "Why Parents Choose Us" section */
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(83, 117, 226, 0.15);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(83, 117, 226, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(83, 117, 226, 0.15);
+}
+
+/* List styling within cards */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card ul li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1.25rem;
+  color: var(--muted-text);
+  line-height: 1.8;
+}
+
+.card ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Green checkmark bullets */
+.card ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--brand-green);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+/* Bold text styling within list items */
+.card ul li strong {
+  color: var(--text-color);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Hindi language adjustments for better readability */
+.lang-hi .card ul li {
+  line-height: 2;
+  font-size: 1.05rem;
+}
+
+.lang-hi .card ul li strong {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .card ul li {
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .card ul li::before {
+    font-size: 1.2rem;
+  }
+
+  .card ul li strong {
+    font-size: 1rem;
+  }
+
+  .lang-hi .card ul li {
+    font-size: 1rem;
+  }
+
+  .lang-hi .card ul li strong {
+    font-size: 1.05rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .card {
+    padding: 1.25rem;
+  }
+
+  .card ul li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .card ul li::before {
+    font-size: 1.1rem;
+  }
+}
