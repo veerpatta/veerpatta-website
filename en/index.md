@@ -88,13 +88,13 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
 </section>
 
 <!-- RECENT ACHIEVEMENTS -->
-<section class="container">
+<section class="container achievements-section">
   <h2>Recent Achievements</h2>
-  <div class="card">
-    <ul style="line-height:1.8;">
-      <li>🏆 <strong>3 students selected for district-level science exhibition</strong> - Representing Amet region</li>
-      <li>🎖️ <strong>NCC 'B' Certificate for 15 students</strong> - Leadership and discipline excellence</li>
-      <li>📚 <strong>100% result in Class 10 English and Science</strong> - Academic excellence recognized</li>
+  <div class="achievements-card">
+    <ul class="achievements-list">
+      <li><span class="achievement-emoji">🏆</span> <strong>3 students selected for district-level science exhibition</strong> - Representing Amet region</li>
+      <li><span class="achievement-emoji">🎖️</span> <strong>NCC 'B' Certificate for 15 students</strong> - Leadership and discipline excellence</li>
+      <li><span class="achievement-emoji">📚</span> <strong>100% result in Class 10 English and Science</strong> - Academic excellence recognized</li>
     </ul>
   </div>
 </section>
