@@ -235,6 +235,15 @@ sports-day-2024.jpg | EN: Annual Sports Day 2024 | HI: वार्षिक ख
 - **Trigger**: Push to `main` branch
 - **Build Time**: 2-3 minutes
 - **Live URL**: https://veerpatta.github.io/veerpatta-website/
+- **Build System**: GitHub Actions workflow (`.github/workflows/jekyll.yml`)
+- **Status**: Check the Actions tab in GitHub to monitor deployment progress
+
+### Monitoring Deployment
+1. Go to the [Actions tab](https://github.com/veerpatta/veerpatta-website/actions) in the repository
+2. Look for the latest workflow run for your commit
+3. Click on the workflow to see build logs and deployment status
+4. Green checkmark ✓ means successful deployment
+5. Red X ✗ means build failed - click to see error details
 
 ### Manual Testing
 After deployment, test these URLs:
@@ -303,8 +312,9 @@ lighthouse https://veerpatta.github.io/veerpatta-website/en/ --view
 
 **Solution:**
 - Wait 2-3 minutes for GitHub Pages rebuild
+- Check build status in the [Actions tab](https://github.com/veerpatta/veerpatta-website/actions)
 - Hard refresh browser (Ctrl+Shift+R)
-- Check if build succeeded in repository Actions tab
+- Verify the deployment workflow completed successfully
 
 ### Issue: Images not loading
 

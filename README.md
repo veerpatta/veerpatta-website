@@ -226,9 +226,10 @@ analytics_domain: "veerpatta.github.io"
 
 ### Automatic Deployment
 
-**Trigger**: Push to `main` branch
-**Build Time**: 2-3 minutes
-**Live URL**: https://veerpatta.github.io/veerpatta-website/
+**Trigger**: Push to `main` branch  
+**Build Time**: 2-3 minutes  
+**Live URL**: https://veerpatta.github.io/veerpatta-website/  
+**Monitor**: [GitHub Actions](https://github.com/veerpatta/veerpatta-website/actions)
 
 ### Process:
 1. Code pushed to GitHub
