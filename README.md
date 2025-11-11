@@ -19,8 +19,9 @@ Official bilingual website for **Veer Patta Public School**, Nokha, Rajasthan, I
 |--------------|-----------|
 | 📘 **Understand what this project is** | [PROJECT_GUIDE.md](PROJECT_GUIDE.md) ← Start here! |
 | 👨‍💻 **Contribute code or make changes** | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| ⚡ **Quick start for coding agents** | [QUICK_START.md](QUICK_START.md) |
 | 🖼️ **Upload photos/videos** | [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md) |
-| ⚡ **Quick media upload reference** | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) |
+| 📋 **Quick media upload reference** | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) |
 | 🏗️ **Understand technical architecture** | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 | 📝 **See what changed** | [CHANGELOG.md](CHANGELOG.md) |
 | 🤝 **Understand community guidelines** | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
