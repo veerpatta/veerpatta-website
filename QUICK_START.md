@@ -65,7 +65,7 @@ window.GalleryLoader.registerItems('sports', [
 
 **Other Pages**:
 - Upload to `assets/media/{page-name}/`
-- Reference in page: `![Alt]({{ '/assets/media/page/file.jpg' | relative_url }})`
+- Reference in page: `![Alt]({% raw %}{{ '/assets/media/page/file.jpg' | relative_url }}{% endraw %})`
 
 ### Task: Modify Styles
 
@@ -115,11 +115,13 @@ window.GalleryLoader.registerItems('sports', [
 
 **Critical**: Use Liquid variables for bilingual content:
 ```liquid
+{% raw %}
 {% if page.lang == 'hi' %}
   {% assign nav_home = 'होम' %}
 {% else %}
   {% assign nav_home = 'Home' %}
 {% endif %}
+{% endraw %}
 ```
 
 ## 🧪 Testing Checklist
@@ -128,7 +130,7 @@ Before committing:
 - [ ] Test at 320px width (mobile)
 - [ ] Test both `/en/` and `/hi/` pages
 - [ ] No console errors
-- [ ] Links work (use `{{ url | relative_url }}`)
+- [ ] Links work (use `{% raw %}{{ url | relative_url }}{% endraw %}`)
 - [ ] Keyboard navigation works (Tab, Enter)
 - [ ] Images have alt text
 
@@ -152,25 +154,31 @@ style: Improve button hover states
 
 **URLs** (always use these):
 ```liquid
+{% raw %}
 {{ '/en/about/' | relative_url }}        → /veerpatta-website/en/about/
 {{ '/assets/css/style.css' | absolute_url }} → https://veerpatta.github.io/veerpatta-website/assets/css/style.css
+{% endraw %}
 ```
 
 **Variables**:
 ```liquid
+{% raw %}
 {{ page.title }}      → Page title from frontmatter
 {{ site.title }}      → Site title from _config.yml
 {{ page.lang }}       → Language (en or hi)
 {{ content }}         → Page content (in layouts)
+{% endraw %}
 ```
 
 **Conditionals**:
 ```liquid
+{% raw %}
 {% if page.lang == 'hi' %}
   Hindi content
 {% else %}
   English content
 {% endif %}
+{% endraw %}
 ```
 
 ## 🎨 Design System
@@ -225,7 +233,7 @@ style: Improve button hover states
 
 **Build Failures**:
 - Check GitHub Actions tab for logs
-- Look for Liquid syntax errors (`{% %}`, `{{ }}`)
+- Look for Liquid syntax errors (`{% raw %}{% %}{% endraw %}`, `{% raw %}{{ }}{% endraw %}`)
 - Verify YAML frontmatter format
 
 **Styles Not Applied**:
