@@ -15,6 +15,9 @@
   window.GalleryLoader.registerItems('sports', [
     // Add sports media filenames here
     // Example: 'relay-race.jpg', 'football-match.mp4'
+    // Uncomment and add your files:
+    // 'sports-day-2024.jpg',
+    // 'football-practice.mp4'
   ]);
 
   window.GalleryLoader.registerItems('ncc', [

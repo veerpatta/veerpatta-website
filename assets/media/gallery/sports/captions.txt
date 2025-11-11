@@ -3,3 +3,9 @@ Format: filename.ext | EN: English caption | HI: Hindi caption
 Examples:
 relay-race.jpg | EN: Annual Sports Day | HI: वार्षिक खेल दिवस
 football.mp4 | EN: Football Practice | HI: फुटबॉल अभ्यास
+
+# SAMPLE ENTRIES (remove # to activate):
+# sports-day-2024.jpg | EN: Annual Sports Day 2024 | HI: वार्षिक खेल दिवस 2024
+# football-practice.mp4 | EN: Football Practice Session | HI: फुटबॉल अभ्यास सत्र
+# cricket-match.jpg | EN: Inter-house Cricket Match | HI: अंतर-सदन क्रिकेट मैच
+# relay-race.mp4 | EN: 100m Relay Race | HI: 100 मीटर रिले दौड़

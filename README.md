@@ -49,3 +49,40 @@ Built with Jekyll and deployed on GitHub Pages.
 ## License
 
 Content and code for Veer Patta Public School.
+
+---
+
+## 📸 Media Upload System
+
+This website includes an automated media upload system for easy monthly content updates.
+
+### Quick Upload (3 Steps)
+
+1. **Upload** images/videos to `assets/media/{category}/`
+2. **Register** (gallery only): Add filename to `assets/js/gallery-items.js`
+3. **Commit** changes → Website updates in 2-3 minutes ✨
+
+### Full Documentation
+
+- 📖 **English Guide:** [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md)
+- 📖 **Hindi Guide (हिंदी):** [MEDIA_UPLOAD_GUIDE_HI.md](MEDIA_UPLOAD_GUIDE_HI.md)
+- ⚡ **Quick Reference:** [QUICK_REFERENCE.md](QUICK_REFERENCE.md)
+
+### Supported Media
+
+- **Images:** `.jpg`, `.png`, `.webp` (any size)
+- **Videos:** `.mp4`, `.webm` (max 100MB, recommended 50MB)
+
+### System Features
+
+✅ Auto-detects images and videos
+✅ Bilingual caption support (English/Hindi)
+✅ Lazy loading for fast performance
+✅ Responsive on all devices (mobile-first)
+✅ No code changes needed after setup
+✅ Simple file registration system
+
+### Need Help?
+
+- Check [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md) for troubleshooting
+- Email: veerpatta.school@gmail.com
