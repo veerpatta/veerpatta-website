@@ -1,0 +1,5 @@
+Image and Video Captions - Sports
+Format: filename.ext | EN: English caption | HI: Hindi caption
+Examples:
+relay-race.jpg | EN: Annual Sports Day | HI: वार्षिक खेल दिवस
+football.mp4 | EN: Football Practice | HI: फुटबॉल अभ्यास
