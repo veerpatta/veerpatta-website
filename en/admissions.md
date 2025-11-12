@@ -110,26 +110,168 @@ permalink: /en/admissions/
   <!-- FAQ Section -->
   <section class="admissions-faq">
     <h2>Frequently Asked Questions</h2>
-    <div class="card">
-      <h3>What documents are needed for admission?</h3>
-      <p>Birth certificate, Aadhaar card, previous school Transfer Certificate (if applicable), and 2 passport-size photos.</p>
+    <div class="card" itemscope itemtype="https://schema.org/FAQPage">
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">What documents are needed for admission?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Birth certificate, Aadhaar card, previous school Transfer Certificate (if applicable), and 2 passport-size photos.</p>
+        </div>
+      </div>
 
-      <h3>Is there an entrance test?</h3>
-      <p>No entrance test. We conduct a friendly interaction to understand the child's learning level and ensure class compatibility.</p>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Is there an entrance test?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">No entrance test. We conduct a friendly interaction to understand the child's learning level and ensure class compatibility.</p>
+        </div>
+      </div>
 
-      <h3>What is the admission process timeline?</h3>
-      <p>Form submission → Interaction within 3 days → Result in 1 day → Admission completion within 1 week.</p>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">What is the admission process timeline?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Form submission → Interaction within 3 days → Result in 1 day → Admission completion within 1 week.</p>
+        </div>
+      </div>
 
-      <h3>Do you provide transport facilities?</h3>
-      <p>Yes, we provide safe and reliable transport covering a 15km radius around Amet. Routes include Amet town and surrounding villages like Khempur and Parasoli.</p>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Do you provide transport facilities?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Yes, we provide safe and reliable transport covering a 15km radius around Amet. Routes include Amet town and surrounding villages like Khempur and Parasoli.</p>
+        </div>
+      </div>
 
-      <h3>What about support for weak students?</h3>
-      <p>We provide free remedial classes after school hours for students who need extra support. Personal attention is our strength.</p>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">What about support for weak students?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">We provide free remedial classes after school hours for students who need extra support. Personal attention is our strength.</p>
+        </div>
+      </div>
 
-      <h3>Are scholarships available?</h3>
-      <p>Yes, we offer merit-based scholarships and sibling discounts. Financial assistance is considered on a case-by-case basis for deserving students.</p>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Are scholarships available?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Yes, we offer merit-based scholarships and sibling discounts. Financial assistance is considered on a case-by-case basis for deserving students.</p>
+        </div>
+      </div>
+
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">What is the fee structure?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Admission fee (one-time): ₹5,000. Annual tuition: ₹18,000-₹24,000 (varies by class). Books & uniform: ₹3,000-₹5,000. Optional transport: ₹800-₹1,200/month based on distance.</p>
+        </div>
+      </div>
+
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Can I visit the school before applying?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Absolutely! We encourage parents to visit during office hours (Mon-Fri, 9AM-4PM). Please call ahead to schedule a tour: +91 94137 48575.</p>
+        </div>
+      </div>
+
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">What is the teacher-student ratio?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">We maintain a 1:30 teacher-student ratio with a maximum of 30 students per class, ensuring personalized attention for every child.</p>
+        </div>
+      </div>
+
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">What co-curricular activities do you offer?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">We offer NCC, sports (cricket, football, athletics), cultural activities (music, dance), science club, library, and annual events. All activities are included in the tuition fee.</p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- JSON-LD FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What documents are needed for admission?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Birth certificate, Aadhaar card, previous school Transfer Certificate (if applicable), and 2 passport-size photos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there an entrance test?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No entrance test. We conduct a friendly interaction to understand the child's learning level and ensure class compatibility."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the admission process timeline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Form submission → Interaction within 3 days → Result in 1 day → Admission completion within 1 week."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide transport facilities?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we provide safe and reliable transport covering a 15km radius around Amet. Routes include Amet town and surrounding villages like Khempur and Parasoli."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What about support for weak students?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We provide free remedial classes after school hours for students who need extra support. Personal attention is our strength."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are scholarships available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer merit-based scholarships and sibling discounts. Financial assistance is considered on a case-by-case basis for deserving students."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the fee structure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Admission fee (one-time): ₹5,000. Annual tuition: ₹18,000-₹24,000 (varies by class). Books & uniform: ₹3,000-₹5,000. Optional transport: ₹800-₹1,200/month based on distance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the school before applying?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! We encourage parents to visit during office hours (Mon-Fri, 9AM-4PM). Please call ahead to schedule a tour: +91 94137 48575."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the teacher-student ratio?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We maintain a 1:30 teacher-student ratio with a maximum of 30 students per class, ensuring personalized attention for every child."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What co-curricular activities do you offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer NCC, sports (cricket, football, athletics), cultural activities (music, dance), science club, library, and annual events. All activities are included in the tuition fee."
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- Contact Form Section -->
   <section class="admissions-contact">

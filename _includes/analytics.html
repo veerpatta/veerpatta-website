@@ -2,7 +2,28 @@
   Analytics include - privacy-safe tracking
   Only loads when site.analytics_enabled is true
   No cookies, no personal data, async load
+  Includes custom event tracking for marketing actions
 {% endcomment %}
 {% if site.analytics_enabled and site.analytics_script %}
   <script defer data-domain="{{ site.analytics_domain }}" src="{{ site.analytics_script }}"></script>
+
+  <!-- Marketing Event Tracking -->
+  <script>
+    // Safe analytics event tracking wrapper
+    window.trackEvent = function(eventName, props) {
+      // Only track if analytics is enabled and plausible is loaded
+      if (window.plausible) {
+        window.plausible(eventName, props ? { props: props } : undefined);
+      }
+    };
+
+    // Track CTA clicks via event delegation
+    document.addEventListener('click', function(e) {
+      var target = e.target.closest('[data-event]');
+      if (target) {
+        var eventName = target.getAttribute('data-event');
+        window.trackEvent(eventName);
+      }
+    });
+  </script>
 {% endif %}

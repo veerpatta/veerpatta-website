@@ -287,4 +287,269 @@
   });
 })();
 
-console.log('Marketing enhancements loaded - Testimonials carousel, FAQ accordion, and animations ready');
+/* ============================================
+   ENQUIRY DRAWER FUNCTIONALITY
+   Bottom sheet for admissions enquiries with validation
+   ============================================ */
+(function initEnquiryDrawer() {
+  // Marketing Enhancements Module
+  window.MarketingEnhancements = window.MarketingEnhancements || {};
+
+  Object.assign(window.MarketingEnhancements, {
+
+    // Open enquiry drawer
+    openEnquiryDrawer: function() {
+      var drawer = document.getElementById('enquiryDrawer');
+      var overlay = document.getElementById('enquiryOverlay');
+
+      if (drawer && overlay) {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+        drawer.setAttribute('aria-hidden', 'false');
+        overlay.setAttribute('aria-hidden', 'false');
+
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+
+        // Focus first input
+        setTimeout(function() {
+          var firstInput = drawer.querySelector('input');
+          if (firstInput) firstInput.focus();
+        }, 300);
+
+        // Track event
+        if (window.trackEvent) {
+          window.trackEvent('Enquiry Drawer: Opened');
+        }
+      }
+    },
+
+    // Close enquiry drawer
+    closeEnquiryDrawer: function() {
+      var drawer = document.getElementById('enquiryDrawer');
+      var overlay = document.getElementById('enquiryOverlay');
+
+      if (drawer && overlay) {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+        drawer.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('aria-hidden', 'true');
+
+        // Restore body scroll
+        document.body.style.overflow = '';
+
+        // Track event
+        if (window.trackEvent) {
+          window.trackEvent('Enquiry Drawer: Closed');
+        }
+      }
+    },
+
+    // Validate form field
+    validateField: function(field) {
+      var errorSpan = document.getElementById(field.id + 'Error');
+      var form = field.closest('form');
+      var errorRequired = form.dataset.errorRequired || 'This field is required';
+      var errorPhone = form.dataset.errorPhone || 'Please enter a valid phone number';
+
+      // Clear previous errors
+      if (errorSpan) {
+        errorSpan.textContent = '';
+        field.classList.remove('error');
+      }
+
+      // Check required
+      if (field.hasAttribute('required') && !field.value.trim()) {
+        if (errorSpan) {
+          errorSpan.textContent = errorRequired;
+          field.classList.add('error');
+        }
+        return false;
+      }
+
+      // Check phone pattern
+      if (field.type === 'tel' && field.value.trim()) {
+        var phonePattern = /^[0-9]{10,12}$/;
+        if (!phonePattern.test(field.value.trim())) {
+          if (errorSpan) {
+            errorSpan.textContent = errorPhone;
+            field.classList.add('error');
+          }
+          return false;
+        }
+      }
+
+      return true;
+    },
+
+    // Validate entire form
+    validateForm: function(form) {
+      var isValid = true;
+      var fields = form.querySelectorAll('input[required], select[required]');
+
+      fields.forEach(function(field) {
+        if (!window.MarketingEnhancements.validateField(field)) {
+          isValid = false;
+        }
+      });
+
+      return isValid;
+    },
+
+    // Get form data as object
+    getFormData: function(form) {
+      var data = {};
+      var inputs = form.querySelectorAll('input, select');
+
+      inputs.forEach(function(input) {
+        if (input.name) {
+          data[input.name] = input.value;
+        }
+      });
+
+      return data;
+    },
+
+    // Format enquiry message
+    formatEnquiryMessage: function(data, lang) {
+      if (lang === 'hi') {
+        return 'वीर पट्टा पब्लिक स्कूल में प्रवेश पूछताछ\n\n' +
+               'अभिभावक का नाम: ' + data.parent_name + '\n' +
+               'बच्चे का नाम: ' + data.child_name + '\n' +
+               'कक्षा: ' + data.class_sought + '\n' +
+               'फोन: ' + data.phone + '\n\n' +
+               'कृपया विवरण साझा करें।';
+      } else {
+        return 'Admission Enquiry for Veer Patta Public School\n\n' +
+               'Parent Name: ' + data.parent_name + '\n' +
+               'Child Name: ' + data.child_name + '\n' +
+               'Class: ' + data.class_sought + '\n' +
+               'Phone: ' + data.phone + '\n\n' +
+               'Please share details.';
+      }
+    },
+
+    // Submit via email (mailto)
+    submitViaEmail: function(form) {
+      var data = window.MarketingEnhancements.getFormData(form);
+      var lang = form.dataset.lang || 'en';
+      var schoolEmail = form.dataset.schoolEmail || 'veerpatta.school@gmail.com';
+
+      var subject = lang === 'hi' ?
+        'प्रवेश पूछताछ - ' + data.child_name :
+        'Admission Enquiry - ' + data.child_name;
+
+      var body = window.MarketingEnhancements.formatEnquiryMessage(data, lang);
+
+      var mailtoLink = 'mailto:' + schoolEmail +
+                       '?subject=' + encodeURIComponent(subject) +
+                       '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailtoLink;
+
+      // Track event
+      if (window.trackEvent) {
+        window.trackEvent('Lead: Enquiry Submitted', { method: 'email' });
+      }
+    },
+
+    // Submit via WhatsApp
+    submitViaWhatsApp: function() {
+      var form = document.getElementById('enquiryForm');
+      if (!form) return;
+
+      if (!window.MarketingEnhancements.validateForm(form)) {
+        return;
+      }
+
+      var data = window.MarketingEnhancements.getFormData(form);
+      var lang = form.dataset.lang || 'en';
+      var schoolPhone = form.dataset.schoolPhone || '919413748575';
+
+      var message = window.MarketingEnhancements.formatEnquiryMessage(data, lang);
+
+      var whatsappLink = 'https://wa.me/' + schoolPhone + '?text=' + encodeURIComponent(message);
+
+      window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+
+      // Show success
+      window.MarketingEnhancements.showSuccess();
+
+      // Track event
+      if (window.trackEvent) {
+        window.trackEvent('Lead: Enquiry Submitted', { method: 'whatsapp' });
+      }
+    },
+
+    // Show success toast
+    showSuccess: function() {
+      var toast = document.getElementById('successToast');
+      if (toast) {
+        toast.classList.add('show');
+
+        setTimeout(function() {
+          toast.classList.remove('show');
+          window.MarketingEnhancements.closeEnquiryDrawer();
+
+          // Reset form
+          var form = document.getElementById('enquiryForm');
+          if (form) form.reset();
+        }, 3000);
+      }
+    }
+  });
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // Close drawer on overlay click
+    var overlay = document.getElementById('enquiryOverlay');
+    if (overlay) {
+      overlay.addEventListener('click', function() {
+        window.MarketingEnhancements.closeEnquiryDrawer();
+      });
+    }
+
+    // Close drawer on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        window.MarketingEnhancements.closeEnquiryDrawer();
+      }
+    });
+
+    // Form submission
+    var form = document.getElementById('enquiryForm');
+    if (form) {
+
+      // Real-time validation
+      var fields = form.querySelectorAll('input, select');
+      fields.forEach(function(field) {
+        field.addEventListener('blur', function() {
+          window.MarketingEnhancements.validateField(field);
+        });
+
+        field.addEventListener('input', function() {
+          // Clear error on input
+          var errorSpan = document.getElementById(field.id + 'Error');
+          if (errorSpan && errorSpan.textContent) {
+            errorSpan.textContent = '';
+            field.classList.remove('error');
+          }
+        });
+      });
+
+      // Form submit (email)
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (window.MarketingEnhancements.validateForm(form)) {
+          window.MarketingEnhancements.submitViaEmail(form);
+          window.MarketingEnhancements.showSuccess();
+        }
+      });
+    }
+  });
+
+})();
+
+console.log('Marketing enhancements loaded - Testimonials, FAQ, animations, and enquiry drawer ready');

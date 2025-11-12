@@ -1,0 +1,47 @@
+{
+  "name": "Veer Patta Public School",
+  "short_name": "VPPS",
+  "description": "Bilingual learning environment nurturing leaders of tomorrow",
+  "lang": "en",
+  "start_url": "/veerpatta-website/en/",
+  "scope": "/veerpatta-website/",
+  "display": "standalone",
+  "background_color": "#FEFEFE",
+  "theme_color": "#5375E2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/veerpatta-website/assets/images/VPPS LOGO ONNLY.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education"],
+  "shortcuts": [
+    {
+      "name": "Admissions (EN)",
+      "short_name": "Admissions",
+      "description": "View admission process and apply",
+      "url": "/veerpatta-website/en/admissions/",
+      "icons": [
+        {
+          "src": "/veerpatta-website/assets/images/VPPS LOGO ONNLY.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "प्रवेश (HI)",
+      "short_name": "प्रवेश",
+      "description": "प्रवेश प्रक्रिया देखें और आवेदन करें",
+      "url": "/veerpatta-website/hi/admissions/",
+      "icons": [
+        {
+          "src": "/veerpatta-website/assets/images/VPPS LOGO ONNLY.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

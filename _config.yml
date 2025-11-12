@@ -11,8 +11,24 @@ permalink: pretty
 collections:
   pages:
     output: true
+  news:
+    output: true
+    permalink: /:collection/:name/
 
 # Analytics (privacy-safe, disabled by default)
 analytics_enabled: false
 analytics_script: "https://plausible.io/js/script.js"
 analytics_domain: "veerpatta.github.io"
+
+# School Contact Information
+school_name: "Veer Patta Public School"
+school_phone: "+919413748575"
+school_email: "veerpatta.school@gmail.com"
+school_address: "Opp. Mela Ground, Amet, Rajasthan - 313332, India"
+school_geo_lat: "25.3004"
+school_geo_lng: "73.9281"
+school_hours: "Mo-Sa 08:00-14:00"
+school_maps_url: "https://maps.google.com/?q=Veer+Patta+Public+School+Amet+Rajasthan"
+school_sameAs:
+  - "https://www.facebook.com/veerpattapublicschool"
+  - "https://twitter.com/veerpattaschool"

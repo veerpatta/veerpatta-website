@@ -1,0 +1,171 @@
+{% comment %}
+  =====================================================
+  ADMISSIONS ENQUIRY DRAWER - Bottom Sheet
+  Bilingual form with validation, mailto + WhatsApp fallbacks
+  =====================================================
+{% endcomment %}
+
+{% assign segments = page.url | split: '/' %}
+{% assign lang_segment = segments[1] %}
+{% if lang_segment == 'hi' %}
+  {% assign drawer_title = 'प्रवेश पूछताछ' %}
+  {% assign label_parent = 'अभिभावक का नाम' %}
+  {% assign label_child = 'बच्चे का नाम' %}
+  {% assign label_class = 'कक्षा' %}
+  {% assign label_phone = 'फोन नंबर (10 अंक)' %}
+  {% assign placeholder_phone = '9876543210' %}
+  {% assign btn_submit = 'ईमेल भेजें' %}
+  {% assign btn_whatsapp = 'WhatsApp से भेजें' %}
+  {% assign btn_close = 'बंद करें' %}
+  {% assign error_required = 'यह फ़ील्ड आवश्यक है' %}
+  {% assign error_phone = 'कृपया एक मान्य 10-अंकीय फोन नंबर दर्ज करें' %}
+  {% assign success_message = 'धन्यवाद! हम जल्द ही आपसे संपर्क करेंगे।' %}
+  {% assign class_options = 'Nursery,LKG,UKG,कक्षा 1,कक्षा 2,कक्षा 3,कक्षा 4,कक्षा 5,कक्षा 6,कक्षा 7,कक्षा 8,कक्षा 9,कक्षा 10,कक्षा 11,कक्षा 12' %}
+{% else %}
+  {% assign drawer_title = 'Admissions Enquiry' %}
+  {% assign label_parent = 'Parent/Guardian Name' %}
+  {% assign label_child = 'Child Name' %}
+  {% assign label_class = 'Class/Grade' %}
+  {% assign label_phone = 'Phone Number (10 digits)' %}
+  {% assign placeholder_phone = '9876543210' %}
+  {% assign btn_submit = 'Send via Email' %}
+  {% assign btn_whatsapp = 'Send via WhatsApp' %}
+  {% assign btn_close = 'Close' %}
+  {% assign error_required = 'This field is required' %}
+  {% assign error_phone = 'Please enter a valid 10-digit phone number' %}
+  {% assign success_message = 'Thank you! We will contact you soon.' %}
+  {% assign class_options = 'Nursery,LKG,UKG,Class 1,Class 2,Class 3,Class 4,Class 5,Class 6,Class 7,Class 8,Class 9,Class 10,Class 11,Class 12' %}
+{% endif %}
+
+<!-- Drawer Overlay -->
+<div class="enquiry-overlay" id="enquiryOverlay" aria-hidden="true"></div>
+
+<!-- Drawer Container -->
+<div class="enquiry-drawer" id="enquiryDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+
+  <!-- Drawer Header -->
+  <div class="drawer-header">
+    <h2 id="drawerTitle">{{ drawer_title }}</h2>
+    <button type="button"
+            class="drawer-close"
+            onclick="window.MarketingEnhancements && window.MarketingEnhancements.closeEnquiryDrawer()"
+            aria-label="{{ btn_close }}">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Drawer Body with Form -->
+  <div class="drawer-body">
+    <form id="enquiryForm" class="enquiry-form" novalidate>
+
+      <!-- Parent Name -->
+      <div class="form-group">
+        <label for="parentName">{{ label_parent }} <span class="required">*</span></label>
+        <input type="text"
+               id="parentName"
+               name="parent_name"
+               required
+               aria-required="true"
+               aria-describedby="parentNameError"
+               autocomplete="name">
+        <span class="error-message" id="parentNameError" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Child Name -->
+      <div class="form-group">
+        <label for="childName">{{ label_child }} <span class="required">*</span></label>
+        <input type="text"
+               id="childName"
+               name="child_name"
+               required
+               aria-required="true"
+               aria-describedby="childNameError"
+               autocomplete="off">
+        <span class="error-message" id="childNameError" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Class Sought -->
+      <div class="form-group">
+        <label for="classSought">{{ label_class }} <span class="required">*</span></label>
+        <select id="classSought"
+                name="class_sought"
+                required
+                aria-required="true"
+                aria-describedby="classSoughtError">
+          <option value="">-- {{ label_class }} --</option>
+          {% assign classes = class_options | split: ',' %}
+          {% for class in classes %}
+            <option value="{{ class }}">{{ class }}</option>
+          {% endfor %}
+        </select>
+        <span class="error-message" id="classSoughtError" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phoneNumber">{{ label_phone }} <span class="required">*</span></label>
+        <input type="tel"
+               id="phoneNumber"
+               name="phone"
+               required
+               pattern="[0-9]{10,12}"
+               aria-required="true"
+               aria-describedby="phoneNumberError"
+               placeholder="{{ placeholder_phone }}"
+               autocomplete="tel">
+        <span class="error-message" id="phoneNumberError" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit"
+                class="btn btn-primary"
+                data-action="email"
+                data-lang="{{ lang_segment }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          {{ btn_submit }}
+        </button>
+
+        <button type="button"
+                class="btn btn-whatsapp"
+                data-action="whatsapp"
+                data-lang="{{ lang_segment }}"
+                onclick="window.MarketingEnhancements && window.MarketingEnhancements.submitViaWhatsApp()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          {{ btn_whatsapp }}
+        </button>
+      </div>
+
+    </form>
+
+    <!-- Success Toast (Hidden by default) -->
+    <div class="success-toast" id="successToast" role="status" aria-live="polite" aria-atomic="true">
+      {{ success_message }}
+    </div>
+  </div>
+
+</div>
+
+<!-- Inline Script for Form Validation (Keep minimal) -->
+<script>
+  // Store error messages in data attributes for bilingual support
+  (function() {
+    var form = document.getElementById('enquiryForm');
+    if (form) {
+      form.dataset.errorRequired = '{{ error_required }}';
+      form.dataset.errorPhone = '{{ error_phone }}';
+      form.dataset.successMessage = '{{ success_message }}';
+      form.dataset.schoolEmail = '{{ site.school_email | default: "veerpatta.school@gmail.com" }}';
+      form.dataset.schoolPhone = '{{ site.school_phone | default: "+919413748575" | remove: "+" }}';
+      form.dataset.schoolName = '{{ site.school_name | default: "Veer Patta Public School" }}';
+    }
+  })();
+</script>

@@ -98,6 +98,11 @@
       <a class="nav-link" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
       <a class="nav-link" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
       <a class="nav-link" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
+      {% if current_lang == 'hi' %}
+        <a class="nav-link" href="{{ '/hi/news/' | relative_url }}">समाचार</a>
+      {% else %}
+        <a class="nav-link" href="{{ '/en/news/' | relative_url }}">News</a>
+      {% endif %}
       <a class="nav-link" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
     </nav>
 
@@ -193,6 +198,11 @@
     <a class="mobile-nav-link" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
     <a class="mobile-nav-link" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
     <a class="mobile-nav-link" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
+    {% if current_lang == 'hi' %}
+      <a class="mobile-nav-link" href="{{ '/hi/news/' | relative_url }}">समाचार</a>
+    {% else %}
+      <a class="mobile-nav-link" href="{{ '/en/news/' | relative_url }}">News</a>
+    {% endif %}
     <a class="mobile-nav-link" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
   </div>
 

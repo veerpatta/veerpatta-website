@@ -88,6 +88,70 @@ body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--br
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/animations.css' | relative_url }}">
 
+<!-- JSON-LD Organization/School Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "{{ site.school_name | default: 'Veer Patta Public School' }}",
+  "alternateName": "VPPS",
+  "url": "{{ site.url | append: site.baseurl }}",
+  "logo": "{{ '/assets/images/VPPS LOGO ONNLY.jpg' | absolute_url }}",
+  "description": "{{ site.description | default: 'Bilingual learning environment nurturing leaders of tomorrow.' }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Opp. Mela Ground, Amet",
+    "addressLocality": "Amet",
+    "addressRegion": "Rajasthan",
+    "postalCode": "313332",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "{{ site.school_geo_lat | default: '25.3004' }}",
+    "longitude": "{{ site.school_geo_lng | default: '73.9281' }}"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "{{ site.school_phone | default: '+919413748575' }}",
+    "contactType": "Admissions",
+    "areaServed": "IN",
+    "availableLanguage": ["English", "Hindi"]
+  },
+  "email": "{{ site.school_email | default: 'veerpatta.school@gmail.com' }}",
+  "telephone": "{{ site.school_phone | default: '+919413748575' }}",
+  "openingHours": "{{ site.school_hours | default: 'Mo-Sa 08:00-14:00' }}",
+  {% if site.school_sameAs %}
+  "sameAs": {{ site.school_sameAs | jsonify }},
+  {% endif %}
+  "foundingDate": "1994"
+}
+</script>
+
+<!-- JSON-LD WebPage Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ page_title }}",
+  "description": "{{ page_description }}",
+  "url": "{{ page_canonical }}",
+  "inLanguage": "{{ page.lang | default: 'en' }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ site_name }}",
+    "url": "{{ site.url | append: site.baseurl }}"
+  }
+}
+</script>
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
+<meta name="theme-color" content="#5375E2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="{{ site_name }}">
+
 <!-- JavaScript -->
 <script defer src="{{ '/assets/js/main.js' | relative_url }}"></script>
 <script defer src="{{ '/assets/js/marketing-enhancements.js' | relative_url }}"></script>
@@ -95,3 +159,16 @@ body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--br
 <script defer src="{{ '/assets/js/home-media-loader.js' | relative_url }}"></script>
 <script defer src="{{ '/assets/js/gallery-loader.js' | relative_url }}"></script>
 <script defer src="{{ '/assets/js/gallery-items.js' | relative_url }}"></script>
+
+<!-- Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('{{ '/sw.js' | relative_url }}').then(function(registration) {
+        console.log('ServiceWorker registered with scope:', registration.scope);
+      }).catch(function(error) {
+        console.log('ServiceWorker registration failed:', error);
+      });
+    });
+  }
+</script>
