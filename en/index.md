@@ -13,9 +13,9 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
   "url":"{{ '/en/' | relative_url | absolute_url }}",
   "address":{
     "@type":"PostalAddress",
-    "streetAddress":"Near Karmal Road",
+    "streetAddress":"Opp. Mela Ground",
     "addressLocality":"Amet",
-    "addressRegion":"Rajsamand, Rajasthan",
+    "addressRegion":"Rajasthan",
     "postalCode":"313332",
     "addressCountry":"IN"
   },

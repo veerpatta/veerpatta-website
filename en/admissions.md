@@ -152,8 +152,8 @@ permalink: /en/admissions/
   <section class="admissions-visit">
     <h2>Visit Our Campus</h2>
     <p><strong>Veer Patta Public School</strong><br>
-    Near Karmal Road, Amet<br>
-    Rajsamand, Rajasthan - 313332</p>
+    Opp. Mela Ground, Amet<br>
+    Rajasthan - 313332</p>
     <p>
       <a href="tel:+919413748575">+91 94137 48575</a> |
       <a href="mailto:veerpatta.school@gmail.com">veerpatta.school@gmail.com</a>

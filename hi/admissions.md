@@ -153,8 +153,8 @@ permalink: /hi/admissions/
   <section class="admissions-visit">
     <h2>हमारे परिसर में आएं</h2>
     <p><strong>वीर पट्टा पब्लिक स्कूल</strong><br>
-    करमल रोड के पास, अमेट<br>
-    राजसमंद, राजस्थान - 313332</p>
+    मेला ग्राउंड के सामने, अमेट<br>
+    राजस्थान - 313332</p>
     <p>
       <a href="tel:+919413748575">+91 94137 48575</a> |
       <a href="mailto:veerpatta.school@gmail.com">veerpatta.school@gmail.com</a>
