@@ -1151,9 +1151,10 @@ button:focus-visible {
     height: 60px;
   }
 
-  /* Hide brand name on mobile, or make it very small */
+  /* Keep brand name visible on mobile for better brand recognition */
   .header-brand {
-    display: none;
+    display: flex;
+    flex: 1;
   }
 
   /* Hide desktop navigation */
