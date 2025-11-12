@@ -1633,6 +1633,9 @@ video::-webkit-media-controls-volume-slider {
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: 0 10px 30px rgba(83, 117, 226, 0.08);
+  /* Ensure cards are visible by default for progressive enhancement */
+  opacity: 1;
+  transform: none;
 }
 
 .why-choose-card:hover {
@@ -1755,6 +1758,9 @@ video::-webkit-media-controls-volume-slider {
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(83, 117, 226, 0.06);
+  /* Ensure badges are visible by default for progressive enhancement */
+  opacity: 1;
+  transform: none;
 }
 
 .trust-badge:hover {
@@ -1852,6 +1858,12 @@ video::-webkit-media-controls-volume-slider {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* First slide visible by default for progressive enhancement */
+.testimonial-slide:first-child {
+  opacity: 1;
+  visibility: visible;
 }
 
 .testimonial-slide.active {

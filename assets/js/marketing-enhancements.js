@@ -220,11 +220,9 @@
   const whyChooseCards = document.querySelectorAll('.why-choose-card');
   if (!whyChooseCards.length) return;
 
+  // Check if IntersectionObserver is supported
   if (!('IntersectionObserver' in window)) {
-    whyChooseCards.forEach(card => {
-      card.style.opacity = '1';
-      card.style.transform = 'none';
-    });
+    // Fallback: cards are already visible by default CSS
     return;
   }
 
@@ -243,6 +241,7 @@
     rootMargin: '0px 0px -50px 0px'
   });
 
+  // Only hide cards and set up animation after confirming observer is ready
   whyChooseCards.forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(30px)';
@@ -257,11 +256,9 @@
   const badges = document.querySelectorAll('.trust-badge');
   if (!badges.length) return;
 
+  // Check if IntersectionObserver is supported
   if (!('IntersectionObserver' in window)) {
-    badges.forEach(badge => {
-      badge.style.opacity = '1';
-      badge.style.transform = 'none';
-    });
+    // Fallback: badges are already visible by default CSS
     return;
   }
 
@@ -280,6 +277,7 @@
     rootMargin: '0px 0px -50px 0px'
   });
 
+  // Only hide badges and set up animation after confirming observer is ready
   badges.forEach(badge => {
     badge.style.opacity = '0';
     badge.style.transform = 'translateX(-20px)';
