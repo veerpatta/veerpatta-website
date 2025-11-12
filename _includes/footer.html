@@ -7,12 +7,26 @@
   {% assign gallery_path = '/hi/gallery/' %}
   {% assign contact_path = '/hi/contact/' %}
   {% assign privacy_path = '/hi/privacy/' %}
+  {% assign faq_path = '/hi/faq/' %}
   {% assign about_label = 'हमारे बारे में' %}
   {% assign academics_label = 'शैक्षणिक' %}
   {% assign admissions_label = 'प्रवेश' %}
   {% assign gallery_label = 'गैलरी' %}
   {% assign contact_label = 'संपर्क' %}
   {% assign privacy_label = 'गोपनीयता' %}
+  {% assign faq_label = 'सामान्य प्रश्न' %}
+  {% assign quick_links_label = 'त्वरित लिंक' %}
+  {% assign contact_info_label = 'संपर्क जानकारी' %}
+  {% assign school_hours_label = 'स्कूल समय' %}
+  {% assign follow_us_label = 'हमें फॉलो करें' %}
+  {% assign phone_label = 'फोन:' %}
+  {% assign email_label = 'ईमेल:' %}
+  {% assign address_label = 'पता:' %}
+  {% assign hours_text = 'सोमवार - शनिवार: 8:00 पूर्वाह्न - 3:00 अपराह्न' %}
+  {% assign closed_text = 'रविवार बंद' %}
+  {% assign admission_form_label = 'प्रवेश फॉर्म' %}
+  {% assign fee_structure_label = 'शुल्क संरचना' %}
+  {% assign academic_calendar_label = 'शैक्षणिक कैलेंडर' %}
 {% else %}
   {% assign about_path = '/en/about/' %}
   {% assign academics_path = '/en/academics/' %}
@@ -20,25 +34,108 @@
   {% assign gallery_path = '/en/gallery/' %}
   {% assign contact_path = '/en/contact/' %}
   {% assign privacy_path = '/en/privacy/' %}
+  {% assign faq_path = '/en/faq/' %}
   {% assign about_label = 'About' %}
   {% assign academics_label = 'Academics' %}
   {% assign admissions_label = 'Admissions' %}
   {% assign gallery_label = 'Gallery' %}
   {% assign contact_label = 'Contact' %}
   {% assign privacy_label = 'Privacy' %}
+  {% assign faq_label = 'FAQ' %}
+  {% assign quick_links_label = 'Quick Links' %}
+  {% assign contact_info_label = 'Contact Info' %}
+  {% assign school_hours_label = 'School Hours' %}
+  {% assign follow_us_label = 'Follow Us' %}
+  {% assign phone_label = 'Phone:' %}
+  {% assign email_label = 'Email:' %}
+  {% assign address_label = 'Address:' %}
+  {% assign hours_text = 'Monday - Saturday: 8:00 AM - 3:00 PM' %}
+  {% assign closed_text = 'Sundays Closed' %}
+  {% assign admission_form_label = 'Admission Form' %}
+  {% assign fee_structure_label = 'Fee Structure' %}
+  {% assign academic_calendar_label = 'Academic Calendar' %}
 {% endif %}
 
+<!-- Enhanced Footer with Quick Links and Contact Information -->
 <footer class="site-footer">
   <div class="container">
-    <ul class="footer-links">
-      <li><a href="{{ about_path | relative_url }}">{{ about_label }}</a></li>
-      <li><a href="{{ academics_path | relative_url }}">{{ academics_label }}</a></li>
-      <li><a href="{{ admissions_path | relative_url }}">{{ admissions_label }}</a></li>
-      <li><a href="{{ gallery_path | relative_url }}">{{ gallery_label }}</a></li>
-      <li><a href="{{ contact_path | relative_url }}">{{ contact_label }}</a></li>
-      <li><a href="{{ privacy_path | relative_url }}">{{ privacy_label }}</a></li>
-    </ul>
-    <p>Veer Patta Public School · Opp. Mela Ground, Amet, Rajasthan - 313332 · Recognized by Rajasthan Education Department · Member of Rajsamand Private Schools Association</p>
-    <p>© {{ site.time | date: "%Y" }} Veer Patta Public School</p>
+    <div class="footer-grid">
+      <!-- Quick Links Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">{{ quick_links_label }}</h3>
+        <ul class="footer-nav-links">
+          <li><a href="{{ about_path | relative_url }}">{{ about_label }}</a></li>
+          <li><a href="{{ academics_path | relative_url }}">{{ academics_label }}</a></li>
+          <li><a href="{{ admissions_path | relative_url }}">{{ admissions_label }}</a></li>
+          <li><a href="{{ gallery_path | relative_url }}">{{ gallery_label }}</a></li>
+          <li><a href="{{ faq_path | relative_url }}">{{ faq_label }}</a></li>
+          <li><a href="{{ contact_path | relative_url }}">{{ contact_label }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="footer-column">
+        <h3 class="footer-heading">{{ contact_info_label }}</h3>
+        <ul class="footer-contact">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>{{ phone_label }} <a href="tel:+919413748575">+91 94137 48575</a></span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>{{ email_label }} <a href="mailto:info@veerpattaschool.edu.in">info@veerpattaschool.edu.in</a></span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>{{ address_label }} Opp. Mela Ground, Amet, Rajasthan - 313332</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- School Hours -->
+      <div class="footer-column">
+        <h3 class="footer-heading">{{ school_hours_label }}</h3>
+        <p class="footer-hours">{{ hours_text }}</p>
+        <p class="footer-hours">{{ closed_text }}</p>
+
+        <h3 class="footer-heading" style="margin-top: 1.5rem;">{{ follow_us_label }}</h3>
+        <div class="footer-social">
+          <a href="https://facebook.com/veerpattaschool" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="https://instagram.com/veerpattaschool" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="https://wa.me/919413748575" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">© {{ site.time | date: "%Y" }} Veer Patta Public School. All rights reserved.</p>
+      <p class="footer-recognition">Recognized by Rajasthan Education Department · Member of Rajsamand Private Schools Association</p>
+      <ul class="footer-legal-links">
+        <li><a href="{{ privacy_path | relative_url }}">{{ privacy_label }}</a></li>
+      </ul>
+    </div>
   </div>
 </footer>

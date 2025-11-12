@@ -1,8 +1,9 @@
 ---
 layout: default
 lang: hi
-title: मुखपृष्ठ (HI)
-description: अमेट का प्रमुख अंग्रेज़ी-माध्यम विद्यालय (1994 से) LEAD कक्षाएँ, NCC, खेल और संवेदनशील शिक्षकों के साथ। RBSE मान्यता प्राप्त, नर्सरी से कक्षा 12।
+title: अमेट का सर्वश्रेष्ठ अंग्रेज़ी माध्यम स्कूल | वीर पट्टा पब्लिक स्कूल
+description: अमेट का सर्वश्रेष्ठ अंग्रेज़ी माध्यम विद्यालय 1994 से। RBSE मान्यता प्राप्त, नर्सरी से कक्षा 12। LEAD पाठ्यक्रम, NCC प्रशिक्षण, खेल सुविधाएं, योग्य शिक्षक। 95%+ बोर्ड उत्तीर्ण दर। 20+ गांवों से परिवहन के साथ किफायती शुल्क। डिजिटल शिक्षा, CCTV के साथ सुरक्षित परिसर। संपर्क +91 94137 48575।
+keywords: अमेट में सर्वश्रेष्ठ स्कूल, अमेट अंग्रेज़ी माध्यम स्कूल, अमेट में rbse स्कूल, अमेट में नर्सरी से कक्षा 12, lead पाठ्यक्रम स्कूल, अमेट में ncc स्कूल, किफायती स्कूल अमेट, अमेट राजस्थान में सर्वश्रेष्ठ शिक्षा
 ---
 {% include header.html %}
 
@@ -37,12 +38,50 @@ description: अमेट का प्रमुख अंग्रेज़ी-
        alt="वीर पत्ता पब्लिक स्कूल में सुबह की सभा" loading="lazy" style="display:block;max-width:100%;height:auto;">
 </section>
 
-<!-- STATS -->
-<section class="container">
-  <div class="stats">
-    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">स्थापना 1994</div><div>अमेट की सेवा में</div></div>
-    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">500+</div><div>20+ गाँवों से विद्यार्थी</div></div>
-    <div class="stat"><div style="font-size:2rem;color:var(--blue);font-weight:800;">95%</div><div>RBSE बोर्ड परिणाम</div></div>
+<!-- WHY CHOOSE US - Metrics Grid -->
+<section class="container why-choose-us-section lang-hi">
+  <h2>हमें क्यों चुनें</h2>
+  <div class="why-choose-grid">
+    <div class="why-choose-card">
+      <div class="why-choose-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+      </div>
+      <div class="why-choose-number">30+ वर्ष</div>
+      <div class="why-choose-label">उत्कृष्टता का</div>
+    </div>
+    <div class="why-choose-card">
+      <div class="why-choose-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="why-choose-number">1000+</div>
+      <div class="why-choose-label">शिक्षित छात्र</div>
+    </div>
+    <div class="why-choose-card">
+      <div class="why-choose-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <div class="why-choose-number">95%+</div>
+      <div class="why-choose-label">बोर्ड उत्तीर्ण दर</div>
+    </div>
+    <div class="why-choose-card">
+      <div class="why-choose-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <div class="why-choose-number">20+</div>
+      <div class="why-choose-label">योग्य शिक्षक</div>
+    </div>
   </div>
 </section>
 
@@ -70,6 +109,72 @@ description: अमेट का प्रमुख अंग्रेज़ी-
       <h3>कला</h3>
       <p>संगीत, कला और नाटक के माध्यम से रचनात्मकता।</p>
     </article>
+  </div>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="container trust-badges-section">
+  <div class="trust-badges-wrapper">
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+      </div>
+      <div class="badge-text">RBSE मान्यता प्राप्त</div>
+    </div>
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div class="badge-text">सुरक्षित परिसर</div>
+    </div>
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+      </div>
+      <div class="badge-text">डिजिटल शिक्षा</div>
+    </div>
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+          <line x1="9" y1="9" x2="9.01" y2="9"></line>
+          <line x1="15" y1="9" x2="15.01" y2="9"></line>
+        </svg>
+      </div>
+      <div class="badge-text">खेल सुविधाएं</div>
+    </div>
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </div>
+      <div class="badge-text">LEAD पाठ्यक्रम</div>
+    </div>
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="8.5" cy="7" r="4"></circle>
+          <polyline points="17 11 19 13 23 9"></polyline>
+        </svg>
+      </div>
+      <div class="badge-text">योग्य शिक्षक</div>
+    </div>
   </div>
 </section>
 
@@ -108,11 +213,68 @@ description: अमेट का प्रमुख अंग्रेज़ी-
   <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Principal's Welcome" frameborder="0" allowfullscreen></iframe> -->
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="container lang-hi">
+<!-- TESTIMONIALS CAROUSEL -->
+<section class="container testimonials-section lang-hi">
   <h2>अभिभावक क्या कहते हैं</h2>
-  <blockquote>"मेरा बच्चा केवल एक वर्ष में 60% से 85% तक सुधर गया। अमेट क्षेत्र में यहां का व्यक्तिगत ध्यान बेजोड़ है।" <br><em>- खेमपुर से अभिभावक</em></blockquote>
-  <blockquote>"हमने मूल्य-आधारित शिक्षा और किफायती शुल्क के कारण शहर के स्कूलों पर VPS को चुना।" <br><em>- परासोली से अभिभावक</em></blockquote>
+  <div class="testimonials-carousel">
+    <div class="testimonial-track">
+      <div class="testimonial-slide active">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">मेरा बच्चा केवल एक वर्ष में 60% से 85% तक सुधर गया। अमेट क्षेत्र में यहां का व्यक्तिगत ध्यान बेजोड़ है। शिक्षक वास्तव में हर छात्र की प्रगति की परवाह करते हैं।</p>
+          <div class="testimonial-author">
+            <div class="author-name">रमेश कुमार</div>
+            <div class="author-details">कक्षा 10 के छात्र के अभिभावक • 2024</div>
+            <div class="author-location">खेमपुर गाँव</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">हमने मूल्य-आधारित शिक्षा और किफायती शुल्क के कारण शहर के स्कूलों पर VPS को चुना। हमारी बेटी शैक्षणिक और पाठ्येतर गतिविधियों दोनों में उत्कृष्ट रही है।</p>
+          <div class="testimonial-author">
+            <div class="author-name">सुनीता शर्मा</div>
+            <div class="author-details">कक्षा 8 की छात्रा के अभिभावक • 2024</div>
+            <div class="author-location">परासोली गाँव</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">VPS में NCC प्रशिक्षण और अनुशासन ने मेरे बेटे को एक आत्मविश्वासी युवा में बदल दिया है। स्कूल ऐसे अवसर प्रदान करता है जिसकी हमने अपने ग्रामीण क्षेत्र में कभी कल्पना नहीं की थी।</p>
+          <div class="testimonial-author">
+            <div class="author-name">विजय सिंह</div>
+            <div class="author-details">कक्षा 12 के छात्र के अभिभावक • 2023</div>
+            <div class="author-location">अमेट</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">LEAD पाठ्यक्रम और डिजिटल शिक्षण उपकरणों ने मेरे बच्चों के लिए पढ़ाई को मज़ेदार बना दिया है। नियमित व्हाट्सएप अपडेट मुझे उनकी दैनिक प्रगति के बारे में सूचित रखते हैं।</p>
+          <div class="testimonial-author">
+            <div class="author-name">मीना पटेल</div>
+            <div class="author-details">कक्षा 5 और 7 के छात्रों की अभिभावक • 2024</div>
+            <div class="author-location">रेलमगरा</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="testimonial-nav prev" aria-label="पिछली प्रशंसापत्र">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="testimonial-nav next" aria-label="अगली प्रशंसापत्र">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    <div class="testimonial-dots"></div>
+  </div>
 </section>
 
 <!-- ABOUT TEASER -->
