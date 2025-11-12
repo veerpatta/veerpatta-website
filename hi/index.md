@@ -46,6 +46,15 @@ description: अमेट का प्रमुख अंग्रेज़ी-
   </div>
 </section>
 
+<!-- CTA SECTION -->
+<section class="container lang-hi">
+  <div class="cta-section-prominent">
+    <h2>क्या आप अपने बच्चे को सर्वश्रेष्ठ शिक्षा देने के लिए तैयार हैं?</h2>
+    <p>वीर पट्टा पब्लिक स्कूल में अपने बच्चे के उज्ज्वल भविष्य की ओर पहला कदम बढ़ाएं</p>
+    {% include cta-buttons.html lang="hi" style="grid" %}
+  </div>
+</section>
+
 <!-- PROGRAMS -->
 <section class="container">
   <h2>कार्यक्रम</h2>
@@ -109,11 +118,9 @@ description: अमेट का प्रमुख अंग्रेज़ी-
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="container lang-hi">
-  <h2>अभिभावक क्या कहते हैं</h2>
-  <blockquote>"मेरा बच्चा केवल एक वर्ष में 60% से 85% तक सुधर गया। अमेट क्षेत्र में यहां का व्यक्तिगत ध्यान बेजोड़ है।" <br><em>- खेमपुर से अभिभावक</em></blockquote>
-  <blockquote>"हमने मूल्य-आधारित शिक्षा और किफायती शुल्क के कारण शहर के स्कूलों पर VPS को चुना।" <br><em>- परासोली से अभिभावक</em></blockquote>
-</section>
+<div class="container">
+  {% include testimonials.html limit=3 lang="hi" heading_hi="अभिभावक हमारे बारे में क्या कहते हैं" %}
+</div>
 
 <!-- ABOUT TEASER -->
 <section class="container about-teaser lang-hi" id="about">

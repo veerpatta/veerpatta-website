@@ -45,6 +45,15 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
   </div>
 </section>
 
+<!-- CTA SECTION -->
+<section class="container">
+  <div class="cta-section-prominent">
+    <h2>Ready to Give Your Child the Best Education?</h2>
+    <p>Take the first step towards your child's bright future at Veer Patta Public School</p>
+    {% include cta-buttons.html lang="en" style="grid" %}
+  </div>
+</section>
+
 <!-- PROGRAMS -->
 <section class="container">
   <h2>Programs</h2>
@@ -108,11 +117,9 @@ description: Amet's Premier English-medium school (since 1994) with LEAD classro
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="container">
-  <h2>What Parents Say</h2>
-  <blockquote>"My child improved from 60% to 85% in just one year. The personal attention here is unmatched in the Amet region." <br><em>- Parent from Khempur</em></blockquote>
-  <blockquote>"We chose VPS over city schools because of the values-based education and affordable fees." <br><em>- Parent from Parasoli</em></blockquote>
-</section>
+<div class="container">
+  {% include testimonials.html limit=3 lang="en" heading_en="What Parents Say About Us" %}
+</div>
 
 <!-- ABOUT TEASER -->
 <section class="container about-teaser" id="about">

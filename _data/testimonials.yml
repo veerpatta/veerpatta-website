@@ -1,0 +1,39 @@
+# Testimonials Data File
+# Each testimonial includes: name, child_grade, photo, quote, and lang (en/hi)
+# Used by testimonials.html include and dedicated testimonials pages
+
+- name: "Priya Sharma"
+  child_grade: "Class 8"
+  photo: "/assets/images/testimonials/parent1.jpg"
+  quote: "VPS has transformed my daughter's learning journey. The dedicated teachers and excellent facilities have helped her excel not just academically, but also in sports and cultural activities. We couldn't be happier with our choice!"
+  lang: "en"
+
+- name: "Rajesh Kumar"
+  child_grade: "Class 10"
+  photo: "/assets/images/testimonials/parent2.jpg"
+  quote: "The CBSE curriculum combined with the LEAD program has given my son a strong foundation for his future. The school's focus on holistic development is truly commendable. The NCC training has instilled discipline and confidence in him."
+  lang: "en"
+
+- name: "Anita Patel"
+  child_grade: "Class 5"
+  photo: "/assets/images/testimonials/parent3.jpg"
+  quote: "As a parent, I appreciate the transparent communication and the genuine care teachers show towards each student. My child looks forward to going to school every day, which speaks volumes about the positive environment at VPS."
+  lang: "en"
+
+- name: "संजय मीणा"
+  child_grade: "कक्षा 9"
+  photo: "/assets/images/testimonials/parent4.jpg"
+  quote: "वीर पट्टा पब्लिक स्कूल ने मेरी बेटी के जीवन में सकारात्मक बदलाव लाया है। यहाँ की शिक्षा व्यवस्था और शिक्षकों का समर्पण अद्भुत है। स्कूल में खेल-कूद और सांस्कृतिक गतिविधियों पर भी पूरा ध्यान दिया जाता है।"
+  lang: "hi"
+
+- name: "मीना देवी"
+  child_grade: "कक्षा 7"
+  photo: "/assets/images/testimonials/parent5.jpg"
+  quote: "यह स्कूल हमारे बच्चों के सर्वांगीण विकास के लिए प्रतिबद्ध है। सीबीएसई पाठ्यक्रम के साथ LEAD कार्यक्रम से मेरे बेटे को बेहतरीन शिक्षा मिल रही है। एनसीसी प्रशिक्षण ने उसमें अनुशासन और आत्मविश्वास का विकास किया है।"
+  lang: "hi"
+
+- name: "रामलाल शर्मा"
+  child_grade: "कक्षा 6"
+  photo: "/assets/images/testimonials/parent6.jpg"
+  quote: "वीर पट्टा पब्लिक स्कूल में शिक्षकों और अभिभावकों के बीच बेहतरीन तालमेल है। मेरा बच्चा रोज़ स्कूल जाने के लिए उत्सुक रहता है, जो इस बात का प्रमाण है कि यहाँ का माहौल कितना सकारात्मक और प्रेरक है।"
+  lang: "hi"

@@ -1,0 +1,49 @@
+---
+layout: default
+title: Parent Testimonials - Veer Patta Public School
+description: Read what parents and students say about their experiences at Veer Patta Public School. Real testimonials from our school community in Amet, Rajasthan.
+permalink: /en/testimonials/
+---
+{% include header.html %}
+
+<main class="container">
+  <!-- Page Hero -->
+  <section class="hero">
+    <h1>What Our Parents Say</h1>
+    <p>Real experiences from families who trust us with their children's education</p>
+  </section>
+
+  <!-- All Testimonials -->
+  {% include testimonials.html lang="en" show_heading=false %}
+
+  <!-- Call to Action -->
+  <section class="testimonials-footer-cta">
+    <div class="card" style="text-align: center; padding: 3rem 2rem;">
+      <h2>Join Our School Community</h2>
+      <p style="margin: 1rem 0 2rem; color: var(--muted-text); font-size: 1.1rem;">
+        Experience the same quality education and caring environment that our parents appreciate.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ '/en/admissions/' | relative_url }}" class="btn">Apply for Admission</a>
+        <a href="{{ '/en/contact/' | relative_url }}" class="btn btn-secondary">Schedule a Visit</a>
+        <a href="https://wa.me/919413748575" target="_blank" rel="noopener" class="btn btn-secondary">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Info -->
+  <section style="margin: 3rem 0;">
+    <div class="card">
+      <h3>Share Your Experience</h3>
+      <p>
+        Are you a current parent or student at Veer Patta Public School? We'd love to hear your story!
+        Your testimonial can help other families make the right choice for their children's education.
+      </p>
+      <p>
+        <a href="{{ '/en/contact/' | relative_url }}" class="btn btn-secondary">Submit Your Testimonial</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+{% include footer.html %}

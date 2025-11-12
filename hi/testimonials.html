@@ -1,0 +1,50 @@
+---
+layout: default
+lang: hi
+title: अभिभावक प्रशंसापत्र - वीर पट्टा पब्लिक स्कूल
+description: वीर पट्टा पब्लिक स्कूल में अभिभावकों और विद्यार्थियों के अनुभव पढ़ें। अमेट, राजस्थान में हमारे स्कूल समुदाय से वास्तविक प्रशंसापत्र।
+permalink: /hi/testimonials/
+---
+{% include header.html %}
+
+<main class="container lang-hi">
+  <!-- Page Hero -->
+  <section class="hero">
+    <h1>हमारे अभिभावक क्या कहते हैं</h1>
+    <p>उन परिवारों के वास्तविक अनुभव जो अपने बच्चों की शिक्षा के लिए हम पर भरोसा करते हैं</p>
+  </section>
+
+  <!-- All Testimonials -->
+  {% include testimonials.html lang="hi" show_heading=false %}
+
+  <!-- Call to Action -->
+  <section class="testimonials-footer-cta">
+    <div class="card" style="text-align: center; padding: 3rem 2rem;">
+      <h2>हमारे स्कूल समुदाय में शामिल हों</h2>
+      <p style="margin: 1rem 0 2rem; color: var(--muted-text); font-size: 1.1rem;">
+        उसी गुणवत्तापूर्ण शिक्षा और संवेदनशील माहौल का अनुभव करें जिसकी हमारे अभिभावक सराहना करते हैं।
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ '/hi/admissions/' | relative_url }}" class="btn">प्रवेश के लिए आवेदन करें</a>
+        <a href="{{ '/hi/contact/' | relative_url }}" class="btn btn-secondary">स्कूल देखने आएं</a>
+        <a href="https://wa.me/919413748575" target="_blank" rel="noopener" class="btn btn-secondary">व्हाट्सएप करें</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Info -->
+  <section style="margin: 3rem 0;">
+    <div class="card">
+      <h3>अपना अनुभव साझा करें</h3>
+      <p>
+        क्या आप वीर पट्टा पब्लिक स्कूल के वर्तमान अभिभावक या विद्यार्थी हैं? हम आपकी कहानी सुनना पसंद करेंगे!
+        आपका प्रशंसापत्र अन्य परिवारों को अपने बच्चों की शिक्षा के लिए सही विकल्प चुनने में मदद कर सकता है।
+      </p>
+      <p>
+        <a href="{{ '/hi/contact/' | relative_url }}" class="btn btn-secondary">अपना प्रशंसापत्र सबमिट करें</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+{% include footer.html %}

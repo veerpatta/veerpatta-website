@@ -1,0 +1,82 @@
+<!--
+  Testimonials Component
+  Displays testimonials from _data/testimonials.yml
+
+  Parameters:
+  - limit: Number of testimonials to display (optional, default: all)
+  - lang: Language filter ('en' or 'hi')
+  - heading_en: English heading text
+  - heading_hi: Hindi heading text
+  - show_heading: Whether to show the heading (default: true)
+
+  Usage:
+  {% include testimonials.html limit=3 lang="en" heading_en="What Parents Say" %}
+-->
+
+{% assign limit = include.limit | default: 999 %}
+{% assign lang_filter = include.lang %}
+{% assign show_heading = include.show_heading | default: true %}
+
+<!-- Filter testimonials by language -->
+{% assign filtered_testimonials = site.data.testimonials | where: "lang", lang_filter %}
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+  {% if show_heading %}
+    <div class="testimonials-header">
+      {% if lang_filter == "en" %}
+        <h2 class="section-title">{{ include.heading_en | default: "What Parents Say About Us" }}</h2>
+        <p class="section-subtitle">Real experiences from our school community</p>
+      {% else %}
+        <h2 class="section-title">{{ include.heading_hi | default: "अभिभावक हमारे बारे में क्या कहते हैं" }}</h2>
+        <p class="section-subtitle">हमारे स्कूल समुदाय के वास्तविक अनुभव</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="testimonials-grid">
+    {% for testimonial in filtered_testimonials limit: limit %}
+      <div class="testimonial-card animate-on-scroll" data-animation="fade-in-up">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">
+            <img src="{{ testimonial.photo }}"
+                 alt="{{ testimonial.name }}"
+                 loading="lazy"
+                 onerror="this.src='/assets/images/testimonials/placeholder-avatar.jpg';">
+          </div>
+          <div class="testimonial-info">
+            <h3 class="testimonial-name">{{ testimonial.name }}</h3>
+            <p class="testimonial-grade">
+              {% if lang_filter == "en" %}
+                Parent of {{ testimonial.child_grade }} Student
+              {% else %}
+                {{ testimonial.child_grade }} के छात्र के अभिभावक
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+        <div class="testimonial-quote">
+          <svg class="quote-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 18C10 20.2091 8.20914 22 6 22C3.79086 22 2 20.2091 2 18C2 15.7909 3.79086 14 6 14C6.74028 14 7.43546 14.2019 8.03278 14.5545C7.37996 11.5159 5.11168 9.51796 2.78419 9.14351C2.32561 9.07422 2 8.67904 2 8.21544V6.5C2 5.97754 2.42754 5.55 2.95 5.55C8.17871 5.55 12 10.4111 12 16V18C12 18 10 18 10 18Z" fill="currentColor"/>
+            <path d="M26 18C26 20.2091 24.2091 22 22 22C19.7909 22 18 20.2091 18 18C18 15.7909 19.7909 14 22 14C22.7403 14 23.4355 14.2019 24.0328 14.5545C23.38 11.5159 21.1117 9.51796 18.7842 9.14351C18.3256 9.07422 18 8.67904 18 8.21544V6.5C18 5.97754 18.4275 5.55 18.95 5.55C24.1787 5.55 28 10.4111 28 16V18C28 18 26 18 26 18Z" fill="currentColor"/>
+          </svg>
+          <p class="testimonial-text {% if lang_filter == 'hi' %}lang-hi{% endif %}">
+            {{ testimonial.quote }}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- View All Link (only show if limited) -->
+  {% if limit < filtered_testimonials.size %}
+    <div class="testimonials-cta">
+      {% if lang_filter == "en" %}
+        <a href="/en/testimonials/" class="btn btn-secondary">View All Testimonials</a>
+      {% else %}
+        <a href="/hi/testimonials/" class="btn btn-secondary">सभी प्रशंसापत्र देखें</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
