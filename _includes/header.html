@@ -76,12 +76,11 @@
     {% comment %} Logo - Always visible, optimized size {% endcomment %}
     <div class="header-logo">
       <a href="{{ home_path | relative_url }}" aria-label="Veer Patta Public School Home">
-        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="school-logo">
-          <rect width="60" height="60" rx="8" fill="#5375E2"/>
-          <path d="M30 12L37 26H23L30 12Z" fill="#E2D64B"/>
-          <circle cx="30" cy="37" r="9" fill="#84AC64"/>
-          <text x="30" y="54" font-family="Poppins, sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">VPPS</text>
-        </svg>
+        <img src="{{ '/assets/images/VPPS LOGO ONNLY.jpg' | relative_url }}" 
+             alt="Veer Patta Public School Logo" 
+             class="school-logo"
+             width="60" 
+             height="60">
       </a>
     </div>
 
