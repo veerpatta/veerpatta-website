@@ -20,6 +20,16 @@
   let autoRotateTimer;
   const autoRotateInterval = 5000; // 5 seconds
 
+  // Ensure first slide is active on initialization
+  // This handles cases where HTML might not have 'active' class
+  slides.forEach((slide, index) => {
+    if (index === 0) {
+      slide.classList.add('active');
+    } else {
+      slide.classList.remove('active');
+    }
+  });
+
   // Create dots
   slides.forEach((_, index) => {
     const dot = document.createElement('div');
@@ -226,9 +236,22 @@
     return;
   }
 
+  // Helper function to check if element is in viewport
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        // Get the index from the card's data attribute
+        const index = parseInt(entry.target.dataset.cardIndex || '0', 10);
         // Stagger animation
         setTimeout(() => {
           entry.target.classList.add('animate-fadeUp', 'animated');
@@ -241,11 +264,28 @@
     rootMargin: '0px 0px -50px 0px'
   });
 
-  // Only hide cards and set up animation after confirming observer is ready
-  whyChooseCards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    observer.observe(card);
+  // Check each card and handle accordingly
+  whyChooseCards.forEach((card, index) => {
+    // Store index for stagger animation
+    card.dataset.cardIndex = index;
+
+    // Check if card is already in viewport
+    if (isInViewport(card)) {
+      // Card is already visible, animate it immediately with stagger
+      setTimeout(() => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        // Trigger animation immediately
+        requestAnimationFrame(() => {
+          card.classList.add('animate-fadeUp', 'animated');
+        });
+      }, index * 100);
+    } else {
+      // Card is below fold, hide it and observe for intersection
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      observer.observe(card);
+    }
   });
 })();
 
@@ -262,9 +302,22 @@
     return;
   }
 
+  // Helper function to check if element is in viewport
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        // Get the index from the badge's data attribute
+        const index = parseInt(entry.target.dataset.badgeIndex || '0', 10);
         // Stagger animation
         setTimeout(() => {
           entry.target.classList.add('animate-slideIn', 'animated');
@@ -277,11 +330,28 @@
     rootMargin: '0px 0px -50px 0px'
   });
 
-  // Only hide badges and set up animation after confirming observer is ready
-  badges.forEach(badge => {
-    badge.style.opacity = '0';
-    badge.style.transform = 'translateX(-20px)';
-    observer.observe(badge);
+  // Check each badge and handle accordingly
+  badges.forEach((badge, index) => {
+    // Store index for stagger animation
+    badge.dataset.badgeIndex = index;
+
+    // Check if badge is already in viewport
+    if (isInViewport(badge)) {
+      // Badge is already visible, animate it immediately with stagger
+      setTimeout(() => {
+        badge.style.opacity = '0';
+        badge.style.transform = 'translateX(-20px)';
+        // Trigger animation immediately
+        requestAnimationFrame(() => {
+          badge.classList.add('animate-slideIn', 'animated');
+        });
+      }, index * 80);
+    } else {
+      // Badge is below fold, hide it and observe for intersection
+      badge.style.opacity = '0';
+      badge.style.transform = 'translateX(-20px)';
+      observer.observe(badge);
+    }
   });
 })();
 
