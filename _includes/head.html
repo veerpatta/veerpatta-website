@@ -95,3 +95,64 @@ body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--br
 <script defer src="{{ '/assets/js/home-media-loader.js' | relative_url }}"></script>
 <script defer src="{{ '/assets/js/gallery-loader.js' | relative_url }}"></script>
 <script defer src="{{ '/assets/js/gallery-items.js' | relative_url }}"></script>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "School",
+  "name": "{{ site.school_name | default: 'Veer Patta Public School' }}",
+  "description": "{{ site.description | default: 'Bilingual learning environment nurturing leaders of tomorrow.' }}",
+  "url": "{{ site.url | append: site.baseurl }}",
+  "telephone": "{{ site.school_phone | default: '+919413748575' }}",
+  "email": "{{ site.school_email | default: 'veerpatta.school@gmail.com' }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Opp. Mela Ground, Amet",
+    "addressLocality": "Amet",
+    "addressRegion": "Rajasthan",
+    "postalCode": "313332",
+    "addressCountry": "IN"
+  },
+  {% if site.school_geo_lat and site.school_geo_lng %}
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "{{ site.school_geo_lat }}",
+    "longitude": "{{ site.school_geo_lng }}"
+  },
+  {% endif %}
+  {% if site.school_hours %}
+  "openingHours": "{{ site.school_hours }}",
+  {% endif %}
+  {% if site.school_sameAs %}
+  "sameAs": {{ site.school_sameAs | jsonify }},
+  {% endif %}
+  "logo": "{{ '/assets/images/VPPS LOGO ONNLY.jpg' | absolute_url }}",
+  "image": "{{ '/assets/images/VPPS LOGO ONNLY.jpg' | absolute_url }}"
+}
+</script>
+
+<!-- Page-level WebPage Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ page.title | default: site.title }}",
+  "description": "{{ page.description | default: site.description }}",
+  "url": "{{ page.url | absolute_url }}",
+  "inLanguage": "{{ page.lang | default: 'en' }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ site.title }}",
+    "url": "{{ site.url | append: site.baseurl }}"
+  }
+}
+</script>
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
+<meta name="theme-color" content="#5375E2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Veer Patta">
+

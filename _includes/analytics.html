@@ -5,4 +5,18 @@
 {% endcomment %}
 {% if site.analytics_enabled and site.analytics_script %}
   <script defer data-domain="{{ site.analytics_domain }}" src="{{ site.analytics_script }}"></script>
+  <script>
+    // Privacy-first analytics event tracking for marketing features
+    document.addEventListener('DOMContentLoaded', function() {
+      // Track CTA clicks
+      document.querySelectorAll('[data-event]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          const eventName = this.getAttribute('data-event');
+          if (window.plausible && eventName) {
+            window.plausible(eventName);
+          }
+        });
+      });
+    });
+  </script>
 {% endif %}

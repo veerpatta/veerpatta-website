@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Marketing Features (2025-11-12)**:
+  - Sticky CTA bar with Call, WhatsApp, Admissions, and Directions buttons
+  - Bottom-sheet enquiry drawer with bilingual form validation
+  - Enhanced admissions pages with 10 FAQ items (EN/HI parity)
+  - JSON-LD FAQPage schema for improved SEO
+  - School/Organization JSON-LD structured data
+  - Privacy-first analytics event tracking for CTA interactions
+  - News collection with sample posts (EN/HI)
+  - News list pages at `/en/news/` and `/hi/news/`
+  - PWA-lite support with manifest and service worker
+  - Stale-while-revalidate caching for offline access
 - PROJECT_GUIDE.md - Comprehensive guide for non-technical users
 - CONTRIBUTING.md - Developer and coding agent guidelines
 - docs/ARCHITECTURE.md - Technical architecture documentation
@@ -19,6 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - README.md - Updated with better navigation and structure
 - Repository structure - Organized documentation in docs/ folder
+- `_config.yml` - Added school contact data and news collection configuration
+- Header navigation - Added "News" link in both English and Hindi versions
+- Admissions pages - Expanded FAQ sections from 6 to 10 questions
+- Default layout - Integrated sticky CTA bar and enquiry drawer globally
 
 ## [1.0.0] - 2025-11-09
 

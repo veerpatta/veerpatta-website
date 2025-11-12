@@ -1,0 +1,273 @@
+{% comment %}
+  Admissions Enquiry Drawer - Bottom sheet with form
+  Bilingual support, validation, mailto + WhatsApp fallback
+{% endcomment %}
+
+{% assign segments = page.url | split: '/' %}
+{% assign lang_segment = segments[1] %}
+{% if lang_segment == 'hi' %}
+  {% assign drawer_title = 'प्रवेश पूछताछ' %}
+  {% assign label_parent = 'अभिभावक का नाम' %}
+  {% assign label_child = 'बच्चे का नाम' %}
+  {% assign label_class = 'कक्षा की मांग' %}
+  {% assign label_phone = 'फोन नंबर (10 अंक)' %}
+  {% assign btn_submit_email = 'ईमेल भेजें' %}
+  {% assign btn_submit_whatsapp = 'WhatsApp भेजें' %}
+  {% assign btn_close = 'बंद करें' %}
+  {% assign msg_success = 'धन्यवाद! हम जल्द ही संपर्क करेंगे।' %}
+  {% assign msg_error_fill = 'कृपया सभी फ़ील्ड भरें' %}
+  {% assign msg_error_phone = 'कृपया वैध फ़ोन नंबर दर्ज करें (10-12 अंक)' %}
+  {% assign option_nursery = 'नर्सरी' %}
+  {% assign option_lkg = 'एलकेजी' %}
+  {% assign option_ukg = 'यूकेजी' %}
+  {% assign option_class = 'कक्षा' %}
+{% else %}
+  {% assign drawer_title = 'Admissions Enquiry' %}
+  {% assign label_parent = 'Parent/Guardian Name' %}
+  {% assign label_child = 'Child Name' %}
+  {% assign label_class = 'Class Sought' %}
+  {% assign label_phone = 'Phone Number (10 digits)' %}
+  {% assign btn_submit_email = 'Send Email' %}
+  {% assign btn_submit_whatsapp = 'Send WhatsApp' %}
+  {% assign btn_close = 'Close' %}
+  {% assign msg_success = 'Thank you! We will contact you soon.' %}
+  {% assign msg_error_fill = 'Please fill in all fields' %}
+  {% assign msg_error_phone = 'Please enter a valid phone number (10-12 digits)' %}
+  {% assign option_nursery = 'Nursery' %}
+  {% assign option_lkg = 'LKG' %}
+  {% assign option_ukg = 'UKG' %}
+  {% assign option_class = 'Class' %}
+{% endif %}
+
+<div class="enquiry-drawer-overlay" id="enquiryDrawerOverlay" aria-hidden="true"></div>
+
+<aside class="enquiry-drawer" id="enquiryDrawer" role="dialog" aria-labelledby="drawerTitle" aria-hidden="true">
+  <div class="drawer-header">
+    <h2 id="drawerTitle">{{ drawer_title }}</h2>
+    <button class="drawer-close-btn" 
+            id="drawerCloseBtn"
+            aria-label="{{ btn_close }}"
+            onclick="window.closeEnquiryDrawer && window.closeEnquiryDrawer()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <form class="drawer-form" id="enquiryForm" novalidate>
+    <div class="form-group">
+      <label for="parentName">{{ label_parent }} <span class="required">*</span></label>
+      <input type="text" 
+             id="parentName" 
+             name="parent_name" 
+             required 
+             autocomplete="name"
+             aria-required="true">
+    </div>
+
+    <div class="form-group">
+      <label for="childName">{{ label_child }} <span class="required">*</span></label>
+      <input type="text" 
+             id="childName" 
+             name="child_name" 
+             required 
+             aria-required="true">
+    </div>
+
+    <div class="form-group">
+      <label for="classSought">{{ label_class }} <span class="required">*</span></label>
+      <select id="classSought" 
+              name="class_sought" 
+              required 
+              aria-required="true">
+        <option value="">-- {{ label_class }} --</option>
+        <option value="Nursery">{{ option_nursery }}</option>
+        <option value="LKG">{{ option_lkg }}</option>
+        <option value="UKG">{{ option_ukg }}</option>
+        <option value="Class 1">{{ option_class }} 1</option>
+        <option value="Class 2">{{ option_class }} 2</option>
+        <option value="Class 3">{{ option_class }} 3</option>
+        <option value="Class 4">{{ option_class }} 4</option>
+        <option value="Class 5">{{ option_class }} 5</option>
+        <option value="Class 6">{{ option_class }} 6</option>
+        <option value="Class 7">{{ option_class }} 7</option>
+        <option value="Class 8">{{ option_class }} 8</option>
+        <option value="Class 9">{{ option_class }} 9</option>
+        <option value="Class 10">{{ option_class }} 10</option>
+        <option value="Class 11">{{ option_class }} 11</option>
+        <option value="Class 12">{{ option_class }} 12</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">{{ label_phone }} <span class="required">*</span></label>
+      <input type="tel" 
+             id="phoneNumber" 
+             name="phone" 
+             required 
+             pattern="[0-9]{10,12}"
+             autocomplete="tel"
+             aria-required="true"
+             aria-describedby="phoneError">
+      <div id="phoneError" class="error-message" role="alert" aria-live="polite"></div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" 
+              class="btn btn-primary btn-email"
+              data-event="Lead: Enquiry Email">
+        {{ btn_submit_email }}
+      </button>
+      <button type="button" 
+              class="btn btn-whatsapp"
+              id="whatsappSubmit"
+              data-event="Lead: Enquiry WhatsApp">
+        {{ btn_submit_whatsapp }}
+      </button>
+    </div>
+  </form>
+
+  <div class="success-toast" id="successToast" role="status" aria-live="polite">
+    {{ msg_success }}
+  </div>
+</aside>
+
+<script>
+(function() {
+  const drawer = document.getElementById('enquiryDrawer');
+  const overlay = document.getElementById('enquiryDrawerOverlay');
+  const form = document.getElementById('enquiryForm');
+  const toast = document.getElementById('successToast');
+  const phoneInput = document.getElementById('phoneNumber');
+  const phoneError = document.getElementById('phoneError');
+  const whatsappBtn = document.getElementById('whatsappSubmit');
+  
+  const errorMessages = {
+    fillAll: '{{ msg_error_fill }}',
+    invalidPhone: '{{ msg_error_phone }}'
+  };
+
+  // Open drawer
+  window.openEnquiryDrawer = function() {
+    drawer.classList.add('active');
+    overlay.classList.add('active');
+    drawer.setAttribute('aria-hidden', 'false');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('parentName').focus();
+  };
+
+  // Close drawer
+  window.closeEnquiryDrawer = function() {
+    drawer.classList.remove('active');
+    overlay.classList.remove('active');
+    drawer.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    form.reset();
+    phoneError.textContent = '';
+  };
+
+  // Close on overlay click
+  overlay.addEventListener('click', window.closeEnquiryDrawer);
+
+  // Validate phone
+  function validatePhone(phone) {
+    return /^[0-9]{10,12}$/.test(phone.replace(/\s/g, ''));
+  }
+
+  // Get form data
+  function getFormData() {
+    return {
+      parentName: document.getElementById('parentName').value.trim(),
+      childName: document.getElementById('childName').value.trim(),
+      classSought: document.getElementById('classSought').value,
+      phone: phoneInput.value.trim().replace(/\s/g, '')
+    };
+  }
+
+  // Show success toast
+  function showSuccessToast() {
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+      window.closeEnquiryDrawer();
+    }, 3000);
+  }
+
+  // Email submission
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    phoneError.textContent = '';
+
+    const data = getFormData();
+
+    if (!data.parentName || !data.childName || !data.classSought || !data.phone) {
+      phoneError.textContent = errorMessages.fillAll;
+      return;
+    }
+
+    if (!validatePhone(data.phone)) {
+      phoneError.textContent = errorMessages.invalidPhone;
+      phoneInput.focus();
+      return;
+    }
+
+    // Send analytics event
+    if (window.plausible) {
+      window.plausible('Lead: Enquiry Submitted', { props: { method: 'email' } });
+    }
+
+    // Create mailto link
+    const subject = encodeURIComponent('Admission Enquiry - ' + data.childName);
+    const body = encodeURIComponent(
+      'Parent Name: ' + data.parentName + '\n' +
+      'Child Name: ' + data.childName + '\n' +
+      'Class Sought: ' + data.classSought + '\n' +
+      'Phone: ' + data.phone + '\n\n' +
+      'Please contact me regarding admission.'
+    );
+    const mailto = 'mailto:{{ site.school_email | default: "veerpatta.school@gmail.com" }}?subject=' + subject + '&body=' + body;
+    
+    window.location.href = mailto;
+    showSuccessToast();
+  });
+
+  // WhatsApp submission
+  whatsappBtn.addEventListener('click', function() {
+    phoneError.textContent = '';
+
+    const data = getFormData();
+
+    if (!data.parentName || !data.childName || !data.classSought || !data.phone) {
+      phoneError.textContent = errorMessages.fillAll;
+      return;
+    }
+
+    if (!validatePhone(data.phone)) {
+      phoneError.textContent = errorMessages.invalidPhone;
+      phoneInput.focus();
+      return;
+    }
+
+    // Send analytics event
+    if (window.plausible) {
+      window.plausible('Lead: Enquiry Submitted', { props: { method: 'whatsapp' } });
+    }
+
+    // Create WhatsApp message
+    const message = 
+      '🎓 Admission Enquiry\n\n' +
+      'Parent: ' + data.parentName + '\n' +
+      'Child: ' + data.childName + '\n' +
+      'Class: ' + data.classSought + '\n' +
+      'Phone: ' + data.phone + '\n\n' +
+      'Please share admission details and process.';
+    
+    const waUrl = 'https://wa.me/{{ site.school_phone | default: "919413748575" | remove: "+" }}?text=' + encodeURIComponent(message);
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    showSuccessToast();
+  });
+})();
+</script>
