@@ -14,9 +14,9 @@ description: अमेट का प्रमुख अंग्रेज़ी-
   "url":"{{ '/hi/' | relative_url | absolute_url }}",
   "address":{
     "@type":"PostalAddress",
-    "streetAddress":"करमल रोड के पास",
+    "streetAddress":"मेला ग्राउंड के सामने",
     "addressLocality":"अमेट",
-    "addressRegion":"राजसमंद, राजस्थान",
+    "addressRegion":"राजस्थान",
     "postalCode":"313332",
     "addressCountry":"IN"
   },
