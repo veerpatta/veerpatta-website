@@ -5,7 +5,7 @@
 [![Mobile First](https://img.shields.io/badge/Design-Mobile%20First-green)](#responsive-design)
 [![Bilingual](https://img.shields.io/badge/Languages-EN%20%7C%20HI-orange)](#bilingual-support)
 
-Official bilingual website for **Veer Patta Public School**, Nokha, Rajasthan, India.
+Official bilingual website for **Veer Patta Public School**, Amet, Rajasthan, India.
 
 🌐 **Live Site**: [veerpatta.github.io/veerpatta-website](https://veerpatta.github.io/veerpatta-website/)
 
