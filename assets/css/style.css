@@ -2484,3 +2484,372 @@ html {
     padding: 0 1.5rem 1.5rem !important;
   }
 }
+
+/* =====================================================
+   STICKY CTA BAR - Marketing Feature
+   Mobile-first bottom bar with quick action buttons
+   ===================================================== */
+
+.sticky-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1500;
+  background: var(--brand-bg);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 4px;
+  gap: 4px;
+}
+
+.cta-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 4px;
+  min-height: 56px;
+  min-width: 56px;
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cta-btn:hover {
+  background: rgba(83, 117, 226, 0.1);
+  text-decoration: none;
+}
+
+.cta-btn:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+}
+
+.cta-btn svg {
+  flex-shrink: 0;
+}
+
+.cta-label {
+  font-size: 10px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Color variations for specific CTAs */
+.cta-call {
+  color: var(--brand-blue);
+}
+
+.cta-whatsapp {
+  color: #25D366;
+}
+
+.cta-admissions {
+  color: var(--brand-blue);
+}
+
+.cta-directions {
+  color: var(--brand-green);
+}
+
+/* Tablet and desktop - show larger buttons with more space */
+@media (min-width: 768px) {
+  .sticky-cta-bar {
+    padding: 12px 16px;
+    gap: 8px;
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 12px 12px 0 0;
+  }
+
+  .cta-btn {
+    min-height: 60px;
+    min-width: 80px;
+    padding: 10px 8px;
+  }
+
+  .cta-label {
+    font-size: 11px;
+  }
+}
+
+/* =====================================================
+   ENQUIRY DRAWER - Bottom sheet modal
+   Mobile-first with form validation
+   ===================================================== */
+
+.enquiry-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.enquiry-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.enquiry-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 85vh;
+  background: var(--brand-bg);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+  z-index: 1999;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  padding: 24px 20px 100px;
+}
+
+.enquiry-drawer.active {
+  transform: translateY(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(83, 117, 226, 0.2);
+}
+
+.drawer-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--brand-blue);
+}
+
+.drawer-close-btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.drawer-close-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.drawer-close-btn:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+}
+
+.drawer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.required {
+  color: #e53e3e;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 16px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(83, 117, 226, 0.1);
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group select:invalid:not(:placeholder-shown) {
+  border-color: #e53e3e;
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: var(--brand-blue);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #3d5dcc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(83, 117, 226, 0.3);
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: white;
+}
+
+.btn-whatsapp:hover {
+  background: #1fb855;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 3px;
+}
+
+.success-toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #48bb78;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 600;
+}
+
+.success-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tablet and desktop drawer */
+@media (min-width: 768px) {
+  .enquiry-drawer {
+    max-width: 500px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(100%);
+    padding: 32px 32px 120px;
+  }
+
+  .enquiry-drawer.active {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .drawer-header h2 {
+    font-size: 24px;
+  }
+
+  .form-actions {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .btn {
+    flex: 1;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE ADJUSTMENTS FOR NEW FEATURES
+   Account for sticky CTA bar at bottom
+   ===================================================== */
+
+/* Adjust bottom spacing when sticky CTA is present */
+body {
+  padding-bottom: 72px; /* Space for sticky CTA bar */
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 84px; /* Slightly more space on larger screens */
+  }
+}
+
+/* Ensure WhatsApp float button doesn't conflict */
+.whatsapp-float {
+  bottom: 88px !important; /* Move above sticky CTA */
+}
+
+/* Hide WhatsApp float on mobile as we have WhatsApp in sticky CTA */
+@media (max-width: 767px) {
+  .whatsapp-float {
+    display: none;
+  }
+}
+
+/* Print - hide new marketing elements */
+@media print {
+  .sticky-cta-bar,
+  .enquiry-drawer,
+  .enquiry-drawer-overlay {
+    display: none !important;
+  }
+  
+  body {
+    padding-bottom: 0 !important;
+  }
+}

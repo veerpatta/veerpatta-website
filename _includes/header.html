@@ -16,6 +16,7 @@
   {% assign admissions_path = '/hi/admissions/' %}
   {% assign gallery_path = '/hi/gallery/' %}
   {% assign contact_path = '/hi/contact/' %}
+  {% assign news_path = '/hi/news/' %}
   {% assign current_lang = 'hi' %}
   {% assign alt_lang = 'en' %}
   {% assign alt_path = page.url | replace_first: '/hi/', '/en/' %}
@@ -26,6 +27,7 @@
   {% assign nav_admissions = 'प्रवेश' %}
   {% assign nav_academics = 'शिक्षा' %}
   {% assign nav_gallery = 'गैलरी' %}
+  {% assign nav_news = 'समाचार' %}
   {% assign nav_contact = 'संपर्क' %}
   {% assign whatsapp_cta = '📱 प्रवेश पूछताछ' %}
   {% assign menu_label = 'मेनू' %}
@@ -37,6 +39,7 @@
   {% assign admissions_path = '/en/admissions/' %}
   {% assign gallery_path = '/en/gallery/' %}
   {% assign contact_path = '/en/contact/' %}
+  {% assign news_path = '/en/news/' %}
   {% assign current_lang = 'en' %}
   {% assign alt_lang = 'hi' %}
   {% assign alt_path = page.url | replace_first: '/en/', '/hi/' %}
@@ -47,6 +50,7 @@
   {% assign nav_admissions = 'Admissions' %}
   {% assign nav_academics = 'Academics' %}
   {% assign nav_gallery = 'Gallery' %}
+  {% assign nav_news = 'News' %}
   {% assign nav_contact = 'Contact' %}
   {% assign whatsapp_cta = '📱 Admission Inquiry' %}
   {% assign menu_label = 'Menu' %}
@@ -98,6 +102,7 @@
       <a class="nav-link" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
       <a class="nav-link" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
       <a class="nav-link" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
+      <a class="nav-link" href="{{ news_path | relative_url }}">{{ nav_news }}</a>
       <a class="nav-link" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
     </nav>
 
@@ -193,6 +198,7 @@
     <a class="mobile-nav-link" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
     <a class="mobile-nav-link" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
     <a class="mobile-nav-link" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
+    <a class="mobile-nav-link" href="{{ news_path | relative_url }}">{{ nav_news }}</a>
     <a class="mobile-nav-link" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>
   </div>
 
