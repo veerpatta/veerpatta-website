@@ -82,6 +82,45 @@ img[loading="lazy"] {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Shrink state - compact header on scroll (desktop only) */
+.site-header.shrink .header-container {
+  min-height: 56px;
+  padding: 8px 16px;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.site-header.shrink .school-logo {
+  width: 48px;
+  height: 48px;
+  transition: all 0.3s ease;
+}
+
+.site-header.shrink .brand-name {
+  display: none;
+}
+
+.site-header.shrink .nav-link {
+  padding: 8px 10px;
+}
+
+.site-header.shrink .nav-link .nav-label {
+  display: none;
+}
+
+.site-header.shrink .nav-link .nav-icon {
+  display: inline-block;
+}
+
+.site-header.shrink .desktop-whatsapp-btn span {
+  display: none;
+}
+
+.site-header.shrink .desktop-whatsapp-btn {
+  padding: 10px;
+  min-width: 44px;
+}
+
 /* Header flex container - mobile first */
 .header-container {
   display: flex;
@@ -499,8 +538,11 @@ body[lang="hi"] .mobile-nav-link,
     color: var(--text-color);
     text-decoration: none;
     border-radius: 8px;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, padding 0.3s ease;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .nav-link:hover {
@@ -511,6 +553,18 @@ body[lang="hi"] .mobile-nav-link,
   .nav-link:focus-visible {
     outline: 2px solid var(--brand-blue);
     outline-offset: 2px;
+  }
+
+  /* Navigation icons and labels - default state */
+  .nav-link .nav-icon {
+    display: none;
+    flex-shrink: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-link .nav-label {
+    display: inline-block;
+    transition: opacity 0.3s ease;
   }
 
   /* Show desktop language switcher */

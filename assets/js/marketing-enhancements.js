@@ -361,4 +361,29 @@
   });
 })();
 
-console.log('Marketing enhancements loaded - Testimonials carousel, FAQ accordion, and animations ready');
+/* ============================================
+   SHRINKING HEADER ON SCROLL
+   Compact header with icon-only navigation
+   ============================================ */
+(function initShrinkingHeader() {
+  const header = document.getElementById('siteHeader');
+  if (!header) return;
+
+  const shrinkOffset = 50; // px scroll threshold
+
+  function onScroll() {
+    if (window.scrollY > shrinkOffset) {
+      header.classList.add('shrink');
+    } else {
+      header.classList.remove('shrink');
+    }
+  }
+
+  // Initial check in case page loads scrolled
+  onScroll();
+
+  // Listen for scroll events
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+console.log('Marketing enhancements loaded - Testimonials carousel, FAQ accordion, animations, and shrinking header ready');
