@@ -3,14 +3,14 @@
 
 /* ============================================
    INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
+   Uses CSS classes instead of inline styles for better maintainability
    ============================================ */
 (function initScrollAnimations() {
   // Check if IntersectionObserver is supported
   if (!('IntersectionObserver' in window)) {
-    // Fallback: show all elements immediately for older browsers
+    // Fallback: show all elements immediately for older browsers using CSS classes
     document.querySelectorAll('.animate-on-scroll, .animate-fadeUp, .animate-slideIn, .animate-scaleIn').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
+      el.classList.add('animated');
     });
     return;
   }
@@ -1127,22 +1127,25 @@ function debounce(func, wait) {
 
 /* ============================================
    STAGGER ANIMATION FOR CARDS GRID
+   Uses CSS classes instead of inline styles for better maintainability
    ============================================ */
 (function initStaggeredCards() {
   // Check if IntersectionObserver is supported
   if (!('IntersectionObserver' in window)) {
-    // Fallback: show all cards immediately
+    // Fallback: Remove hidden class from all cards for older browsers
     console.log('IntersectionObserver not supported, showing all cards immediately');
-    document.querySelectorAll('.why-choose-card, .program-card, .trust-badge').forEach(card => {
-      card.style.opacity = '1';
-      card.style.transform = 'none';
+    document.querySelectorAll('.why-choose-card, .stat-card-modern, .program-card, .program-card-modern, .trust-badge').forEach(card => {
+      card.classList.remove('card-stagger-hidden');
+      card.classList.add('card-stagger-visible');
     });
     return;
   }
 
   const cardGroups = [
     document.querySelectorAll('.why-choose-card'),
+    document.querySelectorAll('.stat-card-modern'),
     document.querySelectorAll('.program-card'),
+    document.querySelectorAll('.program-card-modern'),
     document.querySelectorAll('.trust-badge')
   ];
   
@@ -1155,18 +1158,23 @@ function debounce(func, wait) {
           // No cards found, show the parent itself if it's a card
           console.log('No child cards found, checking if parent is a card');
           if (entry.target.classList.contains('why-choose-card') || 
+              entry.target.classList.contains('stat-card-modern') ||
               entry.target.classList.contains('program-card') || 
+              entry.target.classList.contains('program-card-modern') ||
               entry.target.classList.contains('trust-badge')) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.remove('card-stagger-hidden');
+            entry.target.classList.add('card-stagger-visible');
           }
         } else {
           console.log(`Revealing ${cards.length} cards with stagger animation`);
           cards.forEach((card, index) => {
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0)';
-            }, index * 100);
+            // Add stagger delay class based on index (1-6)
+            const delayClass = `card-stagger-delay-${Math.min(index + 1, 6)}`;
+            card.classList.add(delayClass);
+            
+            // Remove hidden state and add visible state to trigger animation
+            card.classList.remove('card-stagger-hidden');
+            card.classList.add('card-stagger-visible');
           });
         }
         observer.unobserve(entry.target);
@@ -1188,12 +1196,10 @@ function debounce(func, wait) {
     
     if (!parent || observedParents.has(parent)) return;
     
-    // Set initial hidden state with transition
+    // Set initial hidden state using CSS class
     const cards = parent.querySelectorAll('[class$="-card"], [class$="-badge"]');
     cards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      card.classList.add('card-stagger-hidden');
     });
     
     observer.observe(parent);
@@ -1202,10 +1208,10 @@ function debounce(func, wait) {
     // Failsafe: reveal after 3 seconds if still hidden
     setTimeout(() => {
       cards.forEach(card => {
-        if (card.style.opacity === '0') {
+        if (card.classList.contains('card-stagger-hidden')) {
           console.warn('Card still hidden after 3s, forcing visibility:', card.className);
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
+          card.classList.remove('card-stagger-hidden');
+          card.classList.add('card-stagger-visible');
         }
       });
     }, 3000);

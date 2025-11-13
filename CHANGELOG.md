@@ -14,8 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Elements above the fold now animate correctly on page load instead of staying hidden
   - Elements below the fold animate smoothly when scrolled into view
   - Improved fallback behavior for browsers without IntersectionObserver support
-  - Fixed duplicate WhatsApp CTA on mobile by removing WhatsApp button from mobile navigation menu (sticky CTA bar provides single, consistent entry point)
-  - Previous fix (commit a2be1a2) attempted to address visibility but inline styles overrode CSS classes due to specificity rules
+  - Added new CSS classes: `.card-stagger-hidden`, `.card-stagger-visible`, and `.card-stagger-delay-1` through `.card-stagger-delay-6`
+  - Updated `initStaggeredCards()` and `initScrollAnimations()` functions to use CSS classes instead of inline styles
+  - Fixed issue where CSS default styles (`opacity: 1; transform: none;`) were being overridden by JavaScript inline styles
+  - WhatsApp CTA properly integrated - no duplicates on mobile (desktop header button, sticky CTA bar on all devices, floating button hidden on mobile)
 
 ### Added
 - **Marketing Features (2025-11-12)**:
