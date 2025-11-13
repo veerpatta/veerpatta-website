@@ -27,87 +27,197 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 }
 </script>
 
-<!-- HERO -->
-<section class="hero container">
-  <h1>Amet's Premier English Medium School - Empowering Students for 30 Years</h1>
-  <p>RBSE Affiliated | Nursery to Class 12 | Science, Commerce & Arts Streams</p>
-  <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">Quick Admission Inquiry</a></p>
-  <!-- placeholder image (no file required yet) -->
-  <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}"
-       alt="Morning assembly at Veer Patta Public School" loading="lazy" style="display:block;max-width:100%;height:auto;">
-</section>
+<!-- HERO - MODERN SPLIT LAYOUT -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>
+      Nurturing <span class="text-highlight">Future Leaders</span>
+      in Rural Rajasthan
+    </h1>
+    <p class="hero-description">
+      30+ years of academic excellence, holistic development,
+      and value-based education in Amet. Join 1000+ students
+      shaping tomorrow.
+    </p>
+    <div class="hero-cta-group">
+      <a href="https://wa.me/919413748575" class="btn-hero-primary" target="_blank" rel="noopener">
+        <span>Apply Now 2025-26</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="{{ '/en/about/' | relative_url }}" class="btn-hero-secondary">
+        <span>Learn More</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v8m-4-4h8"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-trust-badges">
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">🏆</span>
+        <span class="trust-badge-text">30+ Years</span>
+      </div>
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">👨‍🎓</span>
+        <span class="trust-badge-text">1000+ Students</span>
+      </div>
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">✅</span>
+        <span class="trust-badge-text">95%+ Pass Rate</span>
+      </div>
+    </div>
+  </div>
 
-<!-- WHY CHOOSE US - Metrics Grid -->
-<section class="container why-choose-us-section">
-  <h2>Why Choose Us</h2>
-  <div class="why-choose-grid">
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-        </svg>
+  <div class="hero-visual">
+    <div class="hero-media-container">
+      <!-- Image will be added later - placeholder shows for now -->
+      <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}" alt="Veer Patta School Campus" loading="eager">
+      <!-- Placeholder shows until image is added -->
+      <div class="hero-media-placeholder">
+        <span class="placeholder-icon">🏫</span>
+        <span class="placeholder-text">School Campus</span>
       </div>
-      <div class="why-choose-number">30+ Years</div>
-      <div class="why-choose-label">of Excellence</div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
+    <div class="hero-floating-badge">
+      <div class="floating-badge-icon">🏆</div>
+      <div class="floating-badge-content">
+        <h3>95%+</h3>
+        <p>Pass Rate</p>
       </div>
-      <div class="why-choose-number">1000+</div>
-      <div class="why-choose-label">Students Educated</div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-      </div>
-      <div class="why-choose-number">95%+</div>
-      <div class="why-choose-label">Board Pass Rate</div>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US - Modern Stats Section -->
+<section class="container stats-section">
+  <div class="section-header-modern">
+    <h2 class="section-heading-main">
+      Why Choose <span class="heading-accent">Veer Patta</span>
+    </h2>
+    <p class="section-subtitle">
+      Three decades of excellence in rural education, empowering thousands of students
+    </p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">📚</span>
+      <div class="stat-number">30+</div>
+      <div class="stat-label">Years</div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </div>
-      <div class="why-choose-number">20+</div>
-      <div class="why-choose-label">Qualified Teachers</div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">👨‍🎓</span>
+      <div class="stat-number">1000+</div>
+      <div class="stat-label">Students</div>
+    </div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">✅</span>
+      <div class="stat-number">95%+</div>
+      <div class="stat-label">Pass Rate</div>
+    </div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">👨‍🏫</span>
+      <div class="stat-number">20+</div>
+      <div class="stat-label">Teachers</div>
     </div>
   </div>
 </section>
 
-<!-- PROGRAMS -->
-<section class="container">
-  <h2>Programs</h2>
-  <div class="programs">
-    <article class="program">
-      <img src="{{ '/assets/images/lead-program.webp' | relative_url }}" alt="LEAD curriculum" loading="lazy">
-      <h3>LEAD Curriculum</h3>
-      <p>Concept mastery through modern pedagogy.</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/ncc-program.webp' | relative_url }}" alt="NCC activities" loading="lazy">
-      <h3>NCC</h3>
-      <p>Discipline and leadership in action.</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/sports-program.webp' | relative_url }}" alt="Sports at school" loading="lazy">
-      <h3>Sports</h3>
-      <p>Teamwork, fitness, and confidence.</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/arts-program.webp' | relative_url }}" alt="Arts and creativity" loading="lazy">
-      <h3>Arts</h3>
-      <p>Creativity through music, art, and drama.</p>
-    </article>
+<!-- PROGRAMS - Modern Card Design -->
+<section class="container programs-section">
+  <div class="section-header-modern">
+    <h2 class="section-heading-main">
+      Our <span class="heading-accent">Programs</span>
+    </h2>
+    <p class="section-subtitle">
+      Comprehensive learning from nursery to senior secondary
+    </p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="programs-grid">
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/lead-program.webp' | relative_url }}" alt="LEAD Curriculum" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">📚</span>
+        </div>
+        <span class="program-badge-emoji">📚</span>
+      </div>
+      <div class="program-content">
+        <h3>LEAD Curriculum</h3>
+        <p>Concept mastery through modern pedagogy and innovative teaching methods</p>
+        <a href="{{ '/en/academics/' | relative_url }}" class="program-learn-more">
+          Learn More
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/ncc-program.webp' | relative_url }}" alt="NCC Training" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">🎖️</span>
+        </div>
+        <span class="program-badge-emoji">🎖️</span>
+      </div>
+      <div class="program-content">
+        <h3>NCC Training</h3>
+        <p>Discipline and leadership development through National Cadet Corps</p>
+        <a href="{{ '/en/academics/' | relative_url }}" class="program-learn-more">
+          Learn More
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/sports-program.webp' | relative_url }}" alt="Sports Program" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">⚽</span>
+        </div>
+        <span class="program-badge-emoji">⚽</span>
+      </div>
+      <div class="program-content">
+        <h3>Sports & Fitness</h3>
+        <p>Teamwork, physical fitness, and confidence building through athletics</p>
+        <a href="{{ '/en/academics/' | relative_url }}" class="program-learn-more">
+          Learn More
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/arts-program.webp' | relative_url }}" alt="Arts & Culture" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">🎨</span>
+        </div>
+        <span class="program-badge-emoji">🎨</span>
+      </div>
+      <div class="program-content">
+        <h3>Arts & Culture</h3>
+        <p>Creativity through music, art, drama, and cultural activities</p>
+        <a href="{{ '/en/academics/' | relative_url }}" class="program-learn-more">
+          Learn More
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 

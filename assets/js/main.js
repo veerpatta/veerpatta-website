@@ -965,7 +965,7 @@ function debounce(func, wait) {
 // 3. Progressive image loading with better placeholder
 (function initProgressiveImageLoading() {
   const images = document.querySelectorAll('img[loading="lazy"]');
-  
+
   images.forEach(img => {
     // Low quality placeholder
     const placeholder = img.getAttribute('data-placeholder');
@@ -974,11 +974,35 @@ function debounce(func, wait) {
       img.style.backgroundSize = 'cover';
       img.style.filter = 'blur(10px)';
     }
-    
+
     img.addEventListener('load', () => {
       img.style.filter = 'none';
       img.classList.add('loaded');
     });
+  });
+})();
+
+/* ============================================
+   PROGRESSIVE IMAGE LOADING - ENHANCED
+   Adds 'loaded' class when images complete loading
+   Works with all images and videos, not just lazy
+   ============================================ */
+(function initProgressiveImages() {
+  const images = document.querySelectorAll('img[src], video[src]');
+
+  images.forEach(media => {
+    const handleLoad = () => {
+      media.classList.add('loaded');
+    };
+
+    if (media.complete && media.naturalHeight !== 0) {
+      // Already loaded (cached)
+      handleLoad();
+    } else {
+      // Wait for load
+      media.addEventListener('load', handleLoad, { once: true });
+      media.addEventListener('loadeddata', handleLoad, { once: true });
+    }
   });
 })();
 
