@@ -39,7 +39,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- WHY CHOOSE US - Metrics Grid -->
-<section class="container why-choose-us-section lang-hi">
+<section class="container why-choose-us-section lang-hi" data-lazy-section>
   <h2>हमें क्यों चुनें</h2>
   <div class="why-choose-grid">
     <div class="why-choose-card">
@@ -86,7 +86,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- PROGRAMS -->
-<section class="container">
+<section class="container" data-lazy-section>
   <h2>कार्यक्रम</h2>
   <div class="programs">
     <article class="program">
@@ -113,7 +113,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- TRUST BADGES -->
-<section class="container trust-badges-section">
+<section class="container trust-badges-section" data-lazy-section>
   <div class="trust-badges-wrapper">
     <div class="trust-badge">
       <div class="badge-icon">
@@ -179,7 +179,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- WHY PARENTS CHOOSE VPS -->
-<section class="container why-parents-section lang-hi">
+<section class="container why-parents-section lang-hi" data-lazy-section>
   <h2>अभिभावक वीर पट्टा को क्यों चुनते हैं</h2>
   <div class="why-parents-card">
     <ul class="why-parents-list">
@@ -194,7 +194,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- RECENT ACHIEVEMENTS -->
-<section class="container achievements-section lang-hi">
+<section class="container achievements-section lang-hi" data-lazy-section>
   <h2>हाल की उपलब्धियां</h2>
   <div class="achievements-card">
     <ul class="achievements-list">
@@ -214,7 +214,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- TESTIMONIALS CAROUSEL -->
-<section class="container testimonials-section lang-hi">
+<section class="container testimonials-section lang-hi" data-lazy-section>
   <h2>अभिभावक क्या कहते हैं</h2>
   <div class="testimonials-carousel">
     <div class="testimonial-track">

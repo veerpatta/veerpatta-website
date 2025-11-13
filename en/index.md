@@ -38,7 +38,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 </section>
 
 <!-- WHY CHOOSE US - Metrics Grid -->
-<section class="container why-choose-us-section">
+<section class="container why-choose-us-section" data-lazy-section>
   <h2>Why Choose Us</h2>
   <div class="why-choose-grid">
     <div class="why-choose-card">
@@ -85,7 +85,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 </section>
 
 <!-- PROGRAMS -->
-<section class="container">
+<section class="container" data-lazy-section>
   <h2>Programs</h2>
   <div class="programs">
     <article class="program">
@@ -112,7 +112,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 </section>
 
 <!-- TRUST BADGES -->
-<section class="container trust-badges-section">
+<section class="container trust-badges-section" data-lazy-section>
   <div class="trust-badges-wrapper">
     <div class="trust-badge">
       <div class="badge-icon">
@@ -178,7 +178,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 </section>
 
 <!-- WHY PARENTS CHOOSE VPS -->
-<section class="container why-parents-section">
+<section class="container why-parents-section" data-lazy-section>
   <h2>Why Parents Choose Veer Patta</h2>
   <div class="why-parents-card">
     <ul class="why-parents-list">
@@ -193,7 +193,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 </section>
 
 <!-- RECENT ACHIEVEMENTS -->
-<section class="container achievements-section">
+<section class="container achievements-section" data-lazy-section>
   <h2>Recent Achievements</h2>
   <div class="achievements-card">
     <ul class="achievements-list">
@@ -213,7 +213,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 </section>
 
 <!-- TESTIMONIALS CAROUSEL -->
-<section class="container testimonials-section">
+<section class="container testimonials-section" data-lazy-section>
   <h2>What Parents Say</h2>
   <div class="testimonials-carousel">
     <div class="testimonial-track">

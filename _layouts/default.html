@@ -2,6 +2,16 @@
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 <head>
   {% include head.html %}
+  <style>
+    :root{--brand-blue:#5375E2;--brand-green:#84AC64;--brand-bg:#FEFEFE}
+    body{margin:0;font-family:'Poppins',sans-serif;background:var(--brand-bg)}
+    .site-header{position:sticky;top:0;z-index:1000;background:var(--brand-bg);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+    .hero{background:linear-gradient(160deg,#F8F9FE 0%,#fff 100%);border-radius:24px;padding:3rem 1.75rem;margin:2.5rem 0;text-align:center}
+    .btn{display:inline-flex;background:var(--brand-green);color:#fff;padding:.85rem 1.6rem;border-radius:999px;font-weight:700;text-decoration:none}
+  </style>
+
+  <link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}"></noscript>
 </head>
 <body>
   {{ content }}
