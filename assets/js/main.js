@@ -899,6 +899,338 @@
 })();
 
 /* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+// 1. Debounce function for better performance
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// 2. Detect device capability and add class for conditional animations
+(function detectDeviceCapability() {
+  const isLowEndDevice = 
+    navigator.hardwareConcurrency <= 4 || 
+    navigator.deviceMemory <= 4 ||
+    /Android [1-7]/.test(navigator.userAgent);
+  
+  if (isLowEndDevice) {
+    document.body.classList.add('low-end-device');
+  }
+})();
+
+// 3. Progressive image loading with better placeholder
+(function initProgressiveImageLoading() {
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  
+  images.forEach(img => {
+    // Low quality placeholder
+    const placeholder = img.getAttribute('data-placeholder');
+    if (placeholder) {
+      img.style.backgroundImage = `url(${placeholder})`;
+      img.style.backgroundSize = 'cover';
+      img.style.filter = 'blur(10px)';
+    }
+    
+    img.addEventListener('load', () => {
+      img.style.filter = 'none';
+      img.classList.add('loaded');
+    });
+  });
+})();
+
+/* ============================================
+   RIPPLE EFFECT FOR BUTTONS
+   ============================================ */
+(function initRippleEffect() {
+  const buttons = document.querySelectorAll('.btn, .cta-btn, .mobile-nav-link');
+  
+  buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.classList.add('ripple');
+      
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+})();
+
+/* ============================================
+   MAGNETIC EFFECT FOR CTA BUTTONS (DESKTOP ONLY)
+   ============================================ */
+(function initMagneticButtons() {
+  if (window.innerWidth < 768) return; // Mobile skip
+  
+  const magneticButtons = document.querySelectorAll('.btn, .desktop-whatsapp-btn');
+  
+  magneticButtons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+})();
+
+/* ============================================
+   SCROLL PROGRESS INDICATOR
+   ============================================ */
+(function initScrollProgress() {
+  const progressBar = document.createElement('div');
+  progressBar.className = 'scroll-progress';
+  document.body.appendChild(progressBar);
+  
+  const updateProgress = debounce(() => {
+    const winScroll = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    progressBar.style.width = scrolled + '%';
+  }, 10);
+  
+  window.addEventListener('scroll', updateProgress, { passive: true });
+})();
+
+/* ============================================
+   ENHANCED NUMBER COUNTER WITH EASING
+   ============================================ */
+(function initEnhancedCounters() {
+  const counters = document.querySelectorAll('.why-choose-number');
+  
+  if (counters.length === 0) return;
+  
+  const easeOutQuart = t => 1 - (--t) * t * t * t;
+  
+  const animateCounter = (element) => {
+    const text = element.textContent;
+    const match = text.match(/(\d+)([+%]*)/);
+    
+    if (!match) return;
+    
+    const target = parseInt(match[1]);
+    const suffix = match[2] || '';
+    const duration = 2000;
+    const startTime = performance.now();
+    
+    const updateCounter = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutQuart(progress);
+      const currentValue = Math.floor(easedProgress * target);
+      
+      element.textContent = currentValue + suffix;
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target + suffix;
+      }
+    };
+    
+    requestAnimationFrame(updateCounter);
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.counted) {
+        entry.target.dataset.counted = 'true';
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  counters.forEach(counter => observer.observe(counter));
+})();
+
+/* ============================================
+   STAGGER ANIMATION FOR CARDS GRID
+   ============================================ */
+(function initStaggeredCards() {
+  const cardGroups = [
+    document.querySelectorAll('.why-choose-card'),
+    document.querySelectorAll('.program-card'),
+    document.querySelectorAll('.trust-badge')
+  ];
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const cards = entry.target.querySelectorAll('[class$="-card"], [class$="-badge"]');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  cardGroups.forEach(group => {
+    if (group[0]) {
+      const parent = group[0].parentElement;
+      parent.querySelectorAll('[class$="-card"], [class$="-badge"]').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      });
+      observer.observe(parent);
+    }
+  });
+})();
+
+/* ============================================
+   KEYBOARD NAVIGATION IMPROVEMENTS
+   ============================================ */
+(function initKeyboardShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Skip if user is typing
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    switch(e.key) {
+      case '/':
+        e.preventDefault();
+        document.querySelector('.mobile-menu-btn')?.focus();
+        break;
+      case 'w':
+        e.preventDefault();
+        document.querySelector('.whatsapp-float, .sticky-whatsapp-mobile')?.click();
+        break;
+      case 'Escape':
+        // Close any open modals/menus
+        document.querySelector('.mobile-nav.active')?.classList.remove('active');
+        document.querySelector('.mobile-overlay.active')?.classList.remove('active');
+        break;
+    }
+  });
+})();
+
+/* ============================================
+   SKIP LINK FOR ACCESSIBILITY
+   ============================================ */
+(function initAccessibility() {
+  const skipLink = document.createElement('a');
+  skipLink.href = '#main-content';
+  skipLink.className = 'skip-link';
+  skipLink.textContent = 'Skip to main content';
+  document.body.insertBefore(skipLink, document.body.firstChild);
+  
+  // Add ID to main content if not present
+  const mainContent = document.querySelector('main, .container, .hero');
+  if (mainContent && !mainContent.id) {
+    mainContent.id = 'main-content';
+  }
+})();
+
+/* ============================================
+   FOCUS TRAP FOR MOBILE MENU
+   ============================================ */
+(function enhanceMobileMenuAccessibility() {
+  const mobileNav = document.getElementById('mobileNav');
+  if (!mobileNav) return;
+  
+  const focusableElements = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  
+  mobileNav.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    
+    const focusables = Array.from(mobileNav.querySelectorAll(focusableElements));
+    const firstFocusable = focusables[0];
+    const lastFocusable = focusables[focusables.length - 1];
+    
+    if (e.shiftKey && document.activeElement === firstFocusable) {
+      e.preventDefault();
+      lastFocusable.focus();
+    } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+      e.preventDefault();
+      firstFocusable.focus();
+    }
+  });
+})();
+
+/* ============================================
+   LAZY LOAD BELOW-THE-FOLD SECTIONS
+   ============================================ */
+(function initLazyLoadSections() {
+  const lazySections = document.querySelectorAll('[data-lazy-section]');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('loaded');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '200px' });
+  
+  lazySections.forEach(section => observer.observe(section));
+})();
+
+/* ============================================
+   TOAST NOTIFICATION SYSTEM
+   ============================================ */
+function showToast(message, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => toast.classList.add('show'), 100);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// Make showToast available globally
+window.showToast = showToast;
+
+/* ============================================
+   PERFORMANCE MONITORING
+   ============================================ */
+(function checkPerformance() {
+  if (window.performance && window.performance.timing) {
+    window.addEventListener('load', () => {
+      const perfData = window.performance.timing;
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+      
+      console.log('📊 Page Load Time:', pageLoadTime + 'ms');
+      
+      if (pageLoadTime > 3000) {
+        console.warn('⚠️ Page load exceeds 3s budget!');
+      } else {
+        console.log('✅ Page load within budget');
+      }
+    });
+  }
+})();
+
+/* ============================================
    INITIALIZE ALL ANIMATIONS ON DOM READY
    ============================================ */
 document.addEventListener('DOMContentLoaded', () => {
