@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Homepage Visibility Bugs (2025-11-13)**:
+  - Fixed "Why Choose Us" and "Trust Badges" sections not displaying above the fold
+  - Improved `isInViewport()` check to detect partially visible elements instead of requiring full visibility
+  - Removed duplicate WhatsApp floating widget from layout (sticky CTA already provides WhatsApp functionality)
+  - Optimized animation timing to prevent visual flash on above-fold elements
+
 ### Added
 - **Marketing Features (2025-11-12)**:
   - Sticky CTA bar with Call, WhatsApp, Admissions, and Directions buttons

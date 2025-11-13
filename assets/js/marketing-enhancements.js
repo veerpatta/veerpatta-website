@@ -236,14 +236,18 @@
     return;
   }
 
-  // Helper function to check if element is in viewport
+  // Helper function to check if element is at least partially in viewport
   function isInViewport(element) {
     const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+    // Check if element is at least partially visible
     return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      rect.top < windowHeight &&
+      rect.bottom > 0 &&
+      rect.left < windowWidth &&
+      rect.right > 0
     );
   }
 
@@ -271,14 +275,12 @@
 
     // Check if card is already in viewport
     if (isInViewport(card)) {
-      // Card is already visible, animate it immediately with stagger
+      // Card is above fold - set initial state immediately to prevent flash
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      // Trigger animation with stagger delay
       setTimeout(() => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        // Trigger animation immediately
-        requestAnimationFrame(() => {
-          card.classList.add('animate-fadeUp', 'animated');
-        });
+        card.classList.add('animate-fadeUp', 'animated');
       }, index * 100);
     } else {
       // Card is below fold, hide it and observe for intersection
@@ -302,14 +304,18 @@
     return;
   }
 
-  // Helper function to check if element is in viewport
+  // Helper function to check if element is at least partially in viewport
   function isInViewport(element) {
     const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+    // Check if element is at least partially visible
     return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      rect.top < windowHeight &&
+      rect.bottom > 0 &&
+      rect.left < windowWidth &&
+      rect.right > 0
     );
   }
 
@@ -337,14 +343,12 @@
 
     // Check if badge is already in viewport
     if (isInViewport(badge)) {
-      // Badge is already visible, animate it immediately with stagger
+      // Badge is above fold - set initial state immediately to prevent flash
+      badge.style.opacity = '0';
+      badge.style.transform = 'translateX(-20px)';
+      // Trigger animation with stagger delay
       setTimeout(() => {
-        badge.style.opacity = '0';
-        badge.style.transform = 'translateX(-20px)';
-        // Trigger animation immediately
-        requestAnimationFrame(() => {
-          badge.classList.add('animate-slideIn', 'animated');
-        });
+        badge.classList.add('animate-slideIn', 'animated');
       }, index * 80);
     } else {
       // Badge is below fold, hide it and observe for intersection
