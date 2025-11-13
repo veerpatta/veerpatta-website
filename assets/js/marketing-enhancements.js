@@ -233,6 +233,9 @@
   // Check if IntersectionObserver is supported
   if (!('IntersectionObserver' in window)) {
     // Fallback: cards are already visible by default CSS
+    whyChooseCards.forEach((card) => {
+      card.classList.add('animated');
+    });
     return;
   }
 
@@ -258,7 +261,7 @@
         const index = parseInt(entry.target.dataset.cardIndex || '0', 10);
         // Stagger animation
         setTimeout(() => {
-          entry.target.classList.add('animate-fadeUp', 'animated');
+          entry.target.classList.add('animated');
         }, index * 100);
         observer.unobserve(entry.target);
       }
@@ -273,19 +276,17 @@
     // Store index for stagger animation
     card.dataset.cardIndex = index;
 
+    // Add the animate-fadeUp class to set initial hidden state
+    card.classList.add('animate-fadeUp');
+
     // Check if card is already in viewport
     if (isInViewport(card)) {
-      // Card is above fold - set initial state immediately to prevent flash
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
-      // Trigger animation with stagger delay
+      // Card is above fold - trigger animation immediately with stagger delay
       setTimeout(() => {
-        card.classList.add('animate-fadeUp', 'animated');
+        card.classList.add('animated');
       }, index * 100);
     } else {
-      // Card is below fold, hide it and observe for intersection
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
+      // Card is below fold, observe for intersection
       observer.observe(card);
     }
   });
@@ -301,6 +302,9 @@
   // Check if IntersectionObserver is supported
   if (!('IntersectionObserver' in window)) {
     // Fallback: badges are already visible by default CSS
+    badges.forEach((badge) => {
+      badge.classList.add('animated');
+    });
     return;
   }
 
@@ -326,7 +330,7 @@
         const index = parseInt(entry.target.dataset.badgeIndex || '0', 10);
         // Stagger animation
         setTimeout(() => {
-          entry.target.classList.add('animate-slideIn', 'animated');
+          entry.target.classList.add('animated');
         }, index * 80);
         observer.unobserve(entry.target);
       }
@@ -341,19 +345,17 @@
     // Store index for stagger animation
     badge.dataset.badgeIndex = index;
 
+    // Add the animate-slideIn class to set initial hidden state
+    badge.classList.add('animate-slideIn');
+
     // Check if badge is already in viewport
     if (isInViewport(badge)) {
-      // Badge is above fold - set initial state immediately to prevent flash
-      badge.style.opacity = '0';
-      badge.style.transform = 'translateX(-20px)';
-      // Trigger animation with stagger delay
+      // Badge is above fold - trigger animation immediately with stagger delay
       setTimeout(() => {
-        badge.classList.add('animate-slideIn', 'animated');
+        badge.classList.add('animated');
       }, index * 80);
     } else {
-      // Badge is below fold, hide it and observe for intersection
-      badge.style.opacity = '0';
-      badge.style.transform = 'translateX(-20px)';
+      // Badge is below fold, observe for intersection
       observer.observe(badge);
     }
   });

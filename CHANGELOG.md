@@ -8,11 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
-- **Homepage Visibility Bugs (2025-11-13)**:
-  - Fixed "Why Choose Us" and "Trust Badges" sections not displaying above the fold
-  - Improved `isInViewport()` check to detect partially visible elements instead of requiring full visibility
-  - Removed duplicate WhatsApp floating widget from layout (sticky CTA already provides WhatsApp functionality)
-  - Optimized animation timing to prevent visual flash on above-fold elements
+- **Animation and Visibility Issues (2025-11-13)**:
+  - Fixed trust badges and "Why Parents Choose" cards remaining permanently invisible due to inline style conflicts
+  - Removed inline style manipulation (`opacity: 0`, `transform`) in animation JavaScript - now uses CSS classes exclusively
+  - Elements above the fold now animate correctly on page load instead of staying hidden
+  - Elements below the fold animate smoothly when scrolled into view
+  - Improved fallback behavior for browsers without IntersectionObserver support
+  - Fixed duplicate WhatsApp CTA on mobile by removing WhatsApp button from mobile navigation menu (sticky CTA bar provides single, consistent entry point)
+  - Previous fix (commit a2be1a2) attempted to address visibility but inline styles overrode CSS classes due to specificity rules
 
 ### Added
 - **Marketing Features (2025-11-12)**:
