@@ -498,6 +498,8 @@
 /* ============================================
    TESTIMONIALS CAROUSEL
    Auto-rotating carousel with manual controls
+   Fixed: Multiple slides overlap, navigation bugs, dot sync,
+   timer race conditions, touch issues, accessibility
    ============================================ */
 (function initTestimonialsCarousel() {
   const carousel = document.querySelector('.testimonials-carousel');
@@ -511,74 +513,204 @@
 
   if (!track || slides.length === 0) return;
 
+  // State management
   let currentIndex = 0;
   let autoRotateInterval = null;
+  let isTransitioning = false; // Prevent rapid navigation
+  let isSwiping = false; // Prevent multi-trigger swipe
   const ROTATION_DELAY = 5000; // 5 seconds
+  const TRANSITION_DURATION = 600; // Match CSS transition duration
   let touchStartX = 0;
   let touchEndX = 0;
 
-  // Initialize slides - hide all except first
+  // Debounce function to prevent rapid-fire clicks
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  // Initialize slides - ensure only first is active
   function initSlides() {
     slides.forEach((slide, index) => {
       slide.classList.remove('active');
+      slide.setAttribute('aria-hidden', 'true');
+      slide.style.opacity = '0';
+      slide.style.visibility = 'hidden';
+      slide.style.position = 'absolute';
+      slide.style.top = '0';
+      slide.style.left = '0';
+      slide.style.width = '100%';
+
       if (index === 0) {
         slide.classList.add('active');
+        slide.setAttribute('aria-hidden', 'false');
+        slide.style.opacity = '1';
+        slide.style.visibility = 'visible';
+        slide.style.position = 'relative';
       }
     });
   }
 
-  // Generate pagination dots
+  // Generate pagination dots with full accessibility
   function generateDots() {
     if (!dotsContainer) return;
-    
+
     dotsContainer.innerHTML = '';
+    dotsContainer.setAttribute('role', 'tablist');
+    dotsContainer.setAttribute('aria-label', 'Testimonial navigation');
+
     slides.forEach((_, index) => {
-      const dot = document.createElement('span');
+      const dot = document.createElement('button');
       dot.classList.add('testimonial-dot');
-      if (index === 0) dot.classList.add('active');
-      dot.setAttribute('role', 'button');
-      dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
-      dot.addEventListener('click', () => goToSlide(index));
+      dot.setAttribute('type', 'button');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Go to testimonial ${index + 1} of ${slides.length}`);
+      dot.setAttribute('aria-controls', `testimonial-${index}`);
+      dot.setAttribute('tabindex', index === 0 ? '0' : '-1');
+
+      if (index === 0) {
+        dot.classList.add('active');
+        dot.setAttribute('aria-selected', 'true');
+        dot.setAttribute('aria-current', 'true');
+      } else {
+        dot.setAttribute('aria-selected', 'false');
+        dot.setAttribute('aria-current', 'false');
+      }
+
+      // Click handler with debouncing
+      dot.addEventListener('click', () => {
+        if (!isTransitioning) {
+          goToSlide(index, true);
+        }
+      });
+
+      // Keyboard navigation for dots
+      dot.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (!isTransitioning) {
+            goToSlide(index, true);
+          }
+        }
+      });
+
       dotsContainer.appendChild(dot);
     });
   }
 
-  // Update dots
+  // Update dots with proper ARIA attributes
   function updateDots() {
     if (!dotsContainer) return;
     const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+
     dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentIndex);
+      const isActive = index === currentIndex;
+
+      // Remove all active states first
+      dot.classList.remove('active');
+      dot.setAttribute('aria-selected', 'false');
+      dot.setAttribute('aria-current', 'false');
+      dot.setAttribute('tabindex', '-1');
+
+      // Set active state for current dot only
+      if (isActive) {
+        dot.classList.add('active');
+        dot.setAttribute('aria-selected', 'true');
+        dot.setAttribute('aria-current', 'true');
+        dot.setAttribute('tabindex', '0');
+      }
     });
   }
 
-  // Go to specific slide
-  function goToSlide(index) {
-    if (index === currentIndex) return;
+  // Update slides with proper ARIA and visibility
+  function updateSlides(oldIndex, newIndex) {
+    // Ensure all slides are inactive first
+    slides.forEach((slide, index) => {
+      slide.classList.remove('active');
+      slide.setAttribute('aria-hidden', 'true');
 
-    slides[currentIndex].classList.remove('active');
+      if (index !== newIndex) {
+        // Use setTimeout to allow transition to complete
+        setTimeout(() => {
+          if (index !== currentIndex) {
+            slide.style.opacity = '0';
+            slide.style.visibility = 'hidden';
+            slide.style.position = 'absolute';
+          }
+        }, TRANSITION_DURATION);
+      }
+    });
+
+    // Activate new slide
+    const newSlide = slides[newIndex];
+    newSlide.classList.add('active');
+    newSlide.setAttribute('aria-hidden', 'false');
+    newSlide.style.position = 'relative';
+    newSlide.style.visibility = 'visible';
+
+    // Force reflow for smooth transition
+    newSlide.offsetHeight;
+    newSlide.style.opacity = '1';
+  }
+
+  // Go to specific slide with transition lock
+  function goToSlide(index, userInitiated = false) {
+    // Validate index
+    if (index < 0 || index >= slides.length || index === currentIndex || isTransitioning) {
+      return;
+    }
+
+    // Lock transitions
+    isTransitioning = true;
+
+    const oldIndex = currentIndex;
     currentIndex = index;
-    slides[currentIndex].classList.add('active');
+
+    // Update UI
+    updateSlides(oldIndex, currentIndex);
     updateDots();
-    resetAutoRotation();
+
+    // Reset auto-rotation if user initiated
+    if (userInitiated) {
+      resetAutoRotation();
+    }
+
+    // Unlock after transition completes
+    setTimeout(() => {
+      isTransitioning = false;
+    }, TRANSITION_DURATION);
   }
 
-  // Next slide
-  function nextSlide() {
+  // Next slide with debouncing
+  const nextSlide = () => {
+    if (isTransitioning) return;
     const nextIndex = (currentIndex + 1) % slides.length;
-    goToSlide(nextIndex);
-  }
+    goToSlide(nextIndex, true);
+  };
 
-  // Previous slide
-  function prevSlide() {
+  // Previous slide with debouncing
+  const prevSlide = () => {
+    if (isTransitioning) return;
     const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-    goToSlide(prevIndex);
-  }
+    goToSlide(prevIndex, true);
+  };
 
-  // Auto rotation
+  // Auto rotation with proper cleanup
   function startAutoRotation() {
     stopAutoRotation();
-    autoRotateInterval = setInterval(nextSlide, ROTATION_DELAY);
+    autoRotateInterval = setInterval(() => {
+      if (!isTransitioning) {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        goToSlide(nextIndex, false);
+      }
+    }, ROTATION_DELAY);
   }
 
   function stopAutoRotation() {
@@ -590,17 +722,45 @@
 
   function resetAutoRotation() {
     stopAutoRotation();
-    startAutoRotation();
+
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      startAutoRotation();
+    }
   }
 
-  // Touch/Swipe support
+  // Touch/Swipe support with debouncing
   function handleTouchStart(e) {
+    if (isTransitioning || isSwiping) return;
     touchStartX = e.changedTouches[0].screenX;
+    isSwiping = false;
+  }
+
+  function handleTouchMove(e) {
+    if (isTransitioning) return;
+    // Detect intentional swipe by checking movement
+    const currentX = e.changedTouches[0].screenX;
+    const diff = Math.abs(touchStartX - currentX);
+
+    if (diff > 10) {
+      isSwiping = true;
+    }
   }
 
   function handleTouchEnd(e) {
+    if (isTransitioning || !isSwiping) {
+      isSwiping = false;
+      return;
+    }
+
     touchEndX = e.changedTouches[0].screenX;
     handleSwipe();
+
+    // Reset swipe flag after a delay
+    setTimeout(() => {
+      isSwiping = false;
+    }, 100);
   }
 
   function handleSwipe() {
@@ -616,51 +776,113 @@
     }
   }
 
-  // Event listeners
-  if (prevBtn) {
-    prevBtn.addEventListener('click', prevSlide);
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', nextSlide);
-  }
-
-  // Pause on hover
-  carousel.addEventListener('mouseenter', stopAutoRotation);
-  carousel.addEventListener('mouseleave', startAutoRotation);
-
-  // Touch events
-  track.addEventListener('touchstart', handleTouchStart, { passive: true });
-  track.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-  // Keyboard navigation
-  carousel.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      prevSlide();
-    } else if (e.key === 'ArrowRight') {
-      nextSlide();
+  // Event listeners with error handling
+  try {
+    // Navigation buttons
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevSlide();
+      });
+      prevBtn.setAttribute('aria-controls', 'testimonial-track');
     }
-  });
 
-  // Reduced motion support
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
-    stopAutoRotation();
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextSlide();
+      });
+      nextBtn.setAttribute('aria-controls', 'testimonial-track');
+    }
+
+    // Pause auto-rotation on hover/focus
+    carousel.addEventListener('mouseenter', stopAutoRotation);
+    carousel.addEventListener('mouseleave', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReducedMotion) {
+        startAutoRotation();
+      }
+    });
+
+    carousel.addEventListener('focusin', stopAutoRotation);
+    carousel.addEventListener('focusout', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReducedMotion) {
+        startAutoRotation();
+      }
+    });
+
+    // Touch events with proper flags
+    track.addEventListener('touchstart', handleTouchStart, { passive: true });
+    track.addEventListener('touchmove', handleTouchMove, { passive: true });
+    track.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    // Keyboard navigation for carousel
+    carousel.setAttribute('tabindex', '0');
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-label', 'Testimonials carousel');
+    carousel.setAttribute('aria-live', 'polite');
+
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(0, true);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(slides.length - 1, true);
+      }
+    });
+
+    // Add IDs to slides for ARIA references
+    slides.forEach((slide, index) => {
+      slide.setAttribute('id', `testimonial-${index}`);
+      slide.setAttribute('role', 'tabpanel');
+      slide.setAttribute('aria-label', `Testimonial ${index + 1} of ${slides.length}`);
+    });
+
+    // Initialize everything
+    initSlides();
+    generateDots();
+    updateDots();
+
+    // Start auto-rotation if motion is allowed
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      startAutoRotation();
+    }
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      stopAutoRotation();
+    });
+
+    // Handle visibility change (pause when tab is hidden)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoRotation();
+      } else {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReducedMotion) {
+          startAutoRotation();
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error('Error initializing testimonials carousel:', error);
+    // Fallback: show all testimonials if carousel fails
+    slides.forEach(slide => {
+      slide.style.position = 'relative';
+      slide.style.opacity = '1';
+      slide.style.visibility = 'visible';
+    });
   }
-
-  // Initialize
-  initSlides();
-  generateDots();
-  updateDots();
-  
-  if (!prefersReducedMotion) {
-    startAutoRotation();
-  }
-
-  // Cleanup on page unload
-  window.addEventListener('beforeunload', () => {
-    stopAutoRotation();
-  });
 })();
 
 /* ============================================
