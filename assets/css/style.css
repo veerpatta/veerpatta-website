@@ -30,6 +30,10 @@ body[lang="hi"],
   line-height: 1.8;
 }
 
+body[lang="hi"] .desktop-whatsapp-btn span {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
 a {
   color: var(--brand-blue);
   text-decoration: none;
