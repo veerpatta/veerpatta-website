@@ -28,87 +28,232 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 }
 </script>
 
-<!-- HERO -->
-<section class="hero container">
-  <h1>अमेट का प्रमुख अंग्रेज़ी माध्यम विद्यालय - 30 वर्षों से विद्यार्थियों को सशक्त बनाना</h1>
-  <p>RBSE मान्यता प्राप्त | नर्सरी से कक्षा 12 | विज्ञान, वाणिज्य और कला संकाय</p>
-  <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">त्वरित प्रवेश पूछताछ</a></p>
-  <!-- placeholder image (no file required yet) -->
-  <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}"
-       alt="वीर पत्ता पब्लिक स्कूल में सुबह की सभा" loading="lazy" style="display:block;max-width:100%;height:auto;">
-</section>
+{% assign transparent_placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==' %}
 
-<!-- WHY CHOOSE US - Metrics Grid -->
-<section class="container why-choose-us-section lang-hi">
-  <h2>हमें क्यों चुनें</h2>
-  <div class="why-choose-grid">
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+<!-- HERO - आधुनिक विभाजित लेआउट -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>
+      ग्रामीण राजस्थान के विद्यार्थियों को
+      <span class="text-highlight">भविष्य के नेता</span>
+      बनने की शक्ति
+    </h1>
+    <p class="hero-description">
+      30+ वर्षों की शैक्षणिक उत्कृष्टता, समग्र विकास और मूल्य आधारित शिक्षा।
+      1000+ छात्रों के साथ उज्ज्वल भविष्य की ओर कदम बढ़ाएँ।
+    </p>
+    <div class="hero-cta-group">
+      <a href="https://wa.me/919413748575" class="btn-hero-primary" target="_blank" rel="noopener">
+        <span>2025-26 प्रवेश आवेदन</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
-      </div>
-      <div class="why-choose-number">30+ वर्ष</div>
-      <div class="why-choose-label">उत्कृष्टता का</div>
+      </a>
+      <a href="{{ '/hi/about/' | relative_url }}" class="btn-hero-secondary">
+        <span>विद्यालय के बारे में</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v8m-4-4h8"/>
+        </svg>
+      </a>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
+    <div class="hero-trust-badges">
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">🏆</span>
+        <span class="trust-badge-text">30+ वर्ष</span>
       </div>
-      <div class="why-choose-number">1000+</div>
-      <div class="why-choose-label">शिक्षित छात्र</div>
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">👨‍🎓</span>
+        <span class="trust-badge-text">1000+ विद्यार्थी</span>
+      </div>
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">✅</span>
+        <span class="trust-badge-text">95%+ परिणाम</span>
+      </div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-media-container">
+      <img
+        src="{{ transparent_placeholder }}"
+        data-placeholder-src="{{ transparent_placeholder }}"
+        data-future-src="{{ '/assets/images/hero-assembly.webp' | relative_url }}"
+        alt="वीर पत्ता पब्लिक स्कूल परिसर"
+        loading="eager"
+        decoding="async"
+      >
+      <div class="hero-media-placeholder">
+        <span class="placeholder-icon">🏫</span>
+        <span class="placeholder-text">विद्यालय परिसर</span>
       </div>
-      <div class="why-choose-number">95%+</div>
-      <div class="why-choose-label">बोर्ड उत्तीर्ण दर</div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
+    <div class="hero-floating-badge">
+      <div class="floating-badge-icon">🏆</div>
+      <div class="floating-badge-content">
+        <h3>95%+</h3>
+        <p>बोर्ड परिणाम</p>
       </div>
-      <div class="why-choose-number">20+</div>
-      <div class="why-choose-label">योग्य शिक्षक</div>
+    </div>
+  </div>
+</div>
+
+<!-- क्यों चुनें - आधुनिक सांख्यिकी अनुभाग -->
+<section class="container stats-section lang-hi">
+  <div class="section-header-modern">
+    <h2 class="section-heading-main">
+      क्यों चुनें <span class="heading-accent">वीर पट्टा</span>
+    </h2>
+    <p class="section-subtitle">
+      ग्रामीण शिक्षा में तीन दशकों की उत्कृष्टता, हजारों विद्यार्थियों को सशक्त बनाना
+    </p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">📚</span>
+      <div class="stat-number">30+</div>
+      <div class="stat-label">वर्ष</div>
+    </div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">👨‍🎓</span>
+      <div class="stat-number">1000+</div>
+      <div class="stat-label">विद्यार्थी</div>
+    </div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">✅</span>
+      <div class="stat-number">95%+</div>
+      <div class="stat-label">बोर्ड परिणाम</div>
+    </div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">👨‍🏫</span>
+      <div class="stat-number">20+</div>
+      <div class="stat-label">योग्य शिक्षक</div>
     </div>
   </div>
 </section>
 
-<!-- PROGRAMS -->
-<section class="container">
-  <h2>कार्यक्रम</h2>
-  <div class="programs">
-    <article class="program">
-      <img src="{{ '/assets/images/lead-program.webp' | relative_url }}" alt="LEAD पाठ्यक्रम" loading="lazy">
-      <h3>LEAD पाठ्यक्रम</h3>
-      <p>आधुनिक शिक्षाशास्त्र के माध्यम से अवधारणा में महारत।</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/ncc-program.webp' | relative_url }}" alt="NCC गतिविधियाँ" loading="lazy">
-      <h3>NCC</h3>
-      <p>क्रियाशील अनुशासन और नेतृत्व।</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/sports-program.webp' | relative_url }}" alt="विद्यालय में खेल" loading="lazy">
-      <h3>खेल</h3>
-      <p>टीमवर्क, फिटनेस और आत्मविश्वास।</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/arts-program.webp' | relative_url }}" alt="कला और रचनात्मकता" loading="lazy">
-      <h3>कला</h3>
-      <p>संगीत, कला और नाटक के माध्यम से रचनात्मकता।</p>
-    </article>
+<!-- कार्यक्रम - आधुनिक कार्ड डिज़ाइन -->
+<section class="container programs-section lang-hi">
+  <div class="section-header-modern">
+    <h2 class="section-heading-main">
+      हमारे <span class="heading-accent">कार्यक्रम</span>
+    </h2>
+    <p class="section-subtitle">
+      नर्सरी से सीनियर सेकेंडरी तक संपूर्ण सीखने की यात्रा
+    </p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="programs-grid">
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/lead-program.webp' | relative_url }}"
+          alt="LEAD पाठ्यक्रम"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">📚</span>
+        </div>
+        <span class="program-badge-emoji">📚</span>
+      </div>
+      <div class="program-content">
+        <h3>LEAD पाठ्यक्रम</h3>
+        <p>आधुनिक शिक्षण पद्धति के साथ अवधारणा में महारत और नियमित प्रगति आँकें</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/ncc-program.webp' | relative_url }}"
+          alt="NCC प्रशिक्षण"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">🎖️</span>
+        </div>
+        <span class="program-badge-emoji">🎖️</span>
+      </div>
+      <div class="program-content">
+        <h3>NCC प्रशिक्षण</h3>
+        <p>अनुशासन, नेतृत्व और राष्ट्रीय सेवा मूल्यों का विकास</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/sports-program.webp' | relative_url }}"
+          alt="खेल एवं फिटनेस"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">⚽</span>
+        </div>
+        <span class="program-badge-emoji">⚽</span>
+      </div>
+      <div class="program-content">
+        <h3>खेल एवं फिटनेस</h3>
+        <p>टीमवर्क, शारीरिक फिटनेस और आत्मविश्वास को बढ़ावा देने वाली गतिविधियाँ</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/arts-program.webp' | relative_url }}"
+          alt="कला और सांस्कृतिक कार्यक्रम"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">🎨</span>
+        </div>
+        <span class="program-badge-emoji">🎨</span>
+      </div>
+      <div class="program-content">
+        <h3>कला और संस्कृति</h3>
+        <p>संगीत, नृत्य, रंगमंच और कला गतिविधियों से रचनात्मक अभिव्यक्ति</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -213,67 +358,119 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
   <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Principal's Welcome" frameborder="0" allowfullscreen></iframe> -->
 </section>
 
-<!-- TESTIMONIALS CAROUSEL -->
+<!-- प्रशंसापत्र कैरोसेल -->
 <section class="container testimonials-section lang-hi">
   <h2>अभिभावक क्या कहते हैं</h2>
   <div class="testimonials-carousel">
     <div class="testimonial-track">
       <div class="testimonial-slide active">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">मेरा बच्चा केवल एक वर्ष में 60% से 85% तक सुधर गया। अमेट क्षेत्र में यहां का व्यक्तिगत ध्यान बेजोड़ है। शिक्षक वास्तव में हर छात्र की प्रगति की परवाह करते हैं।</p>
-          <div class="testimonial-author">
-            <div class="author-name">रमेश कुमार</div>
-            <div class="author-details">कक्षा 10 के छात्र के अभिभावक • 2024</div>
-            <div class="author-location">खेमपुर गाँव</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/ramesh-kumar.webp' | relative_url }}"
+                alt="रमेश कुमार का चित्र"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">🙂</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">रमेश कुमार</div>
+              <div class="testimonial-author-role">कक्षा 10 के छात्र के अभिभावक • 2024</div>
+              <div class="testimonial-author-location">खेमपुर गाँव</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="testimonial-slide">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">हमने मूल्य-आधारित शिक्षा और किफायती शुल्क के कारण शहर के स्कूलों पर VPS को चुना। हमारी बेटी शैक्षणिक और पाठ्येतर गतिविधियों दोनों में उत्कृष्ट रही है।</p>
-          <div class="testimonial-author">
-            <div class="author-name">सुनीता शर्मा</div>
-            <div class="author-details">कक्षा 8 की छात्रा के अभिभावक • 2024</div>
-            <div class="author-location">परासोली गाँव</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/sunita-sharma.webp' | relative_url }}"
+                alt="सुनीता शर्मा का चित्र"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">😊</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">सुनीता शर्मा</div>
+              <div class="testimonial-author-role">कक्षा 8 की छात्रा के अभिभावक • 2024</div>
+              <div class="testimonial-author-location">परासोली गाँव</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="testimonial-slide">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">VPS में NCC प्रशिक्षण और अनुशासन ने मेरे बेटे को एक आत्मविश्वासी युवा में बदल दिया है। स्कूल ऐसे अवसर प्रदान करता है जिसकी हमने अपने ग्रामीण क्षेत्र में कभी कल्पना नहीं की थी।</p>
-          <div class="testimonial-author">
-            <div class="author-name">विजय सिंह</div>
-            <div class="author-details">कक्षा 12 के छात्र के अभिभावक • 2023</div>
-            <div class="author-location">अमेट</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/vijay-singh.webp' | relative_url }}"
+                alt="विजय सिंह का चित्र"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">🙌</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">विजय सिंह</div>
+              <div class="testimonial-author-role">कक्षा 12 के छात्र के अभिभावक • 2023</div>
+              <div class="testimonial-author-location">अमेट</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="testimonial-slide">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">LEAD पाठ्यक्रम और डिजिटल शिक्षण उपकरणों ने मेरे बच्चों के लिए पढ़ाई को मज़ेदार बना दिया है। नियमित व्हाट्सएप अपडेट मुझे उनकी दैनिक प्रगति के बारे में सूचित रखते हैं।</p>
-          <div class="testimonial-author">
-            <div class="author-name">मीना पटेल</div>
-            <div class="author-details">कक्षा 5 और 7 के छात्रों की अभिभावक • 2024</div>
-            <div class="author-location">रेलमगरा</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/meena-patel.webp' | relative_url }}"
+                alt="मीना पटेल का चित्र"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">🤝</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">मीना पटेल</div>
+              <div class="testimonial-author-role">कक्षा 5 एवं 7 के छात्रों की अभिभावक • 2024</div>
+              <div class="testimonial-author-location">रेलमगरा</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <button class="testimonial-nav prev" aria-label="पिछली प्रशंसापत्र">
+    <button class="testimonial-nav prev" aria-label="पिछला प्रशंसापत्र">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
     </button>
-    <button class="testimonial-nav next" aria-label="अगली प्रशंसापत्र">
+    <button class="testimonial-nav next" aria-label="अगला प्रशंसापत्र">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
     </button>
-    <div class="testimonial-dots"></div>
+    <div class="testimonial-dots" role="tablist" aria-label="अभिभावक प्रशंसापत्र"></div>
   </div>
 </section>
 
