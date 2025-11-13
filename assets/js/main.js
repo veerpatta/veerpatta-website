@@ -496,6 +496,174 @@
 })();
 
 /* ============================================
+   TESTIMONIALS CAROUSEL
+   Auto-rotating carousel with manual controls
+   ============================================ */
+(function initTestimonialsCarousel() {
+  const carousel = document.querySelector('.testimonials-carousel');
+  if (!carousel) return;
+
+  const track = carousel.querySelector('.testimonial-track');
+  const slides = Array.from(carousel.querySelectorAll('.testimonial-slide'));
+  const prevBtn = carousel.querySelector('.testimonial-nav.prev');
+  const nextBtn = carousel.querySelector('.testimonial-nav.next');
+  const dotsContainer = carousel.querySelector('.testimonial-dots');
+
+  if (!track || slides.length === 0) return;
+
+  let currentIndex = 0;
+  let autoRotateInterval = null;
+  const ROTATION_DELAY = 5000; // 5 seconds
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  // Initialize slides - hide all except first
+  function initSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.remove('active');
+      if (index === 0) {
+        slide.classList.add('active');
+      }
+    });
+  }
+
+  // Generate pagination dots
+  function generateDots() {
+    if (!dotsContainer) return;
+    
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.classList.add('testimonial-dot');
+      if (index === 0) dot.classList.add('active');
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  // Update dots
+  function updateDots() {
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+
+  // Go to specific slide
+  function goToSlide(index) {
+    if (index === currentIndex) return;
+
+    slides[currentIndex].classList.remove('active');
+    currentIndex = index;
+    slides[currentIndex].classList.add('active');
+    updateDots();
+    resetAutoRotation();
+  }
+
+  // Next slide
+  function nextSlide() {
+    const nextIndex = (currentIndex + 1) % slides.length;
+    goToSlide(nextIndex);
+  }
+
+  // Previous slide
+  function prevSlide() {
+    const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+    goToSlide(prevIndex);
+  }
+
+  // Auto rotation
+  function startAutoRotation() {
+    stopAutoRotation();
+    autoRotateInterval = setInterval(nextSlide, ROTATION_DELAY);
+  }
+
+  function stopAutoRotation() {
+    if (autoRotateInterval) {
+      clearInterval(autoRotateInterval);
+      autoRotateInterval = null;
+    }
+  }
+
+  function resetAutoRotation() {
+    stopAutoRotation();
+    startAutoRotation();
+  }
+
+  // Touch/Swipe support
+  function handleTouchStart(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }
+
+  function handleTouchEnd(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextSlide(); // Swipe left
+      } else {
+        prevSlide(); // Swipe right
+      }
+    }
+  }
+
+  // Event listeners
+  if (prevBtn) {
+    prevBtn.addEventListener('click', prevSlide);
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', nextSlide);
+  }
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', stopAutoRotation);
+  carousel.addEventListener('mouseleave', startAutoRotation);
+
+  // Touch events
+  track.addEventListener('touchstart', handleTouchStart, { passive: true });
+  track.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+  // Keyboard navigation
+  carousel.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
+    }
+  });
+
+  // Reduced motion support
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    stopAutoRotation();
+  }
+
+  // Initialize
+  initSlides();
+  generateDots();
+  updateDots();
+  
+  if (!prefersReducedMotion) {
+    startAutoRotation();
+  }
+
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    stopAutoRotation();
+  });
+})();
+
+/* ============================================
    PERFORMANCE: REMOVE WILL-CHANGE AFTER ANIMATIONS
    ============================================ */
 (function cleanupWillChange() {
