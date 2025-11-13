@@ -1134,7 +1134,7 @@ function debounce(func, wait) {
   if (!('IntersectionObserver' in window)) {
     // Fallback: Remove hidden class from all cards for older browsers
     console.log('IntersectionObserver not supported, showing all cards immediately');
-    document.querySelectorAll('.why-choose-card, .program-card, .trust-badge').forEach(card => {
+    document.querySelectorAll('.why-choose-card, .stat-card-modern, .program-card, .program-card-modern, .trust-badge').forEach(card => {
       card.classList.remove('card-stagger-hidden');
       card.classList.add('card-stagger-visible');
     });
@@ -1143,7 +1143,9 @@ function debounce(func, wait) {
 
   const cardGroups = [
     document.querySelectorAll('.why-choose-card'),
+    document.querySelectorAll('.stat-card-modern'),
     document.querySelectorAll('.program-card'),
+    document.querySelectorAll('.program-card-modern'),
     document.querySelectorAll('.trust-badge')
   ];
   
@@ -1156,7 +1158,9 @@ function debounce(func, wait) {
           // No cards found, show the parent itself if it's a card
           console.log('No child cards found, checking if parent is a card');
           if (entry.target.classList.contains('why-choose-card') || 
+              entry.target.classList.contains('stat-card-modern') ||
               entry.target.classList.contains('program-card') || 
+              entry.target.classList.contains('program-card-modern') ||
               entry.target.classList.contains('trust-badge')) {
             entry.target.classList.remove('card-stagger-hidden');
             entry.target.classList.add('card-stagger-visible');
