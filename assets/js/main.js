@@ -1070,6 +1070,17 @@ function debounce(func, wait) {
    STAGGER ANIMATION FOR CARDS GRID
    ============================================ */
 (function initStaggeredCards() {
+  // Check if IntersectionObserver is supported
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: show all cards immediately
+    console.log('IntersectionObserver not supported, showing all cards immediately');
+    document.querySelectorAll('.why-choose-card, .program-card, .trust-badge').forEach(card => {
+      card.style.opacity = '1';
+      card.style.transform = 'none';
+    });
+    return;
+  }
+
   const cardGroups = [
     document.querySelectorAll('.why-choose-card'),
     document.querySelectorAll('.program-card'),
@@ -1080,27 +1091,65 @@ function debounce(func, wait) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const cards = entry.target.querySelectorAll('[class$="-card"], [class$="-badge"]');
-        cards.forEach((card, index) => {
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, index * 100);
-        });
+        
+        if (cards.length === 0) {
+          // No cards found, show the parent itself if it's a card
+          console.log('No child cards found, checking if parent is a card');
+          if (entry.target.classList.contains('why-choose-card') || 
+              entry.target.classList.contains('program-card') || 
+              entry.target.classList.contains('trust-badge')) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        } else {
+          console.log(`Revealing ${cards.length} cards with stagger animation`);
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, index * 100);
+          });
+        }
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, { 
+    threshold: 0.1, 
+    rootMargin: '100px' // Trigger earlier for better UX
+  });
+  
+  const observedParents = new Set();
   
   cardGroups.forEach(group => {
-    if (group[0]) {
-      const parent = group[0].parentElement;
-      parent.querySelectorAll('[class$="-card"], [class$="-badge"]').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    if (!group.length) return;
+    
+    // Get the parent element
+    const firstCard = group[0];
+    const parent = firstCard.parentElement;
+    
+    if (!parent || observedParents.has(parent)) return;
+    
+    // Set initial hidden state with transition
+    const cards = parent.querySelectorAll('[class$="-card"], [class$="-badge"]');
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    observer.observe(parent);
+    observedParents.add(parent);
+    
+    // Failsafe: reveal after 3 seconds if still hidden
+    setTimeout(() => {
+      cards.forEach(card => {
+        if (card.style.opacity === '0') {
+          console.warn('Card still hidden after 3s, forcing visibility:', card.className);
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }
       });
-      observer.observe(parent);
-    }
+    }, 3000);
   });
 })();
 
