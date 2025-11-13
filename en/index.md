@@ -27,6 +27,8 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 }
 </script>
 
+{% assign transparent_placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==' %}
+
 <!-- HERO - MODERN SPLIT LAYOUT -->
 <div class="hero">
   <div class="hero-content">
@@ -73,7 +75,14 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
   <div class="hero-visual">
     <div class="hero-media-container">
       <!-- Image will be added later - placeholder shows for now -->
-      <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}" alt="Veer Patta School Campus" loading="eager">
+      <img
+        src="{{ transparent_placeholder }}"
+        data-placeholder-src="{{ transparent_placeholder }}"
+        data-future-src="{{ '/assets/images/hero-assembly.webp' | relative_url }}"
+        alt="Veer Patta School Campus"
+        loading="eager"
+        decoding="async"
+      >
       <!-- Placeholder shows until image is added -->
       <div class="hero-media-placeholder">
         <span class="placeholder-icon">🏫</span>
@@ -141,7 +150,14 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
   <div class="programs-grid">
     <div class="program-card-modern">
       <div class="program-image-wrapper">
-        <img src="{{ '/assets/images/lead-program.webp' | relative_url }}" alt="LEAD Curriculum" loading="lazy">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/lead-program.webp' | relative_url }}"
+          alt="LEAD Curriculum"
+          loading="lazy"
+          decoding="async"
+        >
         <div class="program-image-placeholder">
           <span class="placeholder-emoji">📚</span>
         </div>
@@ -161,7 +177,14 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 
     <div class="program-card-modern">
       <div class="program-image-wrapper">
-        <img src="{{ '/assets/images/ncc-program.webp' | relative_url }}" alt="NCC Training" loading="lazy">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/ncc-program.webp' | relative_url }}"
+          alt="NCC Training"
+          loading="lazy"
+          decoding="async"
+        >
         <div class="program-image-placeholder">
           <span class="placeholder-emoji">🎖️</span>
         </div>
@@ -181,7 +204,14 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 
     <div class="program-card-modern">
       <div class="program-image-wrapper">
-        <img src="{{ '/assets/images/sports-program.webp' | relative_url }}" alt="Sports Program" loading="lazy">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/sports-program.webp' | relative_url }}"
+          alt="Sports Program"
+          loading="lazy"
+          decoding="async"
+        >
         <div class="program-image-placeholder">
           <span class="placeholder-emoji">⚽</span>
         </div>
@@ -201,7 +231,14 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 
     <div class="program-card-modern">
       <div class="program-image-wrapper">
-        <img src="{{ '/assets/images/arts-program.webp' | relative_url }}" alt="Arts & Culture" loading="lazy">
+        <img
+          src="{{ transparent_placeholder }}"
+          data-placeholder-src="{{ transparent_placeholder }}"
+          data-future-src="{{ '/assets/images/arts-program.webp' | relative_url }}"
+          alt="Arts & Culture"
+          loading="lazy"
+          decoding="async"
+        >
         <div class="program-image-placeholder">
           <span class="placeholder-emoji">🎨</span>
         </div>
@@ -328,46 +365,98 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
   <div class="testimonials-carousel">
     <div class="testimonial-track">
       <div class="testimonial-slide active">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">My child improved from 60% to 85% in just one year. The personal attention here is unmatched in the Amet region. Teachers genuinely care about each student's progress.</p>
-          <div class="testimonial-author">
-            <div class="author-name">Ramesh Kumar</div>
-            <div class="author-details">Parent of Class 10 Student • 2024</div>
-            <div class="author-location">Khempur Village</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/ramesh-kumar.webp' | relative_url }}"
+                alt="Portrait of Ramesh Kumar"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">🙂</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">Ramesh Kumar</div>
+              <div class="testimonial-author-role">Parent of Class 10 Student • 2024</div>
+              <div class="testimonial-author-location">Khempur Village</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="testimonial-slide">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">We chose VPS over city schools because of the values-based education and affordable fees. Our daughter has excelled in both academics and extracurricular activities.</p>
-          <div class="testimonial-author">
-            <div class="author-name">Sunita Sharma</div>
-            <div class="author-details">Parent of Class 8 Student • 2024</div>
-            <div class="author-location">Parasoli Village</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/sunita-sharma.webp' | relative_url }}"
+                alt="Portrait of Sunita Sharma"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">😊</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">Sunita Sharma</div>
+              <div class="testimonial-author-role">Parent of Class 8 Student • 2024</div>
+              <div class="testimonial-author-location">Parasoli Village</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="testimonial-slide">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">The NCC training and discipline at VPS has transformed my son into a confident young man. The school provides opportunities we never imagined in our rural area.</p>
-          <div class="testimonial-author">
-            <div class="author-name">Vijay Singh</div>
-            <div class="author-details">Parent of Class 12 Student • 2023</div>
-            <div class="author-location">Amet</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/vijay-singh.webp' | relative_url }}"
+                alt="Portrait of Vijay Singh"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">🙌</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">Vijay Singh</div>
+              <div class="testimonial-author-role">Parent of Class 12 Student • 2023</div>
+              <div class="testimonial-author-location">Amet</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="testimonial-slide">
-        <div class="testimonial-content">
-          <div class="quote-icon">"</div>
+        <div class="testimonial-content-modern">
+          <div class="testimonial-quote-icon">“</div>
           <p class="testimonial-text">LEAD curriculum and digital learning tools have made studying fun for my children. The regular WhatsApp updates keep me informed about their daily progress.</p>
-          <div class="testimonial-author">
-            <div class="author-name">Meena Patel</div>
-            <div class="author-details">Parent of Class 5 & 7 Students • 2024</div>
-            <div class="author-location">Railmagra</div>
+          <div class="testimonial-author-section">
+            <div class="testimonial-avatar">
+              <img
+                src="{{ transparent_placeholder }}"
+                data-placeholder-src="{{ transparent_placeholder }}"
+                data-future-src="{{ '/assets/images/testimonials/meena-patel.webp' | relative_url }}"
+                alt="Portrait of Meena Patel"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="testimonial-avatar-placeholder" aria-hidden="true">🤝</div>
+            </div>
+            <div class="testimonial-author-info">
+              <div class="testimonial-author-name">Meena Patel</div>
+              <div class="testimonial-author-role">Parent of Class 5 &amp; 7 Students • 2024</div>
+              <div class="testimonial-author-location">Railmagra</div>
+            </div>
           </div>
         </div>
       </div>
@@ -382,7 +471,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
     </button>
-    <div class="testimonial-dots"></div>
+    <div class="testimonial-dots" role="tablist" aria-label="Parent testimonials"></div>
   </div>
 </section>
 

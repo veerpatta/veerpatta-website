@@ -1001,6 +1001,8 @@ body.menu-open {
   height: 100%;
   object-fit: cover;
   display: block;
+  position: relative;
+  z-index: 1;
 }
 
 /* Legacy support for .hero img/video */
@@ -1013,8 +1015,8 @@ body.menu-open {
 
 /* Placeholder state - shows until image loads */
 .hero-media-placeholder {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1026,6 +1028,9 @@ body.menu-open {
   color: rgba(255, 255, 255, 0.8);
   font-size: 3rem;
   gap: 1rem;
+  z-index: 2;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .hero-media-placeholder .placeholder-icon {
@@ -1040,10 +1045,11 @@ body.menu-open {
   letter-spacing: 2px;
 }
 
-/* Hide placeholder when image loads */
-.hero-media-container img:not([src=""]) ~ .hero-media-placeholder,
-.hero-media-container video:not([src=""]) ~ .hero-media-placeholder {
-  display: none;
+/* Hide placeholder when media finishes loading */
+.hero-media-container img.loaded ~ .hero-media-placeholder,
+.hero-media-container video.loaded ~ .hero-media-placeholder {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Floating stat badge */
@@ -1299,6 +1305,8 @@ body.menu-open {
     rgba(132, 172, 100, 0.08)
   );
   color: var(--brand-blue);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .program-image-placeholder .placeholder-emoji {
@@ -1307,10 +1315,11 @@ body.menu-open {
   opacity: 0.7;
 }
 
-/* Hide placeholder when image exists */
-.program-image-wrapper img:not([src=""]) ~ .program-image-placeholder,
-.program-image-wrapper video:not([src=""]) ~ .program-image-placeholder {
-  display: none;
+/* Hide placeholder when media has loaded */
+.program-image-wrapper img.loaded ~ .program-image-placeholder,
+.program-image-wrapper video.loaded ~ .program-image-placeholder {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Gradient overlay on image */
@@ -3753,6 +3762,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 6px 20px rgba(83, 117, 226, 0.2);
+  position: relative;
 }
 
 /* Avatar image */
@@ -3766,11 +3776,18 @@ body {
 .testimonial-avatar-placeholder {
   font-size: 2.5rem;
   color: #ffffff;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
 }
 
-/* Hide placeholder when image loads */
-.testimonial-avatar img:not([src=""]) ~ .testimonial-avatar-placeholder {
-  display: none;
+/* Hide placeholder when avatar loads */
+.testimonial-avatar img.loaded ~ .testimonial-avatar-placeholder {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Author info */
@@ -3879,6 +3896,7 @@ body {
     rgba(83, 117, 226, 0.1),
     rgba(132, 172, 100, 0.1)
   );
+  transition: opacity 0.3s ease;
 }
 
 .gallery-placeholder-icon {
@@ -3895,10 +3913,11 @@ body {
   letter-spacing: 1px;
 }
 
-/* Hide placeholder when media loads */
-.gallery-item img:not([src=""]) ~ .gallery-placeholder,
-.gallery-item video:not([src=""]) ~ .gallery-placeholder {
-  display: none;
+/* Hide placeholder when gallery media loads */
+.gallery-item img.loaded ~ .gallery-placeholder,
+.gallery-item video.loaded ~ .gallery-placeholder {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Overlay with caption */

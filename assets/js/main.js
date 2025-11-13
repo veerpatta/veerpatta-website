@@ -967,6 +967,11 @@ function debounce(func, wait) {
   const images = document.querySelectorAll('img[loading="lazy"]');
 
   images.forEach(img => {
+    const placeholderSrc = img.dataset.placeholderSrc;
+    if (placeholderSrc && img.getAttribute('src') === placeholderSrc) {
+      return;
+    }
+
     // Low quality placeholder
     const placeholder = img.getAttribute('data-placeholder');
     if (placeholder) {
@@ -991,6 +996,11 @@ function debounce(func, wait) {
   const images = document.querySelectorAll('img[src], video[src]');
 
   images.forEach(media => {
+    const placeholderSrc = media.dataset.placeholderSrc;
+    if (placeholderSrc && media.getAttribute('src') === placeholderSrc) {
+      return;
+    }
+
     const handleLoad = () => {
       media.classList.add('loaded');
     };
