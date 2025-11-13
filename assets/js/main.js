@@ -631,33 +631,68 @@
 
   // Update slides with proper ARIA and visibility
   function updateSlides(oldIndex, newIndex) {
-    // Ensure all slides are inactive first
-    slides.forEach((slide, index) => {
-      slide.classList.remove('active');
-      slide.setAttribute('aria-hidden', 'true');
+    const isNext = newIndex > oldIndex || (oldIndex === slides.length - 1 && newIndex === 0);
+    const oldSlide = slides[oldIndex];
+    const newSlide = slides[newIndex];
+    
+    // Check if reduced motion is preferred
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if (index !== newIndex) {
-        // Use setTimeout to allow transition to complete
-        setTimeout(() => {
-          if (index !== currentIndex) {
-            slide.style.opacity = '0';
-            slide.style.visibility = 'hidden';
-            slide.style.position = 'absolute';
-          }
-        }, TRANSITION_DURATION);
-      }
+    // Remove all transition classes first
+    slides.forEach((slide) => {
+      slide.classList.remove('active', 'slide-in-right', 'slide-in-left', 'slide-out-right', 'slide-out-left');
+      slide.setAttribute('aria-hidden', 'true');
     });
 
-    // Activate new slide
-    const newSlide = slides[newIndex];
-    newSlide.classList.add('active');
-    newSlide.setAttribute('aria-hidden', 'false');
-    newSlide.style.position = 'relative';
-    newSlide.style.visibility = 'visible';
-
-    // Force reflow for smooth transition
-    newSlide.offsetHeight;
-    newSlide.style.opacity = '1';
+    if (prefersReducedMotion) {
+      // Simple fade for reduced motion
+      oldSlide.style.opacity = '0';
+      oldSlide.style.visibility = 'hidden';
+      oldSlide.style.position = 'absolute';
+      
+      newSlide.classList.add('active');
+      newSlide.setAttribute('aria-hidden', 'false');
+      newSlide.style.position = 'relative';
+      newSlide.style.visibility = 'visible';
+      newSlide.style.opacity = '1';
+    } else {
+      // Smooth slide transition for regular users
+      
+      // Set old slide exit direction
+      if (isNext) {
+        oldSlide.classList.add('slide-out-left');
+      } else {
+        oldSlide.classList.add('slide-out-right');
+      }
+      
+      // Set new slide enter direction
+      if (isNext) {
+        newSlide.classList.add('slide-in-right');
+      } else {
+        newSlide.classList.add('slide-in-left');
+      }
+      
+      // Position new slide and prepare for entrance
+      newSlide.style.position = 'relative';
+      newSlide.style.visibility = 'visible';
+      newSlide.setAttribute('aria-hidden', 'false');
+      
+      // Force reflow
+      newSlide.offsetHeight;
+      
+      // Trigger entrance animation
+      requestAnimationFrame(() => {
+        newSlide.classList.add('active');
+        newSlide.classList.remove('slide-in-right', 'slide-in-left');
+        
+        // Clean up old slide after transition
+        setTimeout(() => {
+          oldSlide.style.position = 'absolute';
+          oldSlide.style.visibility = 'hidden';
+          oldSlide.classList.remove('slide-out-left', 'slide-out-right');
+        }, TRANSITION_DURATION);
+      });
+    }
   }
 
   // Go to specific slide with transition lock
