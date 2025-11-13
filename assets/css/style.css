@@ -1913,7 +1913,10 @@ video::-webkit-media-controls-volume-slider {
   flex: 0 0 100%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transform: translateX(0);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* First slide visible by default for progressive enhancement */
@@ -1925,6 +1928,43 @@ video::-webkit-media-controls-volume-slider {
 .testimonial-slide.active {
   opacity: 1;
   visibility: visible;
+  transform: translateX(0);
+}
+
+/* Slide direction states for smooth transitions */
+.testimonial-slide.slide-in-right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.testimonial-slide.slide-in-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.testimonial-slide.slide-out-right {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.testimonial-slide.slide-out-left {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-slide {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transform: none !important;
+  }
+  
+  .testimonial-slide.slide-in-right,
+  .testimonial-slide.slide-in-left,
+  .testimonial-slide.slide-out-right,
+  .testimonial-slide.slide-out-left {
+    transform: none;
+  }
 }
 
 .testimonial-content {
