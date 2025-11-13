@@ -2919,3 +2919,118 @@ body {
     padding-bottom: 0 !important;
   }
 }
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   Mobile-first for rural Rajasthan (3G networks)
+   ============================================ */
+
+/* 1. Reduce will-change overuse - only on active interactions */
+.btn,
+.program-card,
+.stat-card,
+.whatsapp-float {
+  will-change: auto; /* Default state */
+}
+
+.btn:hover,
+.program-card:hover,
+.stat-card:hover,
+.whatsapp-float:hover {
+  will-change: transform; /* Only during interaction */
+}
+
+/* 2. Use contain for isolated components */
+.testimonial-slide,
+.program-card,
+.stat-card,
+.why-choose-card {
+  contain: layout style paint;
+}
+
+/* 3. Optimize box-shadows for mobile - lighter shadows reduce rendering cost */
+@media (max-width: 768px) {
+  .hero,
+  .card,
+  .testimonial-content,
+  .program-card {
+    box-shadow: 0 4px 12px rgba(83, 117, 226, 0.06); /* Lighter shadows */
+  }
+}
+
+/* 4. Add content-visibility for off-screen sections */
+.why-choose-us-section,
+.achievements-section,
+.testimonials-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Scroll progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-green));
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--brand-blue);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background: #333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-success {
+  background: var(--brand-green);
+}
+
+.toast-error {
+  background: #e74c3c;
+}
+
+.toast-info {
+  background: var(--brand-blue);
+}
+
+/* Low-end device optimizations */
+.low-end-device .hero {
+  animation: none; /* Remove gradient animation */
+}
+
+.low-end-device .whatsapp-float {
+  animation: none; /* Remove pulse */
+}
