@@ -1859,6 +1859,8 @@ video::-webkit-media-controls-volume-slider {
 
   .trust-badge {
     min-width: auto;
+    opacity: 1; /* Ensure visible */
+    transform: none; /* No initial offset */
   }
 }
 
@@ -3033,4 +3035,12 @@ body {
 
 .low-end-device .whatsapp-float {
   animation: none; /* Remove pulse */
+}
+
+/* Ensure cards are visible on low-end devices */
+.low-end-device .why-choose-card,
+.low-end-device .program-card,
+.low-end-device .trust-badge {
+  opacity: 1 !important;
+  transform: none !important;
 }
