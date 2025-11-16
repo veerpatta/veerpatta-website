@@ -316,7 +316,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 
 <!-- PRINCIPAL -->
 <section class="container">
-  <h2>Message from the Principal</h2>
+  <h2 class="principal-heading">Message from the Principal</h2>
   <p>Welcome to Veer Patta Public School—where tradition meets innovation to help every child thrive.</p>
   <!-- optional YouTube embed placeholder -->
   <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Principal's Welcome" frameborder="0" allowfullscreen></iframe> -->
