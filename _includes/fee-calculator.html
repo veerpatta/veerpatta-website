@@ -1,0 +1,144 @@
+<!-- Smart Fee Calculator -->
+{% assign segments = page.url | split: '/' %}
+{% assign lang_segment = segments[1] %}
+
+<div class="fee-calculator">
+  {% if lang_segment == 'hi' %}
+    <h2>शुल्क कैलकुलेटर</h2>
+    <p>अपने बच्चे के लिए अनुमानित शुल्क की गणना करें</p>
+  {% else %}
+    <h2>Fee Calculator</h2>
+    <p>Calculate estimated fees for your child</p>
+  {% endif %}
+
+  <div class="calculator-form">
+    <!-- Grade Selection -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fee_grade">
+          {% if lang_segment == 'hi' %}कक्षा चुनें{% else %}Select Grade{% endif %}
+        </label>
+        <select id="fee_grade" name="grade" required>
+          <option value="">{% if lang_segment == 'hi' %}चुनें...{% else %}Select...{% endif %}</option>
+          <option value="nursery">{% if lang_segment == 'hi' %}नर्सरी{% else %}Nursery{% endif %}</option>
+          <option value="lkg">LKG</option>
+          <option value="ukg">UKG</option>
+          <option value="class1">{% if lang_segment == 'hi' %}कक्षा 1{% else %}Class 1{% endif %}</option>
+          <option value="class2">{% if lang_segment == 'hi' %}कक्षा 2{% else %}Class 2{% endif %}</option>
+          <option value="class3">{% if lang_segment == 'hi' %}कक्षा 3{% else %}Class 3{% endif %}</option>
+          <option value="class4">{% if lang_segment == 'hi' %}कक्षा 4{% else %}Class 4{% endif %}</option>
+          <option value="class5">{% if lang_segment == 'hi' %}कक्षा 5{% else %}Class 5{% endif %}</option>
+          <option value="class6">{% if lang_segment == 'hi' %}कक्षा 6{% else %}Class 6{% endif %}</option>
+          <option value="class7">{% if lang_segment == 'hi' %}कक्षा 7{% else %}Class 7{% endif %}</option>
+          <option value="class8">{% if lang_segment == 'hi' %}कक्षा 8{% else %}Class 8{% endif %}</option>
+          <option value="class9">{% if lang_segment == 'hi' %}कक्षा 9{% else %}Class 9{% endif %}</option>
+          <option value="class10">{% if lang_segment == 'hi' %}कक्षा 10{% else %}Class 10{% endif %}</option>
+          <option value="class11">{% if lang_segment == 'hi' %}कक्षा 11{% else %}Class 11{% endif %}</option>
+          <option value="class12">{% if lang_segment == 'hi' %}कक्षा 12{% else %}Class 12{% endif %}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fee_siblings">
+          {% if lang_segment == 'hi' %}भाई-बहनों की संख्या{% else %}Number of Siblings{% endif %}
+        </label>
+        <input type="number" id="fee_siblings" name="siblings" min="0" max="5" value="0">
+      </div>
+    </div>
+
+    <!-- Payment Plan -->
+    <div class="form-group">
+      <label>{% if lang_segment == 'hi' %}भुगतान योजना{% else %}Payment Plan{% endif %}</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" id="payment_quarterly" name="payment_plan" value="quarterly" checked>
+          <label for="payment_quarterly">
+            {% if lang_segment == 'hi' %}त्रैमासिक{% else %}Quarterly{% endif %}
+          </label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" id="payment_annually" name="payment_plan" value="annually">
+          <label for="payment_annually">
+            {% if lang_segment == 'hi' %}वार्षिक (10% छूट){% else %}Annual (10% discount){% endif %}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transport Option -->
+    <div class="form-row">
+      <div class="form-group">
+        <div class="checkbox-group">
+          <input type="checkbox" id="fee_transport" name="transport">
+          <label for="fee_transport">
+            {% if lang_segment == 'hi' %}परिवहन की आवश्यकता है{% else %}Need Transport{% endif %}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group" style="display: none;">
+        <label for="fee_transport_zone">
+          {% if lang_segment == 'hi' %}परिवहन क्षेत्र{% else %}Transport Zone{% endif %}
+        </label>
+        <select id="fee_transport_zone" name="transport_zone">
+          <option value="zone1">{% if lang_segment == 'hi' %}5 किमी के भीतर{% else %}Within 5km{% endif %}</option>
+          <option value="zone2">5-10 km</option>
+          <option value="zone3">10-15 km</option>
+          <option value="zone4">15+ km</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Discounts -->
+    <div class="form-row">
+      <div class="form-group">
+        <div class="checkbox-group">
+          <input type="checkbox" id="fee_merit" name="merit">
+          <label for="fee_merit">
+            {% if lang_segment == 'hi' %}मेरिट छात्रवृत्ति (15%){% else %}Merit Scholarship (15%){% endif %}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="checkbox-group">
+          <input type="checkbox" id="fee_earlybird" name="earlybird">
+          <label for="fee_earlybird">
+            {% if lang_segment == 'hi' %}प्रारंभिक पंजीकरण (5%){% else %}Early Registration (5%){% endif %}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculate Button -->
+    <button class="btn-calculate">
+      {% if lang_segment == 'hi' %}शुल्क की गणना करें{% else %}Calculate Fees{% endif %}
+    </button>
+  </div>
+
+  <!-- Result Section (Hidden by default) -->
+  <div class="fee-result" style="display: none;">
+    <div class="fee-breakdown">
+      <!-- Results will be populated by JavaScript -->
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-whatsapp-share" aria-label="{% if lang_segment == 'hi' %}व्हाट्सएप पर साझा करें{% else %}Share on WhatsApp{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        {% if lang_segment == 'hi' %}व्हाट्सएप पर साझा करें{% else %}Share on WhatsApp{% endif %}
+      </button>
+      <button class="btn-print-fee" aria-label="{% if lang_segment == 'hi' %}प्रिंट/पीडीएफ{% else %}Print/PDF{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        {% if lang_segment == 'hi' %}प्रिंट/पीडीएफ{% else %}Print/PDF{% endif %}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/fee-calculator.js' | relative_url }}" defer></script>

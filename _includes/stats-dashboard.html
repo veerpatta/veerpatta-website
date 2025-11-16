@@ -1,0 +1,106 @@
+<!-- Stats Dashboard with Animated Counters -->
+{% assign segments = page.url | split: '/' %}
+{% assign lang_segment = segments[1] %}
+
+<!-- Enhanced Stats Section -->
+<section class="container stats-dashboard">
+  <div class="section-header-modern">
+    {% if lang_segment == 'hi' %}
+      <h2 class="section-heading-main">हमारे <span class="heading-accent">प्रदर्शन</span></h2>
+      <p class="section-subtitle">तीन दशकों की उत्कृष्टता - संख्याओं में</p>
+    {% else %}
+      <h2 class="section-heading-main">Our <span class="heading-accent">Performance</span></h2>
+      <p class="section-subtitle">Three decades of excellence - by the numbers</p>
+    {% endif %}
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="stats-grid-modern">
+    <!-- Pass Percentage -->
+    <div class="stat-card-modern animate-on-scroll" data-stat-number="{{ site.stats.pass_percentage }}">
+      <span class="stat-icon-emoji">📚</span>
+      <div class="stat-number" data-target="{{ site.stats.pass_percentage }}">{{ site.stats.pass_percentage }}%</div>
+      <div class="stat-label">
+        {% if lang_segment == 'hi' %}उत्तीर्ण दर{% else %}Pass Rate{% endif %}
+      </div>
+    </div>
+
+    <!-- University Admits -->
+    <div class="stat-card-modern animate-on-scroll" data-stat-number="{{ site.stats.university_admits }}">
+      <span class="stat-icon-emoji">🎓</span>
+      <div class="stat-number" data-target="{{ site.stats.university_admits }}">{{ site.stats.university_admits }}+</div>
+      <div class="stat-label">
+        {% if lang_segment == 'hi' %}विश्वविद्यालय प्रवेश{% else %}University Admits{% endif %}
+      </div>
+    </div>
+
+    <!-- Sports Medals -->
+    <div class="stat-card-modern animate-on-scroll" data-stat-number="{{ site.stats.sports_medals }}">
+      <span class="stat-icon-emoji">🏅</span>
+      <div class="stat-number" data-target="{{ site.stats.sports_medals }}">{{ site.stats.sports_medals }}+</div>
+      <div class="stat-label">
+        {% if lang_segment == 'hi' %}खेल पदक{% else %}Sports Medals{% endif %}
+      </div>
+    </div>
+
+    <!-- NCC Cadets -->
+    <div class="stat-card-modern animate-on-scroll" data-stat-number="{{ site.stats.ncc_cadets }}">
+      <span class="stat-icon-emoji">🎖️</span>
+      <div class="stat-number" data-target="{{ site.stats.ncc_cadets }}">{{ site.stats.ncc_cadets }}+</div>
+      <div class="stat-label">
+        {% if lang_segment == 'hi' %}NCC कैडेट{% else %}NCC Cadets{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animated counter for stats dashboard
+  (function initStatsDashboard() {
+    'use strict';
+
+    function animateCounter(element) {
+      const target = parseInt(element.dataset.target) || 0;
+      const duration = 2000; // 2 seconds
+      const steps = 60;
+      const increment = target / steps;
+      const stepDuration = duration / steps;
+      const hasSuffix = element.textContent.includes('+') || element.textContent.includes('%');
+      const suffix = element.textContent.match(/[+%]/)?.[0] || '';
+
+      let current = 0;
+
+      const counter = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(counter);
+        }
+        element.textContent = Math.floor(current) + suffix;
+      }, stepDuration);
+    }
+
+    // Observe stats cards
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+            entry.target.classList.add('animated');
+
+            const numberElement = entry.target.querySelector('.stat-number');
+            if (numberElement) {
+              animateCounter(numberElement);
+            }
+
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.stat-card-modern').forEach(card => {
+        observer.observe(card);
+      });
+    }
+  })();
+</script>

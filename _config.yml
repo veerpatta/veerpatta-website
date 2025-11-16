@@ -34,6 +34,16 @@ analytics_enabled: false
 analytics_script: "https://plausible.io/js/script.js"
 analytics_domain: "veerpatta.github.io"
 
+# Performance Stats for Dashboard
+stats:
+  pass_percentage: 95
+  university_admits: 150
+  sports_medals: 45
+  years_established: 30
+  total_students: 1000
+  qualified_teachers: 20
+  ncc_cadets: 80
+
 # Exclude files from processing
 exclude:
   - CLAUDE.md
