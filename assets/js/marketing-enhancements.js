@@ -227,7 +227,7 @@
    ANIMATE WHY CHOOSE US CARDS ON SCROLL
    ============================================ */
 (function initWhyChooseUsAnimation() {
-  const whyChooseCards = document.querySelectorAll('.why-choose-card');
+  const whyChooseCards = document.querySelectorAll('.why-choose-card, .stat-card-modern');
   if (!whyChooseCards.length) return;
 
   // Check if IntersectionObserver is supported
