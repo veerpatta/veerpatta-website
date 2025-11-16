@@ -151,14 +151,8 @@
    TYPEWRITER EFFECT FOR PRINCIPAL'S MESSAGE
    ============================================ */
 (function initTypewriterEffect() {
-  const principalHeading = document.querySelector('.container h2');
-  if (!principalHeading || !principalHeading.textContent.includes('Principal')) return;
-
-  // Only apply to "Message from the Principal" heading
-  const headings = Array.from(document.querySelectorAll('.container h2'));
-  const principalH2 = headings.find(h => h.textContent.includes('Principal'));
-
-  if (!principalH2) return;
+  const principalHeading = document.querySelector('.principal-heading');
+  if (!principalHeading) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -175,7 +169,7 @@
     });
   }, { threshold: 0.5 });
 
-  observer.observe(principalH2);
+  observer.observe(principalHeading);
 })();
 
 /* ============================================
