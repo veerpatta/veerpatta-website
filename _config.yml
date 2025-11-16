@@ -32,3 +32,24 @@ school_sameAs:
 analytics_enabled: false
 analytics_script: "https://plausible.io/js/script.js"
 analytics_domain: "veerpatta.github.io"
+
+# Exclude files from processing
+exclude:
+  - CLAUDE.md
+  - README.md
+  - CONTRIBUTING.md
+  - CODE_OF_CONDUCT.md
+  - CHANGELOG.md
+  - PROJECT_GUIDE.md
+  - QUICK_START.md
+  - QUICK_REFERENCE.md
+  - MEDIA_UPLOAD_GUIDE.md
+  - MANUAL_TEST_CHECKLIST.md
+  - MARKETING_FEATURES_SUMMARY.md
+  - INDEX.md
+  - agents.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .github/
+  - docs/
