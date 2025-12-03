@@ -31,6 +31,10 @@
   <link rel="alternate" href="{{ self_url }}" hreflang="en">
   <link rel="alternate" href="{{ alt_hi }}" hreflang="hi">
   <link rel="alternate" href="{{ site.url | append: site.baseurl | append: '/en/' }}" hreflang="x-default">
+{% else %}
+  <link rel="alternate" href="{{ '/en/' | absolute_url }}" hreflang="en">
+  <link rel="alternate" href="{{ '/hi/' | absolute_url }}" hreflang="hi">
+  <link rel="alternate" href="{{ site.url | append: site.baseurl | append: '/' }}" hreflang="x-default">
 {% endif %}
 
 <!-- Open Graph -->

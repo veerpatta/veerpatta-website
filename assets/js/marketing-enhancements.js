@@ -6,6 +6,9 @@
    Auto-advances every 5 seconds with manual controls
    ============================================ */
 (function initTestimonialsCarousel() {
+  if (window.testimonialsInitialized) return;
+  window.testimonialsInitialized = true;
+
   const carousel = document.querySelector('.testimonials-carousel');
   if (!carousel) return;
 
@@ -69,7 +72,10 @@
     goToSlide(prev);
   }
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   function startAutoRotate() {
+    if (prefersReducedMotion) return;
     autoRotateTimer = setInterval(nextSlide, autoRotateInterval);
   }
 
@@ -227,6 +233,9 @@
    ANIMATE WHY CHOOSE US CARDS ON SCROLL
    ============================================ */
 (function initWhyChooseUsAnimation() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
   const whyChooseCards = document.querySelectorAll('.why-choose-card, .stat-card-modern');
   if (!whyChooseCards.length) return;
 
@@ -296,6 +305,9 @@
    ANIMATE TRUST BADGES ON SCROLL
    ============================================ */
 (function initTrustBadgesAnimation() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
   const badges = document.querySelectorAll('.trust-badge');
   if (!badges.length) return;
 

@@ -41,7 +41,7 @@
 
 <div class="enquiry-drawer-overlay" id="enquiryDrawerOverlay" aria-hidden="true"></div>
 
-<aside class="enquiry-drawer" id="enquiryDrawer" role="dialog" aria-labelledby="drawerTitle" aria-hidden="true">
+<aside class="enquiry-drawer" id="enquiryDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
   <div class="drawer-header">
     <h2 id="drawerTitle">{{ drawer_title }}</h2>
     <button class="drawer-close-btn" 
@@ -142,6 +142,7 @@
   const phoneInput = document.getElementById('phoneNumber');
   const phoneError = document.getElementById('phoneError');
   const whatsappBtn = document.getElementById('whatsappSubmit');
+  let lastFocusedElement = null;
   
   const errorMessages = {
     fillAll: '{{ msg_error_fill }}',
@@ -150,6 +151,7 @@
 
   // Open drawer
   window.openEnquiryDrawer = function() {
+    lastFocusedElement = document.activeElement;
     drawer.classList.add('active');
     overlay.classList.add('active');
     drawer.setAttribute('aria-hidden', 'false');
@@ -157,6 +159,25 @@
     document.body.style.overflow = 'hidden';
     document.getElementById('parentName').focus();
   };
+
+  // Trap focus within the drawer
+  function trapFocus(event) {
+    if (!drawer.classList.contains('active') || event.key !== 'Tab') return;
+
+    const focusable = drawer.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 
   // Close drawer
   window.closeEnquiryDrawer = function() {
@@ -167,10 +188,21 @@
     document.body.style.overflow = '';
     form.reset();
     phoneError.textContent = '';
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
   };
 
   // Close on overlay click
   overlay.addEventListener('click', window.closeEnquiryDrawer);
+
+  // Keyboard handling
+  drawer.addEventListener('keydown', trapFocus);
+  drawer.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      window.closeEnquiryDrawer();
+    }
+  });
 
   // Validate phone
   function validatePhone(phone) {

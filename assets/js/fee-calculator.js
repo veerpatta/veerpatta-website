@@ -111,7 +111,11 @@
   }
 
   function handleSiblingsChange(e) {
-    calculationData.siblings = parseInt(e.target.value) || 0;
+    const value = parseInt(e.target.value, 10);
+    calculationData.siblings = Number.isFinite(value) && value > 0 ? value : 0;
+    if (e.target.value && calculationData.siblings === 0) {
+      e.target.value = '0';
+    }
   }
 
   function handlePaymentPlanChange(e) {
@@ -149,6 +153,11 @@
       return;
     }
 
+    if (siblings < 0) {
+      alert(lang === 'hi' ? 'भाई-बहन की संख्या 0 या अधिक होनी चाहिए' : 'Sibling count must be 0 or more');
+      return;
+    }
+
     // Get base fees
     const gradeFees = feeStructure[grade];
     if (!gradeFees) {
@@ -162,6 +171,10 @@
     // Add transport if selected
     let transportFee = 0;
     if (transport) {
+      if (!transportZone) {
+        alert(lang === 'hi' ? 'कृपया परिवहन ज़ोन चुनें' : 'Please select a transport zone');
+        return;
+      }
       transportFee = transportFees[transportZone] || 0;
       subtotal += transportFee;
     }

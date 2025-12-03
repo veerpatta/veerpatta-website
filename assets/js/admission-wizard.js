@@ -485,13 +485,48 @@
     let isValid = true;
 
     requiredInputs.forEach(input => {
-      if (!input.value) {
+      const value = input.value.trim();
+      if (!value) {
         isValid = false;
         input.classList.add('invalid');
       } else {
         input.classList.remove('invalid');
       }
     });
+
+    if (step === 1) {
+      const phoneInput = contentContainer.querySelector('#phone');
+      const gradeSelect = contentContainer.querySelector('#grade');
+
+      if (gradeSelect && !gradeSelect.value) {
+        gradeSelect.classList.add('invalid');
+        isValid = false;
+      }
+
+      if (phoneInput) {
+        const phoneValue = phoneInput.value.trim();
+        const validPhone = /^\d{10}$/.test(phoneValue);
+        if (!validPhone) {
+          phoneInput.classList.add('invalid');
+          isValid = false;
+        } else {
+          phoneInput.classList.remove('invalid');
+        }
+      }
+    }
+
+    if (step === 3) {
+      const visitDate = contentContainer.querySelector('#visit_date');
+      if (visitDate && visitDate.value) {
+        const selectedDate = new Date(visitDate.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selectedDate < today) {
+          visitDate.classList.add('invalid');
+          isValid = false;
+        }
+      }
+    }
 
     return isValid;
   }
