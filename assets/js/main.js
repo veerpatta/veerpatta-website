@@ -101,7 +101,8 @@
    ============================================ */
 (function initHeroButtonPulse() {
   const heroBtn = document.querySelector('.hero .btn');
-  if (!heroBtn) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!heroBtn || prefersReducedMotion) return;
 
   // Pulse every 5 seconds
   setInterval(() => {
@@ -118,7 +119,8 @@
    ============================================ */
 (function initWhatsAppPulse() {
   const whatsappBtn = document.querySelector('.sticky-whatsapp-mobile');
-  if (!whatsappBtn) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!whatsappBtn || prefersReducedMotion) return;
 
   // Pulse every 10 seconds to draw attention on mobile
   setInterval(() => {
@@ -496,6 +498,9 @@
    timer race conditions, touch issues, accessibility
    ============================================ */
 (function initTestimonialsCarousel() {
+  if (window.testimonialsInitialized) return;
+  window.testimonialsInitialized = true;
+
   const carousel = document.querySelector('.testimonials-carousel');
   if (!carousel) return;
 
