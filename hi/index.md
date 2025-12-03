@@ -28,87 +28,196 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 }
 </script>
 
-<!-- HERO -->
-<section class="hero container">
-  <h1>अमेट का प्रमुख अंग्रेज़ी माध्यम विद्यालय - 30 वर्षों से विद्यार्थियों को सशक्त बनाना</h1>
-  <p>RBSE मान्यता प्राप्त | नर्सरी से कक्षा 12 | विज्ञान, वाणिज्य और कला संकाय</p>
-  <p><a class="btn" href="https://wa.me/919413748575" target="_blank" rel="noopener">त्वरित प्रवेश पूछताछ</a></p>
-  <!-- placeholder image (no file required yet) -->
-  <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}"
-       alt="वीर पत्ता पब्लिक स्कूल में सुबह की सभा" loading="lazy" style="display:block;max-width:100%;height:auto;">
-</section>
+<!-- HERO - MODERN SPLIT LAYOUT -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>
+      ग्रामीण राजस्थान के <span class="text-highlight">भविष्य के नेता</span>
+      तैयार करना
+    </h1>
+    <p class="hero-description">
+      30+ वर्षों की शैक्षणिक उत्कृष्टता, समग्र विकास और मूल्य आधारित
+      शिक्षा अमेट में। 1000+ विद्यार्थियों के साथ भविष्य गढ़ें।
+    </p>
+    <div class="hero-cta-group">
+      <a href="https://wa.me/919413748575" class="btn-hero-primary" target="_blank" rel="noopener">
+        <span>अभी आवेदन करें 2025-26</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="{{ '/hi/about/' | relative_url }}" class="btn-hero-secondary">
+        <span>और जानें</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v8m-4-4h8"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-trust-badges">
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">🏆</span>
+        <span class="trust-badge-text">30+ वर्ष</span>
+      </div>
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">👨‍🎓</span>
+        <span class="trust-badge-text">1000+ विद्यार्थी</span>
+      </div>
+      <div class="trust-badge-item">
+        <span class="trust-badge-icon">✅</span>
+        <span class="trust-badge-text">95%+ उत्तीर्ण</span>
+      </div>
+    </div>
+  </div>
 
-<!-- WHY CHOOSE US - Metrics Grid -->
-<section class="container why-choose-us-section lang-hi">
-  <h2>हमें क्यों चुनें</h2>
-  <div class="why-choose-grid">
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-        </svg>
+  <div class="hero-visual">
+    <div class="hero-media-container">
+      <!-- Image will be added later - placeholder shows for now -->
+      <img src="{{ '/assets/images/hero-assembly.webp' | relative_url }}" alt="वीर पत्ता पब्लिक स्कूल में सुबह की सभा" loading="eager">
+      <!-- Placeholder shows until image is added -->
+      <div class="hero-media-placeholder">
+        <span class="placeholder-icon">🏫</span>
+        <span class="placeholder-text">विद्यालय परिसर</span>
       </div>
-      <div class="why-choose-number">30+ वर्ष</div>
-      <div class="why-choose-label">उत्कृष्टता का</div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
+    <div class="hero-floating-badge">
+      <div class="floating-badge-icon">🏆</div>
+      <div class="floating-badge-content">
+        <h3>95%+</h3>
+        <p>उत्तीर्ण दर</p>
       </div>
-      <div class="why-choose-number">1000+</div>
-      <div class="why-choose-label">शिक्षित छात्र</div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-      </div>
-      <div class="why-choose-number">95%+</div>
-      <div class="why-choose-label">बोर्ड उत्तीर्ण दर</div>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US - Modern Stats Section -->
+<section class="container stats-section">
+  <div class="section-header-modern">
+    <h2 class="section-heading-main">
+      क्यों चुनें <span class="heading-accent">वीर पट्टा</span>
+    </h2>
+    <p class="section-subtitle">
+      ग्रामीण शिक्षा में तीन दशकों की उत्कृष्टता, हजारों विद्यार्थियों को सशक्त बनाना
+    </p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">📚</span>
+      <div class="stat-number">30+</div>
+      <div class="stat-label">वर्ष</div>
     </div>
-    <div class="why-choose-card">
-      <div class="why-choose-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </div>
-      <div class="why-choose-number">20+</div>
-      <div class="why-choose-label">योग्य शिक्षक</div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">👨‍🎓</span>
+      <div class="stat-number">1000+</div>
+      <div class="stat-label">विद्यार्थी</div>
+    </div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">✅</span>
+      <div class="stat-number">95%+</div>
+      <div class="stat-label">उत्तीर्ण दर</div>
+    </div>
+    <div class="stat-card-modern">
+      <span class="stat-icon-emoji">👨‍🏫</span>
+      <div class="stat-number">20+</div>
+      <div class="stat-label">शिक्षक</div>
     </div>
   </div>
 </section>
 
-<!-- PROGRAMS -->
-<section class="container">
-  <h2>कार्यक्रम</h2>
-  <div class="programs">
-    <article class="program">
-      <img src="{{ '/assets/images/lead-program.webp' | relative_url }}" alt="LEAD पाठ्यक्रम" loading="lazy">
-      <h3>LEAD पाठ्यक्रम</h3>
-      <p>आधुनिक शिक्षाशास्त्र के माध्यम से अवधारणा में महारत।</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/ncc-program.webp' | relative_url }}" alt="NCC गतिविधियाँ" loading="lazy">
-      <h3>NCC</h3>
-      <p>क्रियाशील अनुशासन और नेतृत्व।</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/sports-program.webp' | relative_url }}" alt="विद्यालय में खेल" loading="lazy">
-      <h3>खेल</h3>
-      <p>टीमवर्क, फिटनेस और आत्मविश्वास।</p>
-    </article>
-    <article class="program">
-      <img src="{{ '/assets/images/arts-program.webp' | relative_url }}" alt="कला और रचनात्मकता" loading="lazy">
-      <h3>कला</h3>
-      <p>संगीत, कला और नाटक के माध्यम से रचनात्मकता।</p>
-    </article>
+<!-- PROGRAMS - Modern Card Design -->
+<section class="container programs-section">
+  <div class="section-header-modern">
+    <h2 class="section-heading-main">
+      हमारे <span class="heading-accent">कार्यक्रम</span>
+    </h2>
+    <p class="section-subtitle">
+      नर्सरी से सीनियर सेकेंडरी तक संपूर्ण शिक्षा
+    </p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="programs-grid">
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/lead-program.webp' | relative_url }}" alt="LEAD पाठ्यक्रम" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">📚</span>
+        </div>
+        <span class="program-badge-emoji">📚</span>
+      </div>
+      <div class="program-content">
+        <h3>LEAD पाठ्यक्रम</h3>
+        <p>आधुनिक शिक्षाशास्त्र और नवीन शिक्षण तरीकों से अवधारणाओं पर महारत</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/ncc-program.webp' | relative_url }}" alt="NCC प्रशिक्षण" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">🎖️</span>
+        </div>
+        <span class="program-badge-emoji">🎖️</span>
+      </div>
+      <div class="program-content">
+        <h3>NCC प्रशिक्षण</h3>
+        <p>अनुशासन और नेतृत्व विकास के अवसर नेशनल कैडेट कोर के माध्यम से</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/sports-program.webp' | relative_url }}" alt="खेल कार्यक्रम" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">⚽</span>
+        </div>
+        <span class="program-badge-emoji">⚽</span>
+      </div>
+      <div class="program-content">
+        <h3>खेल और फिटनेस</h3>
+        <p>एथलेटिक्स के माध्यम से टीमवर्क, शारीरिक फिटनेस और आत्मविश्वास निर्माण</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="program-card-modern">
+      <div class="program-image-wrapper">
+        <img src="{{ '/assets/images/arts-program.webp' | relative_url }}" alt="कला और संस्कृति" loading="lazy">
+        <div class="program-image-placeholder">
+          <span class="placeholder-emoji">🎨</span>
+        </div>
+        <span class="program-badge-emoji">🎨</span>
+      </div>
+      <div class="program-content">
+        <h3>कला और संस्कृति</h3>
+        <p>संगीत, कला, नाटक और सांस्कृतिक गतिविधियों के माध्यम से रचनात्मकता</p>
+        <a href="{{ '/hi/academics/' | relative_url }}" class="program-learn-more">
+          और जानें
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
