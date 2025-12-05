@@ -1,7 +1,7 @@
 // Service Worker for Veer Patta Public School Website
 // PWA-lite implementation with stale-while-revalidate caching strategy
 
-const CACHE_VERSION = 'vpps-v2';
+const CACHE_VERSION = 'vpps-v3';
 const BASE_URL = '/veerpatta-website';
 
 // Core assets to cache for offline use
@@ -18,6 +18,12 @@ const CORE_ASSETS = [
   `${BASE_URL}/assets/js/marketing-enhancements.js`,
   `${BASE_URL}/assets/js/admission-wizard.js`,
   `${BASE_URL}/assets/js/fee-calculator.js`,
+  `${BASE_URL}/assets/js/testimonial-carousel.js`,
+  `${BASE_URL}/assets/js/analytics-tracker.js`,
+  `${BASE_URL}/assets/js/media-loader.js`,
+  `${BASE_URL}/assets/js/home-media-loader.js`,
+  `${BASE_URL}/assets/js/gallery-loader.js`,
+  `${BASE_URL}/assets/js/gallery-items.js`,
   `${BASE_URL}/assets/images/VPPS LOGO ONNLY.jpg`
 ];
 

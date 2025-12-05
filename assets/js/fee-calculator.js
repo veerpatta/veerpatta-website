@@ -112,8 +112,10 @@
 
   function handleSiblingsChange(e) {
     const value = parseInt(e.target.value, 10);
-    calculationData.siblings = Number.isFinite(value) && value > 0 ? value : 0;
-    if (e.target.value && calculationData.siblings === 0) {
+    // Clamp to non-negative values to prevent negative discounts from increasing totals
+    calculationData.siblings = Number.isFinite(value) ? Math.max(0, value) : 0;
+    // Update input to show clamped value if user entered negative
+    if (value < 0) {
       e.target.value = '0';
     }
   }
@@ -127,6 +129,11 @@
 
     if (transportZoneSelect) {
       transportZoneSelect.parentElement.style.display = e.target.checked ? 'block' : 'none';
+      // Reset transport zone when transport is disabled to prevent stale values
+      if (!e.target.checked) {
+        calculationData.transportZone = '';
+        transportZoneSelect.value = '';
+      }
     }
   }
 

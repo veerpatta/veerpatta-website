@@ -371,6 +371,50 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
           </div>
         </div>
       </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">The transport facility from our village is reliable and safe. My daughter reaches school on time every day. The driver and attendant are very responsible.</p>
+          <div class="testimonial-author">
+            <div class="author-name">Gopal Lal Meena</div>
+            <div class="author-details">Parent of Class 6 Student • 2024</div>
+            <div class="author-location">Devgarh Road</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">The science lab and computer facilities here are better than many city schools. My son developed a passion for science experiments and now wants to become an engineer.</p>
+          <div class="testimonial-author">
+            <div class="author-name">Prakash Choudhary</div>
+            <div class="author-details">Parent of Class 9 Student • 2024</div>
+            <div class="author-location">Deogarh</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">My daughter was very shy before joining VPS. The teachers encouraged her to participate in debates and now she speaks English confidently. Thank you VPS!</p>
+          <div class="testimonial-author">
+            <div class="author-name">Kamla Devi</div>
+            <div class="author-details">Parent of Class 7 Student • 2024</div>
+            <div class="author-location">Bhatewar</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+          <p class="testimonial-text">Our son won the district-level cricket championship representing VPS. The sports coaching and ground facilities are excellent. He is now preparing for state-level trials.</p>
+          <div class="testimonial-author">
+            <div class="author-name">Bheru Singh Rajput</div>
+            <div class="author-details">Parent of Class 11 Student • 2024</div>
+            <div class="author-location">Amet</div>
+          </div>
+        </div>
+      </div>
     </div>
     <button class="testimonial-nav prev" aria-label="Previous testimonial">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
