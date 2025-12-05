@@ -8,7 +8,7 @@
  * sports: ['relay-race.jpg', 'football-match.mp4', 'cricket.jpg']
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Register your uploaded files here
@@ -33,6 +33,7 @@
   window.GalleryLoader.registerItems('academic', [
     // Add academic media filenames here
     // Example: 'science-lab.jpg', 'lead-class.mp4'
+    'student-reading.jpg'
   ]);
 
   window.GalleryLoader.registerItems('celebrations', [

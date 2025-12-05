@@ -3,3 +3,4 @@ Format: filename.ext | EN: English caption | HI: Hindi caption
 Examples:
 science-lab.jpg | EN: Chemistry Lab | HI: रसायन विज्ञान प्रयोगशाला
 lead-class.mp4 | EN: LEAD Program Class | HI: LEAD कार्यक्रम कक्षा
+student-reading.jpg | EN: Student Studying in Classroom | HI: कक्षा में पढ़ाई करती छात्रा
