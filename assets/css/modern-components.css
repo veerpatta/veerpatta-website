@@ -1091,3 +1091,396 @@
     display: none !important;
   }
 }
+
+/* ============================================
+   ENHANCED MOBILE-FIRST OPTIMIZATIONS
+   For budget Android on 3G in rural Rajasthan
+   ============================================ */
+
+/* ---------- TESTIMONIAL CAROUSEL MOBILE ENHANCEMENTS ---------- */
+@media (max-width: 600px) {
+  .testimonials-carousel {
+    padding: 20px 10px;
+    margin: 20px 0;
+    min-height: 280px;
+  }
+
+  .testimonial-track {
+    min-height: 240px;
+  }
+
+  .testimonial-content {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .quote-icon {
+    font-size: 50px;
+    top: 12px;
+    left: 12px;
+  }
+
+  .testimonial-text {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .author-name {
+    font-size: 15px;
+  }
+
+  .author-details,
+  .author-location {
+    font-size: 13px;
+  }
+
+  /* Touch-friendly navigation */
+  .testimonial-nav {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .testimonial-nav.prev {
+    left: -6px;
+  }
+
+  .testimonial-nav.next {
+    right: -6px;
+  }
+
+  /* Larger touch dots */
+  .testimonial-dots {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .testimonial-dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+  }
+
+  .testimonial-dot.active {
+    width: 24px;
+  }
+}
+
+/* ---------- ADMISSION WIZARD MOBILE ENHANCEMENTS ---------- */
+@media (max-width: 600px) {
+  .admission-wizard {
+    margin: 20px auto;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .wizard-progress-bar {
+    height: 6px;
+    margin-bottom: 20px;
+  }
+
+  .wizard-steps {
+    margin-bottom: 24px;
+    gap: 4px;
+    padding-bottom: 8px;
+  }
+
+  .wizard-step {
+    min-width: 60px;
+  }
+
+  .wizard-step-number {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .wizard-step-title {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .wizard-content {
+    min-height: 240px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .wizard-content h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  /* Stack wizard buttons on mobile */
+  .wizard-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .wizard-btn-prev,
+  .wizard-btn-next,
+  .wizard-btn-whatsapp {
+    width: 100%;
+    padding: 14px 20px;
+    min-height: 48px;
+    font-size: 15px;
+  }
+
+  /* Form inputs */
+  .wizard-form .form-group {
+    margin-bottom: 14px;
+  }
+
+  .wizard-form label {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .wizard-form input,
+  .wizard-form select,
+  .wizard-form textarea {
+    padding: 12px 14px;
+    font-size: 16px;
+    /* Prevent iOS zoom */
+    min-height: 48px;
+  }
+
+  /* Document checklist */
+  .document-checklist {
+    gap: 8px;
+  }
+
+  .checklist-item {
+    padding: 12px;
+  }
+
+  .checkbox-label {
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .checkbox-custom {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+
+/* ---------- FEE CALCULATOR MOBILE ENHANCEMENTS ---------- */
+@media (max-width: 600px) {
+  .fee-calculator {
+    margin: 20px auto;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .fee-calculator h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .fee-calculator h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .calculator-form {
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 12px 14px;
+    font-size: 16px;
+    /* Prevent iOS zoom */
+    min-height: 48px;
+  }
+
+  .checkbox-group {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .checkbox-group input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+  }
+
+  .radio-group {
+    gap: 10px;
+  }
+
+  .radio-option {
+    min-width: 100%;
+    padding: 10px;
+    background: rgba(248, 249, 254, 0.5);
+    border-radius: 8px;
+  }
+
+  .btn-calculate {
+    padding: 14px;
+    font-size: 16px;
+    min-height: 52px;
+  }
+
+  /* Fee result */
+  .fee-result {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .fee-breakdown h4 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .fee-table td {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .fee-table .total-row td {
+    font-size: 17px;
+    padding: 14px 12px;
+  }
+
+  .payment-plan-info {
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  /* Stack result action buttons */
+  .result-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-whatsapp-share,
+  .btn-print-fee {
+    width: 100%;
+    padding: 12px 16px;
+    min-height: 48px;
+    font-size: 15px;
+  }
+}
+
+/* ---------- STATS DASHBOARD MOBILE ---------- */
+@media (max-width: 600px) {
+  .stats-dashboard {
+    padding: 16px;
+    border-radius: 16px;
+    margin: 20px 0;
+  }
+
+  .stats-dashboard h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .dashboard-stat {
+    padding: 14px 10px;
+    border-radius: 10px;
+  }
+
+  .dashboard-stat-icon {
+    font-size: 1.75rem;
+    margin-bottom: 6px;
+  }
+
+  .dashboard-stat-value {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+  }
+
+  .dashboard-stat-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* ---------- GLASSMORPHISM MOBILE OPTIMIZATION ---------- */
+@media (max-width: 600px) {
+
+  /* Reduce blur for better performance on low-end devices */
+  .glass-card,
+  .glass-card-strong {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(83, 117, 226, 0.08);
+  }
+
+  .glass-dark {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* ---------- VERY SMALL SCREENS (320px) ---------- */
+@media (max-width: 360px) {
+
+  .admission-wizard,
+  .fee-calculator {
+    padding: 12px;
+    margin: 16px auto;
+  }
+
+  .wizard-step-title {
+    font-size: 10px;
+  }
+
+  .wizard-step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .wizard-content {
+    padding: 12px;
+    min-height: 200px;
+  }
+
+  .wizard-content h3,
+  .fee-calculator h2 {
+    font-size: 17px;
+  }
+
+  .testimonials-carousel {
+    padding: 16px 8px;
+  }
+
+  .testimonial-content {
+    padding: 16px 12px;
+  }
+
+  .testimonial-text {
+    font-size: 14px;
+  }
+}

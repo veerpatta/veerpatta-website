@@ -4452,3 +4452,640 @@ video.loaded {
     animation: none !important;
   }
 }
+
+/* =====================================================
+   MOBILE-FIRST ENHANCEMENTS
+   Optimized for budget Android on 3G in rural Rajasthan
+   70% mobile traffic - MOBILE IS PRIORITY #1
+   ===================================================== */
+
+/* ---------- HERO SECTION MOBILE OPTIMIZATION ---------- */
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  /* Stack CTA buttons vertically on mobile */
+  .hero-cta-group {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    min-height: 52px; /* WCAG touch target */
+    font-size: 1rem;
+  }
+
+  /* Trust badges - horizontal scroll */
+  .hero-trust-badges {
+    gap: 1.25rem;
+    padding-top: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+  }
+
+  .trust-badge-item {
+    flex-shrink: 0;
+    gap: 0.5rem;
+  }
+
+  .trust-badge-icon {
+    font-size: 1.5rem;
+  }
+
+  .trust-badge-text {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  /* Hero visual - reduce height */
+  .hero-visual {
+    min-height: 280px;
+  }
+
+  .hero-media-container {
+    width: 92%;
+    max-width: 100%;
+  }
+}
+
+/* Very small screens (320px) */
+@media (max-width: 360px) {
+  .hero-content {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- STATS GRID MOBILE OPTIMIZATION ---------- */
+@media (max-width: 600px) {
+  .stats-section,
+  .why-choose-us-section {
+    margin: 3rem 0;
+  }
+
+  .stats-grid,
+  .why-choose-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-card-modern,
+  .why-choose-card {
+    padding: 1.25rem 0.75rem;
+    border-radius: 16px;
+  }
+
+  .stat-icon-emoji,
+  .why-choose-icon {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-number,
+  .why-choose-number {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label,
+  .why-choose-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .stat-label::after,
+  .why-choose-label::after {
+    width: 30px;
+    height: 2px;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Very small screens - single column stats */
+@media (max-width: 360px) {
+  .stats-grid,
+  .why-choose-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .stat-card-modern,
+  .why-choose-card {
+    padding: 1rem 0.5rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* ---------- PROGRAMS SECTION MOBILE ---------- */
+@media (max-width: 600px) {
+  .programs-section {
+    margin: 3rem 0;
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .program-card-modern {
+    border-radius: 16px;
+  }
+
+  .program-image-wrapper {
+    height: 180px;
+  }
+
+  .program-badge-emoji {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    top: 12px;
+    right: 12px;
+  }
+
+  .program-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .program-card-modern h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .program-card-modern p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .program-learn-more {
+    font-size: 0.9rem;
+    min-height: 44px; /* Touch target */
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ---------- TRUST BADGES SECTION MOBILE ---------- */
+@media (max-width: 600px) {
+  .trust-badges-section {
+    margin: 2rem 0;
+  }
+
+  .trust-badges-wrapper {
+    gap: 0.75rem;
+    padding: 1rem 0.25rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .trust-badge {
+    min-width: 140px;
+    padding: 1rem 0.75rem;
+    border-radius: 12px;
+    scroll-snap-align: start;
+  }
+
+  .badge-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.75rem;
+  }
+
+  .badge-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .badge-text {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+}
+
+/* ---------- TESTIMONIALS MOBILE ---------- */
+@media (max-width: 600px) {
+  .testimonials-section {
+    margin: 2.5rem 0;
+  }
+
+  .testimonials-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonials-carousel {
+    padding: 0 40px;
+    border-radius: 12px;
+  }
+
+  .testimonial-content {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+
+  .quote-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-author {
+    padding-top: 1rem;
+  }
+
+  .author-name {
+    font-size: 1rem;
+  }
+
+  .author-details {
+    font-size: 0.85rem;
+  }
+
+  .author-location {
+    font-size: 0.8rem;
+  }
+
+  /* Larger touch targets for nav buttons */
+  .testimonial-nav {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .testimonial-nav svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .testimonial-nav.prev {
+    left: -4px;
+  }
+
+  .testimonial-nav.next {
+    right: -4px;
+  }
+
+  /* Larger dots for touch */
+  .testimonial-dots {
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .testimonial-dot {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    min-height: 14px;
+  }
+
+  .testimonial-dot.active {
+    width: 28px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .testimonials-carousel {
+    padding: 0 35px;
+  }
+
+  .testimonial-content {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- WHY PARENTS & ACHIEVEMENTS MOBILE ---------- */
+@media (max-width: 600px) {
+  .why-parents-section,
+  .achievements-section {
+    margin: 2rem 0;
+  }
+
+  .why-parents-section h2,
+  .achievements-section h2 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+
+  .why-parents-card,
+  .achievements-card {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .why-parents-list,
+  .achievements-list {
+    gap: 0.9rem;
+  }
+
+  .why-parents-list li,
+  .achievements-list li {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding-left: 1.5rem;
+  }
+
+  .why-parents-list li::before {
+    font-size: 1rem;
+  }
+
+  .achievement-emoji {
+    font-size: 1.25rem;
+  }
+
+  .why-parents-list li strong,
+  .achievements-list li strong {
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- BUTTONS - ALL TOUCH TARGETS ---------- */
+@media (max-width: 768px) {
+  /* Ensure all buttons meet WCAG 2.2 touch target size */
+  .btn,
+  .btn-hero-primary,
+  .btn-hero-secondary,
+  .wizard-btn-prev,
+  .wizard-btn-next,
+  .btn-calculate,
+  .btn-whatsapp-share,
+  .btn-print-fee,
+  .faq-question {
+    min-height: 48px;
+  }
+
+  .btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+
+  .btn.btn-secondary {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* ---------- SECTION HEADERS MOBILE ---------- */
+@media (max-width: 600px) {
+  .section-header-modern {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-heading-main {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .heading-accent::after {
+    height: 4px;
+    bottom: -6px;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .section-divider {
+    width: 50px;
+    height: 4px;
+    margin-top: 1rem;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    width: 8px;
+    height: 8px;
+  }
+
+  .section-divider::before {
+    left: -14px;
+  }
+
+  .section-divider::after {
+    right: -14px;
+  }
+}
+
+/* ---------- FORM INPUTS - PREVENT iOS ZOOM ---------- */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+
+  .admissions-form input,
+  .admissions-form textarea,
+  .wizard-form input,
+  .wizard-form select,
+  .wizard-form textarea,
+  .form-group input,
+  .form-group select {
+    font-size: 16px;
+    padding: 0.9rem 1rem;
+    min-height: 48px;
+  }
+}
+
+/* ---------- STICKY CTA MOBILE OPTIMIZATION ---------- */
+@media (max-width: 600px) {
+  .sticky-cta-bar {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .sticky-cta-content {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-text {
+    font-size: 0.8rem;
+    text-align: center;
+    flex-basis: 100%;
+  }
+
+  .cta-buttons {
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cta-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    min-height: 44px;
+    flex: 1;
+    max-width: 50%;
+  }
+}
+
+/* ---------- FOOTER MOBILE ---------- */
+@media (max-width: 600px) {
+  .site-footer {
+    padding: 1.5rem 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .site-footer p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .footer-links {
+    gap: 0.5rem;
+    justify-content: center;
+  }
+}
+
+/* ---------- ABOUT/TEASER SECTIONS MOBILE ---------- */
+@media (max-width: 600px) {
+  .about-teaser,
+  .academics-teaser,
+  .gallery-teaser,
+  .contact-teaser {
+    margin: 1.5rem 0;
+  }
+
+  .about-teaser-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .about-teaser-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .about-teaser-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* ---------- PRINCIPAL MESSAGE MOBILE ---------- */
+@media (max-width: 600px) {
+  .principal-heading {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .container > p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+/* ---------- CONTAINER MOBILE PADDING ---------- */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 0 0.75rem;
+  }
+}
+
+/* ---------- REDUCE MOTION FOR LOW-END DEVICES ---------- */
+@media (prefers-reduced-motion: reduce), (max-width: 480px) {
+  /* Simplify animations on small screens */
+  .hero-floating-badge {
+    animation: none;
+  }
+
+  .hero-visual::before {
+    animation: none;
+  }
+
+  .program-card-modern:hover .program-image-wrapper img,
+  .gallery-item:hover img {
+    transform: none;
+  }
+
+  .trust-badge:hover,
+  .stat-card-modern:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ---------- LANDSCAPE MOBILE ---------- */
+@media (max-width: 900px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-content {
+    padding: 1.5rem 2rem;
+  }
+
+  .hero-visual {
+    min-height: 300px;
+  }
+
+  .hero-cta-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: auto;
+    flex: 1;
+    min-width: 150px;
+  }
+}
