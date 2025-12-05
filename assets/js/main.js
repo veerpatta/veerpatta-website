@@ -493,388 +493,9 @@
 
 /* ============================================
    TESTIMONIALS CAROUSEL
-   Auto-rotating carousel with manual controls
-   Fixed: Multiple slides overlap, navigation bugs, dot sync,
-   timer race conditions, touch issues, accessibility
+   Main implementation has been moved to testimonial-carousel.js
+   to prevent code duplication and improve maintainability.
    ============================================ */
-(function initTestimonialsCarousel() {
-  if (window.testimonialsInitialized) return;
-  window.testimonialsInitialized = true;
-
-  const carousel = document.querySelector('.testimonials-carousel');
-  if (!carousel) return;
-
-  const track = carousel.querySelector('.testimonial-track');
-  const slides = Array.from(carousel.querySelectorAll('.testimonial-slide'));
-  const prevBtn = carousel.querySelector('.testimonial-nav.prev');
-  const nextBtn = carousel.querySelector('.testimonial-nav.next');
-  const dotsContainer = carousel.querySelector('.testimonial-dots');
-
-  if (!track || slides.length === 0) return;
-
-  // State management
-  let currentIndex = 0;
-  let autoRotateInterval = null;
-  let isTransitioning = false; // Prevent rapid navigation
-  let isSwiping = false; // Prevent multi-trigger swipe
-  const ROTATION_DELAY = 5000; // 5 seconds
-  const TRANSITION_DURATION = 600; // Match CSS transition duration
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  // Debounce function to prevent rapid-fire clicks
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-
-  // Initialize slides - ensure only first is active
-  function initSlides() {
-    slides.forEach((slide, index) => {
-      slide.classList.remove('active');
-      slide.setAttribute('aria-hidden', 'true');
-      slide.style.opacity = '0';
-      slide.style.visibility = 'hidden';
-      slide.style.position = 'absolute';
-      slide.style.top = '0';
-      slide.style.left = '0';
-      slide.style.width = '100%';
-
-      if (index === 0) {
-        slide.classList.add('active');
-        slide.setAttribute('aria-hidden', 'false');
-        slide.style.opacity = '1';
-        slide.style.visibility = 'visible';
-        slide.style.position = 'relative';
-      }
-    });
-  }
-
-  // Generate pagination dots with full accessibility
-  function generateDots() {
-    if (!dotsContainer) return;
-
-    dotsContainer.innerHTML = '';
-    dotsContainer.setAttribute('role', 'tablist');
-    dotsContainer.setAttribute('aria-label', 'Testimonial navigation');
-
-    slides.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.classList.add('testimonial-dot');
-      dot.setAttribute('type', 'button');
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-label', `Go to testimonial ${index + 1} of ${slides.length}`);
-      dot.setAttribute('aria-controls', `testimonial-${index}`);
-      dot.setAttribute('tabindex', index === 0 ? '0' : '-1');
-
-      if (index === 0) {
-        dot.classList.add('active');
-        dot.setAttribute('aria-selected', 'true');
-        dot.setAttribute('aria-current', 'true');
-      } else {
-        dot.setAttribute('aria-selected', 'false');
-        dot.setAttribute('aria-current', 'false');
-      }
-
-      // Click handler with debouncing
-      dot.addEventListener('click', () => {
-        if (!isTransitioning) {
-          goToSlide(index, true);
-        }
-      });
-
-      // Keyboard navigation for dots
-      dot.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          if (!isTransitioning) {
-            goToSlide(index, true);
-          }
-        }
-      });
-
-      dotsContainer.appendChild(dot);
-    });
-  }
-
-  // Update dots with proper ARIA attributes
-  function updateDots() {
-    if (!dotsContainer) return;
-    const dots = dotsContainer.querySelectorAll('.testimonial-dot');
-
-    dots.forEach((dot, index) => {
-      const isActive = index === currentIndex;
-
-      // Remove all active states first
-      dot.classList.remove('active');
-      dot.setAttribute('aria-selected', 'false');
-      dot.setAttribute('aria-current', 'false');
-      dot.setAttribute('tabindex', '-1');
-
-      // Set active state for current dot only
-      if (isActive) {
-        dot.classList.add('active');
-        dot.setAttribute('aria-selected', 'true');
-        dot.setAttribute('aria-current', 'true');
-        dot.setAttribute('tabindex', '0');
-      }
-    });
-  }
-
-  // Update slides with proper ARIA and visibility
-  function updateSlides(oldIndex, newIndex) {
-    const oldSlide = slides[oldIndex];
-    const newSlide = slides[newIndex];
-
-    // Check if reduced motion is preferred
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Hide old slide
-    oldSlide.classList.remove('active');
-    oldSlide.setAttribute('aria-hidden', 'true');
-    oldSlide.style.opacity = '0';
-    oldSlide.style.visibility = 'hidden';
-    oldSlide.style.position = 'absolute';
-
-    // Show new slide
-    newSlide.classList.add('active');
-    newSlide.setAttribute('aria-hidden', 'false');
-    newSlide.style.position = 'relative';
-    newSlide.style.visibility = 'visible';
-    newSlide.style.opacity = '1';
-  }
-
-  // Go to specific slide with transition lock
-  function goToSlide(index, userInitiated = false) {
-    // Validate index
-    if (index < 0 || index >= slides.length || index === currentIndex || isTransitioning) {
-      return;
-    }
-
-    // Lock transitions
-    isTransitioning = true;
-
-    const oldIndex = currentIndex;
-    currentIndex = index;
-
-    // Update UI
-    updateSlides(oldIndex, currentIndex);
-    updateDots();
-
-    // Reset auto-rotation if user initiated
-    if (userInitiated) {
-      resetAutoRotation();
-    }
-
-    // Unlock after transition completes
-    setTimeout(() => {
-      isTransitioning = false;
-    }, TRANSITION_DURATION);
-  }
-
-  // Next slide with debouncing
-  const nextSlide = () => {
-    if (isTransitioning) return;
-    const nextIndex = (currentIndex + 1) % slides.length;
-    goToSlide(nextIndex, true);
-  };
-
-  // Previous slide with debouncing
-  const prevSlide = () => {
-    if (isTransitioning) return;
-    const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-    goToSlide(prevIndex, true);
-  };
-
-  // Auto rotation with proper cleanup
-  function startAutoRotation() {
-    stopAutoRotation();
-    autoRotateInterval = setInterval(() => {
-      if (!isTransitioning) {
-        const nextIndex = (currentIndex + 1) % slides.length;
-        goToSlide(nextIndex, false);
-      }
-    }, ROTATION_DELAY);
-  }
-
-  function stopAutoRotation() {
-    if (autoRotateInterval) {
-      clearInterval(autoRotateInterval);
-      autoRotateInterval = null;
-    }
-  }
-
-  function resetAutoRotation() {
-    stopAutoRotation();
-
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReducedMotion) {
-      startAutoRotation();
-    }
-  }
-
-  // Touch/Swipe support with debouncing
-  function handleTouchStart(e) {
-    if (isTransitioning || isSwiping) return;
-    touchStartX = e.changedTouches[0].screenX;
-    isSwiping = false;
-  }
-
-  function handleTouchMove(e) {
-    if (isTransitioning) return;
-    // Detect intentional swipe by checking movement
-    const currentX = e.changedTouches[0].screenX;
-    const diff = Math.abs(touchStartX - currentX);
-
-    if (diff > 10) {
-      isSwiping = true;
-    }
-  }
-
-  function handleTouchEnd(e) {
-    if (isTransitioning || !isSwiping) {
-      isSwiping = false;
-      return;
-    }
-
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-
-    // Reset swipe flag after a delay
-    setTimeout(() => {
-      isSwiping = false;
-    }, 100);
-  }
-
-  function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        nextSlide(); // Swipe left
-      } else {
-        prevSlide(); // Swipe right
-      }
-    }
-  }
-
-  // Event listeners with error handling
-  try {
-    // Navigation buttons
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        prevSlide();
-      });
-      prevBtn.setAttribute('aria-controls', 'testimonial-track');
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        nextSlide();
-      });
-      nextBtn.setAttribute('aria-controls', 'testimonial-track');
-    }
-
-    // Pause auto-rotation on hover/focus
-    carousel.addEventListener('mouseenter', stopAutoRotation);
-    carousel.addEventListener('mouseleave', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!prefersReducedMotion) {
-        startAutoRotation();
-      }
-    });
-
-    carousel.addEventListener('focusin', stopAutoRotation);
-    carousel.addEventListener('focusout', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!prefersReducedMotion) {
-        startAutoRotation();
-      }
-    });
-
-    // Touch events with proper flags
-    track.addEventListener('touchstart', handleTouchStart, { passive: true });
-    track.addEventListener('touchmove', handleTouchMove, { passive: true });
-    track.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-    // Keyboard navigation for carousel
-    carousel.setAttribute('tabindex', '0');
-    carousel.setAttribute('role', 'region');
-    carousel.setAttribute('aria-label', 'Testimonials carousel');
-    carousel.setAttribute('aria-live', 'polite');
-
-    carousel.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        prevSlide();
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        nextSlide();
-      } else if (e.key === 'Home') {
-        e.preventDefault();
-        goToSlide(0, true);
-      } else if (e.key === 'End') {
-        e.preventDefault();
-        goToSlide(slides.length - 1, true);
-      }
-    });
-
-    // Add IDs to slides for ARIA references
-    slides.forEach((slide, index) => {
-      slide.setAttribute('id', `testimonial-${index}`);
-      slide.setAttribute('role', 'tabpanel');
-      slide.setAttribute('aria-label', `Testimonial ${index + 1} of ${slides.length}`);
-    });
-
-    // Initialize everything
-    initSlides();
-    generateDots();
-    updateDots();
-
-    // Start auto-rotation if motion is allowed
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReducedMotion) {
-      startAutoRotation();
-    }
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-      stopAutoRotation();
-    });
-
-    // Handle visibility change (pause when tab is hidden)
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopAutoRotation();
-      } else {
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!prefersReducedMotion) {
-          startAutoRotation();
-        }
-      }
-    });
-
-  } catch (error) {
-    console.error('Error initializing testimonials carousel:', error);
-    // Fallback: show all testimonials if carousel fails
-    slides.forEach(slide => {
-      slide.style.position = 'relative';
-      slide.style.opacity = '1';
-      slide.style.visibility = 'visible';
-    });
-  }
-})();
 
 /* ============================================
    PERFORMANCE: REMOVE WILL-CHANGE AFTER ANIMATIONS
@@ -1083,96 +704,78 @@ function debounce(func, wait) {
 
 /* ============================================
    STAGGER ANIMATION FOR CARDS GRID
-   Uses CSS classes instead of inline styles for better maintainability
+   Replaced by consolidated logic in marketing-enhancements.js and css classes
    ============================================ */
-(function initStaggeredCards() {
-  // Check if IntersectionObserver is supported
-  if (!('IntersectionObserver' in window)) {
-    // Fallback: Remove hidden class from all cards for older browsers
-    console.log('IntersectionObserver not supported, showing all cards immediately');
-    document.querySelectorAll('.why-choose-card, .stat-card-modern, .program-card, .program-card-modern, .trust-badge').forEach(card => {
-      card.classList.remove('card-stagger-hidden');
-      card.classList.add('card-stagger-visible');
-    });
-    return;
-  }
+// Logic moved to prevent duplicates
 
-  const cardGroups = [
-    document.querySelectorAll('.why-choose-card'),
-    document.querySelectorAll('.stat-card-modern'),
-    document.querySelectorAll('.program-card'),
-    document.querySelectorAll('.program-card-modern'),
-    document.querySelectorAll('.trust-badge')
-  ];
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const cards = entry.target.querySelectorAll('[class$="-card"], [class$="-badge"]');
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const cards = entry.target.querySelectorAll('[class$="-card"], [class$="-badge"]');
-
-        if (cards.length === 0) {
-          // No cards found, show the parent itself if it's a card
-          console.log('No child cards found, checking if parent is a card');
-          if (entry.target.classList.contains('why-choose-card') ||
-            entry.target.classList.contains('stat-card-modern') ||
-            entry.target.classList.contains('program-card') ||
-            entry.target.classList.contains('program-card-modern') ||
-            entry.target.classList.contains('trust-badge')) {
-            entry.target.classList.remove('card-stagger-hidden');
-            entry.target.classList.add('card-stagger-visible');
-          }
-        } else {
-          console.log(`Revealing ${cards.length} cards with stagger animation`);
-          cards.forEach((card, index) => {
-            // Add stagger delay class based on index (1-6)
-            const delayClass = `card-stagger-delay-${Math.min(index + 1, 6)}`;
-            card.classList.add(delayClass);
-
-            // Remove hidden state and add visible state to trigger animation
-            card.classList.remove('card-stagger-hidden');
-            card.classList.add('card-stagger-visible');
-          });
+      if (cards.length === 0) {
+        // No cards found, show the parent itself if it's a card
+        console.log('No child cards found, checking if parent is a card');
+        if (entry.target.classList.contains('why-choose-card') ||
+          entry.target.classList.contains('stat-card-modern') ||
+          entry.target.classList.contains('program-card') ||
+          entry.target.classList.contains('program-card-modern') ||
+          entry.target.classList.contains('trust-badge')) {
+          entry.target.classList.remove('card-stagger-hidden');
+          entry.target.classList.add('card-stagger-visible');
         }
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '100px' // Trigger earlier for better UX
-  });
+      } else {
+        console.log(`Revealing ${cards.length} cards with stagger animation`);
+        cards.forEach((card, index) => {
+          // Add stagger delay class based on index (1-6)
+          const delayClass = `card-stagger-delay-${Math.min(index + 1, 6)}`;
+          card.classList.add(delayClass);
 
-  const observedParents = new Set();
-
-  cardGroups.forEach(group => {
-    if (!group.length) return;
-
-    // Get the parent element
-    const firstCard = group[0];
-    const parent = firstCard.parentElement;
-
-    if (!parent || observedParents.has(parent)) return;
-
-    // Set initial hidden state using CSS class
-    const cards = parent.querySelectorAll('[class$="-card"], [class$="-badge"]');
-    cards.forEach(card => {
-      card.classList.add('card-stagger-hidden');
-    });
-
-    observer.observe(parent);
-    observedParents.add(parent);
-
-    // Failsafe: reveal after 3 seconds if still hidden
-    setTimeout(() => {
-      cards.forEach(card => {
-        if (card.classList.contains('card-stagger-hidden')) {
-          console.warn('Card still hidden after 3s, forcing visibility:', card.className);
+          // Remove hidden state and add visible state to trigger animation
           card.classList.remove('card-stagger-hidden');
           card.classList.add('card-stagger-visible');
-        }
-      });
-    }, 3000);
+        });
+      }
+      observer.unobserve(entry.target);
+    }
   });
-})();
+}, {
+  threshold: 0.1,
+  rootMargin: '100px' // Trigger earlier for better UX
+});
+
+const observedParents = new Set();
+
+cardGroups.forEach(group => {
+  if (!group.length) return;
+
+  // Get the parent element
+  const firstCard = group[0];
+  const parent = firstCard.parentElement;
+
+  if (!parent || observedParents.has(parent)) return;
+
+  // Set initial hidden state using CSS class
+  const cards = parent.querySelectorAll('[class$="-card"], [class$="-badge"]');
+  cards.forEach(card => {
+    card.classList.add('card-stagger-hidden');
+  });
+
+  observer.observe(parent);
+  observedParents.add(parent);
+
+  // Failsafe: reveal after 3 seconds if still hidden
+  setTimeout(() => {
+    cards.forEach(card => {
+      if (card.classList.contains('card-stagger-hidden')) {
+        console.warn('Card still hidden after 3s, forcing visibility:', card.className);
+        card.classList.remove('card-stagger-hidden');
+        card.classList.add('card-stagger-visible');
+      }
+    });
+  }, 3000);
+});
+}) ();
 
 /* ============================================
    KEYBOARD NAVIGATION IMPROVEMENTS

@@ -8,6 +8,16 @@
   {% include sticky-cta.html %}
   {% include enquiry-drawer.html %}
   {% include analytics.html %}
+
+  <!-- Modern Features Scripts -->
+  <script src="{{ '/assets/js/testimonial-carousel.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/analytics-tracker.js' | relative_url }}" defer></script>
+
+  <!-- Conditional loads based on page -->
+  {% if page.url contains '/admissions' %}
+    <script src="{{ '/assets/js/admission-wizard.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/fee-calculator.js' | relative_url }}" defer></script>
+  {% endif %}
   
   <!-- Service Worker Registration -->
   <script>

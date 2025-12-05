@@ -14,7 +14,7 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 32px rgba(83, 117, 226, 0.12),
-              0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 }
 
 .glass-card-strong {
@@ -23,7 +23,7 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 12px 40px rgba(83, 117, 226, 0.15),
-              0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.7) inset;
 }
 
 .glass-dark {
@@ -111,7 +111,7 @@
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0 8px 32px rgba(83, 117, 226, 0.12),
-              0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
   position: relative;
   overflow: hidden;
 }
@@ -123,11 +123,9 @@
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle at center,
-    rgba(83, 117, 226, 0.03) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle at center,
+      rgba(83, 117, 226, 0.03) 0%,
+      transparent 70%);
   pointer-events: none;
 }
 
@@ -290,7 +288,7 @@
 
 .wizard-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #5375E2, #84AC64);
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-green));
   border-radius: 4px;
   transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -445,12 +443,12 @@
   transition: all 0.3s ease;
 }
 
-.checklist-item input:checked ~ .checkbox-label .checkbox-custom {
+.checklist-item input:checked~.checkbox-label .checkbox-custom {
   background: var(--brand-green);
   border-color: var(--brand-green);
 }
 
-.checklist-item input:checked ~ .checkbox-label .checkbox-custom::after {
+.checklist-item input:checked~.checkbox-label .checkbox-custom::after {
   content: '✓';
   position: absolute;
   color: white;
@@ -505,7 +503,7 @@
 
 .wizard-btn-next,
 .wizard-btn-whatsapp {
-  background: linear-gradient(135deg, #5375E2, #84AC64);
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-green));
   color: white;
   flex: 1;
 }
@@ -667,7 +665,7 @@
 .btn-calculate {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #5375E2, #84AC64);
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-green));
   color: white;
   border: none;
   border-radius: 10px;
@@ -821,7 +819,7 @@
   padding: 32px 24px;
   text-align: center;
   box-shadow: 0 8px 32px rgba(83, 117, 226, 0.12),
-              0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
@@ -840,7 +838,7 @@
 .stat-card-modern:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 16px 48px rgba(83, 117, 226, 0.2),
-              0 0 0 1px rgba(83, 117, 226, 0.1);
+    0 0 0 1px rgba(83, 117, 226, 0.1);
 }
 
 .stat-icon-emoji {
@@ -1025,12 +1023,10 @@
    ============================================ */
 
 .skeleton-card {
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e0e0e0 50%,
-    #f0f0f0 75%
-  );
+  background: linear-gradient(90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: 8px;

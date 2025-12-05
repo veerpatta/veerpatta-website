@@ -124,147 +124,15 @@
 
 /* ============================================
    ANIMATE WHY CHOOSE US CARDS ON SCROLL
+   Logic consolidated in animations.css and common observers
    ============================================ */
-(function initWhyChooseUsAnimation() {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  const whyChooseCards = document.querySelectorAll('.why-choose-card, .stat-card-modern');
-  if (!whyChooseCards.length) return;
-
-  // Check if IntersectionObserver is supported
-  if (!('IntersectionObserver' in window)) {
-    // Fallback: cards are already visible by default CSS
-    whyChooseCards.forEach((card) => {
-      card.classList.add('animated');
-    });
-    return;
-  }
-
-  // Helper function to check if element is at least partially in viewport
-  function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-
-    // Check if element is at least partially visible
-    return (
-      rect.top < windowHeight &&
-      rect.bottom > 0 &&
-      rect.left < windowWidth &&
-      rect.right > 0
-    );
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Get the index from the card's data attribute
-        const index = parseInt(entry.target.dataset.cardIndex || '0', 10);
-        // Stagger animation
-        setTimeout(() => {
-          entry.target.classList.add('animated');
-        }, index * 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.2,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  // Check each card and handle accordingly
-  whyChooseCards.forEach((card, index) => {
-    // Store index for stagger animation
-    card.dataset.cardIndex = index;
-
-    // Add the animate-fadeUp class to set initial hidden state
-    card.classList.add('animate-fadeUp');
-
-    // Check if card is already in viewport
-    if (isInViewport(card)) {
-      // Card is above fold - trigger animation immediately with stagger delay
-      setTimeout(() => {
-        card.classList.add('animated');
-      }, index * 100);
-    } else {
-      // Card is below fold, observe for intersection
-      observer.observe(card);
-    }
-  });
-})();
+// Logic removed to prevent duplicates with main.js handlers
 
 /* ============================================
    ANIMATE TRUST BADGES ON SCROLL
+   Logic consolidated in animations.css and common observers
    ============================================ */
-(function initTrustBadgesAnimation() {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  const badges = document.querySelectorAll('.trust-badge');
-  if (!badges.length) return;
-
-  // Check if IntersectionObserver is supported
-  if (!('IntersectionObserver' in window)) {
-    // Fallback: badges are already visible by default CSS
-    badges.forEach((badge) => {
-      badge.classList.add('animated');
-    });
-    return;
-  }
-
-  // Helper function to check if element is at least partially in viewport
-  function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-
-    // Check if element is at least partially visible
-    return (
-      rect.top < windowHeight &&
-      rect.bottom > 0 &&
-      rect.left < windowWidth &&
-      rect.right > 0
-    );
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Get the index from the badge's data attribute
-        const index = parseInt(entry.target.dataset.badgeIndex || '0', 10);
-        // Stagger animation
-        setTimeout(() => {
-          entry.target.classList.add('animated');
-        }, index * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.2,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  // Check each badge and handle accordingly
-  badges.forEach((badge, index) => {
-    // Store index for stagger animation
-    badge.dataset.badgeIndex = index;
-
-    // Add the animate-slideIn class to set initial hidden state
-    badge.classList.add('animate-slideIn');
-
-    // Check if badge is already in viewport
-    if (isInViewport(badge)) {
-      // Badge is above fold - trigger animation immediately with stagger delay
-      setTimeout(() => {
-        badge.classList.add('animated');
-      }, index * 80);
-    } else {
-      // Badge is below fold, observe for intersection
-      observer.observe(badge);
-    }
-  });
-})();
+// Logic removed to prevent duplicates with main.js handlers
 
 /* ============================================
    SHRINKING HEADER ON SCROLL
