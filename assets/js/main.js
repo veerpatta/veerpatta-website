@@ -39,9 +39,9 @@
   animatedElements.forEach(el => {
     // Add base animation class if not present
     if (!el.classList.contains('animate-on-scroll') &&
-        !el.classList.contains('animate-fadeUp') &&
-        !el.classList.contains('animate-slideIn') &&
-        !el.classList.contains('animate-scaleIn')) {
+      !el.classList.contains('animate-fadeUp') &&
+      !el.classList.contains('animate-slideIn') &&
+      !el.classList.contains('animate-scaleIn')) {
       el.classList.add('animate-fadeUp');
     }
     observer.observe(el);
@@ -303,11 +303,11 @@
   // Add focus animations to all inputs
   const inputs = document.querySelectorAll('input, textarea');
   inputs.forEach(input => {
-    input.addEventListener('focus', function() {
+    input.addEventListener('focus', function () {
       this.classList.add('hover-glow');
     });
 
-    input.addEventListener('blur', function() {
+    input.addEventListener('blur', function () {
       this.classList.remove('hover-glow');
     });
   });
@@ -630,68 +630,25 @@
 
   // Update slides with proper ARIA and visibility
   function updateSlides(oldIndex, newIndex) {
-    const isNext = newIndex > oldIndex || (oldIndex === slides.length - 1 && newIndex === 0);
     const oldSlide = slides[oldIndex];
     const newSlide = slides[newIndex];
-    
+
     // Check if reduced motion is preferred
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Remove all transition classes first
-    slides.forEach((slide) => {
-      slide.classList.remove('active', 'slide-in-right', 'slide-in-left', 'slide-out-right', 'slide-out-left');
-      slide.setAttribute('aria-hidden', 'true');
-    });
+    // Hide old slide
+    oldSlide.classList.remove('active');
+    oldSlide.setAttribute('aria-hidden', 'true');
+    oldSlide.style.opacity = '0';
+    oldSlide.style.visibility = 'hidden';
+    oldSlide.style.position = 'absolute';
 
-    if (prefersReducedMotion) {
-      // Simple fade for reduced motion
-      oldSlide.style.opacity = '0';
-      oldSlide.style.visibility = 'hidden';
-      oldSlide.style.position = 'absolute';
-      
-      newSlide.classList.add('active');
-      newSlide.setAttribute('aria-hidden', 'false');
-      newSlide.style.position = 'relative';
-      newSlide.style.visibility = 'visible';
-      newSlide.style.opacity = '1';
-    } else {
-      // Smooth slide transition for regular users
-      
-      // Set old slide exit direction
-      if (isNext) {
-        oldSlide.classList.add('slide-out-left');
-      } else {
-        oldSlide.classList.add('slide-out-right');
-      }
-      
-      // Set new slide enter direction
-      if (isNext) {
-        newSlide.classList.add('slide-in-right');
-      } else {
-        newSlide.classList.add('slide-in-left');
-      }
-      
-      // Position new slide and prepare for entrance
-      newSlide.style.position = 'relative';
-      newSlide.style.visibility = 'visible';
-      newSlide.setAttribute('aria-hidden', 'false');
-      
-      // Force reflow
-      newSlide.offsetHeight;
-      
-      // Trigger entrance animation
-      requestAnimationFrame(() => {
-        newSlide.classList.add('active');
-        newSlide.classList.remove('slide-in-right', 'slide-in-left');
-        
-        // Clean up old slide after transition
-        setTimeout(() => {
-          oldSlide.style.position = 'absolute';
-          oldSlide.style.visibility = 'hidden';
-          oldSlide.classList.remove('slide-out-left', 'slide-out-right');
-        }, TRANSITION_DURATION);
-      });
-    }
+    // Show new slide
+    newSlide.classList.add('active');
+    newSlide.setAttribute('aria-hidden', 'false');
+    newSlide.style.position = 'relative';
+    newSlide.style.visibility = 'visible';
+    newSlide.style.opacity = '1';
   }
 
   // Go to specific slide with transition lock
@@ -951,11 +908,11 @@ function debounce(func, wait) {
 
 // 2. Detect device capability and add class for conditional animations
 (function detectDeviceCapability() {
-  const isLowEndDevice = 
-    navigator.hardwareConcurrency <= 4 || 
+  const isLowEndDevice =
+    navigator.hardwareConcurrency <= 4 ||
     navigator.deviceMemory <= 4 ||
     /Android [1-7]/.test(navigator.userAgent);
-  
+
   if (isLowEndDevice) {
     document.body.classList.add('low-end-device');
   }
@@ -1010,22 +967,22 @@ function debounce(func, wait) {
    ============================================ */
 (function initRippleEffect() {
   const buttons = document.querySelectorAll('.btn, .cta-btn, .mobile-nav-link');
-  
+
   buttons.forEach(button => {
-    button.addEventListener('click', function(e) {
+    button.addEventListener('click', function (e) {
       const ripple = document.createElement('span');
       const rect = this.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
       const x = e.clientX - rect.left - size / 2;
       const y = e.clientY - rect.top - size / 2;
-      
+
       ripple.style.width = ripple.style.height = size + 'px';
       ripple.style.left = x + 'px';
       ripple.style.top = y + 'px';
       ripple.classList.add('ripple');
-      
+
       this.appendChild(ripple);
-      
+
       setTimeout(() => ripple.remove(), 600);
     });
   });
@@ -1036,18 +993,18 @@ function debounce(func, wait) {
    ============================================ */
 (function initMagneticButtons() {
   if (window.innerWidth < 768) return; // Mobile skip
-  
+
   const magneticButtons = document.querySelectorAll('.btn, .desktop-whatsapp-btn');
-  
+
   magneticButtons.forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      
+
       btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
     });
-    
+
     btn.addEventListener('mouseleave', () => {
       btn.style.transform = '';
     });
@@ -1061,14 +1018,14 @@ function debounce(func, wait) {
   const progressBar = document.createElement('div');
   progressBar.className = 'scroll-progress';
   document.body.appendChild(progressBar);
-  
+
   const updateProgress = debounce(() => {
     const winScroll = document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
     progressBar.style.width = scrolled + '%';
   }, 10);
-  
+
   window.addEventListener('scroll', updateProgress, { passive: true });
 })();
 
@@ -1077,40 +1034,40 @@ function debounce(func, wait) {
    ============================================ */
 (function initEnhancedCounters() {
   const counters = document.querySelectorAll('.why-choose-number');
-  
+
   if (counters.length === 0) return;
-  
+
   const easeOutQuart = t => 1 - (--t) * t * t * t;
-  
+
   const animateCounter = (element) => {
     const text = element.textContent;
     const match = text.match(/(\d+)([+%]*)/);
-    
+
     if (!match) return;
-    
+
     const target = parseInt(match[1]);
     const suffix = match[2] || '';
     const duration = 2000;
     const startTime = performance.now();
-    
+
     const updateCounter = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easedProgress = easeOutQuart(progress);
       const currentValue = Math.floor(easedProgress * target);
-      
+
       element.textContent = currentValue + suffix;
-      
+
       if (progress < 1) {
         requestAnimationFrame(updateCounter);
       } else {
         element.textContent = target + suffix;
       }
     };
-    
+
     requestAnimationFrame(updateCounter);
   };
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !entry.target.dataset.counted) {
@@ -1120,7 +1077,7 @@ function debounce(func, wait) {
       }
     });
   }, { threshold: 0.5 });
-  
+
   counters.forEach(counter => observer.observe(counter));
 })();
 
@@ -1147,20 +1104,20 @@ function debounce(func, wait) {
     document.querySelectorAll('.program-card-modern'),
     document.querySelectorAll('.trust-badge')
   ];
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const cards = entry.target.querySelectorAll('[class$="-card"], [class$="-badge"]');
-        
+
         if (cards.length === 0) {
           // No cards found, show the parent itself if it's a card
           console.log('No child cards found, checking if parent is a card');
-          if (entry.target.classList.contains('why-choose-card') || 
-              entry.target.classList.contains('stat-card-modern') ||
-              entry.target.classList.contains('program-card') || 
-              entry.target.classList.contains('program-card-modern') ||
-              entry.target.classList.contains('trust-badge')) {
+          if (entry.target.classList.contains('why-choose-card') ||
+            entry.target.classList.contains('stat-card-modern') ||
+            entry.target.classList.contains('program-card') ||
+            entry.target.classList.contains('program-card-modern') ||
+            entry.target.classList.contains('trust-badge')) {
             entry.target.classList.remove('card-stagger-hidden');
             entry.target.classList.add('card-stagger-visible');
           }
@@ -1170,7 +1127,7 @@ function debounce(func, wait) {
             // Add stagger delay class based on index (1-6)
             const delayClass = `card-stagger-delay-${Math.min(index + 1, 6)}`;
             card.classList.add(delayClass);
-            
+
             // Remove hidden state and add visible state to trigger animation
             card.classList.remove('card-stagger-hidden');
             card.classList.add('card-stagger-visible');
@@ -1179,31 +1136,31 @@ function debounce(func, wait) {
         observer.unobserve(entry.target);
       }
     });
-  }, { 
-    threshold: 0.1, 
+  }, {
+    threshold: 0.1,
     rootMargin: '100px' // Trigger earlier for better UX
   });
-  
+
   const observedParents = new Set();
-  
+
   cardGroups.forEach(group => {
     if (!group.length) return;
-    
+
     // Get the parent element
     const firstCard = group[0];
     const parent = firstCard.parentElement;
-    
+
     if (!parent || observedParents.has(parent)) return;
-    
+
     // Set initial hidden state using CSS class
     const cards = parent.querySelectorAll('[class$="-card"], [class$="-badge"]');
     cards.forEach(card => {
       card.classList.add('card-stagger-hidden');
     });
-    
+
     observer.observe(parent);
     observedParents.add(parent);
-    
+
     // Failsafe: reveal after 3 seconds if still hidden
     setTimeout(() => {
       cards.forEach(card => {
@@ -1224,8 +1181,8 @@ function debounce(func, wait) {
   document.addEventListener('keydown', (e) => {
     // Skip if user is typing
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    
-    switch(e.key) {
+
+    switch (e.key) {
       case '/':
         e.preventDefault();
         document.querySelector('.mobile-menu-btn')?.focus();
@@ -1252,7 +1209,7 @@ function debounce(func, wait) {
   skipLink.className = 'skip-link';
   skipLink.textContent = 'Skip to main content';
   document.body.insertBefore(skipLink, document.body.firstChild);
-  
+
   // Add ID to main content if not present
   const mainContent = document.querySelector('main, .container, .hero');
   if (mainContent && !mainContent.id) {
@@ -1266,16 +1223,16 @@ function debounce(func, wait) {
 (function enhanceMobileMenuAccessibility() {
   const mobileNav = document.getElementById('mobileNav');
   if (!mobileNav) return;
-  
+
   const focusableElements = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-  
+
   mobileNav.addEventListener('keydown', (e) => {
     if (e.key !== 'Tab') return;
-    
+
     const focusables = Array.from(mobileNav.querySelectorAll(focusableElements));
     const firstFocusable = focusables[0];
     const lastFocusable = focusables[focusables.length - 1];
-    
+
     if (e.shiftKey && document.activeElement === firstFocusable) {
       e.preventDefault();
       lastFocusable.focus();
@@ -1291,7 +1248,7 @@ function debounce(func, wait) {
    ============================================ */
 (function initLazyLoadSections() {
   const lazySections = document.querySelectorAll('[data-lazy-section]');
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1300,7 +1257,7 @@ function debounce(func, wait) {
       }
     });
   }, { rootMargin: '200px' });
-  
+
   lazySections.forEach(section => observer.observe(section));
 })();
 
@@ -1312,7 +1269,7 @@ function showToast(message, type = 'success') {
   toast.className = `toast toast-${type}`;
   toast.textContent = message;
   document.body.appendChild(toast);
-  
+
   setTimeout(() => toast.classList.add('show'), 100);
   setTimeout(() => {
     toast.classList.remove('show');
@@ -1331,9 +1288,9 @@ window.showToast = showToast;
     window.addEventListener('load', () => {
       const perfData = window.performance.timing;
       const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-      
+
       console.log('📊 Page Load Time:', pageLoadTime + 'ms');
-      
+
       if (pageLoadTime > 3000) {
         console.warn('⚠️ Page load exceeds 3s budget!');
       } else {
