@@ -4494,7 +4494,8 @@ video.loaded {
     width: 100%;
     justify-content: center;
     padding: 1rem 1.5rem;
-    min-height: 52px; /* WCAG touch target */
+    min-height: 52px;
+    /* WCAG touch target */
     font-size: 1rem;
   }
 
@@ -4552,6 +4553,7 @@ video.loaded {
 
 /* ---------- STATS GRID MOBILE OPTIMIZATION ---------- */
 @media (max-width: 600px) {
+
   .stats-section,
   .why-choose-us-section {
     margin: 3rem 0;
@@ -4597,6 +4599,7 @@ video.loaded {
 
 /* Very small screens - single column stats */
 @media (max-width: 360px) {
+
   .stats-grid,
   .why-choose-grid {
     grid-template-columns: 1fr 1fr;
@@ -4661,7 +4664,8 @@ video.loaded {
 
   .program-learn-more {
     font-size: 0.9rem;
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
+    /* Touch target */
     display: inline-flex;
     align-items: center;
   }
@@ -4807,6 +4811,7 @@ video.loaded {
 
 /* ---------- WHY PARENTS & ACHIEVEMENTS MOBILE ---------- */
 @media (max-width: 600px) {
+
   .why-parents-section,
   .achievements-section {
     margin: 2rem 0;
@@ -4852,6 +4857,7 @@ video.loaded {
 
 /* ---------- BUTTONS - ALL TOUCH TARGETS ---------- */
 @media (max-width: 768px) {
+
   /* Ensure all buttons meet WCAG 2.2 touch target size */
   .btn,
   .btn-hero-primary,
@@ -4921,6 +4927,7 @@ video.loaded {
 
 /* ---------- FORM INPUTS - PREVENT iOS ZOOM ---------- */
 @media (max-width: 768px) {
+
   input[type="text"],
   input[type="email"],
   input[type="tel"],
@@ -4928,7 +4935,8 @@ video.loaded {
   input[type="date"],
   select,
   textarea {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    font-size: 16px !important;
+    /* Prevents iOS zoom on focus */
   }
 
   .admissions-form input,
@@ -4996,6 +5004,7 @@ video.loaded {
 
 /* ---------- ABOUT/TEASER SECTIONS MOBILE ---------- */
 @media (max-width: 600px) {
+
   .about-teaser,
   .academics-teaser,
   .gallery-teaser,
@@ -5027,7 +5036,7 @@ video.loaded {
     margin-bottom: 0.75rem;
   }
 
-  .container > p {
+  .container>p {
     font-size: 0.95rem;
     line-height: 1.6;
   }
@@ -5042,7 +5051,9 @@ video.loaded {
 }
 
 /* ---------- REDUCE MOTION FOR LOW-END DEVICES ---------- */
-@media (prefers-reduced-motion: reduce), (max-width: 480px) {
+@media (prefers-reduced-motion: reduce),
+(max-width: 480px) {
+
   /* Simplify animations on small screens */
   .hero-floating-badge {
     animation: none;
@@ -5088,4 +5099,50 @@ video.loaded {
     flex: 1;
     min-width: 150px;
   }
+}
+
+/* =====================================================
+   PERMANENT VISIBILITY FIX FOR CRITICAL SECTIONS
+   This overrides any animation-related hiding
+   Cards should ALWAYS be visible - animations are optional enhancements
+   ===================================================== */
+
+/* Stats Cards - ALWAYS VISIBLE */
+.stats-grid .stat-card-modern,
+.stat-card-modern,
+.why-choose-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Program Cards - ALWAYS VISIBLE */
+.programs-grid .program-card-modern,
+.program-card-modern {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Trust Badges - ALWAYS VISIBLE */
+.trust-badges-wrapper .trust-badge,
+.trust-badge {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Override any animation-related hidden classes */
+.card-stagger-hidden.stat-card-modern,
+.card-stagger-hidden.program-card-modern,
+.card-stagger-hidden.trust-badge,
+.animate-fadeUp.stat-card-modern,
+.animate-fadeUp.program-card-modern,
+.animate-fadeUp.trust-badge,
+.animate-on-scroll.stat-card-modern,
+.animate-on-scroll.program-card-modern,
+.animate-on-scroll.trust-badge {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
 }

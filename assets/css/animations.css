@@ -28,6 +28,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -38,6 +39,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -49,6 +51,7 @@
     opacity: 0;
     transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -61,6 +64,7 @@
     opacity: 0;
     transform: translateX(-40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -72,6 +76,7 @@
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -83,6 +88,7 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -95,6 +101,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -105,6 +112,7 @@
   from {
     transform: scale(0.95);
   }
+
   to {
     transform: scale(1);
   }
@@ -112,10 +120,13 @@
 
 /* Pulse Animation */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 12px 30px rgba(132, 172, 100, 0.28);
   }
+
   50% {
     transform: scale(1.05);
     box-shadow: 0 16px 40px rgba(132, 172, 100, 0.4);
@@ -124,9 +135,12 @@
 
 /* Gentle Pulse for Attention */
 @keyframes gentlePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.03);
   }
@@ -134,9 +148,12 @@
 
 /* Bounce Animation */
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -144,9 +161,12 @@
 
 /* Float Animation */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -157,6 +177,7 @@
   0% {
     background-position: -468px 0;
   }
+
   100% {
     background-position: 468px 0;
   }
@@ -167,9 +188,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -180,6 +203,7 @@
   from {
     width: 0;
   }
+
   to {
     width: 100%;
   }
@@ -196,6 +220,7 @@
   from {
     width: 0;
   }
+
   to {
     width: 100%;
   }
@@ -203,9 +228,12 @@
 
 /* Glow Animation */
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 5px rgba(83, 117, 226, 0.3);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(83, 117, 226, 0.6), 0 0 30px rgba(83, 117, 226, 0.4);
   }
@@ -217,6 +245,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -399,7 +428,7 @@ body {
   position: relative;
   overflow: hidden;
   transition: transform var(--animation-duration-normal) var(--animation-easing-spring),
-              box-shadow var(--animation-duration-normal) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing);
   will-change: transform;
 }
 
@@ -455,7 +484,7 @@ body {
 /* Card Hover Lift Effect */
 .hover-lift {
   transition: transform var(--animation-duration-normal) var(--animation-easing),
-              box-shadow var(--animation-duration-normal) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing);
   will-change: transform;
 }
 
@@ -471,8 +500,8 @@ body {
 .program {
   transform-style: preserve-3d;
   transition: transform var(--animation-duration-normal) var(--animation-easing-smooth),
-              box-shadow var(--animation-duration-normal) var(--animation-easing),
-              border-color var(--animation-duration-normal) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing),
+    border-color var(--animation-duration-normal) var(--animation-easing);
   will-change: transform;
   position: relative;
 }
@@ -495,7 +524,7 @@ body {
 .stat:hover {
   transform: translateY(-6px) scale(1.02) rotateX(2deg);
   box-shadow: 0 20px 40px rgba(83, 117, 226, 0.18),
-              0 0 0 1px rgba(83, 117, 226, 0.08);
+    0 0 0 1px rgba(83, 117, 226, 0.08);
 }
 
 .stat-card:hover::before,
@@ -507,7 +536,7 @@ body {
 .program:hover {
   transform: translateY(-8px) rotateY(1deg) rotateX(-1deg);
   box-shadow: 0 24px 48px rgba(83, 117, 226, 0.2),
-              0 0 0 2px rgba(83, 117, 226, 0.1);
+    0 0 0 2px rgba(83, 117, 226, 0.1);
   border-color: var(--brand-blue);
 }
 
@@ -527,8 +556,8 @@ input[type="email"],
 input[type="tel"],
 textarea {
   transition: border-color var(--animation-duration-normal) var(--animation-easing),
-              box-shadow var(--animation-duration-normal) var(--animation-easing),
-              transform var(--animation-duration-fast) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing),
+    transform var(--animation-duration-fast) var(--animation-easing);
 }
 
 .admissions-form input:focus,
@@ -558,7 +587,7 @@ textarea:focus {
 
 .whatsapp-float {
   transition: transform var(--animation-duration-normal) var(--animation-easing),
-              box-shadow var(--animation-duration-normal) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing);
   will-change: transform;
 }
 
@@ -596,8 +625,8 @@ textarea:focus {
   overflow: hidden;
   position: relative;
   transition: opacity var(--animation-duration-normal) var(--animation-easing),
-              transform var(--animation-duration-normal) var(--animation-easing-smooth),
-              box-shadow var(--animation-duration-normal) var(--animation-easing);
+    transform var(--animation-duration-normal) var(--animation-easing-smooth),
+    box-shadow var(--animation-duration-normal) var(--animation-easing);
 }
 
 .gallery-item img {
@@ -619,25 +648,21 @@ textarea:focus {
 
 /* Shimmer Effect for Loading Images */
 .loading-shimmer {
-  background: linear-gradient(
-    to right,
-    #f0f0f0 0%,
-    #e0e0e0 20%,
-    #f0f0f0 40%,
-    #f0f0f0 100%
-  );
+  background: linear-gradient(to right,
+      #f0f0f0 0%,
+      #e0e0e0 20%,
+      #f0f0f0 40%,
+      #f0f0f0 100%);
   background-size: 800px 100%;
   animation: shimmer 2s linear infinite;
 }
 
 /* Skeleton Loading */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e0e0e0 50%,
-    #f0f0f0 75%
-  );
+  background: linear-gradient(90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: 8px;
@@ -674,7 +699,7 @@ img[loading="lazy"].loaded {
 .stat h3,
 .stat-card h3 {
   transition: color var(--animation-duration-normal) var(--animation-easing),
-              transform var(--animation-duration-normal) var(--animation-easing);
+    transform var(--animation-duration-normal) var(--animation-easing);
 }
 
 .stat:hover h3,
@@ -694,7 +719,7 @@ img[loading="lazy"].loaded {
 
 .testimonial {
   transition: transform var(--animation-duration-normal) var(--animation-easing),
-              box-shadow var(--animation-duration-normal) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing);
 }
 
 .testimonial:hover {
@@ -730,9 +755,11 @@ img[loading="lazy"].loaded {
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -748,12 +775,10 @@ img[loading="lazy"].loaded {
    ============================================ */
 
 .hero {
-  background: linear-gradient(
-    160deg,
-    #F8F9FE 0%,
-    #ffffff 50%,
-    #F8F9FE 100%
-  );
+  background: linear-gradient(160deg,
+      #F8F9FE 0%,
+      #ffffff 50%,
+      #F8F9FE 100%);
   background-size: 200% 200%;
   animation: gradientShift 15s ease infinite;
 }
@@ -796,6 +821,7 @@ html {
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -927,6 +953,7 @@ button:focus-visible,
     opacity: 0;
     transform: rotateY(-10deg) rotateX(5deg) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: rotateY(0) rotateX(0) scale(1);
@@ -938,9 +965,11 @@ button:focus-visible,
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -951,6 +980,7 @@ button:focus-visible,
   0% {
     stroke-dashoffset: 1000;
   }
+
   100% {
     stroke-dashoffset: 0;
   }
@@ -958,13 +988,24 @@ button:focus-visible,
 
 /* Shake Animation for Errors */
 @keyframes shake {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(0);
   }
-  10%, 30%, 50%, 70%, 90% {
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
     transform: translateX(-4px);
   }
-  20%, 40%, 60%, 80% {
+
+  20%,
+  40%,
+  60%,
+  80% {
     transform: translateX(4px);
   }
 }
@@ -975,9 +1016,11 @@ button:focus-visible,
     opacity: 0;
     transform: scale(0) rotate(-180deg);
   }
+
   50% {
     transform: scale(1.1) rotate(10deg);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) rotate(0);
@@ -990,6 +1033,7 @@ button:focus-visible,
     opacity: 0;
     transform: translate(-20px, -20px);
   }
+
   to {
     opacity: 1;
     transform: translate(0, 0);
@@ -998,12 +1042,15 @@ button:focus-visible,
 
 /* Glow Pulse */
 @keyframes glowPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 10px rgba(83, 117, 226, 0.3);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(83, 117, 226, 0.6),
-                0 0 30px rgba(83, 117, 226, 0.4);
+      0 0 30px rgba(83, 117, 226, 0.4);
   }
 }
 
@@ -1012,6 +1059,7 @@ button:focus-visible,
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -1045,13 +1093,13 @@ button:focus-visible,
 /* Scale with Glow */
 .hover-scale-glow {
   transition: transform var(--animation-duration-normal) var(--animation-easing-spring),
-              box-shadow var(--animation-duration-normal) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing);
 }
 
 .hover-scale-glow:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 24px rgba(83, 117, 226, 0.25),
-              0 0 20px rgba(83, 117, 226, 0.15);
+    0 0 20px rgba(83, 117, 226, 0.15);
 }
 
 /* Border Glow Effect */
@@ -1159,7 +1207,7 @@ button:focus-visible,
   position: relative;
   transform-style: preserve-3d;
   transition: transform var(--animation-duration-normal) var(--animation-easing-smooth),
-              box-shadow var(--animation-duration-normal) var(--animation-easing);
+    box-shadow var(--animation-duration-normal) var(--animation-easing);
 }
 
 .card-modern::before {
@@ -1179,7 +1227,7 @@ button:focus-visible,
 .card-modern:hover {
   transform: translateY(-10px) rotateX(2deg);
   box-shadow: 0 20px 40px rgba(83, 117, 226, 0.2),
-              0 0 0 1px rgba(83, 117, 226, 0.1);
+    0 0 0 1px rgba(83, 117, 226, 0.1);
 }
 
 .card-modern:hover::before {
@@ -1187,12 +1235,29 @@ button:focus-visible,
 }
 
 /* Stagger with Spring Easing */
-.stagger-spring-1 { animation-delay: calc(1 * var(--stagger-delay-fast)); }
-.stagger-spring-2 { animation-delay: calc(2 * var(--stagger-delay-fast)); }
-.stagger-spring-3 { animation-delay: calc(3 * var(--stagger-delay-fast)); }
-.stagger-spring-4 { animation-delay: calc(4 * var(--stagger-delay-fast)); }
-.stagger-spring-5 { animation-delay: calc(5 * var(--stagger-delay-fast)); }
-.stagger-spring-6 { animation-delay: calc(6 * var(--stagger-delay-fast)); }
+.stagger-spring-1 {
+  animation-delay: calc(1 * var(--stagger-delay-fast));
+}
+
+.stagger-spring-2 {
+  animation-delay: calc(2 * var(--stagger-delay-fast));
+}
+
+.stagger-spring-3 {
+  animation-delay: calc(3 * var(--stagger-delay-fast));
+}
+
+.stagger-spring-4 {
+  animation-delay: calc(4 * var(--stagger-delay-fast));
+}
+
+.stagger-spring-5 {
+  animation-delay: calc(5 * var(--stagger-delay-fast));
+}
+
+.stagger-spring-6 {
+  animation-delay: calc(6 * var(--stagger-delay-fast));
+}
 
 /* ============================================
    FORM ENHANCEMENTS
@@ -1214,8 +1279,8 @@ button:focus-visible,
   padding: 0 4px;
 }
 
-.form-input:focus ~ .floating-label,
-.form-input:not(:placeholder-shown) ~ .floating-label {
+.form-input:focus~.floating-label,
+.form-input:not(:placeholder-shown)~.floating-label {
   top: -8px;
   left: 8px;
   font-size: 0.75rem;
@@ -1277,6 +1342,7 @@ button:focus-visible,
   from {
     clip-path: inset(0 100% 0 0);
   }
+
   to {
     clip-path: inset(0 0 0 0);
   }
@@ -1303,11 +1369,25 @@ button:focus-visible,
    UTILITY CLASSES
    ============================================ */
 
-.anim-tilt-in { animation: tiltIn 0.6s var(--animation-easing-spring); }
-.anim-diagonal { animation: slideInDiagonal 0.5s var(--animation-easing); }
-.anim-glow-pulse { animation: glowPulse 2s ease-in-out infinite; }
-.anim-shake { animation: shake 0.5s ease; }
-.anim-icon-bounce { animation: iconBounceIn 0.6s var(--animation-easing-bounce); }
+.anim-tilt-in {
+  animation: tiltIn 0.6s var(--animation-easing-spring);
+}
+
+.anim-diagonal {
+  animation: slideInDiagonal 0.5s var(--animation-easing);
+}
+
+.anim-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.anim-shake {
+  animation: shake 0.5s ease;
+}
+
+.anim-icon-bounce {
+  animation: iconBounceIn 0.6s var(--animation-easing-bounce);
+}
 
 /* ============================================
    TESTIMONIAL CAROUSEL ANIMATIONS
@@ -1318,7 +1398,7 @@ button:focus-visible,
   opacity: 0;
   transform: translateX(100%);
   transition: opacity var(--animation-duration-slow) var(--animation-easing),
-              transform var(--animation-duration-slow) var(--animation-easing);
+    transform var(--animation-duration-slow) var(--animation-easing);
   position: absolute;
   width: 100%;
   top: 0;
@@ -1374,12 +1454,10 @@ button:focus-visible,
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
   animation: shimmer 2s ease-in-out infinite;
 }
 
@@ -1426,12 +1504,29 @@ button:focus-visible,
   animation: slideInLeft 0.4s var(--animation-easing) forwards;
 }
 
-.fee-table tr:nth-child(1) { animation-delay: 0.05s; }
-.fee-table tr:nth-child(2) { animation-delay: 0.1s; }
-.fee-table tr:nth-child(3) { animation-delay: 0.15s; }
-.fee-table tr:nth-child(4) { animation-delay: 0.2s; }
-.fee-table tr:nth-child(5) { animation-delay: 0.25s; }
-.fee-table tr:nth-child(6) { animation-delay: 0.3s; }
+.fee-table tr:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.fee-table tr:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.fee-table tr:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.fee-table tr:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.fee-table tr:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.fee-table tr:nth-child(6) {
+  animation-delay: 0.3s;
+}
 
 /* Total Amount Highlight */
 .total-amount {
@@ -1451,30 +1546,38 @@ button:focus-visible,
   animation: countUp 1s var(--animation-easing-spring);
 }
 
-/* Stats Card Reveal */
+/* Stats Card Reveal - Visible by default, animation as progressive enhancement */
 .stats-grid .stat-card-modern {
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
+  /* Cards are ALWAYS visible by default for progressive enhancement */
+  opacity: 1;
+  transform: translateY(0) scale(1);
   transition: all 0.5s var(--animation-easing);
 }
 
-.stats-grid .stat-card-modern:nth-child(1) {
+/* Only apply hidden state if JavaScript has added the waiting-for-animation class */
+.stats-grid.js-animate .stat-card-modern:not(.animated) {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+}
+
+.stats-grid.js-animate .stat-card-modern:nth-child(1) {
   transition-delay: 0.1s;
 }
 
-.stats-grid .stat-card-modern:nth-child(2) {
+.stats-grid.js-animate .stat-card-modern:nth-child(2) {
   transition-delay: 0.2s;
 }
 
-.stats-grid .stat-card-modern:nth-child(3) {
+.stats-grid.js-animate .stat-card-modern:nth-child(3) {
   transition-delay: 0.3s;
 }
 
-.stats-grid .stat-card-modern:nth-child(4) {
+.stats-grid.js-animate .stat-card-modern:nth-child(4) {
   transition-delay: 0.4s;
 }
 
-.stats-grid .stat-card-modern.animated {
+.stats-grid .stat-card-modern.animated,
+.stats-grid.js-animate .stat-card-modern.animated {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
@@ -1488,6 +1591,7 @@ button:focus-visible,
   0% {
     background-position: -200% center;
   }
+
   100% {
     background-position: 200% center;
   }
@@ -1505,9 +1609,11 @@ button:focus-visible,
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
