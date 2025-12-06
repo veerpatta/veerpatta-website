@@ -958,3 +958,304 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealElements.forEach(el => observer.observe(el));
 })();
+
+/* ============================================
+   MODERN SCROLL ANIMATIONS SYSTEM (MOBILE-FIRST)
+   Optimized for mobile devices and 3G networks
+   ============================================ */
+(function initModernScrollAnimations() {
+  // Skip if IntersectionObserver not supported
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: make everything visible immediately
+    document.querySelectorAll('.scroll-reveal, .scroll-fade-up, .scroll-fade-left, .scroll-fade-right, .scroll-scale-up, .scroll-blur-fade, .scroll-bounce-up, .scroll-rotate-in, .scroll-stagger, .scroll-stagger-fast, .section-reveal').forEach(el => {
+      el.classList.add('revealed');
+    });
+    return;
+  }
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    // Reveal everything immediately for users who prefer reduced motion
+    document.querySelectorAll('.scroll-reveal, .scroll-fade-up, .scroll-fade-left, .scroll-fade-right, .scroll-scale-up, .scroll-blur-fade, .scroll-bounce-up, .scroll-rotate-in, .scroll-stagger, .scroll-stagger-fast, .section-reveal').forEach(el => {
+      el.classList.add('revealed');
+    });
+    return;
+  }
+
+  // Observer options - trigger slightly before element enters viewport
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -80px 0px', // Trigger before element is fully visible
+    threshold: 0.1
+  };
+
+  // Main scroll reveal observer
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Add revealed class to trigger animation
+        entry.target.classList.add('revealed');
+
+        // Clean up will-change after transition completes
+        entry.target.addEventListener('transitionend', function handler() {
+          entry.target.classList.add('transition-done');
+          entry.target.removeEventListener('transitionend', handler);
+        }, { once: true });
+
+        // Stop observing this element
+        scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all scroll-reveal elements
+  const scrollElements = document.querySelectorAll(
+    '.scroll-reveal, .scroll-fade-up, .scroll-fade-left, .scroll-fade-right, ' +
+    '.scroll-scale-up, .scroll-blur-fade, .scroll-bounce-up, .scroll-rotate-in, ' +
+    '.scroll-stagger, .scroll-stagger-fast, .section-reveal, .section-clip-reveal, ' +
+    '.section-line-reveal, .scroll-counter, .scroll-line, .scroll-dot'
+  );
+
+  scrollElements.forEach(el => scrollObserver.observe(el));
+
+  // Failsafe: reveal all elements after 4 seconds if still hidden
+  setTimeout(() => {
+    scrollElements.forEach(el => {
+      if (!el.classList.contains('revealed')) {
+        el.classList.add('revealed', 'transition-done');
+      }
+    });
+  }, 4000);
+})();
+
+/* ============================================
+   AUTOMATIC SCROLL ANIMATION CLASS APPLICATION
+   Applies animation classes to key page elements
+   ============================================ */
+(function initAutoScrollAnimationClasses() {
+  // Skip on low-end devices for better performance
+  const isLowEnd = document.body.classList.contains('low-end-device');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) return;
+
+  // Apply scroll-fade-up to section headings
+  document.querySelectorAll('.section-header-modern, .section h2:not(.hero h2), .container > h2').forEach(el => {
+    if (!el.classList.contains('scroll-fade-up') && !el.classList.contains('revealed')) {
+      el.classList.add('scroll-fade-up');
+    }
+  });
+
+  // Apply scroll-stagger-fast to card grids on mobile, scroll-stagger on desktop
+  const animClass = isLowEnd || window.innerWidth <= 768 ? 'scroll-stagger-fast' : 'scroll-stagger';
+
+  document.querySelectorAll('.stats-grid, .programs-grid, .trust-badges-wrapper').forEach(el => {
+    if (!el.classList.contains('scroll-stagger') && !el.classList.contains('scroll-stagger-fast') && !el.classList.contains('revealed')) {
+      el.classList.add(animClass);
+    }
+  });
+
+  // Apply scroll-scale-up to individual cards
+  document.querySelectorAll('.stat-card-modern, .program-card-modern, .why-parents-card, .achievements-card, .about-teaser-card').forEach(el => {
+    if (!el.classList.contains('scroll-scale-up') && !el.closest('.scroll-stagger') && !el.closest('.scroll-stagger-fast')) {
+      el.classList.add('scroll-fade-up');
+    }
+  });
+
+  // Apply section-reveal to major sections
+  document.querySelectorAll('.stats-section, .programs-section, .trust-badges-section, .why-parents-section, .achievements-section, .testimonials-section').forEach(el => {
+    if (!el.classList.contains('section-reveal') && !el.classList.contains('revealed')) {
+      el.classList.add('section-reveal');
+    }
+  });
+
+  // Apply scroll-rotate-in to trust badge icons
+  document.querySelectorAll('.trust-badge .badge-icon, .stat-icon-emoji').forEach(el => {
+    if (!el.classList.contains('scroll-rotate-in') && !el.classList.contains('revealed')) {
+      el.classList.add('scroll-rotate-in');
+    }
+  });
+
+  // Re-observe newly added elements
+  if ('IntersectionObserver' in window && !prefersReducedMotion) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -60px 0px',
+      threshold: 0.15
+    };
+
+    const autoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          autoObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-fade-up:not(.revealed), .scroll-scale-up:not(.revealed), .scroll-rotate-in:not(.revealed), .section-reveal:not(.revealed), .scroll-stagger:not(.revealed), .scroll-stagger-fast:not(.revealed)').forEach(el => {
+      autoObserver.observe(el);
+    });
+  }
+})();
+
+/* ============================================
+   SMART HEADER SCROLL BEHAVIOR
+   Hide on scroll down, show on scroll up
+   ============================================ */
+(function initSmartHeaderScroll() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  let lastScrollY = 0;
+  let ticking = false;
+  const scrollThreshold = 100; // Minimum scroll before header behavior kicks in
+  const hideThreshold = 10; // Minimum scroll delta to trigger hide
+
+  function updateHeader() {
+    const currentScrollY = window.pageYOffset;
+    const scrollDelta = currentScrollY - lastScrollY;
+
+    // Add scrolled class when past threshold
+    if (currentScrollY > scrollThreshold) {
+      header.classList.add('header-scrolled');
+
+      // Only hide/show after passing threshold
+      if (scrollDelta > hideThreshold) {
+        // Scrolling down - hide header
+        header.classList.add('header-hidden');
+        header.classList.remove('header-visible');
+      } else if (scrollDelta < -hideThreshold) {
+        // Scrolling up - show header
+        header.classList.remove('header-hidden');
+        header.classList.add('header-visible');
+      }
+    } else {
+      // Near top - reset header
+      header.classList.remove('header-scrolled', 'header-hidden', 'header-visible');
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateHeader();
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+/* ============================================
+   SCROLL-DRIVEN IMAGE LAZY LOADING WITH REVEAL
+   ============================================ */
+(function initScrollDrivenLazyImages() {
+  if (!('IntersectionObserver' in window)) return;
+
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+
+        // Add reveal animation class when image enters viewport
+        img.classList.add('lazy-image');
+
+        // When image loads, add loaded class for reveal
+        if (img.complete) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', () => {
+            img.classList.add('loaded');
+          }, { once: true });
+        }
+
+        // Also update parent container if it has image-container class
+        const container = img.closest('.image-container');
+        if (container) {
+          if (img.complete) {
+            container.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              container.classList.add('loaded');
+            }, { once: true });
+          }
+        }
+
+        imageObserver.unobserve(img);
+      }
+    });
+  }, { rootMargin: '100px' }); // Load images slightly before they enter viewport
+
+  lazyImages.forEach(img => imageObserver.observe(img));
+})();
+
+/* ============================================
+   PARALLAX SCROLL EFFECT (DESKTOP ONLY)
+   Subtle parallax for hero elements
+   ============================================ */
+(function initParallaxScroll() {
+  // Only on desktop with sufficient power
+  if (window.innerWidth <= 768) return;
+  if (document.body.classList.contains('low-end-device')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const parallaxElements = document.querySelectorAll('.hero-visual img, .hero-floating-badge');
+  if (parallaxElements.length === 0) return;
+
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrollY = window.pageYOffset;
+
+        // Only apply parallax in the first viewport height
+        if (scrollY < window.innerHeight * 1.2) {
+          parallaxElements.forEach((el, index) => {
+            const speed = 0.15 + (index * 0.05); // Different speeds for layered effect
+            const yPos = scrollY * speed;
+            el.style.transform = `translateY(${yPos}px)`;
+          });
+        }
+
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+/* ============================================
+   SCROLL MOMENTUM TRACKING FOR ANIMATIONS
+   Adjusts animation speed based on scroll velocity
+   ============================================ */
+(function initScrollMomentum() {
+  let lastScrollY = window.pageYOffset;
+  let scrollVelocity = 0;
+  let lastTime = Date.now();
+
+  window.addEventListener('scroll', () => {
+    const currentTime = Date.now();
+    const currentScrollY = window.pageYOffset;
+    const timeDelta = currentTime - lastTime;
+
+    if (timeDelta > 0) {
+      scrollVelocity = Math.abs(currentScrollY - lastScrollY) / timeDelta;
+    }
+
+    // Update CSS custom property for velocity-based animations
+    document.documentElement.style.setProperty('--scroll-velocity', scrollVelocity.toFixed(3));
+
+    lastScrollY = currentScrollY;
+    lastTime = currentTime;
+  }, { passive: true });
+})();
+
+console.log('🎨 Modern Scroll Animations initialized');
+
