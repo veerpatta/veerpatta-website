@@ -31,7 +31,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 <div class="hero">
   <div class="hero-content">
     <h1>
-      Nurturing <span class="text-highlight">Future Leaders</span>
+      Nurturing <span class="text-highlight shimmer">Future Leaders</span>
       in Rural Rajasthan
     </h1>
     <p class="hero-description">
@@ -39,14 +39,14 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
       and value-based education in Amet. Join 1000+ students
       shaping tomorrow.
     </p>
-    <div class="hero-cta-group">
-      <a href="https://wa.me/919413748575" class="btn-hero-primary" target="_blank" rel="noopener">
+    <div class="hero-cta-group stagger-children">
+      <a href="https://wa.me/919413748575" class="btn-hero-primary cta-animated touch-pulse" target="_blank" rel="noopener">
         <span>Apply Now 2025-26</span>
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-      <a href="{{ '/en/about/' | relative_url }}" class="btn-hero-secondary">
+      <a href="{{ '/en/about/' | relative_url }}" class="btn-hero-secondary touch-pulse">
         <span>Learn More</span>
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10"/>
@@ -102,23 +102,23 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
     <div class="section-divider"></div>
   </div>
 
-  <div class="stats-grid">
-    <div class="stat-card-modern">
+  <div class="stats-grid stagger-children">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">📚</span>
       <div class="stat-number">30+</div>
       <div class="stat-label">Years</div>
     </div>
-    <div class="stat-card-modern">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">👨‍🎓</span>
       <div class="stat-number">1000+</div>
       <div class="stat-label">Students</div>
     </div>
-    <div class="stat-card-modern">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">✅</span>
       <div class="stat-number">95%+</div>
       <div class="stat-label">Pass Rate</div>
     </div>
-    <div class="stat-card-modern">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">👨‍🏫</span>
       <div class="stat-number">20+</div>
       <div class="stat-label">Teachers</div>

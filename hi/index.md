@@ -32,21 +32,21 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 <div class="hero">
   <div class="hero-content">
     <h1>
-      ग्रामीण राजस्थान के <span class="text-highlight">भविष्य के नेता</span>
+      ग्रामीण राजस्थान के <span class="text-highlight shimmer">भविष्य के नेता</span>
       तैयार करना
     </h1>
     <p class="hero-description">
       30+ वर्षों की शैक्षणिक उत्कृष्टता, समग्र विकास और मूल्य आधारित
       शिक्षा अमेट में। 1000+ विद्यार्थियों के साथ भविष्य गढ़ें।
     </p>
-    <div class="hero-cta-group">
-      <a href="https://wa.me/919413748575" class="btn-hero-primary" target="_blank" rel="noopener">
+    <div class="hero-cta-group stagger-children">
+      <a href="https://wa.me/919413748575" class="btn-hero-primary cta-animated touch-pulse" target="_blank" rel="noopener">
         <span>अभी आवेदन करें 2025-26</span>
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-      <a href="{{ '/hi/about/' | relative_url }}" class="btn-hero-secondary">
+      <a href="{{ '/hi/about/' | relative_url }}" class="btn-hero-secondary touch-pulse">
         <span>और जानें</span>
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10"/>
@@ -102,23 +102,23 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
     <div class="section-divider"></div>
   </div>
 
-  <div class="stats-grid">
-    <div class="stat-card-modern">
+  <div class="stats-grid stagger-children">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">📚</span>
       <div class="stat-number">30+</div>
       <div class="stat-label">वर्ष</div>
     </div>
-    <div class="stat-card-modern">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">👨‍🎓</span>
       <div class="stat-number">1000+</div>
       <div class="stat-label">विद्यार्थी</div>
     </div>
-    <div class="stat-card-modern">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">✅</span>
       <div class="stat-number">95%+</div>
       <div class="stat-label">उत्तीर्ण दर</div>
     </div>
-    <div class="stat-card-modern">
+    <div class="stat-card-modern premium-card">
       <span class="stat-icon-emoji">👨‍🏫</span>
       <div class="stat-number">20+</div>
       <div class="stat-label">शिक्षक</div>

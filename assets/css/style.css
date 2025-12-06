@@ -5146,3 +5146,377 @@ video.loaded {
   visibility: visible !important;
   transform: translateY(0) scale(1) !important;
 }
+
+/* =====================================================
+   MODERN MARKETING UI ENHANCEMENTS (2025)
+   Mobile-first, performance-optimized
+   ===================================================== */
+
+/* Enhanced Hero CTA with Glow Animation */
+.btn-hero-primary.cta-animated {
+  animation: ctaGlow 2.5s ease-in-out infinite;
+}
+
+.btn-hero-primary.cta-animated:hover {
+  animation: none;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(83, 117, 226, 0.5);
+}
+
+/* Hero Text Shimmer Effect */
+.hero .text-highlight.shimmer {
+  background: linear-gradient(90deg,
+      var(--brand-blue) 0%,
+      var(--brand-green) 25%,
+      var(--brand-yellow) 50%,
+      var(--brand-green) 75%,
+      var(--brand-blue) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s linear infinite;
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Enhanced Trust Badges with Stagger Entrance */
+.hero-trust-badges {
+  animation: fadeUp 0.8s ease-out;
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+
+.trust-badge-item {
+  transition: all 0.3s ease;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+.trust-badge-item:hover {
+  background: rgba(83, 117, 226, 0.08);
+  transform: translateY(-2px);
+}
+
+.trust-badge-icon {
+  transition: transform 0.3s ease;
+}
+
+.trust-badge-item:hover .trust-badge-icon {
+  transform: scale(1.15);
+}
+
+/* Stats Grid Enhanced Animation */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Stat Card Modern with Breathe Animation */
+.stat-card-modern {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  border: 1px solid rgba(83, 117, 226, 0.1);
+  box-shadow: 0 8px 32px rgba(83, 117, 226, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+.stat-card-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-green));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.stat-card-modern:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-card-modern:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(83, 117, 226, 0.18);
+  border-color: rgba(83, 117, 226, 0.2);
+}
+
+.stat-icon-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.stat-card-modern:hover .stat-icon-emoji {
+  transform: scale(1.15);
+  animation: bounce 0.6s ease;
+}
+
+.stat-number {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--muted-text);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Section Wave Dividers */
+.wave-section {
+  position: relative;
+}
+
+.wave-section::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  width: 200%;
+  height: 80px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23f8f9fe'/%3E%3C/svg%3E");
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
+  animation: waveDivider 15s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes waveDivider {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Enhanced Program Cards */
+.program-card-modern {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.program-card-modern::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(83, 117, 226, 0.05) 0%,
+      rgba(132, 172, 100, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.program-card-modern:hover::after {
+  opacity: 1;
+}
+
+.program-card-modern:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 24px 48px rgba(83, 117, 226, 0.18);
+}
+
+.program-card-modern:hover .program-badge-emoji {
+  animation: iconBounceIn 0.5s ease;
+}
+
+@keyframes iconBounceIn {
+  0% {
+    transform: scale(0.8);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Trust Badges Section */
+.trust-badges-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+
+.trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(83, 117, 226, 0.1);
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.trust-badge:hover {
+  background: rgba(83, 117, 226, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(83, 117, 226, 0.12);
+}
+
+.trust-badge .badge-icon {
+  color: var(--brand-blue);
+  transition: transform 0.3s ease;
+}
+
+.trust-badge:hover .badge-icon {
+  transform: scale(1.1);
+}
+
+.trust-badge .badge-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+}
+
+/* Achievements Section Enhanced */
+.achievements-list li {
+  transition: all 0.3s ease;
+  padding: 0.75rem 0;
+  border-radius: 8px;
+}
+
+.achievements-list li:hover {
+  background: rgba(83, 117, 226, 0.05);
+  padding-left: 1rem;
+}
+
+.achievement-emoji {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.achievements-list li:hover .achievement-emoji {
+  transform: scale(1.2);
+}
+
+/* Why Parents List Enhanced */
+.why-parents-list li {
+  transition: all 0.3s ease;
+  padding: 0.75rem 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 8px;
+}
+
+.why-parents-list li:hover {
+  background: rgba(132, 172, 100, 0.08);
+  transform: translateX(4px);
+}
+
+/* Mobile Touch Optimizations */
+@media (max-width: 768px) {
+  .stat-card-modern {
+    padding: 1.25rem 1rem;
+  }
+
+  .stat-icon-emoji {
+    font-size: 2rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  .trust-badge {
+    padding: 0.75rem 1rem;
+    min-width: 85px;
+  }
+
+  /* Touch feedback */
+  .btn-hero-primary:active,
+  .btn-hero-secondary:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+  }
+
+  .stat-card-modern:active {
+    transform: scale(0.98);
+    transition-duration: 0.1s;
+  }
+
+  .program-card-modern:active {
+    transform: scale(0.98);
+    transition-duration: 0.1s;
+  }
+
+  /* Disable complex hover effects on touch devices */
+  .wave-section::after {
+    animation-duration: 30s;
+    /* Slower for mobile perf */
+  }
+}
+
+/* Scroll Progress Bar Positioning */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-green));
+  z-index: 10000;
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+/* Skip Link Styling */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--brand-blue);
+  color: white;
+  padding: 12px 24px;
+  z-index: 10001;
+  border-radius: 0 0 8px 0;
+  font-weight: 600;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}

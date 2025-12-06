@@ -874,3 +874,87 @@ document.addEventListener('DOMContentLoaded', () => {
   // This is just for any additional setup
   console.log('Veer Patta Public School - Animations loaded successfully');
 });
+
+/* ============================================
+   TESTIMONIALS SWIPE GESTURE SUPPORT (MOBILE)
+   ============================================ */
+(function initTestimonialSwipe() {
+  const carousel = document.querySelector('.testimonials-carousel');
+  if (!carousel) return;
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const minSwipeDistance = 50;
+
+  carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) < minSwipeDistance) return;
+
+    const nextBtn = carousel.querySelector('.testimonial-nav.next');
+    const prevBtn = carousel.querySelector('.testimonial-nav.prev');
+
+    if (swipeDistance < 0 && nextBtn) {
+      // Swiped left - go next
+      nextBtn.click();
+    } else if (swipeDistance > 0 && prevBtn) {
+      // Swiped right - go previous
+      prevBtn.click();
+    }
+  }
+})();
+
+/* ============================================
+   STAGGER CHILDREN VISIBILITY FIX
+   Ensures animated elements become visible after animation
+   ============================================ */
+(function initStaggerChildrenFix() {
+  const staggerContainers = document.querySelectorAll('.stagger-children');
+
+  staggerContainers.forEach(container => {
+    const children = container.children;
+
+    // Set a failsafe to ensure visibility after animations should have completed
+    setTimeout(() => {
+      Array.from(children).forEach(child => {
+        child.style.opacity = '1';
+        child.style.transform = 'translateY(0)';
+      });
+    }, 1000); // After animation duration
+  });
+})();
+
+/* ============================================
+   ENHANCED SCROLL REVEAL WITH STAGGER TIMING
+   ============================================ */
+(function initEnhancedScrollReveal() {
+  const revealElements = document.querySelectorAll('.slide-up-reveal:not(.animated), .zoom-in:not(.animated)');
+
+  if (!('IntersectionObserver' in window)) {
+    revealElements.forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '20px' });
+
+  revealElements.forEach(el => observer.observe(el));
+})();
