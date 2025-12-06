@@ -230,51 +230,9 @@
 })();
 
 /* ============================================
-   GALLERY FILTER FUNCTIONALITY (ENHANCED)
+   GALLERY FILTER FUNCTIONALITY
+   Moved to gallery-loader.js to run AFTER dynamic items load
    ============================================ */
-(function initGalleryFilter() {
-  const pills = document.querySelectorAll('.pill');
-  const items = document.querySelectorAll('.gallery-item');
-
-  if (!pills.length || !items.length) return;
-
-  pills.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Update active state
-      pills.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-
-      // Animate items out then in
-      items.forEach((item, index) => {
-        const category = item.getAttribute('data-category');
-        const shouldShow = (filter === 'all' || filter === category);
-
-        if (shouldShow) {
-          // Fade in with stagger
-          setTimeout(() => {
-            item.style.display = '';
-            item.style.opacity = '0';
-            item.style.transform = 'scale(0.9)';
-
-            setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'scale(1)';
-            }, 50);
-          }, index * 50);
-        } else {
-          // Fade out
-          item.style.opacity = '0';
-          item.style.transform = 'scale(0.9)';
-          setTimeout(() => {
-            item.style.display = 'none';
-          }, 300);
-        }
-      });
-    });
-  });
-})();
 
 /* ============================================
    FORM VALIDATION AND SUBMISSION ANIMATION
@@ -704,78 +662,83 @@ function debounce(func, wait) {
 
 /* ============================================
    STAGGER ANIMATION FOR CARDS GRID
-   Replaced by consolidated logic in marketing-enhancements.js and css classes
    ============================================ */
-// Logic moved to prevent duplicates
+(function initCardStagger() {
+  // Collect all card groups that need stagger animation
+  const cardGroups = [
+    document.querySelectorAll('.why-choose-card'),
+    document.querySelectorAll('.stat-card-modern'),
+    document.querySelectorAll('.program-card'),
+    document.querySelectorAll('.program-card-modern'),
+    document.querySelectorAll('.trust-badge')
+  ];
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const cards = entry.target.querySelectorAll('[class$="-card"], [class$="-badge"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const cards = entry.target.querySelectorAll('[class$="-card"], [class$="-badge"]');
 
-      if (cards.length === 0) {
-        // No cards found, show the parent itself if it's a card
-        console.log('No child cards found, checking if parent is a card');
-        if (entry.target.classList.contains('why-choose-card') ||
-          entry.target.classList.contains('stat-card-modern') ||
-          entry.target.classList.contains('program-card') ||
-          entry.target.classList.contains('program-card-modern') ||
-          entry.target.classList.contains('trust-badge')) {
-          entry.target.classList.remove('card-stagger-hidden');
-          entry.target.classList.add('card-stagger-visible');
+        if (cards.length === 0) {
+          // No cards found, show the parent itself if it's a card
+          if (entry.target.classList.contains('why-choose-card') ||
+            entry.target.classList.contains('stat-card-modern') ||
+            entry.target.classList.contains('program-card') ||
+            entry.target.classList.contains('program-card-modern') ||
+            entry.target.classList.contains('trust-badge')) {
+            entry.target.classList.remove('card-stagger-hidden');
+            entry.target.classList.add('card-stagger-visible');
+          }
+        } else {
+          cards.forEach((card, index) => {
+            // Add stagger delay class based on index (1-6)
+            const delayClass = `card-stagger-delay-${Math.min(index + 1, 6)}`;
+            card.classList.add(delayClass);
+
+            // Remove hidden state and add visible state to trigger animation
+            card.classList.remove('card-stagger-hidden');
+            card.classList.add('card-stagger-visible');
+          });
         }
-      } else {
-        console.log(`Revealing ${cards.length} cards with stagger animation`);
-        cards.forEach((card, index) => {
-          // Add stagger delay class based on index (1-6)
-          const delayClass = `card-stagger-delay-${Math.min(index + 1, 6)}`;
-          card.classList.add(delayClass);
-
-          // Remove hidden state and add visible state to trigger animation
-          card.classList.remove('card-stagger-hidden');
-          card.classList.add('card-stagger-visible');
-        });
-      }
-      observer.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.1,
-  rootMargin: '100px' // Trigger earlier for better UX
-});
-
-const observedParents = new Set();
-
-cardGroups.forEach(group => {
-  if (!group.length) return;
-
-  // Get the parent element
-  const firstCard = group[0];
-  const parent = firstCard.parentElement;
-
-  if (!parent || observedParents.has(parent)) return;
-
-  // Set initial hidden state using CSS class
-  const cards = parent.querySelectorAll('[class$="-card"], [class$="-badge"]');
-  cards.forEach(card => {
-    card.classList.add('card-stagger-hidden');
-  });
-
-  observer.observe(parent);
-  observedParents.add(parent);
-
-  // Failsafe: reveal after 3 seconds if still hidden
-  setTimeout(() => {
-    cards.forEach(card => {
-      if (card.classList.contains('card-stagger-hidden')) {
-        console.warn('Card still hidden after 3s, forcing visibility:', card.className);
-        card.classList.remove('card-stagger-hidden');
-        card.classList.add('card-stagger-visible');
+        observer.unobserve(entry.target);
       }
     });
-  }, 3000);
-});
-}) ();
+  }, {
+    threshold: 0.1,
+    rootMargin: '100px' // Trigger earlier for better UX
+  });
+
+  const observedParents = new Set();
+
+  cardGroups.forEach(group => {
+    if (!group.length) return;
+
+    // Get the parent element
+    const firstCard = group[0];
+    const parent = firstCard.parentElement;
+
+    if (!parent || observedParents.has(parent)) return;
+
+    // Set initial hidden state using CSS class
+    const cards = parent.querySelectorAll('[class$="-card"], [class$="-badge"]');
+    cards.forEach(card => {
+      card.classList.add('card-stagger-hidden');
+    });
+
+    observer.observe(parent);
+    observedParents.add(parent);
+
+    // Failsafe: reveal after 3 seconds if still hidden
+    setTimeout(() => {
+      cards.forEach(card => {
+        if (card.classList.contains('card-stagger-hidden')) {
+          console.warn('Card still hidden after 3s, forcing visibility:', card.className);
+          card.classList.remove('card-stagger-hidden');
+          card.classList.add('card-stagger-visible');
+        }
+      });
+    }, 3000);
+  });
+})();
 
 /* ============================================
    KEYBOARD NAVIGATION IMPROVEMENTS
