@@ -1,0 +1,808 @@
+/* ============================================
+   VEER PATTA PUBLIC SCHOOL - DEEP MOBILE OPTIMIZATION
+   Targeted optimizations for budget Android devices on 3G
+   Breakpoints: 320px, 360px, 480px, 600px
+   ============================================ */
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS - GLOBAL
+   ============================================ */
+
+/* Reduce GPU memory for low-end devices */
+@media (max-width: 600px) {
+
+    /* Contain layout to reduce paint costs */
+    .stat-card-modern,
+    .program-card-modern,
+    .testimonial-content,
+    .card,
+    .why-parents-card,
+    .achievements-card {
+        contain: layout style;
+    }
+
+    /* Reduce backdrop-filter intensity for performance */
+    .glass-card,
+    .glass-card-strong,
+    .testimonial-content,
+    .admission-wizard,
+    .fee-calculator {
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+    }
+
+    /* Disable complex transforms on mobile */
+    .stat-card:hover,
+    .stat:hover,
+    .program-card:hover,
+    .program:hover {
+        transform: none;
+    }
+}
+
+/* ============================================
+   HERO SECTION - MOBILE DEEP OPTIMIZATION
+   ============================================ */
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 400px;
+        margin: 0 0 2rem 0;
+    }
+
+    .hero-content {
+        padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+    }
+
+    /* Hero CTA Buttons - Full width stacking */
+    .hero-cta-group {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        min-height: 52px;
+    }
+
+    /* Hero visual - reduce height on mobile */
+    .hero-visual {
+        min-height: 280px;
+        order: -1;
+    }
+
+    .hero-media-container {
+        width: 90%;
+        border-radius: 16px;
+    }
+
+    /* Floating badge smaller */
+    .hero-floating-badge {
+        padding: 0.75rem 1rem;
+        bottom: 12px;
+        left: 12px;
+        border-radius: 12px;
+    }
+
+    .floating-badge-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+    }
+
+    .floating-badge-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .floating-badge-content p {
+        font-size: 0.75rem;
+    }
+}
+
+/* Very small screens (320px) */
+@media (max-width: 360px) {
+    .hero-content {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        padding: 0.85rem 1.25rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
+   TRUST BADGES - HORIZONTAL SCROLL
+   ============================================ */
+
+@media (max-width: 600px) {
+    .hero-trust-badges {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 1rem 0;
+        margin: 0 -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .hero-trust-badges::-webkit-scrollbar {
+        display: none;
+    }
+
+    .trust-badge-item {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        min-width: max-content;
+    }
+
+    .trust-badge-icon {
+        font-size: 1.5rem;
+    }
+
+    .trust-badge-text {
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+}
+
+/* Trust Badges Section (separate component) */
+@media (max-width: 600px) {
+    .trust-badges-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 12px;
+        padding: 16px 0;
+        margin: 0 -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .trust-badges-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .trust-badge {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        min-width: 100px;
+        padding: 16px 12px;
+        text-align: center;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(83, 117, 226, 0.08);
+    }
+
+    .badge-icon {
+        margin-bottom: 8px;
+    }
+
+    .badge-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .badge-text {
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+}
+
+/* ============================================
+   STATS CARDS - MOBILE VISIBILITY FIX
+   ============================================ */
+
+@media (max-width: 600px) {
+    .stats-section {
+        padding: 1.5rem 0;
+    }
+
+    .stats-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-card-modern {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        padding: 1rem 0.75rem;
+        border-radius: 12px;
+    }
+
+    .stat-icon-emoji {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.3px;
+    }
+}
+
+@media (max-width: 360px) {
+    .stats-grid {
+        gap: 8px;
+    }
+
+    .stat-card-modern {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .stat-icon-emoji {
+        font-size: 1.75rem;
+    }
+
+    .stat-number {
+        font-size: 1.25rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* ============================================
+   PROGRAM CARDS - MOBILE LAYOUT
+   ============================================ */
+
+@media (max-width: 600px) {
+    .programs-section {
+        margin: 2rem 0;
+    }
+
+    .programs-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .program-card-modern {
+        border-radius: 16px;
+    }
+
+    .program-image-wrapper {
+        height: 160px;
+    }
+
+    .program-badge-emoji {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+        top: 12px;
+        right: 12px;
+    }
+
+    .program-content {
+        padding: 1.25rem 1rem;
+    }
+
+    .program-card-modern h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .program-card-modern p {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .program-learn-more {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .programs-grid {
+        gap: 0.75rem;
+    }
+
+    .program-image-wrapper {
+        height: 140px;
+    }
+
+    .program-content {
+        padding: 1rem 0.875rem;
+    }
+}
+
+/* ============================================
+   SECTION HEADERS - MOBILE
+   ============================================ */
+
+@media (max-width: 600px) {
+    .section-header-modern {
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .section-heading-main {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+    }
+
+    .section-divider {
+        width: 60px;
+        height: 3px;
+        margin-top: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .section-heading-main {
+        font-size: 1.35rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================
+   FEE TABLES - RESPONSIVE
+   ============================================ */
+
+@media (max-width: 600px) {
+    .admissions-fees {
+        overflow-x: auto;
+        margin: 0 -1rem;
+        padding: 0 1rem;
+    }
+
+    .admissions-fees table {
+        min-width: 320px;
+        font-size: 0.9rem;
+    }
+
+    .admissions-fees th,
+    .admissions-fees td {
+        padding: 10px 12px;
+        white-space: nowrap;
+    }
+
+    .admissions-fees th:first-child,
+    .admissions-fees td:first-child {
+        white-space: normal;
+        min-width: 150px;
+    }
+}
+
+/* ============================================
+   ADMISSION FORMS - TOUCH FRIENDLY
+   ============================================ */
+
+@media (max-width: 600px) {
+
+    .admissions-form input,
+    .admissions-form textarea,
+    .wizard-form input,
+    .wizard-form select,
+    .wizard-form textarea,
+    .form-group input,
+    .form-group select {
+        font-size: 16px !important;
+        /* Prevent iOS zoom */
+        min-height: 52px;
+        padding: 14px 16px;
+        border-radius: 10px;
+    }
+
+    .admissions-form textarea {
+        min-height: 120px;
+    }
+
+    .admissions-form .btn,
+    .wizard-btn-next,
+    .wizard-btn-prev,
+    .btn-calculate {
+        min-height: 52px;
+        font-size: 1rem;
+        padding: 14px 20px;
+        border-radius: 12px;
+    }
+
+    /* Form labels */
+    .admissions-form label,
+    .wizard-form label,
+    .form-group label {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+}
+
+/* ============================================
+   GALLERY - MOBILE LAYOUT
+   ============================================ */
+
+@media (max-width: 600px) {
+
+    /* Pills horizontal scroll */
+    .pills {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 12px 0;
+        margin: 0 -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .pills::-webkit-scrollbar {
+        display: none;
+    }
+
+    .pill {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Gallery grid */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .gallery-item {
+        border-radius: 10px;
+    }
+
+    .gallery-item figcaption {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .gallery-item .ph {
+        aspect-ratio: 16/10;
+    }
+}
+
+/* ============================================
+   WHY PARENTS / ACHIEVEMENTS CARDS
+   ============================================ */
+
+@media (max-width: 600px) {
+
+    .why-parents-section,
+    .achievements-section {
+        margin: 2rem 0;
+    }
+
+    .why-parents-section h2,
+    .achievements-section h2 {
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .why-parents-card,
+    .achievements-card {
+        padding: 1.25rem;
+        border-radius: 14px;
+    }
+
+    .why-parents-list,
+    .achievements-list {
+        gap: 0.875rem;
+    }
+
+    .why-parents-list li,
+    .achievements-list li {
+        font-size: 0.9rem;
+        padding-left: 1.5rem;
+    }
+
+    .why-parents-list li::before,
+    .achievements-list li::before {
+        font-size: 1rem;
+    }
+
+    .achievement-emoji {
+        font-size: 1.1rem;
+    }
+}
+
+/* ============================================
+   ABOUT TEASER CARDS
+   ============================================ */
+
+@media (max-width: 600px) {
+
+    .about-teaser,
+    .academics-teaser,
+    .gallery-teaser,
+    .contact-teaser {
+        margin: 1.5rem 0;
+    }
+
+    .about-teaser-card {
+        padding: 1.25rem;
+        border-radius: 14px;
+    }
+
+    .about-teaser-card h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .about-teaser-card p {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .about-teaser-card .btn {
+        min-height: 48px;
+        padding: 12px 20px;
+    }
+}
+
+/* ============================================
+   CONTACT PAGE - MOBILE
+   ============================================ */
+
+@media (max-width: 600px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .contact-grid .card {
+        padding: 1.25rem;
+    }
+
+    /* Touch-to-call links */
+    .contact a[href^="tel:"],
+    .contact a[href^="mailto:"] {
+        display: inline-block;
+        padding: 8px 0;
+        font-weight: 600;
+    }
+}
+
+/* ============================================
+   ADMISSION TIMELINE - MOBILE
+   ============================================ */
+
+@media (max-width: 600px) {
+    .admissions-timeline li {
+        padding: 1.25rem;
+        border-radius: 14px;
+    }
+
+    .admissions-timeline .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .admissions-timeline h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .admissions-timeline p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================
+   FAQ SECTION - MOBILE
+   ============================================ */
+
+@media (max-width: 600px) {
+    .admissions-faq .card {
+        padding: 1.25rem;
+    }
+
+    .admissions-faq h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        margin-top: 1.25rem;
+    }
+
+    .admissions-faq h3:first-child {
+        margin-top: 0;
+    }
+
+    .admissions-faq p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+
+/* ============================================
+   FOOTER - MOBILE
+   ============================================ */
+
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+
+    .site-footer p {
+        font-size: 0.85rem;
+    }
+
+    .footer-links {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .footer-links a {
+        padding: 8px 0;
+    }
+}
+
+/* ============================================
+   TOUCH TARGET ENFORCEMENT
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    /* Minimum 48x48px touch targets */
+    a,
+    button,
+    .btn,
+    .pill,
+    .nav-link,
+    .mobile-nav-link,
+    [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Links in text maintain inline but with padding */
+    p a,
+    li a,
+    .card a:not(.btn) {
+        padding: 4px 0;
+        margin: -4px 0;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION PREFERENCES
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .hero-floating-badge {
+        animation: none;
+    }
+
+    .hero-visual::before {
+        animation: none;
+    }
+}
+
+/* ============================================
+   HINDI LANGUAGE MOBILE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 600px) {
+
+    .lang-hi .hero h1,
+    body[lang="hi"] .hero h1 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+    }
+
+    .lang-hi .hero-description,
+    body[lang="hi"] .hero-description {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .lang-hi .section-heading-main,
+    body[lang="hi"] .section-heading-main {
+        font-size: 1.4rem;
+    }
+
+    .lang-hi .why-parents-list li,
+    body[lang="hi"] .why-parents-list li,
+    .lang-hi .achievements-list li,
+    body[lang="hi"] .achievements-list li {
+        font-size: 0.95rem;
+        line-height: 1.9;
+    }
+
+    .lang-hi .program-card-modern h3,
+    body[lang="hi"] .program-card-modern h3 {
+        font-size: 1.1rem;
+    }
+
+    .lang-hi .testimonial-text,
+    body[lang="hi"] .testimonial-text {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+
+    .mobile-menu-btn,
+    .mobile-nav,
+    .mobile-overlay,
+    .whatsapp-float,
+    .sticky-cta,
+    .enquiry-drawer {
+        display: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+}
