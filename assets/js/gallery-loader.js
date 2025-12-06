@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   const MEDIA_BASE = '/veerpatta-website/assets/media/gallery';
@@ -10,6 +10,16 @@
     cultural: [],
     academic: [],
     celebrations: []
+  };
+
+  // IMPORTANT: Expose GalleryLoader FIRST so gallery-items.js can register items
+  window.GalleryLoader = {
+    registerItems: function (category, files) {
+      if (GALLERY_ITEMS[category]) {
+        GALLERY_ITEMS[category] = files;
+        console.log('Registered gallery items for:', category, files);
+      }
+    }
   };
 
   async function loadGallery() {
@@ -30,6 +40,7 @@
 
     for (const category of CATEGORIES) {
       const items = GALLERY_ITEMS[category];
+      console.log('Loading category:', category, 'items:', items);
 
       for (const filename of items) {
         const url = `${MEDIA_BASE}/${category}/${filename}`;
@@ -71,7 +82,8 @@
     const isGalleryPage = window.location.pathname.includes('/gallery');
     if (!isGalleryPage) return;
 
-    loadGallery();
+    // Small delay to ensure gallery-items.js has finished registering all items
+    setTimeout(loadGallery, 300);
   }
 
   if (document.readyState === 'loading') {
@@ -79,13 +91,5 @@
   } else {
     init();
   }
-
-  window.GalleryLoader = {
-    registerItems: function(category, files) {
-      if (GALLERY_ITEMS[category]) {
-        GALLERY_ITEMS[category] = files;
-      }
-    }
-  };
 
 })();

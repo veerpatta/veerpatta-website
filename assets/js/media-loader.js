@@ -3,7 +3,7 @@
  * Supports: .jpg, .jpeg, .png, .webp, .gif, .mp4, .webm, .mov
  */
 
-(function() {
+(function () {
   'use strict';
 
   const IMAGE_EXTS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
@@ -32,6 +32,17 @@
     img.alt = alt || '';
     img.loading = 'lazy';
     if (className) img.className = className;
+
+    // Add 'loaded' class when image loads - required because CSS hides lazy images by default
+    img.addEventListener('load', function () {
+      this.classList.add('loaded');
+    });
+
+    // Handle already-cached images that load immediately
+    if (img.complete) {
+      img.classList.add('loaded');
+    }
+
     return img;
   }
 
