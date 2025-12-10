@@ -12,12 +12,34 @@
     celebrations: []
   };
 
+  // Promise to track when items are registered
+  let itemsRegisteredResolver;
+  const itemsRegisteredPromise = new Promise(resolve => {
+    itemsRegisteredResolver = resolve;
+  });
+
+  // Track registered count to know when we're done
+  // Note: This relies on gallery-items.js calling registerItems for all categories
+  // A better approach would be for gallery-items.js to signal "done", but we'll infer it
+  let registeredCategories = 0;
+
   // IMPORTANT: Expose GalleryLoader FIRST so gallery-items.js can register items
   window.GalleryLoader = {
     registerItems: function (category, files) {
       if (GALLERY_ITEMS[category]) {
         GALLERY_ITEMS[category] = files;
-        console.log('Registered gallery items for:', category, files);
+        // console.log('Registered gallery items for:', category, files);
+        registeredCategories++;
+        
+        // If we have registered items for all categories (or at least some time has passed), we can proceed
+        // Ideally gallery-items.js would be one object we could just check, but it's likely a series of calls
+        if (registeredCategories >= 1) { // Resolve after first registration to start the flow
+             // We'll debounce the resolve mostly to catch all synchronous registrations
+             if (window.galleryRegistrationTimeout) clearTimeout(window.galleryRegistrationTimeout);
+             window.galleryRegistrationTimeout = setTimeout(() => {
+                 if(itemsRegisteredResolver) itemsRegisteredResolver();
+             }, 50);
+        }
       }
     }
   };
@@ -28,11 +50,27 @@
 
     galleryGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading gallery...</p>';
 
+    // Wait for items to be registered
+    await itemsRegisteredPromise;
+
     let totalItems = 0;
     const allCaptions = {};
 
-    for (const category of CATEGORIES) {
-      allCaptions[category] = await window.MediaLoader.loadCaptions(`${MEDIA_BASE}/${category}`);
+    try {
+        const captionPromises = CATEGORIES.map(category => 
+            window.MediaLoader.loadCaptions(`${MEDIA_BASE}/${category}`)
+                .then(captions => {
+                    allCaptions[category] = captions;
+                })
+                .catch(err => {
+                    console.warn(`Failed to load captions for ${category}`, err);
+                    allCaptions[category] = {};
+                })
+        );
+        
+        await Promise.all(captionPromises);
+    } catch (e) {
+        console.error("Error loading captions", e);
     }
 
     const lang = window.MediaLoader.getCurrentLanguage();
@@ -40,7 +78,9 @@
 
     for (const category of CATEGORIES) {
       const items = GALLERY_ITEMS[category];
-      console.log('Loading category:', category, 'items:', items);
+      if (!items || items.length === 0) continue;
+
+      // console.log('Loading category:', category, 'items:', items);
 
       for (const filename of items) {
         const url = `${MEDIA_BASE}/${category}/${filename}`;
@@ -50,6 +90,10 @@
         const figure = document.createElement('figure');
         figure.className = 'gallery-item';
         figure.setAttribute('data-category', category);
+
+        // Pre-hide for animation
+        figure.style.opacity = '0'; 
+        figure.style.display = 'none'; // Initially hidden for filter to reveal
 
         if (window.MediaLoader.isImage(filename)) {
           const img = window.MediaLoader.createImageElement(url, caption);
@@ -77,8 +121,12 @@
     galleryGrid.innerHTML = '';
     itemsHtml.forEach(item => galleryGrid.appendChild(item));
 
-    // Initialize gallery filter AFTER items are loaded
+    // Initialize gallery filter - this will reveal the items
     initGalleryFilter();
+    
+    // Trigger "All" filter to show items initially
+    const allBtn = document.querySelector('.pill[data-filter="all"]');
+    if(allBtn) allBtn.click();
   }
 
   /**
@@ -92,35 +140,50 @@
     if (!pills.length || !galleryGrid) return;
 
     pills.forEach(btn => {
+        // Remove old listeners to prevent duplicates if re-initialized
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+    });
+    
+    // Re-select refreshed buttons
+    const freshPills = document.querySelectorAll('.pill');
+
+    freshPills.forEach(btn => {
       btn.addEventListener('click', () => {
         // Update active state
-        pills.forEach(p => p.classList.remove('active'));
+        freshPills.forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
 
         const filter = btn.getAttribute('data-filter');
         const items = galleryGrid.querySelectorAll('.gallery-item');
 
-        // Animate items out then in
-        items.forEach((item, index) => {
+        // Simple counter for stagger delay
+        let visibleIndex = 0;
+
+        items.forEach((item) => {
           const category = item.getAttribute('data-category');
           const shouldShow = (filter === 'all' || filter === category);
 
           if (shouldShow) {
-            // Fade in with stagger
+            // Display first, then animate opacity
+            item.style.display = '';
+            
+            // Use setTimeout to allow display:block to apply before opacity transition
             setTimeout(() => {
-              item.style.display = '';
-              item.style.opacity = '0';
-              item.style.transform = 'scale(0.9)';
-
-              setTimeout(() => {
+                // Stagger effect
+                const delay = visibleIndex * 50; 
+                item.style.transition = `opacity 0.4s ease ${delay}ms, transform 0.4s ease ${delay}ms`;
                 item.style.opacity = '1';
                 item.style.transform = 'scale(1)';
-              }, 50);
-            }, index * 50);
+            }, 10);
+            
+            visibleIndex++;
           } else {
-            // Fade out
+            // Fade out then hide
+            item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
             item.style.opacity = '0';
             item.style.transform = 'scale(0.9)';
+            
             setTimeout(() => {
               item.style.display = 'none';
             }, 300);
@@ -134,8 +197,8 @@
     const isGalleryPage = window.location.pathname.includes('/gallery');
     if (!isGalleryPage) return;
 
-    // Small delay to ensure gallery-items.js has finished registering all items
-    setTimeout(loadGallery, 300);
+    // Load gallery immediately, it will wait for the promise internally
+    loadGallery();
   }
 
   if (document.readyState === 'loading') {

@@ -803,6 +803,162 @@ body.menu-open {
   display: inline-block;
 }
 
+/* =====================================================
+   TESTIMONIAL CAROUSEL - STACKED GRID LAYOUT
+   Fixes vertical shift issues by occupying same space
+   ===================================================== */
+.testimonials-section {
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.testimonials-carousel {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  /* Create a grid stack context */
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  /* Center vertically if heights differ slightly */
+}
+
+/* The track is now just a wrapper for the grid items */
+.testimonial-track {
+  display: contents;
+  /* Allows children to participate in the parent grid */
+}
+
+.testimonial-slide {
+  /* Stack all slides in the same grid cell */
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+
+  /* Hide by default using opacity/visibility for transitions */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  transition: all 0.5s ease-in-out;
+
+  /* Ensure it takes up space even when hidden (if we weren't using grid stack) 
+       But in grid stack, the container takes height of tallest item. 
+       We want to prevent layout shift, so grid is perfect. */
+  width: 100%;
+  pointer-events: none;
+  /* Prevent interaction when hidden */
+}
+
+.testimonial-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Testimonial Content Styling */
+.testimonial-content {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.testimonial-author h4 {
+  color: var(--brand-blue);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-author p {
+  font-size: 0.9rem;
+  color: var(--muted-text);
+}
+
+/* Navigation Dots */
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2rem;
+  grid-column: 1 / -1;
+  /* Place dots below the stack */
+  grid-row: 2;
+  /* Explicitly put in row 2 */
+}
+
+.testimonial-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.testimonial-dot.active {
+  background: var(--brand-blue);
+  transform: scale(1.2);
+}
+
+/* Navigation Arrows */
+.testimonial-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s ease;
+  color: var(--brand-blue);
+}
+
+.testimonial-nav:hover {
+  background: var(--brand-blue);
+  color: #ffffff;
+  box-shadow: 0 8px 16px rgba(83, 117, 226, 0.2);
+}
+
+.testimonial-nav.prev {
+  left: -20px;
+}
+
+.testimonial-nav.next {
+  right: -20px;
+}
+
+@media (max-width: 768px) {
+  .testimonial-nav {
+    display: none;
+    /* Hide arrows on mobile, use swipe */
+  }
+
+  .testimonial-content {
+    padding: 1.5rem;
+  }
+}
+
 /* Decorative underline */
 .hero .text-highlight::after {
   content: '';
