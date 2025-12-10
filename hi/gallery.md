@@ -26,12 +26,7 @@ permalink: /hi/gallery/
   </section>
 
   <section class="gallery-grid" id="gallery-grid">
-    <figure class="gallery-item" data-category="sports"><div class="ph"></div><figcaption>खेल दिवस — रिले</figcaption></figure>
-    <figure class="gallery-item" data-category="ncc"><div class="ph"></div><figcaption>एनसीसी ड्रिल अभ्यास</figcaption></figure>
-    <figure class="gallery-item" data-category="cultural"><div class="ph"></div><figcaption>स्वतंत्रता दिवस नृत्य</figcaption></figure>
-    <figure class="gallery-item" data-category="academic"><div class="ph"></div><figcaption>विज्ञान प्रयोगशाला गतिविधि</figcaption></figure>
-    <figure class="gallery-item" data-category="celebrations"><div class="ph"></div><figcaption>वार्षिकोत्सव समापन</figcaption></figure>
-    <figure class="gallery-item" data-category="sports"><div class="ph"></div><figcaption>फ़ुटबॉल अभ्यास</figcaption></figure>
+    <!-- Gallery items loaded dynamically by gallery-loader.js -->
   </section>
 
   <noscript>

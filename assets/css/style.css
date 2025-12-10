@@ -2868,30 +2868,32 @@ video::-webkit-media-controls-volume-slider {
 
 .testimonial-track {
   position: relative;
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+  min-height: 300px;
+  overflow: hidden;
 }
 
 .testimonial-slide {
-  flex: 0 0 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(0);
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* First slide visible by default for progressive enhancement */
 .testimonial-slide:first-child {
+  position: relative;
   opacity: 1;
   visibility: visible;
 }
 
 .testimonial-slide.active {
+  position: relative;
   opacity: 1;
   visibility: visible;
-  transform: translateX(0);
 }
 
 /* Slide direction states for smooth transitions */

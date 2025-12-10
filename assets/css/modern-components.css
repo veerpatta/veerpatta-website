@@ -90,18 +90,26 @@
 
 .testimonial-track {
   position: relative;
-  min-height: 250px;
+  min-height: 280px;
   overflow: hidden;
 }
 
 .testimonial-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  visibility: hidden;
 }
 
 .testimonial-slide.active {
+  position: relative;
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
 }
 
 .testimonial-content {

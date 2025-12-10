@@ -25,13 +25,7 @@ permalink: /en/gallery/
   </section>
 
   <section class="gallery-grid" id="gallery-grid">
-    <!-- Placeholder items; real images later -->
-    <figure class="gallery-item" data-category="sports"><div class="ph"></div><figcaption>Sports Day — Relay</figcaption></figure>
-    <figure class="gallery-item" data-category="ncc"><div class="ph"></div><figcaption>NCC Drill Practice</figcaption></figure>
-    <figure class="gallery-item" data-category="cultural"><div class="ph"></div><figcaption>Independence Day Dance</figcaption></figure>
-    <figure class="gallery-item" data-category="academic"><div class="ph"></div><figcaption>Science Lab Activity</figcaption></figure>
-    <figure class="gallery-item" data-category="celebrations"><div class="ph"></div><figcaption>Annual Day Finale</figcaption></figure>
-    <figure class="gallery-item" data-category="sports"><div class="ph"></div><figcaption>Football Practice</figcaption></figure>
+    <!-- Gallery items loaded dynamically by gallery-loader.js -->
   </section>
 
   <noscript>
