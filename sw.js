@@ -2,29 +2,41 @@
 // PWA-lite implementation with stale-while-revalidate caching strategy
 
 const CACHE_VERSION = 'vpps-v3';
-const BASE_URL = '/veerpatta-website';
+
+// Compute base path dynamically to work with or without a baseurl
+const computeBasePath = () => {
+  const scopePath = self.registration?.scope
+    ? new URL(self.registration.scope).pathname
+    : null;
+  const locationPath = new URL(self.location.href).pathname;
+  const path = (scopePath || locationPath).replace(/\/?$/, '');
+  return path === '' ? '' : path;
+};
+
+const BASE_PATH = computeBasePath();
+const withBase = (path) => `${BASE_PATH}${path}`;
 
 // Core assets to cache for offline use
 const CORE_ASSETS = [
-  `${BASE_URL}/`,
-  `${BASE_URL}/en/`,
-  `${BASE_URL}/hi/`,
-  `${BASE_URL}/en/admissions/`,
-  `${BASE_URL}/hi/admissions/`,
-  `${BASE_URL}/assets/css/style.css`,
-  `${BASE_URL}/assets/css/animations.css`,
-  `${BASE_URL}/assets/css/modern-components.css`,
-  `${BASE_URL}/assets/js/main.js`,
-  `${BASE_URL}/assets/js/marketing-enhancements.js`,
-  `${BASE_URL}/assets/js/admission-wizard.js`,
-  `${BASE_URL}/assets/js/fee-calculator.js`,
-  `${BASE_URL}/assets/js/testimonial-carousel.js`,
-  `${BASE_URL}/assets/js/analytics-tracker.js`,
-  `${BASE_URL}/assets/js/media-loader.js`,
-  `${BASE_URL}/assets/js/home-media-loader.js`,
-  `${BASE_URL}/assets/js/gallery-loader.js`,
-  `${BASE_URL}/assets/js/gallery-items.js`,
-  `${BASE_URL}/assets/images/VPPS LOGO ONNLY.jpg`
+  withBase('/'),
+  withBase('/en/'),
+  withBase('/hi/'),
+  withBase('/en/admissions/'),
+  withBase('/hi/admissions/'),
+  withBase('/assets/css/style.css'),
+  withBase('/assets/css/animations.css'),
+  withBase('/assets/css/modern-components.css'),
+  withBase('/assets/js/main.js'),
+  withBase('/assets/js/marketing-enhancements.js'),
+  withBase('/assets/js/admission-wizard.js'),
+  withBase('/assets/js/fee-calculator.js'),
+  withBase('/assets/js/testimonial-carousel.js'),
+  withBase('/assets/js/analytics-tracker.js'),
+  withBase('/assets/js/media-loader.js'),
+  withBase('/assets/js/home-media-loader.js'),
+  withBase('/assets/js/gallery-loader.js'),
+  withBase('/assets/js/gallery-items.js'),
+  withBase('/assets/images/VPPS LOGO ONNLY.jpg')
 ];
 
 // Install event - cache core assets
