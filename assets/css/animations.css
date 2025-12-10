@@ -1393,27 +1393,7 @@ button:focus-visible,
    TESTIMONIAL CAROUSEL ANIMATIONS
    ============================================ */
 
-/* Testimonial Slide Transitions */
-.testimonial-slide {
-  opacity: 0;
-  transform: translateX(100%);
-  transition: opacity var(--animation-duration-slow) var(--animation-easing),
-    transform var(--animation-duration-slow) var(--animation-easing);
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-
-.testimonial-slide.active {
-  opacity: 1;
-  transform: translateX(0);
-  position: relative;
-}
-
-.testimonial-slide.prev {
-  transform: translateX(-100%);
-}
+/* Note: Main .testimonial-slide styles are in style.css */
 
 /* Testimonial Dot Animation */
 .testimonial-dot {

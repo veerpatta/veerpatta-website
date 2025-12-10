@@ -2868,53 +2868,31 @@ video::-webkit-media-controls-volume-slider {
 
 .testimonial-track {
   position: relative;
-  min-height: 300px;
+  display: grid;
   overflow: hidden;
 }
 
+/* All slides occupy the same grid cell, stacked on top of each other */
 .testimonial-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
+  grid-row: 1;
+  grid-column: 1;
   visibility: hidden;
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
-/* First slide visible by default for progressive enhancement */
-.testimonial-slide:first-child {
-  position: relative;
-  opacity: 1;
-  visibility: visible;
-}
-
+/* Only the active slide is visible */
 .testimonial-slide.active {
-  position: relative;
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 
-/* Slide direction states for smooth transitions */
-.testimonial-slide.slide-in-right {
-  transform: translateX(100%);
-  opacity: 0;
-}
-
-.testimonial-slide.slide-in-left {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-
-.testimonial-slide.slide-out-right {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-
+/* Remove transform rules that could interfere */
+.testimonial-slide.slide-in-right,
+.testimonial-slide.slide-in-left,
+.testimonial-slide.slide-out-right,
 .testimonial-slide.slide-out-left {
-  transform: translateX(100%);
-  opacity: 0;
+  transform: none;
 }
 
 /* Respect user's motion preferences */
@@ -4068,22 +4046,7 @@ body {
    Modern testimonial cards with photo support
    ===================================================== */
 
-.testimonial-slide {
-  /* Keep existing transition styles */
-  flex: 0 0 100%;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(0);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.testimonial-slide.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-}
+/* Note: Main .testimonial-slide styles are defined earlier in this file */
 
 .testimonial-content-modern {
   background: #ffffff;
