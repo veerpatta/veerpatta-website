@@ -956,6 +956,38 @@ body.menu-open {
 
   .testimonial-content {
     padding: 1.5rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonials-section {
+    padding: 2rem 0;
+  }
+
+  .testimonial-content {
+    padding: 1.25rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .testimonial-author .author-name {
+    font-size: 0.95rem;
+  }
+
+  .testimonial-author .author-details,
+  .testimonial-author .author-location {
+    font-size: 0.8rem;
   }
 }
 
