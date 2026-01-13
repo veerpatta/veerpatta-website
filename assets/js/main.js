@@ -156,6 +156,11 @@
   const principalHeading = document.querySelector('.principal-heading');
   if (!principalHeading) return;
 
+  if (!('IntersectionObserver' in window)) {
+    principalHeading.classList.add('typewriter', 'finished');
+    return;
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !entry.target.classList.contains('typewriter')) {
@@ -601,6 +606,10 @@ function debounce(func, wait) {
   const updateProgress = debounce(() => {
     const winScroll = document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (height <= 0) {
+      progressBar.style.width = '100%';
+      return;
+    }
     const scrolled = (winScroll / height) * 100;
     progressBar.style.width = scrolled + '%';
   }, 10);
@@ -615,6 +624,17 @@ function debounce(func, wait) {
   const counters = document.querySelectorAll('.why-choose-number');
 
   if (counters.length === 0) return;
+
+  if (!('IntersectionObserver' in window)) {
+    counters.forEach(counter => {
+      const text = counter.textContent;
+      const match = text.match(/(\d+)([+%]*)/);
+      if (match) {
+        counter.textContent = match[1] + (match[2] || '');
+      }
+    });
+    return;
+  }
 
   const easeOutQuart = t => 1 - (--t) * t * t * t;
 
@@ -672,6 +692,16 @@ function debounce(func, wait) {
     document.querySelectorAll('.program-card-modern'),
     document.querySelectorAll('.trust-badge')
   ];
+
+  if (!('IntersectionObserver' in window)) {
+    cardGroups.forEach(group => {
+      group.forEach(card => {
+        card.classList.remove('card-stagger-hidden');
+        card.classList.add('card-stagger-visible');
+      });
+    });
+    return;
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -814,6 +844,11 @@ function debounce(func, wait) {
    ============================================ */
 (function initLazyLoadSections() {
   const lazySections = document.querySelectorAll('[data-lazy-section]');
+
+  if (!('IntersectionObserver' in window)) {
+    lazySections.forEach(section => section.classList.add('loaded'));
+    return;
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1258,4 +1293,3 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 console.log('🎨 Modern Scroll Animations initialized');
-
