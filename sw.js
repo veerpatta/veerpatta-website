@@ -1,7 +1,7 @@
 // Service Worker for Veer Patta Public School Website
 // PWA-lite implementation with stale-while-revalidate caching strategy
 
-const CACHE_VERSION = 'vpps-v3';
+const CACHE_VERSION = 'vpps-v4';
 
 // Compute base path dynamically to work with or without a baseurl
 const computeBasePath = () => {
@@ -26,6 +26,7 @@ const CORE_ASSETS = [
   withBase('/assets/css/style.css'),
   withBase('/assets/css/animations.css'),
   withBase('/assets/css/modern-components.css'),
+  withBase('/assets/css/mobile-deep-optimize.css'),
   withBase('/assets/js/main.js'),
   withBase('/assets/js/marketing-enhancements.js'),
   withBase('/assets/js/admission-wizard.js'),

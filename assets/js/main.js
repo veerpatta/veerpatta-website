@@ -550,6 +550,9 @@ function debounce(func, wait) {
    RIPPLE EFFECT FOR BUTTONS
    ============================================ */
 (function initRippleEffect() {
+  // Respect reduced motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   const buttons = document.querySelectorAll('.btn, .cta-btn, .mobile-nav-link');
 
   buttons.forEach(button => {
@@ -576,6 +579,8 @@ function debounce(func, wait) {
    MAGNETIC EFFECT FOR CTA BUTTONS (DESKTOP ONLY)
    ============================================ */
 (function initMagneticButtons() {
+  // Respect reduced motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (window.innerWidth < 768) return; // Mobile skip
 
   const magneticButtons = document.querySelectorAll('.btn, .desktop-whatsapp-btn');
