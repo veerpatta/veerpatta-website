@@ -1,8 +1,13 @@
 /* Brand Colors & Variables */
 :root {
   --brand-blue: #5375E2;
+  --brand-blue-rgb: 83, 117, 226;
   --brand-green: #84AC64;
+  --brand-green-rgb: 132, 172, 100;
   --brand-yellow: #E2D64B;
+  --brand-yellow-rgb: 226, 214, 75;
+  --brand-red: #E74C3C;
+  --brand-red-rgb: 231, 76, 60;
   --brand-bg: #FEFEFE;
   --text-color: #1e2430;
   --muted-text: #4f5b75;

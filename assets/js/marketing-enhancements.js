@@ -3,9 +3,8 @@
 
 /* ============================================
    TESTIMONIALS CAROUSEL
-   NOTE: Carousel initialization is handled in main.js
+   NOTE: Carousel initialization is handled in testimonial-carousel.js
    to avoid duplicate event listeners and race conditions.
-   See main.js initTestimonialsCarousel() for implementation.
    ============================================ */
 
 /* ============================================

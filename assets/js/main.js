@@ -3,50 +3,8 @@
 
 /* ============================================
    INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
-   Uses CSS classes instead of inline styles for better maintainability
+   Consolidated into initModernScrollAnimations (below)
    ============================================ */
-(function initScrollAnimations() {
-  // Check if IntersectionObserver is supported
-  if (!('IntersectionObserver' in window)) {
-    // Fallback: show all elements immediately for older browsers using CSS classes
-    document.querySelectorAll('.animate-on-scroll, .animate-fadeUp, .animate-slideIn, .animate-scaleIn').forEach(el => {
-      el.classList.add('animated');
-    });
-    return;
-  }
-
-  const observerOptions = {
-    root: null,
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
-        // Unobserve after animation to improve performance
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Observe all elements with animation classes
-  const animatedElements = document.querySelectorAll(
-    '.animate-on-scroll, .animate-fadeUp, .animate-slideIn, .animate-scaleIn, .section, .stat, .stat-card, .program, .program-card'
-  );
-
-  animatedElements.forEach(el => {
-    // Add base animation class if not present
-    if (!el.classList.contains('animate-on-scroll') &&
-      !el.classList.contains('animate-fadeUp') &&
-      !el.classList.contains('animate-slideIn') &&
-      !el.classList.contains('animate-scaleIn')) {
-      el.classList.add('animate-fadeUp');
-    }
-    observer.observe(el);
-  });
-})();
 
 /* ============================================
    COUNTER ANIMATION FOR STATISTICS
@@ -1004,11 +962,19 @@ document.addEventListener('DOMContentLoaded', () => {
    Optimized for mobile devices and 3G networks
    ============================================ */
 (function initModernScrollAnimations() {
+  // Legacy classes to support
+  const legacySelector = '.animate-on-scroll, .animate-fadeUp, .animate-slideIn, .animate-scaleIn';
+  const modernSelector = '.scroll-reveal, .scroll-fade-up, .scroll-fade-left, .scroll-fade-right, .scroll-scale-up, .scroll-blur-fade, .scroll-bounce-up, .scroll-rotate-in, .scroll-stagger, .scroll-stagger-fast, .section-reveal, .section-clip-reveal, .section-line-reveal, .scroll-counter, .scroll-line, .scroll-dot';
+
+  // Combine selectors
+  const allSelector = `${legacySelector}, ${modernSelector}`;
+
   // Skip if IntersectionObserver not supported
   if (!('IntersectionObserver' in window)) {
     // Fallback: make everything visible immediately
-    document.querySelectorAll('.scroll-reveal, .scroll-fade-up, .scroll-fade-left, .scroll-fade-right, .scroll-scale-up, .scroll-blur-fade, .scroll-bounce-up, .scroll-rotate-in, .scroll-stagger, .scroll-stagger-fast, .section-reveal').forEach(el => {
-      el.classList.add('revealed');
+    document.querySelectorAll(allSelector).forEach(el => {
+      el.classList.add('revealed'); // Modern flag
+      el.classList.add('animated'); // Legacy flag
     });
     return;
   }
@@ -1017,8 +983,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
     // Reveal everything immediately for users who prefer reduced motion
-    document.querySelectorAll('.scroll-reveal, .scroll-fade-up, .scroll-fade-left, .scroll-fade-right, .scroll-scale-up, .scroll-blur-fade, .scroll-bounce-up, .scroll-rotate-in, .scroll-stagger, .scroll-stagger-fast, .section-reveal').forEach(el => {
+    document.querySelectorAll(allSelector).forEach(el => {
       el.classList.add('revealed');
+      el.classList.add('animated');
     });
     return;
   }
@@ -1034,36 +1001,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Add revealed class to trigger animation
-        entry.target.classList.add('revealed');
+        const el = entry.target;
+
+        // Add revealed class (Modern system)
+        el.classList.add('revealed');
+
+        // Add animated class (Legacy system) if it has legacy classes
+        if (el.matches(legacySelector) || el.classList.contains('animate-on-scroll')) {
+          el.classList.add('animated');
+        }
 
         // Clean up will-change after transition completes
-        entry.target.addEventListener('transitionend', function handler() {
-          entry.target.classList.add('transition-done');
-          entry.target.removeEventListener('transitionend', handler);
+        el.addEventListener('transitionend', function handler() {
+          el.classList.add('transition-done');
+          el.removeEventListener('transitionend', handler);
         }, { once: true });
 
         // Stop observing this element
-        scrollObserver.unobserve(entry.target);
+        scrollObserver.unobserve(el);
       }
     });
   }, observerOptions);
 
   // Observe all scroll-reveal elements
-  const scrollElements = document.querySelectorAll(
-    '.scroll-reveal, .scroll-fade-up, .scroll-fade-left, .scroll-fade-right, ' +
-    '.scroll-scale-up, .scroll-blur-fade, .scroll-bounce-up, .scroll-rotate-in, ' +
-    '.scroll-stagger, .scroll-stagger-fast, .section-reveal, .section-clip-reveal, ' +
-    '.section-line-reveal, .scroll-counter, .scroll-line, .scroll-dot'
-  );
+  const scrollElements = document.querySelectorAll(allSelector);
 
   scrollElements.forEach(el => scrollObserver.observe(el));
 
   // Failsafe: reveal all elements after 4 seconds if still hidden
   setTimeout(() => {
     scrollElements.forEach(el => {
-      if (!el.classList.contains('revealed')) {
-        el.classList.add('revealed', 'transition-done');
+      // Check legacy or modern revealed state
+      const isRevealed = el.classList.contains('revealed') || el.classList.contains('animated');
+
+      if (!isRevealed) {
+        el.classList.add('revealed', 'animated', 'transition-done');
       }
     });
   }, 4000);
