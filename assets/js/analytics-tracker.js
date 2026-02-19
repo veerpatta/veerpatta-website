@@ -19,6 +19,7 @@
 
   // State
   let sessionData = {
+    sessionId: generateSessionId(),
     pageUrl: window.location.pathname,
     pageTitle: document.title,
     lang: document.documentElement.lang || 'en',
@@ -375,6 +376,14 @@
     return 'other';
   }
 
+  function generateSessionId() {
+    if (window.crypto && window.crypto.randomUUID) {
+      return window.crypto.randomUUID();
+    }
+
+    return `session_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+  }
+
   /* ============================================
      DATA PERSISTENCE
      ============================================ */
@@ -383,8 +392,17 @@
       // Get existing analytics data
       const existingData = JSON.parse(localStorage.getItem(config.storageKey) || '[]');
 
-      // Add current session to history
-      const updatedData = [...existingData, sessionData];
+      // Upsert current session by sessionId to avoid duplicate snapshots
+      const existingIndex = existingData.findIndex(
+        (session) => session.sessionId === sessionData.sessionId
+      );
+
+      const updatedData = [...existingData];
+      if (existingIndex >= 0) {
+        updatedData[existingIndex] = sessionData;
+      } else {
+        updatedData.push(sessionData);
+      }
 
       // Keep only last 100 sessions to avoid storage limits
       const trimmedData = updatedData.slice(-100);
@@ -418,8 +436,17 @@
   function generateAnalyticsReport() {
     const allSessions = getAnalyticsData();
 
+    // Backward compatibility: dedupe legacy snapshot-based data
+    const dedupedSessions = Array.from(
+      allSessions.reduce((sessionsByKey, session, index) => {
+        const sessionKey = session.sessionId || `${session.pageUrl || 'unknown'}_${session.sessionStart || index}`;
+        sessionsByKey.set(sessionKey, session);
+        return sessionsByKey;
+      }, new Map()).values()
+    );
+
     const report = {
-      totalSessions: allSessions.length,
+      totalSessions: dedupedSessions.length,
       avgTimeOnPage: 0,
       avgScrollDepth: 0,
       avgEngagementScore: 0,
@@ -431,7 +458,7 @@
       exitIntents: 0
     };
 
-    allSessions.forEach(session => {
+    dedupedSessions.forEach(session => {
       // Calculate averages
       report.avgTimeOnPage += session.timeOnPage || 0;
       report.avgScrollDepth += session.maxScrollDepth || 0;
@@ -462,10 +489,10 @@
     });
 
     // Calculate final averages
-    if (allSessions.length > 0) {
-      report.avgTimeOnPage = Math.round(report.avgTimeOnPage / allSessions.length);
-      report.avgScrollDepth = Math.round(report.avgScrollDepth / allSessions.length);
-      report.avgEngagementScore = Math.round(report.avgEngagementScore / allSessions.length);
+    if (dedupedSessions.length > 0) {
+      report.avgTimeOnPage = Math.round(report.avgTimeOnPage / dedupedSessions.length);
+      report.avgScrollDepth = Math.round(report.avgScrollDepth / dedupedSessions.length);
+      report.avgEngagementScore = Math.round(report.avgEngagementScore / dedupedSessions.length);
     }
 
     return report;
