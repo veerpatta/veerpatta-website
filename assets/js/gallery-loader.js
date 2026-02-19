@@ -12,37 +12,53 @@
     celebrations: []
   };
 
+  const REGISTRATION_TIMEOUT_MS = 1500;
+
   // Promise to track when items are registered
   let itemsRegisteredResolver;
+  let registrationResolved = false;
   const itemsRegisteredPromise = new Promise(resolve => {
     itemsRegisteredResolver = resolve;
   });
 
-  // Track registered count to know when we're done
-  // Note: This relies on gallery-items.js calling registerItems for all categories
-  // A better approach would be for gallery-items.js to signal "done", but we'll infer it
-  let registeredCategories = 0;
+  function resolveRegistration() {
+    if (registrationResolved) return;
+    registrationResolved = true;
+    if (window.galleryRegistrationTimeout) {
+      clearTimeout(window.galleryRegistrationTimeout);
+      window.galleryRegistrationTimeout = null;
+    }
+    if (itemsRegisteredResolver) itemsRegisteredResolver();
+  }
 
   // IMPORTANT: Expose GalleryLoader FIRST so gallery-items.js can register items
   window.GalleryLoader = {
     registerItems: function (category, files) {
       if (GALLERY_ITEMS[category]) {
         GALLERY_ITEMS[category] = files;
-        // console.log('Registered gallery items for:', category, files);
-        registeredCategories++;
-        
-        // If we have registered items for all categories (or at least some time has passed), we can proceed
-        // Ideally gallery-items.js would be one object we could just check, but it's likely a series of calls
-        if (registeredCategories >= 1) { // Resolve after first registration to start the flow
-             // We'll debounce the resolve mostly to catch all synchronous registrations
-             if (window.galleryRegistrationTimeout) clearTimeout(window.galleryRegistrationTimeout);
-             window.galleryRegistrationTimeout = setTimeout(() => {
-                 if(itemsRegisteredResolver) itemsRegisteredResolver();
-             }, 50);
-        }
+        // Debounce the resolve to allow synchronous registrations to finish.
+        if (window.galleryRegistrationTimeout) clearTimeout(window.galleryRegistrationTimeout);
+        window.galleryRegistrationTimeout = setTimeout(resolveRegistration, 50);
       }
-    }
+    },
+    finalizeRegistration: resolveRegistration
   };
+
+  function waitForRegistration() {
+    return Promise.race([
+      itemsRegisteredPromise.then(() => true),
+      new Promise(resolve => {
+        setTimeout(() => {
+          if (!registrationResolved) {
+            console.warn(
+              `Gallery item registration did not complete within ${REGISTRATION_TIMEOUT_MS}ms. Continuing with available items.`
+            );
+          }
+          resolve(false);
+        }, REGISTRATION_TIMEOUT_MS);
+      })
+    ]);
+  }
 
   async function loadGallery() {
     const galleryGrid = document.getElementById('gallery-grid');
@@ -50,8 +66,8 @@
 
     galleryGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading gallery...</p>';
 
-    // Wait for items to be registered
-    await itemsRegisteredPromise;
+    // Wait for items to be registered, but never block forever.
+    await waitForRegistration();
 
     let totalItems = 0;
     const allCaptions = {};
@@ -114,7 +130,7 @@
     }
 
     if (totalItems === 0) {
-      galleryGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No media files found. Upload to assets/media/gallery/</p>';
+      galleryGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Gallery is temporarily unavailable. Please try again shortly.</p>';
       return;
     }
 
