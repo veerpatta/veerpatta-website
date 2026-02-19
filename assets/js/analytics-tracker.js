@@ -43,6 +43,11 @@
   };
 
   let hasTrackedExit = false;
+  let hasSessionTimedOut = false;
+
+  function updateLastActivity() {
+    sessionData.lastActivity = Date.now();
+  }
 
   /* ============================================
      INITIALIZATION
@@ -66,6 +71,7 @@
     // Scroll tracking
     let scrollTimeout;
     window.addEventListener('scroll', () => {
+      updateLastActivity();
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(trackScroll, 100);
     }, { passive: true });
@@ -85,16 +91,25 @@
 
     // CTA click tracking
     document.addEventListener('click', (e) => {
+      updateLastActivity();
       const target = e.target.closest('a, button');
       if (target) {
         trackCTAClick(target);
       }
     });
 
+    document.addEventListener('keydown', updateLastActivity);
+    document.addEventListener('touchstart', updateLastActivity, { passive: true });
+
     // Form interactions
     const forms = document.querySelectorAll('form, input, textarea, select');
     forms.forEach(element => {
+      const markFormInteraction = () => updateLastActivity();
+      element.addEventListener('input', markFormInteraction);
+      element.addEventListener('change', markFormInteraction);
+
       element.addEventListener('focus', () => {
+        updateLastActivity();
         trackEvent('form_interaction', {
           element: element.tagName,
           id: element.id || 'unnamed'
@@ -233,8 +248,9 @@
      TIME TRACKING
      ============================================ */
   function startHeartbeat() {
+    clearInterval(timers.heartbeat);
+
     timers.heartbeat = setInterval(() => {
-      sessionData.lastActivity = Date.now();
       sessionData.timeOnPage = Math.round((Date.now() - sessionData.sessionStart) / 1000);
 
       // Check for session timeout
@@ -301,6 +317,10 @@
   }
 
   function handleSessionTimeout() {
+    if (hasSessionTimedOut) return;
+
+    hasSessionTimedOut = true;
+
     trackEvent('session_timeout', {
       timeOnPage: sessionData.timeOnPage,
       maxScrollDepth: sessionData.maxScrollDepth
