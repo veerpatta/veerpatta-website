@@ -41,4 +41,7 @@
     // Example: 'annual-day.mp4', 'independence-day.jpg'
   ]);
 
+  // Explicitly signal completion so loader can proceed without waiting for timeout.
+  window.GalleryLoader.finalizeRegistration();
+
 })();
