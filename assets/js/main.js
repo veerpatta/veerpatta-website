@@ -1028,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   scrollElements.forEach(el => scrollObserver.observe(el));
 
-  // Failsafe: reveal all elements after 4 seconds if still hidden
+  // Failsafe: reveal all elements after 2 seconds if still hidden
   setTimeout(() => {
     scrollElements.forEach(el => {
       // Check legacy or modern revealed state
@@ -1038,7 +1038,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add('revealed', 'animated', 'transition-done');
       }
     });
-  }, 4000);
+  }, 2000);
 })();
 
 /* ============================================
@@ -1075,12 +1075,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Apply section-reveal to major sections
-  document.querySelectorAll('.stats-section, .programs-section, .trust-badges-section, .why-parents-section, .achievements-section, .testimonials-section').forEach(el => {
-    if (!el.classList.contains('section-reveal') && !el.classList.contains('revealed')) {
-      el.classList.add('section-reveal');
-    }
-  });
+  // Note: Do NOT add section-reveal to parent section containers.
+  // Hiding entire sections with opacity:0 causes invisible content if
+  // IntersectionObserver fails. Child elements already animate individually.
 
   // Apply scroll-rotate-in to trust badge icons
   document.querySelectorAll('.trust-badge .badge-icon, .stat-icon-emoji').forEach(el => {
@@ -1110,6 +1107,13 @@ document.addEventListener('DOMContentLoaded', () => {
       autoObserver.observe(el);
     });
   }
+
+  // Failsafe: reveal all auto-animated elements after 2 seconds
+  setTimeout(() => {
+    document.querySelectorAll('.scroll-fade-up:not(.revealed), .scroll-scale-up:not(.revealed), .scroll-rotate-in:not(.revealed), .section-reveal:not(.revealed), .scroll-stagger:not(.revealed), .scroll-stagger-fast:not(.revealed)').forEach(el => {
+      el.classList.add('revealed', 'transition-done');
+    });
+  }, 2000);
 })();
 
 /* ============================================
