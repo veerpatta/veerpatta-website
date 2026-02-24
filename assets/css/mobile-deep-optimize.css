@@ -120,7 +120,7 @@
         padding: 2rem 16px;
         max-width: 100%;
         box-sizing: border-box;
-        overflow: hidden;
+        overflow-x: clip;
     }
 
     .hero h1 {
@@ -345,7 +345,9 @@
     .badge-text {
         font-size: 0.75rem;
         font-weight: 600;
-        white-space: nowrap;
+        white-space: normal;
+        text-align: center;
+        min-width: 70px;
     }
 }
 

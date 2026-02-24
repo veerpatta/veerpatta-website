@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
 <head>
   {% include head.html %}
 </head>
+
 <body>
   {{ content }}
   {% include sticky-cta.html %}
@@ -15,10 +17,22 @@
 
   <!-- Conditional loads based on page -->
   {% if page.url contains '/admissions' %}
-    <script src="{{ '/assets/js/admission-wizard.js' | relative_url }}" defer></script>
-    <script src="{{ '/assets/js/fee-calculator.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/admission-wizard.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/fee-calculator.js' | relative_url }}" defer></script>
   {% endif %}
-  
+
+  <!-- Image load handler - show placeholder on 404 -->
+  <script>
+    document.querySelectorAll('.hero-media-container img, .program-image-wrapper img').forEach(function (img) {
+      if (img.complete && img.naturalWidth > 0) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', function () { this.classList.add('loaded'); });
+        img.addEventListener('error', function () { this.style.display = 'none'; });
+      }
+    });
+  </script>
+
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
@@ -34,4 +48,5 @@
     }
   </script>
 </body>
+
 </html>

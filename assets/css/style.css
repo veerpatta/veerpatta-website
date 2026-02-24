@@ -1001,10 +1001,10 @@ body.menu-open {
 .hero .text-highlight::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -12px;
   left: 0;
   width: 100%;
-  height: 6px;
+  height: 4px;
   background: var(--brand-yellow);
   border-radius: 3px;
   opacity: 0.7;
@@ -1234,8 +1234,11 @@ body.menu-open {
   letter-spacing: 2px;
 }
 
-/* Hide placeholder when image loads */
-.hero-media-container img:not([src=""])~.hero-media-placeholder,
+/* Hide placeholder when image loads successfully.
+   The placeholder is visible by default and only hidden
+   via JS when the image actually loads (onload event).
+   Broken images (404) will keep the placeholder visible. */
+.hero-media-container img.loaded~.hero-media-placeholder,
 .hero-media-container video:not([src=""])~.hero-media-placeholder {
   display: none;
 }
@@ -1504,8 +1507,8 @@ body.menu-open {
   opacity: 0.7;
 }
 
-/* Hide placeholder when image exists */
-.program-image-wrapper img:not([src=""])~.program-image-placeholder,
+/* Hide placeholder when image loads successfully */
+.program-image-wrapper img.loaded~.program-image-placeholder,
 .program-image-wrapper video:not([src=""])~.program-image-placeholder {
   display: none;
 }
@@ -3846,25 +3849,25 @@ html {
   color: var(--brand-green);
 }
 
-/* Tablet and desktop - show larger buttons with more space */
+/* Tablet and desktop - compact bar that doesn't obscure content */
 @media (min-width: 768px) {
   .sticky-cta-bar {
-    padding: 12px 16px;
+    padding: 6px 12px;
     gap: 8px;
-    max-width: 600px;
+    max-width: 500px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 12px 12px 0 0;
   }
 
   .cta-btn {
-    min-height: 60px;
-    min-width: 80px;
-    padding: 10px 8px;
+    min-height: 44px;
+    min-width: 70px;
+    padding: 6px 6px;
   }
 
   .cta-label {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
@@ -5699,4 +5702,17 @@ video.loaded {
 
 .skip-link:focus {
   top: 0;
+}
+
+/* =====================================================
+   BODY PADDING - Prevent sticky CTA from hiding content
+   ===================================================== */
+body {
+  padding-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 70px;
+  }
 }
