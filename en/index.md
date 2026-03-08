@@ -72,7 +72,7 @@ keywords: best school in amet, english medium school amet, rbse school amet, nur
 
   <div class="hero-visual">
     <div class="hero-media-container">
-      <img src="{{ '/assets/images/hero-main.png' | relative_url }}" alt="Veer Patta School Campus" loading="eager">
+      <img src="{{ '/assets/images/hero-popout.png' | relative_url }}" alt="Veer Patta School Campus" loading="eager">
     </div>
     <div class="hero-floating-badge">
       <div class="floating-badge-icon">🏆</div>

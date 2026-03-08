@@ -72,7 +72,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 
   <div class="hero-visual">
     <div class="hero-media-container">
-      <img src="{{ '/assets/images/hero-main.png' | relative_url }}" alt="वीर पत्ता पब्लिक स्कूल में सुबह की सभा" loading="eager">
+      <img src="{{ '/assets/images/hero-popout.png' | relative_url }}" alt="वीर पत्ता पब्लिक स्कूल में सुबह की सभा" loading="eager">
     </div>
     <div class="hero-floating-badge">
       <div class="floating-badge-icon">🏆</div>
