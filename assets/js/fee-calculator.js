@@ -52,7 +52,7 @@
     siblings: 0,
     paymentPlan: 'quarterly',
     transport: false,
-    transportZone: 'zone1',
+    transportZone: '',
     applyMerit: false,
     applyEarlyBird: false
   };
@@ -100,6 +100,7 @@
     // Initially hide transport zone selector
     if (transportZoneSelect) {
       transportZoneSelect.parentElement.style.display = 'none';
+      calculationData.transportZone = transportZoneSelect.value || '';
     }
   }
 
@@ -129,6 +130,9 @@
 
     if (transportZoneSelect) {
       transportZoneSelect.parentElement.style.display = e.target.checked ? 'block' : 'none';
+      if (e.target.checked) {
+        calculationData.transportZone = transportZoneSelect.value || '';
+      }
       // Reset transport zone when transport is disabled to prevent stale values
       if (!e.target.checked) {
         calculationData.transportZone = '';
