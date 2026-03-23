@@ -404,6 +404,15 @@
   function printFeeDetails() {
     // Create a print-friendly version
     const printWindow = window.open('', '_blank');
+    if (!printWindow || !printWindow.document) {
+      alert(
+        lang === 'hi'
+          ? 'प्रिंट/पीडीएफ़ खोलने के लिए कृपया पॉप-अप की अनुमति दें।'
+          : 'Please allow popups to open the Print/PDF preview.'
+      );
+      return;
+    }
+
     const printContent = generatePrintContent();
 
     printWindow.document.write(printContent);
