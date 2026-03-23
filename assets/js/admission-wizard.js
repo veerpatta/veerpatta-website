@@ -220,6 +220,10 @@
       village: 'Village/Town'
     };
 
+    const selectPlaceholder = lang === 'hi' ? 'चुनें...' : 'Select...';
+    const nurseryLabel = lang === 'hi' ? 'नर्सरी' : 'Nursery';
+    const classLabelPrefix = lang === 'hi' ? 'कक्षा' : 'Class';
+
     return `
       <h3>${texts.heading}</h3>
       <p>${texts.intro}</p>
@@ -231,11 +235,11 @@
         <div class="form-group">
           <label for="grade">${texts.grade}</label>
           <select id="grade" name="grade" required>
-            <option value="">Select...</option>
-            <option value="nursery">Nursery</option>
+            <option value="">${selectPlaceholder}</option>
+            <option value="nursery">${nurseryLabel}</option>
             <option value="lkg">LKG</option>
             <option value="ukg">UKG</option>
-            ${[...Array(12)].map((_, i) => `<option value="${i + 1}">Class ${i + 1}</option>`).join('')}
+            ${[...Array(12)].map((_, i) => `<option value="${i + 1}">${classLabelPrefix} ${i + 1}</option>`).join('')}
           </select>
         </div>
         <div class="form-group">
@@ -306,6 +310,8 @@
       afternoon: 'Afternoon (2:00 PM - 5:00 PM)'
     };
 
+    const selectPlaceholder = lang === 'hi' ? 'चुनें...' : 'Select...';
+
     return `
       <h3>${texts.heading}</h3>
       <p>${texts.intro}</p>
@@ -317,7 +323,7 @@
         <div class="form-group">
           <label for="visit_time">${texts.time}</label>
           <select id="visit_time" name="visit_time" required>
-            <option value="">Select...</option>
+            <option value="">${selectPlaceholder}</option>
             <option value="morning">${texts.morning}</option>
             <option value="afternoon">${texts.afternoon}</option>
           </select>
