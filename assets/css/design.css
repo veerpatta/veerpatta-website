@@ -1,0 +1,1106 @@
+/* =====================================================
+   VEER PATTA — SITE DESIGN
+   =====================================================
+
+   Ported from the Claude Design project "School website
+   redesign brief" (d7e45125), and applied at every viewport.
+
+   The source design is a fixed 1360px canvas whose only media
+   query is prefers-reduced-motion, so it does not describe its
+   own small-screen behaviour. Two properties of it carry down
+   honestly and do most of the work:
+
+     - every grid is repeat(auto-fit, minmax(Npx, 1fr)), which
+       reflows to fewer columns on its own
+     - the container is width: min(1360px, 100%) with a
+       clamp() gutter
+
+   What the design could not supply, and is therefore authored
+   here rather than copied:
+
+     - spacing is clamp()ed, so a phone does not inherit
+       desktop whitespace (84px section padding becomes 44px)
+     - the section header stacks below 768px and takes the
+       design's side-by-side arrangement above it
+     - the two-row header with its nine-tab bar needs width, so
+       below 1280px the existing hamburger navigation stands
+     - the sticky call bar stays on small screens, where it is
+       the primary contact route; the design's header carries
+       those actions on desktop
+
+   Load order matters: linked LAST, after style.css,
+   animations.css and mobile-deep-optimize.css, so equal
+   specificity resolves here. mobile-deep-optimize.css is
+   entirely max-width and still wins below 768px where it is
+   more specific, which is deliberate — it holds the tuning for
+   slow connections.
+
+   The token block below is the single source of the design's
+   values. Contrast ratios are recorded against it because
+   three of the design's colours fail WCAG AA as text.
+   ===================================================== */
+
+
+/* ---------------------------------------------------
+   TOKENS
+   Values taken from the design. The comments record
+   measured WCAG contrast, because three of the design's
+   colours cannot be used for text as drawn.
+   --------------------------------------------------- */
+:root {
+  /* Ink — all safe for body text */
+  --d-ink:          #0B1631;  /* 17.90:1 on white */
+  --d-navy:         #17466B;  /*  9.88:1 on white */
+  --d-slate:        #33455E;  /*  9.75:1 on white */
+  --d-muted:        #5A6E88;  /*  5.22:1 on white, 4.89 on tint — smallest text-safe grey */
+
+  /* Text-unsafe. Large display text, borders, fills and icons only. */
+  --d-grey-lg:      #7089A6;  /*  3.61:1 — large text only (≥18.66px bold / ≥24px) */
+  --d-grey-deco:    #93AAC2;  /*  2.39:1 — decoration only, never text */
+
+  /* Brand blues */
+  --d-blue:         #1E7BB8;  /*  4.58:1 on white — but only 4.30 on --d-surface,
+                                  so links on tinted panels use --d-navy instead */
+  --d-cyan:         #2BA9DE;  /*  2.68:1 — NEVER text, and never with white text on it.
+                                  Accent bars, underlines, focus rings, icon fills. */
+  --d-cyan-soft:    #7FD3F5;
+
+  /* Surfaces and lines */
+  --d-white:        #FFFFFF;
+  --d-surface:      #F4F8FC;
+  --d-surface-2:    #FBFDFF;
+  --d-line:         #E1EBF5;
+  --d-line-soft:    #EDF3F9;
+  --d-line-2:       #DCEBF7;
+  --d-line-3:       #C9DCEF;
+
+  /* Type */
+  --d-font-head: 'Bricolage Grotesque', 'Noto Sans Devanagari', 'Poppins', sans-serif;
+  --d-font-body: 'Manrope', 'Noto Sans Devanagari', 'Poppins', sans-serif;
+
+  /* Radii */
+  --d-r-sm:  10px;
+  --d-r-md:  12px;
+  --d-r-lg:  16px;
+  --d-r-xl:  18px;
+  --d-r-pill: 999px;
+
+  /* Elevation */
+  --d-shadow-header: 0 1px 0 rgba(11,22,49,0.02), 0 10px 30px -22px rgba(11,22,49,0.28);
+  --d-shadow-card:   0 22px 44px -26px rgba(23,70,107,0.4);
+  --d-shadow-lift:   0 30px 70px -30px rgba(11,22,49,0.42);
+
+  /* Layout */
+  --d-container: 1360px;
+  --d-gutter: clamp(16px, 3vw, 40px);
+
+  /* Uppercase kicker tracking, straight from the design */
+  --d-track-kicker: 0.16em;
+  --d-track-head: -0.02em;
+}
+
+/* ---------------------------------------------------
+   BASE TYPOGRAPHY
+   --------------------------------------------------- */
+body {
+  font-family: var(--d-font-body);
+  color: var(--d-slate);
+  background: var(--d-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--d-font-head);
+  letter-spacing: var(--d-track-head);
+  color: var(--d-ink);
+  text-wrap: pretty;
+}
+
+p { text-wrap: pretty; }
+
+a { color: var(--d-blue); }
+a:hover { color: var(--d-navy); }
+
+/* Hindi needs more leading than the Latin faces. Mirrors the
+   existing html[lang="hi"] treatment but for the new stack. */
+html[lang="hi"] body,
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="hi"] h4 {
+  font-family: 'Noto Sans Devanagari', var(--d-font-body);
+  line-height: 1.75;
+}
+
+/* Visible focus, using the accent as a ring rather than as text. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--d-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------
+   LAYOUT CONTAINER
+   Was width: min(1100px, 92vw) with the header sitting in a
+   1400px shell — the nav overhung every section beneath it.
+   Both are aligned to the design's 1360px here.
+   --------------------------------------------------- */
+.container {
+  width: min(var(--d-container), 100%);
+  padding: 0 var(--d-gutter);
+}
+/* ---------------------------------------------------
+   FOOTER
+   The design has no footer of its own — it ends at the
+   enquiry drawer — so this is derived from its tokens
+   rather than copied.
+   --------------------------------------------------- */
+.site-footer {
+  background: var(--d-ink);
+  color: var(--d-line);
+  border-top: none;
+}
+
+.site-footer .container {
+  max-width: var(--d-container);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 40px;
+}
+
+.footer-heading {
+  font-family: var(--d-font-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: var(--d-track-kicker);
+  text-transform: uppercase;
+  /* On #0B1631 the soft cyan reads at well over 4.5:1 */
+  color: var(--d-cyan-soft);
+}
+
+/* The footer band is dark now, so every inherited ink colour from
+   style.css has to be lifted or it lands on near-black. Measured
+   against #0B1631, the old values came out at 1.15:1 and 2.63:1.
+   style.css uses .footer-column h3.footer-heading (0,2,1), so these
+   selectors are deliberately specific enough to win. */
+.site-footer,
+.site-footer p,
+.site-footer li,
+.site-footer span,
+.site-footer a,
+.site-footer .footer-nav-links li a,
+.site-footer .footer-nav-links a,
+.site-footer .footer-contact,
+.site-footer .footer-contact a,
+.site-footer .footer-hours {
+  color: var(--d-line);
+  font-size: 14px;
+}
+
+.site-footer .footer-column h3.footer-heading {
+  color: var(--d-cyan-soft);
+}
+
+.site-footer .footer-nav-links li a:hover,
+.site-footer .footer-nav-links a:hover,
+.site-footer .footer-contact a:hover,
+.site-footer a:hover {
+  color: var(--d-white);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--d-grey-deco);
+  font-size: 13px;
+}
+
+/* style.css uses .footer-legal-links li a (0,2,0) */
+.site-footer .footer-legal-links li a,
+.site-footer .footer-legal-links a,
+.site-footer .footer-copyright,
+.site-footer .footer-recognition {
+  color: var(--d-grey-deco);
+}
+
+.site-footer .footer-legal-links li a:hover,
+.site-footer .footer-legal-links a:hover { color: var(--d-white); }
+
+/* The skip link is the one control keyboard-only users depend on, and
+   it shipped at 4.19:1 on the old brand blue. */
+.skip-link,
+.skip-link:focus {
+  background: var(--d-navy);
+  color: var(--d-white);
+}
+
+/* ---------------------------------------------------
+   SECTION RHYTHM
+   The design paces the page at 84px vertical with
+   alternating white / #F4F8FC bands. Existing pages wrap
+   each section in .container, so the tint is painted with
+   a full-bleed clip rather than extra markup.
+   --------------------------------------------------- */
+section.container {
+  /* The design paces at 84px; scale it down rather than
+     letting a phone inherit desktop whitespace. */
+  padding-top: clamp(44px, 8vw, 84px);
+  padding-bottom: clamp(44px, 8vw, 84px);
+}
+
+.stats-section,
+.trust-badges-section,
+.achievements-section,
+.testimonials-section {
+  position: relative;
+  z-index: 0;
+}
+
+.stats-section::before,
+.trust-badges-section::before,
+.achievements-section::before,
+.testimonials-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--d-surface);
+  /* Full-bleed tint without leaving .container */
+  clip-path: inset(0 -100vmax);
+  box-shadow: 0 0 0 100vmax var(--d-surface);
+  z-index: -1;
+}
+
+/* ---------------------------------------------------
+   SECTION HEADER
+   Design: kicker + title on the left (max 620px), a
+   supporting paragraph on the right (max 380px), baselines
+   aligned. Existing markup is a centred stack, so this
+   converts it to the two-column arrangement.
+   --------------------------------------------------- */
+.section-header-modern {
+  /* Stacked by default; the design's side-by-side arrangement
+     needs room and is restored at 768px. */
+  display: grid;
+  gap: 14px;
+  text-align: left;
+  margin-bottom: clamp(26px, 4vw, 42px);
+}
+
+.section-heading-main {
+  font-family: var(--d-font-head);
+  font-size: clamp(27px, 2.9vw, 42px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--d-ink);
+  max-width: 620px;
+  margin: 0;
+}
+
+/* The existing .heading-accent span becomes the design's
+   uppercase kicker sitting above the title. */
+.heading-accent {
+  display: block;
+  font-family: var(--d-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--d-track-kicker);
+  text-transform: uppercase;
+  color: var(--d-blue);
+  margin-bottom: 14px;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--d-muted);
+  max-width: 380px;
+  margin: 0;
+  text-align: left;
+}
+
+/* The design uses whitespace, not a rule, between header and grid. */
+.section-divider { display: none; }
+
+/* ---------------------------------------------------
+   CARD SURFACE
+   One shared treatment, since every card class in the
+   codebase maps to the same design object.
+   --------------------------------------------------- */
+.stat-card-modern,
+.program-card-modern,
+.about-teaser-card,
+.why-parents-card,
+.achievements-card,
+.trust-badge,
+.card,
+.news-item {
+  background: var(--d-white);
+  border: 1px solid var(--d-line);
+  border-radius: var(--d-r-lg);
+  box-shadow: none;
+  transition: border-color .18s ease, box-shadow .28s ease,
+              transform .28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card-modern:hover,
+.program-card-modern:hover,
+.about-teaser-card:hover,
+.card:hover,
+.news-item:hover {
+  border-color: var(--d-cyan);
+  box-shadow: var(--d-shadow-card);
+  transform: translateY(-3px);
+}
+
+/* ---------------------------------------------------
+   GRIDS - the design's fluid auto-fit tracks
+   --------------------------------------------------- */
+.stats-grid,
+.stats-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.programs-grid,
+.programs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 18px;
+}
+
+.trust-badges-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  overflow: visible;
+}
+
+/* ---------------------------------------------------
+   STAT CARDS
+   --------------------------------------------------- */
+.stat-card-modern {
+  padding: clamp(20px, 3.5vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  min-height: 168px;
+  justify-content: center;
+}
+
+.stat-icon-emoji {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: #EDF6FC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.stat-number {
+  font-family: var(--d-font-head);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--d-track-head);
+  color: var(--d-navy);
+  /* the old design clipped a gradient through this text */
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  /* the design's 3.61:1 grey would fail at this size */
+  color: var(--d-muted);
+}
+
+/* ---------------------------------------------------
+   PROGRAM CARDS
+   --------------------------------------------------- */
+.program-card-modern {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.program-image-wrapper,
+.program-image-placeholder {
+  border-radius: 0;
+  background: var(--d-surface);
+  border-bottom: 1px solid var(--d-line);
+}
+
+.program-content {
+  padding: 24px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.program-content h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--d-ink);
+  margin: 0;
+}
+
+.program-badge-emoji {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: #EDF6FC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.program-learn-more {
+  margin-top: auto;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--d-blue);
+}
+
+/* ---------------------------------------------------
+   TRUST BADGES
+   --------------------------------------------------- */
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 16px;
+  border-radius: var(--d-r-md);
+  background: var(--d-surface-2);
+  min-width: 0;
+}
+
+.badge-icon,
+.trust-badge-icon {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  background: var(--d-surface);
+  border: 1px solid var(--d-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.badge-text,
+.trust-badge-text {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--d-navy);
+  line-height: 1.35;
+}
+
+/* ---------------------------------------------------
+   LIST CARDS - why-parents, achievements
+   --------------------------------------------------- */
+.why-parents-card,
+.achievements-card {
+  padding: clamp(22px, 4vw, 34px) clamp(20px, 4vw, 36px);
+}
+
+.why-parents-list,
+.achievements-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 4px 32px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.why-parents-list li,
+.achievements-list li {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--d-slate);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--d-line-soft);
+}
+
+.achievement-emoji {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* ---------------------------------------------------
+   TEASER CARDS
+   Four near-identical blocks on the homepage. The design
+   treats these as a quick-answer grid, so their vertical
+   rhythm is tightened to read as one band.
+   --------------------------------------------------- */
+section.container.about-teaser,
+section.container.academics-teaser,
+section.container.gallery-teaser,
+section.container.contact-teaser {
+  padding-top: 0;
+  padding-bottom: 18px;
+}
+
+.about-teaser-card {
+  padding: clamp(20px, 3.5vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about-teaser-card h2,
+.about-teaser-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--d-ink);
+  margin: 0;
+}
+
+.about-teaser-card p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--d-muted);
+}
+
+/* ---------------------------------------------------
+   BUTTONS
+   --------------------------------------------------- */
+.btn,
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--d-blue), var(--d-navy));
+  color: var(--d-white);
+  font-family: var(--d-font-body);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 26px;
+  border-radius: 11px;
+  border: none;
+  box-shadow: 0 12px 26px -12px rgba(30, 123, 184, 0.7);
+}
+
+.btn:hover,
+.btn-hero-primary:hover {
+  color: var(--d-white);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px -12px rgba(30, 123, 184, 0.9);
+}
+
+.btn.btn-secondary,
+.btn-secondary,
+.btn-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--d-surface-2);
+  border: 1px solid var(--d-line-2);
+  color: var(--d-navy);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 26px;
+  border-radius: 11px;
+  box-shadow: none;
+}
+
+.btn.btn-secondary:hover,
+.btn-secondary:hover,
+.btn-hero-secondary:hover {
+  border-color: var(--d-cyan);
+  background: #EDF6FC;
+  color: var(--d-navy);
+}
+
+.pill {
+  border: 1px solid var(--d-line-2);
+  background: var(--d-surface-2);
+  color: var(--d-navy);
+  font-size: 13.5px;
+  font-weight: 700;
+  border-radius: var(--d-r-pill);
+  padding: 10px 18px;
+}
+
+.pill.active,
+.pill[aria-selected="true"] {
+  background: var(--d-navy);
+  border-color: var(--d-navy);
+  color: var(--d-white);
+}
+
+/* ---------------------------------------------------
+   HERO
+   --------------------------------------------------- */
+.hero {
+  background: linear-gradient(160deg, var(--d-surface) 0%, var(--d-white) 62%);
+  border: 1px solid var(--d-line);
+  border-radius: 24px;
+  max-width: var(--d-container);
+  margin: clamp(14px, 3vw, 32px) auto 0;
+  padding: clamp(38px, 7vw, 72px) clamp(20px, 4vw, 64px);
+  text-align: left;
+}
+
+.hero h1 {
+  font-family: var(--d-font-head);
+  font-size: clamp(29px, 6vw, 56px);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: var(--d-track-head);
+  color: var(--d-ink);
+}
+
+.hero-description {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--d-muted);
+  max-width: 620px;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.hero-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.trust-badge-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--d-navy);
+  background: var(--d-white);
+  border: 1px solid var(--d-line);
+  border-radius: var(--d-r-pill);
+  padding: 9px 15px;
+}
+
+.hero-floating-badge {
+  background: var(--d-white);
+  border: 1px solid var(--d-line);
+  border-radius: var(--d-r-md);
+  box-shadow: var(--d-shadow-card);
+  color: var(--d-navy);
+}
+
+/* The old gradient text-clip fights the new ink colour */
+.text-highlight,
+.text-highlight.shimmer {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--d-blue);
+}
+
+/* ---------------------------------------------------
+   TESTIMONIALS
+   --------------------------------------------------- */
+.testimonial-slide,
+.testimonial-content {
+  background: var(--d-white);
+  border: 1px solid var(--d-line);
+  border-radius: var(--d-r-lg);
+  padding: 30px;
+}
+
+.testimonial-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--d-slate);
+}
+
+/* Decorative, but 2BA9DE is 2.68:1 - under the 3.0 large-text floor. */
+.quote-icon { color: var(--d-blue); }
+
+.author-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--d-navy);
+}
+
+.author-location {
+  font-size: 12.5px;
+  color: var(--d-muted);
+}
+
+.testimonial-dot { background: var(--d-line-3); }
+.testimonial-dot.active { background: var(--d-cyan); }
+
+/* ---------------------------------------------------
+   FAQ ACCORDION
+   --------------------------------------------------- */
+.faq-item {
+  border: 1px solid var(--d-line);
+  border-radius: var(--d-r-md);
+  background: var(--d-white);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.faq-question {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--d-ink);
+  padding: 20px 24px;
+  background: transparent;
+}
+
+.faq-question:hover { background: var(--d-surface); }
+
+.faq-answer {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--d-muted);
+  padding: 0 24px 20px;
+}
+
+.faq-icon { color: var(--d-blue); }
+
+.faq-category {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--d-track-kicker);
+  text-transform: uppercase;
+  color: var(--d-blue);
+}
+
+/* ---------------------------------------------------
+   FORMS - enquiry drawer, wizard
+   --------------------------------------------------- */
+.form-group label,
+.form-row label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--d-slate);
+  margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.form-row input,
+.form-row select {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid var(--d-line-2);
+  border-radius: var(--d-r-sm);
+  font-size: 14.5px;
+  color: var(--d-ink);
+  background: var(--d-surface-2);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--d-cyan);
+  background: var(--d-white);
+}
+
+.required { color: #C0392B; }
+
+.enquiry-drawer {
+  border-radius: var(--d-r-xl) 0 0 var(--d-r-xl);
+  box-shadow: var(--d-shadow-lift);
+}
+
+.drawer-header h3 {
+  font-family: var(--d-font-head);
+  color: var(--d-ink);
+}
+
+.wizard-progress-bar {
+  background: var(--d-line);
+  border-radius: var(--d-r-pill);
+}
+
+.wizard-progress-fill {
+  background: linear-gradient(90deg, var(--d-cyan), var(--d-blue));
+}
+
+.wizard-progress-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--d-muted);
+}
+
+.step-number {
+  background: var(--d-navy);
+  color: var(--d-white);
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------
+   NEWS / NOTICES
+   --------------------------------------------------- */
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 18px;
+  list-style: none;
+  padding: 0;
+}
+
+.news-item { padding: 24px 26px; }
+
+.news-date {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--d-track-kicker);
+  text-transform: uppercase;
+  color: var(--d-blue);
+}
+
+.news-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--d-ink);
+  margin: 8px 0;
+}
+
+.news-content {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--d-muted);
+}
+/* ---------------------------------------------------
+   MOTION
+   --------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .desktop-whatsapp-btn:hover { transform: none; }
+}
+
+/* =====================================================
+   >= 768px — the design's side-by-side section header
+   ===================================================== */
+@media (min-width: 768px) {
+
+  .section-header-modern {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+}
+
+/* =====================================================
+   >= 1280px — the design's two-row header
+   Row 1: brand (left) + language/WhatsApp (right)
+   Row 2: full-width nav tab bar
+
+   Below this the nine-tab bar cannot fit, so style.css's
+   hamburger navigation stands instead.
+   ===================================================== */
+@media (min-width: 1280px) {
+
+  /* ---------------------------------------------------
+     HEADER — two rows
+     Row 1: brand (left) + language/WhatsApp (right)
+     Row 2: full-width nav tab bar
+
+     Achieved purely with flex `order` on the existing
+     children, so header.html markup is unchanged.
+     --------------------------------------------------- */
+  .site-header {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--d-line);
+    box-shadow: var(--d-shadow-header);
+  }
+
+  .site-header.scrolled { box-shadow: var(--d-shadow-header); }
+
+  /* The .shrink class is added on scroll by
+     marketing-enhancements.js and collapses the brand and nav
+     labels. That fights the design's stable two-row header, so
+     it is neutralised here (the class still applies below 1280px). */
+  .site-header.shrink .header-container { min-height: 0; padding: 0 var(--d-gutter); gap: 22px; }
+  .site-header.shrink .school-logo { width: 54px; height: 54px; }
+  .site-header.shrink .brand-name { display: block; font-size: 20px; }
+  .site-header.shrink .nav-label { display: inline; }
+
+  .header-container {
+    max-width: var(--d-container);
+    margin: 0 auto;
+    padding: 0 var(--d-gutter);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 22px;
+    row-gap: 0;
+    min-height: 0;
+  }
+
+  /* Row 1 — brand */
+  .header-logo  { order: 1; flex: none; padding: 13px 0; }
+  .header-brand { order: 1; flex: none; padding: 13px 0; }
+
+  .school-logo {
+    width: 54px;
+    height: 54px;
+    border-radius: 0;
+    object-fit: contain;
+    /* Drops the logo's white JPEG box onto the header tint */
+    mix-blend-mode: multiply;
+  }
+
+  .brand-name {
+    font-family: var(--d-font-head);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--d-navy);
+    letter-spacing: var(--d-track-head);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  /* The <br class="mobile-break"> is for the narrow layout only */
+  .brand-name .mobile-break { display: none; }
+
+  /* Row 1 — right cluster */
+  .desktop-lang-switch { order: 2; margin-left: auto; flex: none; padding: 12px 0; }
+  .desktop-whatsapp-btn { order: 2; flex: none; }
+
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--d-surface);
+    border: 1px solid var(--d-line);
+    color: var(--d-navy);
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 11px 15px;
+    border-radius: var(--d-r-sm);
+    text-decoration: none;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--d-cyan);
+    background: #EDF6FC;
+    color: var(--d-navy);
+  }
+
+  .desktop-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* Solid #2BA9DE would put white on a 2.68:1 background.
+       The gradient keeps the accent while staying legible. */
+    background: linear-gradient(135deg, var(--d-blue), var(--d-navy));
+    color: var(--d-white);
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 11px 16px;
+    border-radius: var(--d-r-sm);
+    box-shadow: 0 12px 26px -12px rgba(30, 123, 184, 0.7);
+  }
+
+  .desktop-whatsapp-btn:hover {
+    color: var(--d-white);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px -12px rgba(30, 123, 184, 0.9);
+  }
+
+  /* Row 2 — nav tab bar */
+  .desktop-nav {
+    order: 3;
+    flex: 1 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 2px;
+    margin-left: 0;
+    border-top: 1px solid var(--d-line-soft);
+  }
+
+  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 14px 11px 13px;
+    font-size: 13.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--d-muted);
+    border-radius: 8px 8px 0 0;
+    text-decoration: none;
+  }
+
+  /* The design's nav is text-only; the icons belong to the
+     compact mobile treatment. */
+  .nav-icon  { display: none; }
+  .nav-label { display: inline; }
+
+  .nav-link:hover {
+    background: var(--d-surface);
+    color: var(--d-navy);
+  }
+
+  /* Active tab underline. Requires aria-current="page", which
+     header.html now sets — the desktop nav previously had no
+     current-page indicator at all, for sighted or AT users. */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 11px;
+    right: 11px;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: transparent;
+  }
+
+  .nav-link[aria-current="page"] {
+    color: var(--d-navy);
+    font-weight: 700;
+  }
+
+  .nav-link[aria-current="page"]::after {
+    background: var(--d-cyan);
+  }
+  /* ---------------------------------------------------
+     STICKY CTA
+     The design carries its actions in the header, so the
+     bottom bar is suppressed on desktop and the body padding
+     it reserved is released.
+     --------------------------------------------------- */
+  .sticky-cta-bar { display: none; }
+  body { padding-bottom: 0; }
+
+  /* Orphaned float - not included by the layout */
+  .whatsapp-float { display: none; }
+
+}

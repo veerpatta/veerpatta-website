@@ -44,7 +44,7 @@ jobs:
           for f in _site/index.html _site/en/index.html _site/hi/index.html \
                    _site/en/beyond/index.html _site/hi/beyond/index.html \
                    _site/en/digital/index.html _site/hi/digital/index.html \
-                   _site/assets/css/desktop.css \
+                   _site/assets/css/design.css \
                    _site/404.html _site/sitemap.xml _site/_headers; do
             test -f "$f" || { echo "missing $f"; exit 1; }
           done
