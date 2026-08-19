@@ -21,7 +21,7 @@ Push to main
       ├──► GitHub Actions (build.yml) ──► build check, publishes nothing
       │
       └──► Cloudflare Workers Builds
-             bundle exec jekyll build  ──►  _site/
+             bundle install && jekyll build  ──►  _site/
              npx wrangler deploy       ──►  live site
 ```
 
@@ -79,7 +79,7 @@ Settings → Build), not in this repository:
 |---|---|
 | Git repository | `veerpatta/veerpatta-website` |
 | Production branch | `main` |
-| Build command | `bundle exec jekyll build` |
+| Build command | `bundle install && bundle exec jekyll build` |
 | Deploy command | `npx wrangler deploy` |
 | Root directory | `/` |
 
@@ -99,11 +99,12 @@ a different one without committing.
 | Variable | Value | Why |
 |---|---|---|
 | `JEKYLL_ENV` | `production` | Enables production-only output |
-| `GITHUB_TOKEN` | a fine-grained token, public-repo read | See below |
 
-`jekyll-remote-theme` fetches `pages-themes/cayman` from the GitHub API at build
-time. Without a token the build uses GitHub's anonymous rate limit, shared
-across Cloudflare's build IPs, so it can fail intermittently with a 403.
+No `GITHUB_TOKEN` is needed. It used to be, because `jekyll-remote-theme`
+fetched `pages-themes/cayman` from the GitHub API on every build and the
+anonymous rate limit is shared across Cloudflare's build IPs. That theme was
+removed - it rendered nothing, verified by a byte-identical build - so the
+network dependency is gone rather than worked around.
 
 ## Files Cloudflare reads from `_site/`
 
@@ -155,6 +156,15 @@ or the deploy command never ran. Check Settings → Build in the dashboard.
 ### Every path returns 200, including nonexistent ones
 `not_found_handling` is set to `single-page-application`. It should be
 `404-page` for this site.
+
+### The build fails with a missing gem, or `jekyll: command not found`
+The build command has to install dependencies itself. Workers Builds runs
+exactly the command you give it, and nothing else. Use
+`bundle install && bundle exec jekyll build`, not `bundle exec jekyll build`.
+
+GitHub Actions hides this: `ruby/setup-ruby` with `bundler-cache: true`
+installs the gems before the build step ever runs, so the workflow can pass
+while the Cloudflare build fails on the same commit.
 
 ### Build fails on Cloudflare but the GitHub Actions check passed
 Usually the environment differs. Check that `.ruby-version` is present and that
