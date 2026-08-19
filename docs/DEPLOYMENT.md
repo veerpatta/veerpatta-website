@@ -79,9 +79,19 @@ Settings → Build), not in this repository:
 |---|---|
 | Git repository | `veerpatta/veerpatta-website` |
 | Production branch | `main` |
-| Build command | `bundle exec jekyll build` |
+| **Build command** | **empty** |
 | Deploy command | `npx wrangler deploy` |
 | Root directory | `/` |
+
+**Build command must stay empty.** Ruby is deliberately not on the deployment
+path. `_site/` is committed to the repository and Cloudflare uploads it as-is,
+so a deploy is a file upload and takes seconds.
+
+Running Jekyll on Cloudflare was tried and abandoned: the image spent about
+four minutes initializing and six installing gems before the build even
+started, and the build then failed in four seconds for reasons the dashboard
+log never made legible. GitHub Actions compiles the same commit in twenty
+seconds, so that is where the build happens.
 
 ### Ruby version
 

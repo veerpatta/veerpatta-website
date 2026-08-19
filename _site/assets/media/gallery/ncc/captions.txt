@@ -1,0 +1,5 @@
+Image and Video Captions - NCC
+Format: filename.ext | EN: English caption | HI: Hindi caption
+Examples:
+drill.mp4 | EN: NCC Drill Practice | HI: एनसीसी ड्रिल अभ्यास
+parade.jpg | EN: Republic Day Parade | HI: गणतंत्र दिवस परेड

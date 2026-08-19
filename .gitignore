@@ -1,5 +1,9 @@
 # Jekyll Build Files
-_site/
+# _site/ is intentionally COMMITTED. Cloudflare deploys these files
+# directly, so no Ruby toolchain runs on the deployment path. The
+# GitHub Actions workflow rebuilds and commits it on every push.
+# Do not re-add _site/ here without also restoring a Cloudflare build
+# command, or deploys will ship stale HTML.
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata

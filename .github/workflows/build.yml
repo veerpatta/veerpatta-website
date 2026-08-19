@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: "build-${{ github.ref }}"
@@ -67,3 +67,20 @@ jobs:
           path: _site/
           include-hidden-files: true
           retention-days: 7
+
+      # _site/ is committed because Cloudflare deploys it directly - no Ruby
+      # runs on the deployment path. Keep it in lockstep with the sources.
+      # [skip ci] stops this commit re-triggering this workflow; Cloudflare
+      # still sees the push and deploys the refreshed files.
+      - name: Commit rebuilt site
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f _site
+          if git diff --cached --quiet; then
+            echo "_site already up to date"
+            exit 0
+          fi
+          git commit -m "chore: rebuild _site [skip ci]"
+          git push origin HEAD:main

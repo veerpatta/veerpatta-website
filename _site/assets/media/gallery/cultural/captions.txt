@@ -1,0 +1,5 @@
+Image and Video Captions - Cultural
+Format: filename.ext | EN: English caption | HI: Hindi caption
+Examples:
+dance.mp4 | EN: Independence Day Dance | HI: स्वतंत्रता दिवस नृत्य
+drama.jpg | EN: Annual Day Drama | HI: वार्षिक दिवस नाटक

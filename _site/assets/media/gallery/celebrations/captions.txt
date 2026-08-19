@@ -1,0 +1,5 @@
+Image and Video Captions - Celebrations
+Format: filename.ext | EN: English caption | HI: Hindi caption
+Examples:
+annual-day.mp4 | EN: Annual Day 2024 | HI: वार्षिक दिवस 2024
+teachers-day.jpg | EN: Teachers Day | HI: शिक्षक दिवस
