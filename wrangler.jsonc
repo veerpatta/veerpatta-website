@@ -18,5 +18,21 @@
     // be wrong here, since it answers 200 for every unmatched path and would
     // let search engines index soft 404s.
     "not_found_handling": "404-page"
+  },
+
+  // Workers tracing, per developers.cloudflare.com/agent-setup/tracing.md.
+  //
+  // Currently inert, and honestly so: automatic instrumentation records
+  // handler, fetch and binding calls, and all three require the Worker to be
+  // invoked. This Worker has no `main`, so every request is answered straight
+  // from the static asset store without running Worker code. Nothing will
+  // appear in the dashboard until a Worker script exists.
+  //
+  // Left enabled so tracing is already on if a script is ever added. If that
+  // happens, set head_sampling_rate below 1 before it sees real traffic.
+  "observability": {
+    "traces": {
+      "enabled": true
+    }
   }
 }

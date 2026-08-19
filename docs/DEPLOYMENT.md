@@ -52,6 +52,24 @@ Notes on that file:
 - `wrangler.jsonc` is listed under `exclude:` in `_config.yml`. It has no
   frontmatter, so Jekyll would otherwise copy it into `_site/` and publish it.
 
+### Tracing
+
+`observability.traces.enabled` is set to `true`, following
+[Cloudflare's agent tracing setup](https://developers.cloudflare.com/agent-setup/tracing.md).
+
+Be aware that it currently records nothing. Automatic instrumentation captures
+handler calls, outbound fetch calls, and binding calls — all of which require
+the Worker to actually be invoked. This Worker has no `main`, so every request
+is answered directly from the static asset store without running Worker code.
+No traces will appear in the dashboard until a Worker script exists.
+
+The rest of that guide does not apply here: it instruments agent entry points
+built on Think, Flue, or the AI SDK, and this is a static Jekyll site with no
+agent code and no `main`.
+
+If a Worker script is ever added, set `head_sampling_rate` below `1` before it
+takes real traffic — the default samples 100% of invocations.
+
 ## Workers Builds settings
 
 These live in the Cloudflare dashboard (Workers & Pages → `veerpatta-website` →
