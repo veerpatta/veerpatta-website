@@ -96,7 +96,7 @@ gem "jekyll-remote-theme"
 gem "jekyll-seo-tag"
 ```
 
-**Important**: No npm/webpack/build tools. Cloudflare Workers runs `bundle install && bundle exec jekyll build` and serves `_site/`.
+**Important**: No npm/webpack/build tools. Cloudflare Workers runs `bundle exec jekyll build` and serves `_site/`.
 
 ### Design Principles
 1. **Mobile-First**: 70% of traffic is from mobile devices
@@ -1004,7 +1004,7 @@ Developer Push to GitHub (main)
          └──► Cloudflare Workers
                 - Ruby from .ruby-version
                 - bundle install
-                - bundle install && bundle exec jekyll build
+                - bundle exec jekyll build
                         ↓
                 Static HTML in _site/
                         ↓

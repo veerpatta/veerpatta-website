@@ -79,7 +79,7 @@ Settings → Build), not in this repository:
 |---|---|
 | Git repository | `veerpatta/veerpatta-website` |
 | Production branch | `main` |
-| Build command | `bundle install && bundle exec jekyll build` |
+| Build command | `bundle exec jekyll build` |
 | Deploy command | `npx wrangler deploy` |
 | Root directory | `/` |
 
@@ -157,18 +157,24 @@ or the deploy command never ran. Check Settings → Build in the dashboard.
 `not_found_handling` is set to `single-page-application`. It should be
 `404-page` for this site.
 
-### The build fails with a missing gem, or `jekyll: command not found`
-The build command has to install dependencies itself. Workers Builds runs
-exactly the command you give it, and nothing else. Use
-`bundle install && bundle exec jekyll build`, not `bundle exec jekyll build`.
+### The deploy step fails and nothing was built
+Check **Build command** under Settings -> Build in the dashboard. If it reads
+`None`, Workers Builds clones the repo and installs dependencies but never runs
+Jekyll, so `_site/` never exists and the deploy fails on the assets directory
+named in `wrangler.jsonc`.
 
-GitHub Actions hides this: `ruby/setup-ruby` with `bundler-cache: true`
-installs the gems before the build step ever runs, so the workflow can pass
-while the Cloudflare build fails on the same commit.
+This is a dashboard setting the repository cannot supply, and the GitHub
+Actions check cannot catch it: Actions runs its own build steps and passes on
+the very commit whose Cloudflare build fails.
+
+Workers Builds installs Ruby gems automatically when it finds a Gemfile, so the
+build command does not need its own `bundle install`.
+
 
 ### Build fails on Cloudflare but the GitHub Actions check passed
-Usually the environment differs. Check that `.ruby-version` is present and that
-`GITHUB_TOKEN` is set — the remote theme fetch is the most common cause.
+The two run different steps, so a green check is not evidence the Cloudflare
+build works. Compare the build command and environment in the dashboard against
+what Actions does, and check `.ruby-version` is present.
 
 ### Site deploys but CSS, JS, or images 404
 Something is hardcoding a base path. Search for `veerpatta-website` outside the

@@ -234,7 +234,7 @@ analytics_domain: "veerpatta-website.raj-39e.workers.dev"
 
 ### Process:
 1. Code pushed to GitHub
-2. Cloudflare Workers runs `bundle install && bundle exec jekyll build`
+2. Cloudflare Workers runs `bundle exec jekyll build`
 3. `_site/` is published
 4. Website live!
 
