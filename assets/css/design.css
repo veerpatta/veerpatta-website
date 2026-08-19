@@ -901,6 +901,85 @@ section.container.contact-teaser {
   .desktop-whatsapp-btn:hover { transform: none; }
 }
 
+/* ---------------------------------------------------
+   NAVIGATION SWITCH
+   There was a dead zone: between 768px and 968px the inline
+   critical CSS hid .mobile-menu-btn (its 768px nav swap) while
+   style.css's legacy max-width:968px rule still hid
+   .desktop-nav, so neither navigation rendered.
+
+   One switch point now. Below 1280px the drawer is the
+   navigation, because the design's nine-tab bar needs more
+   width than that. At 1280px the tab bar takes over.
+   --------------------------------------------------- */
+.desktop-nav,
+.desktop-lang-switch,
+.desktop-whatsapp-btn { display: none; }
+
+.mobile-header-tools { display: flex; }
+.mobile-menu-btn { display: flex; }
+
+/* ---------------------------------------------------
+   MOBILE CHROME
+   The hamburger, language pill and sticky call bar are
+   small-screen-only, so the earlier desktop-scoped layer never
+   reached them and they kept the old brand: #5375E2 at 4.16:1,
+   WhatsApp green at 1.97:1 and #84AC64 at 2.58:1 against white.
+
+   Now that the design applies everywhere they would be the only
+   things left wearing the old palette, so they adopt it here.
+   That resolves the contrast at the same time.
+   --------------------------------------------------- */
+.site-header .mobile-lang-toggle,
+.mobile-lang-toggle.language-switch {
+  background: var(--d-surface);
+  border: 1px solid var(--d-line);
+  color: var(--d-navy);
+  font-weight: 700;
+}
+
+.mobile-menu-btn .menu-text { color: var(--d-navy); }
+.mobile-menu-btn .hamburger-line { background: var(--d-navy); }
+
+.sticky-cta-bar {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--d-line);
+  box-shadow: var(--d-shadow-header);
+}
+
+/* 9.88:1 on the bar. The icons keep their own colour below. */
+.sticky-cta-bar .cta-btn,
+.sticky-cta-bar .cta-btn .cta-label {
+  color: var(--d-navy);
+}
+
+.sticky-cta-bar .cta-btn svg { color: var(--d-blue); }
+
+/* WhatsApp keeps its brand green as an icon fill, where the
+   2.6:1 does not matter, while its label stays navy. */
+.sticky-cta-bar .cta-whatsapp svg { color: #1DA851; }
+
+.sticky-cta-bar .cta-btn:active,
+.sticky-cta-bar .cta-btn:focus-visible {
+  background: var(--d-surface);
+}
+
+/* The mobile drawer is the primary navigation below 1280px, so it
+   carries the design too. */
+.mobile-nav { background: var(--d-white); }
+.mobile-nav .mobile-nav-link {
+  color: var(--d-slate);
+  font-family: var(--d-font-body);
+  font-weight: 600;
+}
+.mobile-nav .mobile-nav-link:hover,
+.mobile-nav .mobile-nav-link:focus-visible {
+  background: var(--d-surface);
+  color: var(--d-navy);
+}
+
 /* =====================================================
    >= 768px — the design's side-by-side section header
    ===================================================== */
@@ -924,6 +1003,13 @@ section.container.contact-teaser {
    hamburger navigation stands instead.
    ===================================================== */
 @media (min-width: 1280px) {
+
+  /* The tab bar has room here, so it replaces the drawer. */
+  .desktop-nav { display: flex; }
+  .desktop-lang-switch { display: block; }
+  .desktop-whatsapp-btn { display: inline-flex; }
+  .mobile-header-tools,
+  .mobile-menu-btn { display: none; }
 
   /* ---------------------------------------------------
      HEADER — two rows
