@@ -53,3 +53,14 @@ jobs:
           # would publish the deploy config as part of the site.
           test ! -e _site/wrangler.jsonc || { echo "wrangler.jsonc leaked into _site"; exit 1; }
           echo "built $(find _site -type f | wc -l) files"
+
+      # Makes the built site downloadable with `gh run download`, so it can be
+      # deployed with `npx wrangler deploy` from a machine that has no Ruby.
+      # Not needed once Workers Builds is connected to the repo.
+      - name: Upload built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site/
+          include-hidden-files: true
+          retention-days: 7
