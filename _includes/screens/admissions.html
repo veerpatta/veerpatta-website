@@ -1,0 +1,175 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang = segments[1] | default: 'en' %}
+{% assign d = site.data.design[lang] %}
+{% assign t = d.t %}
+
+{% include design/page-head.html kicker=t.aKicker title=t.aTitle sub=t.aSub %}
+
+{% comment %} Seats table {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">{{ t.seatsTitle }}</h2></div>
+      <p class="dc-head-sub">{{ t.seatsSub }}</p>
+    </div>
+    <div class="dc-table-wrap dc-mt-44">
+      <table class="dc-table">
+        <thead>
+          <tr>
+            <th scope="col">{{ t.colClass }}</th>
+            <th scope="col">{{ t.colSeats }}</th>
+            <th scope="col">{{ t.colLeft }}</th>
+            <th scope="col">{{ t.colStatus }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in d.seatRows %}
+          <tr>
+            <td class="dc-td-strong">{{ r.klass }}</td>
+            <td>{{ r.seats }}</td>
+            <td>{{ r.left }}</td>
+            <td><span class="dc-chip" style="color: {{ r.fg }}; background: {{ r.bg }};">{{ r.status }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% comment %}
+  Enquiry wizard. .admission-wizard is the root contract for
+  assets/js/admission-wizard.js, which was already in the repo but had
+  no markup to bind to.
+{% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">{{ t.wizTitle }}</h2></div>
+      <p class="dc-head-sub">{{ t.wizSub }}</p>
+    </div>
+    <div class="dc-wizard dc-mt-44">
+      <ol class="dc-wizard-steps">
+        {% for w in d.wizardSteps %}
+        <li class="dc-wizard-step{% if forloop.first %} is-active{% endif %}">
+          <span class="dc-step-n">{{ forloop.index }}</span>
+          <span>{{ w.title | default: w }}</span>
+        </li>
+        {% endfor %}
+      </ol>
+      <div class="admission-wizard" data-wizard></div>
+      <p class="dc-point-body">{{ t.wEstNote }}</p>
+    </div>
+  </div>
+</section>
+
+{% comment %} Fees {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">{{ t.feeTitle }}</h2></div>
+      <p class="dc-head-sub">{{ t.feeSub }}</p>
+    </div>
+    <div class="dc-table-wrap dc-mt-44">
+      <table class="dc-table">
+        <tbody>
+          {% for f in d.feesFull %}
+          <tr>
+            <td class="dc-td-strong">{{ f.item }}</td>
+            <td class="dc-td-note">{{ f.note }}</td>
+            <td class="dc-td-amount">{{ f.amount }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="dc-point-body dc-mt-32">{{ t.feeNote }}</p>
+  </div>
+</section>
+
+{% comment %} Documents {% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">{{ t.docsTitle }}</h2></div>
+      <p class="dc-head-sub">{{ t.docsSub }}</p>
+    </div>
+    <div class="dc-points dc-mt-44">
+      {% for doc in d.docs %}
+      <div class="dc-point scroll-fade-up">
+        <span class="dc-point-tick" aria-hidden="true">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+        <div class="dc-point-title">{{ doc }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} Key dates {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head-stack"><h2 class="dc-h2 scroll-fade-up">{{ t.datesTitle }}</h2></div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      {% for a in d.admitDates %}
+      <div class="dc-answer scroll-fade-up">
+        <span class="dc-tag">{{ a.date }}</span>
+        <h3 class="dc-answer-q">{{ a.title }}</h3>
+        <p class="dc-answer-body">{{ a.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %}
+  FAQ. .faq-item / .faq-question / .faq-answer is the accordion contract
+  that marketing-enhancements.js binds to.
+{% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head-stack"><h2 class="dc-h2 scroll-fade-up">{{ t.faqTitle }}</h2></div>
+    <div class="dc-faq dc-mt-44">
+      {% for f in d.faqs %}
+      <div class="faq-item">
+        <button type="button" class="faq-question">
+          <span>{{ f.q }}</span>
+          <span class="faq-icon" aria-hidden="true">{{ f.sign | default: '+' }}</span>
+        </button>
+        <div class="faq-answer"><p>{{ f.a }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %}
+  Formspree enquiry form. The endpoint and .admissions-form class are
+  preserved - main.js binds the submit spinner to that class.
+{% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap dc-form-wrap">
+    <div class="dc-head-stack">
+      <h2 class="dc-h3 scroll-fade-up">{{ t.drawerTitle }}</h2>
+      <p class="dc-lead">{{ t.drawerSub }}</p>
+    </div>
+    <form class="admissions-form dc-form dc-mt-32" action="https://formspree.io/f/xgveybpz" method="POST">
+      <div class="form-group">
+        <label for="ad_parent">{{ t.fParent }}</label>
+        <input id="ad_parent" name="parent" type="text" placeholder="{{ t.fParentPh }}" required>
+      </div>
+      <div class="form-group">
+        <label for="ad_phone">{{ t.fPhone }}</label>
+        <input id="ad_phone" name="phone" type="tel" placeholder="+91 00000 00000" required>
+      </div>
+      <div class="form-group">
+        <label for="ad_class">{{ t.fClass }}</label>
+        <select id="ad_class" name="class">
+          {% for c in d.classOptions %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="dc-btn dc-btn-navy">{{ t.fSubmit }}</button>
+    </form>
+  </div>
+</section>

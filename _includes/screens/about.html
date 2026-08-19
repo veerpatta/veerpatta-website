@@ -1,0 +1,60 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang = segments[1] | default: 'en' %}
+{% assign d = site.data.design[lang] %}
+{% assign t = d.t %}
+
+{% include design/page-head.html kicker=t.abKicker title=t.abTitle sub=t.abSub %}
+
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head-stack">
+      <h2 class="dc-h2 scroll-fade-up">{{ t.missionTitle }}</h2>
+    </div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      {% for v in d.values %}
+      <div class="dc-answer scroll-fade-up">
+        <h3 class="dc-answer-q">{{ v.title }}</h3>
+        <p class="dc-answer-body">{{ v.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head-stack">
+      <h2 class="dc-h2 scroll-fade-up">{{ t.journeyT }}</h2>
+    </div>
+    <ol class="dc-timeline dc-mt-44">
+      {% for j in d.journey %}
+      <li class="dc-timeline-item scroll-fade-up">
+        <span class="dc-timeline-year">{{ j.year }}</span>
+        <span class="dc-timeline-body">{{ j.body }}</span>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head-stack">
+      <h2 class="dc-h2 scroll-fade-up">{{ t.leadershipTitle }}</h2>
+    </div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      {% for tc in d.teachers %}
+      <div class="dc-voice scroll-fade-up">
+        <div class="dc-voice-by dc-voice-by-top">
+          <div class="dc-voice-photo" aria-hidden="true">PHOTO</div>
+          <div>
+            <div class="dc-voice-name">{{ tc.name }}</div>
+            <div class="dc-voice-detail">{{ tc.qual }}</div>
+          </div>
+        </div>
+        <div class="dc-stage-years">{{ tc.exp }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

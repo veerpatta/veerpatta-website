@@ -1,0 +1,13 @@
+{% comment %}
+  Inner-page hero. The design gives every screen except home the same
+  opening: a dark navy band carrying kicker, title and standfirst.
+  Params: kicker, title, sub
+{% endcomment %}
+<section class="dc-pagehead">
+  <div class="dc-pagehead-glow" aria-hidden="true"></div>
+  <div class="dc-wrap">
+    {% if include.kicker %}<div class="dc-pagehead-kicker">{{ include.kicker }}</div>{% endif %}
+    <h1 class="dc-pagehead-title scroll-fade-up">{{ include.title }}</h1>
+    {% if include.sub %}<p class="dc-pagehead-sub">{{ include.sub }}</p>{% endif %}
+  </div>
+</section>
