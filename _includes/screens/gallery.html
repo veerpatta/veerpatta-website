@@ -1,0 +1,42 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang = segments[1] | default: 'en' %}
+{% assign d = site.data.design[lang] %}
+{% assign t = d.t %}
+
+{% include design/page-head.html kicker=t.gKicker title=t.gTitle sub=t.gSub %}
+
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-grid dc-grid-290">
+      {% for a in d.albums %}
+      <div class="dc-album scroll-fade-up">
+        <div class="dc-album-shot">
+          <div class="dc-slot-kicker">Photo</div>
+          <div class="dc-stage-shot-note">{{ a.shot }}</div>
+        </div>
+        <div class="dc-album-body">
+          <div class="dc-stage-name">{{ a.name }}</div>
+          <div class="dc-album-count">{{ a.count }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% comment %}
+      The live gallery grid is populated by gallery-loader.js from
+      assets/media/gallery/. Its contract is #gallery-grid plus the
+      .pill[data-filter] buttons, so both are preserved here.
+    {% endcomment %}
+    <div class="dc-mt-44">
+      <div class="dc-filters" role="group" aria-label="{{ t.gTitle }}">
+        <button type="button" class="pill active" data-filter="all">All</button>
+        <button type="button" class="pill" data-filter="sports">Sports</button>
+        <button type="button" class="pill" data-filter="ncc">NCC</button>
+        <button type="button" class="pill" data-filter="cultural">Cultural</button>
+        <button type="button" class="pill" data-filter="academic">Academic</button>
+        <button type="button" class="pill" data-filter="celebrations">Celebrations</button>
+      </div>
+      <div id="gallery-grid" class="dc-grid dc-grid-290 dc-mt-32"></div>
+    </div>
+  </div>
+</section>

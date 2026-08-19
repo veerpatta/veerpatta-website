@@ -108,6 +108,7 @@ body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',
 <script defer src="/assets/js/home-media-loader.js"></script>
 <script defer src="/assets/js/gallery-loader.js"></script>
 <script defer src="/assets/js/gallery-items.js"></script>
+<script defer src="/assets/js/design-ui.js"></script>
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -322,38 +323,266 @@ body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',
 
 </nav>
 
-<main class="news container lang-hi" id="news">
-  <h1>स्कूल समाचार और अपडेट</h1>
-  <p>वीर पट्टा पब्लिक स्कूल में नवीनतम घटनाओं के बारे में सूचित रहें।</p>
-
-  <div class="news-list">
-    
-    
-      
-        <article class="news-item">
-          <time datetime="2025-01-15T00:00:00+00:00" class="news-date">
-            15 January 2025
-          </time>
-          <h2 class="news-title">वार्षिक खेल दिवस समारोह 2025</h2>
-          <div class="news-content">
-            <p>वीर पट्टा पब्लिक स्कूल ने अपने वार्षिक खेल दिवस को बड़े उत्साह के साथ मनाया। सभी कक्षाओं के छात्रों ने विभिन्न ट्रैक और फील्ड इवेंट्स में भाग लिया, अपनी एथलेटिक प्रतिभा का प्रदर्शन किया।</p>
-
-<p>मुख्य आकर्षण:</p>
-<ul>
-  <li>100 मीटर, 200 मीटर, और रिले दौड़</li>
-  <li>शॉट पुट और लंबी कूद प्रतियोगिताएं</li>
-  <li>सभी हाउसों द्वारा मार्च पास्ट</li>
-  <li>उत्कृष्ट एथलीटों के लिए पुरस्कार समारोह</li>
-</ul>
-
-<p>इस कार्यक्रम में स्थानीय गणमान्य व्यक्तियों और अभिभावकों ने युवा चैंपियनों का उत्साहवर्धन किया।</p>
-
-          </div>
-        </article>
-      
-    
+<section class="dc-pagehead">
+  <div class="dc-pagehead-glow" aria-hidden="true"></div>
+  <div class="dc-wrap">
+    <div class="dc-pagehead-kicker">सूचनाएँ</div>
+    <h1 class="dc-pagehead-title scroll-fade-up">हर परिपत्र, परिणाम और तिथि एक जगह।</h1>
+    <p class="dc-pagehead-sub">ज़रूरी बात अफ़वाह से नहीं पहुँचनी चाहिए। यहाँ लगी सूचना उसी घंटे अभिभावक ऐप पर भी जाती है।</p>
   </div>
-</main>
+</section>
+
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-filters" role="group" aria-label="हर परिपत्र, परिणाम और तिथि एक जगह।">
+      
+      <button type="button" class="dc-chip-btn is-active" data-notice-filter="सभी" style="--chip-bg: #17466B; --chip-fg: #FFFFFF; --chip-bd: #17466B;">सभी</button>
+      
+      <button type="button" class="dc-chip-btn" data-notice-filter="ज-रूरी" style="--chip-bg: #FFFFFF; --chip-fg: #33455E; --chip-bd: #E1EBF5;">ज़रूरी</button>
+      
+      <button type="button" class="dc-chip-btn" data-notice-filter="परिणाम" style="--chip-bg: #FFFFFF; --chip-fg: #33455E; --chip-bd: #E1EBF5;">परिणाम</button>
+      
+      <button type="button" class="dc-chip-btn" data-notice-filter="कार-यक-रम" style="--chip-bg: #FFFFFF; --chip-fg: #33455E; --chip-bd: #E1EBF5;">कार्यक्रम</button>
+      
+      <button type="button" class="dc-chip-btn" data-notice-filter="अवकाश" style="--chip-bg: #FFFFFF; --chip-fg: #33455E; --chip-bd: #E1EBF5;">अवकाश</button>
+      
+    </div>
+
+    <div class="dc-notices dc-mt-32">
+      
+      <div class="dc-notice" data-notice-kind="urgent">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">28</div>
+          <div class="dc-notice-mon">अगस्त</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: #B4530F; background: #FEF0E7;">ज़रूरी</span>
+          <div class="dc-notice-title">अर्धवार्षिक परीक्षा तिथिपत्र जारी</div>
+          <div class="dc-notice-text">कक्षा 6 से 12 · परीक्षा 12 सितम्बर से 24 सितम्बर तक। तिथिपत्र अभिभावक ऐप और सूचना पट्ट पर उपलब्ध।</div>
+        </div>
+        
+        <span class="dc-link">पीडीएफ़ डाउनलोड</span>
+        
+      </div>
+      
+      <div class="dc-notice" data-notice-kind="result">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">22</div>
+          <div class="dc-notice-mon">अगस्त</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: #17466B; background: #EDF6FC;">परिणाम</span>
+          <div class="dc-notice-title">इकाई परीक्षा 1 के परिणाम जारी</div>
+          <div class="dc-notice-text">कक्षा 4 से 10 के विषयवार अंक और शिक्षक टिप्पणी अभिभावक ऐप पर देखें।</div>
+        </div>
+        
+        <span class="dc-link">पीडीएफ़ डाउनलोड</span>
+        
+      </div>
+      
+      <div class="dc-notice" data-notice-kind="event">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">18</div>
+          <div class="dc-notice-mon">अगस्त</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: #1A6B4C; background: #EAF7F1;">कार्यक्रम</span>
+          <div class="dc-notice-title">एनसीसी वार्षिक परेड और स्वतंत्रता सप्ताह</div>
+          <div class="dc-notice-text">15 अगस्त समारोह की तस्वीरें गैलरी में जोड़ दी गई हैं। 15 कैडेट को ‘B’ प्रमाण पत्र मिला।</div>
+        </div>
+        
+        <span class="dc-link">पीडीएफ़ डाउनलोड</span>
+        
+      </div>
+      
+      <div class="dc-notice" data-notice-kind="holiday">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">09</div>
+          <div class="dc-notice-mon">अगस्त</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: #4B3B8F; background: #F3EFFB;">अवकाश</span>
+          <div class="dc-notice-title">रक्षाबंधन अवकाश</div>
+          <div class="dc-notice-text">स्कूल और बस सेवा दोनों बंद रहेंगे। कक्षाएँ अगले कार्यदिवस से नियमित।</div>
+        </div>
+        
+        <span class="dc-link">पीडीएफ़ डाउनलोड</span>
+        
+      </div>
+      
+      <div class="dc-notice" data-notice-kind="result">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">02</div>
+          <div class="dc-notice-mon">जून</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: #17466B; background: #EDF6FC;">परिणाम</span>
+          <div class="dc-notice-title">आरबीएसई बोर्ड परिणाम 2026 — कक्षा 10 और 12</div>
+          <div class="dc-notice-text">95% कुल पास दर। कक्षा 10 अंग्रेज़ी और विज्ञान में 100% परिणाम। तीन विद्यार्थी जिला मेरिट में।</div>
+        </div>
+        
+        <span class="dc-link">पीडीएफ़ डाउनलोड</span>
+        
+      </div>
+      
+      <div class="dc-notice" data-notice-kind="event">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">26</div>
+          <div class="dc-notice-mon">मई</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: #1A6B4C; background: #EAF7F1;">कार्यक्रम</span>
+          <div class="dc-notice-title">ग्रीष्मकालीन कौशल शिविर — पंजीकरण खुला</div>
+          <div class="dc-notice-text">कक्षा 4 से 9 के लिए रोबोटिक्स, अंग्रेज़ी बोलने और क्रिकेट कोचिंग। सीमित स्थान।</div>
+        </div>
+        
+        <span class="dc-link">पीडीएफ़ डाउनलोड</span>
+        
+      </div>
+      
+      <div class="dc-notice" data-notice-kind="urgent">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">14</div>
+          <div class="dc-notice-mon">मई</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: #B4530F; background: #FEF0E7;">ज़रूरी</span>
+          <div class="dc-notice-title">बस रूट 2 का समय बदला</div>
+          <div class="dc-notice-text">खेमपुर और पारसोली के विद्यार्थियों के लिए सुबह की पिकअप 10 मिनट पहले।</div>
+        </div>
+        
+        <span class="dc-link">पीडीएफ़ डाउनलोड</span>
+        
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head-stack"><h2 class="dc-h2 scroll-fade-up">अवकाश और परीक्षा कैलेंडर</h2></div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      
+      <div class="dc-answer scroll-fade-up">
+        <h3 class="dc-answer-q">सितम्बर</h3>
+        <ul class="dc-month-list">
+          <li>{"d"=&gt;"5", "t"=&gt;"अभिभावक-शिक्षक बैठक"}</li><li>{"d"=&gt;"12–24", "t"=&gt;"अर्धवार्षिक परीक्षा"}</li>
+        </ul>
+      </div>
+      
+      <div class="dc-answer scroll-fade-up">
+        <h3 class="dc-answer-q">अक्टूबर</h3>
+        <ul class="dc-month-list">
+          <li>{"d"=&gt;"2", "t"=&gt;"गांधी जयंती — अवकाश"}</li><li>{"d"=&gt;"20–24", "t"=&gt;"दीपावली अवकाश"}</li>
+        </ul>
+      </div>
+      
+      <div class="dc-answer scroll-fade-up">
+        <h3 class="dc-answer-q">नवम्बर</h3>
+        <ul class="dc-month-list">
+          <li>{"d"=&gt;"14", "t"=&gt;"वार्षिक खेल दिवस"}</li><li>{"d"=&gt;"26", "t"=&gt;"संविधान दिवस सभा"}</li>
+        </ul>
+      </div>
+      
+      <div class="dc-answer scroll-fade-up">
+        <h3 class="dc-answer-q">दिसम्बर</h3>
+        <ul class="dc-month-list">
+          <li>{"d"=&gt;"18", "t"=&gt;"वार्षिक समारोह"}</li><li>{"d"=&gt;"31", "t"=&gt;"अर्ली-बर्ड प्रवेश छूट समाप्त"}</li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">परिणाम एक नज़र में</h2></div>
+      <p class="dc-head-sub">आरबीएसई बोर्ड और आंतरिक परिणाम, घोषित होते ही प्रकाशित।</p>
+    </div>
+    <div class="dc-grid dc-grid-230 dc-mt-44">
+      
+      <div class="dc-result scroll-fade-up">
+        <div class="dc-result-value">95%</div>
+        <div class="dc-result-label">कुल बोर्ड पास दर</div>
+        <div class="dc-result-note">कक्षा 10 और 12, आरबीएसई 2026</div>
+      </div>
+      
+      <div class="dc-result scroll-fade-up">
+        <div class="dc-result-value">100%</div>
+        <div class="dc-result-label">कक्षा 10 अंग्रेज़ी और विज्ञान</div>
+        <div class="dc-result-note">लगातार दूसरा वर्ष</div>
+      </div>
+      
+      <div class="dc-result scroll-fade-up">
+        <div class="dc-result-value">3</div>
+        <div class="dc-result-label">जिला विज्ञान प्रदर्शनी चयन</div>
+        <div class="dc-result-note">आमेट क्षेत्र का प्रतिनिधित्व</div>
+      </div>
+      
+      <div class="dc-result scroll-fade-up">
+        <div class="dc-result-value">15</div>
+        <div class="dc-result-label">एनसीसी ‘B’ प्रमाण पत्र</div>
+        <div class="dc-result-note">इस वर्ष के कैडेट</div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">हाल के कार्यक्रम</h2></div>
+      <p class="dc-head-sub">पिछले कुछ सप्ताह की कैंपस तस्वीरें।</p>
+    </div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      
+      <div class="dc-tile dc-slot scroll-fade-up">
+        <div class="dc-slot-kicker">Photo 4:3</div>
+        <div class="dc-tile-note">सुबह की सभा, पूरा स्कूल पंक्ति में</div>
+      </div>
+      
+      <div class="dc-tile dc-slot scroll-fade-up">
+        <div class="dc-slot-kicker">Photo 4:3</div>
+        <div class="dc-tile-note">विज्ञान प्रयोगशाला में प्रयोग</div>
+      </div>
+      
+      <div class="dc-tile dc-slot scroll-fade-up">
+        <div class="dc-slot-kicker">Photo 4:3</div>
+        <div class="dc-tile-note">एनसीसी परेड, मार्च पास्ट</div>
+      </div>
+      
+      <div class="dc-tile dc-slot scroll-fade-up">
+        <div class="dc-slot-kicker">Photo 4:3</div>
+        <div class="dc-tile-note">बस बेड़ा और सुबह की ड्रॉप</div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head-stack"><h2 class="dc-h3">सभी सूचनाएँ</h2></div>
+    <div class="dc-notices dc-mt-32">
+      
+      <a class="dc-notice" href="/news/2025-01-15-sports-day-hi/">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">15</div>
+          <div class="dc-notice-mon">Jan</div>
+        </div>
+        <div class="dc-notice-body">
+          <div class="dc-notice-title">वार्षिक खेल दिवस समारोह 2025</div>
+        </div>
+        <svg class="dc-notice-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+      </a>
+      
+    </div>
+  </div>
+</section>
 
 <!-- Enhanced Footer with Quick Links and Contact Information -->
 <footer class="site-footer">
@@ -440,50 +669,6 @@ body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',
     </div>
   </div>
 </footer>
-
-<style>
-.news-list {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  margin-top: 32px;
-}
-
-.news-item {
-  padding: 24px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.news-date {
-  display: block;
-  font-size: 14px;
-  color: var(--muted-text);
-  margin-bottom: 8px;
-}
-
-.news-title {
-  margin: 0 0 16px 0;
-  color: var(--brand-blue);
-  font-size: 24px;
-}
-
-.news-content {
-  line-height: 1.8;
-}
-
-.news-content ul {
-  margin: 16px 0;
-  padding-left: 24px;
-}
-
-@media (min-width: 768px) {
-  .news-title {
-    font-size: 28px;
-  }
-}
-</style>
 
 
   

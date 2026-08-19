@@ -1,0 +1,120 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang = segments[1] | default: 'en' %}
+{% assign d = site.data.design[lang] %}
+{% assign t = d.t %}
+
+{% include design/page-head.html kicker=t.nKicker title=t.nTitle sub=t.nSub %}
+
+{% comment %} Notices, with the design's filter chips {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-filters" role="group" aria-label="{{ t.nTitle }}">
+      {% for f in d.noticeFilters %}
+      <button type="button" class="dc-chip-btn{% if forloop.first %} is-active{% endif %}"
+              data-notice-filter="{{ f.label | slugify }}"
+              style="--chip-bg: {{ f.bg }}; --chip-fg: {{ f.fg }}; --chip-bd: {{ f.bd }};">{{ f.label }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="dc-notices dc-mt-32">
+      {% for n in d.allNotices %}
+      <div class="dc-notice" data-notice-kind="{{ n.k | slugify }}">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">{{ n.day }}</div>
+          <div class="dc-notice-mon">{{ n.mon }}</div>
+        </div>
+        <div class="dc-notice-body">
+          <span class="dc-chip" style="color: {{ n.tagFg }}; background: {{ n.tagBg }};">{{ n.tag }}</span>
+          <div class="dc-notice-title">{{ n.title }}</div>
+          <div class="dc-notice-text">{{ n.body }}</div>
+        </div>
+        {% if n.file %}
+        <span class="dc-link">{{ t.download }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} Term calendar {% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head-stack"><h2 class="dc-h2 scroll-fade-up">{{ t.nCalTitle }}</h2></div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      {% for m in d.termCalendar %}
+      <div class="dc-answer scroll-fade-up">
+        <h3 class="dc-answer-q">{{ m.month }}</h3>
+        <ul class="dc-month-list">
+          {% for i in m.items %}<li>{{ i }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} Results {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">{{ t.nResTitle }}</h2></div>
+      <p class="dc-head-sub">{{ t.nResSub }}</p>
+    </div>
+    <div class="dc-grid dc-grid-230 dc-mt-44">
+      {% for r in d.resultCards %}
+      <div class="dc-result scroll-fade-up">
+        <div class="dc-result-value">{{ r.value }}</div>
+        <div class="dc-result-label">{{ r.label }}</div>
+        <div class="dc-result-note">{{ r.note }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} Photo highlights {% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main"><h2 class="dc-h2 scroll-fade-up">{{ t.nPhotoTitle }}</h2></div>
+      <p class="dc-head-sub">{{ t.nPhotoSub }}</p>
+    </div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      {% for g in d.galleryTiles %}
+      <div class="dc-tile dc-slot scroll-fade-up">
+        <div class="dc-slot-kicker">{{ g.ratio }}</div>
+        <div class="dc-tile-note">{{ g.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %}
+  The site's own news collection still drives real posts; the design has
+  no equivalent, so it is kept below the design's static notices rather
+  than dropped.
+{% endcomment %}
+{% assign posts = site.news | where: "lang", lang %}
+{% if posts.size > 0 %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head-stack"><h2 class="dc-h3">{{ t.viewAll }}</h2></div>
+    <div class="dc-notices dc-mt-32">
+      {% for post in posts %}
+      <a class="dc-notice" href="{{ post.url | relative_url }}">
+        <div class="dc-notice-date">
+          <div class="dc-notice-day">{{ post.date | date: "%d" }}</div>
+          <div class="dc-notice-mon">{{ post.date | date: "%b" }}</div>
+        </div>
+        <div class="dc-notice-body">
+          <div class="dc-notice-title">{{ post.title }}</div>
+        </div>
+        <svg class="dc-notice-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

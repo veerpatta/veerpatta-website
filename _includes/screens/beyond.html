@@ -1,0 +1,26 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang = segments[1] | default: 'en' %}
+{% assign d = site.data.design[lang] %}
+{% assign t = d.t %}
+
+{% include design/page-head.html kicker=t.bKicker title=t.bTitle sub=t.bSub %}
+
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-grid dc-grid-290">
+      {% for b in d.beyondCards %}
+      <div class="dc-stage scroll-fade-up">
+        <div class="dc-stage-shot">
+          <div class="dc-slot-kicker">Photo 4:3</div>
+          <div class="dc-stage-shot-note">{{ b.shot }}</div>
+        </div>
+        <div class="dc-stage-body">
+          <span class="dc-tag">{{ b.tag }}</span>
+          <div class="dc-stage-name">{{ b.name }}</div>
+          <div class="dc-stage-note">{{ b.body }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,814 @@
+# Generated from the Claude Design project "School website redesign brief"
+# (d7e45125) by evaluating its own renderVals() per language.
+# Edit the design and re-extract rather than hand-editing this file.
+
+admitDates:
+- body: Forms stay open for the next academic session.
+  date: November – March
+  title: Application window
+- body: 5% off tuition for admissions confirmed before January.
+  date: 31 December
+  title: Early-bird discount ends
+- body: Remaining seats are filled from the waitlist.
+  date: March
+  title: Final seat allotment
+- body: Classes, uniforms and bus routes all start.
+  date: April
+  title: Session begins
+albums:
+- count: 24 photos
+  name: Morning assembly
+  shot: Whole school lined up, flag and prayer
+- count: 18 photos
+  name: Smart classrooms
+  shot: Panel board lesson, students answering
+- count: 16 photos
+  name: Science laboratory
+  shot: Microscope and beaker work, Class 9
+- count: 21 photos
+  name: NCC and parade
+  shot: March past, salute at the dais
+- count: 30 photos
+  name: Sports day
+  shot: Running race finish line, crowd cheering
+- count: 27 photos
+  name: Annual function
+  shot: Stage performance under lights
+- count: 9 photos
+  name: Bus fleet and safety
+  shot: Buses lined up, attendant helping children
+- count: 12 photos
+  name: Library
+  shot: Reading hour, shelves in the background
+allNotices:
+- body: Classes 6 to 12 · exams run 12 September to 24 September. The datesheet is on the parent app and
+    the notice board.
+  day: '28'
+  file: Datesheet_Sep2026.pdf
+  k: urgent
+  mon: Aug
+  tag: Urgent
+  tagBg: '#FEF0E7'
+  tagFg: '#B4530F'
+  title: Half-yearly examination datesheet published
+- body: Subject-wise marks and teacher remarks for Classes 4 to 10 are live on the parent app.
+  day: '22'
+  file: UT1_Result_Summary.pdf
+  k: result
+  mon: Aug
+  tag: Result
+  tagBg: '#EDF6FC'
+  tagFg: '#17466B'
+  title: Unit Test 1 results released
+- body: Photographs from the 15 August celebration have been added to the gallery. Fifteen cadets received
+    the ‘B’ certificate.
+  day: '18'
+  file: ''
+  k: event
+  mon: Aug
+  tag: Event
+  tagBg: '#EAF7F1'
+  tagFg: '#1A6B4C'
+  title: NCC annual parade and Independence week
+- body: School and bus service both closed. Classes resume as normal the next working day.
+  day: 09
+  file: ''
+  k: holiday
+  mon: Aug
+  tag: Holiday
+  tagBg: '#F3EFFB'
+  tagFg: '#4B3B8F'
+  title: Raksha Bandhan holiday
+- body: 95% overall pass rate. 100% results in Class 10 English and Science. Three students placed in
+    the district merit list.
+  day: '02'
+  file: Board_Result_2026.pdf
+  k: result
+  mon: Jun
+  tag: Result
+  tagBg: '#EDF6FC'
+  tagFg: '#17466B'
+  title: RBSE board results 2026 — Classes 10 and 12
+- body: Robotics, English speaking and cricket coaching for Classes 4 to 9. Limited places.
+  day: '26'
+  file: Summer_Camp_Form.pdf
+  k: event
+  mon: May
+  tag: Event
+  tagBg: '#EAF7F1'
+  tagFg: '#1A6B4C'
+  title: Summer skills camp — registration open
+- body: Morning pickup moves 10 minutes earlier for students from Khempur and Parasoli.
+  day: '14'
+  file: ''
+  k: urgent
+  mon: May
+  tag: Urgent
+  tagBg: '#FEF0E7'
+  tagFg: '#B4530F'
+  title: Bus route 2 timing revised
+announcement: 'Admissions 2026–27 open: Nursery to Class 9 · 30 seats per class'
+answers:
+- body: Tuition ₹18,000–₹24,000 a year, plus a one-time ₹5,000 admission fee. Books, uniform and transport
+    listed separately — nothing hidden.
+  cta: See the full fee table
+  go: /en/admissions/
+  icon: M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6
+  q: What will a year actually cost?
+  tag: Fees
+- body: 95% overall board pass rate, 100% results in Class 10 English and Science, and district-level
+    science exhibition selections.
+  cta: See academics
+  go: /en/academics/
+  icon: M3 3v18h18M7 15l4-4 3 3 5-6
+  q: How do students actually do?
+  tag: Results
+- body: Safe transport across a 15 km radius of Amet, including Khempur, Parasoli, Devgarh Road and Railmagra.
+    ₹800–₹1,200 a month.
+  cta: Check the routes
+  go: /en/contact/
+  icon: M4 16V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10M4 16h16M6 20h2m8 0h2M7 8h10M7 12h10
+  q: Does the bus reach my village?
+  tag: Transport
+- body: Every teacher is B.Ed qualified with at least 5 years of experience. 1:25 in primary, and free
+    remedial classes after school for children who need them.
+  cta: Meet the teachers
+  go: /en/academics/
+  icon: M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM23 21v-2a4 4 0 0 0-3-3.87
+  q: Will my child get attention?
+  tag: Teachers
+- body: The only English-medium school within 10 km of Amet. The LEAD English programme adds weekly speaking
+    practice, reading circles and debate.
+  cta: How LEAD works
+  go: /en/academics/
+  icon: M5 8h14M5 8a7 7 0 0 0 7 7 7 7 0 0 0 7-7M9 4h6M13 21l4-9 4 9M15.5 17h5
+  q: Will my child speak English confidently?
+  tag: English
+- body: Nursery to Class 9 are open at 30 seats per class. Class 10 is full. No entrance test, and a decision
+    inside one week.
+  cta: Start an enquiry
+  go: /en/admissions/
+  icon: M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11
+  q: Are seats still available?
+  tag: Seats
+apps:
+- initials: GC
+  name: Google Classroom
+  who: Students & teachers
+- initials: LP
+  name: LEAD Parent app
+  who: Daily progress
+- initials: ₹
+  name: Fee payment
+  who: Online receipts
+- initials: RC
+  name: Results & report cards
+  who: Exam marks
+- initials: AF
+  name: Online admission form
+  who: New admissions
+- initials: +
+  name: More coming soon
+  who: Slot reserved
+assessPoints:
+- body: A short check in every subject, marks on the parent app the same day.
+  title: Weekly mastery check
+- body: Three times a session, with a subject-wise report card.
+  title: Three unit tests
+- body: In board format from Class 6 upward.
+  title: Half-yearly and annual exams
+- body: After every exam, face to face with the class teacher.
+  title: Parent–teacher meetings
+beyondCards:
+- body: A unit on campus since 2018. Fifteen cadets earned the ‘B’ certificate this year. Parade drill,
+    annual camp and leadership training.
+  name: NCC cadet unit
+  shot: NCC cadets in uniform, march past on the assembly ground
+  tag: NCC
+- body: Coached practice through the week and district-level competition. One student is a district cricket
+    champion.
+  name: Cricket, football and athletics
+  shot: Cricket practice on the school playfield, coach bowling
+  tag: Sport
+- body: The annual function, Rajasthani folk dance and debate competitions are all on the timetable.
+  name: Music, dance and theatre
+  shot: Annual function stage, students performing folk dance
+  tag: Arts
+- body: Three students were selected for the district science exhibition. Weekly project time in the computer
+    lab.
+  name: Science and computer club
+  shot: Science exhibition model being demonstrated by students
+  tag: Clubs
+calendar:
+- color: '#1E7BB8'
+  date: 5 Sep
+  kind: All classes · 9:00 AM
+  title: Parent–teacher meeting
+- color: '#B4530F'
+  date: 12 Sep
+  kind: Classes 6–12
+  title: Half-yearly exams begin
+- color: '#4B3B8F'
+  date: 2 Oct
+  kind: School closed
+  title: Gandhi Jayanti holiday
+- color: '#1A6B4C'
+  date: 14 Nov
+  kind: Playfield · full day
+  title: Annual sports day
+- color: '#2BA9DE'
+  date: 31 Dec
+  kind: Session 2026–27
+  title: Early-bird admission discount ends
+classOptions:
+- Nursery
+- LKG / UKG
+- Class 1–5
+- Class 6–8
+- Class 9
+- Class 11 (Science)
+- Class 11 (Commerce/Arts)
+digitalPoints:
+- body: Gmail, Docs and Drive from Class 3, under teacher supervision.
+  title: A Google account for every student
+- body: Daily work, due dates and teacher feedback in one place.
+  title: Homework in Google Classroom
+- body: Panel boards and LEAD digital lessons in every senior classroom.
+  title: Smart classrooms
+- body: Attendance, marks and notices on your phone, in Hindi too.
+  title: Progress on the parent app
+docs:
+- Birth certificate (original and a photocopy)
+- Aadhaar card — child and both parents
+- Transfer Certificate from the previous school, if applicable
+- Last year’s report card or marksheet
+- Two passport-size photographs
+- Address proof, used to assign the bus route
+faqs:
+- a: No entrance test. We hold a friendly interaction to understand the child’s learning level and place
+    them in the right class.
+  open: true
+  q: Is there an entrance test?
+  sign: −
+- a: Form submission → interaction within 3 days → result in 1 day → admission complete within one week.
+  open: false
+  q: How long does admission take?
+  sign: +
+- a: Yes. Safe transport covers a 15 km radius around Amet, including villages such as Khempur and Parasoli.
+  open: false
+  q: Do you provide transport?
+  sign: +
+- a: Free remedial classes after school hours, taught by the child’s own subject teachers.
+  open: false
+  q: What support exists for children who fall behind?
+  sign: +
+- a: Yes — merit scholarships and sibling discounts. Financial assistance is considered case by case for
+    deserving families.
+  open: false
+  q: Are scholarships available?
+  sign: +
+- a: Yes, subject to seat availability. Call the office to check current vacancies.
+  open: false
+  q: Do you accept mid-year admissions?
+  sign: +
+fees:
+- amount: ₹5,000
+  item: Admission fee (one-time)
+- amount: ₹18,000 – ₹24,000
+  item: Annual tuition
+- amount: ₹3,000 – ₹5,000
+  item: Books & uniform
+- amount: ₹800 – ₹1,200 / month
+  item: Transport (optional)
+feesFull:
+- amount: ₹5,000
+  item: Admission fee (one-time)
+  note: New students only, non-refundable
+- amount: ₹18,000
+  item: Annual tuition — Nursery to UKG
+  note: Payable in three instalments
+- amount: ₹20,000
+  item: Annual tuition — Class 1 to 8
+  note: Includes LEAD learning material
+- amount: ₹22,000
+  item: Annual tuition — Class 9 and 10
+  note: Includes board practice papers
+- amount: ₹24,000
+  item: Annual tuition — Class 11 and 12
+  note: Includes lab and stream fees
+- amount: ₹3,000 – ₹5,000
+  item: Books and uniform
+  note: Varies by class, bought at school
+- amount: ₹800 – ₹1,200 / month
+  item: Transport (optional)
+  note: Based on distance from campus
+galleryTiles:
+- label: Morning assembly, whole school in line
+  ratio: Photo 4:3
+- label: Science lab experiment in progress
+  ratio: Photo 4:3
+- label: NCC parade, march past
+  ratio: Photo 4:3
+- label: Bus fleet at the morning drop-off
+  ratio: Photo 4:3
+journey:
+- body: Founded by visionary educators with just 50 students, bringing quality English-medium education
+    to Amet.
+  year: '1994'
+- body: The first Class 10 batch achieved a 100% pass result, establishing VPS as a trusted name in the
+    region.
+  year: '2000'
+- body: A computer education lab was introduced, modernising the learning experience.
+  year: '2010'
+- body: The NCC programme launched, instilling discipline and leadership in students.
+  year: '2018'
+- body: LEAD curriculum implementation brought international teaching standards to Amet.
+  year: '2024'
+- body: The whole campus moved onto Google for Education, with a school account for every student from
+    Class 3.
+  year: '2026'
+leadWeek:
+- body: The teacher introduces the idea using the LEAD digital lesson plan.
+  n: '01'
+  title: Concept
+- body: Classroom activity and workbook practice, often in pairs.
+  n: '02'
+  title: Practice
+- body: A short mastery check at the end of the week, marks on the parent app.
+  n: '03'
+  title: Assess
+- body: Free remedial hour for any child who has not mastered it yet.
+  n: '04'
+  title: Remediate
+navItems:
+- bar: '#1E7BB8'
+  color: '#17466B'
+  go: /en/
+  key: home
+  label: Home
+- bar: transparent
+  color: '#33455E'
+  go: /en/admissions/
+  key: admissions
+  label: Admissions
+- bar: transparent
+  color: '#33455E'
+  go: /en/academics/
+  key: academics
+  label: Academics
+- bar: transparent
+  color: '#33455E'
+  go: /en/beyond/
+  key: beyond
+  label: Beyond
+- bar: transparent
+  color: '#33455E'
+  go: /en/digital/
+  key: digital
+  label: Digital
+- bar: transparent
+  color: '#33455E'
+  go: /en/gallery/
+  key: gallery
+  label: Gallery
+- bar: transparent
+  color: '#33455E'
+  go: /en/news/
+  key: notices
+  label: Notices
+- bar: transparent
+  color: '#33455E'
+  go: /en/about/
+  key: about
+  label: About
+- bar: transparent
+  color: '#33455E'
+  go: /en/contact/
+  key: contact
+  label: Contact
+noticeFilters:
+- bd: '#17466B'
+  bg: '#17466B'
+  fg: '#FFFFFF'
+  label: All
+- bd: '#E1EBF5'
+  bg: '#FFFFFF'
+  fg: '#33455E'
+  label: Urgent
+- bd: '#E1EBF5'
+  bg: '#FFFFFF'
+  fg: '#33455E'
+  label: Results
+- bd: '#E1EBF5'
+  bg: '#FFFFFF'
+  fg: '#33455E'
+  label: Events
+- bd: '#E1EBF5'
+  bg: '#FFFFFF'
+  fg: '#33455E'
+  label: Holidays
+notices:
+- body: Classes 6–12 · exams begin 12 September
+  day: '28'
+  mon: Aug
+  tag: Urgent
+  tagBg: '#FEF0E7'
+  tagFg: '#B4530F'
+  title: Half-yearly datesheet published
+- body: Classes 4–10 · subject marks with teacher remarks
+  day: '22'
+  mon: Aug
+  tag: Result
+  tagBg: '#EDF6FC'
+  tagFg: '#17466B'
+  title: Unit Test 1 results on the parent app
+- body: 15 August photographs added to the gallery
+  day: '18'
+  mon: Aug
+  tag: Event
+  tagBg: '#EAF7F1'
+  tagFg: '#1A6B4C'
+  title: NCC annual parade and Independence week
+- body: School and transport both closed
+  day: 09
+  mon: Aug
+  tag: Holiday
+  tagBg: '#F3EFFB'
+  tagFg: '#4B3B8F'
+  title: Raksha Bandhan holiday
+partners:
+- name: Google for Education
+  note: Workspace & Classroom
+- name: LEAD School
+  note: Curriculum partner
+- name: NCC
+  note: Cadet unit on campus
+- name: RBSE
+  note: Affiliated · English medium
+resultCards:
+- label: Overall board pass rate
+  note: Classes 10 and 12, RBSE 2026
+  value: 95%
+- label: Class 10 English & Science
+  note: Second year running
+  value: 100%
+- label: District science exhibition picks
+  note: Representing the Amet region
+  value: '3'
+- label: NCC ‘B’ certificates
+  note: Cadets this year
+  value: '15'
+routes:
+- n: Route 1
+  path: Amet town → Mela Ground → School
+  time: Pickup from 7:10 AM
+- n: Route 2
+  path: Khempur → Parasoli → Devgarh Road → School
+  time: Pickup from 6:50 AM
+- n: Route 3
+  path: Railmagra → Bhatewar → School
+  time: Pickup from 6:40 AM
+seatRows:
+- bg: '#EAF7F1'
+  fg: '#1A6B4C'
+  klass: Nursery / LKG / UKG
+  left: 11 seats left
+  seats: '30'
+  status: Open
+- bg: '#EAF7F1'
+  fg: '#1A6B4C'
+  klass: Class 1 – 5
+  left: 18 seats left
+  seats: '30'
+  status: Open
+- bg: '#EAF7F1'
+  fg: '#1A6B4C'
+  klass: Class 6 – 8
+  left: 7 seats left
+  seats: '30'
+  status: Open
+- bg: '#FEF0E7'
+  fg: '#B4530F'
+  klass: Class 9
+  left: 3 seats left
+  seats: '30'
+  status: Limited
+- bg: '#F6E9E9'
+  fg: '#9B2C2C'
+  klass: Class 10
+  left: Waitlist only
+  seats: '30'
+  status: Full
+- bg: '#EAF7F1'
+  fg: '#1A6B4C'
+  klass: Class 11 – 12 (Science · Commerce · Arts)
+  left: By stream
+  seats: '30'
+  status: Open
+socials:
+- icon: M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z
+- icon: M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.23 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.1
+    1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6
+    0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2
+    2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4C8.4 2.2 8.8
+    2.2 12 2.2zm0 3.4a6.4 6.4 0 1 0 0 12.8 6.4 6.4 0 0 0 0-12.8zm0 10.5a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0
+    0 1 0 8.2zm8.2-10.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z
+- icon: M23 5.5c-.8.4-1.7.6-2.6.8a4.2 4.2 0 0 0-7.2 3.8A11.9 11.9 0 0 1 4.6 4.7a4.2 4.2 0 0 0 1.3 5.6c-.8
+    0-1.5-.2-2.2-.6a4.2 4.2 0 0 0 3.4 4.2c-.8.2-1.5.2-2.3.1a4.2 4.2 0 0 0 3.9 2.9A11.9 11.9 0 0 1 2 19.5a16.8
+    16.8 0 0 0 9 2.6c6.6 0 10.4-5.6 10.2-10.6A8 8 0 0 0 23 5.5z
+stages:
+- body: Play-based learning, phonics, and the first year of listening and speaking English.
+  grades: Nursery – UKG
+  name: Early Years
+  shot: Nursery classroom, children on the floor mat with the teacher
+- body: LEAD English and Maths, weekly mastery checks, and a daily reading habit.
+  grades: Class 1 – 5
+  name: Foundational
+  shot: Primary class reading aloud, LEAD workbooks on desks
+- body: Science lab work, computer periods, and the first choice of NCC or sport.
+  grades: Class 6 – 8
+  name: Middle School
+  shot: Students at the science lab bench with a teacher demonstrating
+- body: RBSE board preparation, subject-wise practice papers, free remedial hours.
+  grades: Class 9 – 10
+  name: Secondary
+  shot: Board-exam revision class, blackboard full of worked problems
+- body: Science, Commerce and Arts streams, career counselling and entrance-exam support.
+  grades: Class 11 – 12
+  name: Senior Secondary
+  shot: Senior students in uniform outside the school building
+stats:
+- label: Students on campus
+  note: Nursery through Class 12
+  value: 500+
+- label: Serving Amet since
+  note: More than thirty years
+  value: '1994'
+- label: Board pass rate
+  note: Classes 10 and 12, RBSE
+  value: 95%
+- label: Teacher ratio in primary
+  note: 1:30 in secondary classes
+  value: '1:25'
+steps:
+- body: Fill the form or WhatsApp us. We call back the same day.
+  n: '01'
+  title: Enquire
+- body: A friendly interaction within 3 days. No entrance test.
+  n: '02'
+  title: Interaction
+- body: Result in 1 day, then fees and the welcome kit.
+  n: '03'
+  title: Confirm
+streams:
+- body: For students heading towards medical and engineering entrances, with compulsory lab work.
+  name: Science
+  subjects: Physics · Chemistry · Biology / Maths · English
+- body: For students heading towards commerce degrees, banking and CA.
+  name: Commerce
+  subjects: Accountancy · Business Studies · Economics · English
+- body: A strong base for civil services, teaching and law.
+  name: Arts
+  subjects: History · Political Science · Hindi Literature · English
+t:
+  aKicker: Admissions 2026–27
+  aSub: Everything you need to decide is on this page — live seat counts, the full fee table, the documents
+    to carry, and a form that takes two minutes.
+  aTitle: Thirty seats a class. No entrance test. A decision in a week.
+  abKicker: About us
+  abSub: Founded in 1994 with fifty students, Veer Patta today teaches more than 500 children from Amet
+    and the villages around it.
+  abTitle: Thirty years of building a school Amet can trust.
+  acKicker: Academics
+  acSub: The LEAD curriculum gives every class a structured lesson plan, activity-based teaching and a
+    weekly mastery check you can see.
+  acTitle: Concept mastery, not rote learning.
+  admitSub: Thirty seats per class, no entrance test, and a decision within a week. Start with a two-minute
+    enquiry and we will call you back the same day.
+  admitTitle: Admissions for 2026–27 are open.
+  answersKicker: Parents first
+  answersSub: No brochure hunting and no phone calls needed. Every answer below is one click away, with
+    the exact numbers.
+  answersTitle: The six questions every parent asks us.
+  assessTitle: How progress is measured
+  bKicker: Beyond academics
+  bSub: NCC, sport, and the arts run on the timetable, not after it. Every student picks at least one.
+  bTitle: Marks alone do not build a child.
+  cKicker: Visit us
+  cSub: Walk in any working day between 9:00 AM and 2:00 PM, or call ahead and we will keep the admissions
+    desk free for you.
+  cTitle: Come and see the campus.
+  calendarKicker: Calendar
+  calendarTitle: Dates to know
+  colClass: Class
+  colLeft: Availability
+  colSeats: Intake
+  colStatus: Status
+  dAppsSub: Bookmark this page. Every school system opens from here.
+  dAppsTitle: The parent launcher
+  dKicker: Digital campus
+  dSub: The school runs on Google Workspace for Education. Parents get one login, and every portal opens
+    from a single launcher.
+  dTitle: A Google-powered school, run from your phone.
+  datesTitle: Dates that matter
+  digitalCta: See the digital campus
+  digitalKicker: Digital campus
+  digitalSub: Every student from Class 3 upward gets a school Google account. Lessons, homework, marks
+    and teacher feedback all live in one place that you can see from your phone.
+  digitalTitle: Powered by Google for Education.
+  docsSub: Carry the originals; the office photocopies them free.
+  docsTitle: What to bring
+  download: Download PDF
+  drawerHelpBody: Walk in Monday to Saturday between 9:00 AM and 2:00 PM. Ask at the office for the admissions
+    desk.
+  drawerHelpTitle: Prefer to visit?
+  drawerKicker: Two minutes
+  drawerSub: Three fields. We call you back the same working day.
+  drawerTitle: Enquire about admission
+  enquire: Enquire now
+  fClass: Class you are enquiring for
+  fParent: Parent / guardian name
+  fParentPh: Your full name
+  fPhone: Mobile number
+  fSubmit: Request a call back
+  faqTitle: Questions parents ask before applying
+  feeCta: Open the admissions page
+  feeNote: Sibling discount and merit scholarships available. 5% early-bird discount before January.
+  feeSnapshot: Fee snapshot 2026–27
+  feeSub: Nothing beyond this list is charged during the year.
+  feeTitle: The full fee table
+  footerBlurb: Serving families in Amet and the villages around it since 1994. RBSE affiliated, English
+    medium, Nursery to Class 12.
+  footerExplore: Explore
+  footerHours: Mon–Sat, 8:00 AM – 2:00 PM · Office until 4:00 PM
+  footerPortals: Portals
+  footerReach: Reach us
+  fullCalendar: View the full academic calendar
+  gKicker: Life at VPS
+  gSub: Assemblies, labs, the playfield, the NCC parade and the bus fleet — photographed through the year.
+  gTitle: See the school before you visit it.
+  heroCta1: Enquire for 2026–27
+  heroCta2: Watch the campus film
+  heroEyebrow: RBSE affiliated · English medium · Amet, Rajasthan · Since 1994
+  heroSub: Google for Education classrooms, the LEAD curriculum, NCC training and a 95% board pass record
+    — for families across Amet and 20+ surrounding villages.
+  heroTitle: A city-standard English-medium education, ten minutes from home.
+  journeyKicker: Academics
+  journeySub: Nursery to Class 12 under one roof, with the same teachers watching your child grow through
+    every stage.
+  journeyT: Our journey
+  journeyTitle: One school, fourteen years of your child’s life.
+  leadTitle: How a LEAD week works
+  leadershipTitle: From the Principal
+  lifeKicker: Life at VPS
+  lifeTitle: A day on campus, in pictures.
+  live: Notice
+  mapLabel: Map · Opp. Mela Ground, Amet
+  missionTitle: Our mission
+  nCalTitle: Holiday and exam calendar
+  nKicker: Notices
+  nPhotoSub: Photographs from the last few weeks on campus.
+  nPhotoTitle: Recent event highlights
+  nResSub: RBSE board and internal results, published as soon as they are declared.
+  nResTitle: Results at a glance
+  nSub: Nothing important should reach you by rumour. Notices posted here also go to the parent app the
+    same hour.
+  nTitle: Every circular, result and date in one place.
+  noticeKicker: Notices
+  noticeTitle: Latest from school
+  openGallery: Open the gallery
+  or: or
+  perClass: seats per class
+  portals: Portals
+  portalsTitle: School apps & parent portals
+  poweredBy: Learning powered by
+  reachTitle: Reach us
+  recognition: Recognised by the Rajasthan Education Department
+  rights: All rights reserved.
+  routesTitle: Bus routes
+  seatsLabel: Admissions 2026–27
+  seatsNote: Nursery to Class 9 open. Class 10 waitlist only.
+  seatsSub: Updated by the school office every Monday.
+  seatsTitle: Seats available right now
+  sentBody: Our admissions coordinator will call you today between 10:00 AM and 5:00 PM. Keep your child’s
+    birth certificate handy.
+  sentTitle: Enquiry received
+  streamsTitle: Streams in Class 11 and 12
+  teachersSub: Every teacher is B.Ed qualified with a minimum of five years of classroom experience.
+  teachersTitle: The people who teach your child
+  tick2: 'Parent–teacher meeting: Saturday, 5 September, 9:00 AM'
+  tick3: Half-yearly exam datesheet published for Classes 6–12
+  valuesTitle: What we hold to
+  viewAll: All notices
+  visitTitle: Plan your visit
+  voicesKicker: Parent voices
+  voicesTitle: Families who made the switch.
+  wBack: Back
+  wChild: Child’s full name
+  wClassL: Class applying for
+  wDob: Date of birth
+  wDoneBody: The admissions office will call you within one working day to fix the interaction date. Your
+    reference number arrives by SMS.
+  wDoneTitle: Application submitted
+  wEstNote: Tuition + admission fee + books and uniform, and transport if selected. Sibling and early-bird
+    discounts are applied at the office.
+  wEstimate: Estimated first-year cost
+  wNext: Continue
+  wParentL: Parent / guardian name
+  wPhoneL: Mobile number
+  wRestart: Submit another application
+  wReviewTitle: Check your details
+  wSubmit: Submit application
+  wTransport: Do you need school transport?
+  wVillage: Where do you live?
+  whatsapp: Chat on WhatsApp
+  wizSub: Four short steps. You will see an estimated yearly cost at the end before anything is submitted.
+  wizTitle: Start your application
+teachers:
+- exp: 12 years experience
+  name: Mrs. Sharma
+  qual: M.A. English, B.Ed
+- exp: 15 years experience
+  name: Mr. Verma
+  qual: M.Sc. Mathematics
+- exp: 10 years experience
+  name: Mrs. Singh
+  qual: M.Sc. Science, B.Ed
+- exp: 8 years experience
+  name: Mr. Patel
+  qual: M.A. Social Science
+termCalendar:
+- items:
+  - d: '5'
+    t: Parent–teacher meeting
+  - d: 12–24
+    t: Half-yearly examinations
+  month: September
+- items:
+  - d: '2'
+    t: Gandhi Jayanti — holiday
+  - d: 20–24
+    t: Diwali break
+  month: October
+- items:
+  - d: '14'
+    t: Annual sports day
+  - d: '26'
+    t: Constitution Day assembly
+  month: November
+- items:
+  - d: '18'
+    t: Annual function
+  - d: '31'
+    t: Early-bird admission discount ends
+  month: December
+values:
+- body: Rules are clear, but children learn through understanding, not fear.
+  title: Discipline with empathy
+- body: Marks reflect what the child has actually earned. No shortcuts.
+  title: Academic integrity
+- body: NCC, cleanliness drives and community work every session.
+  title: Service and citizenship
+- body: Labs, clubs and the stage — room to ask questions and to make things.
+  title: Curiosity and creativity
+villageOptions:
+- Amet town
+- Khempur
+- Parasoli
+- Devgarh Road
+- Railmagra
+- Bhatewar
+- Deogarh
+- Other
+voices:
+- detail: Parent, Class 10 · Khempur village
+  name: Ramesh Kumar
+  text: My child improved from 60% to 85% in just one year. The personal attention here is unmatched in
+    the Amet region. Teachers genuinely care about each student’s progress.
+- detail: Parent, Class 8 · Parasoli village
+  name: Sunita Sharma
+  text: We chose VPS over city schools because of the values-based education and affordable fees. Our
+    daughter has excelled in both academics and extracurricular activities.
+- detail: Parent, Class 12 · Amet
+  name: Vijay Singh
+  text: The NCC training and discipline at VPS has transformed my son into a confident young man. The
+    school provides opportunities we never imagined in our rural area.
+wClassOptions:
+- Nursery
+- LKG
+- UKG
+- Class 1
+- Class 2
+- Class 3
+- Class 4
+- Class 5
+- Class 6
+- Class 7
+- Class 8
+- Class 9
+- Class 11 (Science)
+- Class 11 (Commerce)
+- Class 11 (Arts)
+yesNo:
+- 'Yes'
+- 'No'

@@ -1,0 +1,53 @@
+{% assign segments = page.url | split: '/' %}
+{% assign lang = segments[1] | default: 'en' %}
+{% assign d = site.data.design[lang] %}
+{% assign t = d.t %}
+
+{% include design/page-head.html kicker=t.dKicker title=t.dTitle sub=t.dSub %}
+
+<section class="dc-band">
+  <div class="dc-wrap dc-split">
+    <div class="dc-points">
+      {% for p in d.digitalPoints %}
+      <div class="dc-point scroll-fade-up">
+        <span class="dc-point-tick" aria-hidden="true">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+        <div>
+          <div class="dc-point-title">{{ p.title }}</div>
+          <div class="dc-point-body">{{ p.body }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="dc-digital-panel">
+      <div class="dc-slot dc-slot-wide">
+        <div class="dc-slot-kicker">Photo 16:10</div>
+        <div class="dc-slot-title">Students at Chromebooks in the smart classroom, teacher at the panel board</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main">
+        <h2 class="dc-h2 scroll-fade-up">{{ t.dAppsTitle }}</h2>
+      </div>
+      <p class="dc-head-sub">{{ t.dAppsSub }}</p>
+    </div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      {% for app in d.apps %}
+      <div class="dc-app dc-app-lg scroll-fade-up">
+        <span class="dc-app-initials" aria-hidden="true">{{ app.initials }}</span>
+        <span class="dc-app-meta">
+          <span class="dc-app-name">{{ app.name }}</span>
+          <span class="dc-partner-note">{{ app.who }}</span>
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
