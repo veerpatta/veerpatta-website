@@ -10,6 +10,11 @@
   //   Deploy command: npx wrangler deploy
   "name": "veerpatta-website",
   "compatibility_date": "2026-08-19",
+
+  // Explicit because wrangler warns on every deploy otherwise. This is the
+  // default while a workers.dev route is enabled; stating it keeps branch and
+  // pull-request preview URLs from silently changing behaviour later.
+  "preview_urls": true,
   "assets": {
     "directory": "./_site",
 

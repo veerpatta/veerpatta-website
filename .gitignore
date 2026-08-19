@@ -60,3 +60,6 @@ yarn.lock
 dist/
 build/
 out/
+
+# Wrangler local state and cache (contains account identifiers)
+.wrangler/
