@@ -99,6 +99,10 @@ body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',
 <link rel="stylesheet" href="{{ '/assets/css/animations.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/mobile-deep-optimize.css' | relative_url }}">
 
+<!-- Site base path, for scripts that build asset URLs at runtime.
+     Empty on Cloudflare Pages; set when served under a subpath. -->
+<script>window.SITE_BASEURL = {{ site.baseurl | default: '' | jsonify }};</script>
+
 <!-- JavaScript -->
 <script defer src="{{ '/assets/js/main.js' | relative_url }}"></script>
 <script defer src="{{ '/assets/js/marketing-enhancements.js' | relative_url }}"></script>

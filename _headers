@@ -1,0 +1,13 @@
+# Cloudflare Pages response headers.
+# Listed under `include:` in _config.yml, otherwise Jekyll drops the file
+# because its name starts with an underscore.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# The service worker must never be served stale, or a returning visitor keeps
+# running the previous deploy's cache logic and never sees the new site.
+/sw.js
+  Cache-Control: no-cache

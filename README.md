@@ -1,13 +1,13 @@
 # 🏫 Veer Patta Public School Website
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue?logo=github)](https://veerpatta.github.io/veerpatta-website/)
+[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-orange?logo=cloudflare&logoColor=white)](https://veerpatta-website.pages.dev/)
 [![Jekyll](https://img.shields.io/badge/Built%20with-Jekyll-red?logo=jekyll)](https://jekyllrb.com/)
 [![Mobile First](https://img.shields.io/badge/Design-Mobile%20First-green)](#responsive-design)
 [![Bilingual](https://img.shields.io/badge/Languages-EN%20%7C%20HI-orange)](#bilingual-support)
 
 Official bilingual website for **Veer Patta Public School**, Amet, Rajasthan, India.
 
-🌐 **Live Site**: [veerpatta.github.io/veerpatta-website](https://veerpatta.github.io/veerpatta-website/)
+🌐 **Live Site**: [veerpatta-website.pages.dev](https://veerpatta-website.pages.dev/)
 
 ---
 
@@ -67,7 +67,7 @@ bundle exec jekyll serve
 ```
 
 ### For Coding Agents
-1. **Repository Type**: Jekyll static site, GitHub Pages hosting
+1. **Repository Type**: Jekyll static site, Cloudflare Pages hosting
 2. **Key Principle**: Mobile-first, bilingual parity (EN/HI required)
 3. **Read First**: [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
 4. **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
@@ -180,14 +180,14 @@ Easy monthly content updates with automated media loading.
 ## 🔧 Technology Stack
 
 - **Jekyll 4.x** - Static site generator
-- **GitHub Pages** - Free hosting and deployment
+- **Cloudflare Pages** - Hosting, builds, and preview deployments
 - **Liquid** - Template language
 - **Markdown** - Content format
 - **HTML5** - Semantic markup
 - **CSS3** - Mobile-first styling
 - **JavaScript (ES6+)** - Vanilla JS, no dependencies
 
-**No build tools needed!** GitHub Pages handles everything automatically.
+**No build tools needed!** Cloudflare Pages runs the Jekyll build automatically.
 
 ---
 ## ⚙️ Configuration
@@ -195,7 +195,7 @@ Easy monthly content updates with automated media loading.
 ### Jekyll Config (`_config.yml`)
 
 Key settings:
-- `baseurl: "/veerpatta-website"` - Required for GitHub Pages subpath
+- `baseurl: ""` - Empty; Cloudflare Pages serves the site from the domain root
 - `lang: en` - Default language
 - `remote_theme: pages-themes/cayman@v0.2.0` - Base theme
 
@@ -207,7 +207,7 @@ Analytics are **disabled by default**. To enable:
 # _config.yml
 analytics_enabled: true
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta.github.io"
+analytics_domain: "veerpatta-website.pages.dev"
 ```
 
 **Supported Providers:**
@@ -226,18 +226,26 @@ analytics_domain: "veerpatta.github.io"
 
 ### Automatic Deployment
 
+**Host**: Cloudflare Pages  
 **Trigger**: Push to `main` branch  
-**Build Time**: 2-3 minutes  
-**Live URL**: https://veerpatta.github.io/veerpatta-website/  
-**Monitor**: [GitHub Actions](https://github.com/veerpatta/veerpatta-website/actions)
+**Build Time**: 1-3 minutes  
+**Live URL**: https://veerpatta-website.pages.dev/  
+**Monitor**: Cloudflare dashboard -> Workers & Pages -> Deployments
 
 ### Process:
 1. Code pushed to GitHub
-2. GitHub Actions runs Jekyll build
-3. Output deployed to GitHub Pages
+2. Cloudflare Pages runs `bundle exec jekyll build`
+3. `_site/` is published
 4. Website live!
 
-No manual deployment steps needed.
+Branches and pull requests each get their own preview deployment URL.
+
+GitHub Actions also runs [`build.yml`](.github/workflows/build.yml), but that is
+a **build check only** — it compiles the site to catch Liquid and YAML errors
+and publishes nothing.
+
+No manual deployment steps needed. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+for the Cloudflare project settings and required environment variables.
 
 ---
 
@@ -341,7 +349,7 @@ All rights reserved. This website and its content are the property of Veer Patta
 ## 🙏 Acknowledgments
 
 - **Jekyll** - Static site generator
-- **GitHub Pages** - Free hosting
+- **Cloudflare Pages** - Hosting and builds
 - **Google Fonts** - Poppins & Noto Sans Devanagari
 - All contributors who help improve this website
 

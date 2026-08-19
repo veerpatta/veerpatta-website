@@ -183,6 +183,6 @@ When making changes, add entries under `[Unreleased]` in the appropriate categor
 
 ## Links
 - [Project Repository](https://github.com/veerpatta/veerpatta-website)
-- [Live Website](https://veerpatta.github.io/veerpatta-website/)
+- [Live Website](https://veerpatta-website.pages.dev/)
 - [Contributing Guidelines](CONTRIBUTING.md)
 - [Project Guide](PROJECT_GUIDE.md)

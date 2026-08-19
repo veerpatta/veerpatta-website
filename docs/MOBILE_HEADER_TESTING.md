@@ -369,7 +369,7 @@ http://localhost:4000/veerpatta-website/
 npm install -g lighthouse
 
 # Run
-lighthouse http://localhost:4000/veerpatta-website/en/ --view
+lighthouse http://localhost:4000/en/ --view
 ```
 
 ## Conclusion

@@ -5,8 +5,8 @@
 ## 🎯 Agent Quick Facts
 
 - **Type**: Jekyll static site
-- **Hosting**: GitHub Pages (auto-deploy on push to main)
-- **Build Time**: 2-3 minutes
+- **Hosting**: Cloudflare Pages (auto-deploy on push to main)
+- **Build Time**: 1-3 minutes
 - **No Local Build Required**: Can edit directly via GitHub
 - **Primary Constraint**: Maintain bilingual parity (EN/HI)
 
@@ -155,8 +155,8 @@ style: Improve button hover states
 **URLs** (always use these):
 ```liquid
 {% raw %}
-{{ '/en/about/' | relative_url }}        → /veerpatta-website/en/about/
-{{ '/assets/css/style.css' | absolute_url }} → https://veerpatta.github.io/veerpatta-website/assets/css/style.css
+{{ '/en/about/' | relative_url }}        → /en/about/
+{{ '/assets/css/style.css' | absolute_url }} → https://veerpatta-website.pages.dev/assets/css/style.css
 {% endraw %}
 ```
 
@@ -250,12 +250,12 @@ style: Improve button hover states
 
 - **Local edit**: Instant
 - **Commit & push**: Few seconds
-- **GitHub Pages build**: 2-3 minutes
-- **Live update**: 2-3 minutes after push
+- **Cloudflare Pages build**: 1-3 minutes
+- **Live update**: 1-3 minutes after push
 
 ## 🔗 Essential Links
 
-- **Live Site**: https://veerpatta.github.io/veerpatta-website/
+- **Live Site**: https://veerpatta-website.pages.dev/
 - **Full Guide**: [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - **Project Overview**: [PROJECT_GUIDE.md](PROJECT_GUIDE.md)

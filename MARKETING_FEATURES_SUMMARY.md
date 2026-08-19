@@ -133,7 +133,7 @@ This document provides a quick reference to the marketing features implemented f
 # _config.yml
 analytics_enabled: false  # Set to true to enable
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta.github.io"
+analytics_domain: "veerpatta-website.pages.dev"
 ```
 
 **Safe Guards:**
@@ -199,7 +199,7 @@ hi/news/index.md   (Hindi list page)
 {
   "name": "Veer Patta Public School",
   "short_name": "VPPS",
-  "start_url": "/veerpatta-website/en/",
+  "start_url": "/en/",
   "display": "standalone",
   "theme_color": "#5375E2"
 }
@@ -487,7 +487,7 @@ All components designed mobile-first:
    ---
    ```
 4. Write content in markdown
-5. Commit and push (GitHub Pages builds automatically)
+5. Commit and push (Cloudflare Pages builds automatically)
 
 ### Updating School Contact Info
 Edit `_config.yml`:

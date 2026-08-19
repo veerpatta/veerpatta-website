@@ -1,7 +1,8 @@
 title: Veer Patta Public School
 description: Bilingual learning environment nurturing leaders of tomorrow.
-url: "https://veerpatta.github.io"
-baseurl: "/veerpatta-website"
+# Cloudflare Pages serves the site at the domain root, so baseurl is empty.
+url: "https://veerpatta-website.pages.dev"
+baseurl: ""
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
@@ -32,7 +33,7 @@ school_sameAs:
 # Analytics (privacy-safe, disabled by default)
 analytics_enabled: false
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta.github.io"
+analytics_domain: "veerpatta-website.pages.dev"
 
 # Performance Stats for Dashboard
 stats:
@@ -43,6 +44,11 @@ stats:
   total_students: 1000
   qualified_teachers: 20
   ncc_cadets: 80
+
+# Cloudflare Pages control files. Jekyll ignores names starting with "_"
+# unless they are listed here, so without this _headers never reaches _site.
+include:
+  - _headers
 
 # Exclude files from processing
 exclude:

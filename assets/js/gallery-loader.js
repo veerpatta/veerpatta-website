@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  const MEDIA_BASE = '/veerpatta-website/assets/media/gallery';
+  const BASE = window.SITE_BASEURL || '';
+  const MEDIA_BASE = `${BASE}/assets/media/gallery`;
   const CATEGORIES = ['sports', 'ncc', 'cultural', 'academic', 'celebrations'];
 
   const GALLERY_ITEMS = {

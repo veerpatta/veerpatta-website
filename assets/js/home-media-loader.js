@@ -1,7 +1,8 @@
 (function() {
   'use strict';
 
-  const MEDIA_BASE = '/veerpatta-website/assets/media';
+  const BASE = window.SITE_BASEURL || '';
+  const MEDIA_BASE = `${BASE}/assets/media`;
 
   const HOME_HERO_FILES = [
     'hero-video.mp4',

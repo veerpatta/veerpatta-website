@@ -18,15 +18,15 @@
 
 ## Project Overview
 
-**Veer Patta Public School Website** is a bilingual (English/Hindi) static site built with Jekyll and hosted on GitHub Pages. The site serves as the official web presence for a public school in Amet, Rajasthan, India.
+**Veer Patta Public School Website** is a bilingual (English/Hindi) static site built with Jekyll and hosted on Cloudflare Pages. The site serves as the official web presence for a public school in Amet, Rajasthan, India.
 
 ### Key Facts
 - **Type**: Static site (Jekyll-based)
-- **Hosting**: GitHub Pages
+- **Hosting**: Cloudflare Pages
 - **Languages**: English (`/en/`) and Hindi (`/hi/`)
 - **Target Audience**: Parents and students in semi-rural India
 - **Primary Devices**: Budget Android phones on 3G networks
-- **Live URL**: https://veerpatta.github.io/veerpatta-website/
+- **Live URL**: https://veerpatta-website.pages.dev/
 - **Repository Size**: 944KB (50 source files)
 - **Build Time**: 2-3 minutes
 
@@ -48,21 +48,21 @@ Templating:            Liquid
 Content Format:        Markdown with YAML frontmatter
 Styling:               CSS3 (mobile-first, no preprocessor)
 Scripting:             Vanilla JavaScript ES6+ (no frameworks)
-Hosting:               GitHub Pages
-CI/CD:                 GitHub Actions
+Hosting:               Cloudflare Pages
+CI/CD:                 Cloudflare Pages build; GitHub Actions build check only
 ```
 
 ### Dependencies (Gemfile)
 ```ruby
 gem "jekyll", "~> 3.10.0"        # Jekyll core
-gem "github-pages", "~> 232"     # GitHub Pages bundle
+gem "github-pages", "~> 232"     # Plugin bundle (kept from the GitHub Pages era)
 gem "jekyll-remote-theme"        # Remote theme support
 gem "jekyll-seo-tag"             # SEO meta tags
 ```
 
 ### Key Configuration (_config.yml)
 ```yaml
-baseurl: "/veerpatta-website"    # CRITICAL: Required for GitHub Pages
+baseurl: ""    # Empty: Cloudflare Pages serves from the domain root
 remote_theme: pages-themes/cayman@v0.2.0
 plugins: [jekyll-remote-theme, jekyll-seo-tag]
 lang: en                          # Default language
@@ -89,7 +89,7 @@ analytics_enabled: false          # Privacy-first
 <a href="{{ '/en/about/' | relative_url }}">About</a>
 <img src="{{ '/assets/images/logo.jpg' | relative_url }}">
 
-<!-- ✗ WRONG (breaks on GitHub Pages) -->
+<!-- ✗ WRONG (hardcoded; breaks if the base path ever changes) -->
 <a href="/en/about/">About</a>
 <img src="/assets/images/logo.jpg">
 ```
@@ -181,7 +181,7 @@ veerpatta-website/
 │   └── [other docs]
 │
 ├── .github/workflows/
-│   └── jekyll.yml              # GitHub Actions CI/CD
+│   └── build.yml               # GitHub Actions build check (no deploy)
 │
 ├── _config.yml                  # Jekyll configuration
 ├── index.html                   # Root redirect to /en/
@@ -217,15 +217,21 @@ bundle exec jekyll serve
 # View at http://localhost:4000/veerpatta-website/
 ```
 
-### GitHub Actions Workflow
+### Cloudflare Pages
 **Automatic deployment** on push to `main` branch:
-1. Checkout code
-2. Setup Ruby 3.1
-3. Install gems via Bundler
-4. Build Jekyll site
-5. Deploy to GitHub Pages
+1. Cloudflare Pages checks out the repo
+2. Ruby from `.ruby-version`
+3. `bundle install`
+4. `bundle exec jekyll build`
+5. Publishes `_site/`
 
-**No manual deployment needed.**
+Branches and pull requests each get their own preview deployment.
+
+GitHub Actions runs `.github/workflows/build.yml` on the same push as a **build
+check only** — it compiles the site to catch Liquid and YAML errors and
+publishes nothing.
+
+**No manual deployment needed.** See `docs/DEPLOYMENT.md`.
 
 ### Making Changes
 
@@ -603,12 +609,12 @@ if (await fileExists('/assets/media/home/hero-video.mp4')) {
 **Trigger**: Push to `main` branch
 
 **Process**:
-1. GitHub Actions workflow triggers
-2. Ruby 3.1 environment setup
+1. Cloudflare Pages build triggers
+2. Ruby environment from `.ruby-version`
 3. Bundle install (dependencies)
 4. `bundle exec jekyll build`
-5. Deploy to GitHub Pages
-6. Live in ~2-3 minutes
+5. `_site/` published
+6. Live in ~1-3 minutes
 
 ### Manual Build (Optional, for testing)
 ```bash
@@ -745,7 +751,7 @@ git log --oneline -5              # Recent commits
 ### Important URLs
 | Purpose | URL |
 |---------|-----|
-| Live site | https://veerpatta.github.io/veerpatta-website/ |
+| Live site | https://veerpatta-website.pages.dev/ |
 | GitHub repo | https://github.com/veerpatta/veerpatta-website |
 | Actions (CI/CD) | https://github.com/veerpatta/veerpatta-website/actions |
 
@@ -820,7 +826,7 @@ git log --oneline -5              # Recent commits
 ### External Resources
 - Jekyll documentation: https://jekyllrb.com/docs/
 - Liquid syntax: https://shopify.github.io/liquid/
-- GitHub Pages: https://docs.github.com/en/pages
+- Cloudflare Pages: https://developers.cloudflare.com/pages/
 - Lighthouse: https://developer.chrome.com/docs/lighthouse/
 - WCAG Guidelines: https://www.w3.org/WAI/WCAG21/quickref/
 

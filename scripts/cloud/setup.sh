@@ -40,7 +40,7 @@ for f in _site/index.html _site/en/index.html _site/hi/index.html; do
 done
 
 if [ "$SERVE" = "1" ]; then
-  say "Serving on http://127.0.0.1:4000/veerpatta-website/"
+  say "Serving on http://127.0.0.1:4000/"
   exec bundle exec jekyll serve --host 127.0.0.1 --port 4000
 fi
 
@@ -48,11 +48,12 @@ cat <<'EOT'
 
 Next:
   bundle exec jekyll serve --host 127.0.0.1 --port 4000   # local preview
-  git push origin main                                    # deploys via Actions
+  git push origin main                                    # deploys via Cloudflare
 
-Deployment note: this repo publishes through .github/workflows/jekyll.yml to
-GitHub Pages, and GitHub Actions DOES run on a push made from a cloud container.
-That is worth stating because the sibling repo (veerpatta/schoolfees) deploys
-through Vercel's GitHub App, which does NOT react to a container push - it needs
-scripts/cloud/deploy.sh there. Here, a push really is the deploy.
+Deployment note: this repo deploys through Cloudflare Pages, which builds from
+GitHub on every push to main - so a push from a cloud container really is the
+deploy. .github/workflows/build.yml is a build check only; it publishes nothing.
+The sibling repo (veerpatta/schoolfees) deploys through Vercel's GitHub App,
+which does NOT react to a container push - it needs scripts/cloud/deploy.sh
+there.
 EOT

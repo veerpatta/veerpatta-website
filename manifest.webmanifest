@@ -4,14 +4,14 @@
   "name": "Veer Patta Public School",
   "short_name": "VPPS",
   "description": "Bilingual learning environment nurturing leaders of tomorrow",
-  "start_url": "/veerpatta-website/en/",
+  "start_url": {{ "/en/" | relative_url | jsonify }},
   "display": "standalone",
   "background_color": "#FEFEFE",
   "theme_color": "#5375E2",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/veerpatta-website/assets/images/VPPS LOGO ONNLY.jpg",
+      "src": {{ "/assets/images/VPPS LOGO ONNLY.jpg" | relative_url | jsonify }},
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
@@ -20,7 +20,7 @@
   "lang": "en",
   "dir": "ltr",
   "categories": ["education"],
-  "scope": "/veerpatta-website/",
+  "scope": {{ "/" | relative_url | jsonify }},
   "related_applications": [],
   "prefer_related_applications": false
 }

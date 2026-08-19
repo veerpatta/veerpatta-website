@@ -1,0 +1,52 @@
+# Build check only. Deployment is handled by Cloudflare Pages, which builds
+# this repo itself on every push to main. This workflow exists so a broken
+# Liquid tag, bad YAML frontmatter, or a missing include fails here on the PR
+# rather than in the Cloudflare dashboard after it has already gone live.
+name: Build site
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "build-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Kept in step with .ruby-version, which pins the Cloudflare build.
+          ruby-version: '3.2.2'
+          bundler-cache: true
+
+      - name: Build with Jekyll
+        # No --baseurl override: the site is served from the domain root on
+        # Cloudflare Pages, so _config.yml (baseurl: "") is already correct.
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+          # jekyll-remote-theme pulls pages-themes/cayman from the GitHub API.
+          # Without a token the build shares an anonymous rate limit and can
+          # fail intermittently.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check key pages were generated
+        run: |
+          for f in _site/index.html _site/en/index.html _site/hi/index.html \
+                   _site/404.html _site/sitemap.xml _site/_headers; do
+            test -f "$f" || { echo "missing $f"; exit 1; }
+          done
+          echo "built $(find _site -type f | wc -l) files"

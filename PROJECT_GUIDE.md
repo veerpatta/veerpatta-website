@@ -85,14 +85,14 @@ Want to add new photos or videos? It's easy!
 
 ### Built With:
 - **Jekyll** - Website generator (free and simple)
-- **GitHub Pages** - Free hosting from GitHub
+- **Cloudflare Pages** - Free hosting, builds the site automatically
 - **HTML/CSS/JavaScript** - Standard web technologies
 
 ### How It Works:
 1. Write content in simple text files (Markdown)
 2. Jekyll converts it to a beautiful website
 3. GitHub automatically publishes it online
-4. Website appears at: https://veerpatta.github.io/veerpatta-website/
+4. Website appears at: https://veerpatta-website.pages.dev/
 
 ### Updates Happen Automatically:
 When you save changes, GitHub rebuilds the website in 2-3 minutes!
@@ -113,7 +113,7 @@ When you save changes, GitHub rebuilds the website in 2-3 minutes!
 
 **About Jekyll (Website Builder):**
 - [Jekyll Official Website](https://jekyllrb.com/)
-- [GitHub Pages Documentation](https://pages.github.com/)
+- [Cloudflare Pages Documentation](https://developers.cloudflare.com/pages/)
 
 **About Markdown (Text Formatting):**
 - [Markdown Guide](https://www.markdownguide.org/)

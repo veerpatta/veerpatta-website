@@ -6,7 +6,7 @@
 
 ### Repository Type
 - **Technology**: Jekyll static site generator
-- **Hosting**: GitHub Pages
+- **Hosting**: Cloudflare Pages
 - **Languages**: HTML, CSS, JavaScript (Vanilla)
 - **Content**: Markdown files in `/en/` and `/hi/` directories
 - **Deployment**: Automatic on push to main branch
@@ -114,8 +114,10 @@ bundle exec jekyll serve
 
 1. Make changes in a new branch
 2. Push to GitHub
-3. GitHub Pages will build automatically
-4. View at: `https://veerpatta.github.io/veerpatta-website/`
+3. Cloudflare Pages builds the branch automatically
+4. View it at the branch's own **preview deployment** URL, shown in the
+   Cloudflare dashboard and on the pull request. Production stays untouched
+   until the branch merges to `main`.
 
 ## 🎨 Making Changes
 
@@ -233,22 +235,29 @@ sports-day-2024.jpg | EN: Annual Sports Day 2024 | HI: वार्षिक ख
 
 ### Automatic Deployment
 - **Trigger**: Push to `main` branch
-- **Build Time**: 2-3 minutes
-- **Live URL**: https://veerpatta.github.io/veerpatta-website/
-- **Build System**: GitHub Actions workflow (`.github/workflows/jekyll.yml`)
-- **Status**: Check the Actions tab in GitHub to monitor deployment progress
+- **Build Time**: 1-3 minutes
+- **Live URL**: https://veerpatta-website.pages.dev/
+- **Build System**: Cloudflare Pages, building this repo directly from GitHub
+- **Status**: Cloudflare dashboard -> Workers & Pages -> Deployments
+
+GitHub Actions runs `.github/workflows/build.yml` on the same push, but that is
+a **build check only** and publishes nothing.
 
 ### Monitoring Deployment
-1. Go to the [Actions tab](https://github.com/veerpatta/veerpatta-website/actions) in the repository
-2. Look for the latest workflow run for your commit
-3. Click on the workflow to see build logs and deployment status
-4. Green checkmark ✓ means successful deployment
+1. Cloudflare dashboard -> Workers & Pages -> the project -> **Deployments**
+2. Find the deployment for your commit
+3. Open it to read the build log
+4. "Success" means it is live; use **Rollback to this deployment** on an older
+   entry to revert instantly
+
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for project settings and
+environment variables.
 5. Red X ✗ means build failed - click to see error details
 
 ### Manual Testing
 After deployment, test these URLs:
-- English: https://veerpatta.github.io/veerpatta-website/en/
-- Hindi: https://veerpatta.github.io/veerpatta-website/hi/
+- English: https://veerpatta-website.pages.dev/en/
+- Hindi: https://veerpatta-website.pages.dev/hi/
 - Test on mobile device if possible
 
 ## 🧪 Testing Guidelines
@@ -297,7 +306,7 @@ After deployment, test these URLs:
 **Lighthouse:**
 ```bash
 # Run Lighthouse audit
-lighthouse https://veerpatta.github.io/veerpatta-website/en/ --view
+lighthouse https://veerpatta-website.pages.dev/en/ --view
 ```
 
 **Target Scores:**
@@ -311,10 +320,11 @@ lighthouse https://veerpatta.github.io/veerpatta-website/en/ --view
 ### Issue: Changes not showing after commit
 
 **Solution:**
-- Wait 2-3 minutes for GitHub Pages rebuild
-- Check build status in the [Actions tab](https://github.com/veerpatta/veerpatta-website/actions)
+- Wait 1-3 minutes for the Cloudflare Pages rebuild
+- Check the deployment status in the Cloudflare dashboard, not just GitHub
+  Actions — the Actions run is a build check and does not publish
 - Hard refresh browser (Ctrl+Shift+R)
-- Verify the deployment workflow completed successfully
+- Verify the Cloudflare deployment reports "Success"
 
 ### Issue: Images not loading
 

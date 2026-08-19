@@ -20,11 +20,11 @@
 
 ### Essential Facts
 - **Type**: Jekyll static site (no server-side code)
-- **Hosting**: GitHub Pages (automatic deployment)
+- **Hosting**: Cloudflare Pages (builds from GitHub on every push to `main`)
 - **Languages**: Bilingual - English (`/en/`) and Hindi (`/hi/`)
 - **Target Users**: 70% mobile users on budget Android devices with 3G networks
 - **Build Time**: 2-3 minutes after push
-- **Live URL**: https://veerpatta.github.io/veerpatta-website/
+- **Live URL**: https://veerpatta-website.pages.dev/
 
 ### Three Critical Rules
 1. **Bilingual Parity**: ALL content changes must be made in BOTH `/en/` and `/hi/` directories
@@ -55,8 +55,9 @@ because `github-pages` pulls a large tree; the build itself takes about a second
 `jekyll build` needs network — `remote_theme: pages-themes/cayman` is fetched
 from GitHub at build time, so an offline container fails at build, not at serve.
 
-**A push from the container really does deploy this site.** `.github/workflows/jekyll.yml`
-publishes to GitHub Pages, and GitHub Actions runs on container pushes. Worth
+**A push from the container really does deploy this site.** Cloudflare Pages
+builds from GitHub on every push to `main`. (`.github/workflows/build.yml` is a
+build check only and publishes nothing.) Worth
 stating explicitly because the sibling repo `veerpatta/schoolfees` behaves
 differently: it deploys through Vercel's GitHub App, which does *not* react to a
 push made from a container, and needs its own `scripts/cloud/deploy.sh`. Do not
@@ -81,8 +82,8 @@ Templates:     Liquid templating language
 Content:       Markdown with YAML frontmatter
 Styling:       CSS3 (mobile-first, no preprocessor in production)
 JavaScript:    Vanilla ES6+ (no frameworks/libraries)
-Hosting:       GitHub Pages
-CI/CD:         GitHub Actions
+Hosting:       Cloudflare Pages
+CI/CD:         Cloudflare Pages build; GitHub Actions runs a build check only
 Fonts:         Poppins (EN), Noto Sans Devanagari (HI)
 PWA:           Service Worker with stale-while-revalidate caching
 ```
@@ -95,7 +96,7 @@ gem "jekyll-remote-theme"
 gem "jekyll-seo-tag"
 ```
 
-**Important**: No npm/webpack/build tools. GitHub Pages handles everything.
+**Important**: No npm/webpack/build tools. Cloudflare Pages runs `bundle exec jekyll build` and serves `_site/`.
 
 ### Design Principles
 1. **Mobile-First**: 70% of traffic is from mobile devices
@@ -144,7 +145,7 @@ hi/about.md
 
 ### 2. Always Use `relative_url` Filter
 
-**Rule**: All URLs in Liquid templates MUST use the `relative_url` filter because of GitHub Pages baseurl.
+**Rule**: All URLs in Liquid templates MUST use the `relative_url` filter, so the site stays portable across base paths.
 
 ```liquid
 <!-- ✓ CORRECT -->
@@ -152,12 +153,12 @@ hi/about.md
 <img src="{{ '/assets/images/logo.jpg' | relative_url }}" alt="Logo">
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
-<!-- ✗ WRONG - Will break on GitHub Pages -->
+<!-- ✗ WRONG - Hardcoded, breaks if the site ever moves off the domain root -->
 <a href="/en/about/">About</a>
 <img src="/assets/images/logo.jpg" alt="Logo">
 ```
 
-**Why**: The site uses `baseurl: "/veerpatta-website"` in `_config.yml`, so all URLs need this prefix.
+**Why**: `baseurl` is `""` on Cloudflare Pages (served from the domain root), but was `/veerpatta-website` under GitHub Pages. `relative_url` keeps every URL correct either way. JavaScript that builds asset URLs at runtime must read `window.SITE_BASEURL`, which `_includes/head.html` sets from `site.baseurl` — never hardcode a base path in JS.
 
 ### 3. Mobile-First CSS
 
@@ -290,7 +291,7 @@ veerpatta-website/
 │
 ├── .github/                     # GitHub configuration
 │   ├── workflows/
-│   │   └── jekyll.yml          # GitHub Actions deployment
+│   │   └── build.yml           # GitHub Actions build check (no deploy)
 │   ├── ISSUE_TEMPLATE/         # Issue templates
 │   └── pull_request_template.md # PR template
 │
@@ -319,8 +320,8 @@ veerpatta-website/
 ```yaml
 title: Veer Patta Public School
 description: Bilingual learning environment nurturing leaders of tomorrow.
-url: "https://veerpatta.github.io"
-baseurl: "/veerpatta-website"          # CRITICAL: Required for GitHub Pages
+url: "https://veerpatta-website.pages.dev"
+baseurl: ""                            # Cloudflare Pages serves from the domain root
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
@@ -345,7 +346,7 @@ school_geo_lng: "73.9271"
 # Analytics (disabled by default for privacy)
 analytics_enabled: false
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta.github.io"
+analytics_domain: "veerpatta-website.pages.dev"
 ```
 
 ---
@@ -373,10 +374,10 @@ analytics_domain: "veerpatta.github.io"
    git push origin main
    ```
 
-4. **Wait 2-3 minutes** for GitHub Pages to rebuild
+4. **Wait 1-3 minutes** for Cloudflare Pages to rebuild
 5. **Verify both versions** at:
-   - https://veerpatta.github.io/veerpatta-website/en/about/
-   - https://veerpatta.github.io/veerpatta-website/hi/about/
+   - https://veerpatta-website.pages.dev/en/about/
+   - https://veerpatta-website.pages.dev/hi/about/
 
 ### Workflow 2: Add Gallery Media
 
@@ -850,7 +851,7 @@ analytics_enabled: false
 # To:
 analytics_enabled: true
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta.github.io"
+analytics_domain: "veerpatta-website.pages.dev"
 ```
 
 **Privacy-safe options**:
@@ -992,33 +993,34 @@ grep -r "broken-url" .
 ### Automatic Deployment Flow
 
 ```
-Developer Push to GitHub
+Developer Push to GitHub (main)
          ↓
-GitHub Actions Triggered (.github/workflows/jekyll.yml)
-         ↓
-Jekyll Build Process
-  - Install Ruby 3.1
-  - Install bundler
-  - bundle install (with cache)
-  - bundle exec jekyll build
-         ↓
-Generate Static HTML in _site/
-         ↓
-Upload to GitHub Pages
-         ↓
-Live at: https://veerpatta.github.io/veerpatta-website/
-         ↓
-Build Time: 2-3 minutes
+         ├──► GitHub Actions (.github/workflows/build.yml)
+         │      build check only - publishes nothing
+         │
+         └──► Cloudflare Pages
+                - Ruby from .ruby-version
+                - bundle install
+                - bundle exec jekyll build
+                        ↓
+                Static HTML in _site/
+                        ↓
+                Live at: https://veerpatta-website.pages.dev/
+                        ↓
+                Build Time: 1-3 minutes
 ```
+
+Full detail, including the Cloudflare project settings and required environment
+variables, is in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ### Monitoring Deployment
 
 **Check build status**:
-1. Go to repository on GitHub
-2. Click "Actions" tab
-3. Find latest workflow run
-4. Green checkmark ✓ = success
-5. Red X ✗ = failure (click to see logs)
+1. Cloudflare dashboard -> Workers & Pages -> the project -> **Deployments**
+2. Open the latest deployment to read its build log
+3. Branches and PRs each get their own **preview** deployment URL
+4. The GitHub **Actions** tab shows the build check separately - it catches
+   Liquid and YAML errors, but a green check there is not a deploy
 
 **Common build failures**:
 - Liquid syntax errors
@@ -1028,11 +1030,16 @@ Build Time: 2-3 minutes
 
 ### Manual Deployment (if needed)
 
-**Never necessary** - GitHub Pages handles everything automatically on push to `main`.
+**Never necessary** - Cloudflare Pages builds automatically on push to `main`.
+The dashboard also offers **Retry deployment** if a build failed for a transient
+reason, such as the remote-theme fetch being rate-limited.
 
 ### Rollback Process
 
-**If deployment breaks**:
+**Fastest**: Cloudflare dashboard -> **Deployments** -> pick the last good one ->
+**Rollback to this deployment**. Instant, no push needed.
+
+**To fix forward instead**:
 1. Revert commit:
    ```bash
    git revert HEAD
@@ -1052,8 +1059,10 @@ Build Time: 2-3 minutes
 **Symptoms**: Pushed changes but website hasn't updated
 
 **Solutions**:
-1. **Wait 2-3 minutes** - Build takes time
-2. **Check Actions tab** - Verify build succeeded
+1. **Wait 1-3 minutes** - Build takes time
+2. **Check the Cloudflare Deployments tab** - Verify the build succeeded. A
+   green check in GitHub Actions only means the build check passed; Cloudflare
+   runs its own build and can still fail
 3. **Hard refresh browser** - Ctrl+Shift+R (Cmd+Shift+R on Mac)
 4. **Clear browser cache**
 5. **Check if pushed to correct branch** - Must be `main`
@@ -1127,17 +1136,22 @@ Build Time: 2-3 minutes
 3. **Check mobile menu function** in `main.js`
 4. **Test on actual mobile device** - Desktop DevTools may behave differently
 
-### Issue: Build Failing on GitHub Actions
+### Issue: Build Failing
 
-**Symptoms**: Red X in Actions tab
+**Symptoms**: Failed deployment in Cloudflare, or a red X on the GitHub Actions
+build check
 
 **Solutions**:
-1. **Click on failed workflow** to see logs
+1. **Read the build log** - Cloudflare: Deployments -> the failed run.
+   GitHub: Actions -> the failed workflow
 2. **Common errors**:
    - **Liquid syntax error**: Check `{% %}` and `{{ }}` syntax
    - **YAML frontmatter error**: Verify indentation and colons
    - **Missing include file**: Ensure referenced file exists
    - **Gem dependency issue**: Check Gemfile
+   - **403 fetching the remote theme**: `jekyll-remote-theme` hit GitHub's
+     anonymous rate limit. Set `GITHUB_TOKEN` in the Cloudflare project's
+     environment variables, then retry the deployment
 
 3. **Test locally**:
    ```bash
@@ -1145,6 +1159,15 @@ Build Time: 2-3 minutes
    ```
 
 4. **Fix error** and push again
+
+### Issue: `_headers` or `_redirects` Has No Effect
+
+**Symptoms**: Cloudflare ignores the file entirely
+
+**Cause**: Jekyll skips files whose names start with `_`, so it never reaches
+`_site/`.
+
+**Fix**: Add the filename to `include:` in `_config.yml`.
 
 ### Issue: Bilingual Content Out of Sync
 
@@ -1247,8 +1270,10 @@ Build Time: 2-3 minutes
 - https://jekyllrb.com/docs/
 - https://shopify.github.io/liquid/ (Liquid templates)
 
-**GitHub Pages**:
-- https://docs.github.com/en/pages
+**Cloudflare Pages**:
+- https://developers.cloudflare.com/pages/
+- https://developers.cloudflare.com/pages/configuration/headers/
+- https://developers.cloudflare.com/pages/configuration/redirects/
 
 **Web Standards**:
 - https://www.w3.org/WAI/WCAG21/quickref/ (WCAG AA)

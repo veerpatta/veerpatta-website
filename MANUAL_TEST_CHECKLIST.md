@@ -188,7 +188,7 @@
 - [ ] Check fields:
   - name: "Veer Patta Public School"
   - short_name: "VPPS"
-  - start_url: "/veerpatta-website/en/"
+  - start_url: "/en/"
   - display: "standalone"
   - theme_color: "#5375E2"
   - icons array present
@@ -218,9 +218,9 @@
 - [ ] Cache named "vpps-v1" exists
 - [ ] Core assets are cached:
   - /veerpatta-website/
-  - /veerpatta-website/en/
+  - /en/
   - /veerpatta-website/hi/
-  - /veerpatta-website/en/admissions/
+  - /en/admissions/
   - /veerpatta-website/hi/admissions/
   - style.css, animations.css, main.js
   - VPPS logo
