@@ -17,6 +17,8 @@
   {% assign gallery_path = '/hi/gallery/' %}
   {% assign contact_path = '/hi/contact/' %}
   {% assign news_path = '/hi/news/' %}
+  {% assign beyond_path = '/hi/beyond/' %}
+  {% assign digital_path = '/hi/digital/' %}
   {% assign current_lang = 'hi' %}
   {% assign alt_lang = 'en' %}
   {% assign alt_path = page.url | replace_first: '/hi/', '/en/' %}
@@ -28,6 +30,8 @@
   {% assign nav_academics = 'शिक्षा' %}
   {% assign nav_gallery = 'गैलरी' %}
   {% assign nav_news = 'समाचार' %}
+  {% assign nav_beyond = 'सह-शिक्षा' %}
+  {% assign nav_digital = 'डिजिटल कैंपस' %}
   {% assign nav_contact = 'संपर्क' %}
   {% assign menu_label = 'मेनू' %}
   {% assign close_label = 'बंद करें' %}
@@ -40,6 +44,8 @@
   {% assign gallery_path = '/en/gallery/' %}
   {% assign contact_path = '/en/contact/' %}
   {% assign news_path = '/en/news/' %}
+  {% assign beyond_path = '/en/beyond/' %}
+  {% assign digital_path = '/en/digital/' %}
   {% assign current_lang = 'en' %}
   {% assign alt_lang = 'hi' %}
   {% assign alt_path = page.url | replace_first: '/en/', '/hi/' %}
@@ -51,6 +57,8 @@
   {% assign nav_academics = 'Academics' %}
   {% assign nav_gallery = 'Gallery' %}
   {% assign nav_news = 'News' %}
+  {% assign nav_beyond = 'Beyond Academics' %}
+  {% assign nav_digital = 'Digital Campus' %}
   {% assign nav_contact = 'Contact' %}
   {% assign menu_label = 'Menu' %}
   {% assign close_label = 'Close' %}
@@ -97,43 +105,55 @@
 
     {% comment %} Desktop Navigation - Hidden on mobile {% endcomment %}
     <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
-      <a class="nav-link" href="{{ home_path | relative_url }}" aria-label="{{ nav_home }}">
+      <a class="nav-link" href="{{ home_path | relative_url }}" aria-label="{{ nav_home }}"{% if page.url == home_path %} aria-current="page"{% endif %}>
         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </svg>
         <span class="nav-label">{{ nav_home }}</span>
       </a>
-      <a class="nav-link" href="{{ about_path | relative_url }}" aria-label="{{ nav_about }}">
+      <a class="nav-link" href="{{ about_path | relative_url }}" aria-label="{{ nav_about }}"{% if page.url == about_path %} aria-current="page"{% endif %}>
         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
         </svg>
         <span class="nav-label">{{ nav_about }}</span>
       </a>
-      <a class="nav-link" href="{{ admissions_path | relative_url }}" aria-label="{{ nav_admissions }}">
+      <a class="nav-link" href="{{ admissions_path | relative_url }}" aria-label="{{ nav_admissions }}"{% if page.url == admissions_path %} aria-current="page"{% endif %}>
         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
         </svg>
         <span class="nav-label">{{ nav_admissions }}</span>
       </a>
-      <a class="nav-link" href="{{ academics_path | relative_url }}" aria-label="{{ nav_academics }}">
+      <a class="nav-link" href="{{ academics_path | relative_url }}" aria-label="{{ nav_academics }}"{% if page.url == academics_path %} aria-current="page"{% endif %}>
         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
         </svg>
         <span class="nav-label">{{ nav_academics }}</span>
       </a>
-      <a class="nav-link" href="{{ gallery_path | relative_url }}" aria-label="{{ nav_gallery }}">
+      <a class="nav-link" href="{{ beyond_path | relative_url }}" aria-label="{{ nav_beyond }}"{% if page.url == beyond_path %} aria-current="page"{% endif %}>
+        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/>
+        </svg>
+        <span class="nav-label">{{ nav_beyond }}</span>
+      </a>
+      <a class="nav-link" href="{{ digital_path | relative_url }}" aria-label="{{ nav_digital }}"{% if page.url == digital_path %} aria-current="page"{% endif %}>
+        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h5l-1 2v1h8v-1l-1-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+        </svg>
+        <span class="nav-label">{{ nav_digital }}</span>
+      </a>
+      <a class="nav-link" href="{{ gallery_path | relative_url }}" aria-label="{{ nav_gallery }}"{% if page.url == gallery_path %} aria-current="page"{% endif %}>
         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/>
         </svg>
         <span class="nav-label">{{ nav_gallery }}</span>
       </a>
-      <a class="nav-link" href="{{ news_path | relative_url }}" aria-label="{{ nav_news }}">
+      <a class="nav-link" href="{{ news_path | relative_url }}" aria-label="{{ nav_news }}"{% if page.url == news_path %} aria-current="page"{% endif %}>
         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
         </svg>
         <span class="nav-label">{{ nav_news }}</span>
       </a>
-      <a class="nav-link" href="{{ contact_path | relative_url }}" aria-label="{{ nav_contact }}">
+      <a class="nav-link" href="{{ contact_path | relative_url }}" aria-label="{{ nav_contact }}"{% if page.url == contact_path %} aria-current="page"{% endif %}>
         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
         </svg>
@@ -232,6 +252,8 @@
     <a class="mobile-nav-link" href="{{ about_path | relative_url }}">{{ nav_about }}</a>
     <a class="mobile-nav-link" href="{{ admissions_path | relative_url }}">{{ nav_admissions }}</a>
     <a class="mobile-nav-link" href="{{ academics_path | relative_url }}">{{ nav_academics }}</a>
+    <a class="mobile-nav-link" href="{{ beyond_path | relative_url }}">{{ nav_beyond }}</a>
+    <a class="mobile-nav-link" href="{{ digital_path | relative_url }}">{{ nav_digital }}</a>
     <a class="mobile-nav-link" href="{{ gallery_path | relative_url }}">{{ nav_gallery }}</a>
     <a class="mobile-nav-link" href="{{ news_path | relative_url }}">{{ nav_news }}</a>
     <a class="mobile-nav-link" href="{{ contact_path | relative_url }}">{{ nav_contact }}</a>

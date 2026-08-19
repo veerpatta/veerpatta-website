@@ -29,7 +29,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </script>
 
 <!-- HERO - MODERN SPLIT LAYOUT -->
-<div class="hero">
+<div class="hero lang-hi">
   <div class="hero-content">
     <h1>
       ग्रामीण राजस्थान के <span class="text-highlight shimmer">भविष्य के नेता</span>
@@ -85,7 +85,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </div>
 
 <!-- WHY CHOOSE US - Modern Stats Section -->
-<section class="container stats-section">
+<section class="container stats-section lang-hi">
   <div class="section-header-modern">
     <h2 class="section-heading-main">
       क्यों चुनें <span class="heading-accent">वीर पट्टा</span>
@@ -121,7 +121,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- PROGRAMS - Modern Card Design -->
-<section class="container programs-section">
+<section class="container programs-section lang-hi">
   <div class="section-header-modern">
     <h2 class="section-heading-main">
       हमारे <span class="heading-accent">कार्यक्रम</span>
@@ -216,7 +216,7 @@ keywords: अमेट में सर्वश्रेष्ठ स्कू�
 </section>
 
 <!-- TRUST BADGES -->
-<section class="container trust-badges-section">
+<section class="container trust-badges-section lang-hi">
   <div class="trust-badges-wrapper">
     <div class="trust-badge">
       <div class="badge-icon">
