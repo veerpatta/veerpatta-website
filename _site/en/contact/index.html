@@ -82,18 +82,20 @@ body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Desktop-only faces. Gated so mobile downloads neither family. -->
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="(min-width: 1280px)">
+<!-- The design's faces. Loaded at every viewport now that the design
+     applies everywhere - the type IS the design, so gating them would
+     leave small screens looking like a different site. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/animations.css">
 <link rel="stylesheet" href="/assets/css/mobile-deep-optimize.css">
 
-<!-- Desktop design layer (>=1280px). The media attribute makes this
-     non-render-blocking, so phones never pay for it. Must load last:
-     it relies on source order to win equal-specificity ties. -->
-<link rel="stylesheet" href="/assets/css/desktop.css" media="(min-width: 1280px)">
+<!-- Site design layer. Applies at every viewport, so it is no longer
+     media-gated. Must load last: it relies on source order to win
+     equal-specificity ties against the three sheets above. -->
+<link rel="stylesheet" href="/assets/css/design.css">
 
 <!-- Site base path, for scripts that build asset URLs at runtime.
      Empty on Cloudflare Pages; set when served under a subpath. -->
