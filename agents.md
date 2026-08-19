@@ -18,15 +18,15 @@
 
 ## Project Overview
 
-**Veer Patta Public School Website** is a bilingual (English/Hindi) static site built with Jekyll and hosted on Cloudflare Pages. The site serves as the official web presence for a public school in Amet, Rajasthan, India.
+**Veer Patta Public School Website** is a bilingual (English/Hindi) static site built with Jekyll and hosted on Cloudflare Workers. The site serves as the official web presence for a public school in Amet, Rajasthan, India.
 
 ### Key Facts
 - **Type**: Static site (Jekyll-based)
-- **Hosting**: Cloudflare Pages
+- **Hosting**: Cloudflare Workers
 - **Languages**: English (`/en/`) and Hindi (`/hi/`)
 - **Target Audience**: Parents and students in semi-rural India
 - **Primary Devices**: Budget Android phones on 3G networks
-- **Live URL**: https://veerpatta-website.pages.dev/
+- **Live URL**: https://veerpatta-website.raj-39e.workers.dev/
 - **Repository Size**: 944KB (50 source files)
 - **Build Time**: 2-3 minutes
 
@@ -48,8 +48,8 @@ Templating:            Liquid
 Content Format:        Markdown with YAML frontmatter
 Styling:               CSS3 (mobile-first, no preprocessor)
 Scripting:             Vanilla JavaScript ES6+ (no frameworks)
-Hosting:               Cloudflare Pages
-CI/CD:                 Cloudflare Pages build; GitHub Actions build check only
+Hosting:               Cloudflare Workers
+CI/CD:                 Cloudflare Workers build; GitHub Actions build check only
 ```
 
 ### Dependencies (Gemfile)
@@ -62,7 +62,7 @@ gem "jekyll-seo-tag"             # SEO meta tags
 
 ### Key Configuration (_config.yml)
 ```yaml
-baseurl: ""    # Empty: Cloudflare Pages serves from the domain root
+baseurl: ""    # Empty: Cloudflare Workers serves from the domain root
 remote_theme: pages-themes/cayman@v0.2.0
 plugins: [jekyll-remote-theme, jekyll-seo-tag]
 lang: en                          # Default language
@@ -183,6 +183,9 @@ veerpatta-website/
 ├── .github/workflows/
 │   └── build.yml               # GitHub Actions build check (no deploy)
 │
+├── wrangler.jsonc               # Cloudflare Workers deploy config
+├── .ruby-version                # Pins Ruby for the Cloudflare build
+├── _headers                     # Response headers (copied into _site/)
 ├── _config.yml                  # Jekyll configuration
 ├── index.html                   # Root redirect to /en/
 ├── 404.html                     # Custom 404 page
@@ -217,9 +220,9 @@ bundle exec jekyll serve
 # View at http://localhost:4000/veerpatta-website/
 ```
 
-### Cloudflare Pages
+### Cloudflare Workers
 **Automatic deployment** on push to `main` branch:
-1. Cloudflare Pages checks out the repo
+1. Cloudflare Workers checks out the repo
 2. Ruby from `.ruby-version`
 3. `bundle install`
 4. `bundle exec jekyll build`
@@ -609,7 +612,7 @@ if (await fileExists('/assets/media/home/hero-video.mp4')) {
 **Trigger**: Push to `main` branch
 
 **Process**:
-1. Cloudflare Pages build triggers
+1. Cloudflare Workers build triggers
 2. Ruby environment from `.ruby-version`
 3. Bundle install (dependencies)
 4. `bundle exec jekyll build`
@@ -751,7 +754,7 @@ git log --oneline -5              # Recent commits
 ### Important URLs
 | Purpose | URL |
 |---------|-----|
-| Live site | https://veerpatta-website.pages.dev/ |
+| Live site | https://veerpatta-website.raj-39e.workers.dev/ |
 | GitHub repo | https://github.com/veerpatta/veerpatta-website |
 | Actions (CI/CD) | https://github.com/veerpatta/veerpatta-website/actions |
 
@@ -826,7 +829,7 @@ git log --oneline -5              # Recent commits
 ### External Resources
 - Jekyll documentation: https://jekyllrb.com/docs/
 - Liquid syntax: https://shopify.github.io/liquid/
-- Cloudflare Pages: https://developers.cloudflare.com/pages/
+- Cloudflare Workers: https://developers.cloudflare.com/pages/
 - Lighthouse: https://developer.chrome.com/docs/lighthouse/
 - WCAG Guidelines: https://www.w3.org/WAI/WCAG21/quickref/
 

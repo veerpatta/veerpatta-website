@@ -1,4 +1,4 @@
-# Build check only. Deployment is handled by Cloudflare Pages, which builds
+# Build check only. Deployment is handled by Cloudflare Workers, which builds
 # this repo itself on every push to main. This workflow exists so a broken
 # Liquid tag, bad YAML frontmatter, or a missing include fails here on the PR
 # rather than in the Cloudflare dashboard after it has already gone live.
@@ -34,7 +34,7 @@ jobs:
 
       - name: Build with Jekyll
         # No --baseurl override: the site is served from the domain root on
-        # Cloudflare Pages, so _config.yml (baseurl: "") is already correct.
+        # Cloudflare Workers, so _config.yml (baseurl: "") is already correct.
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
@@ -49,4 +49,7 @@ jobs:
                    _site/404.html _site/sitemap.xml _site/_headers; do
             test -f "$f" || { echo "missing $f"; exit 1; }
           done
+          # wrangler.jsonc has no frontmatter, so a missing exclude: entry
+          # would publish the deploy config as part of the site.
+          test ! -e _site/wrangler.jsonc || { echo "wrangler.jsonc leaked into _site"; exit 1; }
           echo "built $(find _site -type f | wc -l) files"

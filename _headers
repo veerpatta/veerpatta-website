@@ -1,4 +1,4 @@
-# Cloudflare Pages response headers.
+# Cloudflare Workers response headers.
 # Listed under `include:` in _config.yml, otherwise Jekyll drops the file
 # because its name starts with an underscore.
 

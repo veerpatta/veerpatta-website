@@ -20,11 +20,11 @@
 
 ### Essential Facts
 - **Type**: Jekyll static site (no server-side code)
-- **Hosting**: Cloudflare Pages (builds from GitHub on every push to `main`)
+- **Hosting**: Cloudflare Workers (builds from GitHub on every push to `main`)
 - **Languages**: Bilingual - English (`/en/`) and Hindi (`/hi/`)
 - **Target Users**: 70% mobile users on budget Android devices with 3G networks
 - **Build Time**: 2-3 minutes after push
-- **Live URL**: https://veerpatta-website.pages.dev/
+- **Live URL**: https://veerpatta-website.raj-39e.workers.dev/
 
 ### Three Critical Rules
 1. **Bilingual Parity**: ALL content changes must be made in BOTH `/en/` and `/hi/` directories
@@ -55,7 +55,7 @@ because `github-pages` pulls a large tree; the build itself takes about a second
 `jekyll build` needs network — `remote_theme: pages-themes/cayman` is fetched
 from GitHub at build time, so an offline container fails at build, not at serve.
 
-**A push from the container really does deploy this site.** Cloudflare Pages
+**A push from the container really does deploy this site.** Cloudflare Workers
 builds from GitHub on every push to `main`. (`.github/workflows/build.yml` is a
 build check only and publishes nothing.) Worth
 stating explicitly because the sibling repo `veerpatta/schoolfees` behaves
@@ -82,8 +82,8 @@ Templates:     Liquid templating language
 Content:       Markdown with YAML frontmatter
 Styling:       CSS3 (mobile-first, no preprocessor in production)
 JavaScript:    Vanilla ES6+ (no frameworks/libraries)
-Hosting:       Cloudflare Pages
-CI/CD:         Cloudflare Pages build; GitHub Actions runs a build check only
+Hosting:       Cloudflare Workers
+CI/CD:         Cloudflare Workers build; GitHub Actions runs a build check only
 Fonts:         Poppins (EN), Noto Sans Devanagari (HI)
 PWA:           Service Worker with stale-while-revalidate caching
 ```
@@ -96,7 +96,7 @@ gem "jekyll-remote-theme"
 gem "jekyll-seo-tag"
 ```
 
-**Important**: No npm/webpack/build tools. Cloudflare Pages runs `bundle exec jekyll build` and serves `_site/`.
+**Important**: No npm/webpack/build tools. Cloudflare Workers runs `bundle exec jekyll build` and serves `_site/`.
 
 ### Design Principles
 1. **Mobile-First**: 70% of traffic is from mobile devices
@@ -158,7 +158,7 @@ hi/about.md
 <img src="/assets/images/logo.jpg" alt="Logo">
 ```
 
-**Why**: `baseurl` is `""` on Cloudflare Pages (served from the domain root), but was `/veerpatta-website` under GitHub Pages. `relative_url` keeps every URL correct either way. JavaScript that builds asset URLs at runtime must read `window.SITE_BASEURL`, which `_includes/head.html` sets from `site.baseurl` — never hardcode a base path in JS.
+**Why**: `baseurl` is `""` on Cloudflare Workers (served from the domain root), but was `/veerpatta-website` under GitHub Pages. `relative_url` keeps every URL correct either way. JavaScript that builds asset URLs at runtime must read `window.SITE_BASEURL`, which `_includes/head.html` sets from `site.baseurl` — never hardcode a base path in JS.
 
 ### 3. Mobile-First CSS
 
@@ -295,6 +295,9 @@ veerpatta-website/
 │   ├── ISSUE_TEMPLATE/         # Issue templates
 │   └── pull_request_template.md # PR template
 │
+├── wrangler.jsonc               # Cloudflare Workers deploy config
+├── .ruby-version                # Pins Ruby for the Cloudflare build
+├── _headers                     # Response headers (copied into _site/)
 ├── _config.yml                  # Jekyll configuration
 ├── index.html                   # Root redirect to /en/
 ├── 404.html                     # Custom 404 page
@@ -320,8 +323,8 @@ veerpatta-website/
 ```yaml
 title: Veer Patta Public School
 description: Bilingual learning environment nurturing leaders of tomorrow.
-url: "https://veerpatta-website.pages.dev"
-baseurl: ""                            # Cloudflare Pages serves from the domain root
+url: "https://veerpatta-website.raj-39e.workers.dev"
+baseurl: ""                            # Cloudflare Workers serves from the domain root
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
@@ -346,7 +349,7 @@ school_geo_lng: "73.9271"
 # Analytics (disabled by default for privacy)
 analytics_enabled: false
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta-website.pages.dev"
+analytics_domain: "veerpatta-website.raj-39e.workers.dev"
 ```
 
 ---
@@ -374,10 +377,10 @@ analytics_domain: "veerpatta-website.pages.dev"
    git push origin main
    ```
 
-4. **Wait 1-3 minutes** for Cloudflare Pages to rebuild
+4. **Wait 1-3 minutes** for Cloudflare Workers to rebuild
 5. **Verify both versions** at:
-   - https://veerpatta-website.pages.dev/en/about/
-   - https://veerpatta-website.pages.dev/hi/about/
+   - https://veerpatta-website.raj-39e.workers.dev/en/about/
+   - https://veerpatta-website.raj-39e.workers.dev/hi/about/
 
 ### Workflow 2: Add Gallery Media
 
@@ -851,7 +854,7 @@ analytics_enabled: false
 # To:
 analytics_enabled: true
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta-website.pages.dev"
+analytics_domain: "veerpatta-website.raj-39e.workers.dev"
 ```
 
 **Privacy-safe options**:
@@ -998,14 +1001,14 @@ Developer Push to GitHub (main)
          ├──► GitHub Actions (.github/workflows/build.yml)
          │      build check only - publishes nothing
          │
-         └──► Cloudflare Pages
+         └──► Cloudflare Workers
                 - Ruby from .ruby-version
                 - bundle install
                 - bundle exec jekyll build
                         ↓
                 Static HTML in _site/
                         ↓
-                Live at: https://veerpatta-website.pages.dev/
+                Live at: https://veerpatta-website.raj-39e.workers.dev/
                         ↓
                 Build Time: 1-3 minutes
 ```
@@ -1016,7 +1019,7 @@ variables, is in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 ### Monitoring Deployment
 
 **Check build status**:
-1. Cloudflare dashboard -> Workers & Pages -> the project -> **Deployments**
+1. Cloudflare dashboard -> Workers & Pages -> veerpatta-website -> **Deployments**
 2. Open the latest deployment to read its build log
 3. Branches and PRs each get their own **preview** deployment URL
 4. The GitHub **Actions** tab shows the build check separately - it catches
@@ -1030,7 +1033,7 @@ variables, is in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ### Manual Deployment (if needed)
 
-**Never necessary** - Cloudflare Pages builds automatically on push to `main`.
+**Never necessary** - Cloudflare Workers builds automatically on push to `main`.
 The dashboard also offers **Retry deployment** if a build failed for a transient
 reason, such as the remote-theme fetch being rate-limited.
 
@@ -1270,7 +1273,7 @@ build check
 - https://jekyllrb.com/docs/
 - https://shopify.github.io/liquid/ (Liquid templates)
 
-**Cloudflare Pages**:
+**Cloudflare Workers**:
 - https://developers.cloudflare.com/pages/
 - https://developers.cloudflare.com/pages/configuration/headers/
 - https://developers.cloudflare.com/pages/configuration/redirects/

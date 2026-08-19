@@ -1,0 +1,22 @@
+{
+  // Cloudflare Workers (static assets) deployment for the Jekyll site.
+  //
+  // This Worker serves static files only — there is no `main` entry point and
+  // no `binding`, both of which are only valid alongside a Worker script.
+  // Jekyll builds into _site/ and Cloudflare uploads that directory as-is.
+  //
+  // Workers Builds settings (set in the dashboard, not here):
+  //   Build command:  bundle exec jekyll build
+  //   Deploy command: npx wrangler deploy
+  "name": "veerpatta-website",
+  "compatibility_date": "2026-08-19",
+  "assets": {
+    "directory": "./_site",
+
+    // Serve the nearest 404.html with a real 404 status. Without this a
+    // missing page returns 404 with no body; "single-page-application" would
+    // be wrong here, since it answers 200 for every unmatched path and would
+    // let search engines index soft 404s.
+    "not_found_handling": "404-page"
+  }
+}

@@ -133,7 +133,7 @@ This document provides a quick reference to the marketing features implemented f
 # _config.yml
 analytics_enabled: false  # Set to true to enable
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta-website.pages.dev"
+analytics_domain: "veerpatta-website.raj-39e.workers.dev"
 ```
 
 **Safe Guards:**
@@ -487,7 +487,7 @@ All components designed mobile-first:
    ---
    ```
 4. Write content in markdown
-5. Commit and push (Cloudflare Pages builds automatically)
+5. Commit and push (Cloudflare Workers builds automatically)
 
 ### Updating School Contact Info
 Edit `_config.yml`:

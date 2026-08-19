@@ -5,7 +5,7 @@
 ## 🎯 Agent Quick Facts
 
 - **Type**: Jekyll static site
-- **Hosting**: Cloudflare Pages (auto-deploy on push to main)
+- **Hosting**: Cloudflare Workers (auto-deploy on push to main)
 - **Build Time**: 1-3 minutes
 - **No Local Build Required**: Can edit directly via GitHub
 - **Primary Constraint**: Maintain bilingual parity (EN/HI)
@@ -156,7 +156,7 @@ style: Improve button hover states
 ```liquid
 {% raw %}
 {{ '/en/about/' | relative_url }}        → /en/about/
-{{ '/assets/css/style.css' | absolute_url }} → https://veerpatta-website.pages.dev/assets/css/style.css
+{{ '/assets/css/style.css' | absolute_url }} → https://veerpatta-website.raj-39e.workers.dev/assets/css/style.css
 {% endraw %}
 ```
 
@@ -250,12 +250,12 @@ style: Improve button hover states
 
 - **Local edit**: Instant
 - **Commit & push**: Few seconds
-- **Cloudflare Pages build**: 1-3 minutes
+- **Cloudflare Workers build**: 1-3 minutes
 - **Live update**: 1-3 minutes after push
 
 ## 🔗 Essential Links
 
-- **Live Site**: https://veerpatta-website.pages.dev/
+- **Live Site**: https://veerpatta-website.raj-39e.workers.dev/
 - **Full Guide**: [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - **Project Overview**: [PROJECT_GUIDE.md](PROJECT_GUIDE.md)

@@ -8,7 +8,7 @@ This document describes the technical architecture of the Veer Patta Public Scho
 
 ### Core Technologies
 - **Jekyll 4.x** - Static site generator
-- **Cloudflare Pages** - Hosting and build platform
+- **Cloudflare Workers** - Hosting and build platform
 - **Liquid** - Templating language
 - **Markdown** - Content format
 - **HTML5** - Semantic markup
@@ -24,13 +24,13 @@ This document describes the technical architecture of the Veer Patta Public Scho
 - No Node.js/npm
 - No webpack/bundler
 - No preprocessors (Sass compilation handled by Jekyll)
-- Cloudflare Pages runs `bundle exec jekyll build` and publishes `_site/`
+- Cloudflare Workers runs `bundle exec jekyll build` and publishes `_site/`
 
 ## Architecture Diagram
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      Cloudflare Pages                        │
+│                      Cloudflare Workers                        │
 │                    (Hosting & Build Server)                  │
 └─────────────────┬───────────────────────────────────────────┘
                   │ Automatic Build on Push
@@ -51,7 +51,7 @@ This document describes the technical architecture of the Veer Patta Public Scho
                   │
 ┌─────────────────▼───────────────────────────────────────────┐
 │                    Static HTML Website                       │
-│                 veerpatta-website.pages.dev                  │
+│                 veerpatta-website.raj-39e.workers.dev                  │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -212,8 +212,8 @@ Content here...
 # Site Info
 title: Veer Patta Public School
 description: Bilingual learning environment...
-url: "https://veerpatta-website.pages.dev"
-baseurl: ""   # Cloudflare Pages serves from the domain root
+url: "https://veerpatta-website.raj-39e.workers.dev"
+baseurl: ""   # Cloudflare Workers serves from the domain root
 
 # Theme
 remote_theme: pages-themes/cayman@v0.2.0
@@ -230,7 +230,7 @@ permalink: pretty
 # Analytics (disabled by default)
 analytics_enabled: false
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta-website.pages.dev"
+analytics_domain: "veerpatta-website.raj-39e.workers.dev"
 ```
 
 ## Performance Benchmarks
@@ -249,7 +249,7 @@ analytics_domain: "veerpatta-website.pages.dev"
 
 ### Documentation
 - [Jekyll Docs](https://jekyllrb.com/docs/)
-- [Cloudflare Pages Docs](https://developers.cloudflare.com/pages/)
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/pages/)
 - [Liquid Template Docs](https://shopify.github.io/liquid/)
 
 ### Tools

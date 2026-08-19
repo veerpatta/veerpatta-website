@@ -6,7 +6,7 @@
 
 ### Repository Type
 - **Technology**: Jekyll static site generator
-- **Hosting**: Cloudflare Pages
+- **Hosting**: Cloudflare Workers
 - **Languages**: HTML, CSS, JavaScript (Vanilla)
 - **Content**: Markdown files in `/en/` and `/hi/` directories
 - **Deployment**: Automatic on push to main branch
@@ -114,7 +114,7 @@ bundle exec jekyll serve
 
 1. Make changes in a new branch
 2. Push to GitHub
-3. Cloudflare Pages builds the branch automatically
+3. Cloudflare Workers builds the branch automatically
 4. View it at the branch's own **preview deployment** URL, shown in the
    Cloudflare dashboard and on the pull request. Production stays untouched
    until the branch merges to `main`.
@@ -236,15 +236,15 @@ sports-day-2024.jpg | EN: Annual Sports Day 2024 | HI: वार्षिक ख
 ### Automatic Deployment
 - **Trigger**: Push to `main` branch
 - **Build Time**: 1-3 minutes
-- **Live URL**: https://veerpatta-website.pages.dev/
-- **Build System**: Cloudflare Pages, building this repo directly from GitHub
+- **Live URL**: https://veerpatta-website.raj-39e.workers.dev/
+- **Build System**: Cloudflare Workers, building this repo directly from GitHub
 - **Status**: Cloudflare dashboard -> Workers & Pages -> Deployments
 
 GitHub Actions runs `.github/workflows/build.yml` on the same push, but that is
 a **build check only** and publishes nothing.
 
 ### Monitoring Deployment
-1. Cloudflare dashboard -> Workers & Pages -> the project -> **Deployments**
+1. Cloudflare dashboard -> Workers & Pages -> veerpatta-website -> **Deployments**
 2. Find the deployment for your commit
 3. Open it to read the build log
 4. "Success" means it is live; use **Rollback to this deployment** on an older
@@ -256,8 +256,8 @@ environment variables.
 
 ### Manual Testing
 After deployment, test these URLs:
-- English: https://veerpatta-website.pages.dev/en/
-- Hindi: https://veerpatta-website.pages.dev/hi/
+- English: https://veerpatta-website.raj-39e.workers.dev/en/
+- Hindi: https://veerpatta-website.raj-39e.workers.dev/hi/
 - Test on mobile device if possible
 
 ## 🧪 Testing Guidelines
@@ -306,7 +306,7 @@ After deployment, test these URLs:
 **Lighthouse:**
 ```bash
 # Run Lighthouse audit
-lighthouse https://veerpatta-website.pages.dev/en/ --view
+lighthouse https://veerpatta-website.raj-39e.workers.dev/en/ --view
 ```
 
 **Target Scores:**
@@ -320,7 +320,7 @@ lighthouse https://veerpatta-website.pages.dev/en/ --view
 ### Issue: Changes not showing after commit
 
 **Solution:**
-- Wait 1-3 minutes for the Cloudflare Pages rebuild
+- Wait 1-3 minutes for the Cloudflare Workers rebuild
 - Check the deployment status in the Cloudflare dashboard, not just GitHub
   Actions — the Actions run is a build check and does not publish
 - Hard refresh browser (Ctrl+Shift+R)

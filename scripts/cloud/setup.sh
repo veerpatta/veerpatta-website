@@ -50,9 +50,10 @@ Next:
   bundle exec jekyll serve --host 127.0.0.1 --port 4000   # local preview
   git push origin main                                    # deploys via Cloudflare
 
-Deployment note: this repo deploys through Cloudflare Pages, which builds from
-GitHub on every push to main - so a push from a cloud container really is the
-deploy. .github/workflows/build.yml is a build check only; it publishes nothing.
+Deployment note: this repo deploys through Cloudflare Workers (static assets,
+configured in wrangler.jsonc), which builds from GitHub on every push to main -
+so a push from a cloud container really is the deploy.
+.github/workflows/build.yml is a build check only; it publishes nothing.
 The sibling repo (veerpatta/schoolfees) deploys through Vercel's GitHub App,
 which does NOT react to a container push - it needs scripts/cloud/deploy.sh
 there.

@@ -1,13 +1,13 @@
 # 🏫 Veer Patta Public School Website
 
-[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-orange?logo=cloudflare&logoColor=white)](https://veerpatta-website.pages.dev/)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Pages-orange?logo=cloudflare&logoColor=white)](https://veerpatta-website.raj-39e.workers.dev/)
 [![Jekyll](https://img.shields.io/badge/Built%20with-Jekyll-red?logo=jekyll)](https://jekyllrb.com/)
 [![Mobile First](https://img.shields.io/badge/Design-Mobile%20First-green)](#responsive-design)
 [![Bilingual](https://img.shields.io/badge/Languages-EN%20%7C%20HI-orange)](#bilingual-support)
 
 Official bilingual website for **Veer Patta Public School**, Amet, Rajasthan, India.
 
-🌐 **Live Site**: [veerpatta-website.pages.dev](https://veerpatta-website.pages.dev/)
+🌐 **Live Site**: [veerpatta-website.raj-39e.workers.dev](https://veerpatta-website.raj-39e.workers.dev/)
 
 ---
 
@@ -67,7 +67,7 @@ bundle exec jekyll serve
 ```
 
 ### For Coding Agents
-1. **Repository Type**: Jekyll static site, Cloudflare Pages hosting
+1. **Repository Type**: Jekyll static site, Cloudflare Workers hosting
 2. **Key Principle**: Mobile-first, bilingual parity (EN/HI required)
 3. **Read First**: [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
 4. **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
@@ -180,14 +180,14 @@ Easy monthly content updates with automated media loading.
 ## 🔧 Technology Stack
 
 - **Jekyll 4.x** - Static site generator
-- **Cloudflare Pages** - Hosting, builds, and preview deployments
+- **Cloudflare Workers** - Hosting, builds, and preview deployments
 - **Liquid** - Template language
 - **Markdown** - Content format
 - **HTML5** - Semantic markup
 - **CSS3** - Mobile-first styling
 - **JavaScript (ES6+)** - Vanilla JS, no dependencies
 
-**No build tools needed!** Cloudflare Pages runs the Jekyll build automatically.
+**No build tools needed!** Cloudflare Workers runs the Jekyll build automatically.
 
 ---
 ## ⚙️ Configuration
@@ -195,7 +195,7 @@ Easy monthly content updates with automated media loading.
 ### Jekyll Config (`_config.yml`)
 
 Key settings:
-- `baseurl: ""` - Empty; Cloudflare Pages serves the site from the domain root
+- `baseurl: ""` - Empty; Cloudflare Workers serves the site from the domain root
 - `lang: en` - Default language
 - `remote_theme: pages-themes/cayman@v0.2.0` - Base theme
 
@@ -207,7 +207,7 @@ Analytics are **disabled by default**. To enable:
 # _config.yml
 analytics_enabled: true
 analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta-website.pages.dev"
+analytics_domain: "veerpatta-website.raj-39e.workers.dev"
 ```
 
 **Supported Providers:**
@@ -226,15 +226,15 @@ analytics_domain: "veerpatta-website.pages.dev"
 
 ### Automatic Deployment
 
-**Host**: Cloudflare Pages  
+**Host**: Cloudflare Workers  
 **Trigger**: Push to `main` branch  
 **Build Time**: 1-3 minutes  
-**Live URL**: https://veerpatta-website.pages.dev/  
+**Live URL**: https://veerpatta-website.raj-39e.workers.dev/  
 **Monitor**: Cloudflare dashboard -> Workers & Pages -> Deployments
 
 ### Process:
 1. Code pushed to GitHub
-2. Cloudflare Pages runs `bundle exec jekyll build`
+2. Cloudflare Workers runs `bundle exec jekyll build`
 3. `_site/` is published
 4. Website live!
 
@@ -349,7 +349,7 @@ All rights reserved. This website and its content are the property of Veer Patta
 ## 🙏 Acknowledgments
 
 - **Jekyll** - Static site generator
-- **Cloudflare Pages** - Hosting and builds
+- **Cloudflare Workers** - Hosting and builds
 - **Google Fonts** - Poppins & Noto Sans Devanagari
 - All contributors who help improve this website
 
