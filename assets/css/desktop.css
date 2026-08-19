@@ -345,16 +345,33 @@
     color: var(--d-cyan-soft);
   }
 
-  .footer-nav-links a,
-  .footer-contact a,
-  .footer-contact,
-  .footer-hours {
+  /* The footer band is dark now, so every inherited ink colour from
+     style.css has to be lifted or it lands on near-black. Measured
+     against #0B1631, the old values came out at 1.15:1 and 2.63:1.
+     style.css uses .footer-column h3.footer-heading (0,2,1), so these
+     selectors are deliberately specific enough to win. */
+  .site-footer,
+  .site-footer p,
+  .site-footer li,
+  .site-footer span,
+  .site-footer a,
+  .site-footer .footer-nav-links li a,
+  .site-footer .footer-nav-links a,
+  .site-footer .footer-contact,
+  .site-footer .footer-contact a,
+  .site-footer .footer-hours {
     color: var(--d-line);
     font-size: 14px;
   }
 
-  .footer-nav-links a:hover,
-  .footer-contact a:hover {
+  .site-footer .footer-column h3.footer-heading {
+    color: var(--d-cyan-soft);
+  }
+
+  .site-footer .footer-nav-links li a:hover,
+  .site-footer .footer-nav-links a:hover,
+  .site-footer .footer-contact a:hover,
+  .site-footer a:hover {
     color: var(--d-white);
   }
 
@@ -364,13 +381,24 @@
     font-size: 13px;
   }
 
-  .footer-legal-links a,
-  .footer-copyright,
-  .footer-recognition {
+  /* style.css uses .footer-legal-links li a (0,2,0) */
+  .site-footer .footer-legal-links li a,
+  .site-footer .footer-legal-links a,
+  .site-footer .footer-copyright,
+  .site-footer .footer-recognition {
     color: var(--d-grey-deco);
   }
 
-  .footer-legal-links a:hover { color: var(--d-white); }
+  .site-footer .footer-legal-links li a:hover,
+  .site-footer .footer-legal-links a:hover { color: var(--d-white); }
+
+  /* The skip link is the one control keyboard-only users depend on, and
+     it shipped at 4.19:1 on the old brand blue. */
+  .skip-link,
+  .skip-link:focus {
+    background: var(--d-navy);
+    color: var(--d-white);
+  }
 
   /* ---------------------------------------------------
      SECTION RHYTHM
@@ -738,6 +766,7 @@
     box-shadow: 0 16px 30px -12px rgba(30, 123, 184, 0.9);
   }
 
+  .btn.btn-secondary,
   .btn-secondary,
   .btn-hero-secondary {
     display: inline-flex;
@@ -754,6 +783,7 @@
     box-shadow: none;
   }
 
+  .btn.btn-secondary:hover,
   .btn-secondary:hover,
   .btn-hero-secondary:hover {
     border-color: var(--d-cyan);
@@ -868,7 +898,8 @@
     color: var(--d-slate);
   }
 
-  .quote-icon { color: var(--d-cyan); }
+  /* Decorative, but 2BA9DE is 2.68:1 - under the 3.0 large-text floor. */
+  .quote-icon { color: var(--d-blue); }
 
   .author-name {
     font-size: 14px;
