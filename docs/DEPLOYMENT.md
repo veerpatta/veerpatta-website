@@ -106,13 +106,18 @@ a different one without committing.
 
 ### Environment variables
 
-| Variable | Value | Why |
-|---|---|---|
-| `JEKYLL_ENV` | `production` | Enables production-only output |
+None, and none can be set. The dashboard states plainly:
 
-No `GITHUB_TOKEN` is needed. It used to be, because `jekyll-remote-theme`
+> Variables cannot be added to a Worker that only has static assets.
+
+That is a consequence of `wrangler.jsonc` declaring assets with no `main`, and
+it is fine here - nothing in this repo branches on `jekyll.environment`, so
+`JEKYLL_ENV` would have changed nothing anyway. The GitHub Actions build sets
+it for parity with local builds.
+
+No `GITHUB_TOKEN` is needed either. It used to be, because `jekyll-remote-theme`
 fetched `pages-themes/cayman` from the GitHub API on every build and the
-anonymous rate limit is shared across Cloudflare's build IPs. That theme was
+anonymous rate limit is shared across a CI provider's IPs. That theme was
 removed - it rendered nothing, verified by a byte-identical build - so the
 network dependency is gone rather than worked around.
 
