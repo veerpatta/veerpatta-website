@@ -1563,3 +1563,182 @@ section.container.contact-teaser {
 /* On the dark hero the slot kicker keeps the design's soft cyan, which
    is 8.9:1 there. */
 .dc-hero .dc-slot-kicker { color: var(--d-cyan-soft); }
+
+/* =====================================================
+   DESIGN COMPONENTS — inner screens
+   ===================================================== */
+
+/* --- page head (every screen except home) -------------------------- */
+.dc-pagehead {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(140deg, #12295E 0%, var(--d-navy) 55%, var(--d-blue) 100%);
+  padding: clamp(44px, 7vw, 88px) 0;
+}
+.dc-pagehead-glow {
+  position: absolute; top: -160px; right: -100px; width: 480px; height: 480px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(43,169,222,0.28) 0%, rgba(43,169,222,0) 70%);
+}
+.dc-pagehead .dc-wrap { position: relative; }
+.dc-pagehead-kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: var(--d-track-kicker);
+  text-transform: uppercase; color: var(--d-cyan-soft);
+}
+.dc-pagehead-title {
+  font-family: var(--d-font-head);
+  font-size: clamp(28px, 3.6vw, 50px);
+  font-weight: 700; line-height: 1.08; color: var(--d-white);
+  margin: 14px 0 0; letter-spacing: -0.03em; max-width: 900px;
+}
+.dc-pagehead-sub {
+  font-size: clamp(15px, 1.5vw, 17.5px); line-height: 1.65;
+  color: var(--d-line-3); margin-top: 18px; max-width: 640px;
+}
+
+/* --- grids ---------------------------------------------------------- */
+.dc-grid-230 { grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); }
+
+/* --- step number ---------------------------------------------------- */
+.dc-step-n {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--d-navy); color: var(--d-white);
+  font-size: 13px; font-weight: 700; flex: none;
+}
+
+/* --- timeline (about) ---------------------------------------------- */
+.dc-timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--d-line-2); }
+.dc-timeline-item { position: relative; display: grid; gap: 4px; padding: 0 0 26px 26px; }
+.dc-timeline-item::before {
+  content: ""; position: absolute; left: -7px; top: 6px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--d-cyan); border: 2px solid var(--d-white);
+}
+.dc-timeline-year { font-family: var(--d-font-head); font-size: 16px; font-weight: 700; color: var(--d-navy); }
+.dc-timeline-body { font-size: 14.5px; line-height: 1.6; color: var(--d-muted); }
+
+/* --- albums (gallery) ----------------------------------------------- */
+.dc-album {
+  border: 1px solid var(--d-line); border-radius: var(--d-r-lg); overflow: hidden;
+  background: var(--d-white); display: flex; flex-direction: column;
+  transition: border-color .18s ease, box-shadow .28s ease;
+}
+.dc-album:hover { border-color: var(--d-cyan); box-shadow: var(--d-shadow-card); }
+.dc-album-shot {
+  min-height: 150px; background: linear-gradient(140deg, var(--d-surface), #EDF6FC);
+  border-bottom: 1px dashed #C6DAEB;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; text-align: center; padding: 16px;
+}
+.dc-album-body { padding: 18px; display: grid; gap: 4px; }
+.dc-album-count { font-size: 12.5px; font-weight: 700; color: var(--d-blue); }
+
+/* --- app tiles (digital) -------------------------------------------- */
+.dc-app-lg { padding: 16px 18px; }
+.dc-app-meta { display: grid; gap: 2px; }
+
+/* --- filters (notices, gallery) ------------------------------------- */
+.dc-filters { display: flex; flex-wrap: wrap; gap: 10px; }
+.dc-chip-btn {
+  border: 1px solid var(--chip-bd, var(--d-line-2));
+  background: var(--chip-bg, var(--d-surface-2));
+  color: var(--d-navy);
+  font-family: var(--d-font-body);
+  font-size: 13px; font-weight: 700;
+  padding: 9px 16px; border-radius: var(--d-r-pill); cursor: pointer;
+}
+.dc-chip-btn.is-active { background: var(--d-navy); border-color: var(--d-navy); color: var(--d-white); }
+.dc-notice[hidden] { display: none; }
+
+/* --- month list (notices) ------------------------------------------- */
+.dc-month-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.dc-month-list li {
+  font-size: 14px; line-height: 1.55; color: var(--d-muted);
+  padding-left: 16px; position: relative;
+}
+.dc-month-list li::before {
+  content: ""; position: absolute; left: 0; top: 8px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--d-cyan);
+}
+
+/* --- result cards (notices) ----------------------------------------- */
+.dc-result {
+  background: var(--d-white); border: 1px solid var(--d-line);
+  border-radius: var(--d-r-lg); padding: 26px; display: grid; gap: 6px;
+}
+.dc-result-value {
+  font-family: var(--d-font-head); font-size: clamp(30px, 3vw, 42px);
+  font-weight: 700; color: var(--d-navy); line-height: 1; letter-spacing: -0.03em;
+}
+.dc-result-label { font-size: 14.5px; font-weight: 700; color: var(--d-ink); }
+.dc-result-note { font-size: 13px; line-height: 1.5; color: var(--d-muted); }
+
+/* --- tables (admissions) -------------------------------------------- */
+.dc-table-wrap { overflow-x: auto; border: 1px solid var(--d-line); border-radius: var(--d-r-lg); background: var(--d-white); }
+.dc-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+.dc-table th {
+  text-align: left; font-size: 11px; font-weight: 700;
+  letter-spacing: var(--d-track-kicker); text-transform: uppercase;
+  color: var(--d-muted); padding: 16px 18px; border-bottom: 1px solid var(--d-line);
+  background: var(--d-surface);
+}
+.dc-table td { padding: 16px 18px; border-bottom: 1px solid var(--d-line-soft); font-size: 14.5px; color: var(--d-slate); }
+.dc-table tr:last-child td { border-bottom: none; }
+.dc-td-strong { font-weight: 700; color: var(--d-ink); }
+.dc-td-note { color: var(--d-muted); font-size: 13.5px; }
+.dc-td-amount { font-family: var(--d-font-head); font-weight: 700; color: var(--d-navy); white-space: nowrap; text-align: right; }
+
+/* --- wizard shell (admissions) -------------------------------------- */
+.dc-wizard { background: var(--d-white); border: 1px solid var(--d-line); border-radius: var(--d-r-lg); padding: clamp(20px, 3vw, 30px); }
+.dc-wizard-steps { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 14px 22px; }
+.dc-wizard-step { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 600; color: var(--d-muted); }
+.dc-wizard-step.is-active { color: var(--d-navy); font-weight: 700; }
+.dc-wizard-step .dc-step-n { background: var(--d-line); color: var(--d-navy); }
+.dc-wizard-step.is-active .dc-step-n { background: var(--d-navy); color: var(--d-white); }
+
+/* --- faq (admissions) ------------------------------------------------ */
+.dc-faq .faq-item {
+  border: 1px solid var(--d-line); border-radius: var(--d-r-md);
+  background: var(--d-white); margin-bottom: 12px; overflow: hidden;
+}
+.dc-faq .faq-question {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font-family: var(--d-font-body); font-size: 16px; font-weight: 700;
+  color: var(--d-ink); padding: 20px 24px; background: transparent;
+  border: none; cursor: pointer; text-align: left;
+}
+.dc-faq .faq-question:hover { background: var(--d-surface); }
+.dc-faq .faq-icon { color: var(--d-blue); font-size: 20px; flex: none; }
+.dc-faq .faq-answer { padding: 0 24px 20px; }
+.dc-faq .faq-answer p { font-size: 15px; line-height: 1.7; color: var(--d-muted); margin: 0; }
+
+/* --- contact --------------------------------------------------------- */
+.dc-contact-list { display: grid; gap: 12px; }
+.dc-contact-row {
+  display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+  border: 1px solid var(--d-line); border-radius: 14px; background: var(--d-white);
+  text-decoration: none; transition: border-color .18s ease, background-color .18s ease;
+}
+.dc-contact-row:hover { border-color: var(--d-cyan); background: var(--d-surface-2); }
+.dc-contact-row > span:last-child { display: grid; gap: 2px; }
+.dc-visit { border: 1px solid var(--d-line); border-radius: var(--d-r-lg); padding: 22px; background: var(--d-surface-2); }
+.dc-slot-map {
+  border: 1.5px dashed #C6DAEB; background: var(--d-surface);
+  min-height: 200px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; text-align: center;
+}
+.dc-slot-map .dc-slot-kicker { color: var(--d-muted); }
+.dc-slot-map .dc-slot-title { color: var(--d-navy); }
+
+/* --- forms ------------------------------------------------------------ */
+.dc-form-wrap { max-width: 640px; }
+.dc-form { display: grid; gap: 16px; }
+.dc-form .form-group { display: grid; gap: 7px; }
+.dc-form label { font-size: 12.5px; font-weight: 700; color: var(--d-slate); }
+.dc-form input, .dc-form select {
+  width: 100%; padding: 14px 15px; border: 1px solid var(--d-line-2);
+  border-radius: var(--d-r-sm); font-size: 14.5px; color: var(--d-ink);
+  background: var(--d-surface-2); font-family: var(--d-font-body);
+}
+.dc-form input:focus, .dc-form select:focus { border-color: var(--d-cyan); background: var(--d-white); }
+.dc-form .dc-btn { justify-self: start; }
