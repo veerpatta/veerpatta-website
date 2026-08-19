@@ -373,6 +373,668 @@
   .footer-legal-links a:hover { color: var(--d-white); }
 
   /* ---------------------------------------------------
+     SECTION RHYTHM
+     The design paces the page at 84px vertical with
+     alternating white / #F4F8FC bands. Existing pages wrap
+     each section in .container, so the tint is painted with
+     a full-bleed clip rather than extra markup.
+     --------------------------------------------------- */
+  section.container {
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+
+  .stats-section,
+  .trust-badges-section,
+  .achievements-section,
+  .testimonials-section {
+    position: relative;
+    z-index: 0;
+  }
+
+  .stats-section::before,
+  .trust-badges-section::before,
+  .achievements-section::before,
+  .testimonials-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--d-surface);
+    /* Full-bleed tint without leaving .container */
+    clip-path: inset(0 -100vmax);
+    box-shadow: 0 0 0 100vmax var(--d-surface);
+    z-index: -1;
+  }
+
+  /* ---------------------------------------------------
+     SECTION HEADER
+     Design: kicker + title on the left (max 620px), a
+     supporting paragraph on the right (max 380px), baselines
+     aligned. Existing markup is a centred stack, so this
+     converts it to the two-column arrangement.
+     --------------------------------------------------- */
+  .section-header-modern {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    text-align: left;
+    margin-bottom: 42px;
+  }
+
+  .section-heading-main {
+    font-family: var(--d-font-head);
+    font-size: clamp(27px, 2.9vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--d-ink);
+    max-width: 620px;
+    margin: 0;
+  }
+
+  /* The existing .heading-accent span becomes the design's
+     uppercase kicker sitting above the title. */
+  .heading-accent {
+    display: block;
+    font-family: var(--d-font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: var(--d-track-kicker);
+    text-transform: uppercase;
+    color: var(--d-blue);
+    margin-bottom: 14px;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .section-subtitle {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--d-muted);
+    max-width: 380px;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* The design uses whitespace, not a rule, between header and grid. */
+  .section-divider { display: none; }
+
+  /* ---------------------------------------------------
+     CARD SURFACE
+     One shared treatment, since every card class in the
+     codebase maps to the same design object.
+     --------------------------------------------------- */
+  .stat-card-modern,
+  .program-card-modern,
+  .about-teaser-card,
+  .why-parents-card,
+  .achievements-card,
+  .trust-badge,
+  .card,
+  .news-item {
+    background: var(--d-white);
+    border: 1px solid var(--d-line);
+    border-radius: var(--d-r-lg);
+    box-shadow: none;
+    transition: border-color .18s ease, box-shadow .28s ease,
+                transform .28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stat-card-modern:hover,
+  .program-card-modern:hover,
+  .about-teaser-card:hover,
+  .card:hover,
+  .news-item:hover {
+    border-color: var(--d-cyan);
+    box-shadow: var(--d-shadow-card);
+    transform: translateY(-3px);
+  }
+
+  /* ---------------------------------------------------
+     GRIDS - the design's fluid auto-fit tracks
+     --------------------------------------------------- */
+  .stats-grid,
+  .stats-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
+
+  .programs-grid,
+  .programs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 18px;
+  }
+
+  .trust-badges-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    overflow: visible;
+  }
+
+  /* ---------------------------------------------------
+     STAT CARDS
+     --------------------------------------------------- */
+  .stat-card-modern {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    min-height: 168px;
+    justify-content: center;
+  }
+
+  .stat-icon-emoji {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: #EDF6FC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .stat-number {
+    font-family: var(--d-font-head);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: var(--d-track-head);
+    color: var(--d-navy);
+    /* the old design clipped a gradient through this text */
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    /* the design's 3.61:1 grey would fail at this size */
+    color: var(--d-muted);
+  }
+
+  /* ---------------------------------------------------
+     PROGRAM CARDS
+     --------------------------------------------------- */
+  .program-card-modern {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .program-image-wrapper,
+  .program-image-placeholder {
+    border-radius: 0;
+    background: var(--d-surface);
+    border-bottom: 1px solid var(--d-line);
+  }
+
+  .program-content {
+    padding: 24px 26px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .program-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--d-ink);
+    margin: 0;
+  }
+
+  .program-badge-emoji {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: #EDF6FC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .program-learn-more {
+    margin-top: auto;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--d-blue);
+  }
+
+  /* ---------------------------------------------------
+     TRUST BADGES
+     --------------------------------------------------- */
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 16px;
+    border-radius: var(--d-r-md);
+    background: var(--d-surface-2);
+    min-width: 0;
+  }
+
+  .badge-icon,
+  .trust-badge-icon {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+    background: var(--d-surface);
+    border: 1px solid var(--d-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .badge-text,
+  .trust-badge-text {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--d-navy);
+    line-height: 1.35;
+  }
+
+  /* ---------------------------------------------------
+     LIST CARDS - why-parents, achievements
+     --------------------------------------------------- */
+  .why-parents-card,
+  .achievements-card {
+    padding: 34px 36px;
+  }
+
+  .why-parents-list,
+  .achievements-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 4px 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .why-parents-list li,
+  .achievements-list li {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--d-slate);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--d-line-soft);
+  }
+
+  .achievement-emoji {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  /* ---------------------------------------------------
+     TEASER CARDS
+     Four near-identical blocks on the homepage. The design
+     treats these as a quick-answer grid, so their vertical
+     rhythm is tightened to read as one band.
+     --------------------------------------------------- */
+  section.container.about-teaser,
+  section.container.academics-teaser,
+  section.container.gallery-teaser,
+  section.container.contact-teaser {
+    padding-top: 0;
+    padding-bottom: 18px;
+  }
+
+  .about-teaser-card {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .about-teaser-card h2,
+  .about-teaser-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--d-ink);
+    margin: 0;
+  }
+
+  .about-teaser-card p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--d-muted);
+  }
+
+  /* ---------------------------------------------------
+     BUTTONS
+     --------------------------------------------------- */
+  .btn,
+  .btn-hero-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--d-blue), var(--d-navy));
+    color: var(--d-white);
+    font-family: var(--d-font-body);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 26px;
+    border-radius: 11px;
+    border: none;
+    box-shadow: 0 12px 26px -12px rgba(30, 123, 184, 0.7);
+  }
+
+  .btn:hover,
+  .btn-hero-primary:hover {
+    color: var(--d-white);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px -12px rgba(30, 123, 184, 0.9);
+  }
+
+  .btn-secondary,
+  .btn-hero-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--d-surface-2);
+    border: 1px solid var(--d-line-2);
+    color: var(--d-navy);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 26px;
+    border-radius: 11px;
+    box-shadow: none;
+  }
+
+  .btn-secondary:hover,
+  .btn-hero-secondary:hover {
+    border-color: var(--d-cyan);
+    background: #EDF6FC;
+    color: var(--d-navy);
+  }
+
+  .pill {
+    border: 1px solid var(--d-line-2);
+    background: var(--d-surface-2);
+    color: var(--d-navy);
+    font-size: 13.5px;
+    font-weight: 700;
+    border-radius: var(--d-r-pill);
+    padding: 10px 18px;
+  }
+
+  .pill.active,
+  .pill[aria-selected="true"] {
+    background: var(--d-navy);
+    border-color: var(--d-navy);
+    color: var(--d-white);
+  }
+
+  /* ---------------------------------------------------
+     HERO
+     --------------------------------------------------- */
+  .hero {
+    background: linear-gradient(160deg, var(--d-surface) 0%, var(--d-white) 62%);
+    border: 1px solid var(--d-line);
+    border-radius: 24px;
+    max-width: var(--d-container);
+    margin: 32px auto 0;
+    padding: 72px clamp(28px, 4vw, 64px);
+    text-align: left;
+  }
+
+  .hero h1 {
+    font-family: var(--d-font-head);
+    font-size: clamp(38px, 4vw, 56px);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: var(--d-track-head);
+    color: var(--d-ink);
+  }
+
+  .hero-description {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--d-muted);
+    max-width: 620px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .hero-trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .trust-badge-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--d-navy);
+    background: var(--d-white);
+    border: 1px solid var(--d-line);
+    border-radius: var(--d-r-pill);
+    padding: 9px 15px;
+  }
+
+  .hero-floating-badge {
+    background: var(--d-white);
+    border: 1px solid var(--d-line);
+    border-radius: var(--d-r-md);
+    box-shadow: var(--d-shadow-card);
+    color: var(--d-navy);
+  }
+
+  /* The old gradient text-clip fights the new ink colour */
+  .text-highlight,
+  .text-highlight.shimmer {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--d-blue);
+  }
+
+  /* ---------------------------------------------------
+     TESTIMONIALS
+     --------------------------------------------------- */
+  .testimonial-slide,
+  .testimonial-content {
+    background: var(--d-white);
+    border: 1px solid var(--d-line);
+    border-radius: var(--d-r-lg);
+    padding: 30px;
+  }
+
+  .testimonial-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--d-slate);
+  }
+
+  .quote-icon { color: var(--d-cyan); }
+
+  .author-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--d-navy);
+  }
+
+  .author-location {
+    font-size: 12.5px;
+    color: var(--d-muted);
+  }
+
+  .testimonial-dot { background: var(--d-line-3); }
+  .testimonial-dot.active { background: var(--d-cyan); }
+
+  /* ---------------------------------------------------
+     FAQ ACCORDION
+     --------------------------------------------------- */
+  .faq-item {
+    border: 1px solid var(--d-line);
+    border-radius: var(--d-r-md);
+    background: var(--d-white);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--d-ink);
+    padding: 20px 24px;
+    background: transparent;
+  }
+
+  .faq-question:hover { background: var(--d-surface); }
+
+  .faq-answer {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--d-muted);
+    padding: 0 24px 20px;
+  }
+
+  .faq-icon { color: var(--d-blue); }
+
+  .faq-category {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: var(--d-track-kicker);
+    text-transform: uppercase;
+    color: var(--d-blue);
+  }
+
+  /* ---------------------------------------------------
+     FORMS - enquiry drawer, wizard
+     --------------------------------------------------- */
+  .form-group label,
+  .form-row label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--d-slate);
+    margin-bottom: 7px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea,
+  .form-row input,
+  .form-row select {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid var(--d-line-2);
+    border-radius: var(--d-r-sm);
+    font-size: 14.5px;
+    color: var(--d-ink);
+    background: var(--d-surface-2);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--d-cyan);
+    background: var(--d-white);
+  }
+
+  .required { color: #C0392B; }
+
+  .enquiry-drawer {
+    border-radius: var(--d-r-xl) 0 0 var(--d-r-xl);
+    box-shadow: var(--d-shadow-lift);
+  }
+
+  .drawer-header h3 {
+    font-family: var(--d-font-head);
+    color: var(--d-ink);
+  }
+
+  .wizard-progress-bar {
+    background: var(--d-line);
+    border-radius: var(--d-r-pill);
+  }
+
+  .wizard-progress-fill {
+    background: linear-gradient(90deg, var(--d-cyan), var(--d-blue));
+  }
+
+  .wizard-progress-text {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--d-muted);
+  }
+
+  .step-number {
+    background: var(--d-navy);
+    color: var(--d-white);
+    border-radius: 50%;
+    font-weight: 700;
+  }
+
+  /* ---------------------------------------------------
+     NEWS / NOTICES
+     --------------------------------------------------- */
+  .news-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 18px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .news-item { padding: 24px 26px; }
+
+  .news-date {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: var(--d-track-kicker);
+    text-transform: uppercase;
+    color: var(--d-blue);
+  }
+
+  .news-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--d-ink);
+    margin: 8px 0;
+  }
+
+  .news-content {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--d-muted);
+  }
+
+  /* ---------------------------------------------------
+     STICKY CTA
+     The design carries its actions in the header, so the
+     bottom bar is suppressed on desktop and the body padding
+     it reserved is released.
+     --------------------------------------------------- */
+  .sticky-cta-bar { display: none; }
+  body { padding-bottom: 0; }
+
+  /* Orphaned float - not included by the layout */
+  .whatsapp-float { display: none; }
+
+  /* ---------------------------------------------------
      MOTION
      --------------------------------------------------- */
   @media (prefers-reduced-motion: reduce) {
