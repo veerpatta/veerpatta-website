@@ -1,0 +1,382 @@
+/* =====================================================
+   DESKTOP DESIGN — Phase 1 (≥1280px only)
+   =====================================================
+
+   Ported from the Claude Design project "School website
+   redesign brief" (d7e45125). That design is a fixed 1360px
+   canvas with no breakpoints of its own, so it is applied
+   here as a desktop-only layer.
+
+   HOW THIS FILE IS SCOPED — two gates, deliberately:
+
+   1. The <link> in _includes/head.html carries
+      media="(min-width: 1280px)". A non-matching media
+      attribute makes a stylesheet non-render-blocking, so
+      phones never pay for this file. That gate protects
+      PERFORMANCE.
+   2. Everything below also sits inside an explicit
+      @media (min-width: 1280px) block. That gate protects
+      CORRECTNESS if the file is ever linked unconditionally.
+
+   Load order matters: this file is linked LAST, after
+   style.css, animations.css and mobile-deep-optimize.css,
+   so equal-specificity rules resolve here.
+
+   PHASE 2 NOTE: the token block is the only place values are
+   defined. Extending this design to mobile later means
+   lifting :root out of the media query and widening the
+   component rules — not re-deriving the design.
+
+   Nothing in this file may affect rendering below 1280px.
+   A visual diff at 1279px is a defect, not a tradeoff.
+   ===================================================== */
+
+@media (min-width: 1280px) {
+
+  /* ---------------------------------------------------
+     TOKENS
+     Values taken from the design. The comments record
+     measured WCAG contrast, because three of the design's
+     colours cannot be used for text as drawn.
+     --------------------------------------------------- */
+  :root {
+    /* Ink — all safe for body text */
+    --d-ink:          #0B1631;  /* 17.90:1 on white */
+    --d-navy:         #17466B;  /*  9.88:1 on white */
+    --d-slate:        #33455E;  /*  9.75:1 on white */
+    --d-muted:        #5A6E88;  /*  5.22:1 on white, 4.89 on tint — smallest text-safe grey */
+
+    /* Text-unsafe. Large display text, borders, fills and icons only. */
+    --d-grey-lg:      #7089A6;  /*  3.61:1 — large text only (≥18.66px bold / ≥24px) */
+    --d-grey-deco:    #93AAC2;  /*  2.39:1 — decoration only, never text */
+
+    /* Brand blues */
+    --d-blue:         #1E7BB8;  /*  4.58:1 on white — but only 4.30 on --d-surface,
+                                    so links on tinted panels use --d-navy instead */
+    --d-cyan:         #2BA9DE;  /*  2.68:1 — NEVER text, and never with white text on it.
+                                    Accent bars, underlines, focus rings, icon fills. */
+    --d-cyan-soft:    #7FD3F5;
+
+    /* Surfaces and lines */
+    --d-white:        #FFFFFF;
+    --d-surface:      #F4F8FC;
+    --d-surface-2:    #FBFDFF;
+    --d-line:         #E1EBF5;
+    --d-line-soft:    #EDF3F9;
+    --d-line-2:       #DCEBF7;
+    --d-line-3:       #C9DCEF;
+
+    /* Type */
+    --d-font-head: 'Bricolage Grotesque', 'Noto Sans Devanagari', 'Poppins', sans-serif;
+    --d-font-body: 'Manrope', 'Noto Sans Devanagari', 'Poppins', sans-serif;
+
+    /* Radii */
+    --d-r-sm:  10px;
+    --d-r-md:  12px;
+    --d-r-lg:  16px;
+    --d-r-xl:  18px;
+    --d-r-pill: 999px;
+
+    /* Elevation */
+    --d-shadow-header: 0 1px 0 rgba(11,22,49,0.02), 0 10px 30px -22px rgba(11,22,49,0.28);
+    --d-shadow-card:   0 22px 44px -26px rgba(23,70,107,0.4);
+    --d-shadow-lift:   0 30px 70px -30px rgba(11,22,49,0.42);
+
+    /* Layout */
+    --d-container: 1360px;
+    --d-gutter: clamp(16px, 3vw, 40px);
+
+    /* Uppercase kicker tracking, straight from the design */
+    --d-track-kicker: 0.16em;
+    --d-track-head: -0.02em;
+  }
+
+  /* ---------------------------------------------------
+     BASE TYPOGRAPHY
+     --------------------------------------------------- */
+  body {
+    font-family: var(--d-font-body);
+    color: var(--d-slate);
+    background: var(--d-white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--d-font-head);
+    letter-spacing: var(--d-track-head);
+    color: var(--d-ink);
+    text-wrap: pretty;
+  }
+
+  p { text-wrap: pretty; }
+
+  a { color: var(--d-blue); }
+  a:hover { color: var(--d-navy); }
+
+  /* Hindi needs more leading than the Latin faces. Mirrors the
+     existing html[lang="hi"] treatment but for the new stack. */
+  html[lang="hi"] body,
+  html[lang="hi"] h1,
+  html[lang="hi"] h2,
+  html[lang="hi"] h3,
+  html[lang="hi"] h4 {
+    font-family: 'Noto Sans Devanagari', var(--d-font-body);
+    line-height: 1.75;
+  }
+
+  /* Visible focus, using the accent as a ring rather than as text. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--d-cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* ---------------------------------------------------
+     LAYOUT CONTAINER
+     Was width: min(1100px, 92vw) with the header sitting in a
+     1400px shell — the nav overhung every section beneath it.
+     Both are aligned to the design's 1360px here.
+     --------------------------------------------------- */
+  .container {
+    width: min(var(--d-container), 100%);
+    padding: 0 var(--d-gutter);
+  }
+
+  /* ---------------------------------------------------
+     HEADER — two rows
+     Row 1: brand (left) + language/WhatsApp (right)
+     Row 2: full-width nav tab bar
+
+     Achieved purely with flex `order` on the existing
+     children, so header.html markup is unchanged.
+     --------------------------------------------------- */
+  .site-header {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--d-line);
+    box-shadow: var(--d-shadow-header);
+  }
+
+  .site-header.scrolled { box-shadow: var(--d-shadow-header); }
+
+  /* The .shrink class is added on scroll by
+     marketing-enhancements.js and collapses the brand and nav
+     labels. That fights the design's stable two-row header, so
+     it is neutralised here (the class still applies below 1280px). */
+  .site-header.shrink .header-container { min-height: 0; padding: 0 var(--d-gutter); gap: 22px; }
+  .site-header.shrink .school-logo { width: 54px; height: 54px; }
+  .site-header.shrink .brand-name { display: block; font-size: 20px; }
+  .site-header.shrink .nav-label { display: inline; }
+
+  .header-container {
+    max-width: var(--d-container);
+    margin: 0 auto;
+    padding: 0 var(--d-gutter);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 22px;
+    row-gap: 0;
+    min-height: 0;
+  }
+
+  /* Row 1 — brand */
+  .header-logo  { order: 1; flex: none; padding: 13px 0; }
+  .header-brand { order: 1; flex: none; padding: 13px 0; }
+
+  .school-logo {
+    width: 54px;
+    height: 54px;
+    border-radius: 0;
+    object-fit: contain;
+    /* Drops the logo's white JPEG box onto the header tint */
+    mix-blend-mode: multiply;
+  }
+
+  .brand-name {
+    font-family: var(--d-font-head);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--d-navy);
+    letter-spacing: var(--d-track-head);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  /* The <br class="mobile-break"> is for the narrow layout only */
+  .brand-name .mobile-break { display: none; }
+
+  /* Row 1 — right cluster */
+  .desktop-lang-switch { order: 2; margin-left: auto; flex: none; padding: 12px 0; }
+  .desktop-whatsapp-btn { order: 2; flex: none; }
+
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--d-surface);
+    border: 1px solid var(--d-line);
+    color: var(--d-navy);
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 11px 15px;
+    border-radius: var(--d-r-sm);
+    text-decoration: none;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--d-cyan);
+    background: #EDF6FC;
+    color: var(--d-navy);
+  }
+
+  .desktop-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* Solid #2BA9DE would put white on a 2.68:1 background.
+       The gradient keeps the accent while staying legible. */
+    background: linear-gradient(135deg, var(--d-blue), var(--d-navy));
+    color: var(--d-white);
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 11px 16px;
+    border-radius: var(--d-r-sm);
+    box-shadow: 0 12px 26px -12px rgba(30, 123, 184, 0.7);
+  }
+
+  .desktop-whatsapp-btn:hover {
+    color: var(--d-white);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px -12px rgba(30, 123, 184, 0.9);
+  }
+
+  /* Row 2 — nav tab bar */
+  .desktop-nav {
+    order: 3;
+    flex: 1 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 2px;
+    margin-left: 0;
+    border-top: 1px solid var(--d-line-soft);
+  }
+
+  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 14px 11px 13px;
+    font-size: 13.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--d-muted);
+    border-radius: 8px 8px 0 0;
+    text-decoration: none;
+  }
+
+  /* The design's nav is text-only; the icons belong to the
+     compact mobile treatment. */
+  .nav-icon  { display: none; }
+  .nav-label { display: inline; }
+
+  .nav-link:hover {
+    background: var(--d-surface);
+    color: var(--d-navy);
+  }
+
+  /* Active tab underline. Requires aria-current="page", which
+     header.html now sets — the desktop nav previously had no
+     current-page indicator at all, for sighted or AT users. */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 11px;
+    right: 11px;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: transparent;
+  }
+
+  .nav-link[aria-current="page"] {
+    color: var(--d-navy);
+    font-weight: 700;
+  }
+
+  .nav-link[aria-current="page"]::after {
+    background: var(--d-cyan);
+  }
+
+  /* ---------------------------------------------------
+     FOOTER
+     The design has no footer of its own — it ends at the
+     enquiry drawer — so this is derived from its tokens
+     rather than copied.
+     --------------------------------------------------- */
+  .site-footer {
+    background: var(--d-ink);
+    color: var(--d-line);
+    border-top: none;
+  }
+
+  .site-footer .container {
+    max-width: var(--d-container);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 40px;
+  }
+
+  .footer-heading {
+    font-family: var(--d-font-head);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: var(--d-track-kicker);
+    text-transform: uppercase;
+    /* On #0B1631 the soft cyan reads at well over 4.5:1 */
+    color: var(--d-cyan-soft);
+  }
+
+  .footer-nav-links a,
+  .footer-contact a,
+  .footer-contact,
+  .footer-hours {
+    color: var(--d-line);
+    font-size: 14px;
+  }
+
+  .footer-nav-links a:hover,
+  .footer-contact a:hover {
+    color: var(--d-white);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--d-grey-deco);
+    font-size: 13px;
+  }
+
+  .footer-legal-links a,
+  .footer-copyright,
+  .footer-recognition {
+    color: var(--d-grey-deco);
+  }
+
+  .footer-legal-links a:hover { color: var(--d-white); }
+
+  /* ---------------------------------------------------
+     MOTION
+     --------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .desktop-whatsapp-btn:hover { transform: none; }
+  }
+
+}
