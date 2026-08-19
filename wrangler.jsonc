@@ -6,7 +6,7 @@
   // Jekyll builds into _site/ and Cloudflare uploads that directory as-is.
   //
   // Workers Builds settings (set in the dashboard, not here):
-  //   Build command:  bundle exec jekyll build
+  //   Build command:  bundle install && bundle exec jekyll build
   //   Deploy command: npx wrangler deploy
   "name": "veerpatta-website",
   "compatibility_date": "2026-08-19",

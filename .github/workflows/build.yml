@@ -38,10 +38,6 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
-          # jekyll-remote-theme pulls pages-themes/cayman from the GitHub API.
-          # Without a token the build shares an anonymous rate limit and can
-          # fail intermittently.
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check key pages were generated
         run: |

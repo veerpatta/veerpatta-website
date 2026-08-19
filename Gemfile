@@ -8,7 +8,6 @@ gem "github-pages", "~> 232", group: :jekyll_plugins
 
 # Additional plugins
 group :jekyll_plugins do
-  gem "jekyll-remote-theme"
   gem "jekyll-seo-tag"
 end
 

@@ -24,7 +24,7 @@ This document describes the technical architecture of the Veer Patta Public Scho
 - No Node.js/npm
 - No webpack/bundler
 - No preprocessors (Sass compilation handled by Jekyll)
-- Cloudflare Workers runs `bundle exec jekyll build` and publishes `_site/`
+- Cloudflare Workers runs `bundle install && bundle exec jekyll build` and publishes `_site/`
 
 ## Architecture Diagram
 
