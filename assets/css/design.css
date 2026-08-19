@@ -1310,7 +1310,8 @@ section.container.contact-teaser {
   overflow: hidden;
   background: var(--d-ink);
   padding: clamp(40px, 6vw, 54px) 0;
-  min-height: clamp(auto, 60vw, 620px);
+  /* clamp() has no `auto`; the design's 620px is a desktop floor only. */
+  min-height: 620px;
 }
 
 .dc-hero-drift { position: absolute; inset: 0; animation: dcDrift 26s ease-in-out infinite alternate; }
@@ -1364,7 +1365,10 @@ section.container.contact-teaser {
 .dc-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 34px; }
 
 .dc-hero-aside { display: flex; flex-direction: column; gap: 18px; align-items: flex-end; }
-@media (max-width: 767px) { .dc-hero-aside { align-items: stretch; } }
+@media (max-width: 767px) {
+  .dc-hero { min-height: 0; }
+  .dc-hero-aside { align-items: stretch; }
+}
 
 .dc-slot {
   border: 1.5px dashed rgba(255,255,255,0.34);
@@ -1530,3 +1534,32 @@ section.container.contact-teaser {
   .dc-hero-drift { animation: none; }
   .dc-btn-light:hover, .dc-answer:hover { transform: none; }
 }
+
+/* --- contrast corrections on the design's own values --------------- */
+
+/* The token block records that #1E7BB8 is 4.58:1 on white but only
+   4.30:1 on the tint. The design uses it on both; on tinted bands it
+   steps to navy. */
+.dc-band-tint .dc-kicker,
+.dc-band-tint .dc-link,
+/* the calendar footer is a tinted panel inside a white band */
+.dc-cal-foot .dc-link,
+.dc-band-tint .dc-answer-top ~ * .dc-link { color: var(--d-navy); }
+
+/* #93AAC2 is 2.39:1 - the token block says decoration only, never
+   text. These are text. */
+.dc-notice-mon,
+.dc-tag { color: var(--d-muted); }
+
+/* Placeholder labels are instructions to whoever supplies the photos,
+   so they have to be readable rather than ghosted. */
+.dc-partner-logo,
+.dc-slot-kicker,
+.dc-voice-photo,
+.dc-stage-shot .dc-slot-kicker,
+.dc-tile .dc-slot-kicker,
+.dc-mosaic-hero .dc-slot-kicker { color: var(--d-muted); }
+
+/* On the dark hero the slot kicker keeps the design's soft cyan, which
+   is 8.9:1 there. */
+.dc-hero .dc-slot-kicker { color: var(--d-cyan-soft); }
