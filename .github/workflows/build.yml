@@ -52,6 +52,10 @@ jobs:
           # wrangler.jsonc has no frontmatter, so a missing exclude: entry
           # would publish the deploy config as part of the site.
           test ! -e _site/wrangler.jsonc || { echo "wrangler.jsonc leaked into _site"; exit 1; }
+          # Internal notes and tooling must not be published as site pages.
+          for leak in AUDIT_REPORT.md FIX_SUMMARY.md MODERNIZATION_SUMMARY.md                       QUICK_START_WINDOWS.md remove_bg.mjs scripts tests; do
+            test ! -e "_site/$leak" || { echo "$leak leaked into _site"; exit 1; }
+          done
           echo "built $(find _site -type f | wc -l) files"
 
       # Makes the built site downloadable with `gh run download`, so it can be

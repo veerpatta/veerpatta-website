@@ -53,6 +53,15 @@ include:
 # Exclude files from processing
 exclude:
   - wrangler.jsonc
+  # Internal notes and tooling. Without these Jekyll publishes each one as a
+  # page on the public site (e.g. /AUDIT_REPORT/).
+  - AUDIT_REPORT.md
+  - FIX_SUMMARY.md
+  - MODERNIZATION_SUMMARY.md
+  - QUICK_START_WINDOWS.md
+  - remove_bg.mjs
+  - scripts/
+  - tests/
   - CLAUDE.md
   - README.md
   - CONTRIBUTING.md
