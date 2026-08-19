@@ -38,6 +38,36 @@
 
 ---
 
+## Working in a Claude Cloud Container
+
+A cloud container starts bare and is discarded afterwards. One command sets it up:
+
+```bash
+bash scripts/cloud/setup.sh          # gems + build
+bash scripts/cloud/setup.sh --serve  # ...and serve on 127.0.0.1:4000
+```
+
+Verified 19 Aug 2026 in a real container: ruby 3.3.6, bundler and a C toolchain
+are already in the image, so no version manager and no apt are needed. Gems
+vendor into `vendor/bundle` (already gitignored). First `bundle install` is slow
+because `github-pages` pulls a large tree; the build itself takes about a second.
+
+`jekyll build` needs network — `remote_theme: pages-themes/cayman` is fetched
+from GitHub at build time, so an offline container fails at build, not at serve.
+
+**A push from the container really does deploy this site.** `.github/workflows/jekyll.yml`
+publishes to GitHub Pages, and GitHub Actions runs on container pushes. Worth
+stating explicitly because the sibling repo `veerpatta/schoolfees` behaves
+differently: it deploys through Vercel's GitHub App, which does *not* react to a
+push made from a container, and needs its own `scripts/cloud/deploy.sh`. Do not
+carry the habit from one repo to the other in either direction.
+
+Two things noticed and left alone: `tests/admission-wizard.test.js` and
+`tests/fee-calculator.test.js` have no runner — there is no `package.json`,
+`Rakefile` or `Makefile` — so nothing executes them. And `/` serves a redirect
+page to the language roots rather than content, which is by design for the
+bilingual split.
+
 ## Project Overview
 
 ### What This Is
