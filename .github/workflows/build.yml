@@ -57,9 +57,8 @@ jobs:
           done
           echo "built $(find _site -type f | wc -l) files"
 
-      # Makes the built site downloadable with `gh run download`, so it can be
-      # deployed with `npx wrangler deploy` from a machine that has no Ruby.
-      # Not needed once Workers Builds is connected to the repo.
+      # Kept as a convenience for deploying from a machine with no Ruby:
+      # gh run download <id> -n site -D _site && npx wrangler deploy
       - name: Upload built site
         uses: actions/upload-artifact@v4
         with:
@@ -73,7 +72,7 @@ jobs:
       # [skip ci] stops this commit re-triggering this workflow; Cloudflare
       # still sees the push and deploys the refreshed files.
       - name: Commit rebuilt site
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
