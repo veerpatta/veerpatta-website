@@ -1,0 +1,304 @@
+{% comment %}
+  HOME — ported from the Claude Design "School website redesign brief".
+  Section order and treatment follow the design exactly:
+    hero (dark) → partners → answers → stats (dark) → journey →
+    digital → notices + calendar → voices → life → admit (gradient)
+
+  Content comes from _data/design/<lang>.yml, so this one template serves
+  both languages. Do not add language conditionals here.
+{% endcomment %}
+
+{% assign segments = page.url | split: '/' %}
+{% assign lang = segments[1] | default: 'en' %}
+{% assign d = site.data.design[lang] %}
+{% assign t = d.t %}
+{% if lang == 'hi' %}{% assign home_path = '/hi/' %}{% else %}{% assign home_path = '/en/' %}{% endif %}
+
+{% comment %} 1 — HERO {% endcomment %}
+<section class="dc-hero">
+  <div class="dc-hero-drift"><div class="dc-hero-wash"></div></div>
+  <div class="dc-hero-scrim"></div>
+  <div class="dc-hero-scrim-b"></div>
+
+  <div class="dc-wrap dc-hero-grid">
+    <div class="dc-hero-copy">
+      <div class="dc-eyebrow"><span class="dc-eyebrow-dot" aria-hidden="true"></span><span>{{ t.heroEyebrow }}</span></div>
+      <h1 class="dc-hero-title scroll-fade-up">{{ t.heroTitle }}</h1>
+      <p class="dc-hero-sub">{{ t.heroSub }}</p>
+      <div class="dc-hero-cta">
+        <button type="button" class="dc-btn dc-btn-light" data-enquiry-open>
+          {{ t.heroCta1 }}
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <a class="dc-btn dc-btn-glass" href="{{ '/en/gallery/' | replace: '/en/', home_path | relative_url }}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          {{ t.heroCta2 }}
+        </a>
+      </div>
+    </div>
+
+    <div class="dc-hero-aside">
+      <div class="dc-slot dc-slot-video">
+        <div class="dc-slot-kicker">Hero video · 1920×1080 · loop</div>
+        <div class="dc-slot-title">Drone push-in over the campus, cutting to morning assembly, a smart classroom, and the NCC parade</div>
+        <div class="dc-slot-note">20–25 sec · no on-camera speech · golden-hour light</div>
+      </div>
+      <div class="dc-seats">
+        <div class="dc-seats-label">{{ t.seatsLabel }}</div>
+        <div class="dc-seats-row"><span class="dc-seats-num">30</span><span class="dc-seats-per">{{ t.perClass }}</span></div>
+        <div class="dc-seats-bar"><div class="dc-seats-fill"></div></div>
+        <div class="dc-seats-note">{{ t.seatsNote }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} 2 — PARTNERS {% endcomment %}
+<section class="dc-partners">
+  <div class="dc-wrap dc-partners-inner">
+    <div class="dc-partners-label">{{ t.poweredBy }}</div>
+    <div class="dc-partners-grid">
+      {% for p in d.partners %}
+      <div class="dc-partner scroll-fade-up">
+        <div class="dc-partner-logo" aria-hidden="true">LOGO</div>
+        <div>
+          <div class="dc-partner-name">{{ p.name }}</div>
+          <div class="dc-partner-note">{{ p.note }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} 3 — ANSWERS {% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main">
+        <div class="dc-kicker">{{ t.answersKicker }}</div>
+        <h2 class="dc-h2 scroll-fade-up">{{ t.answersTitle }}</h2>
+      </div>
+      <p class="dc-head-sub">{{ t.answersSub }}</p>
+    </div>
+    <div class="dc-grid dc-grid-290">
+      {% for a in d.answers %}
+      <a class="dc-answer" href="{{ a.go | relative_url }}">
+        <div class="dc-answer-top">
+          <span class="dc-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"/></svg>
+          </span>
+          <span class="dc-tag">{{ a.tag }}</span>
+        </div>
+        <h3 class="dc-answer-q">{{ a.q }}</h3>
+        <p class="dc-answer-body">{{ a.body }}</p>
+        <span class="dc-link">{{ a.cta }}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} 4 — STATS (dark) {% endcomment %}
+<section class="dc-stats">
+  <div class="dc-stats-glow" aria-hidden="true"></div>
+  <div class="dc-wrap dc-stats-grid">
+    {% for s in d.stats %}
+    <div class="dc-stat scroll-fade-up">
+      <div class="dc-stat-value">{{ s.value }}</div>
+      <div class="dc-stat-label">{{ s.label }}</div>
+      <div class="dc-stat-note">{{ s.note }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% comment %} 5 — JOURNEY {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head-stack">
+      <div class="dc-kicker">{{ t.journeyKicker }}</div>
+      <h2 class="dc-h2 scroll-fade-up">{{ t.journeyTitle }}</h2>
+      <p class="dc-lead">{{ t.journeySub }}</p>
+    </div>
+    <div class="dc-grid dc-grid-210 dc-mt-46">
+      {% for st in d.stages %}
+      <div class="dc-stage scroll-fade-up">
+        <div class="dc-stage-shot">
+          <div class="dc-slot-kicker">Photo 4:3</div>
+          <div class="dc-stage-shot-note">{{ st.shot }}</div>
+        </div>
+        <div class="dc-stage-body">
+          <div class="dc-stage-name">{{ st.name }}</div>
+          {% if st.years %}<div class="dc-stage-years">{{ st.years }}</div>{% endif %}
+          {% if st.note %}<div class="dc-stage-note">{{ st.note }}</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} 6 — DIGITAL {% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap dc-split">
+    <div>
+      <div class="dc-kicker">{{ t.digitalKicker }}</div>
+      <h2 class="dc-h2 scroll-fade-up">{{ t.digitalTitle }}</h2>
+      <p class="dc-lead">{{ t.digitalSub }}</p>
+      <div class="dc-points">
+        {% for p in d.digitalPoints %}
+        <div class="dc-point scroll-fade-up">
+          <span class="dc-point-tick" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          </span>
+          <div>
+            <div class="dc-point-title">{{ p.title }}</div>
+            <div class="dc-point-body">{{ p.body }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="dc-btn dc-btn-navy dc-mt-32" href="{{ '/en/digital/' | replace: '/en/', home_path | relative_url }}">
+        {{ t.digitalCta }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="dc-digital-panel">
+      <div class="dc-slot dc-slot-wide">
+        <div class="dc-slot-kicker">Photo 16:10</div>
+        <div class="dc-slot-title">Students at Chromebooks in the smart classroom, teacher at the panel board</div>
+      </div>
+      <div class="dc-apps">
+        {% for app in d.apps %}
+        <div class="dc-app scroll-fade-up">
+          <span class="dc-app-initials" aria-hidden="true">{{ app.initials }}</span>
+          <span class="dc-app-name">{{ app.name }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} 7 — NOTICES + CALENDAR {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap dc-split">
+    <div>
+      <div class="dc-head">
+        <div class="dc-head-main">
+          <div class="dc-kicker">{{ t.noticeKicker }}</div>
+          <h2 class="dc-h3 scroll-fade-up">{{ t.noticeTitle }}</h2>
+        </div>
+        <a class="dc-link" href="{{ '/en/news/' | replace: '/en/', home_path | relative_url }}">{{ t.viewAll }}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="dc-notices">
+        {% for n in d.notices %}
+        <a class="dc-notice" href="{{ '/en/news/' | replace: '/en/', home_path | relative_url }}">
+          <div class="dc-notice-date">
+            <div class="dc-notice-day">{{ n.day }}</div>
+            <div class="dc-notice-mon">{{ n.mon }}</div>
+          </div>
+          <div class="dc-notice-body">
+            <span class="dc-chip" style="color: {{ n.tagFg }}; background: {{ n.tagBg }};">{{ n.tag }}</span>
+            <div class="dc-notice-title">{{ n.title }}</div>
+            <div class="dc-notice-text">{{ n.body }}</div>
+          </div>
+          <svg class="dc-notice-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div>
+      <div class="dc-kicker">{{ t.calendarKicker }}</div>
+      <h2 class="dc-h3 scroll-fade-up">{{ t.calendarTitle }}</h2>
+      <div class="dc-calendar">
+        {% for c in d.calendar %}
+        <div class="dc-cal-row scroll-fade-up">
+          <div class="dc-cal-bar" style="background: {{ c.color }};" aria-hidden="true"></div>
+          <div class="dc-cal-main">
+            <div class="dc-cal-title">{{ c.title }}</div>
+            <div class="dc-cal-kind">{{ c.kind }}</div>
+          </div>
+          <div class="dc-cal-date">{{ c.date }}</div>
+        </div>
+        {% endfor %}
+        <div class="dc-cal-foot">
+          <a class="dc-link" href="{{ '/en/news/' | replace: '/en/', home_path | relative_url }}">{{ t.fullCalendar }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} 8 — VOICES {% endcomment %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head-center">
+      <div class="dc-kicker">{{ t.voicesKicker }}</div>
+      <h2 class="dc-h2 scroll-fade-up">{{ t.voicesTitle }}</h2>
+    </div>
+    <div class="dc-grid dc-grid-290 dc-mt-44">
+      {% for v in d.voices %}
+      <div class="dc-voice scroll-fade-up">
+        <div class="dc-voice-quote" aria-hidden="true">&ldquo;</div>
+        <p class="dc-voice-text">{{ v.text }}</p>
+        <div class="dc-voice-by">
+          <div class="dc-voice-photo" aria-hidden="true">PHOTO</div>
+          <div>
+            <div class="dc-voice-name">{{ v.name }}</div>
+            <div class="dc-voice-detail">{{ v.detail }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} 9 — LIFE {% endcomment %}
+<section class="dc-band">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main">
+        <div class="dc-kicker">{{ t.lifeKicker }}</div>
+        <h2 class="dc-h2 scroll-fade-up">{{ t.lifeTitle }}</h2>
+      </div>
+      <a class="dc-link" href="{{ '/en/gallery/' | replace: '/en/', home_path | relative_url }}">{{ t.openGallery }}
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="dc-mosaic">
+      <div class="dc-mosaic-hero dc-slot">
+        <div class="dc-slot-kicker">Video 16:9</div>
+        <div class="dc-slot-title">60-second campus walkthrough: gate, assembly ground, labs, library, playfield</div>
+      </div>
+      {% for g in d.galleryTiles %}
+      <div class="dc-tile dc-slot scroll-fade-up">
+        <div class="dc-slot-kicker">{{ g.ratio | default: 'Photo' }}</div>
+        <div class="dc-tile-note">{{ g.note | default: g.title }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} 10 — ADMIT {% endcomment %}
+<section class="dc-admit">
+  <div class="dc-wrap dc-admit-inner">
+    <div>
+      <h2 class="dc-admit-title scroll-fade-up">{{ t.admitTitle }}</h2>
+      <p class="dc-admit-sub">{{ t.admitSub }}</p>
+    </div>
+    <div class="dc-admit-actions">
+      <button type="button" class="dc-btn dc-btn-light" data-enquiry-open>{{ t.heroCta1 }}</button>
+      <a class="dc-btn dc-btn-glass" href="{{ '/en/admissions/' | replace: '/en/', home_path | relative_url }}">{{ t.viewAll | default: 'Admissions' }}</a>
+    </div>
+  </div>
+</section>
