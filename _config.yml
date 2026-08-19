@@ -3,9 +3,12 @@ description: Bilingual learning environment nurturing leaders of tomorrow.
 # Cloudflare Workers serves the site at the domain root, so baseurl is empty.
 url: "https://veerpatta-website.raj-39e.workers.dev"
 baseurl: ""
-remote_theme: pages-themes/cayman@v0.2.0
+# No remote_theme. _layouts/default.html is a complete, self-contained
+# document and is the only layout in the repo, so the Cayman theme was
+# never rendering anything. It did make every build fetch the theme from
+# the GitHub API, which fails with a 403 when the anonymous rate limit
+# shared across a CI provider's IPs is exhausted.
 plugins:
-  - jekyll-remote-theme
   - jekyll-seo-tag
 lang: en
 encoding: utf-8
