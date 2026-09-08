@@ -1,6 +1,10 @@
 {% comment %} Build absolute canonical safely using site.url + site.baseurl + page.url {% endcomment %}
 {% assign page_canonical = page.url | absolute_url %}
 {% assign site_name = site.title | default: "Shri Veer Patta Senior Secondary School" %}
+{% comment %} Hindi pages carry the Hindi form of the name in <title> and
+   og:site_name. The School JSON-LD further down keeps the official
+   English name, which is what search engines index the school under. {% endcomment %}
+{% if page.lang == 'hi' %}{% assign site_name = 'श्री वीर पट्टा सीनियर सेकेंडरी स्कूल' %}{% endif %}
 {% assign page_title = page.title | default: site_name %}
 {% assign page_description = page.description | default: "English-medium school in Nokha (since 1994) with LEAD classrooms, NCC, sports, and caring teachers." %}
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Best English Medium School in Amet | Shri Veer Patta Senior Secondary School
+title: Best English Medium School in Amet
 description: Best English medium school in Amet since 1994. RBSE Affiliated, Nursery to Class 12. LEAD curriculum, NCC training, sports facilities, qualified teachers. 95%+ board pass rate. Affordable fees with transport from 20+ villages. Digital learning, safe campus with CCTV. Contact +91 94137 48575.
 keywords: best school in amet, english medium school amet, rbse school amet, nursery to class 12 amet, lead curriculum school, ncc school amet, affordable school amet, best education amet rajasthan
 ---

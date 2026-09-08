@@ -36,6 +36,10 @@
   {% assign menu_label = 'मेनू' %}
   {% assign close_label = 'बंद करें' %}
   {% assign whatsapp_cta = 'WhatsApp' %}
+  {% assign brand_full = 'श्री वीर पट्टा सीनियर सेकेंडरी स्कूल' %}
+  {% assign brand_lead = 'श्री वीर पट्टा' %}
+  {% assign brand_tail = 'सीनियर सेकेंडरी स्कूल' %}
+  {% assign logo_word = 'लोगो' %}
 {% else %}
   {% assign home_path = '/en/' %}
   {% assign about_path = '/en/about/' %}
@@ -60,6 +64,10 @@
   {% assign nav_beyond = 'Beyond Academics' %}
   {% assign nav_digital = 'Digital Campus' %}
   {% assign nav_contact = 'Contact' %}
+  {% assign brand_full = 'Shri Veer Patta Senior Secondary School' %}
+  {% assign brand_lead = 'Shri Veer Patta' %}
+  {% assign brand_tail = 'Senior Secondary School' %}
+  {% assign logo_word = 'Logo' %}
   {% assign menu_label = 'Menu' %}
   {% assign close_label = 'Close' %}
   {% assign whatsapp_cta = 'WhatsApp' %}
@@ -87,9 +95,9 @@
 
     {% comment %} Logo - Always visible, optimized size {% endcomment %}
     <div class="header-logo">
-      <a href="{{ home_path | relative_url }}" aria-label="Shri Veer Patta Senior Secondary School Home">
+      <a href="{{ home_path | relative_url }}" aria-label="{{ brand_full }} {{ nav_home }}">
         <img src="{{ '/assets/images/VPPS LOGO ONNLY.jpg' | relative_url }}" 
-             alt="Shri Veer Patta Senior Secondary School Logo" 
+             alt="{{ brand_full }} {{ logo_word }}" 
              class="school-logo"
              width="60" 
              height="60">
@@ -99,7 +107,7 @@
     {% comment %} School Name - 2 lines OK on mobile {% endcomment %}
     <div class="header-brand">
       <a href="{{ home_path | relative_url }}" class="brand-link">
-        <span class="brand-name">Shri Veer Patta<span class="brand-suffix">Senior Secondary School</span></span>
+        <span class="brand-name">{{ brand_lead }}<span class="brand-suffix">{{ brand_tail }}</span></span>
       </a>
     </div>
 
