@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We as members, contributors, and leaders pledge to make participation in our project a respectful and professional experience for everyone involved in the Veer Patta Public School website.
+We as members, contributors, and leaders pledge to make participation in our project a respectful and professional experience for everyone involved in the Shri Veer Patta Senior Secondary School website.
 
 ## Our Standards
 
@@ -93,6 +93,6 @@ For questions or concerns about this Code of Conduct:
 
 ---
 
-**Remember**: This project represents Veer Patta Public School. All contributions should reflect the values of education, respect, and community service.
+**Remember**: This project represents Shri Veer Patta Senior Secondary School. All contributions should reflect the values of education, respect, and community service.
 
 *Last Updated: November 2025*

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Contact (EN)
-description: Reach Veer Patta Public School at Opp. Mela Ground, Amet, Rajasthan. Call/WhatsApp +91 94137 48575 for admissions, transport, or general queries.
+description: Reach Shri Veer Patta Senior Secondary School at Opp. Mela Ground, Amet, Rajasthan. Call/WhatsApp +91 94137 48575 for admissions, transport, or general queries.
 permalink: /en/contact/
 ---
 {% include header.html %}

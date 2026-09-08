@@ -1,4 +1,4 @@
-# Contributing to Veer Patta Public School Website
+# Contributing to Shri Veer Patta Senior Secondary School Website
 
 **Welcome, Coding Agents and Developers!** This guide provides clear instructions for making contributions to this repository.
 
@@ -505,7 +505,7 @@ Contributors who make valuable improvements will be recognized in:
 - CHANGELOG.md
 - Commit history
 
-Thank you for contributing to Veer Patta Public School's web presence! 🏫
+Thank you for contributing to Shri Veer Patta Senior Secondary School's web presence! 🏫
 
 ---
 

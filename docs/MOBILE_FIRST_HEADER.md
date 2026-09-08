@@ -1,7 +1,7 @@
 # Mobile-First Header Implementation
 
 ## 🎯 Project Goal
-Redesign the header for Veer Patta Public School's website with a **true mobile-first approach**, optimized for budget Android smartphones on 3G networks in semi-rural Rajasthan.
+Redesign the header for Shri Veer Patta Senior Secondary School's website with a **true mobile-first approach**, optimized for budget Android smartphones on 3G networks in semi-rural Rajasthan.
 
 ## 📊 Key Statistics
 - **70% mobile traffic** - Mobile is THE priority

@@ -1,6 +1,6 @@
 # CLAUDE.md - AI Assistant Guide
 
-> **For AI Assistants**: This document provides comprehensive guidance for working on the Veer Patta Public School website codebase. Read this before making any changes.
+> **For AI Assistants**: This document provides comprehensive guidance for working on the Shri Veer Patta Senior Secondary School website codebase. Read this before making any changes.
 
 ## Table of Contents
 1. [Quick Start](#quick-start)
@@ -72,7 +72,7 @@ bilingual split.
 ## Project Overview
 
 ### What This Is
-A bilingual static website for Veer Patta Public School in Amet, Rajasthan, India. The site provides school information, admissions details, gallery, and contact options for parents and students in semi-rural areas.
+A bilingual static website for Shri Veer Patta Senior Secondary School in Amet, Rajasthan, India. The site provides school information, admissions details, gallery, and contact options for parents and students in semi-rural areas.
 
 ### Technology Stack
 
@@ -321,7 +321,7 @@ veerpatta-website/
 
 #### `_config.yml` (Jekyll Configuration)
 ```yaml
-title: Veer Patta Public School
+title: Shri Veer Patta Senior Secondary School
 description: Bilingual learning environment nurturing leaders of tomorrow.
 url: "https://veerpatta-website.raj-39e.workers.dev"
 baseurl: ""                            # Cloudflare Workers serves from the domain root
@@ -339,7 +339,7 @@ collections:
     permalink: /:collection/:name/
 
 # School Contact Data (used in templates)
-school_name: "Veer Patta Public School"
+school_name: "Shri Veer Patta Senior Secondary School"
 school_phone: "+919413748575"
 school_email: "veerpatta.school@gmail.com"
 school_address: "Opp. Mela Ground, Amet, Rajasthan - 313332"
@@ -1348,6 +1348,6 @@ build check
 
 **Last Updated**: 2025-11-16
 
-**Maintained By**: Veer Patta Public School Development Team
+**Maintained By**: Shri Veer Patta Senior Secondary School Development Team
 
 **Questions?** Open an issue or contact veerpatta.school@gmail.com

@@ -4,7 +4,7 @@ date: 2025-01-15
 lang: en
 ---
 
-Veer Patta Public School celebrated its Annual Sports Day with great enthusiasm. Students from all classes participated in various track and field events, showcasing their athletic talents.
+Shri Veer Patta Senior Secondary School celebrated its Annual Sports Day with great enthusiasm. Students from all classes participated in various track and field events, showcasing their athletic talents.
 
 Key highlights:
 - 100m, 200m, and relay races

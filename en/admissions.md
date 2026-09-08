@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Admissions (EN)
-description: Join Veer Patta Public School in Amet. RBSE Affiliated, Nursery to Class 12. Limited seats available - Early bird discounts. Application period Nov-Mar, session starts April.
+description: Join Shri Veer Patta Senior Secondary School in Amet. RBSE Affiliated, Nursery to Class 12. Limited seats available - Early bird discounts. Application period Nov-Mar, session starts April.
 permalink: /en/admissions/
 ---
 {% include header.html %}

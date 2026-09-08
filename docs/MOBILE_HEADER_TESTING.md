@@ -1,7 +1,7 @@
 # Mobile-First Header Testing Guide
 
 ## Overview
-This guide explains how to test the redesigned mobile-first header for Veer Patta Public School's website, optimized for budget Android smartphones on 3G networks in semi-rural Rajasthan.
+This guide explains how to test the redesigned mobile-first header for Shri Veer Patta Senior Secondary School's website, optimized for budget Android smartphones on 3G networks in semi-rural Rajasthan.
 
 ## Testing Priorities
 **CRITICAL:** Mobile devices (320px-767px) are the PRIMARY audience (70% of traffic).
@@ -144,7 +144,7 @@ This guide explains how to test the redesigned mobile-first header for Veer Patt
 #### Screen Reader Testing:
 1. Enable screen reader (NVDA/JAWS/VoiceOver)
 2. Verify announcements:
-   - "Veer Patta Public School Home" for logo
+   - "Shri Veer Patta Senior Secondary School Home" for logo
    - "Open navigation menu" for hamburger
    - "Mobile navigation" for menu
    - "Close navigation menu" for close button

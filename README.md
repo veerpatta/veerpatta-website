@@ -1,11 +1,11 @@
-# 🏫 Veer Patta Public School Website
+# 🏫 Shri Veer Patta Senior Secondary School Website
 
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Pages-orange?logo=cloudflare&logoColor=white)](https://veerpatta-website.raj-39e.workers.dev/)
 [![Jekyll](https://img.shields.io/badge/Built%20with-Jekyll-red?logo=jekyll)](https://jekyllrb.com/)
 [![Mobile First](https://img.shields.io/badge/Design-Mobile%20First-green)](#responsive-design)
 [![Bilingual](https://img.shields.io/badge/Languages-EN%20%7C%20HI-orange)](#bilingual-support)
 
-Official bilingual website for **Veer Patta Public School**, Amet, Rajasthan, India.
+Official bilingual website for **Shri Veer Patta Senior Secondary School**, Amet, Rajasthan, India.
 
 🌐 **Live Site**: [veerpatta-website.raj-39e.workers.dev](https://veerpatta-website.raj-39e.workers.dev/)
 
@@ -340,9 +340,9 @@ We welcome contributions! Here's how:
 
 ## 📜 License
 
-Content and code for Veer Patta Public School.
+Content and code for Shri Veer Patta Senior Secondary School.
 
-All rights reserved. This website and its content are the property of Veer Patta Public School.
+All rights reserved. This website and its content are the property of Shri Veer Patta Senior Secondary School.
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides a quick reference to the marketing features implemented for the Veer Patta Public School website.
+This document provides a quick reference to the marketing features implemented for the Shri Veer Patta Senior Secondary School website.
 
 ## Features at a Glance
 
@@ -98,7 +98,7 @@ This document provides a quick reference to the marketing features implemented f
 ```json
 {
   "@type": "School",
-  "name": "Veer Patta Public School",
+  "name": "Shri Veer Patta Senior Secondary School",
   "telephone": "+919413748575",
   "email": "veerpatta.school@gmail.com",
   "address": { ... },
@@ -197,7 +197,7 @@ hi/news/index.md   (Hindi list page)
 
 ```json
 {
-  "name": "Veer Patta Public School",
+  "name": "Shri Veer Patta Senior Secondary School",
   "short_name": "VPPS",
   "start_url": "/en/",
   "display": "standalone",
@@ -256,7 +256,7 @@ collections:
     permalink: /:collection/:name/
 
 # School Contact & Location (NEW)
-school_name: "Veer Patta Public School"
+school_name: "Shri Veer Patta Senior Secondary School"
 school_phone: "+919413748575"
 school_email: "veerpatta.school@gmail.com"
 school_address: "Opp. Mela Ground, Amet, Rajasthan - 313332"

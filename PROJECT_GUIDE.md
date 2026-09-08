@@ -1,10 +1,10 @@
-# 🏫 Veer Patta Public School Website - Project Guide
+# 🏫 Shri Veer Patta Senior Secondary School Website - Project Guide
 
-**Welcome!** This guide explains everything about the Veer Patta Public School website in simple terms.
+**Welcome!** This guide explains everything about the Shri Veer Patta Senior Secondary School website in simple terms.
 
 ## 📚 What is This Project?
 
-This is the official website for **Veer Patta Public School** located in Nokha, Rajasthan, India. The website provides information about the school in both **English** and **Hindi** languages.
+This is the official website for **Shri Veer Patta Senior Secondary School** located in Nokha, Rajasthan, India. The website provides information about the school in both **English** and **Hindi** languages.
 
 ### What Can You Find on the Website?
 
@@ -207,6 +207,6 @@ Choose the guide that matches your needs:
 
 ---
 
-**Remember**: This website represents Veer Patta Public School. Keep content professional, accurate, and respectful! 🏫
+**Remember**: This website represents Shri Veer Patta Senior Secondary School. Keep content professional, accurate, and respectful! 🏫
 
 *Last Updated: November 2025*

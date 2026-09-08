@@ -204,7 +204,7 @@
   function renderStep1() {
     const texts = lang === 'hi' ? {
       heading: 'प्रवेश पूछताछ शुरू करें',
-      intro: 'वीर पट्टा पब्लिक स्कूल में आपकी रुचि के लिए धन्यवाद। आइए आरंभ करें!',
+      intro: 'श्री वीर पट्टा सीनियर सेकेंडरी स्कूल में आपकी रुचि के लिए धन्यवाद। आइए आरंभ करें!',
       studentName: 'छात्र का नाम',
       grade: 'कक्षा जिसमें प्रवेश चाहिए',
       parentName: 'अभिभावक का नाम',
@@ -212,7 +212,7 @@
       village: 'गांव/शहर'
     } : {
       heading: 'Start Your Admission Inquiry',
-      intro: 'Thank you for your interest in Veer Patta Public School. Let\'s get started!',
+      intro: 'Thank you for your interest in Shri Veer Patta Senior Secondary School. Let\'s get started!',
       studentName: 'Student Name',
       grade: 'Grade Applying For',
       parentName: 'Parent Name',
@@ -561,8 +561,8 @@
     };
 
     const greeting = lang === 'hi' ?
-      `नमस्ते, मैं वीर पट्टा पब्लिक स्कूल में प्रवेश के बारे में पूछताछ कर रहा/रही हूं।\n\nमैं वर्तमान में कदम ${currentStep} पर हूं: ${stepTexts[lang][currentStep - 1]}\n\nकृपया मेरी मदद करें।` :
-      `Hello, I'm inquiring about admission to Veer Patta Public School.\n\nI'm currently on Step ${currentStep}: ${stepTexts[lang][currentStep - 1]}\n\nPlease assist me.`;
+      `नमस्ते, मैं श्री वीर पट्टा सीनियर सेकेंडरी स्कूल में प्रवेश के बारे में पूछताछ कर रहा/रही हूं।\n\nमैं वर्तमान में कदम ${currentStep} पर हूं: ${stepTexts[lang][currentStep - 1]}\n\nकृपया मेरी मदद करें।` :
+      `Hello, I'm inquiring about admission to Shri Veer Patta Senior Secondary School.\n\nI'm currently on Step ${currentStep}: ${stepTexts[lang][currentStep - 1]}\n\nPlease assist me.`;
 
     return greeting;
   }

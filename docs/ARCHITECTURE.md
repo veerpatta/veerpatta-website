@@ -1,8 +1,8 @@
-# Technical Architecture - Veer Patta Public School Website
+# Technical Architecture - Shri Veer Patta Senior Secondary School Website
 
 ## Overview
 
-This document describes the technical architecture of the Veer Patta Public School website for developers and coding agents.
+This document describes the technical architecture of the Shri Veer Patta Senior Secondary School website for developers and coding agents.
 
 ## Technology Stack
 
@@ -210,7 +210,7 @@ Content here...
 
 ```yaml
 # Site Info
-title: Veer Patta Public School
+title: Shri Veer Patta Senior Secondary School
 description: Bilingual learning environment...
 url: "https://veerpatta-website.raj-39e.workers.dev"
 baseurl: ""   # Cloudflare Workers serves from the domain root

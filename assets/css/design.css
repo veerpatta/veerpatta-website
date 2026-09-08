@@ -1073,8 +1073,9 @@ section.container.contact-teaser {
     white-space: nowrap;
   }
 
-  /* The <br class="mobile-break"> is for the narrow layout only */
-  .brand-name .mobile-break { display: none; }
+  /* The name is a two-tier lockup at every width; the second tier is
+     set smaller so it balances against the 54px logo. */
+  .brand-name .brand-suffix { font-size: 0.68em; font-weight: 600; }
 
   /* Row 1 — right cluster */
   .desktop-lang-switch { order: 2; margin-left: auto; flex: none; padding: 12px 0; }

@@ -1,4 +1,4 @@
-// Marketing Enhancements JavaScript - Veer Patta Public School
+// Marketing Enhancements JavaScript - Shri Veer Patta Senior Secondary School
 // Handles testimonials carousel, FAQ accordion, and related animations
 
 /* ============================================

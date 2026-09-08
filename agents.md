@@ -1,4 +1,4 @@
-# Agents Guide for Veer Patta Public School Website
+# Agents Guide for Shri Veer Patta Senior Secondary School Website
 
 > **Quick Start for AI Agents**: This document provides everything you need to understand and work effectively on this codebase. Read this first before making any changes.
 
@@ -18,7 +18,7 @@
 
 ## Project Overview
 
-**Veer Patta Public School Website** is a bilingual (English/Hindi) static site built with Jekyll and hosted on Cloudflare Workers. The site serves as the official web presence for a public school in Amet, Rajasthan, India.
+**Shri Veer Patta Senior Secondary School Website** is a bilingual (English/Hindi) static site built with Jekyll and hosted on Cloudflare Workers. The site serves as the official web presence for a public school in Amet, Rajasthan, India.
 
 ### Key Facts
 - **Type**: Static site (Jekyll-based)

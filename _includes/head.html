@@ -1,6 +1,6 @@
 {% comment %} Build absolute canonical safely using site.url + site.baseurl + page.url {% endcomment %}
 {% assign page_canonical = page.url | absolute_url %}
-{% assign site_name = site.title | default: "Veer Patta Public School" %}
+{% assign site_name = site.title | default: "Shri Veer Patta Senior Secondary School" %}
 {% assign page_title = page.title | default: site_name %}
 {% assign page_description = page.description | default: "English-medium school in Nokha (since 1994) with LEAD classrooms, NCC, sports, and caring teachers." %}
 
@@ -71,7 +71,8 @@ body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',
 .header-logo{flex-shrink:0}
 .school-logo{width:60px;height:60px;display:block;border-radius:8px;object-fit:contain}
 .header-brand{flex:1;min-width:0}
-.brand-name{font-size:16px;font-weight:700;line-height:1.3;color:var(--brand-blue)}
+.brand-name{font-size:clamp(13px,4.3vw,16px);font-weight:700;line-height:1.3;color:var(--brand-blue)}
+.brand-suffix{display:block;font-size:.68em;font-weight:600;letter-spacing:.02em}
 .hero{background:linear-gradient(160deg,#F8F9FE 0%,#fff 100%);border-radius:24px;padding:3rem 1.75rem;margin:2.5rem 0;text-align:center}
 .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--brand-green);color:#fff;padding:.85rem 1.6rem;border-radius:999px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .3s ease}
 .desktop-nav,.desktop-lang-switch,.desktop-whatsapp-btn{display:none}
@@ -127,7 +128,7 @@ body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',
 {
   "@context": "https://schema.org",
   "@type": "School",
-  "name": "{{ site.school_name | default: 'Veer Patta Public School' }}",
+  "name": "{{ site.school_name | default: 'Shri Veer Patta Senior Secondary School' }}",
   "description": "{{ site.description | default: 'Bilingual learning environment nurturing leaders of tomorrow.' }}",
   "url": "{{ site.url | append: site.baseurl }}",
   "telephone": "{{ site.school_phone | default: '+919413748575' }}",

@@ -158,9 +158,9 @@ img[loading="lazy"] {
   transform: scale(0.95);
 }
 
-/* School Name - 2 lines OK on mobile */
+/* School Name - two-tier lockup, 2 lines on every width */
 .header-brand {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   min-width: 0;
 }
 
@@ -171,14 +171,21 @@ img[loading="lazy"] {
 }
 
 .brand-name {
-  font-size: 16px;
+  /* Fluid at the low end so the full name still lands in two tiers on a
+     320px screen, where the logo and the mobile tools leave ~100px. */
+  font-size: clamp(13px, 4.3vw, 16px);
   font-weight: 700;
   line-height: 1.3;
   color: var(--brand-blue);
 }
 
-.mobile-break {
-  display: inline;
+/* Second tier of the name, set smaller so the full school name fits
+   beside the logo without pushing the mobile tools off screen. */
+.brand-suffix {
+  display: block;
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 /* Desktop Nav - HIDDEN on mobile */
@@ -630,11 +637,7 @@ body[lang="hi"] .mobile-nav-link,
     outline-offset: 2px;
   }
 
-  /* Brand name - no line break on tablet+ */
-  .mobile-break {
-    display: none;
-  }
-
+  /* Brand name - each tier stays on its own single line from tablet up */
   .brand-name {
     font-size: 18px;
     white-space: nowrap;
@@ -2253,7 +2256,9 @@ button:focus-visible {
   }
 
   .brand-name {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    /* Low end agrees with the fluid base rule; a 1rem floor here would
+       undo it and force the name to wrap on a 320px screen. */
+    font-size: clamp(13px, 4.3vw, 1.2rem);
   }
 
   .header-whatsapp-btn {

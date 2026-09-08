@@ -1,7 +1,7 @@
 ---
 layout: default
 title: School News
-description: Latest news and updates from Veer Patta Public School
+description: Latest news and updates from Shri Veer Patta Senior Secondary School
 lang: en
 permalink: /en/news/
 ---

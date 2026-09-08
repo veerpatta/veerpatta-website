@@ -1,7 +1,7 @@
 ---
 layout: default
 title: स्कूल समाचार
-description: वीर पट्टा पब्लिक स्कूल से नवीनतम समाचार और अपडेट
+description: श्री वीर पट्टा सीनियर सेकेंडरी स्कूल से नवीनतम समाचार और अपडेट
 lang: hi
 permalink: /hi/news/
 ---

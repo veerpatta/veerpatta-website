@@ -1,4 +1,4 @@
-// Service Worker for Veer Patta Public School Website
+// Service Worker for Shri Veer Patta Senior Secondary School Website
 // PWA-lite implementation with stale-while-revalidate caching strategy
 
 const CACHE_VERSION = 'vpps-v8';

@@ -1,4 +1,4 @@
-title: Veer Patta Public School
+title: Shri Veer Patta Senior Secondary School
 description: Bilingual learning environment nurturing leaders of tomorrow.
 # Cloudflare Workers serves the site at the domain root, so baseurl is empty.
 url: "https://veerpatta-website.raj-39e.workers.dev"
@@ -21,7 +21,7 @@ collections:
     permalink: /:collection/:name/
 
 # School Contact & Location
-school_name: "Veer Patta Public School"
+school_name: "Shri Veer Patta Senior Secondary School"
 school_phone: "+919413748575"
 school_email: "veerpatta.school@gmail.com"
 school_address: "Opp. Mela Ground, Amet, Rajasthan - 313332"

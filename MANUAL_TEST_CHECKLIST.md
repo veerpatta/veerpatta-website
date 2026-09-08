@@ -120,7 +120,7 @@
 - [ ] Find `@type: School` JSON-LD script
 - [ ] Validate at https://validator.schema.org/
 - [ ] Check all fields populated:
-  - name: "Veer Patta Public School"
+  - name: "Shri Veer Patta Senior Secondary School"
   - telephone: "+919413748575"
   - address (streetAddress, locality, region, postalCode)
   - geo coordinates (if present)
@@ -186,7 +186,7 @@
 - [ ] Navigate to `/veerpatta-website/manifest.webmanifest`
 - [ ] Manifest loads as valid JSON
 - [ ] Check fields:
-  - name: "Veer Patta Public School"
+  - name: "Shri Veer Patta Senior Secondary School"
   - short_name: "VPPS"
   - start_url: "/en/"
   - display: "standalone"

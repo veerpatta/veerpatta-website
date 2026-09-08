@@ -1,4 +1,4 @@
-# 📸 Media Upload Guide - Veer Patta Public School Website
+# 📸 Media Upload Guide - Shri Veer Patta Senior Secondary School Website
 
 ## Quick Start (5 Minutes)
 
@@ -414,4 +414,4 @@ You don't need to worry about these technical details - just upload files correc
 
 **Last Updated:** November 2024
 **Version:** 1.0
-**Maintained by:** Veer Patta Public School Technical Team
+**Maintained by:** Shri Veer Patta Senior Secondary School Technical Team

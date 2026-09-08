@@ -1,4 +1,4 @@
-# 📚 Veer Patta Public School Website - Complete Documentation Index
+# 📚 Shri Veer Patta Senior Secondary School Website - Complete Documentation Index
 
 **Navigation Hub**: Find every document, guide, and resource in one place.
 

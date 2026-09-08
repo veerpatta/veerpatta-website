@@ -1,4 +1,4 @@
-// Main JavaScript file - Veer Patta Public School
+// Main JavaScript file - Shri Veer Patta Senior Secondary School
 // Handles animations, counters, scroll observers, and interactivity
 
 /* ============================================
@@ -870,7 +870,7 @@ window.showToast = showToast;
 document.addEventListener('DOMContentLoaded', () => {
   // All functions are already initialized via IIFEs
   // This is just for any additional setup
-  console.log('Veer Patta Public School - Animations loaded successfully');
+  console.log('Shri Veer Patta Senior Secondary School - Animations loaded successfully');
 });
 
 /* ============================================

@@ -427,7 +427,7 @@
   }
 
   function generatePrintContent() {
-    const schoolName = lang === 'hi' ? 'वीर पट्टा पब्लिक स्कूल' : 'Veer Patta Public School';
+    const schoolName = lang === 'hi' ? 'श्री वीर पट्टा सीनियर सेकेंडरी स्कूल' : 'Shri Veer Patta Senior Secondary School';
     const feeEstimate = lang === 'hi' ? 'शुल्क अनुमान' : 'Fee Estimate';
     const breakdownHTML = breakdownContainer ? breakdownContainer.innerHTML : '';
 

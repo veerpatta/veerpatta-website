@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Frequently Asked Questions
-description: Common questions about admissions, fees, transport, curriculum, and facilities at Veer Patta Public School, Amet's premier English medium school.
+description: Common questions about admissions, fees, transport, curriculum, and facilities at Shri Veer Patta Senior Secondary School, Amet's premier English medium school.
 ---
 {% include header.html %}
 
@@ -9,7 +9,7 @@ description: Common questions about admissions, fees, transport, curriculum, and
 <section class="container faq-page">
   <div class="faq-hero">
     <h1>Frequently Asked Questions</h1>
-    <p>Find answers to common questions about admissions, fees, transport, timings, and more at Veer Patta Public School.</p>
+    <p>Find answers to common questions about admissions, fees, transport, timings, and more at Shri Veer Patta Senior Secondary School.</p>
   </div>
 
   <!-- Admissions Section -->
