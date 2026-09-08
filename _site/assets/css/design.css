@@ -225,6 +225,7 @@ textarea:focus-visible {
 .site-footer .footer-legal-links li a,
 .site-footer .footer-legal-links a,
 .site-footer .footer-copyright,
+.site-footer .footer-trust,
 .site-footer .footer-recognition {
   color: var(--d-grey-deco);
 }

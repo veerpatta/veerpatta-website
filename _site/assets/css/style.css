@@ -3609,6 +3609,16 @@ video::-webkit-media-controls-volume-slider {
   margin-bottom: 0.5rem;
 }
 
+/* Governing trust. Sits with the recognition line below it and matches its
+   size, but stays upright and a shade heavier - this names who runs the
+   school, where the line below it is an accreditation aside. */
+.footer-trust {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-text);
+  margin-bottom: 0.35rem;
+}
+
 .footer-recognition {
   font-size: 0.85rem;
   color: var(--muted-text);

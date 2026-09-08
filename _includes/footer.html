@@ -31,6 +31,7 @@
   {% assign admission_form_label = 'प्रवेश फॉर्म' %}
   {% assign fee_structure_label = 'शुल्क संरचना' %}
   {% assign academic_calendar_label = 'शैक्षणिक कैलेंडर' %}
+  {% assign trust_line = 'रानी हीर कंवर शिक्षण संस्थान ट्रस्ट द्वारा संचालित' %}
 {% else %}
   {% assign about_path = '/en/about/' %}
   {% assign academics_path = '/en/academics/' %}
@@ -62,6 +63,7 @@
   {% assign admission_form_label = 'Admission Form' %}
   {% assign fee_structure_label = 'Fee Structure' %}
   {% assign academic_calendar_label = 'Academic Calendar' %}
+  {% assign trust_line = 'Run by ' | append: site.school_trust %}
 {% endif %}
 
 <!-- Enhanced Footer with Quick Links and Contact Information -->
@@ -142,6 +144,7 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
       <p class="footer-copyright">© {{ site.time | date: "%Y" }} Shri Veer Patta Senior Secondary School. All rights reserved.</p>
+      {% if trust_line and site.school_trust %}<p class="footer-trust">{{ trust_line }}</p>{% endif %}
       <p class="footer-recognition">Recognized by Rajasthan Education Department · Member of Rajsamand Private Schools Association</p>
       <ul class="footer-legal-links">
         <li><a href="{{ privacy_path | relative_url }}">{{ privacy_label }}</a></li>
