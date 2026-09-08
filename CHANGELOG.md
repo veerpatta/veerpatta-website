@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Governing trust stated on the home page (2026-09-08)**:
+  - The hero now carries a line naming the trust the school runs under - "Run by Rani Heer Kanwar Shikshan Sansthan Trust", and रानी हीर कंवर शिक्षण संस्थान ट्रस्ट द्वारा संचालित on `/hi/`
+  - Copy lives in `_data/design/<lang>.yml` as `heroTrust`, so the one home template serves both languages
+  - The name is also in `_config.yml` as `school_trust`, and feeds `parentOrganization` on the School JSON-LD across every page
+
 ### Changed
 - **School renamed to Shri Veer Patta Senior Secondary School (2026-09-08)**:
   - Replaced the former name site-wide in both languages: page titles, meta and Open Graph tags, School/FAQ JSON-LD, header, footer, WhatsApp and enquiry prefills, the PWA manifest, and the news posts

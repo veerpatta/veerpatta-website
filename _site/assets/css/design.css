@@ -1363,6 +1363,22 @@ section.container.contact-teaser {
 }
 
 .dc-hero-sub { font-size: clamp(16px, 1.6vw, 18.5px); line-height: 1.6; color: var(--d-line-3); margin-top: 20px; max-width: 560px; }
+/* Governing trust, stated on the home hero. Reads a step quieter than
+   .dc-hero-sub above it but stays well clear of the 4.5:1 floor on the
+   hero's dark ground. */
+.dc-hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  max-width: 560px;
+  font-size: clamp(13.5px, 1.15vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--d-line-2);
+}
+.dc-hero-trust svg { flex: none; opacity: 0.75; }
+
 .dc-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 34px; }
 
 .dc-hero-aside { display: flex; flex-direction: column; gap: 18px; align-items: flex-end; }
