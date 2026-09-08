@@ -1,11 +1,24 @@
 # Changelog
 
-All notable changes to the Veer Patta Public School website will be documented in this file.
+All notable changes to the Shri Veer Patta Senior Secondary School website will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Changed
+- **School renamed to Shri Veer Patta Senior Secondary School (2026-09-08)**:
+  - Replaced the former name site-wide in both languages: page titles, meta and Open Graph tags, School/FAQ JSON-LD, header, footer, WhatsApp and enquiry prefills, the PWA manifest, and the news posts
+  - Hindi name is श्री वीर पट्टा सीनियर सेकेंडरी स्कूल; one stray वीर पत्ता spelling in the about copy corrected to श्री वीर पट्टा
+  - **Header brand is now a two-tier lockup** - "Shri Veer Patta" over a smaller "Senior Secondary School". The new name is 38 characters against the old 24, and the brand was `white-space: nowrap` from 768px up, so a straight substitution pushed the nav off the row
+  - `.header-brand` changed from `flex: 0 0 auto` to `flex: 1 1 auto` so it can give way to the mobile tools
+  - Brand type is fluid at the low end. A legacy `max-width: 1200px` rule set `clamp(1rem, 2vw, 1.2rem)`, and its `1rem` floor overrode the new base size and wrapped the name over four lines at 320px
+  - Header brand, logo `aria-label` and logo `alt` are bilingual now - `/hi/` reads श्री वीर पट्टा / सीनियर सेकेंडरी स्कूल with होम and लोगो labels, where the Hindi pages previously showed the English name
+  - `<title>` and `og:site_name` use the Hindi name on `/hi/` pages; the School JSON-LD deliberately keeps the official English name, which is what search engines index the school under
+  - `school_maps_url` - the Directions button on every page - now searches for the new name
+  - Dropped the school name from both home pages' front-matter titles; `head.html` already appends it, so tabs and share cards were showing it twice
+  - Checked at 320, 375, 768 and 1280 in EN and HI: no horizontal overflow, and the mobile header is 60px tall (79px before)
 
 ### Added
 - **Website Modernization (2025-01-16)**:
