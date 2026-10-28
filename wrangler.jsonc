@@ -1,15 +1,18 @@
 {
   // Cloudflare Workers (static assets) deployment for the Jekyll site.
   //
-  // This Worker serves static files only — there is no `main` entry point and
-  // no `binding`, both of which are only valid alongside a Worker script.
   // Jekyll builds into _site/ and Cloudflare uploads that directory as-is.
+  // Almost every request is answered straight from that asset store. The one
+  // exception is video: worker.js runs first for /assets/media/videos/* to
+  // answer byte-range requests, which the asset store ignores and which
+  // Safari on iPhone needs before it will play a clip.
   //
   // Workers Builds settings (set in the dashboard, not here):
-  //   Build command:  bundle exec jekyll build
+  //   Build command:  (empty - see docs/DEPLOYMENT.md)
   //   Deploy command: npx wrangler deploy
   "name": "veerpatta-website",
   "compatibility_date": "2026-08-19",
+  "main": "worker.js",
 
   // Explicit because wrangler warns on every deploy otherwise. This is the
   // default while a workers.dev route is enabled; stating it keeps branch and
@@ -17,6 +20,10 @@
   "preview_urls": true,
   "assets": {
     "directory": "./_site",
+    "binding": "ASSETS",
+
+    // Only video goes through worker.js. Everything else never invokes it.
+    "run_worker_first": ["/assets/media/videos/*"],
 
     // Serve the nearest 404.html with a real 404 status. Without this a
     // missing page returns 404 with no body; "single-page-application" would
@@ -27,17 +34,12 @@
 
   // Workers tracing, per developers.cloudflare.com/agent-setup/tracing.md.
   //
-  // Currently inert, and honestly so: automatic instrumentation records
-  // handler, fetch and binding calls, and all three require the Worker to be
-  // invoked. This Worker has no `main`, so every request is answered straight
-  // from the static asset store without running Worker code. Nothing will
-  // appear in the dashboard until a Worker script exists.
-  //
-  // Left enabled so tracing is already on if a script is ever added. If that
-  // happens, set head_sampling_rate below 1 before it sees real traffic.
+  // Records only video requests, the only ones that run worker.js. Sampled
+  // at 10% so a busy day does not flood the dashboard.
   "observability": {
     "traces": {
-      "enabled": true
+      "enabled": true,
+      "head_sampling_rate": 0.1
     }
   }
 }
