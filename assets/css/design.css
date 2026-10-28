@@ -1572,6 +1572,27 @@ section.container.contact-teaser {
 }
 .dc-gallery-item .dc-photo { height: auto; aspect-ratio: 4 / 3; overflow: hidden; }
 
+/* --- facilities --------------------------------------------------------
+   Phones get a swipeable row: each card is 72% wide so the next one peeks
+   in, which tells people the row scrolls. From 768px it is a plain grid. */
+.dc-fac {
+  list-style: none; margin: 32px 0 0; padding: 0 0 10px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+}
+.dc-fac:focus-visible { outline: 2px solid var(--d-blue); outline-offset: 4px; }
+.dc-fac-card { scroll-snap-align: start; background: var(--d-white); border: 1px solid var(--d-line); border-radius: var(--d-r-lg); overflow: hidden; }
+.dc-fac-shot { aspect-ratio: 4 / 3; overflow: hidden; }
+.dc-fac-body { padding: 12px 14px 14px; }
+.dc-fac-name { font-family: var(--d-font-head); font-size: 15px; font-weight: 700; color: var(--d-ink); }
+.dc-fac-note { font-size: 12.5px; line-height: 1.45; color: var(--d-muted); margin-top: 4px; }
+@media (min-width: 768px) {
+  .dc-fac { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); overflow: visible; gap: 14px; }
+}
+@media (min-width: 1100px) {
+  .dc-fac { grid-template-columns: repeat(5, 1fr); }
+}
+
 /* --- 10. admit ---------------------------------------------------- */
 .dc-admit { background: linear-gradient(140deg, #12295E 0%, var(--d-navy) 55%, var(--d-blue) 100%); padding: clamp(44px, 7vw, 84px) 0; }
 .dc-admit-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(24px, 4vw, 48px); align-items: center; }

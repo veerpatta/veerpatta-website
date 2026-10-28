@@ -122,6 +122,33 @@
   </div>
 </section>
 
+{% comment %} 4b — FACILITIES: real photos of what is on campus. A swipeable
+   row on phones (CSS scroll-snap, no script), a grid from 768px. {% endcomment %}
+{% if d.facilities %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main">
+        <div class="dc-kicker">{{ t.facKicker }}</div>
+        <h2 class="dc-h2 scroll-fade-up">{{ t.facTitle }}</h2>
+      </div>
+      <p class="dc-head-sub">{{ t.facSub }}</p>
+    </div>
+    <ul class="dc-fac" tabindex="0" aria-label="{{ t.facKicker }}">
+      {% for f in d.facilities %}
+      <li class="dc-fac-card">
+        <div class="dc-fac-shot">{% include design/photo.html key=f.photo sizes="(min-width: 1100px) 220px, (min-width: 768px) 31vw, 72vw" %}</div>
+        <div class="dc-fac-body">
+          <div class="dc-fac-name">{{ f.name }}</div>
+          <div class="dc-fac-note">{{ f.note }}</div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
 {% comment %} 5 — JOURNEY {% endcomment %}
 <section class="dc-band">
   <div class="dc-wrap">
