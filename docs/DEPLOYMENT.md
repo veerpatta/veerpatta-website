@@ -164,6 +164,17 @@ git push origin main
 
 ## Troubleshooting
 
+### The live site is one push behind `main`
+Cloudflare Workers Builds, like GitHub Actions, skips any commit whose
+message contains `[skip ci]`. The GitHub Actions job commits the rebuilt
+`_site/` as its own commit, and that commit is the only one carrying the
+fresh build, so it must not carry the tag. Until 28 Oct 2026 it did, and
+each merge went live with the previous merge's `_site/`. A push made with
+`GITHUB_TOKEN` never starts another workflow run, so no loop follows.
+
+Avoid writing the tag anywhere in a commit message on this repo, even
+when quoting it, or that commit is neither checked nor deployed.
+
 ### Every path returns "Hello world"
 The Worker is still the default scaffold — the repository was never connected,
 or the deploy command never ran. Check Settings → Build in the dashboard.
