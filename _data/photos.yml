@@ -297,6 +297,27 @@ items:
     alt:
       en: "Open-air stage for assemblies and events"
       hi: "सभा और कार्यक्रमों के लिए खुला मंच"
+  video-sports-day:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 675
+    alt:
+      en: "Sports Day 2026: students sprint to the finish line"
+      hi: "खेल दिवस 2026: फ़िनिश लाइन की ओर दौड़ते विद्यार्थी"
+  video-house-dance:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 675
+    alt:
+      en: "Inter-house dance competition 2025 on the school lawn"
+      hi: "विद्यालय के लॉन पर अंतर-सदनीय नृत्य प्रतियोगिता 2025"
+  video-cultural-stage:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 675
+    alt:
+      en: "Independence Day programme: a stage dance"
+      hi: "स्वतंत्रता दिवस कार्यक्रम: मंच पर नृत्य"
 
 slots:
   hero: campus-lawn
