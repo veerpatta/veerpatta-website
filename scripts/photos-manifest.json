@@ -2,164 +2,458 @@
   "_comment": "Source of truth for site photos. Run: python scripts/optimize_photos.py <folder of originals named <id>.jpg>. Originals came from the school Drive (VPPS School Marketing, 13_AI_Visual_Library real-photo folders) and Google Photos (Sports Day 2026, Inter House Dance 2025, Veer Patta Cultural 2026). No photos from RESTRICTED or AI-generated folders.",
   "items": {
     "campus-lawn": {
-      "widths": [480, 800, 1200, 1600],
+      "widths": [
+        480,
+        800,
+        1200,
+        1600
+      ],
       "pos": "center 40%",
       "gallery": "campus",
-      "alt": {"en": "Students playing on the green lawn in front of the school building", "hi": "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"}
+      "alt": {
+        "en": "Students playing on the green lawn in front of the school building",
+        "hi": "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"
+      },
+      "quality": 66,
+      "_quality_note": "Grass and leaves cost bytes; 66 keeps the 800px file near 100 KB."
     },
     "campus-lawn-tall": {
       "src": "campus-lawn.jpg",
-      "crop": [0.16, 0, 0.72, 1],
-      "_quality_note": "Only shown under the dark hero overlay on phones, so it can be compressed harder.",
-      "quality": 55,
-      "widths": [480, 800],
-      "alt": {"en": "Students playing on the green lawn in front of the school building", "hi": "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"}
+      "crop": [
+        0.16,
+        0,
+        0.72,
+        1
+      ],
+      "_quality_note": "Only shown under the dark hero overlay on phones, so it is compressed harder and not sharpened.",
+      "quality": 50,
+      "widths": [
+        480,
+        800
+      ],
+      "alt": {
+        "en": "Students playing on the green lawn in front of the school building",
+        "hi": "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"
+      },
+      "sharpen": false
     },
     "campus-front": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "campus",
-      "alt": {"en": "Main entrance of the school with palm trees and the front staircase", "hi": "विद्यालय का मुख्य प्रवेश द्वार, ताड़ के पेड़ और सामने की सीढ़ियाँ"}
+      "alt": {
+        "en": "Main entrance of the school with palm trees and the front staircase",
+        "hi": "विद्यालय का मुख्य प्रवेश द्वार, ताड़ के पेड़ और सामने की सीढ़ियाँ"
+      },
+      "crop": [
+        0,
+        0,
+        1,
+        0.84
+      ]
     },
     "campus-evening": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "campus",
-      "alt": {"en": "The two-storey school building in the evening light", "hi": "शाम की रोशनी में विद्यालय का दो-मंज़िला भवन"}
+      "alt": {
+        "en": "The two-storey school building in the evening light",
+        "hi": "शाम की रोशनी में विद्यालय का दो-मंज़िला भवन"
+      }
     },
     "assembly-courtyard": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "campus",
-      "alt": {"en": "Assembly courtyard under its new blue canopy", "hi": "नई नीली छत वाला प्रार्थना-सभा प्रांगण"}
+      "alt": {
+        "en": "Assembly courtyard under its new blue canopy",
+        "hi": "नई नीली छत वाला प्रार्थना-सभा प्रांगण"
+      }
     },
     "school-hall": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "campus",
-      "alt": {"en": "The school hall with its patterned stone floor", "hi": "नक्काशीदार पत्थर के फ़र्श वाला विद्यालय हॉल"}
+      "alt": {
+        "en": "The school hall with its patterned stone floor",
+        "hi": "नक्काशीदार पत्थर के फ़र्श वाला विद्यालय हॉल"
+      }
     },
     "basketball-court": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "sports",
-      "alt": {"en": "Basketball court on the school campus", "hi": "विद्यालय परिसर में बास्केटबॉल कोर्ट"}
+      "alt": {
+        "en": "Basketball court on the school campus",
+        "hi": "विद्यालय परिसर में बास्केटबॉल कोर्ट"
+      }
     },
     "activity-room": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "academic",
-      "alt": {"en": "Activity room with low round tables for young learners", "hi": "छोटे बच्चों के लिए गोल मेज़ों वाला गतिविधि कक्ष"}
+      "alt": {
+        "en": "Activity room with low round tables for young learners",
+        "hi": "छोटे बच्चों के लिए गोल मेज़ों वाला गतिविधि कक्ष"
+      }
     },
     "classroom": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "academic",
-      "alt": {"en": "A bright classroom with desks and display boards", "hi": "डेस्क और सूचना-पट्ट वाली रोशन कक्षा"}
+      "alt": {
+        "en": "A bright classroom with desks and display boards",
+        "hi": "डेस्क और सूचना-पट्ट वाली रोशन कक्षा"
+      }
     },
     "classroom-benches": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "academic",
-      "alt": {"en": "Classroom with rows of benches facing the board", "hi": "बोर्ड की ओर लगी बेंचों की कतारों वाली कक्षा"}
+      "alt": {
+        "en": "Classroom with rows of benches facing the board",
+        "hi": "बोर्ड की ओर लगी बेंचों की कतारों वाली कक्षा"
+      }
     },
     "science-lab": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "pos": "center 60%",
       "gallery": "academic",
-      "alt": {"en": "Science laboratory with workbenches and apparatus", "hi": "वर्कबेंच और उपकरणों से सुसज्जित विज्ञान प्रयोगशाला"}
+      "alt": {
+        "en": "Science laboratory with workbenches and apparatus",
+        "hi": "वर्कबेंच और उपकरणों से सुसज्जित विज्ञान प्रयोगशाला"
+      }
     },
     "computer-lab": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "academic",
-      "alt": {"en": "Computer lab workstations", "hi": "कंप्यूटर लैब के वर्कस्टेशन"}
+      "alt": {
+        "en": "Computer lab workstations",
+        "hi": "कंप्यूटर लैब के वर्कस्टेशन"
+      }
     },
     "staff-team": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "academic",
-      "alt": {"en": "Our teaching staff", "hi": "हमारा शिक्षक दल"}
+      "alt": {
+        "en": "Our teaching staff",
+        "hi": "हमारा शिक्षक दल"
+      }
     },
     "robotics-training": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "academic",
-      "alt": {"en": "Teachers training with robotics kits", "hi": "रोबोटिक्स किट के साथ प्रशिक्षण लेते शिक्षक"}
+      "alt": {
+        "en": "Teachers training with robotics kits",
+        "hi": "रोबोटिक्स किट के साथ प्रशिक्षण लेते शिक्षक"
+      }
     },
     "learning-exhibition": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "academic",
-      "alt": {"en": "Students explaining their models at the learning exhibition", "hi": "शिक्षण प्रदर्शनी में अपने मॉडल समझाते विद्यार्थी"}
+      "alt": {
+        "en": "Students explaining their models at the learning exhibition",
+        "hi": "शिक्षण प्रदर्शनी में अपने मॉडल समझाते विद्यार्थी"
+      }
     },
     "function-stage": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "cultural",
-      "alt": {"en": "Dance performance on stage at the cultural programme", "hi": "सांस्कृतिक कार्यक्रम में मंच पर नृत्य प्रस्तुति"}
+      "alt": {
+        "en": "Dance performance on stage at the cultural programme",
+        "hi": "सांस्कृतिक कार्यक्रम में मंच पर नृत्य प्रस्तुति"
+      }
     },
     "dance-lawn": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "cultural",
-      "alt": {"en": "Inter-house dance competition on the school lawn", "hi": "विद्यालय के लॉन पर अंतर-सदनीय नृत्य प्रतियोगिता"}
+      "alt": {
+        "en": "Inter-house dance competition on the school lawn",
+        "hi": "विद्यालय के लॉन पर अंतर-सदनीय नृत्य प्रतियोगिता"
+      }
     },
     "dance-group": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "cultural",
-      "alt": {"en": "Dancers in traditional dress at the inter-house competition", "hi": "अंतर-सदनीय प्रतियोगिता में पारंपरिक वेशभूषा में नर्तक"}
+      "alt": {
+        "en": "Dancers in traditional dress at the inter-house competition",
+        "hi": "अंतर-सदनीय प्रतियोगिता में पारंपरिक वेशभूषा में नर्तक"
+      },
+      "quality": 66,
+      "_quality_note": "Grass and leaves cost bytes; 66 keeps the 800px file near 100 KB."
     },
     "dance-line": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "cultural",
-      "alt": {"en": "A house team performs a folk dance", "hi": "लोक नृत्य प्रस्तुत करती एक सदन टीम"}
+      "alt": {
+        "en": "A house team performs a folk dance",
+        "hi": "लोक नृत्य प्रस्तुत करती एक सदन टीम"
+      },
+      "quality": 66,
+      "_quality_note": "Grass and leaves cost bytes; 66 keeps the 800px file near 100 KB."
     },
     "sports-finish": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "sports",
-      "alt": {"en": "A runner breaks the finish tape on Sports Day", "hi": "खेल दिवस पर फ़िनिश टेप तोड़ता धावक"}
+      "alt": {
+        "en": "A runner breaks the finish tape on Sports Day",
+        "hi": "खेल दिवस पर फ़िनिश टेप तोड़ता धावक"
+      }
     },
     "sports-drill": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "sports",
-      "alt": {"en": "Students in house colours give the PT display on Sports Day", "hi": "खेल दिवस पर सदन रंगों में पीटी प्रदर्शन करते विद्यार्थी"}
+      "alt": {
+        "en": "Students in house colours give the PT display on Sports Day",
+        "hi": "खेल दिवस पर सदन रंगों में पीटी प्रदर्शन करते विद्यार्थी"
+      }
     },
     "sports-sprint": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "sports",
-      "alt": {"en": "Girls' sprint on the school ground", "hi": "विद्यालय मैदान पर छात्राओं की दौड़"}
+      "alt": {
+        "en": "Girls' sprint on the school ground",
+        "hi": "विद्यालय मैदान पर छात्राओं की दौड़"
+      }
     },
     "sports-oath": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "sports",
-      "alt": {"en": "House captains take the sports oath", "hi": "खेल शपथ लेते सदन कप्तान"}
+      "alt": {
+        "en": "House captains take the sports oath",
+        "hi": "खेल शपथ लेते सदन कप्तान"
+      }
     },
     "sports-start": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "sports",
-      "alt": {"en": "Sprinters at the start line, school building behind", "hi": "प्रारंभ रेखा पर धावक, पीछे विद्यालय भवन"}
+      "alt": {
+        "en": "Sprinters at the start line, school building behind",
+        "hi": "प्रारंभ रेखा पर धावक, पीछे विद्यालय भवन"
+      }
     },
     "sack-race": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "sports",
-      "alt": {"en": "Sack race nearing the finish line", "hi": "फ़िनिश लाइन की ओर बढ़ती बोरा दौड़"}
+      "alt": {
+        "en": "Sack race nearing the finish line",
+        "hi": "फ़िनिश लाइन की ओर बढ़ती बोरा दौड़"
+      }
     },
     "three-legged-race": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "sports",
-      "alt": {"en": "Junior three-legged race", "hi": "जूनियर तीन-टांग दौड़"}
+      "alt": {
+        "en": "Junior three-legged race",
+        "hi": "जूनियर तीन-टांग दौड़"
+      }
     },
     "musical-chairs": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "sports",
-      "alt": {"en": "Musical chairs on Sports Day", "hi": "खेल दिवस पर म्यूज़िकल चेयर"}
+      "alt": {
+        "en": "Musical chairs on Sports Day",
+        "hi": "खेल दिवस पर म्यूज़िकल चेयर"
+      }
     },
     "ncc-cadets": {
-      "widths": [480, 800, 1200],
+      "widths": [
+        480,
+        800,
+        1200
+      ],
       "gallery": "ncc",
-      "alt": {"en": "NCC cadets of the school unit on Sports Day", "hi": "खेल दिवस पर विद्यालय इकाई के एनसीसी कैडेट"}
+      "alt": {
+        "en": "NCC cadets of the school unit on Sports Day",
+        "hi": "खेल दिवस पर विद्यालय इकाई के एनसीसी कैडेट"
+      }
     },
     "ncc-podium": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "ncc",
-      "alt": {"en": "NCC cadets with junior medal winners and guests", "hi": "जूनियर पदक विजेताओं और अतिथियों के साथ एनसीसी कैडेट"}
+      "alt": {
+        "en": "NCC cadets with junior medal winners and guests",
+        "hi": "जूनियर पदक विजेताओं और अतिथियों के साथ एनसीसी कैडेट"
+      }
     },
     "prize-podium": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "celebrations",
-      "alt": {"en": "Medal winners on the podium with guests", "hi": "अतिथियों के साथ पोडियम पर पदक विजेता"}
+      "alt": {
+        "en": "Medal winners on the podium with guests",
+        "hi": "अतिथियों के साथ पोडियम पर पदक विजेता"
+      }
     },
     "prize-certificate": {
-      "widths": [480, 800],
+      "widths": [
+        480,
+        800
+      ],
       "gallery": "celebrations",
-      "alt": {"en": "A student receives a certificate at the dais", "hi": "मंच पर प्रमाण-पत्र प्राप्त करता विद्यार्थी"}
+      "alt": {
+        "en": "A student receives a certificate at the dais",
+        "hi": "मंच पर प्रमाण-पत्र प्राप्त करता विद्यार्थी"
+      }
+    },
+    "computer-lab-wide": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "academic",
+      "alt": {
+        "en": "Computer lab with a workstation for every student",
+        "hi": "हर विद्यार्थी के लिए वर्कस्टेशन वाली कंप्यूटर लैब"
+      }
+    },
+    "cricket-nets": {
+      "widths": [
+        480,
+        800
+      ],
+      "gallery": "sports",
+      "crop": [
+        0,
+        0.1,
+        1,
+        1
+      ],
+      "alt": {
+        "en": "Cricket practice nets beside the school building",
+        "hi": "विद्यालय भवन के पास क्रिकेट अभ्यास नेट"
+      }
+    },
+    "volleyball-court": {
+      "widths": [
+        480,
+        800
+      ],
+      "gallery": "sports",
+      "crop": [
+        0,
+        0.14,
+        1,
+        1
+      ],
+      "alt": {
+        "en": "Volleyball court in front of the senior block",
+        "hi": "सीनियर ब्लॉक के सामने वॉलीबॉल कोर्ट"
+      }
+    },
+    "football-lawn": {
+      "widths": [
+        480,
+        800
+      ],
+      "gallery": "sports",
+      "alt": {
+        "en": "Football goal on the green lawn",
+        "hi": "हरे लॉन पर फ़ुटबॉल गोल"
+      },
+      "quality": 66,
+      "_quality_note": "Grass and leaves cost bytes; 66 keeps the 800px file near 100 KB."
+    },
+    "open-air-stage": {
+      "widths": [
+        480,
+        800
+      ],
+      "gallery": "campus",
+      "crop": [
+        0,
+        0.12,
+        1,
+        1
+      ],
+      "alt": {
+        "en": "Open-air stage for assemblies and events",
+        "hi": "सभा और कार्यक्रमों के लिए खुला मंच"
+      }
     }
   },
   "slots": {
@@ -167,16 +461,71 @@
     "hero_tall": "campus-lawn-tall",
     "digital": "computer-lab",
     "life": "sports-drill",
-    "stages": ["activity-room", "classroom", "science-lab", "classroom-benches", "campus-front"],
-    "tiles": ["assembly-courtyard", "learning-exhibition", "ncc-cadets", "dance-lawn"],
-    "albums": ["assembly-courtyard", "classroom", "science-lab", "ncc-cadets", "sports-finish", "function-stage", null, null],
-    "beyond": ["ncc-cadets", "sports-sprint", "dance-lawn", "learning-exhibition"]
+    "stages": [
+      "activity-room",
+      "classroom",
+      "science-lab",
+      "classroom-benches",
+      "campus-front"
+    ],
+    "tiles": [
+      "assembly-courtyard",
+      "learning-exhibition",
+      "ncc-cadets",
+      "dance-lawn"
+    ],
+    "albums": [
+      "assembly-courtyard",
+      "classroom",
+      "science-lab",
+      "ncc-cadets",
+      "sports-finish",
+      "function-stage",
+      null,
+      null
+    ],
+    "beyond": [
+      "ncc-cadets",
+      "sports-sprint",
+      "dance-lawn",
+      "learning-exhibition"
+    ]
   },
   "gallery_order": [
-    "sports-finish", "campus-lawn", "function-stage", "ncc-cadets", "computer-lab", "dance-lawn",
-    "sports-drill", "campus-front", "learning-exhibition", "prize-podium", "science-lab", "sports-sprint",
-    "dance-group", "assembly-courtyard", "staff-team", "sports-oath", "classroom", "ncc-podium",
-    "robotics-training", "sports-start", "dance-line", "campus-evening", "prize-certificate", "activity-room",
-    "sack-race", "school-hall", "three-legged-race", "classroom-benches", "musical-chairs", "basketball-court"
+    "sports-finish",
+    "campus-lawn",
+    "function-stage",
+    "ncc-cadets",
+    "computer-lab",
+    "dance-lawn",
+    "sports-drill",
+    "campus-front",
+    "learning-exhibition",
+    "prize-podium",
+    "science-lab",
+    "sports-sprint",
+    "dance-group",
+    "assembly-courtyard",
+    "staff-team",
+    "sports-oath",
+    "classroom",
+    "ncc-podium",
+    "robotics-training",
+    "sports-start",
+    "dance-line",
+    "campus-evening",
+    "prize-certificate",
+    "activity-room",
+    "sack-race",
+    "school-hall",
+    "three-legged-race",
+    "classroom-benches",
+    "musical-chairs",
+    "basketball-court",
+    "computer-lab-wide",
+    "cricket-nets",
+    "volleyball-court",
+    "football-lawn",
+    "open-air-stage"
   ]
 }

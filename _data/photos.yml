@@ -27,7 +27,7 @@ items:
   campus-front:
     widths: [480, 800, 1200]
     w: 1200
-    h: 900
+    h: 756
     gallery: campus
     alt:
       en: "Main entrance of the school with palm trees and the front staircase"
@@ -257,6 +257,46 @@ items:
     alt:
       en: "A student receives a certificate at the dais"
       hi: "मंच पर प्रमाण-पत्र प्राप्त करता विद्यार्थी"
+  computer-lab-wide:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 904
+    gallery: academic
+    alt:
+      en: "Computer lab with a workstation for every student"
+      hi: "हर विद्यार्थी के लिए वर्कस्टेशन वाली कंप्यूटर लैब"
+  cricket-nets:
+    widths: [480, 800]
+    w: 800
+    h: 542
+    gallery: sports
+    alt:
+      en: "Cricket practice nets beside the school building"
+      hi: "विद्यालय भवन के पास क्रिकेट अभ्यास नेट"
+  volleyball-court:
+    widths: [480, 800]
+    w: 800
+    h: 516
+    gallery: sports
+    alt:
+      en: "Volleyball court in front of the senior block"
+      hi: "सीनियर ब्लॉक के सामने वॉलीबॉल कोर्ट"
+  football-lawn:
+    widths: [480, 800]
+    w: 800
+    h: 600
+    gallery: sports
+    alt:
+      en: "Football goal on the green lawn"
+      hi: "हरे लॉन पर फ़ुटबॉल गोल"
+  open-air-stage:
+    widths: [480, 800]
+    w: 800
+    h: 528
+    gallery: campus
+    alt:
+      en: "Open-air stage for assemblies and events"
+      hi: "सभा और कार्यक्रमों के लिए खुला मंच"
 
 slots:
   hero: campus-lawn
@@ -268,4 +308,4 @@ slots:
   albums: [assembly-courtyard, classroom, science-lab, ncc-cadets, sports-finish, function-stage, null, null]
   beyond: [ncc-cadets, sports-sprint, dance-lawn, learning-exhibition]
 
-gallery_order: [sports-finish, campus-lawn, function-stage, ncc-cadets, computer-lab, dance-lawn, sports-drill, campus-front, learning-exhibition, prize-podium, science-lab, sports-sprint, dance-group, assembly-courtyard, staff-team, sports-oath, classroom, ncc-podium, robotics-training, sports-start, dance-line, campus-evening, prize-certificate, activity-room, sack-race, school-hall, three-legged-race, classroom-benches, musical-chairs, basketball-court]
+gallery_order: [sports-finish, campus-lawn, function-stage, ncc-cadets, computer-lab, dance-lawn, sports-drill, campus-front, learning-exhibition, prize-podium, science-lab, sports-sprint, dance-group, assembly-courtyard, staff-team, sports-oath, classroom, ncc-podium, robotics-training, sports-start, dance-line, campus-evening, prize-certificate, activity-room, sack-race, school-hall, three-legged-race, classroom-benches, musical-chairs, basketball-court, computer-lab-wide, cricket-nets, volleyball-court, football-lawn, open-air-stage]
