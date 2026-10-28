@@ -17,7 +17,7 @@
 {% comment %} 1 — HERO {% endcomment %}
 {% assign ps = site.data.photos.slots %}
 <section class="dc-hero{% if ps.hero %} dc-hero--photo{% endif %}">
-  <div class="dc-hero-drift"><div class="dc-hero-wash"></div>{% include design/photo.html key=ps.hero_tall wide=ps.hero class="dc-hero-photo" eager=true %}</div>
+  <div class="dc-hero-drift"{% if site.data.videos.slots.hero %} data-hero-video="{{ '/assets/media/videos/' | append: site.data.videos.slots.hero | append: '-720.mp4' | relative_url }}"{% endif %}><div class="dc-hero-wash"></div>{% include design/photo.html key=ps.hero_tall wide=ps.hero class="dc-hero-photo" eager=true %}</div>
   <div class="dc-hero-scrim"></div>
   <div class="dc-hero-scrim-b"></div>
 
@@ -318,7 +318,13 @@
       </a>
     </div>
     <div class="dc-mosaic">
-      {% if ps.life %}
+      {% assign vlife = site.data.videos.slots.life %}
+      {% if vlife and site.data.videos.clips[vlife] %}
+      <div class="dc-mosaic-hero has-photo">
+        {% include design/video.html key=vlife play=t.playVideo sizes="(min-width: 700px) 50vw, 92vw" %}
+        <span class="dc-photo-cap">{{ site.data.videos.clips[vlife].caption[lang] }}</span>
+      </div>
+      {% elsif ps.life %}
       <div class="dc-mosaic-hero has-photo">
         {% include design/photo.html key=ps.life sizes="(min-width: 700px) 50vw, 92vw" %}
         <span class="dc-photo-cap">{{ site.data.photos.items[ps.life].alt[lang] }}</span>

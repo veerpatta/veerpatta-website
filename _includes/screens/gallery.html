@@ -5,6 +5,25 @@
 
 {% include design/page-head.html kicker=t.gKicker title=t.gTitle sub=t.gSub %}
 
+{% if site.data.videos.slots.gallery %}
+<section class="dc-band dc-band-tint">
+  <div class="dc-wrap">
+    <div class="dc-head-stack">
+      <h2 class="dc-h2 scroll-fade-up">{{ t.gVideosTitle }}</h2>
+      <p class="dc-lead">{{ t.gVideosSub }}</p>
+    </div>
+    <div class="dc-videos">
+      {% for vk in site.data.videos.slots.gallery %}
+      <figure class="dc-video-fig">
+        {% include design/video.html key=vk play=t.playVideo sizes="(min-width: 1100px) 370px, (min-width: 768px) 31vw, 92vw" %}
+        <figcaption>{{ site.data.videos.clips[vk].caption[lang] }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <section class="dc-band">
   <div class="dc-wrap">
     <div class="dc-grid dc-grid-290">
