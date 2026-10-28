@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Facilities, videos and a photo clean-up pass (2026-10-28)**:
+  - Home has a **Facilities** band after the stats: ten real photos (classrooms, computer lab, science lab, activity room, basketball, cricket nets, volleyball, football lawn, assembly courtyard, open-air stage) with one-line EN/HI notes that only say what the photo shows. A swipeable row on phones, a grid from 768px
+  - **Videos**: short clips from Sports Day 2026 and the cultural programmes, trimmed and re-encoded to 720p H.264 (about 2-3.5 MB each) with metadata stripped. They are tap-to-play cards: a page loads only the poster photo until someone taps, and shows each clip's length and size. Used in the home life mosaic and a new Videos band on the gallery
+  - The home hero plays a silent background loop on desktops with a decent connection; phones, Data Saver and reduced-motion users keep the still photo
+  - `optimize_photos.py` now gives every photo a gentle, global clean-up (levels without colour shift, a touch more vibrance, sharpening after resize) with per-photo `quality`/`enhance`/`sharpen`; the entrance photo loses its bare-earth foreground. 800px photos average 67 KB
+  - Five more facility photos in the gallery; service worker cache bumped to `vpps-v10`
 - **Real school photos in every design placeholder (2026-10-28)**:
   - 30 photos chosen from the school's Google Drive (campus shoot, Sports Day 2026, Learning Exhibition, robotics training, staff portrait) and Google Photos (Sports Day 2026, Inter House Dance 2025, Cultural 2026). Nothing from the RESTRICTED student-portrait folders or the AI-generated folders
   - Home: hero photo behind the copy (a portrait crop on phones, the wide shot from 768px), the five stage cards, the digital panel and the life mosaic. Also the Gallery albums, Beyond cards, Digital panel and the Notices photo highlights
