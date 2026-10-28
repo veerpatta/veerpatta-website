@@ -303,13 +303,13 @@ feesFull:
   item: Transport (optional)
   note: Based on distance from campus
 galleryTiles:
-- label: Morning assembly, whole school in line
+- label: Assembly courtyard under the new canopy
   ratio: Photo 4:3
-- label: Science lab experiment in progress
+- label: Learning exhibition, students explaining their models
   ratio: Photo 4:3
-- label: NCC parade, march past
+- label: NCC cadets on Sports Day
   ratio: Photo 4:3
-- label: Bus fleet at the morning drop-off
+- label: Inter-house dance competition
   ratio: Photo 4:3
 journey:
 - body: Founded by visionary educators with just 50 students, bringing quality English-medium education

@@ -1,5 +1,24 @@
 # 📸 Media Upload Guide - Shri Veer Patta Senior Secondary School Website
 
+## Photos in the page design (home, gallery, beyond, digital)
+
+The photos in the page layouts are not uploaded by hand. They live in
+`assets/media/photos/` as WebP files in several sizes, and
+`_data/photos.yml` says which photo goes in which place, with its English
+and Hindi description. To add or swap one:
+
+1. Put the original photo in a folder on your computer, named `<id>.jpg`
+2. Add or edit its entry in `scripts/photos-manifest.json` (sizes, gallery
+   category, alt text in both languages, and the `slots` it fills)
+3. Run `python scripts/optimize_photos.py <that folder>` (needs `pip install pillow`)
+4. Commit `assets/media/photos/`, `_data/photos.yml` and the manifest
+
+The script strips EXIF (no GPS location) and keeps each phone-sized file
+under about 50 KB. Do not use photos from the Drive folders marked
+RESTRICTED, or AI-generated images, as real school photos.
+
+The upload flow below still works for extra gallery photos and videos.
+
 ## Quick Start (5 Minutes)
 
 ### Step 1: Navigate to the Right Folder

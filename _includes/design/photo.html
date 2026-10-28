@@ -1,0 +1,31 @@
+{% comment %}
+  One real photo from _data/photos.yml, served as responsive WebP.
+
+    key    photo id (required). Renders nothing if the id is unknown, so a
+           caller can keep its placeholder as the fallback.
+    wide   optional photo id used from 768px up; `key` is then the
+           mobile crop (mobile-first art direction for the hero)
+    sizes  the img sizes attribute; defaults to 100vw
+    eager  true only for the photo at the top of the page
+
+  Below-the-fold photos load lazily. width/height carry the aspect ratio so
+  the layout does not shift while a photo arrives on a slow connection.
+{% endcomment %}
+{%- assign p = site.data.photos.items[include.key] -%}
+{%- if p -%}
+{%- assign seg = page.url | split: '/' -%}
+{%- if seg[1] == 'hi' -%}{%- assign plang = 'hi' -%}{%- else -%}{%- assign plang = 'en' -%}{%- endif -%}
+{%- assign psizes = include.sizes | default: '100vw' -%}
+{%- capture psrcset -%}{%- for w in p.widths -%}{{ '/assets/media/photos/' | append: include.key | append: '-' | append: w | append: '.webp' | relative_url }} {{ w }}w{%- unless forloop.last -%}, {% endunless -%}{%- endfor -%}{%- endcapture -%}
+{%- assign pmid = p.widths[1] | default: p.widths[0] -%}
+<picture class="dc-photo{% if include.class %} {{ include.class }}{% endif %}">
+  {%- if include.wide -%}
+  {%- assign pw = site.data.photos.items[include.wide] -%}
+  {%- if pw -%}
+  {%- capture pwset -%}{%- for w in pw.widths -%}{{ '/assets/media/photos/' | append: include.wide | append: '-' | append: w | append: '.webp' | relative_url }} {{ w }}w{%- unless forloop.last -%}, {% endunless -%}{%- endfor -%}{%- endcapture -%}
+  <source media="(min-width: 768px)" type="image/webp" srcset="{{ pwset }}" sizes="{{ psizes }}" width="{{ pw.w }}" height="{{ pw.h }}">
+  {%- endif -%}
+  {%- endif %}
+  <img src="{{ '/assets/media/photos/' | append: include.key | append: '-' | append: pmid | append: '.webp' | relative_url }}" srcset="{{ psrcset }}" sizes="{{ psizes }}" width="{{ p.w }}" height="{{ p.h }}" alt="{{ p.alt[plang] | escape }}"{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async"{% if p.pos %} style="object-position: {{ p.pos }};"{% endif %}>
+</picture>
+{%- endif -%}

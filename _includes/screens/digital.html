@@ -22,10 +22,14 @@
     </div>
 
     <div class="dc-digital-panel">
+      {% if site.data.photos.slots.digital %}
+      <div class="dc-slot-wide has-photo">{% include design/photo.html key=site.data.photos.slots.digital sizes="(min-width: 900px) 560px, 92vw" %}</div>
+      {% else %}
       <div class="dc-slot dc-slot-wide">
         <div class="dc-slot-kicker">Photo 16:10</div>
         <div class="dc-slot-title">Students at Chromebooks in the smart classroom, teacher at the panel board</div>
       </div>
+      {% endif %}
     </div>
   </div>
 </section>

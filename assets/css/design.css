@@ -1536,6 +1536,42 @@ section.container.contact-teaser {
 .dc-mosaic-hero .dc-slot-title { color: var(--d-navy); font-size: 18px; max-width: 300px; }
 .dc-tile-note { font-family: var(--d-font-head); font-size: 13.5px; font-weight: 600; color: var(--d-navy); line-height: 1.4; }
 
+/* --- real photos in the design's slots ------------------------------
+   _includes/design/photo.html puts a <picture> in a slot, and the slot gets
+   .has-photo, which drops the dashed placeholder chrome. The img rule
+   outranks animations.css, which hides img[loading=lazy] until a script
+   marks it .loaded: these photos must show even if that script never runs. */
+.dc-photo { display: block; width: 100%; height: 100%; }
+.dc-photo img,
+.dc-photo img[loading] {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; opacity: 1;
+  background: var(--d-surface);
+}
+.dc-hero-photo { position: absolute; inset: 0; }
+.dc-hero-photo img[loading] { background: transparent; }
+/* On phones the hero copy spans the full width, so the photo sits under an
+   even scrim; from 768px the design's left-to-right scrim takes over. */
+.dc-hero--photo .dc-hero-scrim { background: linear-gradient(180deg, rgba(11,22,49,0.72) 0%, rgba(11,22,49,0.84) 100%); }
+@media (min-width: 768px) {
+  .dc-hero--photo .dc-hero-scrim { background: linear-gradient(90deg, rgba(11,22,49,0.93) 0%, rgba(11,22,49,0.78) 42%, rgba(11,22,49,0.24) 100%); }
+}
+.dc-stage-shot.has-photo,
+.dc-album-shot.has-photo { display: block; min-height: 0; padding: 0; border-bottom: 0; aspect-ratio: 4 / 3; overflow: hidden; }
+.dc-slot-wide.has-photo { display: block; min-height: 0; padding: 0; border-bottom: 0; aspect-ratio: 16 / 10; overflow: hidden; }
+.dc-tile.has-photo,
+.dc-mosaic-hero.has-photo { position: relative; display: block; padding: 0; border: 0; overflow: hidden; aspect-ratio: 4 / 3; }
+/* The mosaic sets its own row height. */
+.dc-mosaic .dc-tile.has-photo,
+.dc-mosaic .dc-mosaic-hero.has-photo { aspect-ratio: auto; }
+.dc-photo-cap {
+  position: absolute; left: 10px; bottom: 10px; max-width: calc(100% - 20px);
+  padding: 6px 10px; border-radius: 8px;
+  background: rgba(11,22,49,0.8); color: var(--d-white);
+  font-size: 12.5px; font-weight: 600; line-height: 1.35;
+}
+.dc-gallery-item .dc-photo { height: auto; aspect-ratio: 4 / 3; overflow: hidden; }
+
 /* --- 10. admit ---------------------------------------------------- */
 .dc-admit { background: linear-gradient(140deg, #12295E 0%, var(--d-navy) 55%, var(--d-blue) 100%); padding: clamp(44px, 7vw, 84px) 0; }
 .dc-admit-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(24px, 4vw, 48px); align-items: center; }

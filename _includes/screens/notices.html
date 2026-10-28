@@ -82,10 +82,18 @@
     </div>
     <div class="dc-grid dc-grid-290 dc-mt-44">
       {% for g in d.galleryTiles %}
+      {% assign pk = site.data.photos.slots.tiles[forloop.index0] %}
+      {% if pk %}
+      <div class="dc-tile has-photo scroll-fade-up">
+        {% include design/photo.html key=pk sizes="(min-width: 1100px) 370px, (min-width: 640px) 46vw, 92vw" %}
+        <span class="dc-photo-cap">{{ g.label }}</span>
+      </div>
+      {% else %}
       <div class="dc-tile dc-slot scroll-fade-up">
         <div class="dc-slot-kicker">{{ g.ratio }}</div>
         <div class="dc-tile-note">{{ g.label }}</div>
       </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>

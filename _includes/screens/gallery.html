@@ -10,10 +10,15 @@
     <div class="dc-grid dc-grid-290">
       {% for a in d.albums %}
       <div class="dc-album scroll-fade-up">
+        {% assign pk = site.data.photos.slots.albums[forloop.index0] %}
+        {% if pk %}
+        <div class="dc-album-shot has-photo">{% include design/photo.html key=pk sizes="(min-width: 1100px) 370px, (min-width: 640px) 46vw, 92vw" %}</div>
+        {% else %}
         <div class="dc-album-shot">
           <div class="dc-slot-kicker">Photo</div>
           <div class="dc-stage-shot-note">{{ a.shot }}</div>
         </div>
+        {% endif %}
         <div class="dc-album-body">
           <div class="dc-stage-name">{{ a.name }}</div>
           <div class="dc-album-count">{{ a.count }}</div>
@@ -29,14 +34,32 @@
     {% endcomment %}
     <div class="dc-mt-44">
       <div class="dc-filters" role="group" aria-label="{{ t.gTitle }}">
-        <button type="button" class="pill active" data-filter="all">All</button>
-        <button type="button" class="pill" data-filter="sports">Sports</button>
-        <button type="button" class="pill" data-filter="ncc">NCC</button>
-        <button type="button" class="pill" data-filter="cultural">Cultural</button>
-        <button type="button" class="pill" data-filter="academic">Academic</button>
-        <button type="button" class="pill" data-filter="celebrations">Celebrations</button>
+        {% if lang == 'hi' %}
+          {% assign pill_labels = 'सभी,परिसर,खेल,एनसीसी,सांस्कृतिक,शैक्षणिक,समारोह' | split: ',' %}
+        {% else %}
+          {% assign pill_labels = 'All,Campus,Sports,NCC,Cultural,Academic,Celebrations' | split: ',' %}
+        {% endif %}
+        {% assign pill_keys = 'all,campus,sports,ncc,cultural,academic,celebrations' | split: ',' %}
+        {% for k in pill_keys %}
+        <button type="button" class="pill{% if forloop.first %} active{% endif %}" data-filter="{{ k }}">{{ pill_labels[forloop.index0] }}</button>
+        {% endfor %}
       </div>
-      <div id="gallery-grid" class="dc-grid dc-grid-290 dc-mt-32"></div>
+      {% comment %}
+        The school's photos from _data/photos.yml are rendered here at build
+        time, so they show without JavaScript; gallery-loader.js keeps them
+        and appends any files still registered in gallery-items.js.
+      {% endcomment %}
+      <div id="gallery-grid" class="dc-grid dc-grid-290 dc-mt-32">
+        {% for pk in site.data.photos.gallery_order %}
+        {% assign p = site.data.photos.items[pk] %}
+        {% if p %}
+        <figure class="gallery-item dc-gallery-item" data-category="{{ p.gallery }}">
+          {% include design/photo.html key=pk sizes="(min-width: 1100px) 370px, (min-width: 640px) 46vw, 92vw" %}
+          <figcaption>{{ p.alt[lang] }}</figcaption>
+        </figure>
+        {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
