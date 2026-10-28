@@ -106,12 +106,10 @@ a different one without committing.
 
 ### Environment variables
 
-None, and none can be set. The dashboard states plainly:
-
-> Variables cannot be added to a Worker that only has static assets.
-
-That is a consequence of `wrangler.jsonc` declaring assets with no `main`, and
-it is fine here - nothing in this repo branches on `jekyll.environment`, so
+None. Until 28 Oct 2026 none could be set either - the dashboard said
+"Variables cannot be added to a Worker that only has static assets" - but
+the Worker now has a `main` (`worker.js`, for video byte ranges), so they
+could be. None are needed: nothing in this repo branches on `jekyll.environment`, so
 `JEKYLL_ENV` would have changed nothing anyway. The GitHub Actions build sets
 it for parity with local builds.
 
@@ -120,6 +118,21 @@ fetched `pages-themes/cayman` from the GitHub API on every build and the
 anonymous rate limit is shared across a CI provider's IPs. That theme was
 removed - it rendered nothing, verified by a byte-identical build - so the
 network dependency is gone rather than worked around.
+
+## The one Worker script: video byte ranges
+
+The asset store answers every request with the whole file and ignores the
+`Range` header. Safari on iPhone fetches video in ranges and will not play
+a clip served that way. `worker.js` fixes that, and nothing else:
+`wrangler.jsonc` sets `run_worker_first` to `/assets/media/videos/*`, so
+the script runs only for video files and answers `206 Partial Content`
+(or `416`). Every page, image and stylesheet is still served straight
+from the asset store without invoking it. `worker.js` is in `exclude:`
+in `_config.yml`, so it is never published as a file.
+
+Checked 28 Oct 2026 with `wrangler dev`: `bytes=0-1`, `bytes=100-199`,
+`bytes=3000000-` and `bytes=-500` return 206 with the right bytes;
+`bytes=99999999-` returns 416; pages and the 404 page are unchanged.
 
 ## Files Cloudflare reads from `_site/`
 

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Videos play on iPhone (2026-10-28)**: the static asset store ignores `Range`, and Safari will not play video without `206` responses. `worker.js` now handles byte ranges for `/assets/media/videos/*` only (`run_worker_first`); everything else is still served without running code
+- **Deploys no longer lag one push behind**: the CI bot's rebuilt-`_site` commit carried `[skip ci]`, which Cloudflare Workers Builds also honours, so it never deployed. The tag is gone; see the troubleshooting entry in `docs/DEPLOYMENT.md`
+
 ### Added
 - **Facilities, videos and a photo clean-up pass (2026-10-28)**:
   - Home has a **Facilities** band after the stats: ten real photos (classrooms, computer lab, science lab, activity room, basketball, cricket nets, volleyball, football lawn, assembly courtyard, open-air stage) with one-line EN/HI notes that only say what the photo shows. A swipeable row on phones, a grid from 768px
