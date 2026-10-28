@@ -7,6 +7,10 @@ Reads scripts/photos-manifest.json. Each photo there is looked up as
 <originals_dir>/<id>.jpg (or the "src" filename it names), then:
   - rotated upright from its EXIF orientation,
   - cropped if the entry has a "crop" box (fractions of width/height),
+  - given a gentle, global clean-up: levels stretched without shifting
+    colour, a touch more vibrance, and sharpening after each resize. Nothing
+    in the frame is retouched. "enhance": false skips the clean-up and
+    "sharpen": false the sharpening for one photo,
   - resized to every width in "widths" that the original can supply,
   - encoded at quality 74, or the entry's "quality" if it has one,
   - saved as assets/media/photos/<id>-<width>.webp with no EXIF, so no
@@ -19,12 +23,25 @@ import json
 import os
 import sys
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, "assets", "media", "photos")
 DATA = os.path.join(ROOT, "_data", "photos.yml")
 QUALITY = 74
+
+
+def clean_up(im):
+    # Phone shots of the campus are often hazy under a bright sky. Clip the
+    # darkest and brightest 0.3% and stretch the rest, the same amount on
+    # every channel so whites stay white; then a little more colour.
+    im = ImageOps.autocontrast(im, cutoff=(0.3, 0.3), preserve_tone=True)
+    return ImageEnhance.Color(im).enhance(1.06)
+
+
+# Downscaling softens edges; this restores them without crunching the
+# WhatsApp-compressed originals (threshold skips flat areas and noise).
+SHARPEN = ImageFilter.UnsharpMask(radius=0.8, percent=55, threshold=3)
 
 
 def q(s):
@@ -57,11 +74,16 @@ def main(src_dir):
             x0, y0, x1, y1 = p["crop"]
             W, H = im.size
             im = im.crop((round(x0 * W), round(y0 * H), round(x1 * W), round(y1 * H)))
+        if p.get("enhance", True):
+            im = clean_up(im)
         widths = [w for w in p["widths"] if w <= im.width] or [im.width]
         for w in widths:
             h = round(im.height * w / im.width)
             out = os.path.join(OUT_DIR, f"{pid}-{w}.webp")
-            im.resize((w, h), Image.LANCZOS).save(out, "WEBP", quality=p.get("quality", QUALITY), method=6)
+            small = im.resize((w, h), Image.LANCZOS)
+            if p.get("sharpen", True):
+                small = small.filter(SHARPEN)
+            small.save(out, "WEBP", quality=p.get("quality", QUALITY), method=6)
             total += os.path.getsize(out)
         top = widths[-1]
         lines += [

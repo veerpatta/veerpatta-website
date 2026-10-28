@@ -1,0 +1,24 @@
+{% comment %}
+  A tap-to-play video card from _data/videos.yml.
+
+    key    video id (required); renders nothing if the id is unknown
+    play   the localised "Play video" label for screen readers
+    sizes  sizes attribute for the poster photo
+
+  The card is a plain link to the MP4, so it works without JavaScript.
+  design-ui.js turns a tap into an inline player. Until someone taps, the
+  page loads only the poster photo, never the clip: most visitors are on
+  phone data. Duration and file size are shown so parents can decide.
+{% endcomment %}
+{%- assign v = site.data.videos.clips[include.key] -%}
+{%- if v -%}
+{%- assign seg = page.url | split: '/' -%}
+{%- if seg[1] == 'hi' -%}{%- assign vlang = 'hi' -%}{%- else -%}{%- assign vlang = 'en' -%}{%- endif -%}
+{%- assign vsrc = '/assets/media/videos/' | append: include.key | append: '-720.mp4' | relative_url -%}
+{%- assign vposter = '/assets/media/photos/' | append: v.poster | append: '-800.webp' | relative_url -%}
+<a class="dc-video" href="{{ vsrc }}" data-video-src="{{ vsrc }}" data-video-poster="{{ vposter }}" aria-label="{{ include.play }}: {{ v.caption[vlang] | escape }} ({{ v.duration }})">
+  {% include design/photo.html key=v.poster sizes=include.sizes %}
+  <span class="dc-video-play" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+  <span class="dc-video-meta" aria-hidden="true">{{ v.duration }} · {{ v.size }}</span>
+</a>
+{%- endif -%}

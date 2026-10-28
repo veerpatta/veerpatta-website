@@ -17,6 +17,12 @@ The script strips EXIF (no GPS location) and keeps each phone-sized file
 under about 50 KB. Do not use photos from the Drive folders marked
 RESTRICTED, or AI-generated images, as real school photos.
 
+Videos for the design live in `assets/media/videos/<id>-720.mp4`, listed in
+`_data/videos.yml` with a poster photo (a normal entry in the photo
+manifest), duration, size and EN/HI caption. Keep each clip to 12-20
+seconds, 1280x720 H.264 with `-movflags +faststart`, under about 3.5 MB,
+and strip metadata (`-map_metadata -1`). They play only when tapped.
+
 The upload flow below still works for extra gallery photos and videos.
 
 ## Quick Start (5 Minutes)

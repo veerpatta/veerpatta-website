@@ -71,3 +71,63 @@
     chip.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
   });
 })();
+
+/* --------------------------------------------
+   Tap-to-play videos
+   _includes/design/video.html renders a link to the MP4 with a poster
+   photo. A tap swaps it for a <video> and starts it, so nothing of the
+   clip is downloaded until someone asks for it.
+   -------------------------------------------- */
+(function initVideoCards() {
+  'use strict';
+
+  var cards = document.querySelectorAll('[data-video-src]');
+  if (!cards.length) return;
+
+  Array.prototype.forEach.call(cards, function (card) {
+    card.addEventListener('click', function (e) {
+      e.preventDefault();
+      var video = document.createElement('video');
+      video.className = 'dc-video-player';
+      video.src = card.getAttribute('data-video-src');
+      video.poster = card.getAttribute('data-video-poster') || '';
+      video.controls = true;
+      video.playsInline = true;
+      video.setAttribute('aria-label', card.getAttribute('aria-label') || '');
+      card.parentNode.replaceChild(video, card);
+      var started = video.play();
+      if (started && started.catch) started.catch(function () {});
+      video.focus();
+    });
+  });
+})();
+
+/* --------------------------------------------
+   Hero background video
+   Only for wide screens on a decent connection, and never with
+   reduced motion or Data Saver. Everyone else keeps the still photo,
+   which is what a phone on 3G should get. The clip has no sound.
+   -------------------------------------------- */
+(function initHeroVideo() {
+  'use strict';
+
+  var holder = document.querySelector('[data-hero-video]');
+  if (!holder || !window.matchMedia) return;
+  if (!window.matchMedia('(min-width: 1024px)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var conn = navigator.connection;
+  if (conn && (conn.saveData || /2g|3g/.test(conn.effectiveType || ''))) return;
+
+  var video = document.createElement('video');
+  video.className = 'dc-hero-video';
+  video.muted = true;
+  video.loop = true;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.setAttribute('aria-hidden', 'true');
+  video.addEventListener('playing', function () {
+    video.classList.add('is-playing');
+  });
+  video.src = holder.getAttribute('data-hero-video');
+  holder.appendChild(video);
+})();

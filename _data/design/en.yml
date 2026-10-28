@@ -244,6 +244,37 @@ docs:
 - Last year’s report card or marksheet
 - Two passport-size photographs
 - Address proof, used to assign the bus route
+facilities:
+- name: Classrooms
+  note: Bright, airy rooms with display boards
+  photo: classroom
+- name: Computer lab
+  note: Desktop workstations for computer periods
+  photo: computer-lab-wide
+- name: Science laboratory
+  note: Workbenches, sinks and apparatus for practicals
+  photo: science-lab
+- name: Activity room
+  note: Low round tables for young learners and robotics kits
+  photo: activity-room
+- name: Basketball court
+  note: A hard court on campus
+  photo: basketball-court
+- name: Cricket nets
+  note: Practice nets beside the main building
+  photo: cricket-nets
+- name: Volleyball court
+  note: In front of the senior block
+  photo: volleyball-court
+- name: Football lawn
+  note: A green lawn with goalposts
+  photo: football-lawn
+- name: Assembly courtyard
+  note: A paved courtyard under a blue canopy
+  photo: assembly-courtyard
+- name: Open-air stage
+  note: For assemblies, functions and events
+  photo: open-air-stage
 faqs:
 - a: No entrance test. We hold a friendly interaction to understand the child’s learning level and place
     them in the right class.
@@ -643,10 +674,16 @@ t:
   footerHours: Mon–Sat, 8:00 AM – 2:00 PM · Office until 4:00 PM
   footerPortals: Portals
   footerReach: Reach us
+  facKicker: Facilities
+  facSub: Real photos of the classrooms, labs and grounds your child will use every day.
+  facTitle: Everything on one campus.
   fullCalendar: View the full academic calendar
   gKicker: Life at VPS
   gSub: Assemblies, labs, the playfield, the NCC parade and the bus fleet — photographed through the year.
   gTitle: See the school before you visit it.
+  gVideosSub: Short clips from Sports Day and our cultural programmes. Each one plays only when you tap it, so it does not use your data until then.
+  gVideosTitle: Watch school life
+  playVideo: Play video
   heroCta1: Enquire for 2026–27
   heroCta2: Watch the campus film
   heroEyebrow: RBSE affiliated · English medium · Amet, Rajasthan · Since 1994

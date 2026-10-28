@@ -1572,6 +1572,64 @@ section.container.contact-teaser {
 }
 .dc-gallery-item .dc-photo { height: auto; aspect-ratio: 4 / 3; overflow: hidden; }
 
+/* --- facilities --------------------------------------------------------
+   Phones get a swipeable row: each card is 72% wide so the next one peeks
+   in, which tells people the row scrolls. From 768px it is a plain grid. */
+.dc-fac {
+  list-style: none; margin: 32px 0 0; padding: 0 0 10px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+}
+.dc-fac:focus-visible { outline: 2px solid var(--d-blue); outline-offset: 4px; }
+.dc-fac-card { scroll-snap-align: start; background: var(--d-white); border: 1px solid var(--d-line); border-radius: var(--d-r-lg); overflow: hidden; }
+.dc-fac-shot { aspect-ratio: 4 / 3; overflow: hidden; }
+.dc-fac-body { padding: 12px 14px 14px; }
+.dc-fac-name { font-family: var(--d-font-head); font-size: 15px; font-weight: 700; color: var(--d-ink); }
+.dc-fac-note { font-size: 12.5px; line-height: 1.45; color: var(--d-muted); margin-top: 4px; }
+@media (min-width: 768px) {
+  .dc-fac { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); overflow: visible; gap: 14px; }
+}
+@media (min-width: 1100px) {
+  .dc-fac { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* --- videos -----------------------------------------------------------
+   _includes/design/video.html: a poster photo with a play button. A tap
+   swaps it for .dc-video-player (design-ui.js). */
+.dc-video {
+  position: relative; display: block; overflow: hidden;
+  aspect-ratio: 16 / 9; border-radius: var(--d-r-lg);
+  background: var(--d-ink); color: var(--d-white);
+}
+.dc-video-play {
+  position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px;
+  display: flex; align-items: center; justify-content: center; border-radius: 50%;
+  background: rgba(11,22,49,0.75); box-shadow: 0 0 0 3px rgba(255,255,255,0.9);
+  transition: background-color .18s ease;
+}
+.dc-video:hover .dc-video-play,
+.dc-video:focus-visible .dc-video-play { background: var(--d-blue); }
+.dc-video:focus-visible { outline: 3px solid var(--d-blue); outline-offset: 3px; }
+.dc-video-meta {
+  position: absolute; right: 10px; bottom: 10px; padding: 4px 8px; border-radius: 6px;
+  background: rgba(11,22,49,0.8); font-size: 12px; font-weight: 600;
+}
+.dc-video-player { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--d-r-lg); background: #000; }
+.dc-mosaic-hero .dc-video,
+.dc-mosaic-hero .dc-video-player { height: 100%; aspect-ratio: auto; border-radius: 0; }
+/* The caption chip would sit over the player's controls once it plays. */
+.dc-video-player + .dc-photo-cap { display: none; }
+.dc-videos { display: grid; gap: 18px; margin-top: 30px; }
+.dc-video-fig { margin: 0; }
+.dc-video-fig figcaption { margin-top: 10px; font-size: 14px; line-height: 1.45; color: var(--d-slate, var(--d-ink)); }
+@media (min-width: 768px) {
+  .dc-videos { grid-template-columns: repeat(3, 1fr); }
+}
+/* Hero background loop (desktop only, see design-ui.js); fades in over
+   the photo once it is actually playing. */
+.dc-hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s ease; }
+.dc-hero-video.is-playing { opacity: 1; }
+
 /* --- 10. admit ---------------------------------------------------- */
 .dc-admit { background: linear-gradient(140deg, #12295E 0%, var(--d-navy) 55%, var(--d-blue) 100%); padding: clamp(44px, 7vw, 84px) 0; }
 .dc-admit-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(24px, 4vw, 48px); align-items: center; }

@@ -1,0 +1,38 @@
+# Short clips for the design, in assets/media/videos/<id>-720.mp4:
+# 1280x720 H.264 with +faststart, 12-16 s, metadata stripped (no GPS or
+# device details). Sources: the school's Google Photos albums Sports Day
+# 2026, Inter House Dance Competition 2025 and Veer Patta Cultural 2026.
+#
+# clips: tap-to-play cards (_includes/design/video.html). poster is a photo
+#   id in _data/photos.yml; duration and size are shown on the card so
+#   parents on phone data know what a tap costs.
+# slots: hero is the silent desktop-only background loop (no card), life
+#   the home mosaic, gallery the Videos band on the gallery page.
+
+clips:
+  sports-day:
+    poster: video-sports-day
+    duration: "0:15"
+    size: "3.0 MB"
+    caption:
+      en: "Sports Day 2026: students sprint to the finish line"
+      hi: "खेल दिवस 2026: फ़िनिश लाइन की ओर दौड़ते विद्यार्थी"
+  house-dance:
+    poster: video-house-dance
+    duration: "0:13"
+    size: "3.0 MB"
+    caption:
+      en: "Inter-house dance competition 2025 on the school lawn"
+      hi: "विद्यालय के लॉन पर अंतर-सदनीय नृत्य प्रतियोगिता 2025"
+  cultural-stage:
+    poster: video-cultural-stage
+    duration: "0:12"
+    size: "2.3 MB"
+    caption:
+      en: "Independence Day programme: students in costume and a stage dance"
+      hi: "स्वतंत्रता दिवस कार्यक्रम: वेशभूषा में विद्यार्थी और मंच पर नृत्य"
+
+slots:
+  hero: hero-loop
+  life: sports-day
+  gallery: [sports-day, house-dance, cultural-stage]
