@@ -67,3 +67,4 @@ out/
 
 # Wrangler local state and cache (contains account identifiers)
 .wrangler/
+scripts/__pycache__/

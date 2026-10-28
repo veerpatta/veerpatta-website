@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Campus photo refresh and a campus film (2026-10-28)**:
+  - 19 campus photos re-done from the full-size Drive originals (13_AI_Visual_Library/03_CAMPUS, March and April 2026 shoot) with a new finishing step, `scripts/grade.py`: white balance from the white walls, exposure and shadow lift, clarity only where there is detail (so skies do not band), straightened verticals on wide-angle shots, greener grass. Nothing in the frame is retouched; crops only remove the photographer's shadow and bare earth. `optimize_photos.py` takes a `grade` block per photo and now skips photos whose original is not supplied, keeping their published files
+  - New photos: reception hall, school office, shaded verandas, covered walkway, paved courtyard, arched staircase, green lawn, front steps, approach to the main building. Replaced: hero lawn, entrance, classrooms, labs, activity room, assembly courtyard, basketball court, staff portrait (now 1200px)
+  - Home: a **Campus film** band after the partners strip (the hero's "Watch the campus film" button now jumps to it): a 45 s, 5 MB tap-to-play film built from the graded photos plus 3 s each of the house-dance and Sports Day clips, with English and Hindi captions burned in, four stills, and a "Book a campus visit" WhatsApp link. Facilities grow from 10 to 15 cards (3 rows of 5 on desktop). Journey stages now show children where we have them (activity room, classroom, learning exhibition, computer lab, prize-giving). The life mosaic leads with the staff photo and no longer leaves two empty cells at desktop widths
+  - About: a campus photo strip under the heading and the staff group photo above the teacher cards. Admissions: a three-photo "see the campus" band with the WhatsApp visit link, right after the seats table
+  - Gallery: campus film first in the videos band (2x2 on tablets, four across on desktop); the two placeholder albums (bus fleet, library: no photos exist yet) become "Campus and verandas" and "Lawns and grounds"; the campus showcase leads the grid
+  - The dashed LOGO / PHOTO placeholders are now partner abbreviations and initials. The phone hero scrim is lighter so the campus shows through. Service worker cache bumped to `vpps-v11` so returning visitors get the new photos
+
 ### Fixed
 - **Videos play on iPhone (2026-10-28)**: the static asset store ignores `Range`, and Safari will not play video without `206` responses. `worker.js` now handles byte ranges for `/assets/media/videos/*` only (`run_worker_first`); everything else is still served without running code
 - **Deploys no longer lag one push behind**: the CI bot's rebuilt-`_site` commit carried `[skip ci]`, which Cloudflare Workers Builds also honours, so it never deployed. The tag is gone; see the troubleshooting entry in `docs/DEPLOYMENT.md`

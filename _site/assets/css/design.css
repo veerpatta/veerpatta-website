@@ -1854,3 +1854,77 @@ section.container.contact-teaser {
 }
 .dc-form input:focus, .dc-form select:focus { border-color: var(--d-cyan); background: var(--d-white); }
 .dc-form .dc-btn { justify-self: start; }
+
+/* =====================================================
+   MEDIA REFRESH (Oct 2026): campus film band, photo strips,
+   partner and initial badges, mosaic and hero fixes.
+   Mobile-first like the rest of this file.
+   ===================================================== */
+
+/* The dashed LOGO / PHOTO placeholders become finished badges:
+   the partner's short name, and the person's initials. */
+.dc-partner-logo.has-abbr {
+  border: 0; background: var(--d-navy); color: var(--d-white);
+  font-family: var(--d-font-head); font-size: 11px; letter-spacing: 0.02em;
+}
+.dc-voice-photo.has-initials {
+  border: 0; background: var(--d-line-2); color: var(--d-navy);
+  font-family: var(--d-font-head); font-size: 14px; font-weight: 700; letter-spacing: 0.02em;
+}
+
+/* On phones the hero photo was almost hidden under a 62-82% scrim.
+   A lighter top lets the campus show; the bottom stays dark enough for
+   the buttons, and the title is large text (3:1 is enough). */
+.dc-hero--photo .dc-hero-scrim { background: linear-gradient(180deg, rgba(11,22,49,0.50) 0%, rgba(11,22,49,0.66) 45%, rgba(11,22,49,0.86) 100%); }
+@media (min-width: 768px) {
+  .dc-hero--photo .dc-hero-scrim { background: linear-gradient(90deg, rgba(11,22,49,0.90) 0%, rgba(11,22,49,0.72) 42%, rgba(11,22,49,0.18) 100%); }
+}
+
+/* Campus film band (home, #campus-film) */
+.dc-tour { scroll-margin-top: 80px; }
+.dc-tour-grid { align-items: center; }
+.dc-tour-media { min-width: 0; }
+.dc-tour-media .dc-video { box-shadow: 0 30px 60px -30px rgba(23,70,107,0.55); }
+.dc-tour-strip { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.dc-tour-strip li { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; }
+.dc-tour-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Photo strips (About, Admissions): swipe on phones, three across from 768px */
+.dc-band-photos { padding-top: clamp(28px, 5vw, 56px); padding-bottom: clamp(28px, 5vw, 56px); }
+.dc-strip {
+  list-style: none; margin: 0; padding: 0 0 8px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 80%; gap: 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+}
+.dc-strip:focus-visible { outline: 2px solid var(--d-blue); outline-offset: 4px; }
+.dc-strip-item { scroll-snap-align: start; }
+.dc-strip-item figure { margin: 0; }
+.dc-strip-item .dc-photo { height: auto; aspect-ratio: 4 / 3; border-radius: var(--d-r-lg); overflow: hidden; }
+.dc-strip-item figcaption,
+.dc-team-photo figcaption { margin-top: 10px; font-size: 13.5px; line-height: 1.45; color: var(--d-muted); }
+@media (min-width: 768px) {
+  .dc-strip { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); overflow: visible; gap: 18px; }
+}
+.dc-team-photo { margin: 0; }
+.dc-team-photo .dc-photo { height: auto; aspect-ratio: 3 / 2; border-radius: var(--d-r-lg); overflow: hidden; }
+@media (min-width: 1024px) {
+  .dc-team-photo .dc-photo { aspect-ratio: 21 / 9; }
+}
+
+/* Home mosaic: auto-fit left two empty cells at desktop widths (the
+   2x2 hero plus four tiles never filled a 5-column row). Fixed columns
+   make it a clean block: 2 across on tablets, 4 across on desktop. */
+@media (min-width: 701px) {
+  .dc-mosaic { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .dc-mosaic { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Gallery videos: four clips now, so 2x2 on tablets and a row of four on desktop */
+@media (min-width: 768px) {
+  .dc-videos { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .dc-videos { grid-template-columns: repeat(4, 1fr); }
+}

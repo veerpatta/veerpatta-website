@@ -34,12 +34,17 @@ albums:
 - count: 27 तस्वीरें
   name: वार्षिक समारोह
   shot: Stage performance under lights
-- count: 9 तस्वीरें
-  name: बस बेड़ा और सुरक्षा
-  shot: Buses lined up, attendant helping children
-- count: 12 तस्वीरें
-  name: पुस्तकालय
-  shot: Reading hour, shelves in the background
+- count: 13 तस्वीरें
+  name: परिसर और बरामदे
+  shot: Verandas, courtyards and the reception hall
+- count: 5 तस्वीरें
+  name: लॉन और मैदान
+  shot: Green lawns, courts and nets
+tourPoints:
+- स्वागत कक्ष और विद्यालय कार्यालय
+- कक्षाएँ, कंप्यूटर लैब और विज्ञान प्रयोगशाला
+- छायादार बरामदे और पक्के प्रांगण
+- हरे-भरे लॉन और खेल मैदान
 allNotices:
 - body: कक्षा 6 से 12 · परीक्षा 12 सितम्बर से 24 सितम्बर तक। तिथिपत्र अभिभावक ऐप और सूचना पट्ट पर उपलब्ध।
   day: '28'
@@ -239,8 +244,11 @@ docs:
 - 2 पासपोर्ट आकार की फ़ोटो
 - निवास प्रमाण (बस रूट के लिए)
 facilities:
+- name: स्वागत कक्ष
+  note: नक्काशीदार पत्थर का फ़र्श और काँच का अगला हिस्सा
+  photo: school-hall
 - name: कक्षाएँ
-  note: सूचना-पट्ट वाले रोशन, हवादार कमरे
+  note: डेस्कों की साफ़-सुथरी कतारों वाले रोशन कमरे
   photo: classroom
 - name: कंप्यूटर लैब
   note: कंप्यूटर पीरियड के लिए डेस्कटॉप वर्कस्टेशन
@@ -251,6 +259,27 @@ facilities:
 - name: गतिविधि कक्ष
   note: छोटे बच्चों के लिए गोल मेज़ें और रोबोटिक्स किट
   photo: activity-room
+- name: छायादार बरामदे
+  note: कक्षा भवनों के साथ ढके हुए गलियारे
+  photo: veranda
+- name: प्रार्थना-सभा प्रांगण
+  note: नीली छत के नीचे पक्का प्रांगण
+  photo: assembly-courtyard
+- name: पक्का प्रांगण
+  note: भवनों के बीच खुला, पक्का स्थान
+  photo: paved-courtyard
+- name: विद्यालय कार्यालय
+  note: प्रवेश और दैनिक प्रशासन
+  photo: school-office
+- name: खुला मंच
+  note: सभा, समारोह और कार्यक्रमों के लिए
+  photo: open-air-stage
+- name: हरे-भरे लॉन
+  note: खेल और कार्यक्रमों के लिए खुले लॉन
+  photo: lawn-wide
+- name: फ़ुटबॉल लॉन
+  note: गोलपोस्ट वाला हरा लॉन
+  photo: football-lawn
 - name: बास्केटबॉल कोर्ट
   note: परिसर में पक्का कोर्ट
   photo: basketball-court
@@ -260,15 +289,6 @@ facilities:
 - name: वॉलीबॉल कोर्ट
   note: सीनियर ब्लॉक के सामने
   photo: volleyball-court
-- name: फ़ुटबॉल लॉन
-  note: गोलपोस्ट वाला हरा लॉन
-  photo: football-lawn
-- name: प्रार्थना-सभा प्रांगण
-  note: नीली छत के नीचे पक्का प्रांगण
-  photo: assembly-courtyard
-- name: खुला मंच
-  note: सभा, समारोह और कार्यक्रमों के लिए
-  photo: open-air-stage
 faqs:
 - a: नहीं। हम बच्चे के स्तर को समझने के लिए एक सहज बातचीत करते हैं, ताकि सही कक्षा तय हो सके।
   open: true
@@ -326,9 +346,9 @@ feesFull:
   item: परिवहन (वैकल्पिक)
   note: गाँव की दूरी के अनुसार
 galleryTiles:
-- label: नई छत के नीचे प्रार्थना-सभा प्रांगण
+- label: हमारे शिक्षक
   ratio: Photo 4:3
-- label: शिक्षण प्रदर्शनी, अपने मॉडल समझाते विद्यार्थी
+- label: नई छत के नीचे प्रार्थना-सभा प्रांगण
   ratio: Photo 4:3
 - label: खेल दिवस पर एनसीसी कैडेट
   ratio: Photo 4:3
@@ -458,13 +478,17 @@ notices:
   tagFg: '#4B3B8F'
   title: रक्षाबंधन अवकाश
 partners:
-- name: Google for Education
+- abbr: G
+  name: Google for Education
   note: Workspace और Classroom
-- name: LEAD School
+- abbr: LEAD
+  name: LEAD School
   note: पाठ्यक्रम भागीदार
-- name: NCC
+- abbr: NCC
+  name: NCC
   note: कैडेट यूनिट
-- name: RBSE
+- abbr: RBSE
+  name: RBSE
   note: मान्यता प्राप्त
 resultCards:
 - label: कुल बोर्ड पास दर
@@ -592,6 +616,11 @@ streams:
   name: कला
   subjects: इतिहास · राजनीति विज्ञान · हिंदी साहित्य · अंग्रेज़ी
 t:
+  tourKicker: कैंपस फ़िल्म
+  tourTitle: आने से पहले कैंपस देखें।
+  tourSub: सामने की सीढ़ियों से स्वागत कक्ष, बरामदों, कक्षाओं, प्रयोगशालाओं और लॉन तक — 45 सेकंड की सैर। हर दृश्य विद्यालय की असली तस्वीर है।
+  tourCta: कैंपस देखने का समय लें
+  tourWa: नमस्ते, मैं अपने बच्चे के साथ श्री वीर पट्टा कैंपस देखने आना चाहता/चाहती हूँ। कृपया उपयुक्त दिन और समय बताएँ।
   aKicker: प्रवेश 2026–27
   aSub: निर्णय लेने के लिए सब कुछ इसी पृष्ठ पर है — सीटों की स्थिति, पूरा शुल्क विवरण, आवश्यक दस्तावेज़,
     और दो मिनट का फ़ॉर्म।
@@ -670,7 +699,7 @@ t:
   facTitle: सब कुछ एक ही परिसर में।
   fullCalendar: पूरा शैक्षणिक कैलेंडर देखें
   gKicker: वीपीएस में जीवन
-  gSub: सभा, प्रयोगशाला, खेल मैदान, एनसीसी परेड और बस बेड़ा — साल भर की तस्वीरें।
+  gSub: कक्षाएँ, प्रयोगशालाएँ, बरामदे, लॉन, खेल दिवस और एनसीसी परेड — विद्यालय की असली तस्वीरें।
   gTitle: आने से पहले स्कूल देख लें।
   gVideosSub: खेल दिवस और सांस्कृतिक कार्यक्रमों की छोटी क्लिप। हर वीडियो टैप करने पर ही चलता है, तब तक आपका डेटा खर्च नहीं होता।
   gVideosTitle: स्कूल का जीवन देखें
