@@ -6,10 +6,23 @@
 # clips: tap-to-play cards (_includes/design/video.html). poster is a photo
 #   id in _data/photos.yml; duration and size are shown on the card so
 #   parents on phone data know what a tap costs.
-# slots: hero is the silent desktop-only background loop (no card), life
-#   the home mosaic, gallery the Videos band on the gallery page.
+# slots: hero is the silent desktop-only background loop (no card), tour
+#   the campus-film band on the home page (the hero's second button jumps
+#   to it), life the home mosaic, gallery the Videos band on the gallery page.
+#
+# campus-tour is not cut from footage: it is a 45 s film rendered from the
+# graded campus photos (scripts/photos-manifest.json) plus 3 s each of the
+# house-dance and sports-day clips, with English + Hindi captions burned in.
+# 1280x720, H.264 CRF 29, no audio, metadata stripped.
 
 clips:
+  campus-tour:
+    poster: video-campus-tour
+    duration: "0:45"
+    size: "5.0 MB"
+    caption:
+      en: "Campus film: entrance, reception, verandas, classrooms, labs and lawns"
+      hi: "कैंपस फ़िल्म: प्रवेश द्वार, स्वागत कक्ष, बरामदे, कक्षाएँ, प्रयोगशालाएँ और लॉन"
   sports-day:
     poster: video-sports-day
     duration: "0:15"
@@ -34,5 +47,6 @@ clips:
 
 slots:
   hero: hero-loop
+  tour: campus-tour
   life: sports-day
-  gallery: [sports-day, house-dance, cultural-stage]
+  gallery: [campus-tour, sports-day, house-dance, cultural-stage]

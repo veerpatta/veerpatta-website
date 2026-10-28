@@ -15,7 +15,20 @@
         "hi": "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"
       },
       "quality": 66,
-      "_quality_note": "Grass and leaves cost bytes; 66 keeps the 800px file near 100 KB."
+      "_quality_note": "Grass and leaves cost bytes; 66 keeps the 800px file near 100 KB.",
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
     },
     "campus-lawn-tall": {
       "src": "campus-lawn.jpg",
@@ -35,13 +48,26 @@
         "en": "Students playing on the green lawn in front of the school building",
         "hi": "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"
       },
-      "sharpen": false
+      "sharpen": false,
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false
     },
     "campus-front": {
       "widths": [
         480,
         800,
-        1200
+        1200,
+        1600
       ],
       "gallery": "campus",
       "alt": {
@@ -52,8 +78,22 @@
         0,
         0,
         1,
-        0.84
-      ]
+        0.8
+      ],
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015,
+        "keystone": 0.1
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
     },
     "campus-evening": {
       "widths": [
@@ -76,29 +116,71 @@
       "alt": {
         "en": "Assembly courtyard under its new blue canopy",
         "hi": "नई नीली छत वाला प्रार्थना-सभा प्रांगण"
-      }
+      },
+      "grade": {
+        "ev": 0.08,
+        "shadows": 0.5,
+        "highlights": 0.1,
+        "clahe": 0.45,
+        "vibrance": 0.12,
+        "warmth": 0.01
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 14 Apr 2026), graded Oct 2026"
     },
     "school-hall": {
       "widths": [
         480,
-        800
+        800,
+        1200
       ],
       "gallery": "campus",
       "alt": {
-        "en": "The school hall with its patterned stone floor",
-        "hi": "नक्काशीदार पत्थर के फ़र्श वाला विद्यालय हॉल"
-      }
+        "en": "Reception hall with its patterned stone floor and glass front",
+        "hi": "नक्काशीदार पत्थर के फ़र्श और काँच के सामने वाला स्वागत कक्ष"
+      },
+      "grade": {
+        "wb": 0.7,
+        "ev": 0.25,
+        "shadows": 0.5,
+        "highlights": 0.3,
+        "clahe": 0.6,
+        "vibrance": 0.15,
+        "keystone": 0.06
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
     },
     "basketball-court": {
       "widths": [
         480,
-        800
+        800,
+        1200
       ],
       "gallery": "sports",
       "alt": {
-        "en": "Basketball court on the school campus",
-        "hi": "विद्यालय परिसर में बास्केटबॉल कोर्ट"
-      }
+        "en": "Basketball court with the school building behind it",
+        "hi": "बास्केटबॉल कोर्ट, पीछे विद्यालय भवन"
+      },
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false,
+      "crop": [
+        0,
+        0.12,
+        1,
+        0.74
+      ],
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
     },
     "activity-room": {
       "widths": [
@@ -110,7 +192,18 @@
       "alt": {
         "en": "Activity room with low round tables for young learners",
         "hi": "छोटे बच्चों के लिए गोल मेज़ों वाला गतिविधि कक्ष"
-      }
+      },
+      "grade": {
+        "wb": 0.75,
+        "ev": 0.3,
+        "shadows": 0.5,
+        "highlights": 0.25,
+        "clahe": 0.5,
+        "vibrance": 0.18,
+        "keystone": 0.06
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of Feb 2026), graded Oct 2026"
     },
     "classroom": {
       "widths": [
@@ -120,20 +213,49 @@
       ],
       "gallery": "academic",
       "alt": {
-        "en": "A bright classroom with desks and display boards",
-        "hi": "डेस्क और सूचना-पट्ट वाली रोशन कक्षा"
-      }
+        "en": "A bright classroom with neat rows of desks",
+        "hi": "डेस्कों की साफ़-सुथरी कतारों वाली रोशन कक्षा"
+      },
+      "grade": {
+        "wb": 0.75,
+        "ev": 0.3,
+        "shadows": 0.5,
+        "highlights": 0.25,
+        "clahe": 0.5,
+        "vibrance": 0.18,
+        "keystone": 0.08
+      },
+      "enhance": false,
+      "crop": [
+        0,
+        0.04,
+        0.86,
+        1
+      ],
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
     },
     "classroom-benches": {
       "widths": [
         480,
-        800
+        800,
+        1200
       ],
       "gallery": "academic",
       "alt": {
-        "en": "Classroom with rows of benches facing the board",
-        "hi": "बोर्ड की ओर लगी बेंचों की कतारों वाली कक्षा"
-      }
+        "en": "Classroom with blue benches and learning charts",
+        "hi": "नीली बेंचों और शिक्षण चार्टों वाली कक्षा"
+      },
+      "grade": {
+        "wb": 0.75,
+        "ev": 0.3,
+        "shadows": 0.5,
+        "highlights": 0.25,
+        "clahe": 0.5,
+        "vibrance": 0.18,
+        "keystone": 0.06
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
     },
     "science-lab": {
       "widths": [
@@ -146,7 +268,18 @@
       "alt": {
         "en": "Science laboratory with workbenches and apparatus",
         "hi": "वर्कबेंच और उपकरणों से सुसज्जित विज्ञान प्रयोगशाला"
-      }
+      },
+      "grade": {
+        "wb": 0.75,
+        "ev": 0.3,
+        "shadows": 0.5,
+        "highlights": 0.25,
+        "clahe": 0.5,
+        "vibrance": 0.18,
+        "keystone": 0.06
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of Feb 2026), graded Oct 2026"
     },
     "computer-lab": {
       "widths": [
@@ -163,13 +296,25 @@
     "staff-team": {
       "widths": [
         480,
-        800
+        800,
+        1200
       ],
       "gallery": "academic",
       "alt": {
         "en": "Our teaching staff",
-        "hi": "हमारा शिक्षक दल"
-      }
+        "hi": "हमारे शिक्षक"
+      },
+      "grade": {
+        "ev": 0.15,
+        "shadows": 0.45,
+        "highlights": 0.2,
+        "clahe": 0.35,
+        "vibrance": 0.12,
+        "warmth": 0.01
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 2025), graded Oct 2026",
+      "pos": "center 62%"
     },
     "robotics-training": {
       "widths": [
@@ -389,7 +534,18 @@
       "alt": {
         "en": "Computer lab with rows of desktop workstations",
         "hi": "डेस्कटॉप वर्कस्टेशन की कतारों वाली कंप्यूटर लैब"
-      }
+      },
+      "grade": {
+        "wb": 0.75,
+        "ev": 0.3,
+        "shadows": 0.5,
+        "highlights": 0.25,
+        "clahe": 0.5,
+        "vibrance": 0.18,
+        "keystone": 0.06
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of Feb 2026), graded Oct 2026"
     },
     "cricket-nets": {
       "widths": [
@@ -493,6 +649,249 @@
         "en": "Independence Day programme: a stage dance",
         "hi": "स्वतंत्रता दिवस कार्यक्रम: मंच पर नृत्य"
       }
+    },
+    "veranda": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "campus",
+      "alt": {
+        "en": "Long shaded veranda outside the classrooms",
+        "hi": "कक्षाओं के बाहर लंबा छायादार बरामदा"
+      },
+      "grade": {
+        "wb": 0.5,
+        "ev": 0.1,
+        "shadows": 0.5,
+        "highlights": 0.4,
+        "clahe": 0.5,
+        "vibrance": 0.1,
+        "sky": 0.0
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
+    },
+    "veranda-courtyard": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "campus",
+      "alt": {
+        "en": "Covered walkway beside the paved courtyard",
+        "hi": "पक्के प्रांगण के साथ ढका हुआ गलियारा"
+      },
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
+    },
+    "paved-courtyard": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "campus",
+      "alt": {
+        "en": "The wide paved courtyard between the classroom blocks",
+        "hi": "कक्षा भवनों के बीच चौड़ा पक्का प्रांगण"
+      },
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false,
+      "crop": [
+        0,
+        0.12,
+        1,
+        0.84
+      ],
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
+    },
+    "school-office": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "campus",
+      "alt": {
+        "en": "The school office",
+        "hi": "विद्यालय कार्यालय"
+      },
+      "grade": {
+        "wb": 0.7,
+        "ev": 0.3,
+        "shadows": 0.5,
+        "highlights": 0.2,
+        "clahe": 0.4,
+        "vibrance": 0.15,
+        "keystone": 0.05
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
+    },
+    "arched-stairs": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "campus",
+      "alt": {
+        "en": "Arched staircase in the main building",
+        "hi": "मुख्य भवन की मेहराबदार सीढ़ियाँ"
+      },
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015,
+        "keystone": 0.08
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
+    },
+    "lawn-wide": {
+      "widths": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "gallery": "sports",
+      "alt": {
+        "en": "The green playing lawn on campus",
+        "hi": "परिसर का हरा-भरा खेल का लॉन"
+      },
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026",
+      "quality": 66
+    },
+    "building-palm": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "campus",
+      "alt": {
+        "en": "Front steps with railings and palm trees",
+        "hi": "रेलिंग वाली सामने की सीढ़ियाँ और ताड़ के पेड़"
+      },
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015,
+        "keystone": 0.06
+      },
+      "enhance": false,
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
+    },
+    "campus-approach": {
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "gallery": "campus",
+      "alt": {
+        "en": "Stone steps leading up to the main building",
+        "hi": "मुख्य भवन तक जाती पत्थर की सीढ़ियाँ"
+      },
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false,
+      "crop": [
+        0,
+        0.0,
+        1,
+        0.7
+      ],
+      "_source": "Drive 13_AI_Visual_Library/03_CAMPUS (shoot of 5 Mar 2026), graded Oct 2026"
+    },
+    "video-campus-tour": {
+      "src": "campus-approach.jpg",
+      "_note": "Poster of the campus-tour clip in _data/videos.yml: the graded approach to the main building, cropped to 16:9.",
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "grade": {
+        "wb": 0.2,
+        "ev": 0.1,
+        "shadows": 0.55,
+        "highlights": 0.3,
+        "clahe": 0.55,
+        "vibrance": 0.15,
+        "green": 0.35,
+        "sky": 0.3,
+        "warmth": 0.015
+      },
+      "enhance": false,
+      "crop": [
+        0,
+        0.0,
+        1,
+        0.75
+      ],
+      "alt": {
+        "en": "Campus film: steps up to the main building",
+        "hi": "कैंपस फ़िल्म: मुख्य भवन तक जाती सीढ़ियाँ"
+      }
     }
   },
   "slots": {
@@ -503,13 +902,13 @@
     "stages": [
       "activity-room",
       "classroom",
-      "science-lab",
-      "classroom-benches",
-      "campus-front"
+      "learning-exhibition",
+      "computer-lab-wide",
+      "prize-certificate"
     ],
     "tiles": [
+      "staff-team",
       "assembly-courtyard",
-      "learning-exhibition",
       "ncc-cadets",
       "dance-lawn"
     ],
@@ -520,34 +919,61 @@
       "ncc-cadets",
       "sports-finish",
       "function-stage",
-      null,
-      null
+      "veranda",
+      "lawn-wide"
     ],
     "beyond": [
       "ncc-cadets",
       "sports-sprint",
       "dance-lawn",
       "learning-exhibition"
-    ]
+    ],
+    "about": [
+      "campus-approach",
+      "school-hall",
+      "arched-stairs"
+    ],
+    "visit": [
+      "campus-front",
+      "veranda",
+      "school-office"
+    ],
+    "tour_strip": [
+      "school-hall",
+      "veranda",
+      "classroom",
+      "lawn-wide"
+    ],
+    "about_team": "staff-team"
   },
   "gallery_order": [
-    "sports-finish",
     "campus-lawn",
-    "function-stage",
-    "ncc-cadets",
-    "computer-lab",
+    "arched-stairs",
+    "school-hall",
+    "veranda",
+    "classroom",
+    "sports-finish",
+    "paved-courtyard",
+    "computer-lab-wide",
     "dance-lawn",
-    "sports-drill",
     "campus-front",
+    "staff-team",
+    "ncc-cadets",
+    "lawn-wide",
+    "school-office",
+    "science-lab",
+    "function-stage",
+    "veranda-courtyard",
+    "campus-approach",
+    "building-palm",
+    "computer-lab",
+    "sports-drill",
     "learning-exhibition",
     "prize-podium",
-    "science-lab",
     "sports-sprint",
     "dance-group",
     "assembly-courtyard",
-    "staff-team",
     "sports-oath",
-    "classroom",
     "ncc-podium",
     "robotics-training",
     "sports-start",
@@ -556,12 +982,10 @@
     "prize-certificate",
     "activity-room",
     "sack-race",
-    "school-hall",
     "three-legged-race",
     "classroom-benches",
     "musical-chairs",
     "basketball-court",
-    "computer-lab-wide",
     "cricket-nets",
     "volleyball-court",
     "football-lawn",

@@ -34,12 +34,17 @@ albums:
 - count: 27 photos
   name: Annual function
   shot: Stage performance under lights
-- count: 9 photos
-  name: Bus fleet and safety
-  shot: Buses lined up, attendant helping children
-- count: 12 photos
-  name: Library
-  shot: Reading hour, shelves in the background
+- count: 13 photos
+  name: Campus and verandas
+  shot: Verandas, courtyards and the reception hall
+- count: 5 photos
+  name: Lawns and grounds
+  shot: Green lawns, courts and nets
+tourPoints:
+- Reception hall and school office
+- Classrooms, computer lab and science lab
+- Shaded verandas and paved courtyards
+- Green lawns and sports grounds
 allNotices:
 - body: Classes 6 to 12 · exams run 12 September to 24 September. The datesheet is on the parent app and
     the notice board.
@@ -245,8 +250,11 @@ docs:
 - Two passport-size photographs
 - Address proof, used to assign the bus route
 facilities:
+- name: Reception hall
+  note: Patterned stone floor and a glass front
+  photo: school-hall
 - name: Classrooms
-  note: Bright, airy rooms with display boards
+  note: Bright rooms with neat rows of desks
   photo: classroom
 - name: Computer lab
   note: Desktop workstations for computer periods
@@ -257,6 +265,27 @@ facilities:
 - name: Activity room
   note: Low round tables for young learners and robotics kits
   photo: activity-room
+- name: Shaded verandas
+  note: Covered walkways along the classroom blocks
+  photo: veranda
+- name: Assembly courtyard
+  note: A paved courtyard under a blue canopy
+  photo: assembly-courtyard
+- name: Paved courtyard
+  note: Open, paved space between the blocks
+  photo: paved-courtyard
+- name: School office
+  note: Admissions and day-to-day administration
+  photo: school-office
+- name: Open-air stage
+  note: For assemblies, functions and events
+  photo: open-air-stage
+- name: Green lawns
+  note: Open lawns for games and events
+  photo: lawn-wide
+- name: Football lawn
+  note: A green lawn with goalposts
+  photo: football-lawn
 - name: Basketball court
   note: A hard court on campus
   photo: basketball-court
@@ -266,15 +295,6 @@ facilities:
 - name: Volleyball court
   note: In front of the senior block
   photo: volleyball-court
-- name: Football lawn
-  note: A green lawn with goalposts
-  photo: football-lawn
-- name: Assembly courtyard
-  note: A paved courtyard under a blue canopy
-  photo: assembly-courtyard
-- name: Open-air stage
-  note: For assemblies, functions and events
-  photo: open-air-stage
 faqs:
 - a: No entrance test. We hold a friendly interaction to understand the child’s learning level and place
     them in the right class.
@@ -334,9 +354,9 @@ feesFull:
   item: Transport (optional)
   note: Based on distance from campus
 galleryTiles:
-- label: Assembly courtyard under the new canopy
+- label: Our teachers
   ratio: Photo 4:3
-- label: Learning exhibition, students explaining their models
+- label: Assembly courtyard under the new canopy
   ratio: Photo 4:3
 - label: NCC cadets on Sports Day
   ratio: Photo 4:3
@@ -468,13 +488,17 @@ notices:
   tagFg: '#4B3B8F'
   title: Raksha Bandhan holiday
 partners:
-- name: Google for Education
+- abbr: G
+  name: Google for Education
   note: Workspace & Classroom
-- name: LEAD School
+- abbr: LEAD
+  name: LEAD School
   note: Curriculum partner
-- name: NCC
+- abbr: NCC
+  name: NCC
   note: Cadet unit on campus
-- name: RBSE
+- abbr: RBSE
+  name: RBSE
   note: Affiliated · English medium
 resultCards:
 - label: Overall board pass rate
@@ -602,6 +626,11 @@ streams:
   name: Arts
   subjects: History · Political Science · Hindi Literature · English
 t:
+  tourKicker: Campus film
+  tourTitle: See the campus before you visit.
+  tourSub: A 45-second walk from the front steps through the reception, verandas, classrooms, labs and lawns. Every shot is a real photo of the school.
+  tourCta: Book a campus visit
+  tourWa: Hello, I would like to visit the Shri Veer Patta campus with my child. Please tell me a suitable day and time.
   aKicker: Admissions 2026–27
   aSub: Everything you need to decide is on this page — live seat counts, the full fee table, the documents
     to carry, and a form that takes two minutes.
@@ -679,7 +708,7 @@ t:
   facTitle: Everything on one campus.
   fullCalendar: View the full academic calendar
   gKicker: Life at VPS
-  gSub: Assemblies, labs, the playfield, the NCC parade and the bus fleet — photographed through the year.
+  gSub: Classrooms, labs, verandas, the lawns, Sports Day and the NCC parade — real photos of the school.
   gTitle: See the school before you visit it.
   gVideosSub: Short clips from Sports Day and our cultural programmes. Each one plays only when you tap it, so it does not use your data until then.
   gVideosTitle: Watch school life

@@ -5,6 +5,14 @@
 
 {% include design/page-head.html kicker=t.abKicker title=t.abTitle sub=t.abSub %}
 
+{% if site.data.photos.slots.about %}
+<section class="dc-band dc-band-photos">
+  <div class="dc-wrap">
+    {% include design/photo-strip.html keys=site.data.photos.slots.about %}
+  </div>
+</section>
+{% endif %}
+
 <section class="dc-band">
   <div class="dc-wrap">
     <div class="dc-head-stack">
@@ -42,11 +50,19 @@
     <div class="dc-head-stack">
       <h2 class="dc-h2 scroll-fade-up">{{ t.leadershipTitle }}</h2>
     </div>
+    {% assign team = site.data.photos.slots.about_team %}
+    {% if team and site.data.photos.items[team] %}
+    <figure class="dc-team-photo dc-mt-44">
+      {% include design/photo.html key=team sizes="(min-width: 1200px) 1140px, 94vw" %}
+      <figcaption>{{ site.data.photos.items[team].alt[lang] }}</figcaption>
+    </figure>
+    {% endif %}
     <div class="dc-grid dc-grid-290 dc-mt-44">
       {% for tc in d.teachers %}
       <div class="dc-voice scroll-fade-up">
         <div class="dc-voice-by dc-voice-by-top">
-          <div class="dc-voice-photo" aria-hidden="true">PHOTO</div>
+          {% assign tparts = tc.name | remove: 'Mrs. ' | remove: 'Mr. ' | remove: 'Dr. ' | remove: 'Ms. ' | split: ' ' %}
+          <div class="dc-voice-photo has-initials" aria-hidden="true">{{ tparts.first | slice: 0 }}{% if tparts.size > 1 %}{{ tparts.last | slice: 0 }}{% endif %}</div>
           <div>
             <div class="dc-voice-name">{{ tc.name }}</div>
             <div class="dc-voice-detail">{{ tc.qual }}</div>

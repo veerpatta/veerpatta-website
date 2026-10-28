@@ -11,6 +11,11 @@ Reads scripts/photos-manifest.json. Each photo there is looked up as
     colour, a touch more vibrance, and sharpening after each resize. Nothing
     in the frame is retouched. "enhance": false skips the clean-up and
     "sharpen": false the sharpening for one photo,
+  - if the entry has a "grade" block, finished with scripts/grade.py first
+    (white balance, exposure, shadow lift, clarity, straightened verticals;
+    see that file for every setting). Needs numpy and opencv-python-headless,
+  - skipped (its WebP files are kept as they are) when the original is not
+    in <originals_dir>, so one photo can be redone without the whole set,
   - resized to every width in "widths" that the original can supply,
   - encoded at quality 74, or the entry's "quality" if it has one,
   - saved as assets/media/photos/<id>-<width>.webp with no EXIF, so no
@@ -24,6 +29,8 @@ import os
 import sys
 
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, "assets", "media", "photos")
@@ -49,6 +56,25 @@ def q(s):
     return json.dumps(s, ensure_ascii=False)
 
 
+def _entry(pid, p, widths, top, top_h):
+    out = [
+        f"  {pid}:",
+        f"    widths: [{', '.join(str(w) for w in widths)}]",
+        f"    w: {top}",
+        f"    h: {top_h}",
+    ]
+    if p.get("pos"):
+        out.append(f"    pos: {q(p['pos'])}")
+    if p.get("gallery"):
+        out.append(f"    gallery: {p['gallery']}")
+    out += [
+        "    alt:",
+        f"      en: {q(p['alt']['en'])}",
+        f"      hi: {q(p['alt']['hi'])}",
+    ]
+    return out
+
+
 def main(src_dir):
     with open(os.path.join(ROOT, "scripts", "photos-manifest.json"), encoding="utf-8") as f:
         manifest = json.load(f)
@@ -68,8 +94,23 @@ def main(src_dir):
     ]
     total = 0
     for pid, p in manifest["items"].items():
-        im = Image.open(os.path.join(src_dir, p.get("src", pid + ".jpg")))
+        src = os.path.join(src_dir, p.get("src", pid + ".jpg"))
+        if not os.path.exists(src):
+            # Keep the published files; read the size from the largest one.
+            have = [w for w in p["widths"] if os.path.exists(os.path.join(OUT_DIR, f"{pid}-{w}.webp"))]
+            if not have:
+                sys.exit(f"{pid}: no original at {src} and no published WebP")
+            with Image.open(os.path.join(OUT_DIR, f"{pid}-{have[-1]}.webp")) as old:
+                ow, oh = old.size
+            widths, top, top_h = have, have[-1], oh
+            print(f"{pid}: kept {have} (no original supplied)")
+            lines += _entry(pid, p, widths, top, top_h)
+            continue
+        im = Image.open(src)
         im = ImageOps.exif_transpose(im).convert("RGB")
+        if p.get("grade"):
+            from grade import grade
+            im = grade(im, p["grade"])
         if "crop" in p:
             x0, y0, x1, y1 = p["crop"]
             W, H = im.size
@@ -86,21 +127,7 @@ def main(src_dir):
             small.save(out, "WEBP", quality=p.get("quality", QUALITY), method=6)
             total += os.path.getsize(out)
         top = widths[-1]
-        lines += [
-            f"  {pid}:",
-            f"    widths: [{', '.join(str(w) for w in widths)}]",
-            f"    w: {top}",
-            f"    h: {round(im.height * top / im.width)}",
-        ]
-        if p.get("pos"):
-            lines.append(f"    pos: {q(p['pos'])}")
-        if p.get("gallery"):
-            lines.append(f"    gallery: {p['gallery']}")
-        lines += [
-            "    alt:",
-            f"      en: {q(p['alt']['en'])}",
-            f"      hi: {q(p['alt']['hi'])}",
-        ]
+        lines += _entry(pid, p, widths, top, round(im.height * top / im.width))
         print(f"{pid}: {widths} from {im.size}")
 
     lines += ["", "slots:"]

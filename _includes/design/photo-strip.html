@@ -1,0 +1,25 @@
+{% comment %}
+  A row of real photos with captions, from _data/photos.yml.
+
+    keys   array of photo ids (e.g. site.data.photos.slots.about)
+
+  Swipeable on phones (scroll-snap, no script), three across from 768px.
+  Captions are the photo's alt text in the page language.
+{% endcomment %}
+{%- assign seg = page.url | split: '/' -%}
+{%- if seg[1] == 'hi' -%}{%- assign slang = 'hi' -%}{%- else -%}{%- assign slang = 'en' -%}{%- endif -%}
+{%- if include.keys -%}
+<ul class="dc-strip" tabindex="0">
+  {%- for k in include.keys -%}
+  {%- assign sp = site.data.photos.items[k] -%}
+  {%- if sp %}
+  <li class="dc-strip-item">
+    <figure>
+      {% include design/photo.html key=k sizes="(min-width: 1100px) 370px, (min-width: 768px) 31vw, 78vw" %}
+      <figcaption>{{ sp.alt[slang] }}</figcaption>
+    </figure>
+  </li>
+  {%- endif -%}
+  {%- endfor %}
+</ul>
+{%- endif -%}

@@ -25,9 +25,9 @@ items:
       en: "Students playing on the green lawn in front of the school building"
       hi: "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"
   campus-front:
-    widths: [480, 800, 1200]
-    w: 1200
-    h: 756
+    widths: [480, 800, 1200, 1600]
+    w: 1600
+    h: 992
     gallery: campus
     alt:
       en: "Main entrance of the school with palm trees and the front staircase"
@@ -49,25 +49,25 @@ items:
       en: "Assembly courtyard under its new blue canopy"
       hi: "नई नीली छत वाला प्रार्थना-सभा प्रांगण"
   school-hall:
-    widths: [480, 800]
-    w: 800
-    h: 602
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 921
     gallery: campus
     alt:
-      en: "The school hall with its patterned stone floor"
-      hi: "नक्काशीदार पत्थर के फ़र्श वाला विद्यालय हॉल"
+      en: "Reception hall with its patterned stone floor and glass front"
+      hi: "नक्काशीदार पत्थर के फ़र्श और काँच के सामने वाला स्वागत कक्ष"
   basketball-court:
-    widths: [480, 800]
-    w: 800
-    h: 600
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 560
     gallery: sports
     alt:
-      en: "Basketball court on the school campus"
-      hi: "विद्यालय परिसर में बास्केटबॉल कोर्ट"
+      en: "Basketball court with the school building behind it"
+      hi: "बास्केटबॉल कोर्ट, पीछे विद्यालय भवन"
   activity-room:
     widths: [480, 800, 1200]
     w: 1200
-    h: 900
+    h: 917
     gallery: academic
     alt:
       en: "Activity room with low round tables for young learners"
@@ -75,23 +75,23 @@ items:
   classroom:
     widths: [480, 800, 1200]
     w: 1200
-    h: 904
+    h: 1034
     gallery: academic
     alt:
-      en: "A bright classroom with desks and display boards"
-      hi: "डेस्क और सूचना-पट्ट वाली रोशन कक्षा"
+      en: "A bright classroom with neat rows of desks"
+      hi: "डेस्कों की साफ़-सुथरी कतारों वाली रोशन कक्षा"
   classroom-benches:
-    widths: [480, 800]
-    w: 800
-    h: 602
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 921
     gallery: academic
     alt:
-      en: "Classroom with rows of benches facing the board"
-      hi: "बोर्ड की ओर लगी बेंचों की कतारों वाली कक्षा"
+      en: "Classroom with blue benches and learning charts"
+      hi: "नीली बेंचों और शिक्षण चार्टों वाली कक्षा"
   science-lab:
     widths: [480, 800, 1200]
     w: 1200
-    h: 1600
+    h: 1630
     pos: "center 60%"
     gallery: academic
     alt:
@@ -106,13 +106,14 @@ items:
       en: "Computer lab workstations"
       hi: "कंप्यूटर लैब के वर्कस्टेशन"
   staff-team:
-    widths: [480, 800]
-    w: 800
-    h: 530
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 796
+    pos: "center 62%"
     gallery: academic
     alt:
       en: "Our teaching staff"
-      hi: "हमारा शिक्षक दल"
+      hi: "हमारे शिक्षक"
   robotics-training:
     widths: [480, 800]
     w: 800
@@ -260,7 +261,7 @@ items:
   computer-lab-wide:
     widths: [480, 800, 1200]
     w: 1200
-    h: 904
+    h: 921
     gallery: academic
     alt:
       en: "Computer lab with rows of desktop workstations"
@@ -318,15 +319,90 @@ items:
     alt:
       en: "Independence Day programme: a stage dance"
       hi: "स्वतंत्रता दिवस कार्यक्रम: मंच पर नृत्य"
+  veranda:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 1600
+    gallery: campus
+    alt:
+      en: "Long shaded veranda outside the classrooms"
+      hi: "कक्षाओं के बाहर लंबा छायादार बरामदा"
+  veranda-courtyard:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 904
+    gallery: campus
+    alt:
+      en: "Covered walkway beside the paved courtyard"
+      hi: "पक्के प्रांगण के साथ ढका हुआ गलियारा"
+  paved-courtyard:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 650
+    gallery: campus
+    alt:
+      en: "The wide paved courtyard between the classroom blocks"
+      hi: "कक्षा भवनों के बीच चौड़ा पक्का प्रांगण"
+  school-office:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 914
+    gallery: campus
+    alt:
+      en: "The school office"
+      hi: "विद्यालय कार्यालय"
+  arched-stairs:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 1641
+    gallery: campus
+    alt:
+      en: "Arched staircase in the main building"
+      hi: "मुख्य भवन की मेहराबदार सीढ़ियाँ"
+  lawn-wide:
+    widths: [480, 800, 1200, 1600]
+    w: 1600
+    h: 1205
+    gallery: sports
+    alt:
+      en: "The green playing lawn on campus"
+      hi: "परिसर का हरा-भरा खेल का लॉन"
+  building-palm:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 921
+    gallery: campus
+    alt:
+      en: "Front steps with railings and palm trees"
+      hi: "रेलिंग वाली सामने की सीढ़ियाँ और ताड़ के पेड़"
+  campus-approach:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 630
+    gallery: campus
+    alt:
+      en: "Stone steps leading up to the main building"
+      hi: "मुख्य भवन तक जाती पत्थर की सीढ़ियाँ"
+  video-campus-tour:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 675
+    alt:
+      en: "Campus film: steps up to the main building"
+      hi: "कैंपस फ़िल्म: मुख्य भवन तक जाती सीढ़ियाँ"
 
 slots:
   hero: campus-lawn
   hero_tall: campus-lawn-tall
   digital: computer-lab
   life: sports-drill
-  stages: [activity-room, classroom, science-lab, classroom-benches, campus-front]
-  tiles: [assembly-courtyard, learning-exhibition, ncc-cadets, dance-lawn]
-  albums: [assembly-courtyard, classroom, science-lab, ncc-cadets, sports-finish, function-stage, null, null]
+  stages: [activity-room, classroom, learning-exhibition, computer-lab-wide, prize-certificate]
+  tiles: [staff-team, assembly-courtyard, ncc-cadets, dance-lawn]
+  albums: [assembly-courtyard, classroom, science-lab, ncc-cadets, sports-finish, function-stage, veranda, lawn-wide]
   beyond: [ncc-cadets, sports-sprint, dance-lawn, learning-exhibition]
+  about: [campus-approach, school-hall, arched-stairs]
+  visit: [campus-front, veranda, school-office]
+  tour_strip: [school-hall, veranda, classroom, lawn-wide]
+  about_team: staff-team
 
-gallery_order: [sports-finish, campus-lawn, function-stage, ncc-cadets, computer-lab, dance-lawn, sports-drill, campus-front, learning-exhibition, prize-podium, science-lab, sports-sprint, dance-group, assembly-courtyard, staff-team, sports-oath, classroom, ncc-podium, robotics-training, sports-start, dance-line, campus-evening, prize-certificate, activity-room, sack-race, school-hall, three-legged-race, classroom-benches, musical-chairs, basketball-court, computer-lab-wide, cricket-nets, volleyball-court, football-lawn, open-air-stage]
+gallery_order: [campus-lawn, arched-stairs, school-hall, veranda, classroom, sports-finish, paved-courtyard, computer-lab-wide, dance-lawn, campus-front, staff-team, ncc-cadets, lawn-wide, school-office, science-lab, function-stage, veranda-courtyard, campus-approach, building-palm, computer-lab, sports-drill, learning-exhibition, prize-podium, sports-sprint, dance-group, assembly-courtyard, sports-oath, ncc-podium, robotics-training, sports-start, dance-line, campus-evening, prize-certificate, activity-room, sack-race, three-legged-race, classroom-benches, musical-chairs, basketball-court, cricket-nets, volleyball-court, football-lawn, open-air-stage]

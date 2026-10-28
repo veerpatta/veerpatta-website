@@ -37,6 +37,27 @@
   </div>
 </section>
 
+{% comment %} Visit: three real campus photos and a WhatsApp link to book
+   a visit, right after the seats so a parent who is interested can act. {% endcomment %}
+{% if site.data.photos.slots.visit %}
+<section class="dc-band dc-band-photos">
+  <div class="dc-wrap">
+    <div class="dc-head">
+      <div class="dc-head-main">
+        <div class="dc-kicker">{{ t.tourKicker }}</div>
+        <h2 class="dc-h2 scroll-fade-up">{{ t.tourTitle }}</h2>
+      </div>
+      <a class="dc-link" href="https://wa.me/{{ site.school_phone | remove: '+' }}?text={{ t.tourWa | url_encode }}" target="_blank" rel="noopener">{{ t.tourCta }}
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="dc-mt-32">
+      {% include design/photo-strip.html keys=site.data.photos.slots.visit %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 {% comment %}
   Enquiry wizard. .admission-wizard is the root contract for
   assets/js/admission-wizard.js, which was already in the repo but had
