@@ -8,6 +8,7 @@ Reads scripts/photos-manifest.json. Each photo there is looked up as
   - rotated upright from its EXIF orientation,
   - cropped if the entry has a "crop" box (fractions of width/height),
   - resized to every width in "widths" that the original can supply,
+  - encoded at quality 74, or the entry's "quality" if it has one,
   - saved as assets/media/photos/<id>-<width>.webp with no EXIF, so no
     GPS location or camera details are published.
 It then rewrites _data/photos.yml, which the templates read.
@@ -60,7 +61,7 @@ def main(src_dir):
         for w in widths:
             h = round(im.height * w / im.width)
             out = os.path.join(OUT_DIR, f"{pid}-{w}.webp")
-            im.resize((w, h), Image.LANCZOS).save(out, "WEBP", quality=QUALITY, method=6)
+            im.resize((w, h), Image.LANCZOS).save(out, "WEBP", quality=p.get("quality", QUALITY), method=6)
             total += os.path.getsize(out)
         top = widths[-1]
         lines += [

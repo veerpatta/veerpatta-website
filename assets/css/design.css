@@ -1552,7 +1552,7 @@ section.container.contact-teaser {
 .dc-hero-photo img[loading] { background: transparent; }
 /* On phones the hero copy spans the full width, so the photo sits under an
    even scrim; from 768px the design's left-to-right scrim takes over. */
-.dc-hero--photo .dc-hero-scrim { background: linear-gradient(180deg, rgba(11,22,49,0.72) 0%, rgba(11,22,49,0.84) 100%); }
+.dc-hero--photo .dc-hero-scrim { background: linear-gradient(180deg, rgba(11,22,49,0.62) 0%, rgba(11,22,49,0.82) 100%); }
 @media (min-width: 768px) {
   .dc-hero--photo .dc-hero-scrim { background: linear-gradient(90deg, rgba(11,22,49,0.93) 0%, rgba(11,22,49,0.78) 42%, rgba(11,22,49,0.24) 100%); }
 }

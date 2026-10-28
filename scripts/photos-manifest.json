@@ -10,6 +10,8 @@
     "campus-lawn-tall": {
       "src": "campus-lawn.jpg",
       "crop": [0.16, 0, 0.72, 1],
+      "_quality_note": "Only shown under the dark hero overlay on phones, so it can be compressed harder.",
+      "quality": 55,
       "widths": [480, 800],
       "alt": {"en": "Students playing on the green lawn in front of the school building", "hi": "विद्यालय भवन के सामने हरे-भरे लॉन में खेलते विद्यार्थी"}
     },
