@@ -65,7 +65,12 @@
     const galleryGrid = document.getElementById('gallery-grid');
     if (!galleryGrid) return;
 
-    galleryGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading gallery...</p>';
+    // Photos rendered into the page at build time stay put; files registered
+    // in gallery-items.js are appended after them.
+    const prerendered = galleryGrid.querySelectorAll('.gallery-item').length;
+    if (!prerendered) {
+      galleryGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading gallery...</p>';
+    }
 
     // Wait for items to be registered, but never block forever.
     await waitForRegistration();
@@ -130,12 +135,12 @@
       }
     }
 
-    if (totalItems === 0) {
+    if (totalItems === 0 && !prerendered) {
       galleryGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Gallery is temporarily unavailable. Please try again shortly.</p>';
       return;
     }
 
-    galleryGrid.innerHTML = '';
+    if (!prerendered) galleryGrid.innerHTML = '';
     itemsHtml.forEach(item => galleryGrid.appendChild(item));
 
     // Initialize gallery filter - this will reveal the items

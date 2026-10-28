@@ -11,3 +11,9 @@
 # running the previous deploy's cache logic and never sees the new site.
 /sw.js
   Cache-Control: no-cache
+
+# School photos (scripts/optimize_photos.py). A month is long enough to spare
+# repeat visitors on 3G the download, short enough that a replaced photo
+# under the same name still reaches them.
+/assets/media/photos/*
+  Cache-Control: public, max-age=2592000
