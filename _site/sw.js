@@ -1,7 +1,7 @@
 // Service Worker for Shri Veer Patta Senior Secondary School Website
 // PWA-lite implementation with stale-while-revalidate caching strategy
 
-const CACHE_VERSION = 'vpps-v9';
+const CACHE_VERSION = 'vpps-v10';
 
 // Compute base path dynamically to work with or without a baseurl
 const computeBasePath = () => {
@@ -83,6 +83,14 @@ self.addEventListener('fetch', (event) => {
 
   // Skip external requests
   if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  // Let the browser stream video itself. Clips are fetched with range
+  // requests, which this cache would answer with a whole 200 response
+  // (iOS Safari then refuses to play), and multi-MB files would fill a
+  // phone's storage for something watched once.
+  if (event.request.headers.has('range') || /\.(mp4|webm)$/i.test(new URL(event.request.url).pathname)) {
     return;
   }
 
