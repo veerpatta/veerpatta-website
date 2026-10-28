@@ -69,8 +69,10 @@ jobs:
 
       # _site/ is committed because Cloudflare deploys it directly - no Ruby
       # runs on the deployment path. Keep it in lockstep with the sources.
-      # [skip ci] stops this commit re-triggering this workflow; Cloudflare
-      # still sees the push and deploys the refreshed files.
+      # No [skip ci] in the message: Cloudflare Workers Builds honours it too,
+      # so it skipped every one of these commits and the live site ran one
+      # push behind main. A push made with GITHUB_TOKEN never starts another
+      # workflow run, so dropping it cannot cause a loop.
       - name: Commit rebuilt site
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
@@ -81,5 +83,5 @@ jobs:
             echo "_site already up to date"
             exit 0
           fi
-          git commit -m "chore: rebuild _site [skip ci]"
+          git commit -m "chore: rebuild _site"
           git push origin HEAD:main
