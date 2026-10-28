@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Real school photos in every design placeholder (2026-10-28)**:
+  - 30 photos chosen from the school's Google Drive (campus shoot, Sports Day 2026, Learning Exhibition, robotics training, staff portrait) and Google Photos (Sports Day 2026, Inter House Dance 2025, Cultural 2026). Nothing from the RESTRICTED student-portrait folders or the AI-generated folders
+  - Home: hero photo behind the copy (a portrait crop on phones, the wide shot from 768px), the five stage cards, the digital panel and the life mosaic. Also the Gallery albums, Beyond cards, Digital panel and the Notices photo highlights
+  - Gallery grid now renders the photos at build time with a new Campus filter, and the filter pills are in Hindi on `/hi/`. `gallery-loader.js` keeps them and still appends anything registered in `gallery-items.js`
+  - Mobile: each photo is WebP at 480/800/1200px (hero also 1600) with `srcset`/`sizes`, so a phone downloads about 20-50 KB per photo; `width`/`height` reserve the space; everything below the hero loads lazily. EXIF is stripped, so no GPS location is published. 3.7 MB for all 30 photos in every size
+  - `_data/photos.yml` maps photos to slots and carries English and Hindi alt text; `_includes/design/photo.html` renders them; `scripts/optimize_photos.py` regenerates both from `scripts/photos-manifest.json`
+  - Slots with no real photo yet keep their placeholder: the Bus fleet and Library albums, and the testimonial portraits. Home photo tiles now describe the photos they show (EN and HI)
+  - `/assets/media/photos/*` is cached for 30 days; service worker cache bumped to `vpps-v9`
 - **Governing trust stated on the home page (2026-09-08)**:
   - The hero now carries a line naming the trust the school runs under - "Run by Rani Heer Kanwar Shikshan Sansthan Trust", and रानी हीर कंवर शिक्षण संस्थान ट्रस्ट द्वारा संचालित on `/hi/`
   - Copy lives in `_data/design/<lang>.yml` as `heroTrust`, so the one home template serves both languages

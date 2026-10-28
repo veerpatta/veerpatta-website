@@ -10,10 +10,15 @@
     <div class="dc-grid dc-grid-290">
       {% for b in d.beyondCards %}
       <div class="dc-stage scroll-fade-up">
+        {% assign pk = site.data.photos.slots.beyond[forloop.index0] %}
+        {% if pk %}
+        <div class="dc-stage-shot has-photo">{% include design/photo.html key=pk sizes="(min-width: 1100px) 370px, (min-width: 640px) 46vw, 92vw" %}</div>
+        {% else %}
         <div class="dc-stage-shot">
           <div class="dc-slot-kicker">Photo 4:3</div>
           <div class="dc-stage-shot-note">{{ b.shot }}</div>
         </div>
+        {% endif %}
         <div class="dc-stage-body">
           <span class="dc-tag">{{ b.tag }}</span>
           <div class="dc-stage-name">{{ b.name }}</div>

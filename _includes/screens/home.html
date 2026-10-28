@@ -15,8 +15,9 @@
 {% if lang == 'hi' %}{% assign home_path = '/hi/' %}{% else %}{% assign home_path = '/en/' %}{% endif %}
 
 {% comment %} 1 — HERO {% endcomment %}
-<section class="dc-hero">
-  <div class="dc-hero-drift"><div class="dc-hero-wash"></div></div>
+{% assign ps = site.data.photos.slots %}
+<section class="dc-hero{% if ps.hero %} dc-hero--photo{% endif %}">
+  <div class="dc-hero-drift"><div class="dc-hero-wash"></div>{% include design/photo.html key=ps.hero_tall wide=ps.hero class="dc-hero-photo" eager=true %}</div>
   <div class="dc-hero-scrim"></div>
   <div class="dc-hero-scrim-b"></div>
 
@@ -42,11 +43,13 @@
     </div>
 
     <div class="dc-hero-aside">
+      {% unless ps.hero %}
       <div class="dc-slot dc-slot-video">
         <div class="dc-slot-kicker">Hero video · 1920×1080 · loop</div>
         <div class="dc-slot-title">Drone push-in over the campus, cutting to morning assembly, a smart classroom, and the NCC parade</div>
         <div class="dc-slot-note">20–25 sec · no on-camera speech · golden-hour light</div>
       </div>
+      {% endunless %}
       <div class="dc-seats">
         <div class="dc-seats-label">{{ t.seatsLabel }}</div>
         <div class="dc-seats-row"><span class="dc-seats-num">30</span><span class="dc-seats-per">{{ t.perClass }}</span></div>
@@ -130,10 +133,15 @@
     <div class="dc-grid dc-grid-210 dc-mt-46">
       {% for st in d.stages %}
       <div class="dc-stage scroll-fade-up">
+        {% assign pk = ps.stages[forloop.index0] %}
+        {% if pk %}
+        <div class="dc-stage-shot has-photo">{% include design/photo.html key=pk sizes="(min-width: 1100px) 230px, (min-width: 520px) 46vw, 92vw" %}</div>
+        {% else %}
         <div class="dc-stage-shot">
           <div class="dc-slot-kicker">Photo 4:3</div>
           <div class="dc-stage-shot-note">{{ st.shot }}</div>
         </div>
+        {% endif %}
         <div class="dc-stage-body">
           <div class="dc-stage-name">{{ st.name }}</div>
           {% if st.years %}<div class="dc-stage-years">{{ st.years }}</div>{% endif %}
@@ -172,10 +180,14 @@
     </div>
 
     <div class="dc-digital-panel">
+      {% if ps.digital %}
+      <div class="dc-slot-wide has-photo">{% include design/photo.html key=ps.digital sizes="(min-width: 900px) 560px, 92vw" %}</div>
+      {% else %}
       <div class="dc-slot dc-slot-wide">
         <div class="dc-slot-kicker">Photo 16:10</div>
         <div class="dc-slot-title">Students at Chromebooks in the smart classroom, teacher at the panel board</div>
       </div>
+      {% endif %}
       <div class="dc-apps">
         {% for app in d.apps %}
         <div class="dc-app scroll-fade-up">
@@ -279,15 +291,30 @@
       </a>
     </div>
     <div class="dc-mosaic">
+      {% if ps.life %}
+      <div class="dc-mosaic-hero has-photo">
+        {% include design/photo.html key=ps.life sizes="(min-width: 700px) 50vw, 92vw" %}
+        <span class="dc-photo-cap">{{ site.data.photos.items[ps.life].alt[lang] }}</span>
+      </div>
+      {% else %}
       <div class="dc-mosaic-hero dc-slot">
         <div class="dc-slot-kicker">Video 16:9</div>
         <div class="dc-slot-title">60-second campus walkthrough: gate, assembly ground, labs, library, playfield</div>
       </div>
+      {% endif %}
       {% for g in d.galleryTiles %}
+      {% assign pk = ps.tiles[forloop.index0] %}
+      {% if pk %}
+      <div class="dc-tile has-photo scroll-fade-up">
+        {% include design/photo.html key=pk sizes="(min-width: 700px) 25vw, 92vw" %}
+        <span class="dc-photo-cap">{{ g.label }}</span>
+      </div>
+      {% else %}
       <div class="dc-tile dc-slot scroll-fade-up">
         <div class="dc-slot-kicker">{{ g.ratio | default: 'Photo' }}</div>
-        <div class="dc-tile-note">{{ g.note | default: g.title }}</div>
+        <div class="dc-tile-note">{{ g.label }}</div>
       </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
