@@ -3,6 +3,7 @@
 {% assign d = site.data.design[lang] %}
 {% assign t = d.t %}
 
+<main id="main-content">
 {% include design/page-head.html kicker=t.dKicker title=t.dTitle sub=t.dSub %}
 
 <section class="dc-band">
@@ -23,7 +24,10 @@
 
     <div class="dc-digital-panel">
       {% if site.data.photos.slots.digital %}
-      <div class="dc-slot-wide has-photo">{% include design/photo.html key=site.data.photos.slots.digital sizes="(min-width: 900px) 560px, 92vw" %}</div>
+      <figure class="dc-learning-figure">
+        <div class="dc-slot-wide has-photo">{% include design/photo.html key=site.data.photos.slots.digital sizes="(min-width: 900px) 640px, 92vw" %}</div>
+        {% if site.data.photos.items[site.data.photos.slots.digital].illustration %}<figcaption class="dc-image-note">{{ t.learningImageCaption }}</figcaption>{% endif %}
+      </figure>
       {% else %}
       <div class="dc-slot dc-slot-wide">
         <div class="dc-slot-kicker">Photo 16:10</div>
@@ -55,3 +59,4 @@
     </div>
   </div>
 </section>
+</main>

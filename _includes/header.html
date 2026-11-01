@@ -96,7 +96,9 @@
     {% comment %} Logo - Always visible, optimized size {% endcomment %}
     <div class="header-logo">
       <a href="{{ home_path | relative_url }}" aria-label="{{ brand_full }} {{ nav_home }}">
-        <img src="{{ '/assets/images/VPPS LOGO ONNLY.jpg' | relative_url }}" 
+        <img src="{{ '/assets/images/school-logo-120.webp' | relative_url }}"
+             srcset="{{ '/assets/images/school-logo-120.webp' | relative_url }} 120w, {{ '/assets/images/school-logo-240.webp' | relative_url }} 240w"
+             sizes="60px"
              alt="{{ brand_full }} {{ logo_word }}" 
              class="school-logo"
              width="60" 

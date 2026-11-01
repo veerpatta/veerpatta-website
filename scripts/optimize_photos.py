@@ -22,7 +22,10 @@ Reads scripts/photos-manifest.json. Each photo there is looked up as
     GPS location or camera details are published.
 It then rewrites _data/photos.yml, which the templates read.
 
-Needs Pillow (pip install pillow). Originals stay out of the repo.
+Also derives the header logo and small favicon from the existing school
+logo in assets/images, without changing its artwork or the original file.
+
+Needs Pillow (pip install pillow). Photo originals stay out of the repo.
 """
 import json
 import os
@@ -56,6 +59,20 @@ def q(s):
     return json.dumps(s, ensure_ascii=False)
 
 
+def optimize_brand():
+    directory = os.path.join(ROOT, "assets", "images")
+    with Image.open(os.path.join(directory, "VPPS LOGO ONNLY.jpg")) as source:
+        logo = source.convert("RGB")
+    for width in (120, 240):
+        logo.resize((width, width), Image.LANCZOS).save(
+            os.path.join(directory, f"school-logo-{width}.webp"),
+            "WEBP", quality=84, method=6,
+        )
+    logo.resize((48, 48), Image.LANCZOS).save(
+        os.path.join(directory, "school-mark-48.png"), "PNG", optimize=True,
+    )
+
+
 def _entry(pid, p, widths, top, top_h):
     out = [
         f"  {pid}:",
@@ -67,6 +84,8 @@ def _entry(pid, p, widths, top, top_h):
         out.append(f"    pos: {q(p['pos'])}")
     if p.get("gallery"):
         out.append(f"    gallery: {p['gallery']}")
+    if p.get("illustration"):
+        out.append("    illustration: true")
     out += [
         "    alt:",
         f"      en: {q(p['alt']['en'])}",
@@ -145,3 +164,4 @@ def main(src_dir):
 
 if __name__ == "__main__":
     main(sys.argv[1])
+    optimize_brand()

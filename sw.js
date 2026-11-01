@@ -1,7 +1,7 @@
 // Service Worker for Shri Veer Patta Senior Secondary School Website
 // PWA-lite implementation with stale-while-revalidate caching strategy
 
-const CACHE_VERSION = 'vpps-v11';
+const CACHE_VERSION = 'vpps-v12';
 
 // Compute base path dynamically to work with or without a baseurl
 const computeBasePath = () => {
@@ -42,7 +42,9 @@ const CORE_ASSETS = [
   withBase('/assets/js/gallery-loader.js'),
   withBase('/assets/js/gallery-items.js'),
   withBase('/assets/js/design-ui.js'),
-  withBase('/assets/images/VPPS LOGO ONNLY.jpg')
+  withBase('/assets/images/school-logo-120.webp'),
+  withBase('/assets/images/school-logo-240.webp'),
+  withBase('/assets/images/school-mark-48.png')
 ];
 
 // Install event - cache core assets
