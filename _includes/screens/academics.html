@@ -3,12 +3,21 @@
 {% assign d = site.data.design[lang] %}
 {% assign t = d.t %}
 
+<main id="main-content">
 {% include design/page-head.html kicker=t.acKicker title=t.acTitle sub=t.acSub %}
 
 <section class="dc-band">
-  <div class="dc-wrap">
-    <div class="dc-head-stack"><h2 class="dc-h2 scroll-fade-up">{{ t.leadTitle }}</h2></div>
-    <div class="dc-grid dc-grid-210 dc-mt-46">
+  <div class="dc-wrap dc-academics-lead">
+    {%- assign learning_photo = site.data.photos.slots.academics -%}
+    {% if learning_photo -%}
+    <figure class="dc-learning-figure dc-academics-visual">
+      <div class="dc-academics-shot">{% include design/photo.html key=learning_photo sizes="(min-width: 1024px) 620px, 92vw" %}</div>
+      {% if site.data.photos.items[learning_photo].illustration %}<figcaption class="dc-image-note">{{ t.learningImageCaption }}</figcaption>{% endif %}
+    </figure>
+    {% endif -%}
+    <div class="dc-academics-copy">
+      <div class="dc-head-stack"><h2 class="dc-h2 scroll-fade-up">{{ t.leadTitle }}</h2></div>
+      <div class="dc-grid dc-grid-210 dc-mt-46">
       {% for l in d.leadWeek %}
       <div class="dc-answer scroll-fade-up">
         <span class="dc-step-n" aria-hidden="true">{{ l.n }}</span>
@@ -16,6 +25,7 @@
         <p class="dc-answer-body">{{ l.body }}</p>
       </div>
       {% endfor %}
+      </div>
     </div>
   </div>
 </section>
@@ -42,7 +52,6 @@
     </div>
   </div>
 </section>
-
 <section class="dc-band">
   <div class="dc-wrap">
     <div class="dc-head-stack"><h2 class="dc-h2 scroll-fade-up">{{ t.streamsTitle }}</h2></div>
@@ -76,3 +85,4 @@
     </div>
   </div>
 </section>
+</main>

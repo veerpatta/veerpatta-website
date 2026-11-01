@@ -390,11 +390,43 @@ items:
     alt:
       en: "Campus film: steps up to the main building"
       hi: "कैंपस फ़िल्म: मुख्य भवन तक जाती सीढ़ियाँ"
+  ai-campus-hero:
+    widths: [640, 960, 1280, 1600]
+    w: 1600
+    h: 900
+    illustration: true
+    alt:
+      en: "AI-enhanced illustration of the Veerpatta Public School entrance, with three pupils in white and navy uniforms"
+      hi: "वीरपट्टा पब्लिक स्कूल के प्रवेश द्वार का एआई से संवारा गया चित्रण, सफ़ेद और नेवी वर्दी में तीन विद्यार्थियों के साथ"
+  ai-campus-portrait:
+    widths: [480, 800, 1080]
+    w: 1080
+    h: 1440
+    illustration: true
+    alt:
+      en: "AI-enhanced portrait illustration of the school entrance and two pupils in white and navy uniforms"
+      hi: "विद्यालय के प्रवेश द्वार और सफ़ेद व नेवी वर्दी में दो विद्यार्थियों का एआई से संवारा गया लंबवत चित्रण"
+  ai-computer-learning:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 751
+    illustration: true
+    alt:
+      en: "AI illustration of pupils learning at computers with a teacher, based on school references"
+      hi: "विद्यालय के संदर्भों पर आधारित एआई चित्रण: शिक्षिका के साथ कंप्यूटर पर सीखते विद्यार्थी"
+  ai-classroom-learning:
+    widths: [480, 800, 1200]
+    w: 1200
+    h: 905
+    illustration: true
+    alt:
+      en: "AI illustration of 22 pupils in white and navy uniforms taking part in a classroom lesson with their teacher"
+      hi: "शिक्षिका के साथ कक्षा के पाठ में भाग लेते सफ़ेद और नेवी वर्दी में 22 विद्यार्थियों का एआई चित्रण"
 
 slots:
-  hero: campus-lawn
-  hero_tall: campus-lawn-tall
-  digital: computer-lab
+  hero: ai-campus-hero
+  hero_tall: ai-campus-portrait
+  digital: ai-computer-learning
   life: sports-drill
   stages: [activity-room, classroom, learning-exhibition, computer-lab-wide, prize-certificate]
   tiles: [staff-team, assembly-courtyard, ncc-cadets, dance-lawn]
@@ -404,5 +436,6 @@ slots:
   visit: [campus-front, veranda, school-office]
   tour_strip: [school-hall, veranda, classroom, lawn-wide]
   about_team: staff-team
+  academics: ai-classroom-learning
 
 gallery_order: [campus-lawn, arched-stairs, school-hall, veranda, classroom, sports-finish, paved-courtyard, computer-lab-wide, dance-lawn, campus-front, staff-team, ncc-cadets, lawn-wide, school-office, science-lab, function-stage, veranda-courtyard, campus-approach, building-palm, computer-lab, sports-drill, learning-exhibition, prize-podium, sports-sprint, dance-group, assembly-courtyard, sports-oath, ncc-podium, robotics-training, sports-start, dance-line, campus-evening, prize-certificate, activity-room, sack-race, three-legged-race, classroom-benches, musical-chairs, basketball-court, cricket-nets, volleyball-court, football-lawn, open-air-stage]

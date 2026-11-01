@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Website imagery refresh (2026-11-01)**:
+  - Approved AI-enhanced campus illustrations replace the home hero, with a dedicated portrait on phones and a landscape from 768px. Exposed roof rods and stray pipe stubs are removed in the approved v3 images. On phones and tablets the image appears above the copy; desktop copy stays on the quiet left of the campus view. The admissions detail moves below the image, and the background video no longer covers the new still.
+  - Approved computer-learning and full-classroom illustrations appear in the Digital Campus and Academics sections, with English and Hindi captions and alt text identifying them as illustrations. The wide classroom shows 22 pupils in white polos with navy trim. Genuine gallery, facility, admissions and film photos remain unchanged.
+  - Compressed responsive WebP derivatives, intrinsic dimensions and lazy loading for supporting images. Source provenance is retained in the photo manifest; the service worker cache is now `vpps-v12`.
+  - The refreshed pages have a main content landmark. Removed two unused font stylesheet preloads that competed with the hero request; the existing applied font stylesheets remain.
+  - Responsive header logo and a small favicon derived from the existing school artwork reduce image downloads on phones; the original logo remains available.
+
 ### Added
 - **Campus photo refresh and a campus film (2026-10-28)**:
   - 19 campus photos re-done from the full-size Drive originals (13_AI_Visual_Library/03_CAMPUS, March and April 2026 shoot) with a new finishing step, `scripts/grade.py`: white balance from the white walls, exposure and shadow lift, clarity only where there is detail (so skies do not band), straightened verticals on wide-angle shots, greener grass. Nothing in the frame is retouched; crops only remove the photographer's shadow and bare earth. `optimize_photos.py` takes a `grade` block per photo and now skips photos whose original is not supplied, keeping their published files

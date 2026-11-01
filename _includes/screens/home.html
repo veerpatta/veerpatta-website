@@ -16,8 +16,12 @@
 
 {% comment %} 1 — HERO {% endcomment %}
 {% assign ps = site.data.photos.slots %}
-<section class="dc-hero{% if ps.hero %} dc-hero--photo{% endif %}">
-  <div class="dc-hero-drift"{% if site.data.videos.slots.hero %} data-hero-video="{{ '/assets/media/videos/' | append: site.data.videos.slots.hero | append: '-720.mp4' | relative_url }}"{% endif %}><div class="dc-hero-wash"></div>{% include design/photo.html key=ps.hero_tall wide=ps.hero class="dc-hero-photo" eager=true %}</div>
+<main id="main-content">
+<section class="dc-hero dc-hero--illustrated{% if ps.hero %} dc-hero--photo{% endif %}">
+  <figure class="dc-hero-drift">
+    {% include design/photo.html key=ps.hero_tall wide=ps.hero class="dc-hero-photo" eager=true %}
+    <figcaption class="dc-hero-image-note">{{ t.heroImageCaption }}</figcaption>
+  </figure>
   <div class="dc-hero-scrim"></div>
   <div class="dc-hero-scrim-b"></div>
 
@@ -43,23 +47,15 @@
       </div>
     </div>
 
-    <div class="dc-hero-aside">
-      {% unless ps.hero %}
-      <div class="dc-slot dc-slot-video">
-        <div class="dc-slot-kicker">Hero video · 1920×1080 · loop</div>
-        <div class="dc-slot-title">Drone push-in over the campus, cutting to morning assembly, a smart classroom, and the NCC parade</div>
-        <div class="dc-slot-note">20–25 sec · no on-camera speech · golden-hour light</div>
-      </div>
-      {% endunless %}
-      <div class="dc-seats">
-        <div class="dc-seats-label">{{ t.seatsLabel }}</div>
-        <div class="dc-seats-row"><span class="dc-seats-num">30</span><span class="dc-seats-per">{{ t.perClass }}</span></div>
-        <div class="dc-seats-bar"><div class="dc-seats-fill"></div></div>
-        <div class="dc-seats-note">{{ t.seatsNote }}</div>
-      </div>
-    </div>
   </div>
 </section>
+<div class="dc-seats-band">
+  <div class="dc-wrap dc-seats-band-inner">
+    <div class="dc-seats-label">{{ t.seatsLabel }}</div>
+    <div class="dc-seats-band-count"><span class="dc-seats-num">30</span><span class="dc-seats-per">{{ t.perClass }}</span></div>
+    <p class="dc-seats-note">{{ t.seatsNote }}</p>
+  </div>
+</div>
 
 {% comment %} 2 — PARTNERS {% endcomment %}
 <section class="dc-partners">
@@ -251,7 +247,10 @@
 
     <div class="dc-digital-panel">
       {% if ps.digital %}
-      <div class="dc-slot-wide has-photo">{% include design/photo.html key=ps.digital sizes="(min-width: 900px) 560px, 92vw" %}</div>
+      <figure class="dc-learning-figure">
+        <div class="dc-slot-wide has-photo">{% include design/photo.html key=ps.digital sizes="(min-width: 900px) 640px, 92vw" %}</div>
+        {% if site.data.photos.items[ps.digital].illustration %}<figcaption class="dc-image-note">{{ t.learningImageCaption }}</figcaption>{% endif %}
+      </figure>
       {% else %}
       <div class="dc-slot dc-slot-wide">
         <div class="dc-slot-kicker">Photo 16:10</div>
@@ -410,3 +409,4 @@
     </div>
   </div>
 </section>
+</main>

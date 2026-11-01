@@ -1880,6 +1880,58 @@ section.container.contact-teaser {
   .dc-hero--photo .dc-hero-scrim { background: linear-gradient(90deg, rgba(11,22,49,0.90) 0%, rgba(11,22,49,0.72) 42%, rgba(11,22,49,0.18) 100%); }
 }
 
+/* The approved campus illustration needs its sign and pupils in view.
+   Phones/tablets get the complete image above the copy; a desktop has
+   room for copy on the landscape's quiet left, without a card on faces. */
+.dc-hero--illustrated { padding: 0; min-height: 0; }
+.dc-hero--illustrated .dc-hero-drift { position: relative; inset: auto; margin: 0; aspect-ratio: 3 / 4; animation: none; }
+.dc-hero--illustrated .dc-hero-scrim,
+.dc-hero--illustrated .dc-hero-scrim-b { display: none; }
+.dc-hero--illustrated .dc-hero-grid { display: block; width: 100%; padding-top: 32px; padding-bottom: 40px; }
+.dc-hero--illustrated .dc-hero-copy { max-width: 700px; }
+.dc-hero-image-note {
+  position: absolute; right: 16px; bottom: 16px; left: 16px; z-index: 1;
+  width: fit-content; max-width: calc(100% - 32px); margin: 0 0 0 auto;
+  padding: 7px 11px; border-radius: 8px;
+  background: rgba(11,22,49,0.88); color: var(--d-white);
+  font-size: 11.5px; line-height: 1.5;
+}
+.dc-seats-band { background: var(--d-surface); border-bottom: 1px solid var(--d-line); }
+.dc-seats-band-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-top: 20px; padding-bottom: 20px; }
+.dc-seats-band-count { display: flex; align-items: baseline; gap: 8px; }
+.dc-seats-band .dc-seats-num { font-size: 30px; }
+.dc-seats-band .dc-seats-note { margin: 0; flex-basis: 100%; }
+.dc-learning-figure { margin: 0; }
+.dc-image-note { margin: 0; padding: 10px 16px; color: var(--d-muted); background: var(--d-surface); font-size: 12px; line-height: 1.5; }
+.dc-academics-lead { display: grid; gap: 32px; }
+.dc-academics-visual { align-self: start; overflow: hidden; border: 1px solid var(--d-line); border-radius: var(--d-r-lg); }
+.dc-academics-shot { aspect-ratio: 4 / 3; }
+.dc-academics-copy .dc-grid { margin-top: 28px; }
+@media (min-width: 768px) {
+  .dc-hero--illustrated .dc-hero-drift { aspect-ratio: 1672 / 941; }
+  .dc-hero--illustrated .dc-hero-grid { padding-top: 40px; padding-bottom: 48px; }
+  .dc-seats-band .dc-seats-note { flex: 1; }
+}
+@media (min-width: 1024px) {
+  .dc-academics-lead { grid-template-columns: 0.95fr 1.05fr; align-items: center; gap: 40px; }
+  .dc-academics-visual { align-self: center; }
+}
+@media (min-width: 1280px) {
+  .dc-hero--illustrated { min-height: calc(100vw * 941 / 1672); display: flex; align-items: center; }
+  .dc-hero--illustrated .dc-hero-drift { position: absolute; inset: 0; aspect-ratio: auto; }
+  .dc-hero--illustrated .dc-hero-scrim {
+    display: block;
+    background: linear-gradient(90deg, rgba(11,22,49,0.94) 0%, rgba(11,22,49,0.88) 27%, rgba(11,22,49,0.46) 40%, rgba(11,22,49,0) 58%);
+  }
+  .dc-hero--illustrated .dc-hero-copy { max-width: 37%; }
+  .dc-hero--illustrated .dc-hero-title { font-size: clamp(36px, 3.3vw, 58px); }
+  .dc-hero--illustrated .dc-hero-sub { font-size: 16px; }
+  .dc-hero--illustrated .dc-eyebrow { font-size: 11px; letter-spacing: 0.02em; }
+  .dc-hero--illustrated .dc-hero-cta { gap: 12px; margin-top: 28px; }
+  .dc-hero--illustrated .dc-btn { padding: 15px 20px; font-size: 14px; }
+  .dc-hero-image-note { right: var(--d-gutter); bottom: 24px; }
+}
+
 /* Campus film band (home, #campus-film) */
 .dc-tour { scroll-margin-top: 80px; }
 .dc-tour-grid { align-items: center; }

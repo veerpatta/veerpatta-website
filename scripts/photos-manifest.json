@@ -1,5 +1,5 @@
 {
-  "_comment": "Source of truth for site photos. Run: python scripts/optimize_photos.py <folder of originals named <id>.jpg>. Originals came from the school Drive (VPPS School Marketing, 13_AI_Visual_Library real-photo folders) and Google Photos (Sports Day 2026, Inter House Dance 2025, Veer Patta Cultural 2026). No photos from RESTRICTED or AI-generated folders.",
+  "_comment": "Source of truth for site photos and explicitly labelled illustrations. Run: python scripts/optimize_photos.py <originals_dir>. Genuine photos came from school Drive and Google Photos; approved AI illustrations are marked illustration: true, have source provenance, and are excluded from the documentary gallery and facilities.",
   "items": {
     "campus-lawn": {
       "widths": [
@@ -892,12 +892,91 @@
         "en": "Campus film: steps up to the main building",
         "hi": "कैंपस फ़िल्म: मुख्य भवन तक जाती सीढ़ियाँ"
       }
+    },
+    "ai-campus-hero": {
+      "src": "VPPS_AI_Website_Hero_Landscape_v3.png",
+      "widths": [
+        640,
+        960,
+        1280,
+        1600
+      ],
+      "quality": 68,
+      "enhance": false,
+      "sharpen": false,
+      "illustration": true,
+      "alt": {
+        "en": "AI-enhanced illustration of the Veerpatta Public School entrance, with three pupils in white and navy uniforms",
+        "hi": "वीरपट्टा पब्लिक स्कूल के प्रवेश द्वार का एआई से संवारा गया चित्रण, सफ़ेद और नेवी वर्दी में तीन विद्यार्थियों के साथ"
+      },
+      "_source": "Approved cleaned hero v3, Library libfile_7522d3e964fc8191b5f0c024b0de786e, VPPS_AI_Website_Hero_Landscape_v3.png, 1672x941; exposed rooftop rods, stray pipe stubs and small facade blemishes removed; synthetic pupils and enhanced campus, not documentary evidence",
+      "_source_sha256": "0dc4f687a477826da4c9be01f4258f6c91d86b40c8bdb74d718115a551caaac0"
+    },
+    "ai-campus-portrait": {
+      "src": "VPPS_AI_Website_Hero_Portrait_v3.png",
+      "widths": [
+        480,
+        800,
+        1080
+      ],
+      "quality": 72,
+      "enhance": false,
+      "sharpen": false,
+      "illustration": true,
+      "alt": {
+        "en": "AI-enhanced portrait illustration of the school entrance and two pupils in white and navy uniforms",
+        "hi": "विद्यालय के प्रवेश द्वार और सफ़ेद व नेवी वर्दी में दो विद्यार्थियों का एआई से संवारा गया लंबवत चित्रण"
+      },
+      "_source": "Approved cleaned hero v3, Library libfile_420cddfd4a5881919bd440564352d1db, VPPS_AI_Website_Hero_Portrait_v3.png, 1086x1448; exposed rooftop rods, stray pipe stubs and small facade blemishes removed; synthetic pupils and enhanced campus, not documentary evidence",
+      "_source_sha256": "9505a3fdd60c3a3511f0629c9426e23d927808405ec9c75d3bf8a836e1522e60"
+    },
+    "ai-computer-learning": {
+      "src": "VPPS_AI_Concept_Computer_Learning_White_Navy.png",
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "quality": 74,
+      "enhance": false,
+      "sharpen": false,
+      "illustration": true,
+      "crop": [
+        0,
+        0.085,
+        1,
+        0.915
+      ],
+      "alt": {
+        "en": "AI illustration of pupils learning at computers with a teacher, based on school references",
+        "hi": "विद्यालय के संदर्भों पर आधारित एआई चित्रण: शिक्षिका के साथ कंप्यूटर पर सीखते विद्यार्थी"
+      },
+      "_source": "Approved Library libfile_2d965d28009c81918da8da12e23999e3, VPPS_AI_Concept_Computer_Learning_White_Navy.png, 1445x1088; illustrative learning scene, not a facility photograph",
+      "_source_sha256": "300a9e508a0a780a5581460174a76f1585abbeeb08e401b94b35d7636c347741"
+    },
+    "ai-classroom-learning": {
+      "src": "VPPS_AI_Classroom_White_Navy_22Students_v2.png",
+      "widths": [
+        480,
+        800,
+        1200
+      ],
+      "quality": 74,
+      "enhance": false,
+      "sharpen": false,
+      "illustration": true,
+      "alt": {
+        "en": "AI illustration of 22 pupils in white and navy uniforms taking part in a classroom lesson with their teacher",
+        "hi": "शिक्षिका के साथ कक्षा के पाठ में भाग लेते सफ़ेद और नेवी वर्दी में 22 विद्यार्थियों का एआई चित्रण"
+      },
+      "_source": "Approved full classroom revision, Library libfile_0b768adb58488191bd8e90a557b19358, VPPS_AI_Classroom_White_Navy_22Students_v2.png, 1444x1089; 22 visible pupils in white-base polos with navy trim, illustrative lesson, not a staff or classroom photograph",
+      "_source_sha256": "4309f8b8ca9949599cb299b6492eea63c1711c4e02d1ff89a50fd4e15f3cff8f"
     }
   },
   "slots": {
-    "hero": "campus-lawn",
-    "hero_tall": "campus-lawn-tall",
-    "digital": "computer-lab",
+    "hero": "ai-campus-hero",
+    "hero_tall": "ai-campus-portrait",
+    "digital": "ai-computer-learning",
     "life": "sports-drill",
     "stages": [
       "activity-room",
@@ -944,7 +1023,8 @@
       "classroom",
       "lawn-wide"
     ],
-    "about_team": "staff-team"
+    "about_team": "staff-team",
+    "academics": "ai-classroom-learning"
   },
   "gallery_order": [
     "campus-lawn",
