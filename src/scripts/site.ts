@@ -9,20 +9,30 @@ if(menu){
 }
 const enquiry=document.querySelector<HTMLDialogElement>('#enquiry-dialog');
 const photoDialog=document.querySelector<HTMLDialogElement>('#photo-dialog');
-let opener:HTMLElement|null=null;
+const dialogOpeners=new WeakMap<HTMLDialogElement,HTMLElement>();
 function openDialog(dialog:HTMLDialogElement,trigger:HTMLElement){
  if(typeof dialog.showModal!=='function') return false;
  if(dialog.open) return true;
- opener=trigger;
+ dialogOpeners.set(dialog,trigger);
  if(menu) menu.open=false;
  dialog.showModal();
  document.body.classList.add('dialog-open');
  return true;
 }
+function finishDialogClose(dialog:HTMLDialogElement){
+ if(dialog.open) return;
+ const trigger=dialogOpeners.get(dialog);
+ if(!trigger) return;
+ dialogOpeners.delete(dialog);
+ document.body.classList.toggle('dialog-open',!!document.querySelector('dialog[open]'));
+ if(trigger.isConnected) trigger.focus();
+}
+function closeDialog(dialog:HTMLDialogElement){dialog.close();finishDialogClose(dialog);}
 for(const dialog of document.querySelectorAll<HTMLDialogElement>('dialog')) {
- dialog.querySelector('[data-dialog-close]')?.addEventListener('click',()=>dialog.close());
- dialog.addEventListener('click',e=>{if(e.target===dialog) {const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dialog.close();}});
- dialog.addEventListener('close',()=>{document.body.classList.remove('dialog-open');if(opener?.isConnected) opener.focus();opener=null;});
+ dialog.querySelector('[data-dialog-close]')?.addEventListener('click',()=>closeDialog(dialog));
+ dialog.addEventListener('click',e=>{if(e.target===dialog) {const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) closeDialog(dialog);}});
+ dialog.addEventListener('cancel',event=>{event.preventDefault();closeDialog(dialog);});
+ dialog.addEventListener('close',()=>finishDialogClose(dialog));
 }
 for(const trigger of document.querySelectorAll<HTMLAnchorElement>('[data-enquiry-open]')) trigger.addEventListener('click',e=>{if(enquiry&&openDialog(enquiry,trigger))e.preventDefault();});
 for(const trigger of document.querySelectorAll<HTMLAnchorElement>('[data-photo-open]')) trigger.addEventListener('click',e=>{

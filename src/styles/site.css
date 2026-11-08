@@ -34,3 +34,6 @@
 @media print{.site-header,.topbar,.site-footer,.visit-banner,.mobile-contact,dialog,.skip-link{display:none!important}body{color:#000;background:#fff}.section{padding:25px 0}.page-head{padding:20px 0}.wrap{width:100%}a{text-decoration:none}.button{display:none!important}[data-reveal]{animation:none}}
 /* Route callouts retain readable contrast when nested in a navy section. */
 @layer utilities { .route-banner{color:var(--navy)} .route-banner .eyebrow{color:var(--blue)} .route-banner p{color:var(--muted)} }
+
+/* Keep the photo label inside the curved hero crop at every width. */
+@layer utilities { .hero-photo .photo-stamp{left:50%;right:auto;transform:translateX(-50%)} }
