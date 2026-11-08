@@ -1,7 +1,8 @@
 {
-  // Cloudflare Workers (static assets) deployment for the Jekyll site.
+  // Cloudflare Workers (static assets) deployment for the Astro site.
   //
-  // Jekyll builds into _site/ and Cloudflare uploads that directory as-is.
+  // Astro builds into _site/. Commit that output with its sources; Cloudflare
+  // uploads the committed directory as-is without running the Astro build.
   // Almost every request is answered straight from that asset store. The one
   // exception is video: worker.js runs first for /assets/media/videos/* to
   // answer byte-range requests, which the asset store ignores and which

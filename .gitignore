@@ -52,7 +52,6 @@ tmp/
 
 # Node.js (if ever needed)
 node_modules/
-package-lock.json
 yarn.lock
 
 # Environment variables
@@ -68,3 +67,10 @@ out/
 # Wrangler local state and cache (contains account identifiers)
 .wrangler/
 scripts/__pycache__/
+
+# Generated public staging assets and browser reports
+public/assets/
+.astro/
+playwright-report/
+test-results/
+.superpowers/

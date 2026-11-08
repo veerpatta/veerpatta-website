@@ -1,0 +1,12 @@
+---
+import Photo from './Photo.astro';
+import {pathFor,pick,type Lang} from '../data/site';
+interface Props {lang:Lang;kicker:string;title:string;description:string;image?:string}
+const {lang,kicker,title,description,image}=Astro.props;
+---
+<section class:list={['page-head',{ 'page-head-with-photo':image}]}>
+ <div class="wrap page-head-inner">
+  <div class="page-head-copy"><div class="breadcrumb"><a href={pathFor(lang)}>{pick(lang,'Home','होम')}</a><span aria-hidden="true">/</span><span>{kicker}</span></div><p class="eyebrow"><span></span>{kicker}</p><h1 class="display">{title}</h1><p class="lead">{description}</p></div>
+  {image && <div class="page-head-photo photo-frame"><Photo id={image} lang={lang} eager={true} /></div>}
+ </div>
+</section>

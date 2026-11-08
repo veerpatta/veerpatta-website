@@ -1,60 +1,57 @@
 #!/usr/bin/env bash
-# ---------------------------------------------------------------------------
-# setup.sh — bring a Claude cloud container to a working Jekyll environment.
-#
-#   bash scripts/cloud/setup.sh          # install gems, build, report
-#   bash scripts/cloud/setup.sh --serve  # ...then serve on 127.0.0.1:4000
-#
-# Verified 19 Aug 2026: ruby 3.3.6, bundler and a C toolchain are already in the
-# image, so this is just `bundle install` plus a build. No Ruby version manager
-# and no apt needed.
-# ---------------------------------------------------------------------------
+# Prepare the Astro site using the committed npm lockfile.
+#   bash scripts/cloud/setup.sh          # install, check, build, test
+#   bash scripts/cloud/setup.sh --serve  # then preview _site on port 4321
 set -euo pipefail
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 say() { printf '\n\033[1m==> %s\033[0m\n' "$*"; }
-SERVE=0; [ "${1:-}" = "--serve" ] && SERVE=1
+SERVE=0
+case "${1:-}" in
+  '') ;;
+  --serve) SERVE=1 ;;
+  *) echo "Usage: bash scripts/cloud/setup.sh [--serve]" >&2; exit 2 ;;
+esac
+if [ "$#" -gt 1 ]; then
+  echo "Usage: bash scripts/cloud/setup.sh [--serve]" >&2
+  exit 2
+fi
 
-say "Ruby"
-command -v ruby   >/dev/null || { echo "no ruby in this image" >&2; exit 1; }
-command -v bundle >/dev/null || gem install bundler --no-document
-echo "    $(ruby -v)"
-echo "    bundler $(bundle -v | awk '{print $3}')"
+say "Node.js and npm"
+command -v node >/dev/null || { echo "Install Node.js 24 LTS first (minimum 22.12)." >&2; exit 1; }
+command -v npm >/dev/null || { echo "npm is required; use the npm bundled with Node.js." >&2; exit 1; }
+node -e 'const [major,minor]=process.versions.node.split(".").map(Number); if(major<22 || (major===22 && minor<12)){console.error("Node.js 22.12 or newer is required; Node.js 24 LTS is recommended.");process.exit(1)}'
+printf '    Node %s\n    npm %s\n' "$(node --version)" "$(npm --version)"
 
-say "Gems"
-# Vendored so the install survives inside the checkout and .gitignore already
-# covers vendor/. github-pages pins a large dependency tree; first run is slow.
-bundle config set --local path vendor/bundle >/dev/null
-bundle install --jobs 4
-echo "    $(bundle list 2>/dev/null | grep -c '^  \*') gems"
+say "Install locked dependencies"
+npm ci
 
-say "Build"
-# remote_theme (pages-themes/cayman) is fetched from GitHub at build time, so
-# this step needs network. A container without it fails here, not at serve.
-bundle exec jekyll build
-echo "    $(find _site -type f | wc -l) files, $(du -sh _site | cut -f1)"
+say "Check Astro and TypeScript"
+npm run check
 
-say "Sanity"
-for f in _site/index.html _site/en/index.html _site/hi/index.html; do
-  [ -f "$f" ] && echo "    ok   $f" || { echo "    MISSING $f" >&2; exit 1; }
-done
+say "Build and audit public output"
+npm run build
+
+say "Run unit and output-contract tests"
+npm test
+printf '    %s files, %s\n' "$(find _site -type f | wc -l)" "$(du -sh _site | cut -f1)"
 
 if [ "$SERVE" = "1" ]; then
-  say "Serving on http://127.0.0.1:4000/"
-  exec bundle exec jekyll serve --host 127.0.0.1 --port 4000
+  say "Previewing the built site at http://127.0.0.1:4321/"
+  exec npm run preview -- --host 127.0.0.1 --port 4321
 fi
 
 cat <<'EOT'
 
 Next:
-  bundle exec jekyll serve --host 127.0.0.1 --port 4000   # local preview
-  git push origin main                                    # deploys via Cloudflare
+  npm run dev -- --host 127.0.0.1              # development with live reload
+  npm run preview -- --host 127.0.0.1          # preview the built _site/
+  npx playwright install chromium            # browser install, when available
+  npm run test:e2e                            # separate browser/accessibility suite
 
-Deployment note: this repo deploys through Cloudflare Workers (static assets,
-configured in wrangler.jsonc), which builds from GitHub on every push to main -
-so a push from a cloud container really is the deploy.
-.github/workflows/build.yml is a build check only; it publishes nothing.
-The sibling repo (veerpatta/schoolfees) deploys through Vercel's GitHub App,
-which does NOT react to a container push - it needs scripts/cloud/deploy.sh
-there.
+The checks above do not include browser or real-device testing.
+Review source and rebuilt _site/ together before committing. Pushing to main
+triggers Cloudflare Workers production deployment. Its build command stays
+empty; npx wrangler deploy uploads the committed _site/ without rebuilding it.
+See docs/DEPLOYMENT.md. This script does not commit, push, or deploy anything.
 EOT

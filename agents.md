@@ -1,871 +1,103 @@
-# Agents Guide for Shri Veer Patta Senior Secondary School Website
+# Working on the school website
 
-> **Quick Start for AI Agents**: This document provides everything you need to understand and work effectively on this codebase. Read this first before making any changes.
+Read this guide before changing the repository. The current site is **Astro 7.4.7 + TypeScript**, statically generated into committed `_site/` and deployed through the existing Cloudflare Workers Git integration.
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Technology Stack](#technology-stack)
-- [Critical Constraints](#critical-constraints)
-- [Directory Structure](#directory-structure)
-- [Development Workflow](#development-workflow)
-- [Common Tasks](#common-tasks)
-- [Code Patterns](#code-patterns)
-- [Testing Guidelines](#testing-guidelines)
-- [Deployment](#deployment)
-- [Troubleshooting](#troubleshooting)
+## Required workflow
 
----
+Use Node.js 24 LTS. `package.json` permits Node 22.12 or newer; CI uses Node 24. The npm lockfile is part of the source and must remain committed.
 
-## Project Overview
-
-**Shri Veer Patta Senior Secondary School Website** is a bilingual (English/Hindi) static site built with Jekyll and hosted on Cloudflare Workers. The site serves as the official web presence for a public school in Amet, Rajasthan, India.
-
-### Key Facts
-- **Type**: Static site (Jekyll-based)
-- **Hosting**: Cloudflare Workers
-- **Languages**: English (`/en/`) and Hindi (`/hi/`)
-- **Target Audience**: Parents and students in semi-rural India
-- **Primary Devices**: Budget Android phones on 3G networks
-- **Live URL**: https://veerpatta-website.raj-39e.workers.dev/
-- **Repository Size**: 944KB (50 source files)
-- **Build Time**: 2-3 minutes
-
-### Design Principles
-1. **Mobile-first**: 70% of users on budget smartphones
-2. **Performance**: Optimized for 3G networks (~0.8s First Contentful Paint)
-3. **Accessibility**: WCAG AA compliant
-4. **Bilingual parity**: All changes must be made in both EN and HI
-5. **Simplicity**: No complex frameworks; easy for non-experts to maintain
-
----
-
-## Technology Stack
-
-### Core Technologies
-```yaml
-Static Site Generator: Jekyll 4.x
-Templating:            Liquid
-Content Format:        Markdown with YAML frontmatter
-Styling:               CSS3 (mobile-first, no preprocessor)
-Scripting:             Vanilla JavaScript ES6+ (no frameworks)
-Hosting:               Cloudflare Workers
-CI/CD:                 Cloudflare Workers build; GitHub Actions build check only
-```
-
-### Dependencies (Gemfile)
-```ruby
-gem "jekyll", "~> 3.10.0"        # Jekyll core
-gem "github-pages", "~> 232"     # Plugin bundle (kept from the GitHub Pages era)
-gem "jekyll-remote-theme"        # Remote theme support
-gem "jekyll-seo-tag"             # SEO meta tags
-```
-
-### Key Configuration (_config.yml)
-```yaml
-baseurl: ""    # Empty: Cloudflare Workers serves from the domain root
-remote_theme: pages-themes/cayman@v0.2.0
-plugins: [jekyll-remote-theme, jekyll-seo-tag]
-lang: en                          # Default language
-permalink: pretty                 # Clean URLs
-analytics_enabled: false          # Privacy-first
-```
-
----
-
-## Critical Constraints
-
-### MUST Follow Rules
-
-#### 1. Bilingual Parity (CRITICAL)
-**All content changes MUST be made in both `/en/` and `/hi/` directories.**
-- If you update `en/about.md`, you MUST update `hi/about.md`
-- Test both language versions before committing
-- Use proper Hindi fonts: Noto Sans Devanagari
-
-#### 2. Always Use `relative_url` Filter
-**All URLs in Liquid templates MUST use the `relative_url` filter.**
-```liquid
-<!-- ✓ CORRECT -->
-<a href="{{ '/en/about/' | relative_url }}">About</a>
-<img src="{{ '/assets/images/logo.jpg' | relative_url }}">
-
-<!-- ✗ WRONG (hardcoded; breaks if the base path ever changes) -->
-<a href="/en/about/">About</a>
-<img src="/assets/images/logo.jpg">
-```
-
-#### 3. Mobile-First CSS
-**Write CSS mobile-first with progressive enhancement.**
-```css
-/* Base styles for mobile (320px+) */
-.element { padding: 16px; }
-
-/* Tablet (768px+) */
-@media (min-width: 768px) {
-  .element { padding: 24px; }
-}
-
-/* Desktop (1024px+) */
-@media (min-width: 1024px) {
-  .element { padding: 32px; }
-}
-```
-
-#### 4. No Breaking Changes Without Testing
-- Test on mobile (320px, 375px, 414px)
-- Test on tablet (768px, 1024px)
-- Test on desktop (1280px, 1920px)
-- Test both English and Hindi pages
-- Run Lighthouse for performance/accessibility
-
-#### 5. Preserve Accessibility
-- Maintain semantic HTML (`<header>`, `<main>`, `<footer>`, `<nav>`)
-- Keep ARIA labels on interactive elements
-- Ensure keyboard navigation works
-- Maintain color contrast (WCAG AA: 4.5:1 minimum)
-- Test with screen reader if possible
-
----
-
-## Directory Structure
-
-```
-veerpatta-website/
-├── en/                          # English pages (7 files)
-│   ├── index.md                # Homepage
-│   ├── about.md                # About page
-│   ├── academics.md            # Academics page
-│   ├── admissions.md           # Admissions page
-│   ├── gallery.md              # Gallery with filtering
-│   ├── contact.md              # Contact form
-│   └── privacy.md              # Privacy policy
-│
-├── hi/                          # Hindi pages (mirror of en/)
-│   └── [same structure as en/]
-│
-├── _includes/                   # Reusable components
-│   ├── head.html               # <head> with meta, SEO, critical CSS
-│   ├── header.html             # Mobile-first navigation
-│   ├── footer.html             # Footer with language awareness
-│   ├── analytics.html          # Optional analytics
-│   └── whatsapp.html           # WhatsApp floating button
-│
-├── _layouts/                    # Page templates
-│   └── default.html            # Main layout wrapper
-│
-├── assets/
-│   ├── css/
-│   │   ├── style.css           # Main stylesheet (1603 lines)
-│   │   └── animations.css      # Animation definitions
-│   ├── js/
-│   │   ├── main.js             # Core functionality (~520 lines)
-│   │   ├── media-loader.js     # Media utility (~100 lines)
-│   │   ├── gallery-loader.js   # Gallery system (~90 lines)
-│   │   ├── gallery-items.js    # User-editable registry (~40 lines)
-│   │   └── home-media-loader.js # Homepage media (~90 lines)
-│   ├── images/                 # Static images
-│   │   └── VPPS LOGO ONNLY.jpg # Official school logo
-│   └── media/                  # User-uploaded media
-│       ├── home/               # Hero and program cards
-│       ├── gallery/            # Categorized gallery media
-│       │   ├── sports/
-│       │   ├── ncc/
-│       │   ├── cultural/
-│       │   ├── academic/
-│       │   └── celebrations/
-│       └── [other page media]/
-│
-├── docs/                        # Documentation
-│   ├── ARCHITECTURE.md         # Technical deep-dive
-│   ├── DEPLOYMENT.md           # Deployment guide
-│   └── [other docs]
-│
-├── .github/workflows/
-│   └── build.yml               # GitHub Actions build check (no deploy)
-│
-├── wrangler.jsonc               # Cloudflare Workers deploy config
-├── .ruby-version                # Pins Ruby for the Cloudflare build
-├── _headers                     # Response headers (copied into _site/)
-├── _config.yml                  # Jekyll configuration
-├── index.html                   # Root redirect to /en/
-├── 404.html                     # Custom 404 page
-├── sitemap.xml                  # SEO sitemap
-└── robots.txt                   # Search engine instructions
-```
-
-### Key File Purposes
-| File | Purpose | Edit Frequency |
-|------|---------|----------------|
-| `en/*.md` | English content pages | High |
-| `hi/*.md` | Hindi content pages | High |
-| `_includes/header.html` | Site navigation | Medium |
-| `_includes/footer.html` | Footer content | Low |
-| `assets/css/style.css` | All styling | Medium |
-| `assets/js/main.js` | Core interactions | Low |
-| `assets/media/` | Photos/videos | High |
-| `_config.yml` | Site configuration | Low |
-
----
-
-## Development Workflow
-
-### Local Development (Optional)
 ```bash
-# Install dependencies
-bundle install
-
-# Serve locally with live reload
-bundle exec jekyll serve
-
-# View at http://localhost:4000/veerpatta-website/
+npm ci
+npm run check
+npm run build
+npm test
 ```
 
-### Cloudflare Workers
-**Automatic deployment** on push to `main` branch:
-1. Cloudflare Workers checks out the repo
-2. Ruby from `.ruby-version`
-3. `bundle install`
-4. `bundle exec jekyll build`
-5. Publishes `_site/`
+Build before tests because site-contract tests inspect the generated output. `npm run build` stages public media, runs Astro, and audits `_site/`. `scripts/cloud/setup.sh` runs this sequence, with optional `--serve` for a production preview on port 4321. It never pushes or deploys.
 
-Branches and pull requests each get their own preview deployment.
+For development, use `npm run dev -- --host 127.0.0.1`; for the built site, use `npm run preview -- --host 127.0.0.1`. Ruby, Bundler, Liquid and Jekyll are no longer in the active build workflow.
 
-GitHub Actions runs `.github/workflows/build.yml` on the same push as a **build
-check only** — it compiles the site to catch Liquid and YAML errors and
-publishes nothing.
+## Edit the current sources
 
-**No manual deployment needed.** See `docs/DEPLOYMENT.md`.
+| Concern | Current source |
+| --- | --- |
+| Routes, redirects, 404, sitemap | `src/pages/` |
+| Shared layout and navigation | `src/layouts/SiteLayout.astro` |
+| Home, admissions, gallery and subpages | `src/components/` |
+| School details and route helpers | `src/data/site.ts` |
+| Bilingual page content | `src/data/content.ts` |
+| Photos, videos and captions | `src/data/media.ts`, `assets/images/`, `assets/media/` |
+| Browser interactions | `src/scripts/` |
+| Styles | `src/styles/site.css` |
+| Headers, service worker, manifest, robots | `public/` |
+| Output and public-file audit | `scripts/prepare-public.mjs`, `scripts/check-site.mjs` |
+| Video range handling | `worker.js` |
+| Deployment configuration | `wrangler.jsonc` |
 
-### Making Changes
+The old `en/`, `hi/`, `_includes/`, `_layouts/`, `_data/`, `_news/`, `_config.yml`, `Gemfile`, `.ruby-version`, root HTML/metadata files, and `assets/css/` / `assets/js/` are historical implementation files. Editing them does not update the Astro pages. Old documentation and audit reports may describe Jekyll; use this guide, README and `docs/DEPLOYMENT.md` for current instructions. Do not copy their old Liquid patterns, build commands, measured scores or unsupported compliance claims into the new implementation.
 
-#### For Content Updates
-1. Edit markdown files in `en/` and `hi/`
-2. Use YAML frontmatter for page metadata
-3. Maintain consistent structure between languages
-4. Test locally if possible
-5. Commit and push to trigger deployment
+## Keep these boundaries
 
-#### For Code/Style Updates
-1. Edit files in `assets/`, `_includes/`, or `_layouts/`
-2. Test changes locally
-3. Run Lighthouse for performance check
-4. Test on multiple screen sizes
-5. Commit and push
+1. **English/Hindi parity.** Update both languages, preserve `/en/` and `/hi/` URLs, and check the correct `lang`, alternate links, titles and descriptions. Shared helpers such as `pathFor` and `pick` keep routes and text consistent.
+2. **Static, mobile-first pages.** Preserve semantic HTML, meaningful links, responsive images, keyboard focus, native form behavior, reduced-motion support and readable content before scripts run. Test at 320, 375, 414, 768, 1024, 1280 and 1920 pixels where applicable.
+3. **No invented school claims.** Confirm facts against supplied sources. A budget estimate uses parent-entered values, not invented official fees. Enquiry success is not admission acceptance, a confirmed visit or a reserved seat.
+4. **Respect private information.** Do not introduce child-data collection, analytics, new external recipients or real-data test submissions as incidental UI changes. Browser tests must intercept form submissions. Do not send a real enquiry to verify a visual state.
+5. **Explicit public assets only.** `scripts/prepare-public.mjs` stages `assets/images/` and `assets/media/` into generated `public/assets/`. It never copies the repository root. Do not put internal files in those source directories or `public/`. Update an allowlist deliberately if adding another public asset class.
+6. **Generated output stays committed.** Change source, rebuild and review `_site/` together. Never make a fix only in generated HTML. Do not ignore `_site/` while Cloudflare's build command remains empty.
+7. **Keep the existing Worker contract.** `main: "worker.js"`, `assets.binding: "ASSETS"`, video-only `run_worker_first`, and `not_found_handling: "404-page"` are intentional. Do not replace the deployment with Cloudflare Pages or single-page-application fallback.
 
----
+## Content and media changes
 
-## Common Tasks
+- Update the current bilingual component or data record rather than a retained Jekyll page.
+- Register gallery assets in `src/data/media.ts` with accurate English and Hindi descriptions.
+- Keep local links root-relative because this deployment is at the domain root. The old `/veerpatta-website` GitHub Pages base path and Liquid `relative_url` filter do not apply.
+- Use appropriately sized images with meaningful alt text, dimensions and existing responsive-image patterns.
+- Keep videos tap-to-load, with posters, direct links and available captions. Do not restore eager video downloads or unrequested autoplay with sound.
+- Change deployment headers and service-worker source in `public/`, not the historical root copies.
+- If adding a route, update both languages, navigation as needed, the sitemap, and route/output test expectations.
 
-### Task 1: Add a New Page
+## Tests and evidence
 
-#### Steps:
-1. **Create English page** (`en/new-page.md`):
-```markdown
----
-layout: default
-title: Page Title
-description: SEO description
-lang: en
-permalink: /en/new-page/
----
+### Node and output checks
 
-# Page Heading
+`npm run check` runs Astro/TypeScript checking. `npm run build` checks required bilingual routes, release metadata, local links, image alt attributes and public-file boundaries. `npm test` runs current admissions helpers, gallery helpers, generated-site contracts, video Worker tests and two retained CommonJS legacy suites.
 
-Content here...
-```
+The `.cjs` suites target only the old `assets/js/` modules; they are not proof that the current admissions or budget UI works. Add tests for behavior changed in `src/` and run the affected browser flows too.
 
-2. **Create Hindi page** (`hi/new-page.md`):
-```markdown
----
-layout: default
-title: पेज शीर्षक
-description: SEO विवरण
-lang: hi
-permalink: /hi/new-page/
----
+Worker tests mock `ASSETS` using real Node `Request`/`Response` objects. They cover exact 206 bytes for initial, open-ended, suffix and overlong ranges; invalid/multiple-range fallback; 416; HEAD; missing assets; and non-video fallback. These unit tests do not prove Cloudflare's production routing, so verify deployment behavior separately when publishing Worker changes.
 
-# पेज शीर्षक
+### Browser testing
 
-सामग्री यहाँ...
-```
-
-3. **Add navigation links** to `_includes/header.html`:
-```liquid
-{% if current_lang == 'en' %}
-  <a href="{{ '/en/new-page/' | relative_url }}">New Page</a>
-{% else %}
-  <a href="{{ '/hi/new-page/' | relative_url }}">नया पेज</a>
-{% endif %}
-```
-
-4. **Test both versions** before committing.
-
-### Task 2: Update Styles
-
-#### Location: `assets/css/style.css`
-
-**Example: Change brand color**
-```css
-:root {
-  --brand-blue: #5375E2;    /* Change this value */
-}
-```
-
-**Example: Add new component**
-```css
-/* Base (mobile) */
-.new-component {
-  padding: 16px;
-  background: var(--brand-bg);
-}
-
-/* Tablet */
-@media (min-width: 768px) {
-  .new-component {
-    padding: 24px;
-  }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .new-component {
-    padding: 32px;
-    max-width: 1400px;
-  }
-}
-```
-
-### Task 3: Add Gallery Media
-
-#### Steps:
-1. **Upload files** to `assets/media/gallery/{category}/`
-   - Categories: sports, ncc, cultural, academic, celebrations
-   - Supported: .jpg, .png, .webp, .mp4, .webm
-
-2. **Register files** in `assets/js/gallery-items.js`:
-```javascript
-window.GalleryLoader.registerItems('sports', [
-  'relay-race.jpg',
-  'football-match.mp4',
-  'cricket.jpg'
-]);
-```
-
-3. **Add captions** (optional) in `assets/media/gallery/{category}/captions.txt`:
-```
-relay-race.jpg | EN: Students competing in relay race | HI: रिले दौड़ में प्रतिस्पर्धा करते छात्र
-```
-
-4. **Test gallery page** to ensure media loads correctly.
-
-### Task 4: Update Contact Information
-
-#### Location: `_includes/header.html` and `_includes/whatsapp.html`
-
-**WhatsApp number**: Search for `919413748575` and replace
-**Pre-filled message**: Update the `text=` parameter in WhatsApp URLs
-
-### Task 5: Fix a Bug
-
-#### Process:
-1. **Reproduce the bug** on multiple devices/browsers
-2. **Identify the root cause** using browser DevTools
-3. **Make the fix** in the appropriate file
-4. **Test thoroughly** (mobile, tablet, desktop, both languages)
-5. **Check for side effects** on other pages
-6. **Commit with descriptive message**: `fix: [description of bug]`
-
----
-
-## Code Patterns
-
-### Liquid Template Patterns
-
-#### Language Detection
-```liquid
-{% assign segments = page.url | split: '/' %}
-{% assign lang_segment = segments[1] %}
-{% if lang_segment == 'hi' %}
-  {% assign nav_home = 'होम' %}
-  {% assign current_lang = 'hi' %}
-{% else %}
-  {% assign nav_home = 'Home' %}
-  {% assign current_lang = 'en' %}
-{% endif %}
-```
-
-#### Conditional Content
-```liquid
-{% if page.lang == 'hi' %}
-  <h1>हिंदी शीर्षक</h1>
-{% else %}
-  <h1>English Heading</h1>
-{% endif %}
-```
-
-#### URL Handling (CRITICAL)
-```liquid
-<!-- Always use relative_url -->
-<a href="{{ '/en/about/' | relative_url }}">About</a>
-<img src="{{ '/assets/images/logo.jpg' | relative_url }}" alt="Logo">
-
-<!-- For absolute URLs (SEO) -->
-<link rel="canonical" href="{{ page.url | absolute_url }}">
-```
-
-#### Hreflang Tags (SEO)
-```liquid
-{% if lang_segment == 'en' %}
-  {% assign alt_hi = page.url | replace_first: '/en/', '/hi/' | absolute_url %}
-  <link rel="alternate" href="{{ alt_hi }}" hreflang="hi">
-  <link rel="alternate" href="{{ page.url | absolute_url }}" hreflang="en">
-{% elsif lang_segment == 'hi' %}
-  {% assign alt_en = page.url | replace_first: '/hi/', '/en/' | absolute_url %}
-  <link rel="alternate" href="{{ alt_en }}" hreflang="en">
-  <link rel="alternate" href="{{ page.url | absolute_url }}" hreflang="hi">
-{% endif %}
-```
-
-### CSS Patterns
-
-#### Mobile-First Responsive
-```css
-/* Default (mobile) */
-.element {
-  padding: 16px;
-  font-size: 14px;
-}
-
-/* Tablet (768px+) */
-@media (min-width: 768px) {
-  .element {
-    padding: 24px;
-    font-size: 16px;
-  }
-}
-
-/* Desktop (1024px+) */
-@media (min-width: 1024px) {
-  .element {
-    padding: 32px;
-    font-size: 18px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-}
-```
-
-#### CSS Variables (Color System)
-```css
-:root {
-  --brand-blue: #5375E2;
-  --brand-green: #84AC64;
-  --brand-yellow: #E2D64B;
-  --brand-bg: #FEFEFE;
-  --text-color: #1e2430;
-  --muted-text: #4f5b75;
-}
-
-.element {
-  background: var(--brand-blue);
-  color: var(--brand-bg);
-}
-```
-
-#### Accessibility Focus States
-```css
-.button {
-  /* Base styles */
-}
-
-.button:focus-visible {
-  outline: 2px solid var(--brand-blue);
-  outline-offset: 2px;
-}
-```
-
-### JavaScript Patterns
-
-#### Module Pattern (IIFE)
-```javascript
-(function() {
-  // Private scope
-  const privateVar = 'hidden';
-
-  function privateFunction() {
-    // Not accessible outside
-  }
-
-  // Public API
-  window.PublicAPI = {
-    method: function() {
-      privateFunction();
-    }
-  };
-})();
-```
-
-#### IntersectionObserver (Scroll Animations)
-```javascript
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animated');
-      observer.unobserve(entry.target); // Stop observing
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.animate-on-scroll').forEach(el => {
-  observer.observe(el);
-});
-```
-
-#### DOM Manipulation (Classes)
-```javascript
-// Toggle menu
-const menu = document.getElementById('mobileNav');
-menu.classList.add('active');      // Open
-menu.classList.remove('active');   // Close
-menu.classList.toggle('active');   // Toggle
-```
-
-#### Async File Checking
-```javascript
-async function fileExists(url) {
-  try {
-    const response = await fetch(url, { method: 'HEAD' });
-    return response.ok;
-  } catch (error) {
-    return false;
-  }
-}
-
-// Usage
-if (await fileExists('/assets/media/home/hero-video.mp4')) {
-  loadVideo('/assets/media/home/hero-video.mp4');
-}
-```
-
----
-
-## Testing Guidelines
-
-### Manual Testing Checklist
-
-#### Device Testing
-- [ ] **Mobile**: 320px, 375px, 414px (Chrome DevTools)
-- [ ] **Tablet**: 768px, 1024px
-- [ ] **Desktop**: 1280px, 1920px
-- [ ] **Real devices**: Test on at least one Android phone
-
-#### Browser Testing
-- [ ] Chrome (latest)
-- [ ] Safari (latest)
-- [ ] Firefox (latest)
-- [ ] Edge (latest)
-
-#### Language Testing
-- [ ] Test all changes in **both** `/en/` and `/hi/` pages
-- [ ] Verify Hindi font renders correctly (Noto Sans Devanagari)
-- [ ] Check language switcher works
-
-#### Functionality Testing
-- [ ] Navigation works on all pages
-- [ ] Mobile menu opens/closes smoothly
-- [ ] WhatsApp button opens with pre-filled message
-- [ ] Gallery filters work (All, Sports, NCC, etc.)
-- [ ] All links work (no 404s)
-- [ ] Images load correctly
-- [ ] Videos play with controls
-- [ ] No console errors in DevTools
-
-#### Accessibility Testing
-- [ ] Tab through all interactive elements
-- [ ] Focus indicators visible
-- [ ] All images have alt text
-- [ ] Headings in logical order (h1 → h2 → h3)
-- [ ] Color contrast meets WCAG AA (4.5:1)
-- [ ] Screen reader test (NVDA or VoiceOver if possible)
-
-#### Performance Testing
-- [ ] Run Lighthouse audit
-  - Performance: >90
-  - Accessibility: >95
-  - Best Practices: >90
-  - SEO: >95
-- [ ] Check total page size (<1MB)
-- [ ] Test on throttled 3G network
-
-### Testing Tools
-- **Lighthouse**: Built into Chrome DevTools
-- **WAVE**: WebAIM accessibility checker
-- **axe DevTools**: Accessibility audit browser extension
-- **PageSpeed Insights**: https://pagespeed.web.dev/
-- **Mobile Testing**: Chrome DevTools device emulation
-
----
-
-## Deployment
-
-### Automatic Deployment (Preferred)
-**Trigger**: Push to `main` branch
-
-**Process**:
-1. Cloudflare Workers build triggers
-2. Ruby environment from `.ruby-version`
-3. Bundle install (dependencies)
-4. `bundle exec jekyll build`
-5. `_site/` published
-6. Live in ~1-3 minutes
-
-### Manual Build (Optional, for testing)
 ```bash
-bundle exec jekyll build
-# Output in _site/ directory
+npx playwright install chromium
+npm run build
+npm run test:e2e
 ```
 
-### Rollback
-If something breaks:
-```bash
-git revert <commit-hash>
-git push origin main
-```
-GitHub Actions will automatically deploy the reverted version.
+Use Playwright's installed Chromium by default. A runner with a preinstalled browser may use `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium` when the configuration supports the override. Do not hardcode a machine-specific browser path for every developer or CI runner.
 
----
+The optional GitHub Actions browser job is selected through **Build site → Run workflow → browser_tests**. It installs Chromium and system dependencies and uploads reports. A default push/PR build does not run that optional job.
 
-## Troubleshooting
+Check the relevant English and Hindi pages, navigation, no-JavaScript fallback, gallery filters, dialogs, Escape/close and focus restoration, repeated actions, admissions validation and failure/retry states, media, reduced motion and axe findings. Do not treat screenshot creation or test discovery as a completed browser run.
 
-### Problem: Site not updating after push
+If Chromium launch is blocked by a sandbox/socket restriction, report the exact launch failure and mark the browser stage **blocked**, not passed. A managed remote browser cannot reach this container's localhost without a working preview or authorized tunnel. Keep the Node/build results separate, and use a reachable preview for remote checks.
 
-**Solution**:
-1. Check GitHub Actions tab for build errors
-2. Wait 2-3 minutes for deployment to complete
-3. Hard refresh browser (Ctrl+Shift+R)
-4. Check if changes were actually pushed: `git log --oneline -5`
+### Cross-browser and real devices
 
-### Problem: Images not loading
+Use an available authorized BrowserStack connection or physical devices for Safari/iPhone and Android checks, particularly video ranges, narrow-screen layouts, Hindi rendering and touch interactions. Verify current product/plan/session availability; do not assume an older license or sign-in remains active. Record device, OS, browser, tested URL/commit and result. If unavailable, record the limitation and continue other checks.
 
-**Solution**:
-1. Verify image path uses `relative_url` filter
-2. Check file exists in `assets/images/` or `assets/media/`
-3. Check filename case sensitivity (Linux is case-sensitive)
-4. Verify image is committed and pushed
+`docs/BROWSERSTACK.md` contains historical connection guidance. Its Jekyll commands and port 4000 are obsolete; use the Astro preview on port 4321, or a reachable deployment. Do not put access keys in the repository. Read-only production inspection is different from sending a real form submission.
 
-### Problem: CSS changes not appearing
+## Deployment and CI
 
-**Solution**:
-1. Hard refresh browser (Ctrl+Shift+R)
-2. Check browser DevTools for CSS file load errors
-3. Verify CSS syntax is valid (no missing braces)
-4. Check if changes are in `assets/css/style.css` (not elsewhere)
+The Workers dashboard keeps **build command empty** and **deploy command `npx wrangler deploy`**. A push to `main` publishes the committed `_site/` through the existing Git integration. Do not change those settings as part of routine source work.
 
-### Problem: Mobile menu not working
+GitHub Actions independently runs `npm ci`, check, build and tests, then uploads the output. On `main` it repairs stale committed `_site/` only when the build differs and the branch has not advanced. An up-to-date output produces no second commit or extra deployment. A repair commit causes another Cloudflare deployment, so source and output should be committed together from the outset.
 
-**Solution**:
-1. Check browser console for JavaScript errors
-2. Verify `main.js` is loading: check Network tab in DevTools
-3. Check if HTML structure changed in `_includes/header.html`
-4. Verify menu button has correct `id="mobileMenuBtn"`
+CI is not a deployment gate: Cloudflare can deploy before Actions finishes. Avoid CI-skip markers in commit messages because Cloudflare may honor them as well. Branch preview availability depends on dashboard settings and permissions; `preview_urls: true` alone does not prove an accessible preview exists.
 
-### Problem: Hindi text not rendering correctly
+Before reporting publication, verify the remote commit, Actions result and Cloudflare deployment independently. Run a post-deploy smoke test for both languages, a real 404, updated assets and video byte ranges. Follow the approved publication scope; source edits or a passing check do not authorize a push or production deploy. See `docs/DEPLOYMENT.md` for details and rollback.
 
-**Solution**:
-1. Verify Noto Sans Devanagari font is loading
-2. Check `<head>` includes font link:
-   ```html
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
-   ```
-3. Check CSS applies correct font:
-   ```css
-   [lang="hi"], .lang-hi {
-     font-family: 'Noto Sans Devanagari', sans-serif;
-   }
-   ```
+## Completion report
 
-### Problem: Gallery not loading media
-
-**Solution**:
-1. Check `gallery-items.js` has files registered
-2. Verify files exist in `assets/media/gallery/{category}/`
-3. Check browser console for fetch errors
-4. Verify file extensions match: `.jpg`, `.png`, `.webp`, `.mp4`, `.webm`
-
-### Problem: Build failing in GitHub Actions
-
-**Solution**:
-1. Check Actions tab for error logs
-2. Common causes:
-   - Liquid syntax error in templates
-   - Invalid YAML frontmatter
-   - Broken markdown syntax
-   - Missing closing tags in HTML
-3. Test build locally: `bundle exec jekyll build`
-4. Fix errors and push again
-
-### Problem: Accessibility score dropped
-
-**Solution**:
-1. Run Lighthouse audit to identify issues
-2. Common causes:
-   - Missing alt text on images
-   - Insufficient color contrast
-   - Missing ARIA labels
-   - Improper heading hierarchy
-3. Fix identified issues
-4. Re-run Lighthouse to verify
-
----
-
-## Quick Reference
-
-### Essential Commands
-```bash
-# Local development
-bundle install                    # Install dependencies
-bundle exec jekyll serve          # Start local server
-bundle exec jekyll build          # Build site to _site/
-
-# Git workflow
-git add .                         # Stage changes
-git commit -m "description"       # Commit with message
-git push origin main              # Push to trigger deployment
-
-# Check status
-git status                        # See changed files
-git log --oneline -5              # Recent commits
-```
-
-### File Locations Quick Reference
-| What | Where |
-|------|-------|
-| English pages | `en/*.md` |
-| Hindi pages | `hi/*.md` |
-| Navigation | `_includes/header.html` |
-| Footer | `_includes/footer.html` |
-| All styles | `assets/css/style.css` |
-| Main JavaScript | `assets/js/main.js` |
-| Gallery media | `assets/media/gallery/{category}/` |
-| School logo | `assets/images/VPPS LOGO ONNLY.jpg` |
-| Site config | `_config.yml` |
-
-### Important URLs
-| Purpose | URL |
-|---------|-----|
-| Live site | https://veerpatta-website.raj-39e.workers.dev/ |
-| GitHub repo | https://github.com/veerpatta/veerpatta-website |
-| Actions (CI/CD) | https://github.com/veerpatta/veerpatta-website/actions |
-
-### CSS Breakpoints
-```css
-/* Mobile: 320px - 767px (default) */
-@media (min-width: 768px)  { /* Tablet */ }
-@media (min-width: 1024px) { /* Desktop */ }
-```
-
-### Color Variables
-```css
---brand-blue: #5375E2;
---brand-green: #84AC64;
---brand-yellow: #E2D64B;
---brand-bg: #FEFEFE;
---text-color: #1e2430;
---muted-text: #4f5b75;
-```
-
----
-
-## Best Practices for AI Agents
-
-### Before Making Changes
-1. **Read this document first** (you're doing it!)
-2. **Understand the context** of the change
-3. **Check both language versions** if touching content
-4. **Identify affected files** before editing
-
-### While Making Changes
-1. **Follow bilingual parity rule** religiously
-2. **Use `relative_url` filter** for all URLs
-3. **Test changes** if possible (local or in browser)
-4. **Maintain accessibility** features
-5. **Write mobile-first CSS**
-
-### After Making Changes
-1. **Verify both EN and HI pages** work
-2. **Check for console errors** in DevTools
-3. **Test on multiple screen sizes**
-4. **Run Lighthouse** if major changes
-5. **Write clear commit messages**
-
-### Communication Style
-1. **Be concise** in explanations
-2. **Show code examples** when suggesting changes
-3. **Explain rationale** for decisions
-4. **Flag breaking changes** clearly
-5. **Ask for clarification** if requirements unclear
-
-### When Uncertain
-1. **Check existing patterns** in codebase
-2. **Refer to documentation** in `docs/` directory
-3. **Test thoroughly** before committing
-4. **Ask user for clarification** rather than guessing
-5. **Document new patterns** if introducing them
-
----
-
-## Additional Resources
-
-### Documentation Files
-- `README.md` - Project overview
-- `docs/ARCHITECTURE.md` - Technical deep-dive
-- `docs/DEPLOYMENT.md` - Deployment guide
-- `CONTRIBUTING.md` - Developer guidelines
-- `PROJECT_GUIDE.md` - Non-technical guide
-- `MEDIA_UPLOAD_GUIDE.md` - Media upload instructions
-- `QUICK_START.md` - Quick start for developers
-
-### External Resources
-- Jekyll documentation: https://jekyllrb.com/docs/
-- Liquid syntax: https://shopify.github.io/liquid/
-- Cloudflare Workers: https://developers.cloudflare.com/pages/
-- Lighthouse: https://developer.chrome.com/docs/lighthouse/
-- WCAG Guidelines: https://www.w3.org/WAI/WCAG21/quickref/
-
----
-
-## Summary
-
-This codebase is **production-ready**, well-documented, and optimized for its target audience. It prioritizes:
-
-1. **Performance** - Fast on 3G networks
-2. **Accessibility** - WCAG AA compliant
-3. **Simplicity** - No complex frameworks
-4. **Maintainability** - Clear patterns, good documentation
-5. **Bilingual support** - Full English and Hindi parity
-
-**Key principle**: Make changes thoughtfully, test thoroughly, and maintain the bilingual nature of the site.
-
----
-
-## Questions?
-
-If you encounter issues not covered in this guide:
-1. Check the `docs/` directory for specific documentation
-2. Review the codebase for similar patterns
-3. Ask the user for clarification
-4. Document new patterns you introduce
-
-**Happy coding!**
-
-<!-- BEGIN:browserstack -->
-## Cross-browser and real-device testing (BrowserStack)
-
-BrowserStack (Janmejay's GitHub Student Pack licence) is available for this project. Use it after UI, CSS, layout, PWA or mobile changes to check the real browsers and phones that local Chromium can't show - Safari on iPhone, Chrome on Android, Edge and Firefox on Windows.
-
-- **Coding agents (Claude Code, Codex, Cursor):** `.mcp.json` registers BrowserStack's official remote MCP server as `browserstack` (one-time `/mcp` sign-in). Codex: `codex mcp add browserstack --url https://mcp.browserstack.com/mcp`, then `codex mcp login browserstack`.
-- **Agents that drive Chrome (Cowork / Claude in Chrome):** Janmejay's Chrome has the BrowserStack extension installed and is signed in - use https://live.browserstack.com/dashboard.
-- How-to, default device set, localhost testing and troubleshooting: [docs/BROWSERSTACK.md](docs/BROWSERSTACK.md).
-- Never a blocker: if BrowserStack isn't available (no sign-in, plan limit, network), say so in your summary and carry on.
-<!-- END:browserstack -->
+Report what changed and which checks actually ran. Distinguish passed, failed, blocked and not run. Include browser/device and deployment results separately. Do not claim production readiness, performance scores, WCAG compliance, browser coverage or form delivery without supporting evidence.
