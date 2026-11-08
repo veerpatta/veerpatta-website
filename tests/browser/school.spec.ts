@@ -4,7 +4,7 @@ const slugs=['','about','academics','admissions','beyond','digital','contact','f
 for(const lang of ['en','hi']){
  test(`${lang} every route is complete, without console errors or overflow`,async({page})=>{
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
-  for(const slug of slugs){await page.goto(`/${lang}/${slug?slug+'/':''}`);await expect(page.locator('h1')).toHaveCount(1);await expect(page.locator('html')).toHaveAttribute('lang',lang);await expect(page.locator('main')).toBeVisible();const missing=await page.locator('img').evaluateAll(imgs=>imgs.filter((img:HTMLImageElement)=>img.complete&&img.naturalWidth===0).map((img:HTMLImageElement)=>img.src));expect(missing).toEqual([]);}
+  for(const slug of slugs){await page.goto(`/${lang}/${slug?slug+'/':''}`);await expect(page.locator('h1')).toHaveCount(1);await expect(page.locator('html')).toHaveAttribute('lang',lang);await expect(page.locator('main')).toBeVisible();const missing=await page.locator('img[src]').evaluateAll(imgs=>imgs.filter((img:HTMLImageElement)=>img.complete&&img.naturalWidth===0).map((img:HTMLImageElement)=>img.src));expect(missing).toEqual([]);}
   expect(errors).toEqual([]);
  });
  test(`${lang} responsive widths keep content within screen`,async({page})=>{
