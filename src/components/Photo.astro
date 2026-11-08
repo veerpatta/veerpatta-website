@@ -1,0 +1,10 @@
+---
+import { photos } from '../data/media';
+import type { Lang } from '../data/site';
+interface Props { id:string; lang:Lang; eager?:boolean; sizes?:string; class?:string }
+const { id, lang, eager=false, sizes='(min-width: 1000px) 50vw, 100vw', class:className='' } = Astro.props;
+const p=photos[id];
+if (!p) throw new Error(`Unknown authentic photo: ${id}`);
+const width=p.widths.includes(800)?800:p.widths[p.widths.length-1];
+---
+<img src={`/assets/media/photos/${id}-${width}.webp`} srcset={p.widths.map(w=>`/assets/media/photos/${id}-${w}.webp ${w}w`).join(', ')} sizes={sizes} width={p.w} height={p.h} alt={p.alt[lang]} loading={eager?'eager':'lazy'} decoding="async" fetchpriority={eager?'high':'auto'} class={className} style={p.pos?`object-position:${p.pos}`:undefined} />

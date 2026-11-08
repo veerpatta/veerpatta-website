@@ -1,388 +1,138 @@
-# 🏫 Shri Veer Patta Senior Secondary School Website
+# Shri Veer Patta Senior Secondary School Website
 
-[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Pages-orange?logo=cloudflare&logoColor=white)](https://veerpatta-website.raj-39e.workers.dev/)
-[![Jekyll](https://img.shields.io/badge/Built%20with-Jekyll-red?logo=jekyll)](https://jekyllrb.com/)
-[![Mobile First](https://img.shields.io/badge/Design-Mobile%20First-green)](#responsive-design)
-[![Bilingual](https://img.shields.io/badge/Languages-EN%20%7C%20HI-orange)](#bilingual-support)
+The bilingual English/Hindi website for Shri Veer Patta Senior Secondary School in Amet, Rajasthan. Built with **Astro 7.4.7 and TypeScript**, with static HTML hosted on **Cloudflare Workers**.
 
-Official bilingual website for **Shri Veer Patta Senior Secondary School**, Amet, Rajasthan, India.
+- [Live site](https://veerpatta-website.raj-39e.workers.dev/)
+- [Deployment guide](docs/DEPLOYMENT.md)
+- [Contributor and coding-agent guide](agents.md)
+- [Revamp media notes](docs/REVAMP_MEDIA.md)
 
-🌐 **Live Site**: [veerpatta-website.raj-39e.workers.dev](https://veerpatta-website.raj-39e.workers.dev/)
+## Start locally
 
----
-
-## 📖 Documentation Quick Links
-
-**Choose your guide based on your role:**
-
-| I want to... | Read this |
-|--------------|-----------|
-| 📘 **Understand what this project is** | [PROJECT_GUIDE.md](PROJECT_GUIDE.md) ← Start here! |
-| 👨‍💻 **Contribute code or make changes** | [CONTRIBUTING.md](CONTRIBUTING.md) |
-| ⚡ **Quick start for coding agents** | [QUICK_START.md](QUICK_START.md) |
-| 🖼️ **Upload photos/videos** | [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md) |
-| 📋 **Quick media upload reference** | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) |
-| 🏗️ **Understand technical architecture** | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
-| 📝 **See what changed** | [CHANGELOG.md](CHANGELOG.md) |
-| 🤝 **Understand community guidelines** | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
-
----
-
-## ✨ Key Features
-
-- 🌍 **Bilingual support** - English and Hindi
-- 📱 **Mobile-first design** - Optimized for 70% mobile traffic
-- ⚡ **Fast loading** - Works great on 3G networks
-- ♿ **Accessible** - WCAG AA compliant
-- 🎨 **Modern design** - Clean, professional interface
-- 📸 **Gallery system** - Easy photo/video uploads
-- 💬 **WhatsApp integration** - Direct contact button
-- 🔒 **Privacy-focused** - No tracking by default
-- 🚀 **SEO optimized** - Meta tags and structured data
-- 📊 **Performance** - Lighthouse score >90
-
----
-
-## 🚀 Quick Start
-
-### For Non-Technical Users
-1. Read the [PROJECT_GUIDE.md](PROJECT_GUIDE.md) to understand the website
-2. To upload media, follow [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md)
-3. For quick reference, see [QUICK_REFERENCE.md](QUICK_REFERENCE.md)
-
-### For Developers
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines
-2. Check [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for technical details
-3. Clone the repository and start contributing!
+Use **Node.js 24 LTS** and npm. The minimum Node version in `package.json` is 22.12. Ruby and Bundler are not needed for the current site.
 
 ```bash
-git clone https://github.com/veerpatta/veerpatta-website.git
-cd veerpatta-website
-
-# Optional: Test locally with Jekyll
-bundle install
-bundle exec jekyll serve
-
-# View at http://localhost:4000/veerpatta-website/
+npm ci
+npm run dev -- --host 127.0.0.1
 ```
 
-### For Coding Agents
-1. **Repository Type**: Jekyll static site, Cloudflare Workers hosting
-2. **Key Principle**: Mobile-first, bilingual parity (EN/HI required)
-3. **Read First**: [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
-4. **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-5. **Make minimal, surgical changes** following existing patterns
+Open http://127.0.0.1:4321/en/ or http://127.0.0.1:4321/hi/. The root URL redirects to English.
 
----
+To validate and preview the production output:
 
-## 📂 Repository Structure
-
-```
-veerpatta-website/
-├── 📄 README.md                    # This file
-├── 📄 PROJECT_GUIDE.md             # Non-technical project guide
-├── 📄 CONTRIBUTING.md              # Developer guidelines
-├── 📄 CHANGELOG.md                 # Version history
-├── 📄 CODE_OF_CONDUCT.md           # Community guidelines
-├── 📄 MEDIA_UPLOAD_GUIDE.md        # Media upload instructions
-├── 📄 QUICK_REFERENCE.md           # Quick reference
-├── 📁 docs/                        # Technical documentation
-│   ├── ARCHITECTURE.md             # Technical architecture
-│   ├── QA_SUMMARY.md               # QA validation report
-│   ├── MOBILE_FIRST_HEADER.md      # Mobile header docs
-│   └── MOBILE_HEADER_TESTING.md    # Testing guide
-├── 📁 en/                          # English content pages
-├── 📁 hi/                          # Hindi content pages
-├── 📁 _includes/                   # HTML components
-├── 📁 _layouts/                    # Page templates
-├── 📁 assets/                      # Static assets
-│   ├── css/                        # Stylesheets
-│   ├── js/                         # JavaScript
-│   ├── images/                     # Static images
-│   └── media/                      # User-uploaded media
-├── 📁 .github/                     # GitHub templates
-│   ├── ISSUE_TEMPLATE/             # Issue templates
-│   └── pull_request_template.md   # PR template
-├── 📄 _config.yml                  # Jekyll configuration
-├── 📄 index.html                   # Root redirect
-├── 📄 sitemap.xml                  # SEO sitemap
-└── 📄 robots.txt                   # Search engine rules
+```bash
+npm run check
+npm run build
+npm test
+npm run preview -- --host 127.0.0.1
 ```
 
----
+Run the build **before** tests: the output-contract tests inspect `_site/`. `bash scripts/cloud/setup.sh` runs installation, type checking, build, and tests in that order. Add `--serve` to preview the result.
 
-## 🌐 Bilingual Support
+## Current architecture
 
-The website is fully available in both languages:
-
-- **English**: `/en/` - Primary language
-- **हिंदी (Hindi)**: `/hi/` - Complete translation
-
-### Pages Available:
-- 🏠 Home (index)
-- 👥 About
-- 📚 Academics
-- 🎓 Admissions
-- 🖼️ Gallery
-- 📞 Contact
-- 🔒 Privacy Policy
-
-All content changes **must** be made in both languages to maintain parity.
-
----
-
-## 📱 Responsive Design
-
-Optimized for all devices with mobile-first approach:
-
-| Device | Width Range | Features |
-|--------|-------------|----------|
-| 📱 Mobile | 320px - 767px | Hamburger menu, large touch targets |
-| 📲 Tablet | 768px - 1023px | Desktop navigation, optimized layout |
-| 💻 Desktop | 1024px+ | Full features, max-width 1400px |
-
-**Mobile Statistics**: 70% of visitors use mobile devices, primarily budget Android smartphones on 3G networks.
-
----
-
-## 📸 Media Upload System
-
-Easy monthly content updates with automated media loading.
-
-### Quick Upload (3 Steps)
-
-1. **Upload** images/videos to `assets/media/{category}/`
-2. **Register** (gallery only): Add filename to `assets/js/gallery-items.js`
-3. **Commit** changes → Website updates in 2-3 minutes ✨
-
-### Supported Media
-
-- **Images:** `.jpg`, `.png`, `.webp` (any size)
-- **Videos:** `.mp4`, `.webm` (max 100MB, recommended 50MB)
-
-### System Features
-
-✅ Auto-detects images and videos
-✅ Bilingual caption support (English/Hindi)
-✅ Lazy loading for fast performance
-✅ Responsive on all devices (mobile-first)
-✅ No code changes needed after setup
-✅ Simple file registration system
-
-### Full Documentation
-
-- 📖 **English Guide:** [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md)
-- 📖 **Hindi Guide (हिंदी):** [MEDIA_UPLOAD_GUIDE_HI.md](MEDIA_UPLOAD_GUIDE_HI.md)
-- ⚡ **Quick Reference:** [QUICK_REFERENCE.md](QUICK_REFERENCE.md)
-
----
-
-## 🔧 Technology Stack
-
-- **Jekyll 4.x** - Static site generator
-- **Cloudflare Workers** - Hosting, builds, and preview deployments
-- **Liquid** - Template language
-- **Markdown** - Content format
-- **HTML5** - Semantic markup
-- **CSS3** - Mobile-first styling
-- **JavaScript (ES6+)** - Vanilla JS, no dependencies
-
-**No build tools needed!** Cloudflare Workers runs the Jekyll build automatically.
-
----
-## ⚙️ Configuration
-
-### Jekyll Config (`_config.yml`)
-
-Key settings:
-- `baseurl: ""` - Empty; Cloudflare Workers serves the site from the domain root
-- `lang: en` - Default language
-- `remote_theme: pages-themes/cayman@v0.2.0` - Base theme
-
-### Analytics (Optional)
-
-Analytics are **disabled by default**. To enable:
-
-```yaml
-# _config.yml
-analytics_enabled: true
-analytics_script: "https://plausible.io/js/script.js"
-analytics_domain: "veerpatta-website.raj-39e.workers.dev"
+```text
+src/
+  pages/                  Astro routes, root redirect, 404 and sitemap
+  layouts/                Shared page layout and navigation
+  components/             Home, gallery, admissions and reusable UI
+  data/                   Bilingual content, school details and media registry
+  scripts/                TypeScript browser interactions and tested helpers
+  styles/site.css         Mobile-first styles
+assets/images/            Source images
+assets/media/             Source photos, video, posters and captions
+public/                   Explicit public files: headers, service worker, manifest, robots
+scripts/prepare-public.mjs Stages images and media for Astro
+scripts/check-site.mjs     Audits built routes, links and public-file boundaries
+_site/                    Generated production output, intentionally committed
+worker.js                 Video byte-range handler only
+wrangler.jsonc            Existing Cloudflare Workers deployment configuration
+tests/                    Unit, output-contract and browser tests
 ```
 
-**Supported Providers:**
-- [Plausible](https://plausible.io/) - Privacy-first analytics
-- [Umami](https://umami.is/) - Simple, privacy-focused
+`astro.config.mjs` produces a static site in `_site/`, served from the domain root. Astro bundles the active CSS and TypeScript into `_astro/`. `package-lock.json` is committed so local and CI builds install the same dependency versions with `npm ci`.
 
-**Privacy Features:**
-- ✅ No cookies
-- ✅ No personal data tracking
-- ✅ Async loading
-- ✅ Opt-in by default
+`public/assets/` is generated staging, not an editing location. The staging script copies only `assets/images/` and `assets/media/`; it never copies the repository root. Do not place internal notes, configuration, tests, credentials or tooling in `public/` or those asset directories. The build audit checks for leaked tooling and broken local links.
 
----
+### Historical files
 
-## 🚀 Deployment
+The old Jekyll files remain as migration reference: `en/`, `hi/`, `_layouts/`, `_includes/`, `_data/`, `_news/`, `_config.yml`, `Gemfile`, `.ruby-version`, and the old `assets/css/` and `assets/js/` files. They are not the current page, CSS or JavaScript sources and are not used by `npm run build`.
 
-### Automatic Deployment
+Older guides such as `CONTRIBUTING.md`, `QUICK_START.md`, `PROJECT_GUIDE.md`, `MEDIA_UPLOAD_GUIDE.md`, `docs/ARCHITECTURE.md` and historical audit reports may describe that earlier implementation. Use this README, `agents.md`, and `docs/DEPLOYMENT.md` for the current build and deploy workflow. Earlier performance figures and accessibility claims do not establish results for this version.
 
-**Host**: Cloudflare Workers  
-**Trigger**: Push to `main` branch  
-**Build Time**: 1-3 minutes  
-**Live URL**: https://veerpatta-website.raj-39e.workers.dev/  
-**Monitor**: Cloudflare dashboard -> Workers & Pages -> Deployments
+## Content and parent-facing features
 
-### Process:
-1. Code pushed to GitHub
-2. Cloudflare Workers runs `bundle exec jekyll build`
-3. `_site/` is published
-4. Website live!
+Both `/en/` and `/hi/` include home, about, academics, admissions, school life (`beyond`), digital learning, contact, FAQs, gallery, news, and privacy pages. Existing news URLs are preserved.
 
-Branches and pull requests each get their own preview deployment URL.
+- Maintain English and Hindi together in `src/data/` and the relevant components.
+- Update school contact details in `src/data/site.ts` and verify both languages.
+- Update the current gallery registry in `src/data/media.ts`, not the old JavaScript registry.
+- Keep local media in the explicit asset directories and rebuild after changes.
+- Keep meaningful text, links and forms available without JavaScript. Dialogs, filtering and motion enhance the basic pages.
+- Videos load after a tap rather than downloading on first page load. Keep direct-file fallbacks, posters and captions available.
 
-GitHub Actions also runs [`build.yml`](.github/workflows/build.yml), but that is
-a **build check only** — it compiles the site to catch Liquid and YAML errors
-and publishes nothing.
+The admissions flow is an **enquiry**, not an application acceptance, payment or seat reservation. It asks for parent/guardian contact details and class interest. Submission uses the configured Formspree endpoint; the WhatsApp option is a separate explicit action. Do not use real parent or student information in tests, and intercept form requests when exercising test submissions.
 
-No manual deployment steps needed. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
-for the Cloudflare project settings and required environment variables.
+The budget calculator starts with blank inputs. It adds costs entered by the parent, separates annual costs from the one-time admission amount, and is not an official school fee quote. Do not add invented fees, rankings, results or testimonials.
 
----
+## Tests
 
-## 🧪 Testing
+### Required local and CI checks
 
-### Performance Benchmarks
+```bash
+npm ci
+npm run check
+npm run build
+npm test
+```
 
-| Metric | Target | Current | Status |
-|--------|--------|---------|--------|
-| First Contentful Paint | <1.5s | 0.8s | ✅ |
-| Time to Interactive | <3s | 1.9s | ✅ |
-| Total Page Size | <1MB | 450KB | ✅ |
-| Lighthouse Performance | >90 | 92 | ✅ |
-| Lighthouse Accessibility | >95 | 98 | ✅ |
+The test suite includes:
 
-### Testing Checklist
+- Current admissions helper tests for budgets, invalid amounts, Indian phone numbers and bilingual WhatsApp messages.
+- Current gallery filter helpers and built-site contract tests.
+- `worker.js` tests with mocked `ASSETS`, verifying exact range bytes, 206/416 headers, HEAD, missing assets and fallback behavior.
+- Two retained `.cjs` suites for the legacy admission wizard and fee calculator. Those legacy tests alone do **not** validate the new UI.
 
-Before merging changes:
-- [ ] Test on mobile (320px, 375px, 414px)
-- [ ] Test on tablet (768px, 1024px)
-- [ ] Test on desktop (1280px+)
-- [ ] Test both EN and HI versions
-- [ ] Check keyboard navigation
-- [ ] Verify color contrast (WCAG AA)
-- [ ] Run Lighthouse audit
-- [ ] Check all links work
+### Browser and accessibility checks
 
----
+On a machine that can launch Chromium:
 
-## 🤝 Contributing
+```bash
+npx playwright install chromium
+npm run build
+npm run test:e2e
+```
 
-We welcome contributions! Here's how:
+The suite in `tests/browser/` exercises English/Hindi routes, responsive layouts, keyboard and dialog interactions, gallery filters, media behavior, admissions error handling, no-JavaScript fallbacks and axe accessibility checks. Read actual run results before claiming those flows passed. Build and unit checks are not a substitute for browser testing or a WCAG conformance assessment.
 
-1. **Read the guidelines**: [CONTRIBUTING.md](CONTRIBUTING.md)
-2. **Check existing issues**: Avoid duplicates
-3. **Create a branch**: `git checkout -b feature/your-feature`
-4. **Make changes**: Follow coding standards
-5. **Test thoroughly**: See testing checklist
-6. **Submit PR**: Use the PR template
-7. **Wait for review**: Address feedback
+GitHub Actions exposes an optional Chromium job under **Build site → Run workflow → browser_tests**. It installs Chromium and its system dependencies, runs the browser suite, and uploads reports. The regular push/PR build does not run that optional job.
 
-### Contribution Guidelines
+For Safari/iPhone and Android testing, use an authorized BrowserStack session or actual devices against a reachable preview. Availability and plan access must be verified. The remote service cannot reach a container's localhost without an approved tunnel. [The older BrowserStack guide](docs/BROWSERSTACK.md) has connection guidance, but its Jekyll command and port 4000 are historical; use the Astro commands above and port 4321.
 
-- ✅ **Maintain bilingual parity** (EN/HI)
-- ✅ **Mobile-first approach**
-- ✅ **Accessibility compliance** (WCAG AA)
-- ✅ **Minimal changes** - surgical edits only
-- ✅ **Update documentation**
-- ✅ **Test on real devices**
+## Deployment
 
----
+**A push to `main` triggers production deployment through Cloudflare's existing Git integration.** Build and validate first, then commit the changed source and its matching `_site/` together.
 
-## 📞 Support & Contact
+Cloudflare dashboard settings remain:
 
-### For Help With:
+| Setting | Value |
+| --- | --- |
+| Production branch | `main` |
+| Build command | Empty |
+| Deploy command | `npx wrangler deploy` |
+| Static asset directory | `_site/` |
 
-**Media Uploads**: [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md)
-**Development**: [CONTRIBUTING.md](CONTRIBUTING.md)
-**Project Questions**: [PROJECT_GUIDE.md](PROJECT_GUIDE.md)
-**Technical Details**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+Cloudflare uploads the committed output without rebuilding Astro. GitHub Actions independently checks, builds, tests and uploads a `site` artifact. On `main`, it can commit corrected `_site/` output as a fallback. When the output already matches, it makes no commit and causes no extra deployment. CI and Cloudflare run independently, so a successful CI run does not prove a deployment succeeded, and a failed CI run is not a deployment gate.
 
-### Contact Information:
+Keep `worker.js`, the `ASSETS` binding, `run_worker_first: ["/assets/media/videos/*"]`, and `not_found_handling: "404-page"` intact. The Worker supplies video byte ranges; ordinary pages and assets bypass it. See [deployment details and rollback](docs/DEPLOYMENT.md).
 
-- **Email**: veerpatta.school@gmail.com
-- **GitHub Issues**: [Report a bug or request a feature](https://github.com/veerpatta/veerpatta-website/issues)
-- **WhatsApp**: Available on the website
+## Contribution checklist
 
----
+- Make changes in the current `src/` implementation and maintain bilingual parity.
+- Test narrow layouts, keyboard navigation, focus restoration, reduced motion and no-JavaScript fallbacks.
+- Verify media, form error states and external-contact actions without sending real test enquiries.
+- Run check, build and tests, and document browser/device results or exact blockers separately.
+- Review `_site/` for output changes and accidental private files before committing it with the source.
+- Do not push to `main` until production publication is intended.
 
-## 📋 Key Documents
-
-### For Everyone
-- [README.md](README.md) - This file
-- [PROJECT_GUIDE.md](PROJECT_GUIDE.md) - Project overview for non-technical users
-- [CHANGELOG.md](CHANGELOG.md) - Version history and changes
-
-### For Content Editors
-- [MEDIA_UPLOAD_GUIDE.md](MEDIA_UPLOAD_GUIDE.md) - How to upload media
-- [QUICK_REFERENCE.md](QUICK_REFERENCE.md) - Quick reference guide
-
-### For Developers
-- [CONTRIBUTING.md](CONTRIBUTING.md) - Development guidelines
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) - Technical architecture
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) - Community guidelines
-
-### For Reference
-- [docs/QA_SUMMARY.md](docs/QA_SUMMARY.md) - QA validation report
-- [docs/MOBILE_FIRST_HEADER.md](docs/MOBILE_FIRST_HEADER.md) - Mobile header implementation
-- [docs/MOBILE_HEADER_TESTING.md](docs/MOBILE_HEADER_TESTING.md) - Testing guide
-
----
-
-## 📜 License
-
-Content and code for Shri Veer Patta Senior Secondary School.
-
-All rights reserved. This website and its content are the property of Shri Veer Patta Senior Secondary School.
-
----
-
-## 🙏 Acknowledgments
-
-- **Jekyll** - Static site generator
-- **Cloudflare Workers** - Hosting and builds
-- **Google Fonts** - Poppins & Noto Sans Devanagari
-- All contributors who help improve this website
-
----
-
-## 🎯 Project Goals
-
-This website aims to:
-
-1. **Inform** - Provide clear information about the school
-2. **Engage** - Showcase school activities and achievements
-3. **Connect** - Make it easy for parents to reach the school
-4. **Perform** - Work fast on budget devices and slow networks
-5. **Include** - Be accessible to all users, in both languages
-
----
-
-## 📈 Future Roadmap
-
-Potential improvements (see [CHANGELOG.md](CHANGELOG.md)):
-
-- [ ] Search functionality
-- [ ] Event calendar
-- [ ] News/Blog section
-- [ ] Online admission form
-- [ ] Service Worker for offline support
-- [ ] Enhanced gallery features
-- [ ] Additional language support
-
-Suggestions? [Open an issue](https://github.com/veerpatta/veerpatta-website/issues)!
-
----
-
-**Made with ❤️ for students and parents in Nokha, Rajasthan**
-
-*Last Updated: November 2025*
+Content and code belong to Shri Veer Patta Senior Secondary School. All rights reserved.

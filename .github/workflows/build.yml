@@ -1,7 +1,5 @@
-# Build check only. Deployment is handled by Cloudflare Workers, which builds
-# this repo itself on every push to main. This workflow exists so a broken
-# Liquid tag, bad YAML frontmatter, or a missing include fails here on the PR
-# rather than in the Cloudflare dashboard after it has already gone live.
+# Cloudflare deploys committed _site/ directly. This workflow validates Astro,
+# uploads the built site, and repairs stale committed output on main if needed.
 name: Build site
 
 on:
@@ -10,9 +8,14 @@ on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      browser_tests:
+        description: Run the optional Chromium browser and accessibility suite
+        type: boolean
+        default: false
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: "build-${{ github.ref }}"
@@ -21,45 +24,32 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          # Kept in step with .ruby-version, which pins the Cloudflare build.
-          ruby-version: '3.2.2'
-          bundler-cache: true
+          node-version: '24'
+          cache: npm
 
-      - name: Build with Jekyll
-        # No --baseurl override: the site is served from the domain root on
-        # Cloudflare Workers, so _config.yml (baseurl: "") is already correct.
-        run: bundle exec jekyll build
-        env:
-          JEKYLL_ENV: production
+      - name: Install locked dependencies
+        run: npm ci
 
-      - name: Check key pages were generated
-        run: |
-          for f in _site/index.html _site/en/index.html _site/hi/index.html \
-                   _site/en/beyond/index.html _site/hi/beyond/index.html \
-                   _site/en/digital/index.html _site/hi/digital/index.html \
-                   _site/assets/css/design.css \
-                   _site/404.html _site/sitemap.xml _site/_headers; do
-            test -f "$f" || { echo "missing $f"; exit 1; }
-          done
-          # wrangler.jsonc has no frontmatter, so a missing exclude: entry
-          # would publish the deploy config as part of the site.
-          test ! -e _site/wrangler.jsonc || { echo "wrangler.jsonc leaked into _site"; exit 1; }
-          test ! -e _site/worker.js || { echo "worker.js leaked into _site"; exit 1; }
-          # Internal notes and tooling must not be published as site pages.
-          for leak in AUDIT_REPORT.md FIX_SUMMARY.md MODERNIZATION_SUMMARY.md QUICK_START_WINDOWS.md remove_bg.mjs scripts tests; do
-            test ! -e "_site/$leak" || { echo "$leak leaked into _site"; exit 1; }
-          done
-          echo "built $(find _site -type f | wc -l) files"
+      - name: Check Astro and TypeScript
+        run: npm run check
 
-      # Kept as a convenience for deploying from a machine with no Ruby:
-      # gh run download <id> -n site -D _site && npx wrangler deploy
+      - name: Build and audit public output
+        run: npm run build
+
+      # Site-contract tests inspect _site/, so build before running tests.
+      - name: Run unit and output-contract tests
+        run: npm test
+
       - name: Upload built site
         uses: actions/upload-artifact@v4
         with:
@@ -67,22 +57,67 @@ jobs:
           path: _site/
           include-hidden-files: true
           retention-days: 7
+          if-no-files-found: error
 
-      # _site/ is committed because Cloudflare deploys it directly - no Ruby
-      # runs on the deployment path. Keep it in lockstep with the sources.
-      # No [skip ci] in the message: Cloudflare Workers Builds honours it too,
-      # so it skipped every one of these commits and the live site ran one
-      # push behind main. A push made with GITHUB_TOKEN never starts another
-      # workflow run, so dropping it cannot cause a loop.
-      - name: Commit rebuilt site
+      # Commit source and its rebuilt _site/ together whenever possible. This
+      # fallback does nothing when the checked-in output already matches, so
+      # the normal path needs only one Cloudflare deployment. A repair commit
+      # triggers a second Cloudflare deployment, not a second Actions run.
+      # Do not add a CI-skip marker: Cloudflare honors those markers too.
+      - name: Commit rebuilt site only if output changed
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f _site
           if git diff --cached --quiet; then
-            echo "_site already up to date"
+            echo "_site already matches the source; no extra commit or deployment"
             exit 0
           fi
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$GITHUB_SHA" ]; then
+            echo "main has advanced; leave output sync to the newer build"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: rebuild _site"
           git push origin HEAD:main
+
+  # Run UI checks on every PR; main runs can opt in through Actions. Keep
+  # browser results separate from the Node build so both outcomes are visible.
+  browser:
+    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.browser_tests)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site for browser tests
+        run: npm run build
+
+      - name: Run browser and accessibility tests
+        run: npm run test:e2e
+
+      - name: Upload browser reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: warn

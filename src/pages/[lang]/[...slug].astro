@@ -1,0 +1,17 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Home from '../../components/Home.astro';
+import Gallery from '../../components/Gallery.astro';
+import Subpage from '../../components/Subpage.astro';
+import {pick,type Lang,type PageSlug} from '../../data/site';
+export function getStaticPaths(){
+ const slugs=['','about','academics','admissions','beyond','digital','contact','faq','gallery','news','privacy'];
+ return (['en','hi'] as const).flatMap(lang=>slugs.map(slug=>({params:{lang,slug:slug||undefined},props:{lang,slug}})));
+}
+const {lang,slug}=Astro.props as {lang:Lang;slug:string};
+const titles:Record<string,[string,string]>={about:['Our school','हमारा स्कूल'],academics:['Learning at Veerpatta','वीरपट्टा में शिक्षा'],admissions:['Admissions','प्रवेश'],beyond:['School life','स्कूल जीवन'],digital:['Digital campus','डिजिटल कैंपस'],contact:['Contact & visit','संपर्क और मुलाक़ात'],faq:['Common questions','आम सवाल'],gallery:['Photos & films','तस्वीरें और फ़िल्में'],news:['News archive','समाचार संग्रह'],privacy:['Privacy policy','गोपनीयता नीति']};
+const title=titles[slug]?pick(lang,...titles[slug]):undefined;
+---
+<SiteLayout lang={lang} slug={slug} title={title}>
+ {slug===''?<Home lang={lang}/>:slug==='gallery'?<Gallery lang={lang}/>:<Subpage lang={lang} slug={slug as PageSlug}/>}
+</SiteLayout>

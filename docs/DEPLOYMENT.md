@@ -1,232 +1,189 @@
 # Deployment
 
-## Overview
+## Current architecture
 
-This site is built and hosted by **Cloudflare Workers** using
-[static assets](https://developers.cloudflare.com/workers/static-assets/).
-Workers Builds watches the GitHub repository — pushing to `main` is the deploy.
-There is no deployment step in GitHub Actions.
+Astro 7.4.7 generates a static site into `_site/`. That directory is intentionally **committed with its source changes**. Cloudflare Workers' existing Git integration deploys the committed files; it does not run the Astro build.
 
-This is Workers, **not Cloudflare Pages**. The two are similar but configured
-differently, and Cloudflare is steering new projects to Workers. If you follow a
-Pages tutorial, most of it will not apply here.
+The Worker script exists only to support byte-range requests for video. Ordinary pages and other assets are served directly by Cloudflare's static asset store.
 
-GitHub Actions still runs `.github/workflows/build.yml`, but that is a **build
-check only**: it compiles the site to catch broken Liquid, bad YAML frontmatter,
-or a missing include before Cloudflare publishes it. It publishes nothing.
+This is **Cloudflare Workers**, not Cloudflare Pages. Ruby/Jekyll files retained in the repository are historical migration sources. They are not required by the current Node-based validation or site-generation workflow.
 
-```
-Push to main
-      │
-      ├──► GitHub Actions (build.yml) ──► build check, publishes nothing
-      │
-      └──► Cloudflare Workers Builds
-             bundle install && jekyll build  ──►  _site/
-             npx wrangler deploy       ──►  live site
+## Validate before publishing
+
+Use Node.js 24 LTS and the committed npm lockfile:
+
+```bash
+npm ci
+npm run check
+npm run build
+npm test
 ```
 
-## Repository configuration
+`npm run build` stages public images/media, builds Astro, and runs `scripts/check-site.mjs`. Tests include contracts that read `_site/`, so build before tests. Review the source and output diff together; do not edit only generated HTML or rely on a later CI repair to publish the correct version.
 
-[`wrangler.jsonc`](../wrangler.jsonc) at the repository root defines the
-deployment:
+For a local production preview:
+
+```bash
+npm run preview -- --host 127.0.0.1 --port 4321
+```
+
+This preview serves the static output, not Cloudflare's Worker routing. To check the actual Worker locally, use `npx wrangler dev` after building on a machine where Wrangler can start. That is a separate verification step from Astro preview.
+
+A push to `main` is production publication. Commit matching source and `_site/` together before an authorized push. Keep `package-lock.json` tracked and use `npm ci` in clean environments.
+
+## Cloudflare Workers Builds settings
+
+These settings live in the Cloudflare dashboard under **Workers & Pages → veerpatta-website → Settings → Build**. Preserve the existing deployment method:
+
+| Setting | Value |
+| --- | --- |
+| Git repository | `veerpatta/veerpatta-website` |
+| Production branch | `main` |
+| Build command | **Empty** |
+| Deploy command | `npx wrangler deploy` |
+| Root directory | `/` |
+
+**The build command stays empty.** Cloudflare uploads the checked-in `_site/` as-is. It does not need Ruby, Bundler, Astro, or a build environment variable to regenerate pages. Dashboard dependency setup is distinct from the application build; do not infer that the site was rebuilt from an installation log.
+
+Cloudflare deployments and GitHub Actions run independently. A failed Actions job does not prevent Cloudflare from deploying an already-pushed commit. A green Actions check does not prove that the Worker deployment completed. Check both before reporting publication.
+
+Branch builds and preview availability depend on Cloudflare dashboard settings and account permissions. Verify the deployment URL before sharing or testing it; do not assume every branch or pull request automatically has a preview.
+
+## Repository deployment configuration
+
+The important parts of `wrangler.jsonc` are:
 
 ```jsonc
 {
   "name": "veerpatta-website",
   "compatibility_date": "2026-08-19",
+  "main": "worker.js",
+  "preview_urls": true,
   "assets": {
     "directory": "./_site",
+    "binding": "ASSETS",
+    "run_worker_first": ["/assets/media/videos/*"],
     "not_found_handling": "404-page"
   }
 }
 ```
 
-Notes on that file:
+- `main` and the `ASSETS` binding are required for this existing Worker. Do not remove them using the older static-assets-only instructions.
+- Only `/assets/media/videos/*` runs the Worker first. Pages, CSS, JavaScript and images bypass it.
+- `404-page` returns a real 404 with `404.html`. Do not use `single-page-application`, which would change missing-page behavior.
+- `preview_urls: true` preserves the current configuration; it does not itself guarantee that a branch build occurred or that a preview is publicly accessible.
+- Video-handler tracing is enabled with a sampling rate of `0.1`. Ordinary static page requests do not invoke the handler and therefore are not its traces.
 
-- There is **no `main`** and **no `assets.binding`**. Both are only valid when a
-  Worker script exists. This site is static assets only; adding either causes a
-  deploy error.
-- `not_found_handling: "404-page"` serves `404.html` with a real 404 status.
-  Do not switch this to `"single-page-application"` — that returns **200** for
-  every unmatched path, which makes search engines index soft 404s.
-- `wrangler.jsonc` is listed under `exclude:` in `_config.yml`. It has no
-  frontmatter, so Jekyll would otherwise copy it into `_site/` and publish it.
+No application secrets are needed to generate the static site. Keep credentials and private deployment state out of the repository and public output. Wrangler's local state is ignored.
 
-### Tracing
+## GitHub Actions
 
-`observability.traces.enabled` is set to `true`, following
-[Cloudflare's agent tracing setup](https://developers.cloudflare.com/agent-setup/tracing.md).
+`.github/workflows/build.yml` runs on pushes and pull requests to `main`, and can be started manually. Its main job:
 
-Be aware that it currently records nothing. Automatic instrumentation captures
-handler calls, outbound fetch calls, and binding calls — all of which require
-the Worker to actually be invoked. This Worker has no `main`, so every request
-is answered directly from the static asset store without running Worker code.
-No traces will appear in the dashboard until a Worker script exists.
+1. Checks out the commit and selects Node.js 24.
+2. Runs `npm ci` using `package-lock.json`.
+3. Runs `npm run check`.
+4. Runs `npm run build`, including the output audit.
+5. Runs `npm test` against that build.
+6. Uploads the `_site/` directory as the `site` artifact, retained for seven days.
+7. On `main` only, commits corrected `_site/` output if it differs and `main` has not advanced.
 
-The rest of that guide does not apply here: it instruments agent entry points
-built on Think, Flue, or the AI SDK, and this is a static Jekyll site with no
-agent code and no `main`.
+There is no `wrangler deploy` step in Actions. The output-sync commit is a safety net, not the preferred publication path. If the source and correct output were committed together, the rebuilt bytes match and the job skips the commit and extra deployment.
 
-If a Worker script is ever added, set `head_sampling_rate` below `1` before it
-takes real traffic — the default samples 100% of invocations.
+If output is stale, the original push can deploy the old output before the repair commit triggers a second Cloudflare deployment. A bot push using `GITHUB_TOKEN` normally does not start another Actions workflow, but Cloudflare's external integration can still deploy it. Protected-branch rules may prevent the repair push; resolve stale output in a normal reviewed commit instead of weakening branch protection.
 
-## Workers Builds settings
+Do not add CI-skip markers such as `[skip ci]` to deployment commits. Cloudflare may skip them too, leaving the live site behind the repository.
 
-These live in the Cloudflare dashboard (Workers & Pages → `veerpatta-website` →
-Settings → Build), not in this repository:
+### Optional browser job
 
-| Setting | Value |
-|---|---|
-| Git repository | `veerpatta/veerpatta-website` |
-| Production branch | `main` |
-| **Build command** | **empty** |
-| Deploy command | `npx wrangler deploy` |
-| Root directory | `/` |
+Select **Build site → Run workflow → browser_tests** to run the separate Chromium job. It installs the locked npm dependencies and Playwright Chromium with required system dependencies, builds the site, runs `npm run test:e2e`, and uploads browser reports even if tests fail.
 
-**Build command must stay empty.** Ruby is deliberately not on the deployment
-path. `_site/` is committed to the repository and Cloudflare uploads it as-is,
-so a deploy is a file upload and takes seconds.
+For local execution:
 
-Running Jekyll on Cloudflare was tried and abandoned: the image spent about
-four minutes initializing and six installing gems before the build even
-started, and the build then failed in four seconds for reasons the dashboard
-log never made legible. GitHub Actions compiles the same commit in twenty
-seconds, so that is where the build happens.
+```bash
+npx playwright install chromium
+npm run build
+npm run test:e2e
+```
 
-### Ruby version
+Use Playwright's installed Chromium by default. A machine-specific executable override must not be hardcoded for CI. A browser suite that cannot launch because of a sandbox or socket restriction is **blocked**, not passed. A remote managed browser needs a reachable preview or authorized tunnel, not the container's localhost URL.
 
-Ruby is pinned to **3.2.2** by [`.ruby-version`](../.ruby-version) at the
-repository root. The Workers Builds image honours that file and can install any
-version.
+Browser and accessibility tests, actual iPhone/Safari or Android checks, and performance measurements are separate evidence from a passing build. BrowserStack access and real-device session availability must be verified before claiming coverage. The older `docs/BROWSERSTACK.md` describes connection options; replace its Jekyll/port-4000 example with the current Astro/port-4321 preview. Use mock/intercepted submissions and never send real parent data to test the form.
 
-Do not delete it. The build image defaults to Ruby 3.4.4, which is newer than
-this site's `jekyll ~> 3.10` / `github-pages ~> 232` stack was built for. The
-`RUBY_VERSION` environment variable overrides the file if you ever need to test
-a different one without committing.
+## Public-file boundary
 
-### Environment variables
+Astro publishes `public/` and its generated pages/assets, not the repository root. `scripts/prepare-public.mjs` stages only the source `assets/images/` and `assets/media/` directories into `public/assets/`. `public/assets/` is generated and ignored; `_site/` is generated and committed.
 
-None. Until 28 Oct 2026 none could be set either - the dashboard said
-"Variables cannot be added to a Worker that only has static assets" - but
-the Worker now has a `main` (`worker.js`, for video byte ranges), so they
-could be. None are needed: nothing in this repo branches on `jekyll.environment`, so
-`JEKYLL_ENV` would have changed nothing anyway. The GitHub Actions build sets
-it for parity with local builds.
+The current public control files are:
 
-No `GITHUB_TOKEN` is needed either. It used to be, because `jekyll-remote-theme`
-fetched `pages-themes/cayman` from the GitHub API on every build and the
-anonymous rate limit is shared across a CI provider's IPs. That theme was
-removed - it rendered nothing, verified by a byte-identical build - so the
-network dependency is gone rather than worked around.
+| Source | Published output | Purpose |
+| --- | --- | --- |
+| `public/_headers` | `_site/_headers` | Static asset response headers |
+| `public/sw.js` | `_site/sw.js` | Service worker |
+| `public/manifest.webmanifest` | `_site/manifest.webmanifest` | Web app metadata |
+| `public/robots.txt` | `_site/robots.txt` | Crawler instructions |
+| `src/pages/404.astro` | `_site/404.html` | Missing-page body |
+| `src/pages/sitemap.xml.ts` | `_site/sitemap.xml` | Generated sitemap |
 
-## The one Worker script: video byte ranges
+Edit these current sources, not retained root/Jekyll copies. If a new `_redirects` file is needed, put the approved public configuration in `public/_redirects` and verify `_site/_redirects` after building. Jekyll `include:` and `exclude:` settings no longer control publication.
 
-The asset store answers every request with the whole file and ignores the
-`Range` header. Safari on iPhone fetches video in ranges and will not play
-a clip served that way. `worker.js` fixes that, and nothing else:
-`wrangler.jsonc` sets `run_worker_first` to `/assets/media/videos/*`, so
-the script runs only for video files and answers `206 Partial Content`
-(or `416`). Every page, image and stylesheet is still served straight
-from the asset store without invoking it. `worker.js` is in `exclude:`
-in `_config.yml`, so it is never published as a file.
+Do not copy repository docs, scripts, tests, configuration or credentials into a public directory. The output audit checks routes, local links, image alt attributes and known forbidden paths; it supplements, but does not replace, reviewing newly introduced public files.
 
-Checked 28 Oct 2026 with `wrangler dev`: `bytes=0-1`, `bytes=100-199`,
-`bytes=3000000-` and `bytes=-500` return 206 with the right bytes;
-`bytes=99999999-` returns 416; pages and the 404 page are unchanged.
+## Video byte ranges
 
-## Files Cloudflare reads from `_site/`
+`worker.js` requests the whole, unencoded video from `ASSETS` and slices valid single ranges. It preserves this existing behavior:
 
-| File | Purpose |
-|---|---|
-| `_headers` | Response headers (security headers; `no-cache` on `sw.js`) |
-| `404.html` | Served for unmatched paths, per `not_found_handling` |
+- An initial `bytes=0-1`, an open-ended `bytes=7-`, or a suffix `bytes=-3` returns 206 with the selected bytes and `Content-Range` / `Content-Length`.
+- An end or suffix beyond the file length is clamped to the available bytes.
+- Unsatisfiable ranges return 416 with `Content-Range: bytes */<size>`.
+- Invalid or multiple ranges fall back to a whole-file 200 response.
+- HEAD ignores a requested range. Upstream non-200 responses, including a missing video, pass through unchanged.
 
-`_headers` and `_redirects` are supported natively by Workers static assets, and
-must be inside the asset directory — here, `_site/`. `_headers` starts with an
-underscore, so Jekyll would normally skip it; it is listed under `include:` in
-`_config.yml` to force it into `_site/`. If you add a `_redirects` file, add it
-to `include:` too or it will silently never deploy.
+`tests/worker.test.mjs` checks those semantics with mocked `ASSETS` and real `Request`/`Response` objects. It is not a Cloudflare integration or Safari playback test. Preserve `worker.js` and its existing configuration unless a separately verified change is required.
 
-## Base path
+## Verify a deployment
 
-The site is served from the **domain root**, so `_config.yml` has
-`baseurl: ""`. Under GitHub Pages it was `/veerpatta-website`.
+1. Confirm the intended commit is present on the remote branch.
+2. Check the Actions result for that commit. Distinguish main validation from the optional browser job.
+3. In Cloudflare **Deployments**, verify the deployed commit/version and build/deploy log.
+4. Open the exact production or verified preview URL and check both English and Hindi pages, current release content and assets.
+5. Verify a nonexistent page returns HTTP 404 with the designed 404 body.
+6. Verify a small video range returns 206 and the requested bytes, and an out-of-bounds range returns 416. Check HEAD and direct video playback when relevant.
+7. Exercise the intended UI flows without sending real test enquiries. Record browser/device, URL and outcome separately.
 
-Nothing should hardcode either value. Templates use the `relative_url` filter;
-JavaScript that builds asset URLs at runtime reads `window.SITE_BASEURL`, which
-`_includes/head.html` sets from `site.baseurl`.
-
-## Monitoring a deploy
-
-1. Cloudflare dashboard → Workers & Pages → `veerpatta-website` → **Deployments**
-2. Open the latest build to read its log
-3. Enable non-production branch builds to get preview URLs for branches and
-   pull requests
+Do not label a preview as production or treat a successful deploy command as proof that visitors are receiving the expected content.
 
 ## Rollback
 
-In the Cloudflare dashboard, open the Worker's **Deployments**, find the last
-known-good version, and roll back to it. This is instant and needs no push.
+For an urgent rollback, select a previously verified Worker version under Cloudflare **Deployments** and use the dashboard rollback. This restores that deployed version without waiting for a repository build.
 
-To fix forward instead:
-
-```bash
-git revert HEAD
-git push origin main
-```
+For a reviewed fix-forward or revert, restore matching source and `_site/`, run the checks, review the diff and push only when production publication is intended. Rebuild after reverting so source and generated output remain consistent. A dashboard rollback alone does not change `main`; a later push can deploy it again.
 
 ## Troubleshooting
 
-### The live site is one push behind `main`
-Cloudflare Workers Builds, like GitHub Actions, skips any commit whose
-message contains `[skip ci]`. The GitHub Actions job commits the rebuilt
-`_site/` as its own commit, and that commit is the only one carrying the
-fresh build, so it must not carry the tag. Until 28 Oct 2026 it did, and
-each merge went live with the previous merge's `_site/`. A push made with
-`GITHUB_TOKEN` never starts another workflow run, so no loop follows.
+### Source changed but the deployed page did not
 
-Avoid writing the tag anywhere in a commit message on this repo, even
-when quoting it, or that commit is neither checked nor deployed.
+Inspect the `_site/` included in the deployed commit. Cloudflare's empty build command means source-only edits cannot update published HTML. Build, test and commit matching output. Check whether the Actions repair push failed or a skip marker prevented a deployment.
 
-### Every path returns "Hello world"
-The Worker is still the default scaffold — the repository was never connected,
-or the deploy command never ran. Check Settings → Build in the dashboard.
+### `_site/` is missing during deployment
 
-### Every path returns 200, including nonexistent ones
-`not_found_handling` is set to `single-page-application`. It should be
-`404-page` for this site.
+The committed build artifact is absent or ignored. Restore it from a clean build and commit it with the source. Do not switch to Ruby/Jekyll or add an unplanned Cloudflare build step to hide the mismatch.
 
-### The deploy step fails and nothing was built
-Check **Build command** under Settings -> Build in the dashboard. If it reads
-`None`, Workers Builds clones the repo and installs dependencies but never runs
-Jekyll, so `_site/` never exists and the deploy fails on the assets directory
-named in `wrangler.jsonc`.
+### Actions passed but production did not update
 
-This is a dashboard setting the repository cannot supply, and the GitHub
-Actions check cannot catch it: Actions runs its own build steps and passes on
-the very commit whose Cloudflare build fails.
+Inspect the Cloudflare deployment log and commit/version. Actions is not the deployer. Verify the Git integration, production branch, empty build command and `npx wrangler deploy` command separately.
 
-Workers Builds installs Ruby gems automatically when it finds a Gemfile, so the
-build command does not need its own `bundle install`.
+### Styles or media return 404
 
+Inspect the built HTML and output audit. Source styles/scripts are bundled under `_astro/`; media remains under `/assets/`. Paths are root-relative. Historical Liquid filters and the old GitHub Pages `/veerpatta-website` prefix do not apply.
 
-### Build fails on Cloudflare but the GitHub Actions check passed
-The two run different steps, so a green check is not evidence the Cloudflare
-build works. Compare the build command and environment in the dashboard against
-what Actions does, and check `.ruby-version` is present.
+### Visitors retain the old version
 
-### Site deploys but CSS, JS, or images 404
-Something is hardcoding a base path. Search for `veerpatta-website` outside the
-documentation; templates should use `relative_url` and scripts should use
-`window.SITE_BASEURL`.
+Inspect the service-worker response and cache behavior. Ensure the current `public/sw.js` and `public/_headers` reached `_site/` and the deployment. Check in a fresh browser context as well as an existing one; avoid assuming a hard refresh alone proves a service-worker update.
 
-### Changes are live but a visitor still sees the old site
-A stale service worker. `_headers` sets `Cache-Control: no-cache` on `/sw.js`
-to prevent this; confirm `_site/_headers` exists in the build output, since
-Jekyll drops it if the `include:` entry in `_config.yml` is removed.
+### iPhone video playback fails
 
-### A `_redirects` or `_headers` file has no effect
-It was not copied into `_site`. Add it to `include:` in `_config.yml`.
+Verify the request path matches `/assets/media/videos/*`, the Worker still has `ASSETS`, and a range request receives 206 with valid byte counts. Local Astro preview does not execute this Worker. Test the deployed URL or Wrangler locally, then check Safari playback on an available actual/remote device.
 
 ## References
 
@@ -235,9 +192,6 @@ It was not copied into `_site`. Add it to `include:` in `_config.yml`.
 - [Static asset redirects](https://developers.cloudflare.com/workers/static-assets/redirects/)
 - [Wrangler configuration](https://developers.cloudflare.com/workers/wrangler/configuration/)
 - [Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/)
-- [Build image and language versions](https://developers.cloudflare.com/workers/ci-cd/builds/build-image/)
-- [Build check workflow](../.github/workflows/build.yml)
+- [Repository validation workflow](../.github/workflows/build.yml)
 
----
-
-*Last Updated: August 2026*
+Updated for the Astro migration, 8 November 2026.
