@@ -1,13 +1,13 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 const errors=[];
-const routes=['','about','academics','admissions','beyond','digital','contact','faq','gallery','news','privacy'];
+const routes=['','about','academics','admissions','admissions/pre-primary','admissions/class-11','beyond','digital','contact','faq','gallery','news','privacy'];
 for(const lang of ['en','hi']) for(const slug of routes) {
  const file=`_site/${lang}/${slug?slug+'/':''}index.html`;
  if(!existsSync(file)) errors.push(`missing ${file}`);
  else {
   const html=readFileSync(file,'utf8');
-  if(!html.includes('content="parent-first-20261108"')) errors.push(`old output ${file}`);
+  if(!html.includes('content="parent-fieldbook-20261120"')) errors.push(`old output ${file}`);
   if(!html.includes(`lang="${lang}"`)) errors.push(`language mismatch ${file}`);
   if(/\{%|\{\{/.test(html)) errors.push(`unrendered template ${file}`);
  }

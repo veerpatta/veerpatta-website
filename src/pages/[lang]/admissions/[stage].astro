@@ -1,0 +1,11 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import CampaignLanding from '../../../components/CampaignLanding.astro';
+import {pick,type Lang} from '../../../data/site';
+export function getStaticPaths(){return (['en','hi'] as const).flatMap(lang=>(['pre-primary','class-11'] as const).map(stage=>({params:{lang,stage},props:{lang,stage}})));}
+const {lang,stage}=Astro.props as {lang:Lang;stage:'pre-primary'|'class-11'};
+const young=stage==='pre-primary';
+const title=young?pick(lang,'Nursery & KG admissions in Amet','आमेट में नर्सरी और केजी प्रवेश'):pick(lang,'Class 11 admissions in Amet','आमेट में कक्षा 11 प्रवेश');
+const description=young?pick(lang,'Explore the early-years activity room at Veer Patta, Amet. Ask about Nursery or KG, fees, entry age and a campus visit.','वीर पट्टा, आमेट का गतिविधि कक्ष देखें। नर्सरी और केजी की फ़ीस, प्रवेश की उम्र और स्कूल आने के समय की जानकारी लें।'):pick(lang,'Explore Veer Patta’s Class 11 streams in Amet. Ask about subject combinations, eligibility, fees and school visits.','वीर पट्टा आमेट में कक्षा 11 के विज्ञान, वाणिज्य और कला संकाय जानें। विषय, पात्रता, फ़ीस और स्कूल आने का समय पूछें।');
+---
+<SiteLayout lang={lang} slug={`admissions/${stage}`} title={title} description={description}><CampaignLanding lang={lang} stage={stage}/></SiteLayout>

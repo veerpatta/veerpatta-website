@@ -699,3 +699,6 @@ export const videos:Record<string,SchoolVideo> = {
 
 photos["video-school-story"] = {widths:[480,800,1200],w:1200,h:675,alt:{en:"The entrance of Veerpatta School, opening frame of the edited campus story",hi:"वीरपट्टा स्कूल का प्रवेश द्वार, संपादित कैंपस कहानी का पहला दृश्य"}};
 videos["school-story"] = {poster:"video-school-story",duration:"0:24",size:"3.9 MB",caption:{en:"A little glimpse of our world",hi:"हमारी दुनिया की एक छोटी झलक"}};
+
+// Original school photographs. Width, height and orientation reserve space before load.
+photos['first-school-room'] = {widths:[384,640,896,1120],w:1120,h:840,alt:{en:'Low round blue tables and small chairs in the school’s activity room.',hi:'स्कूल के गतिविधि कक्ष में गोल नीली मेज़ें और छोटी कुर्सियाँ।'}};

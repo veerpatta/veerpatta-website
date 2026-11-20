@@ -2,7 +2,7 @@
 
 The bilingual English/Hindi website for Shri Veer Patta Senior Secondary School in Amet, Rajasthan. Built with **Astro 7.4.7 and TypeScript**, with static HTML hosted on **Cloudflare Workers**.
 
-- [Live site](https://veerpatta-website.raj-39e.workers.dev/)
+- [Live school domain](https://vpps.co.in/)
 - [Deployment guide](docs/DEPLOYMENT.md)
 - [Contributor and coding-agent guide](agents.md)
 - [Revamp media notes](docs/REVAMP_MEDIA.md)
@@ -71,7 +71,9 @@ Both `/en/` and `/hi/` include home, about, academics, admissions, school life (
 - Keep meaningful text, links and forms available without JavaScript. Dialogs, filtering and motion enhance the basic pages.
 - Videos load after a tap rather than downloading on first page load. Keep direct-file fallbacks, posters and captions available.
 
-The admissions flow is an **enquiry**, not an application acceptance, payment or seat reservation. It asks for parent/guardian contact details and class interest. Submission uses the configured Formspree endpoint; the WhatsApp option is a separate explicit action. Do not use real parent or student information in tests, and intercept form requests when exercising test submissions.
+The early-years (`/hi/admissions/pre-primary/`, `/en/admissions/pre-primary/`) and Class 11 (`/hi/admissions/class-11/`, `/en/admissions/class-11/`) guides provide short, class-specific enquiries. The two `/admissions/` hubs preserve the all-class guided form and parent-entered budget.
+
+The admissions flow is an **enquiry**, not an application acceptance, payment or seat reservation. It asks for parent/guardian contact details and class interest. Submission uses the configured Formspree endpoint; the public telephone is a call link. WhatsApp is intentionally unconfigured until the school verifies the public messaging recipient; a telephone number alone is not sufficient. Do not use real parent or student information in tests, and intercept form requests when exercising test submissions.
 
 The budget calculator starts with blank inputs. It adds costs entered by the parent, separates annual costs from the one-time admission amount, and is not an official school fee quote. Do not add invented fees, rankings, results or testimonials.
 
@@ -136,3 +138,7 @@ Keep `worker.js`, the `ASSETS` binding, `run_worker_first: ["/assets/media/video
 - Do not push to `main` until production publication is intended.
 
 Content and code belong to Shri Veer Patta Senior Secondary School. All rights reserved.
+
+## Parent fieldbook review
+
+See [parent fieldbook review](docs/PARENT_FIELDBOOK.md) and the [optional measurement safety gate](docs/MEASUREMENT_REVIEW.md). These files describe a local review build; they do not record or authorize publication.

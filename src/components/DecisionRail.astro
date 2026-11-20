@@ -1,0 +1,7 @@
+---
+import {pick,pathFor,type Lang} from '../data/site';
+interface Props {lang:Lang}
+const {lang}=Astro.props,t=(en:string,hi:string)=>pick(lang,en,hi);
+const routes=[{n:'01',tag:t('School life','स्कूल जीवन'),name:t('See a school day','स्कूल का एक दिन देखें'),link:pathFor(lang,'beyond')},{n:'02',tag:t('Admissions','प्रवेश'),name:t('Find your child’s class','बच्चे की कक्षा चुनें'),link:pathFor(lang,'admissions')},{n:'03',tag:t('Plan a visit','मुलाक़ात'),name:t('Visit us in Amet','आमेट में हमसे मिलें'),link:pathFor(lang,'contact')+'#visit'}];
+---
+<nav class="decision-rail" aria-label={t('Choose your next step','अपना अगला कदम चुनें')}><div class="wrap">{routes.map(r=><a href={r.link}><span class="rail-id">{r.n}</span><span><small>{r.tag}</small><strong>{r.name}</strong></span><span class="rail-arrow" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h14m-6-6 6 6-6 6"/></svg></span></a>)}</div></nav>

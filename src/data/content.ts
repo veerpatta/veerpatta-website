@@ -5,13 +5,13 @@ export type PageContent = { kicker: Bilingual; title: Bilingual; description: Bi
 export const pageContent: Record<PageSlug, PageContent> = {
   about: {
     kicker: { en: 'Rooted in Amet', hi: 'आमेट से जुड़ा विद्यालय' },
-    title: { en: 'A place to learn. A place to belong.', hi: 'सीखने की जगह। अपनेपन का अहसास।' },
-    description: { en: 'Get to know Veerpatta Senior Secondary School through the spaces, people and everyday moments that make a school.', hi: 'विद्यालय के परिसर, शिक्षकों और रोज़मर्रा के पलों के ज़रिए वीरपट्टा सीनियर सेकेंडरी स्कूल को जानें।' },
+    title: { en: 'Meet Veerpatta School', hi: 'वीरपट्टा स्कूल को जानें' },
+    description: { en: 'Meet the teaching team and see the classrooms, courtyards and grounds at our school in Amet.', hi: 'आमेट में हमारे स्कूल के शिक्षकों, कक्षाओं, प्रांगण और मैदान की झलक देखें।' },
     image: 'campus-approach',
   },
   academics: {
     kicker: { en: 'Nursery to Class 12 · RBSE', hi: 'नर्सरी से कक्षा 12 · आरबीएसई' },
-    title: { en: 'The next chapter starts with curiosity.', hi: 'जिज्ञासा से शुरू होता है सीखने का सफ़र।' },
+    title: { en: 'Learning from Nursery to Class 12', hi: 'नर्सरी से कक्षा 12 तक की पढ़ाई' },
     description: { en: 'Explore the school stages, see our learning spaces and discuss the right class or stream with the school.', hi: 'कक्षाओं और पढ़ाई की जगहों को जानें। सही कक्षा या संकाय के लिए विद्यालय से बात करें।' },
     image: 'classroom',
   },
@@ -23,39 +23,39 @@ export const pageContent: Record<PageSlug, PageContent> = {
   },
   beyond: {
     kicker: { en: 'Beyond the classroom', hi: 'कक्षा से आगे' },
-    title: { en: 'Room to play. A stage to shine.', hi: 'खेलने का मैदान। अभिव्यक्ति का मंच।' },
+    title: { en: 'School life beyond lessons', hi: 'पढ़ाई के साथ खेल और गतिविधियाँ' },
     description: { en: 'Sport, performance, exhibitions and shared experiences, captured in real moments from our school.', hi: 'खेल, मंच, प्रदर्शनी और साथ बिताए अनुभव, हमारे विद्यालय की असली तस्वीरों में।' },
     image: 'sports-drill',
   },
   digital: {
     kicker: { en: 'A clear path for parents', hi: 'अभिभावकों के लिए सरल जानकारी' },
-    title: { en: 'Technology, with a human connection.', hi: 'तकनीक के साथ मानवीय जुड़ाव।' },
+    title: { en: 'School links & digital learning', hi: 'स्कूल के लिंक और कंप्यूटर की पढ़ाई' },
     description: { en: 'See our computer learning spaces and find out how to get the right school updates and online access.', hi: 'कंप्यूटर कक्ष देखें और विद्यालय की सही ऑनलाइन जानकारी व सेवाओं तक पहुँचने का तरीका जानें।' },
     image: 'computer-lab-wide',
   },
   contact: {
     kicker: { en: 'Let’s talk', hi: 'आइए, बात करें' },
-    title: { en: 'Your questions are welcome.', hi: 'आपके सवालों का स्वागत है।' },
-    description: { en: 'Call, message or ask to visit Veerpatta Senior Secondary School in Amet, Rajasthan.', hi: 'आमेट, राजस्थान के वीरपट्टा सीनियर सेकेंडरी स्कूल में फोन करें, संदेश भेजें या मिलने का समय पूछें।' },
+    title: { en: 'Contact & visit the school', hi: 'स्कूल से संपर्क और मुलाक़ात' },
+    description: { en: 'Speak with the school office, get directions to our campus or send an admission enquiry.', hi: 'स्कूल कार्यालय में फोन करें, परिसर का रास्ता देखें या प्रवेश की पूछताछ भेजें।' },
     image: 'school-office',
   },
   faq: {
     kicker: { en: 'Useful answers', hi: 'काम की जानकारी' },
-    title: { en: 'A little clarity goes a long way.', hi: 'सही जानकारी से आसान होता है फैसला।' },
+    title: { en: 'Answers for parents', hi: 'अभिभावकों के सवालों के जवाब' },
     description: { en: 'A starting point for your questions about classes, admissions, fees and visiting the school.', hi: 'कक्षाओं, प्रवेश, शुल्क और विद्यालय आने से जुड़े सवालों के शुरुआती जवाब।' },
     image: 'school-hall',
   },
   privacy: {
     kicker: { en: 'Your information', hi: 'आपकी जानकारी' },
-    title: { en: 'Privacy, in plain language.', hi: 'आपकी गोपनीयता, सरल शब्दों में।' },
+    title: { en: 'Your information and this website', hi: 'आपकी जानकारी और यह वेबसाइट' },
     description: { en: 'What this website asks for, where an enquiry goes and how to raise a privacy concern.', hi: 'यह वेबसाइट क्या जानकारी माँगती है, पूछताछ कहाँ जाती है और गोपनीयता से जुड़ी चिंता कैसे बताएँ।' },
     image: '',
   },
   news: {
     kicker: { en: 'From the school', hi: 'विद्यालय से' },
-    title: { en: 'Moments worth remembering.', hi: 'याद रखने लायक पल।' },
+    title: { en: 'School news archive', hi: 'स्कूल के पुराने समाचार' },
     description: { en: 'Stories from the school archive. For current notices and dates, please contact the office.', hi: 'विद्यालय के संग्रह से कुछ कहानियाँ। वर्तमान सूचनाओं और तारीखों के लिए कार्यालय से संपर्क करें।' },
-    image: 'sports-oath',
+    image: '',
   },
 };
 
@@ -69,7 +69,7 @@ export const schoolStages = [
 
 export const schoolFaqs = [
   { q: { en: 'Which classes and board does the school offer?', hi: 'विद्यालय में कौन-सी कक्षाएँ और बोर्ड हैं?' }, a: { en: 'The school offers Nursery through Class 12 under RBSE. Senior-secondary streams are Science, Commerce and Arts. Ask the office for current subject combinations.', hi: 'विद्यालय में आरबीएसई के अंतर्गत नर्सरी से कक्षा 12 तक पढ़ाई होती है। सीनियर सेकेंडरी स्तर पर विज्ञान, वाणिज्य और कला संकाय हैं। वर्तमान विषय-संयोजन के लिए कार्यालय से पूछें।' } },
-  { q: { en: 'How do I enquire about admission?', hi: 'प्रवेश की जानकारी कैसे लें?' }, a: { en: 'Call or WhatsApp the school, or send the enquiry form with a parent or guardian’s name, mobile number and the class you are considering. The office can explain the next steps.', hi: 'विद्यालय में फोन या WhatsApp करें, या अभिभावक का नाम, मोबाइल नंबर और इच्छित कक्षा बताकर पूछताछ फ़ॉर्म भेजें। कार्यालय आगे की प्रक्रिया समझाएगा।' } },
+  { q: { en: 'How do I enquire about admission?', hi: 'प्रवेश की जानकारी कैसे लें?' }, a: { en: 'Call the school office, or send the enquiry form with a parent or guardian’s name, mobile number and the class you are considering. The office can explain the next steps.', hi: 'स्कूल कार्यालय में फोन करें, या अभिभावक का नाम, मोबाइल नंबर और इच्छित कक्षा बताकर पूछताछ फ़ॉर्म भेजें। कार्यालय आगे की प्रक्रिया समझाएगा।' } },
   { q: { en: 'Does submitting an enquiry reserve a seat?', hi: 'क्या पूछताछ भेजने से सीट आरक्षित हो जाती है?' }, a: { en: 'No. An enquiry is a request for information. Availability, eligibility, documents and admission confirmation must be discussed with the school.', hi: 'नहीं। पूछताछ केवल जानकारी का अनुरोध है। उपलब्धता, पात्रता, दस्तावेज़ और प्रवेश की पुष्टि के लिए विद्यालय से बात करनी होगी।' } },
   { q: { en: 'What are the fees?', hi: 'शुल्क कितना है?' }, a: { en: 'Ask the office for a current, written quote for the class you are considering, including any admission, books, uniform and transport charges. The budget planner uses only amounts you enter and is not a school fee quote.', hi: 'इच्छित कक्षा के लिए वर्तमान लिखित शुल्क विवरण माँगें। प्रवेश, किताबों, वर्दी और परिवहन के अलग शुल्क भी पूछें। बजट कैलकुलेटर केवल आपकी लिखी राशियों पर चलता है, यह विद्यालय का शुल्क विवरण नहीं है।' } },
   { q: { en: 'Is transport available for our area?', hi: 'क्या हमारे क्षेत्र में परिवहन उपलब्ध है?' }, a: { en: 'Please confirm your area, pick-up point, timings, charges and current route availability with the office before making plans. A route is not guaranteed by this website.', hi: 'योजना बनाने से पहले अपने क्षेत्र, पिक-अप स्थान, समय, शुल्क और वर्तमान मार्ग की उपलब्धता की पुष्टि कार्यालय से करें। वेबसाइट किसी मार्ग की गारंटी नहीं देती।' } },

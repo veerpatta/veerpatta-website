@@ -73,7 +73,7 @@ for(const card of document.querySelectorAll<HTMLAnchorElement>('[data-video-src]
  card.replaceWith(video);video.after(error);video.focus();
  video.play().catch(()=>{error.hidden=false;});
 });
-for(const form of document.querySelectorAll<HTMLFormElement>('.enquiry-form')) bindNativeEnquiryForm(form,hi);
+for(const form of document.querySelectorAll<HTMLFormElement>('.enquiry-form:not([data-campaign-form])')) bindNativeEnquiryForm(form,hi);
 window.addEventListener('pageshow',()=>{for(const button of document.querySelectorAll<HTMLButtonElement>('form button[aria-busy]')){button.disabled=false;button.removeAttribute('aria-busy');}});
 // Content never starts hidden. Motion is a small progressive enhancement.
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
