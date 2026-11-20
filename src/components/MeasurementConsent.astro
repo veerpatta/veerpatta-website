@@ -1,0 +1,30 @@
+---
+import {measurementReady} from '../scripts/measurement';
+import {pick,type Lang} from '../data/site';
+interface Props {lang: Lang;}
+const {lang}=Astro.props;
+const t=(en:string,hi:string)=>pick(lang,en,hi);
+---
+{measurementReady && <aside id="measurement" class="measurement-consent" data-measurement-root hidden
+ data-status-on={t('Advertising measurement is on.','विज्ञापन मापन चालू है।')}
+ data-status-off={t('Advertising measurement is off.','विज्ञापन मापन बंद है।')}
+ aria-label={t('Optional advertising measurement','वैकल्पिक विज्ञापन मापन')}>
+ <details><summary>{t('Advertising measurement choices','विज्ञापन मापन की पसंद')}</summary>
+ <p>{t('If you are 18 or older, you may allow us to tell Meta when you view selected pages or when the school’s enquiry service confirms receipt of your form. Your form answers are not shared with Meta. This optional setting does not affect admissions; turn it off here at any time.','अगर आपकी उम्र 18 साल या अधिक है, तो आप हमें Meta को यह बताने की अनुमति दे सकते हैं कि आपने चुने हुए पेज देखे या फ़ॉर्म मिलने की पुष्टि हुई। आपके फ़ॉर्म के जवाब Meta को नहीं भेजे जाते। यह विकल्प प्रवेश पर असर नहीं डालता। इसे यहाँ कभी भी बंद कर सकते हैं।')}</p>
+ <form data-measurement-form>
+ <label><input type="checkbox" data-measurement-adult required /> {t('I confirm that I am 18 or older.','मैं पुष्टि करता/करती हूँ कि मेरी उम्र 18 साल या उससे अधिक है।')}</label>
+ <div class="measurement-choices"><button type="submit" class="button button-outline">{t('Allow measurement','मापन की अनुमति दें')}</button><button type="button" class="button button-outline" data-measurement-off>{t('Keep off / turn off','बंद रखें / बंद करें')}</button></div>
+ </form><p role="status" data-measurement-status></p>
+ </details>
+</aside>}
+<script>
+ import {bindMeasurementConsent,measurementConfig,verifiedMetaTransport} from '../scripts/measurement';
+ document.querySelectorAll<HTMLElement>('[data-measurement-root]').forEach(root=>bindMeasurementConsent(root,measurementConfig,verifiedMetaTransport));
+</script>
+<style>
+ .measurement-consent { background:#fff9ed; color:#142c52; border-top:1px solid #d7cfc0; padding:1rem max(20px,calc((100vw - 950px)/2)); }
+ summary { cursor:pointer; min-height:44px; display:list-item; align-content:center; font-weight:700; }
+ p,form { margin:0 0 .85rem; }
+ .measurement-choices { display:flex; gap:.65rem; flex-wrap:wrap; margin-top:.75rem; }
+ label { display:inline-flex; min-height:44px; align-items:center; gap:.55rem; }
+</style>

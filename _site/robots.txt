@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://vpps.co.in/sitemap.xml

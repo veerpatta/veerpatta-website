@@ -1,5 +1,5 @@
 /* Network-first pages: fresh information, with a small offline fallback. */
-const CACHE='vpps-v13-parent-first';
+const CACHE='vpps-v14-parent-fieldbook';
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(['/en/','/hi/','/404.html'])).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('vpps-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',event=>{

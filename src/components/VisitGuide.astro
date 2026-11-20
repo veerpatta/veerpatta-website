@@ -1,0 +1,38 @@
+---
+import {site,pick,pathFor,type Lang} from '../data/site';
+import Photo from './Photo.astro';
+interface Props {lang:Lang}
+const {lang}=Astro.props;
+const t=(en:string,hi:string)=>pick(lang,en,hi);
+---
+<section class="section inside-section visit-guide" id="visit" aria-labelledby="visit-title"><div class="wrap visit-guide__grid">
+ <div class="visit-guide__copy">
+  <p class="eyebrow">{t('Before you come','आने से पहले')}</p>
+  <h2 id="visit-title">{t('Plan a campus visit','स्कूल आने की योजना बनाएँ')}</h2>
+  <address><strong>{t(site.name,site.nameHi)}</strong><br />{t(site.address,site.addressHi)}</address>
+  <ol class="visit-guide__steps">
+   <li><strong>{t('Agree on a time','दिन और समय तय करें')}</strong><p>{t('Call the office and ask for a suitable day and time before you travel.','निकलने से पहले स्कूल कार्यालय से मिलने का दिन और समय तय कर लें।')}</p></li>
+   <li><strong>{t('Tell us the class you’re considering','जिस कक्षा की जानकारी चाहिए, वह बताएँ')}</strong><p>{t('If transport or step-free access matters to your family, ask the office about your route or entrance in advance.','अगर बस की सुविधा चाहिए या सीढ़ियों के बिना प्रवेश चाहिए, तो पहले से कार्यालय से रास्ते या प्रवेश द्वार के बारे में पूछ लें।')}</p></li>
+   <li><strong>{t('Bring your questions, not sensitive documents','अपने सवाल साथ लाएँ, निजी दस्तावेज़ नहीं')}</strong><p>{t('Ask for current fees, the document checklist and next steps. Don’t send identity or payment details through an enquiry.','वर्तमान शुल्क, ज़रूरी दस्तावेज़ों की सूची और अगली प्रक्रिया पूछें। पूछताछ में पहचान या भुगतान की जानकारी न भेजें।')}</p></li>
+  </ol>
+  <div class="inside-actions"><a class="button button-primary" href={site.maps} target="_blank" rel="noopener noreferrer">{t('Directions · Google Maps','रास्ता देखें · Google Maps')} <span aria-hidden="true">→</span></a><a class="button button-outline" href={pathFor(lang,'gallery')+'#videos'}>{t('Watch the campus films','परिसर के वीडियो देखें')} <span aria-hidden="true">→</span></a></div>
+ </div>
+ <figure class="visit-guide__photo"><Photo id="campus-front" lang={lang} sizes="(min-width: 1200px) 555px, (min-width: 800px) 45vw, calc(100vw - 40px)" /><figcaption>{t('Veerpatta campus, opposite Mela Ground in Amet','वीरपट्टा परिसर, आमेट में मेला ग्राउंड के सामने')}</figcaption></figure>
+</div></section>
+<style>
+.visit-guide { background:#142c52; color:#fffdf8; }
+.visit-guide__grid { display:grid; gap:32px; align-items:center; }
+.visit-guide .eyebrow { color:#f6c76f; }
+.visit-guide address { font-style:normal; line-height:1.65; margin:1rem 0 1.3rem; }
+.visit-guide__steps { margin:0; padding-inline-start:1.3rem; }
+.visit-guide__steps li { padding:.65rem .25rem; border-top:1px solid #748096; }
+.visit-guide__steps li::marker { color:#f4bc55; font-weight:800; }
+.visit-guide__steps p { color:#e4ebf5; font-size:.93rem; margin-top:.25rem; }
+.visit-guide .button-primary { background:#f4bc55; color:#142c52; }
+.visit-guide .button-outline { border-color:#e2e8f0; color:#fff; }
+.visit-guide .button-outline:hover { background:#fff; color:#142c52; }
+.visit-guide__photo { overflow:hidden; border-radius:4px 40px 4px 4px; background:#fffdf8; color:#142c52; }
+.visit-guide__photo :global(img) { width:100%; height:auto; aspect-ratio:5 / 4; object-fit:cover; }
+.visit-guide__photo figcaption { padding:.7rem 1rem; font-size:.82rem; }
+@media(min-width:800px){.visit-guide__grid{grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,80px)}}
+</style>

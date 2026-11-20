@@ -1,12 +1,23 @@
 ---
 import Photo from './Photo.astro';
+import '../styles/interior.css';
 import {pathFor,pick,type Lang} from '../data/site';
-interface Props {lang:Lang;kicker:string;title:string;description:string;image?:string}
-const {lang,kicker,title,description,image}=Astro.props;
+interface Props {
+ lang:Lang;kicker:string;title:string;description:string;image?:string;
+ caption?:string;
+ links?:{href:string;label:string;external?:boolean}[];
+}
+const {lang,kicker,title,description,image,caption,links=[]}=Astro.props;
 ---
-<section class:list={['page-head',{ 'page-head-with-photo':image}]}>
- <div class="wrap page-head-inner">
-  <div class="page-head-copy"><div class="breadcrumb"><a href={pathFor(lang)}>{pick(lang,'Home','होम')}</a><span aria-hidden="true">/</span><span>{kicker}</span></div><p class="eyebrow"><span></span>{kicker}</p><h1 class="display">{title}</h1><p class="lead">{description}</p></div>
-  {image && <div class="page-head-photo photo-frame"><Photo id={image} lang={lang} eager={true} /></div>}
+<section class:list={['inside-head',{'inside-head--photo':image}]}>
+ <div class="wrap inside-head__grid">
+  <div class="inside-head__copy">
+    <nav class="inside-breadcrumb" aria-label={pick(lang,'Breadcrumb','पेज का क्रम')}><a href={pathFor(lang)}>{pick(lang,'Home','होम')}</a><span aria-hidden="true">/</span><span aria-current="page">{kicker}</span></nav>
+    <p class="inside-kicker"><span aria-hidden="true"></span>{kicker}</p>
+    <h1>{title}</h1>
+    <p class="inside-lead">{description}</p>
+    {links.length>0 && <div class="inside-actions">{links.map((link,index)=><a class:list={['button',index===0?'button-primary':'button-outline']} href={link.href} target={link.external?'_blank':undefined} rel={link.external?'noopener noreferrer':undefined}>{link.label}<span aria-hidden="true">{link.external?'→':'→'}</span></a>)}</div>}
+  </div>
+  {image && <figure class="inside-head__media"><Photo id={image} lang={lang} eager sizes="(min-width: 1350px) 620px, (min-width: 800px) 46vw, calc(100vw - 40px)" />{caption && <figcaption>{caption}</figcaption>}</figure>}
  </div>
 </section>
