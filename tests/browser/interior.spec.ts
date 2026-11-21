@@ -27,7 +27,7 @@ for (const lang of ['en','hi']) {
   await page.locator('main a[href$="/contact/#visit"]').click();
   await expect(page.locator('#visit address')).toBeVisible();
   await expect(page.locator('#visit a[href^="https://maps.google.com/"]')).toHaveAttribute('rel',/noopener/);
-  await expect(page.locator('main a[href^="tel:"]').first()).toHaveAttribute('href','tel:+919413748575');
+  await expect(page.locator('main a[href^="tel:"]').first()).toHaveAttribute('href','tel:+917976199548');
   await expect(page.locator('main a[href*="wa.me"]')).toHaveCount(0);
  });
  test(`${lang}: plain navigation, FAQs and the dated archive work without JavaScript`,async({browser,baseURL})=>{

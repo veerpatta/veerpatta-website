@@ -13,7 +13,7 @@ for(const lang of ['hi','en'])for(const stage of ['pre-primary','class-11']){
  test(`${lang}/${stage}: seven widths, native fallbacks, serious/critical axe`,async({page,browser})=>{
   await page.goto(`/${lang}/admissions/${stage}/`);for(const width of [320,375,414,768,1024,1280,1920]){await page.setViewportSize({width,height:800});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${width}px`).toBe(true);}
   await page.setViewportSize({width:390,height:844});const a=await new AxeBuilder({page}).analyze();expect(a.violations.filter(x=>x.impact==='critical'||x.impact==='serious').map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);
-  const c=await browser.newContext({javaScriptEnabled:false});const p=await c.newPage();await p.goto(`http://127.0.0.1:4321/${lang}/admissions/${stage}/`);await expect(p.locator('[data-campaign-form]')).toBeVisible();await expect(p.locator('a[href^="tel:"]').first()).toHaveAttribute('href','tel:+919413748575');await expect(p.locator('a[href*="wa.me"]')).toHaveCount(0);await c.close();
+  const c=await browser.newContext({javaScriptEnabled:false});const p=await c.newPage();await p.goto(`http://127.0.0.1:4321/${lang}/admissions/${stage}/`);await expect(p.locator('[data-campaign-form]')).toBeVisible();await expect(p.locator('a[href^="tel:"]').first()).toHaveAttribute('href','tel:+917976199548');await expect(p.locator('a[href*="wa.me"]')).toHaveCount(0);await c.close();
  });
 }
 test('Parent guide works as native HTML, quick enquiry is an explicit, acknowledged action',async({page})=>{
