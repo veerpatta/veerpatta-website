@@ -13,7 +13,7 @@ export const pageContent: Record<PageSlug, PageContent> = {
     kicker: { en: 'Nursery to Class 12 · RBSE', hi: 'नर्सरी से कक्षा 12 · आरबीएसई' },
     title: { en: 'Learning from Nursery to Class 12', hi: 'नर्सरी से कक्षा 12 तक की पढ़ाई' },
     description: { en: 'Explore the school stages, see our learning spaces and discuss the right class or stream with the school.', hi: 'कक्षाओं और पढ़ाई की जगहों को जानें। सही कक्षा या संकाय के लिए विद्यालय से बात करें।' },
-    image: 'classroom',
+    image: 'robotics-kit',
   },
   admissions: {
     kicker: { en: 'For your family’s next step', hi: 'आपके परिवार का अगला कदम' },
@@ -31,19 +31,19 @@ export const pageContent: Record<PageSlug, PageContent> = {
     kicker: { en: 'A clear path for parents', hi: 'अभिभावकों के लिए सरल जानकारी' },
     title: { en: 'School links & digital learning', hi: 'स्कूल के लिंक और कंप्यूटर की पढ़ाई' },
     description: { en: 'See our computer learning spaces and find out how to get the right school updates and online access.', hi: 'कंप्यूटर कक्ष देखें और विद्यालय की सही ऑनलाइन जानकारी व सेवाओं तक पहुँचने का तरीका जानें।' },
-    image: 'computer-lab-wide',
+    image: 'robotics-kit',
   },
   contact: {
     kicker: { en: 'Let’s talk', hi: 'आइए, बात करें' },
     title: { en: 'Contact & visit the school', hi: 'स्कूल से संपर्क और मुलाक़ात' },
     description: { en: 'Speak with the school office, get directions to our campus or send an admission enquiry.', hi: 'स्कूल कार्यालय में फोन करें, परिसर का रास्ता देखें या प्रवेश की पूछताछ भेजें।' },
-    image: 'school-office',
+    image: '',
   },
   faq: {
     kicker: { en: 'Useful answers', hi: 'काम की जानकारी' },
     title: { en: 'Answers for parents', hi: 'अभिभावकों के सवालों के जवाब' },
     description: { en: 'A starting point for your questions about classes, admissions, fees and visiting the school.', hi: 'कक्षाओं, प्रवेश, शुल्क और विद्यालय आने से जुड़े सवालों के शुरुआती जवाब।' },
-    image: 'school-hall',
+    image: '',
   },
   privacy: {
     kicker: { en: 'Your information', hi: 'आपकी जानकारी' },
@@ -60,11 +60,11 @@ export const pageContent: Record<PageSlug, PageContent> = {
 };
 
 export const schoolStages = [
-  { label: { en: 'Nursery & KG', hi: 'नर्सरी और केजी' }, title: { en: 'A beginning full of discovery', hi: 'नई खोजों से भरी शुरुआत' }, text: { en: 'A first look at school life. Visit the early-years spaces and talk about age requirements and settling into a new routine.', hi: 'स्कूली जीवन का पहला परिचय। छोटे बच्चों की जगहें देखें और आयु की शर्तों व नई दिनचर्या के बारे में बात करें।' }, image: 'activity-room' },
-  { label: { en: 'Classes 1–5', hi: 'कक्षा 1–5' }, title: { en: 'Build the foundations', hi: 'मज़बूत नींव की ओर' }, text: { en: 'Reading, writing and numbers form the foundation. Ask the team about the curriculum, classroom language and daily learning routine.', hi: 'पढ़ना, लिखना और गणित सीखने की नींव हैं। पाठ्यक्रम, पढ़ाई की भाषा और रोज़ की दिनचर्या के बारे में जानकारी लें।' }, image: 'classroom-benches' },
-  { label: { en: 'Classes 6–8', hi: 'कक्षा 6–8' }, title: { en: 'Explore more questions', hi: 'और सवाल, और खोज' }, text: { en: 'The middle-school years open up new subjects. Talk with the school about subject learning, practice and classroom expectations.', hi: 'माध्यमिक कक्षाओं की तैयारी में नए विषय जुड़ते हैं। विषयों, अभ्यास और कक्षा की अपेक्षाओं पर विद्यालय से बात करें।' }, image: 'learning-exhibition' },
-  { label: { en: 'Classes 9–10', hi: 'कक्षा 9–10' }, title: { en: 'Look ahead with purpose', hi: 'लक्ष्य की ओर अगला कदम' }, text: { en: 'Understand the RBSE secondary stage. Ask about subjects, assessment and the approach to preparing for board examinations.', hi: 'आरबीएसई माध्यमिक स्तर को समझें। विषयों, मूल्यांकन और बोर्ड परीक्षा की तैयारी के बारे में पूछें।' }, image: 'classroom' },
-  { label: { en: 'Classes 11–12', hi: 'कक्षा 11–12' }, title: { en: 'Choose your direction', hi: 'अपनी दिशा चुनें' }, text: { en: 'Science, Commerce and Arts. Confirm the current subject combinations, eligibility and availability directly with the school office.', hi: 'विज्ञान, वाणिज्य और कला। वर्तमान विषय-संयोजन, पात्रता और उपलब्धता की पुष्टि विद्यालय कार्यालय से करें।' }, image: 'science-lab' },
+  { label: { en: 'Nursery & KG', hi: 'नर्सरी और केजी' }, title: { en: 'A beginning full of discovery', hi: 'नई खोजों से भरी शुरुआत' }, text: { en: 'A first look at school life. Visit the early-years spaces and talk about age requirements and settling into a new routine.', hi: 'स्कूली जीवन का पहला परिचय। छोटे बच्चों की जगहें देखें और आयु की शर्तों व नई दिनचर्या के बारे में बात करें।' }, image: 'first-school-room' },
+  { label: { en: 'Classes 1–5', hi: 'कक्षा 1–5' }, title: { en: 'Build the foundations', hi: 'मज़बूत नींव की ओर' }, text: { en: 'Reading, writing and numbers form the foundation. Ask the team about the curriculum, classroom language and daily learning routine.', hi: 'पढ़ना, लिखना और गणित सीखने की नींव हैं। पाठ्यक्रम, पढ़ाई की भाषा और रोज़ की दिनचर्या के बारे में जानकारी लें।' }, image: 'race-lanes' },
+  { label: { en: 'Classes 6–8', hi: 'कक्षा 6–8' }, title: { en: 'Explore more questions', hi: 'और सवाल, और खोज' }, text: { en: 'The middle-school years open up new subjects. Talk with the school about subject learning, practice and classroom expectations.', hi: 'माध्यमिक कक्षाओं की तैयारी में नए विषय जुड़ते हैं। विषयों, अभ्यास और कक्षा की अपेक्षाओं पर विद्यालय से बात करें।' }, image: 'exhibition-project' },
+  { label: { en: 'Classes 9–10', hi: 'कक्षा 9–10' }, title: { en: 'Look ahead with purpose', hi: 'लक्ष्य की ओर अगला कदम' }, text: { en: 'Understand the RBSE secondary stage. Ask about subjects, assessment and the approach to preparing for board examinations.', hi: 'आरबीएसई माध्यमिक स्तर को समझें। विषयों, मूल्यांकन और बोर्ड परीक्षा की तैयारी के बारे में पूछें।' }, image: 'computer-lab' },
+  { label: { en: 'Classes 11–12', hi: 'कक्षा 11–12' }, title: { en: 'Choose your direction', hi: 'अपनी दिशा चुनें' }, text: { en: 'Science, Commerce and Arts. Confirm the current subject combinations, eligibility and availability directly with the school office.', hi: 'विज्ञान, वाणिज्य और कला। वर्तमान विषय-संयोजन, पात्रता और उपलब्धता की पुष्टि विद्यालय कार्यालय से करें।' }, image: 'science-bench' },
 ];
 
 export const schoolFaqs = [

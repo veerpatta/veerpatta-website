@@ -17,7 +17,7 @@ const nav=navigation(lang);
 const admissions=slug==='admissions'||slug.startsWith('admissions/');
 const enquiryUrl=admissions?'#enquiry':pathFor(lang,'admissions')+'#enquiry';
 const defaultPath=canonicalPath?canonicalPath.replace(/-(en|hi)\/$/,'-en/'):pathFor(slug==='admissions/pre-primary'||slug==='admissions/class-11'?'hi':'en',slug);
-const shareImage=slug==='admissions/pre-primary'?'first-school-room-1120':slug==='admissions/class-11'?'classroom-benches-1200':'dance-lawn-1200';
+const shareImage=slug==='admissions/pre-primary'?'first-school-room-1120':slug==='admissions/class-11'?'science-bench-828':'dance-lawn-1200';
 ---
 <!doctype html>
 <html lang={lang}>
