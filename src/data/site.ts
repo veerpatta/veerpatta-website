@@ -7,14 +7,21 @@ export const site = {
   nameHi: 'वीर पट्टा सीनियर सेकेंडरी स्कूल',
   fullName: 'Shri Veer Patta Senior Secondary School',
   phone: '+917976199548', phoneDisplay: '+91 79761 99548',
-  // Leave unset until the school verifies this exact public messaging destination. Never infer it from the phone.
-  whatsapp: '' as string,
+  // The school's WhatsApp number, verified 21 Nov 2026: messages to it reach the school's WhatsApp service, which takes an
+  // admission enquiry inside the chat and puts it on the office's Admissions board. Never infer it from the phone.
+  whatsapp: '+918302207823', whatsappDisplay: '+91 83022 07823',
   address: 'Opp. Mela Ground, Amet, Rajasthan 313332',
   addressHi: 'मेला ग्राउंड के सामने, आमेट, राजस्थान 313332',
   maps: 'https://maps.google.com/?q=Shri+Veer+Patta+Senior+Secondary+School+Amet+Rajasthan',
   url: 'https://vpps.co.in',
-  release: 'photo-story-20261121'
+  release: 'whatsapp-admissions-20261121'
 };
+/** A wa.me link to the school's WhatsApp. `message` is typed into the chat for the parent; nothing is sent until they send it. */
+export const whatsappUrl = (message = ''): string =>
+  `https://wa.me/${site.whatsapp.replace(/\D/g, '')}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
+/** The words the school's WhatsApp reads as "start an admission enquiry", in the page's language. */
+export const admissionWhatsAppText = (lang: Lang): string => pick(lang, 'Admission enquiry', 'प्रवेश पूछताछ');
+export const admissionWhatsApp = (lang: Lang): string => whatsappUrl(admissionWhatsAppText(lang));
 export const navigation = (lang:Lang) => [
   {slug:'',label:pick(lang,'Home','होम')},
   {slug:'about',label:pick(lang,'Our school','हमारा स्कूल')},

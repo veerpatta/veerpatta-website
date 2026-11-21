@@ -28,7 +28,10 @@ for (const lang of ['en','hi']) {
   await expect(page.locator('#visit address')).toBeVisible();
   await expect(page.locator('#visit a[href^="https://maps.google.com/"]')).toHaveAttribute('rel',/noopener/);
   await expect(page.locator('main a[href^="tel:"]').first()).toHaveAttribute('href','tel:+917976199548');
-  await expect(page.locator('main a[href*="wa.me"]')).toHaveCount(0);
+  // Admissions go to the school's WhatsApp (the hub number), never the call number.
+  await expect(page.locator('main a[href*="wa.me"]')).toHaveCount(1);
+  await expect(page.locator('main a[href*="wa.me"]')).toHaveAttribute('href',/^https:\/\/wa\.me\/918302207823\?text=/);
+  await expect(page.locator('a[href*="wa.me/917976199548"]')).toHaveCount(0);
  });
  test(`${lang}: plain navigation, FAQs and the dated archive work without JavaScript`,async({browser,baseURL})=>{
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:820}});

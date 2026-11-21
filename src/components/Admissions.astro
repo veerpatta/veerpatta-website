@@ -2,16 +2,11 @@
 import { site, pick, pathFor, type Lang } from '../data/site';
 import Photo from './Photo.astro';
 import AdmissionsHub from './AdmissionsHub.astro';
-import {nativePhonePattern} from '../scripts/enquiry';
+import WhatsAppEnquiry from './WhatsAppEnquiry.astro';
 import { schoolFaqs } from '../data/content';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = (en: string, hi: string) => pick(lang, en, hi);
-const classOptions = [
-  { value: 'Nursery', label: t('Nursery', 'नर्सरी') },
-  { value: 'KG', label: t('KG', 'केजी') },
-  ...Array.from({ length: 12 }, (_, i) => ({ value: `Class ${i + 1}`, label: t(`Class ${i + 1}`, `कक्षा ${i + 1}`) })),
-];
 const fields = [
   { name: 'tuition', label: t('Tuition · full year', 'पढ़ाई का शुल्क · पूरे वर्ष का') },
   { name: 'admission', label: t('Admission · one-time', 'प्रवेश शुल्क · एक बार') },
@@ -22,36 +17,7 @@ const fields = [
 
 ---
 <AdmissionsHub lang={lang}/>
-<section class="section section-soft" id="enquiry">
-  <div class="wrap enquiry-layout">
-    <div><span class="eyebrow">{t('Admission enquiry', 'प्रवेश की पूछताछ')}</span><h2>{t('A few details. A useful conversation.', 'थोड़ी जानकारी। काम की बातचीत।')}</h2><p class="lead">{t('Prepare an enquiry and review it before sending. Nothing is sent while you fill this in.', 'अपनी पूछताछ तैयार करें और भेजने से पहले जाँच लें। भरते समय कोई जानकारी नहीं भेजी जाती।')}</p><p class="note">{t('Please use a parent or guardian’s details. Do not include a child’s full name, identity documents or payment information.', 'कृपया माता-पिता या अभिभावक का विवरण दें। बच्चे का पूरा नाम, पहचान के दस्तावेज़ या भुगतान जानकारी न दें।')}</p><a class="text-link" href={`tel:${site.phone}`}>{t('Prefer to talk? Call the office', 'बात करना चाहेंगे? कार्यालय में फोन करें')} <span aria-hidden="true">→</span></a></div>
-    <form class="enquiry-card" action="https://formspree.io/f/xgveybpz" method="POST" data-admission-form data-lang={lang} data-whatsapp={site.whatsapp}>
-      <input type="hidden" name="source" value={`school-website-admissions-${lang}`} />
-      <ol class="enquiry-progress" aria-label={t('Enquiry steps', 'पूछताछ के चरण')}>
-        {[t('Your details', 'आपका विवरण'), t('Review', 'जाँचें'), t('Send', 'भेजें')].map((label, i) => <li data-step-marker><span aria-hidden="true">{i + 1}</span>{label}</li>)}
-      </ol>
-      <fieldset data-enquiry-step>
-        <legend tabindex="-1">{t('1. Tell us what you are looking for', '1. बताएँ, आप क्या जानकारी चाहते हैं')}</legend>
-        <div class="field"><label for="ad-guardian">{t('Parent or guardian’s name', 'माता-पिता या अभिभावक का नाम')}</label><input id="ad-guardian" type="text" name="guardian" autocomplete="name" minlength="2" maxlength="80" required /></div>
-        <div class="form-grid"><div class="field"><label for="ad-phone">{t('Indian mobile number', 'भारतीय मोबाइल नंबर')}</label><input id="ad-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" minlength="10" maxlength="20" pattern={nativePhonePattern} aria-describedby="ad-phone-hint" required /><small id="ad-phone-hint">{t('10 digits, with or without +91.', '10 अंक, +91 के साथ या बिना।')}</small></div><div class="field"><label for="ad-class">{t('Class you are considering', 'जिस कक्षा की जानकारी चाहिए')}</label><select id="ad-class" name="class" required><option value="">{t('Choose a class', 'कक्षा चुनें')}</option>{classOptions.map((option) => <option value={option.value}>{option.label}</option>)}</select></div></div>
-        <button class="button button-primary" type="button" data-enquiry-next data-enhanced-only hidden>{t('Review my enquiry', 'मेरी पूछताछ जाँचें')} <span aria-hidden="true">→</span></button>
-      </fieldset>
-      <fieldset data-enquiry-step>
-        <legend tabindex="-1">{t('2. Check your enquiry', '2. अपनी पूछताछ जाँचें')}</legend><p>{t('Make sure your name, class and contact number are right before continuing.', 'आगे बढ़ने से पहले नाम, कक्षा और मोबाइल नंबर जाँच लें।')}</p><div class="enquiry-review" data-enquiry-review data-enhanced-only hidden></div>
-        <div class="button-row" data-enhanced-only hidden><button type="button" class="button button-outline" data-enquiry-back>{t('Edit details', 'विवरण बदलें')}</button><button type="button" class="button button-primary" data-enquiry-next>{t('Continue to send', 'भेजने के लिए आगे बढ़ें')}</button></div>
-      </fieldset>
-      <fieldset data-enquiry-step>
-        <legend tabindex="-1">{t('3. Send when you are ready', '3. तैयार होने पर भेजें')}</legend>
-        <label class="consent"><input type="checkbox" name="consent" value="I consent to sharing my enquiry with the school through Formspree." required /><span>{t('I agree to share these details with Veerpatta Senior Secondary School through Formspree when I submit this form, so the school can respond to my enquiry.', 'मैं अपनी पूछताछ का जवाब पाने के लिए यह विवरण वीरपट्टा सीनियर सेकेंडरी स्कूल के साथ साझा करने की सहमति देता/देती हूँ: फ़ॉर्म भेजने पर Formspree के माध्यम से।')} <a href={pathFor(lang, 'privacy')}>{t('Privacy information', 'गोपनीयता की जानकारी')}</a></span></label>
-        <div class="button-row"><button type="submit" class="button button-primary" data-enquiry-send>{t('Send via Formspree', 'Formspree से पूछताछ भेजें')}</button>{site.whatsapp && <button type="button" class="button button-outline" data-enquiry-whatsapp data-enhanced-only hidden>{t('Open WhatsApp draft', 'WhatsApp ड्राफ़्ट खोलें')}</button>}</div>
-        <p class="note">{t('Sending an enquiry does not reserve a seat or confirm a visit.', 'पूछताछ भेजने से सीट आरक्षित या स्कूल आने का समय पक्का नहीं होता।')}</p>
-        <button type="button" class="text-link back-button" data-enquiry-back data-enhanced-only hidden>{t('Back to review', 'जाँच पर वापस जाएँ')}</button>
-      </fieldset>
-      <p class="form-status" data-enquiry-status role="status" aria-live="polite" tabindex="-1"></p>
-      <noscript><p class="note">{t('Check your details above, tick the consent box, then submit. Formspree will open to show the result. You can also call the school.', 'ऊपर अपना विवरण जाँचें, सहमति दें और फ़ॉर्म भेजें। परिणाम दिखाने के लिए Formspree खुलेगा। आप विद्यालय में फोन भी कर सकते हैं।')}</p></noscript>
-    </form>
-  </div>
-</section>
+<section class="section section-soft" id="enquiry" aria-labelledby="enquiry-heading"><WhatsAppEnquiry lang={lang} /></section>
 <section class="section" id="budget">
   <div class="wrap budget-layout">
     <div><span class="eyebrow">{t('Plan with clarity', 'स्पष्ट जानकारी से योजना बनाएँ')}</span><h2>{t('Your family’s school budget.', 'आपके परिवार का स्कूली बजट।')}</h2><p class="lead">{t('Have a quote from the office? Add the amounts here to see the total. Every field is optional, and starts empty.', 'कार्यालय से शुल्क विवरण मिल गया? कुल बजट देखने के लिए राशियाँ यहाँ लिखें। हर राशि वैकल्पिक है और शुरुआत में खाली रहती है।')}</p><p class="note">{t('Use full-year amounts for recurring costs. If a quote is monthly or term-wise, first convert it to the total for the year. Blank means ₹0, not “included” or “free”. This is your estimate, not an official fee quote.', 'नियमित खर्चों की पूरे वर्ष की राशि लिखें। मासिक या सत्रवार राशि को पहले पूरे वर्ष के कुल खर्च में बदलें। खाली राशि का अर्थ ₹0 है, “शामिल” या “मुफ़्त” नहीं। यह आपका अनुमान है, आधिकारिक शुल्क विवरण नहीं।')}</p><a class="text-link" href={`tel:${site.phone}`}>{t('Ask for the current fee details', 'वर्तमान शुल्क विवरण पूछें')} →</a></div>
@@ -71,23 +37,8 @@ const fields = [
 <style>
   .admission-path { list-style: none; padding: 0; }
   .step-number { display: block; font-size: .82rem; font-weight: 800; letter-spacing: .14em; color: var(--blue, #2854c5); margin-bottom: 1rem; }
-  .enquiry-layout,.budget-layout { display: grid; gap: 2.5rem; align-items: start; }
-  .enquiry-card,.budget-card { border: 1px solid #dce3ef; border-radius: 1.4rem; background: white; padding: clamp(1.1rem, 3vw, 2.3rem); min-width: 0; box-shadow: 0 16px 60px #132a4e08; }
-  .enquiry-progress { list-style: none; display: flex; gap: .8rem; padding: 0; margin: 0 0 2rem; font-size: .78rem; color: #58677b; }
-  .enquiry-progress li { flex: 1; display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; }
-  .enquiry-progress span { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; border-radius: 100%; background: #edf1f7; }
-  .enquiry-progress [data-current] { color: #173b94; font-weight: 700; }
-  .enquiry-progress [data-current] span { background: #244fc3; color: white; }
-  fieldset { border: 0; margin: 0 0 1.5rem; padding: 0; min-width: 0; }
-  legend { font-size: 1.12rem; font-weight: 750; margin-bottom: 1.4rem; width: 100%; }
-  legend:focus { outline: none; }
-  .enquiry-card .field { margin-bottom: 1.2rem; }
-  .button-row { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.3rem; }
-  .enquiry-review { white-space: pre-wrap; overflow-wrap: anywhere; padding: 1.2rem; border: 1px solid #dce3ef; border-radius: .7rem; background: #f6f8fc; font-size: .95rem; line-height: 1.8; margin: 1.2rem 0; }
-  .consent { display: flex; align-items: flex-start; gap: .75rem; font-size: .86rem; line-height: 1.7; }
-  .consent input { flex: 0 0 auto; width: 1.1rem; height: 1.1rem; margin: .35rem 0 0; }
-  .back-button { margin-top: .5rem; }
-  .form-status:not(:empty) { padding: 1rem; background: #edf3ff; border-radius: .6rem; }
+  .budget-layout { display: grid; gap: 2.5rem; align-items: start; }
+  .budget-card { border: 1px solid #dce3ef; border-radius: 1.4rem; background: white; padding: clamp(1.1rem, 3vw, 2.3rem); min-width: 0; box-shadow: 0 16px 60px #132a4e08; }
   .money-input { position: relative; }
   .money-input span { position: absolute; top: 50%; left: .9rem; transform: translateY(-50%); color: #596980; }
   .money-input input { padding-left: 2rem; }
@@ -98,6 +49,6 @@ const fields = [
   .budget-error { color: #9d2020; font-size: .87rem; }
   .visit-grid { align-items: center; }
   [hidden] { display: none !important; }
-  @media(min-width: 900px) { .enquiry-layout,.budget-layout { grid-template-columns: .85fr 1.15fr; gap: 5rem; } }
-  @media print { .budget-card { box-shadow: none; break-inside: avoid; } .enquiry-card { display: none; } [data-budget-calculate],[data-budget-print] { display: none !important; } }
+  @media(min-width: 900px) { .budget-layout { grid-template-columns: .85fr 1.15fr; gap: 5rem; } }
+  @media print { .budget-card { box-shadow: none; break-inside: avoid; } [data-budget-calculate],[data-budget-print] { display: none !important; } }
 </style>

@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **Admissions on WhatsApp (2026-11-21)**:
+  - The admission enquiry now happens on the school's WhatsApp, +91 83022 07823, in English or Hindi. "Enquire on WhatsApp" opens the chat with "Admission enquiry" / "प्रवेश पूछताछ" already written; the chat asks an adult to agree to a call back and to choose the class, and the office's Admissions board gets the enquiry. The website collects nothing itself
+  - The Formspree forms are gone from the admissions page, both class guides and the quick-enquiry dialog. "Call school" (+91 79761 99548) stays everywhere, and the phone bar's second button now opens WhatsApp
+  - Contact, Digital, FAQ and Privacy copy describe the WhatsApp enquiry instead of the form; the privacy page links WhatsApp's privacy policy in place of Formspree's
+  - Service worker cache is now `vpps-v15-whatsapp-admissions`, so offline copies of the old form pages are dropped
 - **School photo story (2026-11-21)**:
   - The home page opens on pupils showing their shapes project at the learning exhibition: a wide crop on phones and a near-square crop of the same moment from 860px, so each screen downloads one image. Stage cards, Academics, School life, Digital and both admissions pages now show pupils' own work (place value, seasons, planets, angles, heart and lungs, greenhouse, a tablet activity), Sports Day (start line, finish tape, early-years track games) and the early-years dance, in place of small crops of legs and cones, a tablecloth, a teacher-training robotics kit and empty rooms
   - Photos newly taken from the Drive library are cropped so that no pupil's face can be recognised; faces appear only in photos the website had already published. Originals stay in Drive and are not committed. Ordinary crop, white balance, exposure and noise reduction only: nothing is added to or removed from any frame
