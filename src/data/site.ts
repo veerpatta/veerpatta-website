@@ -6,7 +6,7 @@ export const site = {
   name: 'Veer Patta Senior Secondary School',
   nameHi: 'वीर पट्टा सीनियर सेकेंडरी स्कूल',
   fullName: 'Shri Veer Patta Senior Secondary School',
-  phone: '+919413748575', phoneDisplay: '+91 94137 48575',
+  phone: '+917976199548', phoneDisplay: '+91 79761 99548',
   // Leave unset until the school verifies this exact public messaging destination. Never infer it from the phone.
   whatsapp: '' as string,
   address: 'Opp. Mela Ground, Amet, Rajasthan 313332',
