@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateBudget, normalizeIndianPhone, buildWhatsAppMessage, buildWhatsAppUrl } from '../src/scripts/admissions.ts';
+import { calculateBudget, normalizeIndianPhone } from '../src/scripts/admissions.ts';
+import { site, whatsappUrl, admissionWhatsApp, admissionWhatsAppText } from '../src/data/site.ts';
 
 const blank = { tuition: '', admission: '', books: '', uniform: '', transport: '' };
 test('blank budget is a zero-value parent estimate', () => {
@@ -26,22 +27,28 @@ for (const phone of ['9413748575', '+91 94137 48575', '91-94137-48575', '0941374
 for (const phone of ['', '1234567890', '941374857', '+1 9413748575', 'abc9413748575', '9413748575 ext 2', '+91+9413748575', '+9413748575', '+09413748575']) {
   test(`rejects invalid Indian mobile ${phone}`, () => assert.equal(normalizeIndianPhone(phone), null));
 }
-test('WhatsApp enquiry explicitly requests information and includes only parent fields', () => {
-  const message = buildWhatsAppMessage({ guardian: 'A & B', phone: '9413748575', className: 'Class 6' }, 'en');
-  assert.match(message, /A & B/);
-  assert.match(message, /Class 6/);
-  assert.match(message, /\+919413748575/);
-  assert.match(message, /enquiry only/);
-  assert.doesNotMatch(message, /admission complete|seat booked|confirmed admission/i);
+test('the school WhatsApp is the verified hub number, never the call number', () => {
+  assert.equal(site.whatsapp, '+918302207823');
+  assert.equal(site.whatsappDisplay, '+91 83022 07823');
+  assert.notEqual(site.whatsapp, site.phone);
+  assert.equal(site.phone, '+917976199548');
 });
-test('Hindi WhatsApp enquiry has Hindi text', () => {
-  assert.match(buildWhatsAppMessage({ guardian: 'मीना', phone: '9413748575', className: 'कक्षा 6' }, 'hi'), /केवल पूछताछ/);
+for (const lang of ['en', 'hi'] as const) {
+  test(`${lang} admission link opens the school chat with the words that start an enquiry`, () => {
+    const url = new URL(admissionWhatsApp(lang));
+    assert.equal(url.origin, 'https://wa.me');
+    assert.equal(url.pathname, '/918302207823');
+    assert.equal(url.searchParams.get('text'), admissionWhatsAppText(lang));
+    assert.equal(url.hash, '');
+    assert.deepEqual([...url.searchParams.keys()], ['text']);
+  });
+}
+test('admission words are fixed and carry no personal details', () => {
+  assert.equal(admissionWhatsAppText('en'), 'Admission enquiry');
+  assert.equal(admissionWhatsAppText('hi'), 'प्रवेश पूछताछ');
+  assert.doesNotMatch(admissionWhatsAppText('en') + admissionWhatsAppText('hi'), /\d/);
 });
-test('WhatsApp URL safely encodes Hindi, ampersands and newlines', () => {
-  const message = 'नमस्ते A & B\nClass 6? #1';
-  const url = new URL(buildWhatsAppUrl('919413748575', message));
-  assert.equal(url.origin, 'https://wa.me');
-  assert.equal(url.pathname, '/919413748575');
-  assert.equal(url.searchParams.get('text'), message);
-  assert.equal(url.hash, '');
+test('a plain WhatsApp link carries no message', () => {
+  assert.equal(whatsappUrl(), 'https://wa.me/918302207823');
+  assert.equal(new URL(whatsappUrl('A & B\nClass 6? #1')).searchParams.get('text'), 'A & B\nClass 6? #1');
 });

@@ -1,4 +1,3 @@
-import {bindNativeEnquiryForm} from './enquiry';
 import {normaliseCategory} from './gallery';
 const hi=document.documentElement.lang==='hi';
 const menu=document.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
@@ -7,7 +6,6 @@ if(menu){
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open){menu.open=false;menu.querySelector('summary')?.focus();}});
  window.matchMedia('(min-width: 1100px)').addEventListener('change',()=>{menu.open=false;});
 }
-const enquiry=document.querySelector<HTMLDialogElement>('#enquiry-dialog');
 const photoDialog=document.querySelector<HTMLDialogElement>('#photo-dialog');
 const dialogOpeners=new WeakMap<HTMLDialogElement,HTMLElement>();
 function openDialog(dialog:HTMLDialogElement,trigger:HTMLElement){
@@ -34,7 +32,6 @@ for(const dialog of document.querySelectorAll<HTMLDialogElement>('dialog')) {
  dialog.addEventListener('cancel',event=>{event.preventDefault();closeDialog(dialog);});
  dialog.addEventListener('close',()=>finishDialogClose(dialog));
 }
-for(const trigger of document.querySelectorAll<HTMLAnchorElement>('[data-enquiry-open]')) trigger.addEventListener('click',e=>{if(enquiry&&openDialog(enquiry,trigger))e.preventDefault();});
 for(const trigger of document.querySelectorAll<HTMLAnchorElement>('[data-photo-open]')) trigger.addEventListener('click',e=>{
  if(!photoDialog) return;
  const img=photoDialog.querySelector<HTMLImageElement>('img');
@@ -73,7 +70,6 @@ for(const card of document.querySelectorAll<HTMLAnchorElement>('[data-video-src]
  card.replaceWith(video);video.after(error);video.focus();
  video.play().catch(()=>{error.hidden=false;});
 });
-for(const form of document.querySelectorAll<HTMLFormElement>('.enquiry-form:not([data-campaign-form])')) bindNativeEnquiryForm(form,hi);
 window.addEventListener('pageshow',()=>{for(const button of document.querySelectorAll<HTMLButtonElement>('form button[aria-busy]')){button.disabled=false;button.removeAttribute('aria-busy');}});
 // Content never starts hidden. Motion is a small progressive enhancement.
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
