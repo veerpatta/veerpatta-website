@@ -200,10 +200,13 @@ export const photos:Record<string,SchoolPhoto> = {
   "learning-exhibition": {
     "widths": [
       480,
-      800
+      800,
+      1200,
+      1600
     ],
-    "w": 800,
-    "h": 360,
+    "w": 1600,
+    "h": 720,
+    "avif": true,
     "gallery": "academic",
     "alt": {
       "en": "Students explaining their models at the learning exhibition",
@@ -674,14 +677,14 @@ photos['race-lanes'] = {
 };
 
 export const galleryIds = [
-  "campus-front", "exhibition-project", "race-lanes", "robotics-kit", "science-bench", "cricket-nets",
-  "campus-lawn", "arched-stairs", "school-hall", "veranda", "classroom", "sports-finish",
-  "paved-courtyard", "computer-lab-wide", "dance-lawn", "staff-team", "ncc-cadets", "lawn-wide",
-  "science-lab", "function-stage", "veranda-courtyard", "campus-approach", "building-palm", "computer-lab",
-  "sports-drill", "prize-podium", "sports-sprint", "dance-group", "assembly-courtyard", "sports-oath",
-  "ncc-podium", "robotics-training", "sports-start", "dance-line", "campus-evening", "prize-certificate",
-  "activity-room", "sack-race", "three-legged-race", "classroom-benches", "musical-chairs", "basketball-court",
-  "volleyball-court", "football-lawn", "open-air-stage"
+  "learning-exhibition", "early-years-dance", "place-value-blocks", "sprint-start", "campus-front", "seasons-model",
+  "dance-lawn", "angles-board", "campus-lawn", "football-goal", "planets-project", "ncc-cadets",
+  "greenhouse-model", "early-years-track", "circulatory-model", "sports-finish", "function-stage", "tablet-quiz",
+  "three-legged-race", "staff-team", "volleyball-court", "prize-podium", "dance-group", "basketball-court",
+  "sports-drill", "ncc-podium", "cricket-nets", "dance-line", "sports-sprint", "prize-certificate",
+  "sack-race", "musical-chairs", "sports-oath", "lawn-wide", "science-lab", "computer-lab-wide",
+  "robotics-training", "campus-approach", "building-palm", "arched-stairs", "veranda", "veranda-courtyard",
+  "assembly-courtyard", "paved-courtyard", "open-air-stage"
 ];
 export interface SchoolVideo {poster:string;duration:string;size:string;caption:{en:string;hi:string}}
 export const videos:Record<string,SchoolVideo> = {
@@ -724,7 +727,25 @@ export const videos:Record<string,SchoolVideo> = {
 };
 
 photos["video-school-story"] = {widths:[480,800,1200],w:1200,h:675,alt:{en:"The entrance of Veerpatta School, opening frame of the edited campus story",hi:"वीरपट्टा स्कूल का प्रवेश द्वार, संपादित कैंपस कहानी का पहला दृश्य"}};
-videos["school-story"] = {poster:"video-school-story",duration:"0:24",size:"3.9 MB",caption:{en:"A little glimpse of our world",hi:"हमारी दुनिया की एक छोटी झलक"}};
+videos["school-story"] = {poster:"film-dance-poster",duration:"0:24",size:"3.9 MB",caption:{en:"A little glimpse of our world",hi:"हमारी दुनिया की एक छोटी झलक"}};
 
 // Original school photographs. Width, height and orientation reserve space before load.
 photos['first-school-room'] = {widths:[384,640,896,1120],w:1120,h:840,alt:{en:'Low round blue tables and small chairs in the school’s activity room.',hi:'स्कूल के गतिविधि कक्ष में गोल नीली मेज़ें और छोटी कुर्सियाँ।'}};
+
+// School photo story, November 2026: real moments from the school's own
+// photographs. Crops of newly sourced Drive photos keep pupils' faces out of
+// frame; the originals stay in Drive and are never committed.
+photos['hero-exhibition-phone'] = {widths:[480,800,1200],w:1200,h:600,avif:true,pos:'50% 30%',alt:{en:'Pupils show their shapes project at the learning exhibition',hi:'शिक्षण प्रदर्शनी में अपना आकृतियों वाला प्रोजेक्ट दिखाते विद्यार्थी'}};
+photos['hero-exhibition-panel'] = {widths:[480,840],w:840,h:720,avif:true,alt:{en:'Pupils show their shapes project at the learning exhibition',hi:'शिक्षण प्रदर्शनी में अपना आकृतियों वाला प्रोजेक्ट दिखाते विद्यार्थी'}};
+photos['early-years-dance'] = {widths:[480,800,1140],w:1140,h:580,avif:true,pos:'55% 75%',gallery:'cultural',alt:{en:'Young pupils in white dresses dance on the school lawn at the inter-house dance competition',hi:'अंतर-सदनीय नृत्य प्रतियोगिता में स्कूल के लॉन पर सफ़ेद पोशाक में नृत्य करते नन्हे विद्यार्थी'}};
+photos['early-years-track'] = {widths:[480,800,1200],w:1200,h:646,avif:true,pos:'60% 45%',gallery:'sports',alt:{en:'Early-years pupils in chalk-marked lanes for track games on Sports Day',hi:'खेल दिवस पर ट्रैक खेलों के लिए चूने की लेनों में खड़े छोटे विद्यार्थी'}};
+photos['seasons-model'] = {widths:[480,800,1200],w:1200,h:600,avif:true,gallery:'academic',alt:{en:'A pupils’ model of summer, the rainy season and winter at the school exhibition',hi:'स्कूल प्रदर्शनी में गर्मी, बरसात और सर्दी के मौसम पर विद्यार्थियों का मॉडल'}};
+photos['place-value-blocks'] = {widths:[480,800,1200],w:1200,h:750,avif:true,gallery:'academic',alt:{en:'A pupil places blocks on a place-value chart at the school exhibition',hi:'स्कूल प्रदर्शनी में स्थानीय मान चार्ट पर ब्लॉक रखते हुए विद्यार्थी'}};
+photos['planets-project'] = {widths:[480,800,1200],w:1200,h:718,avif:true,gallery:'academic',alt:{en:'Painted planets and a solar-system chart made by pupils for the school exhibition',hi:'स्कूल प्रदर्शनी के लिए विद्यार्थियों के बनाए ग्रह और सौरमंडल का चार्ट'}};
+photos['angles-board'] = {widths:[480,800,1200],w:1200,h:800,avif:true,gallery:'academic',alt:{en:'Hands measure with an angle wheel on a pupils’ project about types of angles',hi:'कोणों के प्रकार वाले विद्यार्थियों के प्रोजेक्ट पर कोण-चक्र से मापते हाथ'}};
+photos['circulatory-model'] = {widths:[480,800,1200],w:1200,h:708,avif:true,gallery:'academic',alt:{en:'A pupils’ model of the heart and lungs, with tubes for the flow of blood',hi:'रक्त प्रवाह दिखाने वाली नलियों के साथ हृदय और फेफड़ों का विद्यार्थियों का मॉडल'}};
+photos['greenhouse-model'] = {widths:[480,800,1200],w:1200,h:600,avif:true,pos:'70% 50%',gallery:'academic',alt:{en:'A pupils’ greenhouse model with a small town, trees and a sun at the school exhibition',hi:'स्कूल प्रदर्शनी में छोटे शहर, पेड़ों और सूरज के साथ विद्यार्थियों का ग्रीनहाउस मॉडल'}};
+photos['tablet-quiz'] = {widths:[480,800,1200],w:1200,h:750,avif:true,gallery:'academic',alt:{en:'A pupil demonstrates a tablet activity at the school exhibition',hi:'स्कूल प्रदर्शनी में टैबलेट पर एक गतिविधि दिखाता विद्यार्थी'}};
+photos['sprint-start'] = {widths:[480,800,1200],w:1200,h:750,avif:true,gallery:'sports',alt:{en:'Runners crouch at the start line in chalk-marked lanes on Sports Day',hi:'खेल दिवस पर चूने से बनी लेनों में स्टार्ट लाइन पर तैयार धावक'}};
+photos['football-goal'] = {widths:[480,800,1200],w:1200,h:883,avif:true,pos:'58% 50%',gallery:'sports',alt:{en:'A football goal on the school lawn, with pupils playing beyond it',hi:'स्कूल के लॉन पर फ़ुटबॉल गोल, पीछे खेलते विद्यार्थी'}};
+photos['film-dance-poster'] = {widths:[480,800,960],w:960,h:540,avif:true,alt:{en:'Pupils dance on the school lawn in front of the main building, a moment from the school film',hi:'मुख्य भवन के सामने स्कूल के लॉन पर नृत्य करते विद्यार्थी, स्कूल फ़िल्म का एक दृश्य'}};

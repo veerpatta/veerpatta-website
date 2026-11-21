@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **School photo story (2026-11-21)**:
+  - The home page opens on pupils showing their shapes project at the learning exhibition: a wide crop on phones and a near-square crop of the same moment from 860px, so each screen downloads one image. Stage cards, Academics, School life, Digital and both admissions pages now show pupils' own work (place value, seasons, planets, angles, heart and lungs, greenhouse, a tablet activity), Sports Day (start line, finish tape, early-years track games) and the early-years dance, in place of small crops of legs and cones, a tablecloth, a teacher-training robotics kit and empty rooms
+  - Photos newly taken from the Drive library are cropped so that no pupil's face can be recognised; faces appear only in photos the website had already published. Originals stay in Drive and are not committed. Ordinary crop, white balance, exposure and noise reduction only: nothing is added to or removed from any frame
+  - AVIF with WebP fallback for every new photo. The gallery swaps 12 low-value shots for 12 new ones and is lighter on phones; the school film gets a poster taken from the film itself
+  - Photos served in `<picture>` keep the frame sizes and hover zoom of plain images (admissions thumbnails, stage cards, campus cards, film posters)
 - **Website imagery refresh (2026-11-01)**:
   - Approved AI-enhanced campus illustrations replace the home hero, with a dedicated portrait on phones and a landscape from 768px. Exposed roof rods and stray pipe stubs are removed in the approved v3 images. On phones and tablets the image appears above the copy; desktop copy stays on the quiet left of the campus view. The admissions detail moves below the image, and the background video no longer covers the new still.
   - Approved computer-learning and full-classroom illustrations appear in the Digital Campus and Academics sections, with English and Hindi captions and alt text identifying them as illustrations. The wide classroom shows 22 pupils in white polos with navy trim. Genuine gallery, facility, admissions and film photos remain unchanged.

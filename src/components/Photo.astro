@@ -1,13 +1,18 @@
 ---
 import {photos} from '../data/media';
 import type {Lang} from '../data/site';
-interface Props {id:string;lang:Lang;eager?:boolean;sizes?:string;class?:string;modern?:boolean}
-const {id,lang,eager=false,sizes='(min-width: 1000px) 50vw, 100vw',class:className='',modern=false}=Astro.props;
+// art: a second crop of the same moment for wide screens (art direction).
+// The browser downloads only the source whose media query matches.
+interface Art {id:string;media:string;sizes:string}
+interface Props {id:string;lang:Lang;eager?:boolean;sizes?:string;class?:string;modern?:boolean;art?:Art}
+const {id,lang,eager=false,sizes='(min-width: 1000px) 50vw, 100vw',class:className='',modern=false,art}=Astro.props;
 const p=photos[id];if(!p)throw new Error(`Unknown authentic photo: ${id}`);
+const a=art?photos[art.id]:undefined;if(art&&!a)throw new Error(`Unknown authentic photo: ${art.id}`);
 const narrowModern=['dance-lawn','first-school-room','video-school-story','activity-room','classroom-benches'].includes(id);
 const avifWidths=p.avif?p.widths:(modern&&narrowModern?[416,720,1120]:[]);
 const widths=[...new Set(narrowModern?[...p.widths,416]:p.widths)].sort((a,b)=>a-b);
 const fallback=p.widths.find(w=>w>=600&&w<=800)??p.widths[p.widths.length-1];
-const attrs={src:`/assets/media/photos/${id}-${fallback}.webp`,srcset:widths.map(w=>`/assets/media/photos/${id}-${w}.webp ${w}w`).join(', '),sizes,width:p.w,height:p.h,alt:p.alt[lang],loading:eager?'eager' as const:'lazy' as const,decoding:'async' as const,fetchpriority:eager?'high' as const:'auto' as const,class:className,style:p.pos?`object-position:${p.pos}`:undefined};
+const set=(pid:string,ws:number[],ext:'avif'|'webp')=>ws.map(w=>`/assets/media/photos/${pid}-${w}.${ext} ${w}w`).join(', ');
+const attrs={src:`/assets/media/photos/${id}-${fallback}.webp`,srcset:set(id,widths,'webp'),sizes,width:p.w,height:p.h,alt:p.alt[lang],loading:eager?'eager' as const:'lazy' as const,decoding:'async' as const,fetchpriority:eager?'high' as const:'auto' as const,class:className,style:p.pos?`object-position:${p.pos}`:undefined};
 ---
-{avifWidths.length>0?<picture class="modern-photo"><source type="image/avif" srcset={avifWidths.map(w=>`/assets/media/photos/${id}-${w}.avif ${w}w`).join(', ')} sizes={sizes}/><img {...attrs}/></picture>:<img {...attrs}/>}
+{art&&a?<picture class="modern-photo">{a.avif&&<source media={art.media} type="image/avif" srcset={set(art.id,a.widths,'avif')} sizes={art.sizes} width={a.w} height={a.h}/>}<source media={art.media} type="image/webp" srcset={set(art.id,a.widths,'webp')} sizes={art.sizes} width={a.w} height={a.h}/>{avifWidths.length>0&&<source type="image/avif" srcset={set(id,avifWidths,'avif')} sizes={sizes}/>}<img {...attrs}/></picture>:avifWidths.length>0?<picture class="modern-photo"><source type="image/avif" srcset={set(id,avifWidths,'avif')} sizes={sizes}/><img {...attrs}/></picture>:<img {...attrs}/>}
