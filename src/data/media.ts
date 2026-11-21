@@ -1,4 +1,4 @@
-export interface SchoolPhoto { widths:number[]; w:number; h:number; pos?:string; gallery?:string; alt:{en:string;hi:string} }
+export interface SchoolPhoto { widths:number[]; w:number; h:number; avif?:boolean; pos?:string; gallery?:string; alt:{en:string;hi:string} }
 export const photos:Record<string,SchoolPhoto> = {
   "campus-lawn": {
     "widths": [
@@ -656,7 +656,33 @@ export const photos:Record<string,SchoolPhoto> = {
     }
   }
 };
-export const galleryIds = ["campus-lawn", "arched-stairs", "school-hall", "veranda", "classroom", "sports-finish", "paved-courtyard", "computer-lab-wide", "dance-lawn", "campus-front", "staff-team", "ncc-cadets", "lawn-wide", "school-office", "science-lab", "function-stage", "veranda-courtyard", "campus-approach", "building-palm", "computer-lab", "sports-drill", "learning-exhibition", "prize-podium", "sports-sprint", "dance-group", "assembly-courtyard", "sports-oath", "ncc-podium", "robotics-training", "sports-start", "dance-line", "campus-evening", "prize-certificate", "activity-room", "sack-race", "three-legged-race", "classroom-benches", "musical-chairs", "basketball-court", "cricket-nets", "volleyball-court", "football-lawn", "open-air-stage"];
+photos['exhibition-project'] = {
+  widths: [240, 390], w: 390, h: 132, avif: true, gallery: 'academic',
+  alt: {"en": "Hands moving coloured shapes on a project at the school exhibition", "hi": "स्कूल की प्रदर्शनी में एक प्रोजेक्ट पर रंगीन आकृतियाँ रखते हुए हाथ"}
+};
+photos['robotics-kit'] = {
+  widths: [320, 480, 608], w: 608, h: 294, avif: true, gallery: 'academic',
+  alt: {"en": "Hands, coloured parts and kit trays at a teacher robotics workshop", "hi": "शिक्षकों की रोबोटिक्स कार्यशाला में रंगीन पुर्ज़े, ट्रे और काम करते हाथ"}
+};
+photos['science-bench'] = {
+  widths: [416, 720, 828], w: 828, h: 558, avif: true, gallery: 'academic',
+  alt: {"en": "Glassware, stands and equipment on the school science bench", "hi": "स्कूल की विज्ञान प्रयोगशाला की मेज़ पर काँच के उपकरण और स्टैंड"}
+};
+photos['race-lanes'] = {
+  widths: [240, 448], w: 448, h: 162, avif: true, gallery: 'sports',
+  alt: {"en": "Pupils' feet beside cones and chalk lines during a team race", "hi": "टीम रेस के दौरान चूने की रेखाओं और कोन के पास विद्यार्थियों के कदम"}
+};
+
+export const galleryIds = [
+  "campus-front", "exhibition-project", "race-lanes", "robotics-kit", "science-bench", "cricket-nets",
+  "campus-lawn", "arched-stairs", "school-hall", "veranda", "classroom", "sports-finish",
+  "paved-courtyard", "computer-lab-wide", "dance-lawn", "staff-team", "ncc-cadets", "lawn-wide",
+  "science-lab", "function-stage", "veranda-courtyard", "campus-approach", "building-palm", "computer-lab",
+  "sports-drill", "prize-podium", "sports-sprint", "dance-group", "assembly-courtyard", "sports-oath",
+  "ncc-podium", "robotics-training", "sports-start", "dance-line", "campus-evening", "prize-certificate",
+  "activity-room", "sack-race", "three-legged-race", "classroom-benches", "musical-chairs", "basketball-court",
+  "volleyball-court", "football-lawn", "open-air-stage"
+];
 export interface SchoolVideo {poster:string;duration:string;size:string;caption:{en:string;hi:string}}
 export const videos:Record<string,SchoolVideo> = {
   "campus-tour": {

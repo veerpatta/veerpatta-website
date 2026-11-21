@@ -5,8 +5,9 @@ interface Props {id:string;lang:Lang;eager?:boolean;sizes?:string;class?:string;
 const {id,lang,eager=false,sizes='(min-width: 1000px) 50vw, 100vw',class:className='',modern=false}=Astro.props;
 const p=photos[id];if(!p)throw new Error(`Unknown authentic photo: ${id}`);
 const narrowModern=['dance-lawn','first-school-room','video-school-story','activity-room','classroom-benches'].includes(id);
+const avifWidths=p.avif?p.widths:(modern&&narrowModern?[416,720,1120]:[]);
 const widths=[...new Set(narrowModern?[...p.widths,416]:p.widths)].sort((a,b)=>a-b);
 const fallback=p.widths.find(w=>w>=600&&w<=800)??p.widths[p.widths.length-1];
 const attrs={src:`/assets/media/photos/${id}-${fallback}.webp`,srcset:widths.map(w=>`/assets/media/photos/${id}-${w}.webp ${w}w`).join(', '),sizes,width:p.w,height:p.h,alt:p.alt[lang],loading:eager?'eager' as const:'lazy' as const,decoding:'async' as const,fetchpriority:eager?'high' as const:'auto' as const,class:className,style:p.pos?`object-position:${p.pos}`:undefined};
 ---
-{modern&&narrowModern?<picture class="modern-photo"><source type="image/avif" srcset={[416,720,1120].map(w=>`/assets/media/photos/${id}-${w}.avif ${w}w`).join(', ')} sizes={sizes}/><img {...attrs}/></picture>:<img {...attrs}/>}
+{avifWidths.length>0?<picture class="modern-photo"><source type="image/avif" srcset={avifWidths.map(w=>`/assets/media/photos/${id}-${w}.avif ${w}w`).join(', ')} sizes={sizes}/><img {...attrs}/></picture>:<img {...attrs}/>}
