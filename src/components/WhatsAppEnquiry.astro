@@ -1,0 +1,47 @@
+---
+// The admission enquiry happens inside the school's WhatsApp: the chat asks an adult for consent and the class, and the
+// office's Admissions board gets the enquiry. This website only opens the chat; it collects nothing itself.
+import { site, pick, admissionWhatsApp, admissionWhatsAppText, type Lang } from '../data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+interface Props { lang: Lang; headingId?: string }
+const { lang, headingId = 'enquiry-heading' } = Astro.props;
+const t = (en: string, hi: string) => pick(lang, en, hi);
+const prefill = admissionWhatsAppText(lang);
+---
+<div class="wrap wa-layout">
+  <div class="wa-copy">
+    <p class="eyebrow">{t('Admission enquiry', 'प्रवेश की पूछताछ')}</p>
+    <h2 id={headingId}>{t('Ask on WhatsApp. The office calls you back.', 'WhatsApp पर पूछें। कार्यालय आपको फ़ोन करेगा।')}</h2>
+    <p class="lead">{t('Message the school’s WhatsApp in English or Hindi. The whole enquiry happens inside the chat and takes about a minute.', 'स्कूल के WhatsApp पर हिंदी या अंग्रेज़ी में संदेश भेजें। पूरी पूछताछ चैट में ही होती है और लगभग एक मिनट लगता है।')}</p>
+    <p class="note">{t('The enquiry records only the class you choose and your WhatsApp number, so the office can call you back. Please do not send a child’s name, marks or documents.', 'पूछताछ में केवल चुनी गई कक्षा और आपका WhatsApp नंबर दर्ज होता है, ताकि कार्यालय आपको फ़ोन कर सके। कृपया बच्चे का नाम, अंक या दस्तावेज़ न भेजें।')}</p>
+  </div>
+  <div class="wa-card">
+    <ol class="wa-steps">
+      <li><span class="wa-step" aria-hidden="true">1</span><p>{t(`Tap “Enquire on WhatsApp”. WhatsApp opens with “${prefill}” already written. Send it.`, `“WhatsApp पर पूछताछ करें” दबाएँ। WhatsApp में “${prefill}” पहले से लिखा मिलेगा। उसे भेज दें।`)}</p></li>
+      <li><span class="wa-step" aria-hidden="true">2</span><p>{t('Agree to a call back and type the class you are interested in.', 'फ़ोन पर संपर्क की सहमति दें और कक्षा लिखें।')}</p></li>
+      <li><span class="wa-step" aria-hidden="true">3</span><p>{t('Check it and tap Send. The school office will call you back on that number.', 'जाँचकर “भेजें” दबाएँ। स्कूल कार्यालय उसी नंबर पर आपको फ़ोन करेगा।')}</p></li>
+    </ol>
+    <a class="button button-whatsapp wa-button" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer" data-whatsapp-enquiry><WhatsAppIcon />{t('Enquire on WhatsApp', 'WhatsApp पर पूछताछ करें')}</a>
+    <p class="wa-number">{t('School WhatsApp', 'स्कूल का WhatsApp')}: <span dir="ltr">{site.whatsappDisplay}</span></p>
+    <p class="wa-call">{t('Prefer to talk?', 'बात करना चाहेंगे?')} <a href={`tel:${site.phone}`}>{t('Call school', 'स्कूल को फ़ोन करें')} · <span dir="ltr">{site.phoneDisplay}</span></a></p>
+    <p class="note">{t('An enquiry does not reserve a seat or confirm admission or a visit.', 'पूछताछ से सीट आरक्षित नहीं होती, और प्रवेश या आने का समय पक्का नहीं होता।')}</p>
+  </div>
+</div>
+<style>
+  .wa-layout { display: grid; gap: 2rem; align-items: start; }
+  .wa-copy h2 { max-width: 19ch; }
+  .wa-copy .lead { margin-top: 1rem; }
+  .wa-copy .note { margin-top: 1rem; max-width: 52ch; }
+  .wa-card { border: 1px solid #c6d0d4; border-radius: 1rem; background: #fffdf8; padding: clamp(1.1rem, 3vw, 2rem); min-width: 0; box-shadow: 0 16px 60px #132a4e08; }
+  .wa-steps { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 1rem; }
+  .wa-steps li { display: flex; gap: .9rem; align-items: flex-start; }
+  .wa-steps p { margin: 0; line-height: 1.7; }
+  .wa-step { flex: 0 0 auto; display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 100%; background: #e3efe9; color: #074d45; font-weight: 800; font-size: .9rem; }
+  .wa-button { width: 100%; }
+  .wa-number { margin-top: .9rem; font-weight: 700; color: var(--navy); }
+  .wa-call { margin-top: .4rem; }
+  .wa-call a { font-weight: 700; color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+  .wa-card .note { margin-top: .9rem; }
+  @media (min-width: 900px) { .wa-layout { grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 6rem); } }
+  @media print { .wa-button { display: none; } }
+</style>
