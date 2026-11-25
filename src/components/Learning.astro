@@ -48,6 +48,11 @@ const streamResults = [
         </figure>
       ))}
     </div>
+    <div class="inside-copy exhibit-question">
+      <h3>{t('Let the pupil explain', 'मॉडल को बच्चे की नज़र से देखें')}</h3>
+      <p>{t('At the heart-and-lungs model, try asking, “Where would you start tracing the blood, and where does it go next?” Give the pupil time to point and explain. In a LEAD student-led conference, pupils present their own learning and answer questions. This is a question a family can try with the school photograph.', 'हृदय और फेफड़ों वाले मॉडल को देखकर पूछें, “खून का रास्ता कहाँ से दिखाओगे? फिर वह कहाँ जाएगा?” बच्चे को इशारे से दिखाने और समझाने का समय दें। LEAD के छात्र-नेतृत्व वाले सम्मेलन में विद्यार्थी अपना सीखा हुआ काम समझाते हैं और सवाल लेते हैं। इस तस्वीर के साथ आप घर पर भी यह सवाल आज़मा सकते हैं।')}</p>
+      <a class="inside-link" href="https://leadschool.in/parents/student-events/student-led-conferences/">{t('LEAD’s guide to student-led conferences', 'छात्र-नेतृत्व वाले सम्मेलन पर LEAD की जानकारी')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+    </div>
   </div>
 </section>
 
@@ -85,6 +90,17 @@ const streamResults = [
     <div class="inside-copy">
       <p>{t('ELGA stands for English Language and General Awareness. In Classes 1–5, children learn English in groups according to their current English level. A child in Class 2 and a child in Class 3 can be in the same group.', 'ELGA का पूरा नाम English Language and General Awareness है। कक्षा 1–5 में अंग्रेज़ी सीखने के लिए समूह बच्चों की मौजूदा समझ के आधार पर बनते हैं। मसलन, दूसरी और तीसरी कक्षा के दो बच्चे एक ही समूह में अंग्रेज़ी सीख सकते हैं।')}</p>
       <p>{t('Veer Patta uses the LEAD programme up to Class 10.', 'वीर पत्ता में कक्षा 10 तक LEAD कार्यक्रम का उपयोग होता है।')}</p>
+      <p>{t('LEAD describes a progression from letter sounds and words to understanding stories and expressing ideas in writing. Ask the school office what your child’s group is practising this term.', 'LEAD की पद्धति में अक्षरों की ध्वनियों और शब्दों से शुरू करके कहानी समझने और अपने विचार लिखने तक अभ्यास किया जाता है। इस सत्र में आपके बच्चे के समूह का अभ्यास क्या है, यह विद्यालय कार्यालय से पूछें।')}</p>
+      <a class="inside-link" href="https://leadschool.in/parents/english-language-and-general-awareness/">{t('How LEAD describes ELGA', 'ELGA के बारे में LEAD से पढ़ें')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+      <details class="family-practice" id="reading-practice">
+        <summary>{t('Try a reading activity together', 'साथ मिलकर पढ़ने का एक अभ्यास करें')}</summary>
+        <p>{t('An example for home. Say “map” slowly and listen for its first sound. Read “A map is in my bag.” Where is the map? Replace “map” with another object and say the new sentence aloud.', 'घर पर करने का एक उदाहरण। “map” धीरे बोलें और उसकी पहली ध्वनि सुनें। फिर पढ़ें, “A map is in my bag.” नक्शा कहाँ है? अब “map” की जगह किसी और चीज़ का नाम रखकर नया वाक्य बोलें।')}</p>
+      </details>
+      <details class="family-practice" id="maths-practice">
+        <summary>{t('Build 24 with objects', 'चीज़ों से 24 बनाकर देखें')}</summary>
+        <p>{t('The exhibition photograph shows a place-value chart. At home, make two groups of ten and four single counters. Draw the groups, then write 24. What changes if you take one counter away? This is an example of moving from objects to pictures to symbols, a method LEAD describes for maths.', 'प्रदर्शनी की तस्वीर में स्थानीय मान का चार्ट है। घर पर दस-दस के दो समूह बनाएँ और चार गोटियाँ अलग रखें। समूहों का चित्र बनाएँ, फिर 24 लिखें। एक गोटी हटाने पर क्या बदलेगा? यह वस्तुओं से चित्र और फिर अंकों तक पहुँचने का उदाहरण है। LEAD गणित में इस पद्धति का वर्णन करता है।')}</p>
+        <a class="inside-link" href="https://leadschool.in/school-owner/why-lead/unmatched-curriculum/">{t('LEAD’s subject teaching methods', 'विषय पढ़ाने की LEAD की पद्धतियाँ')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+      </details>
     </div>
   </div>
 </section>
@@ -109,6 +125,7 @@ const streamResults = [
           <div>
             <h3>{stage.title[lang]}</h3>
             <p>{stage.text[lang]}</p>
+            {stage.id === 'middle' && <p>{t('Try this on a visit to the basketball court. Find a corner where two painted lines meet at a right angle. Where is the matching corner across the court?', 'विद्यालय आएँ तो बास्केटबॉल कोर्ट पर देखें। वह कोना खोजें जहाँ दो रेखाएँ मिलकर समकोण बनाती हैं। कोर्ट की दूसरी ओर ऐसा ही कोना कहाँ है?')}</p>}
             {stage.id === 'early-years' && <a class="inside-link" href={pathFor(lang, 'admissions/pre-primary')}>{t('Nursery & KG admissions', 'नर्सरी और केजी में प्रवेश')}<span aria-hidden="true"><Arrow/></span></a>}
             {stage.id === 'primary' && <a class="inside-link" href="#elga">{t('How ELGA groups work', 'ELGA के समूह कैसे बनते हैं')}<span aria-hidden="true">↑</span></a>}
             {stage.id === 'senior-secondary' && <a class="inside-link" href={pathFor(lang, 'admissions/class-11')}>{t('Class 11 admissions', 'कक्षा 11 में प्रवेश')}<span aria-hidden="true"><Arrow/></span></a>}

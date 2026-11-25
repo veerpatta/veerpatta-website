@@ -148,6 +148,12 @@
 
 .inside-elga { background: var(--inside-cream); border-block: 1px solid var(--inside-rule); }
 .inside-elga .inside-copy p:first-child { margin: 0; }
+.exhibit-question { max-width: 68ch; margin-block-start: 2rem; }
+.family-practice { border-block-end: 1px solid var(--inside-rule); }
+.family-practice:first-of-type { margin-block-start: 1rem; border-block-start: 1px solid var(--inside-rule); }
+.family-practice summary { padding: .9rem 0; font-weight: 700; cursor: pointer; }
+.family-practice p { max-width: 62ch; line-height: 1.65; padding-block-end: .9rem; }
+.family-practice .inside-link { margin-block-end: 1rem; }
 .inside-stage-links { margin-bottom: 1.4rem; }
 .inside-toc { display: flex; flex-wrap: wrap; gap: .48rem; list-style: none; padding: 0; margin: 0; }
 .inside-toc a {
