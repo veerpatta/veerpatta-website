@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - AVIF copies for eight more photos (campus front, assembly courtyard, school hall, office, both computer-lab views, function stage, basketball court), made from the published WebP and kept only where they look the same (SSIM 0.985 or higher) and are at least 12% smaller. The other WebP-only photos stay as they are, because a smaller AVIF would have softened them
   - Photo `sizes` now match the real layout for the School life mosaic, campus and activity cards, the computer-lab and admissions visit photos and the large film poster, so phones and desktops stop downloading a larger file than they show
   - Lazy photos show a soft paper tint while they load
-  - Home page on phones: the NCC photo no longer slides over the "Find your people" card, and its ✳ shows as a plain mark rather than a green emoji
+  - Home page on phones: the NCC photo no longer slides over the "Find your people" card, and its asterisk is drawn as a line mark (like the hero's), because Samsung phones showed the ✳ character as a green emoji
   - The school name link and the film's play button speak the same words they show
 
 - **Admissions on WhatsApp (2026-11-21)**:
