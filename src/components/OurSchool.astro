@@ -14,54 +14,54 @@ const facts = [
   { label: t('Board', 'बोर्ड'), value: t('RBSE, Rajasthan', 'माध्यमिक शिक्षा बोर्ड, राजस्थान') },
   { label: t('Classes 11–12', 'कक्षा 11–12'), value: t('Science, Commerce, Arts', 'विज्ञान, वाणिज्य, कला') },
 ];
-const stops = [
+const pupilStories = [
   {
-    image: 'assembly-courtyard',
-    title: t('The assembly courtyard', 'प्रार्थना का प्रांगण'),
-    text: t('A blue canopy shades the paved courtyard where pupils gather for assembly.', 'नीली छत के नीचे पक्के फ़र्श वाले इस प्रांगण में बच्चे प्रार्थना सभा के लिए जुटते हैं।'),
+    image: 'solar-system-visitors',
+    title: t('Two visitors meet the planets', 'दो छोटे मेहमान और सौरमंडल'),
+    text: t('At the 2023 student-led conference, two young visitors stop at the pupils’ solar-system display. Behind the painted planets, a handwritten card marks Jupiter.', '2023 के विद्यार्थी सम्मेलन में दो छोटे मेहमान बच्चों का बनाया सौरमंडल देखने रुके। रंगे हुए ग्रहों के पीछे एक कार्ड पर हाथ से “Jupiter” लिखा है।'),
   },
   {
-    image: 'first-school-room',
-    title: t('The early-years room', 'नन्हे बच्चों का कक्ष'),
-    text: t('Round blue tables and small chairs make it easy for young children to sit around an activity together.', 'गोल नीली मेज़ों के चारों ओर छोटी कुर्सियाँ हैं। बच्चे यहाँ साथ बैठकर गतिविधियाँ कर सकते हैं।'),
+    image: 'classroom-pupils-together',
+    title: t('At the front desk', 'आगे की बेंच पर'),
+    text: t('At a wooden desk, a pupil turns towards the classmate beside him. The school shared this classroom scene in its 2026 Children’s Day story.', 'आगे की बेंच पर एक बच्चा बगल में बैठी सहपाठी की ओर मुड़ा है। विद्यालय ने अपनी कक्षा की यह झलक बाल दिवस 2026 की स्टोरी में साझा की थी।'),
   },
   {
-    image: 'science-bench',
-    title: t('The science laboratory', 'विज्ञान प्रयोगशाला'),
-    text: t('Glassware, stands and measuring equipment share a long bench beside the windows.', 'खिड़कियों के पास लंबी मेज़ पर काँच के उपकरण, स्टैंड और मापने के साधन रखे हैं।'),
+    image: 'dance-footwork',
+    title: t('Keeping time together', 'साथ कदम मिलाना'),
+    text: t('On the lawn, dancers in yellow skirts and pink sashes turn together. They are performing in the inter-house dance competition.', 'लॉन पर पीले घाघरे और गुलाबी दुपट्टे पहने बच्चे एक साथ घूमते हैं। यह अंतर-सदनीय नृत्य प्रतियोगिता की प्रस्तुति है।'),
   },
 ];
 ---
-<div class="inside-facts">
-  <dl class="wrap inside-facts__list">
-    {facts.map(fact => <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
-  </dl>
-</div>
-
 <section id="campus" class="inside-section" aria-labelledby="campus-title">
   <div class="wrap">
     <div class="inside-section-head">
-      <h2 id="campus-title">{t('Inside the school gates', 'विद्यालय के भीतर')}</h2>
-      <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=campus#photos'}>
-        {t('More campus photographs', 'परिसर की और तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
+      <h2 id="campus-title">{t('In the classroom and out on the lawn', 'कक्षा के भीतर और लॉन पर')}</h2>
+      <a class="inside-link" href={pathFor(lang, 'gallery') + '#photos'}>
+        {t('Open the school album', 'विद्यालय का एल्बम देखें')}<span aria-hidden="true"><Arrow/></span>
       </a>
     </div>
     <div class="inside-photo-series">
-      {stops.map(stop => (
+      {pupilStories.map(story => (
         <figure class="inside-figure inside-photo-story">
-          <Photo id={stop.image} lang={lang} modern sizes="(min-width: 1350px) 420px, (min-width: 770px) 31vw, 94vw" />
-          <figcaption><strong>{stop.title}</strong><span>{stop.text}</span></figcaption>
+          <Photo id={story.image} lang={lang} phoneMaxWidth={800} sizes="(min-width: 1350px) 420px, (min-width: 770px) 31vw, 94vw" />
+          <figcaption><strong>{story.title}</strong><span>{story.text}</span></figcaption>
         </figure>
       ))}
     </div>
   </div>
 </section>
 
+<div class="inside-facts">
+  <dl class="wrap inside-facts__list">
+    {facts.map(fact => <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
+  </dl>
+</div>
+
 <section class="inside-section inside-soft" aria-labelledby="campus-film">
   <div class="wrap inside-split inside-film">
     <div class="inside-copy">
-      <h2 id="campus-film">{t('A closer look at the campus', 'परिसर की एक छोटी सैर')}</h2>
-      <p>{t('This short, silent film brings together photographs of our buildings and learning spaces. For a visit in person, call the office before coming to Mela Ground.', 'इस छोटी, बिना आवाज़ वाली फ़िल्म में विद्यालय भवन और पढ़ाई की जगहों की तस्वीरें हैं। ख़ुद परिसर देखने के लिए मेला ग्राउंड आने से पहले कार्यालय में फ़ोन करके समय ले लें।')}</p>
+      <h2 id="campus-film">{t('Where pupils learn and play', 'जहाँ बच्चे पढ़ते और खेलते हैं')}</h2>
+      <p>{t('Follow the front steps into school in this short, silent photo tour. It takes you past the low tables for younger children, the labs and the basketball court. Call the office to arrange a visit.', 'इस छोटी, बिना आवाज़ वाली फ़िल्म में मुख्य सीढ़ियों से विद्यालय के अंदर आइए। तस्वीरों में छोटे बच्चों की मेज़ें, प्रयोगशालाएँ और बास्केटबॉल कोर्ट देखें। ख़ुद आने का समय कार्यालय से तय करें।')}</p>
       <a class="inside-link" href={pathFor(lang, 'contact') + '#visit'}>
         {t('Plan a campus visit', 'आने का रास्ता और समय जानें')}<span aria-hidden="true"><Arrow/></span>
       </a>

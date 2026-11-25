@@ -62,9 +62,13 @@ test('high-density phones load the smaller homepage photographs', async ({ brows
   const context = await browser.newContext({ viewport: { width: 412, height: 839 }, deviceScaleFactor: 3, isMobile: true });
   const page = await context.newPage();
   await page.goto(`${baseURL}/hi/`);
+  const stageSources = await page.locator('.stage-image img').evaluateAll(images => images.map(image => image.getAttribute('src')));
+  expect(stageSources).toHaveLength(4);
+  expect(new Set(stageSources).size).toBe(4);
+  await expect(page.locator('.front-photo img')).toHaveAttribute('fetchpriority', 'high');
   const photos = [
-    { selector: '.front-photo img', file: /amet-campus-wide-(480|800)\.(?:avif|webp)$/ },
-    { selector: '.project-spread figure img', file: /circulatory-model-(480|640)\.(?:avif|webp)$/ },
+    { selector: '.front-photo img', file: /exhibition-pupils-amet-(480|640|800)\.(?:avif|webp)$/ },
+    { selector: '.project-spread figure img', file: /nutrition-presentation-(384|480|640)\.(?:avif|webp)$/ },
     { selector: '#school-film [data-video-src] img', file: /campus-spaces-poster-(480|640)\.(?:avif|webp)$/ },
   ];
   for (const photo of photos) {

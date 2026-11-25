@@ -16,7 +16,7 @@ export const site = {
   addressHi: 'मेला ग्राउंड के सामने, आमेट, राजस्थान 313332',
   maps: 'https://maps.google.com/?q=Shri+Veer+Patta+Senior+Secondary+School+Amet+Rajasthan',
   url: 'https://vpps.co.in',
-  release: 'amet-school-20261125'
+  release: 'amet-students-20261125'
 };
 /** A wa.me link to the school's WhatsApp. `message` is typed into the chat for the parent; nothing is sent until they send it. */
 export const whatsappUrl = (message = ''): string =>

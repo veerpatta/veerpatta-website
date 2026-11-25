@@ -26,7 +26,7 @@ for (const lang of ['en', 'hi']) {
   for (const slug of routes) {
     const file = join(output, lang, slug, 'index.html');
     const html = documents.get(file) || '';
-    if (!html.includes('content="amet-school-20261125"')) errors.add(`Stale or missing route ${file}`);
+    if (!html.includes('content="amet-students-20261125"')) errors.add(`Stale or missing route ${file}`);
     if (!html.includes(`<html lang="${lang}"`)) errors.add(`Wrong language ${file}`);
     if (/\{%|\{\{/.test(html)) errors.add(`Unrendered template ${file}`);
   }
@@ -39,6 +39,7 @@ for (const file of ['worker.js','wrangler.jsonc','src','scripts','tests','packag
 }
 for (const [file, html] of documents) {
   const page = new URL(file.slice(output.length).replace(/index\.html$/, ''), origin);
+  for (const [, raw] of html.matchAll(/<meta property="og:image" content="([^"]+)"/g)) checkUrl(raw, page);
   for (const [, raw] of html.matchAll(/\b(?:href|src|poster)="([^"]+)"/g)) checkUrl(raw, page);
   for (const [, set] of html.matchAll(/\bsrcset="([^"]+)"/g)) {
     for (const item of set.split(',')) checkUrl(item.trim().split(/\s+/)[0], page);
