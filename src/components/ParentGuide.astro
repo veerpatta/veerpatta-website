@@ -1,4 +1,5 @@
 ---
+import Arrow from './Arrow.astro';
 import {guideAnswers} from '../data/parent-guide';
 import {pick,site,type Lang} from '../data/site';
 interface Props {lang: Lang}
@@ -8,8 +9,8 @@ const t=(en:string,hi:string)=>pick(lang,en,hi);
 <aside id="parent-guide" class="pg-shell" aria-label={t('Parent guide','अभिभावक सहायता')}>
  <div class="wrap"><details class="pg-panel"><summary>
   <span class="pg-icon" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h22v15H13l-6 5v-5H3zM8 9h12M8 14h7"/></svg></span>
-  <span><strong>{t('Have a question about the school?', 'स्कूल के बारे में कुछ पूछना है?')}</strong><small>{t('Open the parent guide · four quick answers', 'अभिभावक सहायता खोलें · चार छोटे जवाब')}</small></span><span class="pg-plus" aria-hidden="true">+</span>
- </summary><div class="pg-inside"><div class="pg-answers">{guideAnswers(lang).map(row=><details><summary>{row.q}</summary><p>{row.a}</p><a href={row.url}>{row.label} <span aria-hidden="true">→</span></a></details>)}</div><div class="pg-foot"><p>{t('These are public school answers, not a live chat. No questions are recorded. For anything else, call the office.', 'ये स्कूल की सार्वजनिक जानकारी के जवाब हैं, लाइव चैट नहीं। यहाँ कोई सवाल रिकॉर्ड नहीं होता। बाकी जानकारी के लिए कार्यालय में फोन करें।')}</p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></div></div></details></div>
+  <span><strong>{t('Have a question about the school?', 'स्कूल के बारे में कुछ पूछना है?')}</strong><small>{t('Classes, fees and visits', 'कक्षा, फ़ीस और स्कूल आने की जानकारी')}</small></span><span class="pg-plus" aria-hidden="true">+</span>
+ </summary><div class="pg-inside"><div class="pg-answers">{guideAnswers(lang).map(row=><details><summary>{row.q}</summary><p>{row.a}</p><a href={row.url}>{row.label} <span aria-hidden="true"><Arrow/></span></a></details>)}</div><div class="pg-foot"><p>{t('For other questions, call the school office.', 'अन्य सवालों के लिए विद्यालय कार्यालय में फ़ोन करें।')}</p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></div></div></details></div>
 </aside>
 <style>
  .pg-shell{background:#f8f5ee;padding:27px 0;color:#142c52}.pg-panel{border-block:1px solid #cbd0c6}.pg-panel>summary{display:flex;align-items:center;list-style:none;gap:15px;padding:18px 4px;cursor:pointer}.pg-panel>summary::-webkit-details-marker{display:none}.pg-icon{display:grid;place-items:center;border:1px solid #c2cabe;width:44px;height:44px;background:#fffdf8;border-radius:50%;flex:none}.pg-panel strong{display:block;font-size:1.08rem}.pg-panel small{display:block;color:#44576a}.pg-plus{margin-left:auto;font-size:1.6rem}.pg-panel[open]>summary .pg-plus{transform:rotate(45deg)}.pg-inside{padding:0 0 20px}.pg-answers{display:grid;gap:0 30px}.pg-answers details{border-top:1px solid #d8d9d2;padding:5px 0}.pg-answers summary{padding:12px 3px;cursor:pointer;font-weight:700}.pg-answers p,.pg-foot p{font-size:.9rem;color:#435467}.pg-answers a,.pg-foot a{display:inline-block;text-decoration:underline;text-underline-offset:3px;font-weight:700;padding:8px 0}.pg-foot{margin-top:15px}.pg-foot a{white-space:nowrap}@media(min-width:760px){.pg-answers{grid-template-columns:1fr 1fr}.pg-foot{display:flex;align-items:center;gap:30px;justify-content:space-between}.pg-panel>summary{gap:18px}}

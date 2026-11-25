@@ -1,0 +1,71 @@
+---
+import Arrow from './Arrow.astro';
+import { pathFor, pick, type Lang } from '../data/site';
+import Photo from './Photo.astro';
+import VideoCard from './VideoCard.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = (en: string, hi: string) => pick(lang, en, hi);
+
+const facts = [
+  { label: t('Location', 'स्थान'), value: t('Amet, Rajsamand', 'आमेट, राजसमंद') },
+  { label: t('School stages', 'कक्षाएँ'), value: t('Nursery to Class 12', 'नर्सरी से कक्षा 12') },
+  { label: t('Board', 'बोर्ड'), value: t('RBSE, Rajasthan', 'माध्यमिक शिक्षा बोर्ड, राजस्थान') },
+  { label: t('Classes 11–12', 'कक्षा 11–12'), value: t('Science, Commerce, Arts', 'विज्ञान, वाणिज्य, कला') },
+];
+const stops = [
+  {
+    image: 'assembly-courtyard',
+    title: t('The assembly courtyard', 'प्रार्थना का प्रांगण'),
+    text: t('A blue canopy shades the paved courtyard where pupils gather for assembly.', 'नीली छत के नीचे पक्के फ़र्श वाले इस प्रांगण में बच्चे प्रार्थना सभा के लिए जुटते हैं।'),
+  },
+  {
+    image: 'first-school-room',
+    title: t('The early-years room', 'नन्हे बच्चों का कक्ष'),
+    text: t('Round blue tables and small chairs make it easy for young children to sit around an activity together.', 'गोल नीली मेज़ों के चारों ओर छोटी कुर्सियाँ हैं। बच्चे यहाँ साथ बैठकर गतिविधियाँ कर सकते हैं।'),
+  },
+  {
+    image: 'science-bench',
+    title: t('The science laboratory', 'विज्ञान प्रयोगशाला'),
+    text: t('Glassware, stands and measuring equipment share a long bench beside the windows.', 'खिड़कियों के पास लंबी मेज़ पर काँच के उपकरण, स्टैंड और मापने के साधन रखे हैं।'),
+  },
+];
+---
+<div class="inside-facts">
+  <dl class="wrap inside-facts__list">
+    {facts.map(fact => <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
+  </dl>
+</div>
+
+<section id="campus" class="inside-section" aria-labelledby="campus-title">
+  <div class="wrap">
+    <div class="inside-section-head">
+      <h2 id="campus-title">{t('Inside the school gates', 'विद्यालय के भीतर')}</h2>
+      <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=campus#photos'}>
+        {t('More campus photographs', 'परिसर की और तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
+      </a>
+    </div>
+    <div class="inside-photo-series">
+      {stops.map(stop => (
+        <figure class="inside-figure inside-photo-story">
+          <Photo id={stop.image} lang={lang} modern sizes="(min-width: 1350px) 420px, (min-width: 770px) 31vw, 94vw" />
+          <figcaption><strong>{stop.title}</strong><span>{stop.text}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="inside-section inside-soft" aria-labelledby="campus-film">
+  <div class="wrap inside-split inside-film">
+    <div class="inside-copy">
+      <h2 id="campus-film">{t('A closer look at the campus', 'परिसर की एक छोटी सैर')}</h2>
+      <p>{t('This short, silent film brings together photographs of our buildings and learning spaces. For a visit in person, call the office before coming to Mela Ground.', 'इस छोटी, बिना आवाज़ वाली फ़िल्म में विद्यालय भवन और पढ़ाई की जगहों की तस्वीरें हैं। ख़ुद परिसर देखने के लिए मेला ग्राउंड आने से पहले कार्यालय में फ़ोन करके समय ले लें।')}</p>
+      <a class="inside-link" href={pathFor(lang, 'contact') + '#visit'}>
+        {t('Plan a campus visit', 'आने का रास्ता और समय जानें')}<span aria-hidden="true"><Arrow/></span>
+      </a>
+    </div>
+    <VideoCard id="campus-spaces" lang={lang} large />
+  </div>
+</section>

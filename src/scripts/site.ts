@@ -32,44 +32,78 @@ for(const dialog of document.querySelectorAll<HTMLDialogElement>('dialog')) {
  dialog.addEventListener('cancel',event=>{event.preventDefault();closeDialog(dialog);});
  dialog.addEventListener('close',()=>finishDialogClose(dialog));
 }
-for(const trigger of document.querySelectorAll<HTMLAnchorElement>('[data-photo-open]')) trigger.addEventListener('click',e=>{
- if(!photoDialog) return;
- const img=photoDialog.querySelector<HTMLImageElement>('img');
- const caption=photoDialog.querySelector('figcaption');
- if(img){img.src=trigger.href;img.alt=trigger.dataset.photoCaption||'';}
- if(caption)caption.textContent=trigger.dataset.photoCaption||'';
- if(openDialog(photoDialog,trigger))e.preventDefault();
-});
-const chips=document.querySelectorAll<HTMLButtonElement>('[data-gallery-filter]');
-const photos=document.querySelectorAll<HTMLElement>('[data-gallery-category]');
-function applyGallery(updateUrl:boolean,requested:string|null){
- const category=normaliseCategory(requested);
- let count=0;
- for(const photo of photos){photo.hidden=category!=='all'&&photo.dataset.galleryCategory!==category;if(!photo.hidden)count++;}
- for(const chip of chips)chip.setAttribute('aria-pressed',String(chip.dataset.galleryFilter===category));
- const label=document.querySelector('[data-gallery-count]');
- if(label)label.textContent=`${count} ${hi?'तस्वीरें':'photographs'}`;
- if(updateUrl){const url=new URL(location.href);if(category==='all')url.searchParams.delete('category');else url.searchParams.set('category',category);history.replaceState(null,'',url);}
+function followsNormally(event: MouseEvent) {
+  return event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey;
 }
-if(chips.length){applyGallery(false,new URLSearchParams(location.search).get('category'));for(const chip of chips)chip.addEventListener('click',()=>applyGallery(true,chip.dataset.galleryFilter||null));window.addEventListener('popstate',()=>applyGallery(false,new URLSearchParams(location.search).get('category')));}
-for(const card of document.querySelectorAll<HTMLAnchorElement>('[data-video-src]')) card.addEventListener('click',event=>{
- event.preventDefault();
- const video=document.createElement('video');
- video.className='school-video';video.controls=true;video.playsInline=true;video.muted=true;video.preload='metadata';video.tabIndex=0;
- video.poster=card.dataset.videoPoster||'';
- video.setAttribute('aria-label',card.dataset.videoTitle||'School video');
- video.src=card.dataset.videoSrc||card.href;
- if(card.dataset.videoId==='school-story'){
-  for(const lang of ['en','hi']){const track=document.createElement('track');track.kind='captions';track.label=lang==='hi'?'हिंदी':'English';track.srclang=lang;track.src=`/assets/media/videos/school-story-${lang}.vtt`;track.default=lang===(hi?'hi':'en');video.append(track);}
- }
- const error=document.createElement('p');error.className='video-error';error.hidden=true;
- const fallback=document.createElement('a');fallback.href=video.src;fallback.textContent=hi?'वीडियो सीधे खोलें':'Open the video directly';
- error.append(hi?'वीडियो नहीं चल सका। ':'This video could not play. ',fallback);
- video.addEventListener('error',()=>{error.hidden=false;});
- video.addEventListener('play',()=>{for(const other of document.querySelectorAll('video'))if(other!==video)other.pause();});
- card.replaceWith(video);video.after(error);video.focus();
- video.play().catch(()=>{error.hidden=false;});
-});
+
+for (const trigger of document.querySelectorAll<HTMLAnchorElement>('[data-photo-open]')) {
+  trigger.addEventListener('click', event => {
+    if (followsNormally(event) || !photoDialog || typeof photoDialog.showModal !== 'function') return;
+    const img = photoDialog.querySelector('img');
+    const caption = photoDialog.querySelector('figcaption');
+    if (img) {
+      img.src = trigger.href;
+      img.alt = trigger.dataset.photoCaption || '';
+    }
+    if (caption) caption.textContent = trigger.dataset.photoCaption || '';
+    if (openDialog(photoDialog, trigger)) event.preventDefault();
+  });
+}
+
+const filters = document.querySelector<HTMLElement>('[data-enhanced-gallery]');
+if (filters) {
+  const chips = filters.querySelectorAll<HTMLButtonElement>('[data-gallery-filter]');
+  const pictures = document.querySelectorAll<HTMLElement>('[data-gallery-category]');
+  const countLabel = document.querySelector('[data-gallery-count]');
+
+  const applyFilter = (requested: string | null) => {
+    const category = normaliseCategory(requested);
+    let count = 0;
+    for (const picture of pictures) {
+      picture.hidden = category !== 'all' && picture.dataset.galleryCategory !== category;
+      if (!picture.hidden) count++;
+    }
+    for (const chip of chips) chip.setAttribute('aria-pressed', String(chip.dataset.galleryFilter === category));
+    const unit = hi ? (count === 1 ? 'तस्वीर' : 'तस्वीरें') : (count === 1 ? 'photograph' : 'photographs');
+    if (countLabel) countLabel.textContent = `${count} ${unit}`;
+  };
+  const readFilter = () => applyFilter(new URLSearchParams(location.search).get('category'));
+  readFilter();
+  filters.hidden = false;
+  for (const chip of chips) {
+    chip.addEventListener('click', () => {
+      const category = normaliseCategory(chip.dataset.galleryFilter ?? null);
+      const url = new URL(location.href);
+      if (category === 'all') url.searchParams.delete('category');
+      else url.searchParams.set('category', category);
+      if (url.href !== location.href) history.pushState(null, '', url);
+      applyFilter(category);
+    });
+  }
+  window.addEventListener('popstate', readFilter);
+}
+
+for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-video-src]')) {
+  link.addEventListener('click', event => {
+    const template = link.parentElement?.querySelector<HTMLTemplateElement>('[data-video-template]');
+    if (!template || followsNormally(event)) return;
+    const fragment = template.content.cloneNode(true) as DocumentFragment;
+    const video = fragment.querySelector('video');
+    const error = fragment.querySelector<HTMLElement>('[data-video-error]');
+    if (!video || !error) return;
+    event.preventDefault();
+    video.muted = true;
+    video.addEventListener('error', () => { error.hidden = false; });
+    video.addEventListener('play', () => {
+      error.hidden = true;
+      for (const other of document.querySelectorAll('video')) if (other !== video) other.pause();
+    });
+    link.replaceWith(fragment);
+    template.remove();
+    video.focus();
+    video.play().catch(() => { error.hidden = false; });
+  });
+}
 window.addEventListener('pageshow',()=>{for(const button of document.querySelectorAll<HTMLButtonElement>('form button[aria-busy]')){button.disabled=false;button.removeAttribute('aria-busy');}});
 // Content never starts hidden. Motion is a small progressive enhancement.
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){

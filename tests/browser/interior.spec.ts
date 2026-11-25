@@ -46,7 +46,7 @@ for (const lang of ['en','hi']) {
   await expect(page.locator('#videos [data-video-src]').first()).toHaveAttribute('href',/\.mp4$/);
   await page.goto(`${baseURL}/${lang}/news/`);
   await page.locator(`a[href="/news/2025-01-15-sports-day-${lang}/"]`).click();
-  await expect(page.locator('main time')).toHaveAttribute('datetime','2025-01-15');
+  await expect(page.locator('main time')).toHaveAttribute('datetime','2025-02-10');
   await expect(page.locator(`main a[href="/${lang}/news/#archive"]`)).toBeVisible();
   await context.close();
  });

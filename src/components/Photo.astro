@@ -1,18 +1,39 @@
 ---
-import {photos} from '../data/media';
-import type {Lang} from '../data/site';
-// art: a second crop of the same moment for wide screens (art direction).
-// The browser downloads only the source whose media query matches.
-interface Art {id:string;media:string;sizes:string}
-interface Props {id:string;lang:Lang;eager?:boolean;sizes?:string;class?:string;modern?:boolean;art?:Art}
-const {id,lang,eager=false,sizes='(min-width: 1000px) 50vw, 100vw',class:className='',modern=false,art}=Astro.props;
-const p=photos[id];if(!p)throw new Error(`Unknown authentic photo: ${id}`);
-const a=art?photos[art.id]:undefined;if(art&&!a)throw new Error(`Unknown authentic photo: ${art.id}`);
-const narrowModern=['dance-lawn','first-school-room','video-school-story','activity-room','classroom-benches'].includes(id);
-const avifWidths=p.avif?p.widths:(modern&&narrowModern?[416,720,1120]:[]);
-const widths=[...new Set(narrowModern?[...p.widths,416]:p.widths)].sort((a,b)=>a-b);
-const fallback=p.widths.find(w=>w>=600&&w<=800)??p.widths[p.widths.length-1];
-const set=(pid:string,ws:number[],ext:'avif'|'webp')=>ws.map(w=>`/assets/media/photos/${pid}-${w}.${ext} ${w}w`).join(', ');
-const attrs={src:`/assets/media/photos/${id}-${fallback}.webp`,srcset:set(id,widths,'webp'),sizes,width:p.w,height:p.h,alt:p.alt[lang],loading:eager?'eager' as const:'lazy' as const,decoding:'async' as const,fetchpriority:eager?'high' as const:'auto' as const,class:className,style:p.pos?`object-position:${p.pos}`:undefined};
+import { photos } from '../data/media';
+import type { Lang } from '../data/site';
+
+interface Art { id: string; media: string; sizes: string }
+interface Props {
+  id: string; lang: Lang; eager?: boolean; sizes?: string; class?: string;
+  modern?: boolean; art?: Art;
+}
+
+const { id, lang, eager = false, sizes = '(min-width: 1000px) 50vw, 100vw', class: className, art } = Astro.props;
+const photo = photos[id];
+if (!photo) throw new Error(`Unknown public photograph: ${id}`);
+const wide = art && photos[art.id];
+if (art && !wide) throw new Error(`Unknown public photograph: ${art.id}`);
+
+const srcset = (key: string, widths: number[], extension: string) =>
+  widths.map(width => `/assets/media/photos/${key}-${width}.${extension} ${width}w`).join(', ');
+const fallback = photo.widths.find(width => width >= 600 && width <= 800) ?? photo.widths[photo.widths.length - 1];
+const attrs = {
+  src: `/assets/media/photos/${id}-${fallback}.webp`,
+  srcset: srcset(id, photo.widths, 'webp'),
+  sizes, width: photo.w, height: photo.h,
+  alt: photo.alt[lang], class: className,
+  loading: eager ? 'eager' as const : 'lazy' as const,
+  decoding: 'async' as const, fetchpriority: eager ? 'high' as const : 'auto' as const,
+  style: photo.pos ? `object-position:${photo.pos}` : undefined,
+};
 ---
-{art&&a?<picture class="modern-photo">{a.avif&&<source media={art.media} type="image/avif" srcset={set(art.id,a.widths,'avif')} sizes={art.sizes} width={a.w} height={a.h}/>}<source media={art.media} type="image/webp" srcset={set(art.id,a.widths,'webp')} sizes={art.sizes} width={a.w} height={a.h}/>{avifWidths.length>0&&<source type="image/avif" srcset={set(id,avifWidths,'avif')} sizes={sizes}/>}<img {...attrs}/></picture>:avifWidths.length>0?<picture class="modern-photo"><source type="image/avif" srcset={set(id,avifWidths,'avif')} sizes={sizes}/><img {...attrs}/></picture>:<img {...attrs}/>}
+{art || photo.avifWidths ? (
+  <picture class="modern-photo">
+    {art && wide && <>
+      {wide.avifWidths && <source media={art.media} type="image/avif" srcset={srcset(art.id, wide.avifWidths, 'avif')} sizes={art.sizes} width={wide.w} height={wide.h} />}
+      <source media={art.media} type="image/webp" srcset={srcset(art.id, wide.widths, 'webp')} sizes={art.sizes} width={wide.w} height={wide.h} />
+    </>}
+    {photo.avifWidths && <source type="image/avif" srcset={srcset(id, photo.avifWidths, 'avif')} sizes={sizes} />}
+    <img {...attrs} />
+  </picture>
+) : <img {...attrs} />}

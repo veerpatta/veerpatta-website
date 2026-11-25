@@ -66,14 +66,14 @@ Both `/en/` and `/hi/` include home, about, academics, admissions, school life (
 
 - Maintain English and Hindi together in `src/data/` and the relevant components.
 - Update school contact details in `src/data/site.ts` and verify both languages.
-- Update the current gallery registry in `src/data/media.ts`, not the old JavaScript registry.
+- Register approved photographs, films and bilingual descriptions in `src/data/published-media.json`. Both Astro and the public-file staging script read this catalogue.
 - Keep local media in the explicit asset directories and rebuild after changes.
 - Keep meaningful text, links and forms available without JavaScript. Dialogs, filtering and motion enhance the basic pages.
 - Videos load after a tap rather than downloading on first page load. Keep direct-file fallbacks, posters and captions available.
 
-The early-years (`/hi/admissions/pre-primary/`, `/en/admissions/pre-primary/`) and Class 11 (`/hi/admissions/class-11/`, `/en/admissions/class-11/`) guides provide short, class-specific enquiries. The two `/admissions/` hubs preserve the all-class guided form and parent-entered budget.
+The English and Hindi admissions directories offer Nursery, JKG, SKG and Classes 1–12. Each class opens a WhatsApp draft addressed to the school's admissions service. The early-years and Class 11 guides link to their respective class drafts. The separate telephone action calls the school office.
 
-The admissions flow is an **enquiry**, not an application acceptance, payment or seat reservation. It asks for parent/guardian contact details and class interest. Submission uses the configured Formspree endpoint; the public telephone is a call link. WhatsApp is intentionally unconfigured until the school verifies the public messaging recipient; a telephone number alone is not sufficient. Do not use real parent or student information in tests, and intercept form requests when exercising test submissions.
+The admissions service asks for adult callback consent and a separate confirmation before recording an enquiry. To check the 30 rendered drafts and that consent sequence in isolation, run `scripts/check-admissions-hub.mjs` with the local Hub parser, VPPS One checkout and an in-memory PGlite installation as documented in the script.
 
 The budget calculator starts with blank inputs. It adds costs entered by the parent, separates annual costs from the one-time admission amount, and is not an official school fee quote. Do not add invented fees, rankings, results or testimonials.
 

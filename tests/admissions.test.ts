@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { calculateBudget, normalizeIndianPhone } from '../src/scripts/admissions.ts';
 import { site, whatsappUrl, admissionWhatsApp, admissionWhatsAppText } from '../src/data/site.ts';
+import { admissionClassGroups } from '../src/data/admission-classes.ts';
 
 const blank = { tuition: '', admission: '', books: '', uniform: '', transport: '' };
 test('blank budget is a zero-value parent estimate', () => {
@@ -51,4 +52,17 @@ test('admission words are fixed and carry no personal details', () => {
 test('a plain WhatsApp link carries no message', () => {
   assert.equal(whatsappUrl(), 'https://wa.me/918302207823');
   assert.equal(new URL(whatsappUrl('A & B\nClass 6? #1')).searchParams.get('text'), 'A & B\nClass 6? #1');
+});
+test('the class directory has one choice for every Hub class in school order', () => {
+  const grades = admissionClassGroups.flatMap(group => [...group.classes]);
+  assert.deepEqual(grades, ['Nursery', 'JKG', 'SKG', ...Array.from({ length: 12 }, (_, i) => `Class ${i + 1}`)]);
+  for (const lang of ['en', 'hi'] as const) {
+    const urls = grades.map(grade => new URL(admissionWhatsApp(lang, grade)));
+    assert.equal(new Set(urls.map(url => url.href)).size, 15);
+    for (const [index, url] of urls.entries()) {
+      assert.equal(url.origin + url.pathname, 'https://wa.me/918302207823');
+      assert.deepEqual([...url.searchParams.keys()], ['text']);
+      assert.equal(url.searchParams.get('text'), admissionWhatsAppText(lang, grades[index]));
+    }
+  }
 });

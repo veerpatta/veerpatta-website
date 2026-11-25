@@ -1,23 +1,54 @@
 ---
-import Photo from './Photo.astro';
+import Arrow from './Arrow.astro';
+import { pathFor, pick, type Lang } from '../data/site';
 import '../styles/interior.css';
-import {pathFor,pick,type Lang} from '../data/site';
+import Photo from './Photo.astro';
+
 interface Props {
- lang:Lang;kicker:string;title:string;description:string;image?:string;
- caption?:string;
- links?:{href:string;label:string;external?:boolean}[];
+  lang: Lang;
+  kicker: string;
+  title: string;
+  description: string;
+  image?: string;
+  caption?: string;
+  links?: { href: string; label: string; external?: boolean }[];
 }
-const {lang,kicker,title,description,image,caption,links=[]}=Astro.props;
+
+const { lang, kicker, title, description, image, caption, links = [] } = Astro.props;
 ---
-<section class:list={['inside-head',{'inside-head--photo':image}]}>
- <div class="wrap inside-head__grid">
-  <div class="inside-head__copy">
-    <nav class="inside-breadcrumb" aria-label={pick(lang,'Breadcrumb','पेज का क्रम')}><a href={pathFor(lang)}>{pick(lang,'Home','होम')}</a><span aria-hidden="true">/</span><span aria-current="page">{kicker}</span></nav>
-    <p class="inside-kicker"><span aria-hidden="true"></span>{kicker}</p>
-    <h1>{title}</h1>
-    <p class="inside-lead">{description}</p>
-    {links.length>0 && <div class="inside-actions">{links.map((link,index)=><a class:list={['button',index===0?'button-primary':'button-outline']} href={link.href} target={link.external?'_blank':undefined} rel={link.external?'noopener noreferrer':undefined}>{link.label}<span aria-hidden="true">{link.external?'→':'→'}</span></a>)}</div>}
+<header class:list={['inside-head', { 'inside-head--photo': image }]}>
+  <div class="wrap">
+    <nav class="inside-breadcrumb" aria-label={pick(lang, 'Breadcrumb', 'पृष्ठ का क्रम')}>
+      <ol>
+        <li><a href={pathFor(lang)}>{pick(lang, 'Home', 'मुखपृष्ठ')}</a></li>
+        <li><span class="inside-breadcrumb__slash" aria-hidden="true">/</span><span aria-current="page">{kicker}</span></li>
+      </ol>
+    </nav>
+    <div class="inside-head__grid">
+      <div class="inside-head__copy">
+        <h1>{title}</h1>
+        <p class="inside-lead">{description}</p>
+        {links.length > 0 && (
+          <div class="inside-actions">
+            {links.map((link, index) => (
+              <a
+                class={index === 0 ? 'button button-primary inside-primary' : 'inside-link'}
+                href={link.href}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+              >
+                {link.label}<span aria-hidden="true"><Arrow direction={link.href.startsWith('#') ? 'down' : link.external ? 'up-right' : 'right'}/></span>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+      {image && (
+        <figure class="inside-head__media">
+          <Photo id={image} lang={lang} eager sizes="(min-width: 1350px) 650px, (min-width: 770px) 48vw, 94vw" />
+          {caption && <figcaption>{caption}</figcaption>}
+        </figure>
+      )}
+    </div>
   </div>
-  {image && <figure class="inside-head__media"><Photo id={image} lang={lang} eager sizes="(min-width: 1350px) 620px, (min-width: 800px) 46vw, calc(100vw - 40px)" />{caption && <figcaption>{caption}</figcaption>}</figure>}
- </div>
-</section>
+</header>

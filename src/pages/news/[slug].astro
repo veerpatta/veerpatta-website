@@ -1,34 +1,46 @@
 ---
-import SiteLayout from '../../layouts/SiteLayout.astro';
+import Arrow from '../../components/Arrow.astro';
 import PageHead from '../../components/PageHead.astro';
-import {pick,pathFor,type Lang} from '../../data/site';
-export function getStaticPaths(){return(['en','hi'] as const).map(lang=>({params:{slug:`2025-01-15-sports-day-${lang}`},props:{lang}}));}
-const {lang}=Astro.props as {lang:Lang};
-const t=(en:string,hi:string)=>pick(lang,en,hi);
-const title=t('Annual Sports Day Celebration 2025','वार्षिक खेल दिवस समारोह 2025');
-const date=t('15 January 2025','15 जनवरी 2025');
-const description=t('Track and field events and a march past brought the school together. From the Veerpatta school archive.','दौड़, मैदानी खेलों और मार्च पास्ट के लिए पूरा स्कूल साथ आया। वीरपट्टा स्कूल के संग्रह से।');
+import Photo from '../../components/Photo.astro';
+import { pathFor, pick, type Lang } from '../../data/site';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export function getStaticPaths() {
+  return (['en', 'hi'] as const).map(lang => ({
+    params: { slug: '2025-01-15-sports-day-' + lang },
+    props: { lang },
+  }));
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const t = (en: string, hi: string) => pick(lang, en, hi);
+const title = t('Sports Day at Veer Patta, 2025', 'वीर पत्ता का खेल दिवस 2025');
+const description = t(
+  'The school held its Sports Day on Monday, 10 February 2025 at the Veer Patta Sports Ground in Amet. The invitation scheduled athletics in the morning and matches in the afternoon.',
+  'सोमवार, 10 फ़रवरी 2025 को आमेट के वीर पत्ता खेल मैदान में विद्यालय का खेल दिवस हुआ। आमंत्रण पत्र में सुबह एथलेटिक्स और दोपहर बाद मैचों का समय दिया गया था।'
+);
 ---
-<SiteLayout lang={lang} slug="news" title={title} canonicalPath={`/news/2025-01-15-sports-day-${lang}/`} description={description}>
- <article>
-  <PageHead lang={lang} title={title} kicker={t('School archive','स्कूल का समाचार संग्रह')} description={description} links={[{href:pathFor(lang,'news')+'#archive',label:t('Back to the archive','समाचार संग्रह पर लौटें')}]}/>
-  <section class="section inside-section"><div class="wrap prose news-story">
-   <p class="eyebrow"><time datetime="2025-01-15">{date}</time></p>
-   <h2>{t('Highlights from the day','दिन की झलकियाँ')}</h2>
-   <ul class="sports-highlights">
-    <li>{t('100m, 200m and relay races','100 मीटर, 200 मीटर और रिले दौड़')}</li>
-    <li>{t('Shot put and long jump','गोला फेंक और लंबी कूद')}</li>
-    <li>{t('March past by the school houses','स्कूल के सदनों का मार्च पास्ट')}</li>
-    <li>{t('An award ceremony for young athletes','युवा खिलाड़ियों का सम्मान समारोह')}</li>
-   </ul>
-   <p>{t('Parents and guests joined the school community to cheer on the young athletes.','अभिभावक और अतिथि खिलाड़ियों का हौसला बढ़ाने के लिए स्कूल परिवार के साथ जुड़े।')}</p>
-   <section class="inside-callout" aria-labelledby="current-dates"><div><h2 id="current-dates">{t('Looking for current dates?','वर्तमान तारीखें जानना चाहते हैं?')}</h2><p>{t('This story is from the archive, not an upcoming event notice. Ask the office for current dates.','यह पुराना समाचार है, आने वाले कार्यक्रम की सूचना नहीं। वर्तमान तारीखें स्कूल कार्यालय से पूछें।')}</p></div><a class="button button-outline" href={pathFor(lang,'contact')}>{t('Contact the office','कार्यालय से संपर्क करें')} <span aria-hidden="true">→</span></a></section>
-  </div></section>
- </article>
+<SiteLayout lang={lang} slug="news" title={title} description={description} canonicalPath={'/news/2025-01-15-sports-day-' + lang + '/'}>
+  <article>
+    <PageHead lang={lang} kicker={t('School archive', 'विद्यालय का समाचार संग्रह')} title={title}
+      description={description} links={[{ href: pathFor(lang, 'news') + '#archive', label: t('Back to school news', 'विद्यालय समाचार पर लौटें') }]} />
+    <section class="inside-section">
+      <div class="wrap inside-story-layout">
+        <div class="inside-story-date">
+          <p class="inside-label">{t('Event date', 'कार्यक्रम की तारीख़')}</p>
+          <time datetime="2025-02-10">{t('10 February 2025', '10 फ़रवरी 2025')}</time>
+        </div>
+        <div class="inside-copy">
+          <h2>{t('From the day’s programme', 'उस दिन का कार्यक्रम')}</h2>
+          <p>{t('The morning athletics session was scheduled from 9 am to noon. The programme listed 100-metre and 200-metre races and relays, alongside sack races, three-legged races and tug of war.', 'सुबह 9 से दोपहर 12 बजे तक एथलेटिक्स का समय था। कार्यक्रम में 100 और 200 मीटर की दौड़, रिले, बोरी दौड़, तीन टाँग की दौड़ और रस्साकशी शामिल थीं।')}</p>
+          <p>{t('The invitation set aside 3 pm to 6 pm for matches at the school sports ground.', 'आमंत्रण पत्र में विद्यालय के खेल मैदान पर मैचों के लिए दोपहर 3 से शाम 6 बजे तक का समय रखा गया था।')}</p>
+          <figure class="inside-figure inside-archive-photo">
+            <Photo id="race-lanes" lang={lang} sizes="(min-width: 600px) 448px, 90vw" />
+            <figcaption>{t('From the school sports archive. Green and orange cones mark the team-race lanes.', 'विद्यालय के खेल चित्र-संग्रह से। हरे और नारंगी कोन टीम रेस की लेनों को चिह्नित करते हैं।')}</figcaption>
+          </figure>
+          <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=sports#photos'}>{t('See more of the sports collection', 'खेल-संग्रह की और तस्वीरें देखें')}<span aria-hidden="true"><Arrow/></span></a>
+        </div>
+      </div>
+    </section>
+  </article>
 </SiteLayout>
-<style>
-.news-story { max-width:980px; }
-.sports-highlights { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:.65rem; padding:0; list-style:none; }
-.sports-highlights li { padding:.8rem 1rem; border-inline-start:3px solid #b97828; background:#f7f0e1; }
-.news-story .inside-callout { margin-top:1.6rem; }
-</style>

@@ -1,152 +1,235 @@
 ---
-import { site, pick, pathFor, admissionWhatsApp, type Lang, type PageSlug } from '../data/site';
-import WhatsAppIcon from './WhatsAppIcon.astro';
-import { pageContent, schoolStages, schoolFaqs } from '../data/content';
-import Photo from './Photo.astro';
-import VideoCard from './VideoCard.astro';
-import PageHead from './PageHead.astro';
+import Arrow from './Arrow.astro';
+import { pageContent, schoolFaqs } from '../data/content';
+import { admissionWhatsApp, pathFor, pick, site, type Lang, type PageSlug } from '../data/site';
+import { measurementReady } from '../scripts/measurement';
 import Admissions from './Admissions.astro';
+import Learning from './Learning.astro';
+import OurSchool from './OurSchool.astro';
+import PageHead from './PageHead.astro';
+import Photo from './Photo.astro';
+import SchoolLife from './SchoolLife.astro';
 import VisitGuide from './VisitGuide.astro';
-import {measurementReady} from '../scripts/measurement';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
 interface Props { lang: Lang; slug: PageSlug }
 const { lang, slug } = Astro.props;
 const t = (en: string, hi: string) => pick(lang, en, hi);
 const page = pageContent[slug];
-const link = (href: string, en: string, hi: string, external = false) => ({href,label:t(en,hi),external});
-const stageIds = ['early-years','primary','middle','secondary','senior-secondary'];
-const stageLink = (index: number) => index === 0 ? pathFor(lang,'admissions/pre-primary') : index === 4 ? pathFor(lang,'admissions/class-11') : pathFor(lang,'admissions')+'#enquiry';
-const faqGroups = [
-  {id:'admissions-and-fees',title:t('Admissions, fees & documents','प्रवेश, शुल्क और दस्तावेज़'),items:[1,2,3,6]},
-  {id:'classes-and-visits',title:t('Classes, transport & visits','कक्षाएँ, बस और परिसर'),items:[0,4,5]},
-  {id:'current-families',title:t('For current families','वर्तमान अभिभावकों के लिए'),items:[7]},
-];
-const privacyLinks = [link('#your-details','What we ask for','कौन-सी जानकारी माँगते हैं'),link('#providers','Who gets it','किसे भेजते हैं'),link('#your-choices','Corrections & removals','सुधार और हटाने के अनुरोध')];
+const link = (href: string, en: string, hi: string) => ({ href, label: t(en, hi) });
 const pageLinks = {
-  about:[link('#campus','See the campus','परिसर देखें'),link(pathFor(lang,'contact')+'#visit','Plan a visit','स्कूल आने की योजना')],
-  academics:[link('#stages','Find your child’s class','अपने बच्चे की कक्षा देखें'),link(pathFor(lang,'admissions/class-11'),'Class 11 admissions','कक्षा 11 का प्रवेश')],
-  admissions:[],
-  beyond:[link('#school-activities','Explore activities','गतिविधियाँ देखें'),link(pathFor(lang,'gallery')+'#videos','Watch school films','स्कूल के वीडियो देखें')],
-  digital:[link('#parent-help','Find the right school link','स्कूल का सही लिंक पाएँ'),link('#computer-learning','See learning spaces','कंप्यूटर कक्ष देखें')],
-  contact:[link('tel:'+site.phone,site.phoneDisplay,site.phoneDisplay),link('#visit','Plan a visit','स्कूल आने की योजना')],
-  faq:[link('#admissions-and-fees','Admissions & fees','प्रवेश और शुल्क'),link('#classes-and-visits','Classes & visits','कक्षाएँ और परिसर'),link('#current-families','For current families','वर्तमान अभिभावक')],
-  privacy:privacyLinks,
-  news:[link('#archive','Read the archive','पुराने समाचार पढ़ें'),link(pathFor(lang,'contact'),'Ask about current notices','वर्तमान सूचनाएँ पूछें')],
+  about: [
+    link('#campus', 'Inside the campus', 'परिसर देखें'),
+    link(pathFor(lang, 'contact') + '#visit', 'Plan a visit', 'आने की जानकारी'),
+  ],
+  academics: [
+    link('#stages', 'Find your class', 'अपनी कक्षा देखें'),
+    link('#elga', 'English in primary school', 'प्राथमिक कक्षाओं में अंग्रेज़ी'),
+    link('#results', '2026 board results', 'बोर्ड परिणाम 2026'),
+  ],
+  admissions: [],
+  beyond: [
+    link('#houses', 'Meet the houses', 'चारों सदन देखें'),
+    link('#school-activities', 'Sport and dance', 'खेल और नृत्य'),
+    link('#ncc', 'NCC', 'एनसीसी'),
+  ],
+  digital: [],
+  contact: [
+    link('tel:' + site.phone, 'Call ' + site.phoneDisplay, 'फ़ोन करें ' + site.phoneDisplay),
+    link('#visit', 'Directions to the campus', 'विद्यालय का रास्ता'),
+  ],
+  faq: [
+    link('#admissions-and-fees', 'Admissions & fees', 'प्रवेश और शुल्क'),
+    link('#classes-and-visits', 'Classes & visits', 'कक्षाएँ और परिसर'),
+    link('#current-families', 'Current families', 'वर्तमान अभिभावक'),
+  ],
+  privacy: [
+    link('#your-details', 'Admission enquiries', 'प्रवेश पूछताछ'),
+    link('#providers', 'External services', 'बाहरी सेवाएँ'),
+    link('#your-choices', 'Corrections & photographs', 'सुधार और तस्वीरें'),
+  ],
+  news: [],
 };
-const pageCaptions = {
-  about:t('The approach to Veerpatta’s main building, Amet','आमेट में वीरपट्टा के मुख्य भवन तक जाने का रास्ता'),
-  academics:t('Place-value blocks at the school exhibition','स्कूल प्रदर्शनी में स्थानीय मान के ब्लॉक'),
-  beyond:t('Sports Day: runners ready at the start line','खेल दिवस: स्टार्ट लाइन पर तैयार धावक'),
-  digital:t('A tablet activity at the school exhibition','स्कूल प्रदर्शनी में टैबलेट पर एक गतिविधि'),
-};
-const activities = [
-  { image: 'sports-finish', tag: t('Sport & movement', 'खेल और सक्रियता'), title: t('The joy of taking part', 'भाग लेने की खुशी'), category:'sports', text: t('Running, games and the energy of Sports Day. Explore photographs of pupils taking part, cheering each other on and sharing the field.', 'दौड़, खेल और खेल दिवस का उत्साह। भाग लेते, साथियों का हौसला बढ़ाते और मैदान साझा करते विद्यार्थियों की तस्वीरें देखें।') },
-  { image: 'ncc-cadets', tag: t('NCC', 'एनसीसी'), title: t('Showing up as a team', 'एक टीम की तरह साथ'), category:'ncc', text: t('See the school’s NCC cadets in our photo archive. Ask the school about current participation, eligibility and activities.', 'तस्वीरों के संग्रह में विद्यालय के एनसीसी कैडेट देखें। वर्तमान भागीदारी, पात्रता और गतिविधियों के लिए विद्यालय से जानकारी लें।') },
-  { image: 'dance-lawn', tag: t('Culture & performance', 'संस्कृति और मंच'), title: t('A little courage. A shared stage.', 'थोड़ी हिम्मत। सबका मंच।'), category:'cultural', text: t('From folk dance to group performances, school celebrations make space for expression and the delight of performing together.', 'लोक नृत्य से सामूहिक प्रस्तुतियों तक, विद्यालय के समारोह अभिव्यक्ति और साथ प्रस्तुति देने की खुशी के पल हैं।') },
-  { image: 'planets-project', tag: t('Ideas & exhibitions', 'विचार और प्रदर्शनियाँ'), title: t('Ideas made visible', 'विचारों को मिला आकार'), category:'academic', text: t('A model, a question, an explanation. A glimpse of students sharing what they have explored at a school exhibition.', 'एक मॉडल, एक सवाल, एक व्याख्या। विद्यालय प्रदर्शनी में अपनी खोज साझा करते विद्यार्थियों की झलक।') },
+
+const faqGroups = [
+  {
+    id: 'admissions-and-fees',
+    title: t('Admissions, fees and documents', 'प्रवेश, शुल्क और दस्तावेज़'),
+    destination: link(pathFor(lang, 'admissions') + '#classes', 'Enquire about your class', 'अपनी कक्षा के बारे में पूछें'),
+  },
+  {
+    id: 'classes-and-visits',
+    title: t('Classes, transport and visits', 'कक्षाएँ, परिवहन और परिसर'),
+    destination: link(pathFor(lang, 'contact') + '#visit', 'See the address and directions', 'पता और रास्ता देखें'),
+  },
+  {
+    id: 'current-families',
+    title: t('For current families', 'वर्तमान अभिभावकों के लिए'),
+    destination: link(pathFor(lang, 'digital'), 'School links and logins', 'विद्यालय के लिंक और लॉगिन'),
+  },
+];
+const services = [
+  {
+    name: t('Class notices', 'कक्षा की सूचनाएँ'),
+    text: t('For a timetable change, holiday or meeting, ask the office which channel your class currently uses for notices.', 'समय-सारणी में बदलाव, छुट्टी या बैठक की सूचना के लिए कार्यालय से पूछें कि आपकी कक्षा को सूचना किस माध्यम से मिलती है।'),
+  },
+  {
+    name: t('Parent login', 'अभिभावक लॉगिन'),
+    text: t('Ask the office for the current app or login address and help signing in. Keep your password and one-time passcodes private.', 'ऐप या लॉगिन का वर्तमान पता और उसे खोलने में सहायता कार्यालय से लें। पासवर्ड और ओटीपी अपने पास रखें।'),
+  },
+  {
+    name: t('Fee payments', 'शुल्क भुगतान'),
+    text: t('Before paying, confirm the amount, recipient and accepted payment method with the office. Keep the receipt for your records.', 'शुल्क जमा करने से पहले राशि, प्राप्तकर्ता और भुगतान के तरीके की पुष्टि कार्यालय से करें। रसीद अपने पास रखें।'),
+  },
 ];
 ---
-{slug !== 'admissions' && <PageHead lang={lang} kicker={page.kicker[lang]} title={page.title[lang]} description={page.description[lang]} image={page.image || undefined} links={pageLinks[slug]} caption={pageCaptions[slug as keyof typeof pageCaptions]} />}
+{slug !== 'admissions' && (
+  <PageHead lang={lang} kicker={page.kicker[lang]} title={page.title[lang]}
+    description={page.description[lang]} image={page.image} caption={page.caption?.[lang]}
+    links={pageLinks[slug]} />
+)}
 
 {slug === 'admissions' && <Admissions lang={lang} />}
+{slug === 'about' && <OurSchool lang={lang} />}
+{slug === 'academics' && <Learning lang={lang} />}
+{slug === 'beyond' && <SchoolLife lang={lang} />}
 
-{slug === 'about' && <>
-  <section class="section inside-section"><div class="wrap grid-two story-grid"><div><span class="eyebrow">{t('Our school, at a glance', 'एक नज़र में हमारा विद्यालय')}</span><h2>{t('Learning, close to home.', 'अपने शहर में, सीखने का सफ़र।')}</h2><p class="lead">{t('Veerpatta Senior Secondary School is in Amet, Rajasthan, opposite Mela Ground. Our school brings together Nursery through Class 12 under RBSE.', 'वीरपट्टा सीनियर सेकेंडरी स्कूल राजस्थान के आमेट में मेला ग्राउंड के सामने स्थित है। यहाँ आरबीएसई के अंतर्गत नर्सरी से कक्षा 12 तक पढ़ाई होती है।')}</p><p>{t('Choosing a school is personal. This website gives you a real look at the campus and school life, then makes it easy to speak with the people who can answer your family’s questions.', 'विद्यालय चुनना परिवार का महत्वपूर्ण फैसला है। इस वेबसाइट पर परिसर और स्कूली जीवन की असली झलक देखें, फिर अपनी ज़रूरतों के बारे में विद्यालय से सीधे बात करें।')}</p><a class="text-link" href={pathFor(lang, 'contact')+'#visit'}>{t('Get to know us in person', 'आकर विद्यालय को जानें')} →</a></div><div class="feature-card school-facts"><h3>{t('The essentials', 'ज़रूरी जानकारी')}</h3><dl><div><dt>{t('Location', 'स्थान')}</dt><dd>{t('Amet, Rajasthan', 'आमेट, राजस्थान')}</dd></div><div><dt>{t('School stages', 'कक्षाएँ')}</dt><dd>{t('Nursery–Class 12', 'नर्सरी–कक्षा 12')}</dd></div><div><dt>{t('Board', 'बोर्ड')}</dt><dd>{t('RBSE', 'आरबीएसई')}</dd></div><div><dt>{t('Senior-secondary streams', 'सीनियर सेकेंडरी संकाय')}</dt><dd>{t('Science · Commerce · Arts', 'विज्ञान · वाणिज्य · कला')}</dd></div></dl></div></div></section>
-  <section class="section inside-section section-soft"><div class="wrap"><div class="section-head"><div><span class="eyebrow">{t('The people behind the school day', 'स्कूली दिन के पीछे हमारे शिक्षक')}</span><h2>{t('Meet the teaching team.', 'हमारे शिक्षकों से मिलें।')}</h2></div><p>{t('Our teachers, together in a real photograph from the school. On a visit, ask to learn more about the team for your child’s class.', 'विद्यालय की असली तस्वीर में हमारे शिक्षक। विद्यालय आने पर अपने बच्चे की कक्षा के शिक्षकों के बारे में जानकारी लें।')}</p></div><figure class="team-photo photo-frame"><Photo id="staff-team" lang={lang} sizes="(min-width: 1200px) 1120px, 92vw" /><figcaption>{t('The teaching team at Veerpatta Senior Secondary School.', 'वीरपट्टा सीनियर सेकेंडरी स्कूल के शिक्षक।')}</figcaption></figure></div></section>
-  <section class="section inside-section" id="campus"><div class="wrap"><div class="section-head"><h2>{t('Walk through the school.', 'विद्यालय की एक झलक।')}</h2><a class="text-link" href={pathFor(lang, 'gallery')+'?category=campus#photos'}>{t('Explore campus photos', 'परिसर की तस्वीरें देखें')} →</a></div><div class="grid-three campus-cards">{[{ id: 'assembly-courtyard', label: t('Room to gather', 'साथ जुटने का प्रांगण') }, { id: 'veranda-courtyard', label: t('Spaces between lessons', 'कक्षाओं के बीच का परिसर') }, { id: 'lawn-wide', label: t('Room to be active', 'खेलने के लिए खुला मैदान') }].map((photo) => <figure><div class="photo-frame"><Photo id={photo.id} lang={lang} sizes="(min-width: 900px) 31vw, (min-width: 600px) 46vw, 92vw" /></div><figcaption>{photo.label}</figcaption></figure>)}</div></div></section>
-</>}
+{slug === 'digital' && (
+  <>
+    <section class="inside-section" id="parent-help" aria-labelledby="parent-help-title">
+      <div class="wrap">
+        <div class="inside-section-head">
+          <h2 id="parent-help-title">{t('Getting the right school link', 'विद्यालय का सही लिंक कैसे लें')}</h2>
+          <a class="inside-link" href={pathFor(lang, 'contact')}>{t('Contact the office', 'कार्यालय से संपर्क करें')}<span aria-hidden="true"><Arrow/></span></a>
+        </div>
+        <dl class="inside-service-list">
+          {services.map(service => <div><dt>{service.name}</dt><dd>{service.text}</dd></div>)}
+        </dl>
+      </div>
+    </section>
+    <section id="computer-learning" class="inside-section inside-soft" aria-labelledby="computer-title">
+      <div class="wrap">
+        <div class="inside-section-head">
+          <h2 id="computer-title">{t('Computers and circuits', 'कंप्यूटर और सर्किट')}</h2>
+          <a class="inside-link" href={pathFor(lang, 'academics') + '#exhibitions'}>{t('See pupil projects', 'बच्चों के प्रोजेक्ट देखें')}<span aria-hidden="true"><Arrow/></span></a>
+        </div>
+        <div class="inside-life-pair">
+          <figure class="inside-figure inside-photo-story">
+            <Photo id="computer-lab-wide" lang={lang} sizes="(min-width: 1260px) 585px, (min-width: 770px) 47vw, 94vw" />
+            <figcaption><strong>{t('The computer laboratory', 'कंप्यूटर प्रयोगशाला')}</strong><span>{t('Workstations line the walls of the school’s computer lab. On a visit, families can ask what their child’s class is working on this term.', 'विद्यालय की कंप्यूटर प्रयोगशाला में दीवारों के साथ कंप्यूटर लगे हैं। परिसर आने पर पूछें कि आपके बच्चे की कक्षा इस सत्र में यहाँ क्या सीख रही है।')}</span></figcaption>
+          </figure>
+          <figure class="inside-figure inside-photo-story">
+            <Photo id="robotics-circuit" lang={lang} sizes="(min-width: 1260px) 585px, (min-width: 770px) 47vw, 94vw" />
+            <figcaption><strong>{t('At a teacher workshop', 'शिक्षकों की कार्यशाला में')}</strong><span>{t('Coloured wires join an Arduino board, a breadboard and a sensor. Teachers worked with this circuit during a robotics training session in 2026.', 'रंगीन तारों से एक आर्डुइनो बोर्ड, ब्रेडबोर्ड और सेंसर जुड़े हैं। 2026 की रोबोटिक्स कार्यशाला में शिक्षकों ने इसी सर्किट पर काम किया।')}</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </>
+)}
 
-{slug === 'academics' && <>
-  <section class="section inside-section" id="stages"><div class="wrap"><div class="section-head"><div><span class="eyebrow">{t('One journey, different stages', 'एक सफ़र, अलग-अलग पड़ाव')}</span><h2>{t('Find your child’s next step.', 'अपने बच्चे का अगला पड़ाव जानें।')}</h2></div><p>{t('Use these stages to start a conversation. The office can explain the current curriculum, entry requirements and class availability.', 'इन पड़ावों से जानकारी लेना शुरू करें। कार्यालय वर्तमान पाठ्यक्रम, प्रवेश की शर्तें और कक्षा की उपलब्धता बताएगा।')}</p></div><nav class="stage-toc" aria-label={t('Jump to a school stage','सीधे कक्षा का स्तर देखें')}><ul class="inside-toc">{schoolStages.map((stage,i)=><li><a href={'#'+stageIds[i]}>{stage.label[lang]}</a></li>)}</ul></nav><div class="stage-list">{schoolStages.map((stage, i) => <article class="stage-row" id={stageIds[i]}><div class="stage-photo photo-frame"><Photo id={stage.image} lang={lang} sizes="(min-width: 900px) 320px, 92vw" /></div><div><span class="eyebrow">{stage.label[lang]}</span><h3>{stage.title[lang]}</h3><p>{stage.text[lang]}</p><a class="text-link" href={stageLink(i)}>{i===0?t('Pre-primary admissions','प्री-प्राइमरी प्रवेश'):i===4?t('Class 11 admissions','कक्षा 11 का प्रवेश'):t('Ask about this stage','इस स्तर की जानकारी लें')} →</a></div><span class="stage-index" aria-hidden="true">0{i + 1}</span></article>)}</div></div></section>
-  <section class="section inside-section"><div class="wrap feature-card"><span class="eyebrow">{t('Before choosing a stream', 'संकाय चुनने से पहले')}</span><h2>{t('Make the choice with clear information.', 'पूरी जानकारी लेकर संकाय चुनें।')}</h2><p class="lead">{t('For Classes 11–12, discuss interests, subject combinations, eligibility and next steps with the school. Science, Commerce and Arts are available as streams; individual subject choices need confirmation.', 'कक्षा 11–12 के लिए रुचियों, विषय-संयोजन, पात्रता और आगे की दिशा पर विद्यालय से बात करें। विज्ञान, वाणिज्य और कला संकाय हैं; अलग-अलग विषयों की उपलब्धता की पुष्टि करें।')}</p><a class="button button-primary" href={pathFor(lang, 'admissions/class-11')}>{t('Explore Class 11 admissions', 'कक्षा 11 के प्रवेश की जानकारी')} →</a></div></section>
-</>}
+{slug === 'contact' && (
+  <>
+    <section class="inside-section" aria-labelledby="contact-options-title">
+      <div class="wrap">
+        <div class="inside-section-head"><h2 id="contact-options-title">{t('Speak with the office', 'कार्यालय से बात करें')}</h2></div>
+        <div class="inside-contact">
+          <article>
+            <h3>{t('School office', 'विद्यालय कार्यालय')}</h3>
+            <a class="inside-contact__number" dir="ltr" href={'tel:' + site.phone}>{site.phoneDisplay}</a>
+            <p>{t('For fees, subject choices, transport routes or a time to visit, call the office.', 'शुल्क, विषयों के विकल्प, बस के मार्ग या मिलने के समय के लिए कार्यालय में फ़ोन करें।')}</p>
+          </article>
+          <article>
+            <h3>{t('Admissions on WhatsApp', 'WhatsApp पर प्रवेश पूछताछ')}</h3>
+            <p class="inside-contact__number" dir="ltr">{site.whatsappDisplay}</p>
+            <p>{t('Send an admission enquiry and choose the class you are interested in. The chat asks an adult to agree to a call back.', 'प्रवेश की पूछताछ भेजकर इच्छित कक्षा चुनें। चैट में किसी वयस्क से फ़ोन पर बात करने की सहमति ली जाती है।')}</p>
+            <a class="button button-whatsapp" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer" data-whatsapp-enquiry>
+              <WhatsAppIcon />{t('Enquire on WhatsApp', 'WhatsApp पर पूछताछ करें')}
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <VisitGuide lang={lang} />
+  </>
+)}
 
-{slug === 'beyond' && <>
-  <section class="section inside-section" id="school-activities"><div class="wrap activity-grid">{activities.map((activity) => <article class="activity-card"><div class="photo-frame"><Photo id={activity.image} lang={lang} sizes="(min-width: 700px) 46vw, 92vw" /></div><div class="activity-copy"><span class="eyebrow">{activity.tag}</span><h2>{activity.title}</h2><p>{activity.text}</p><a href={pathFor(lang,'gallery')+'?category='+activity.category+'#photos'} class="text-link">{t('See related photos','इससे जुड़ी तस्वीरें देखें')} →</a></div></article>)}</div></section>
-  <section class="section inside-section section-soft"><div class="wrap"><div class="section-head"><div><span class="eyebrow">{t('A school in motion', 'गतिविधियों से भरा विद्यालय')}</span><h2>{t('Watch a little of school life.', 'स्कूली जीवन के कुछ पल देखें।')}</h2></div><p>{t('Short clips from the school’s media archive. Tap to load a video when you are ready.', 'विद्यालय के मीडिया संग्रह से छोटे वीडियो। तैयार होने पर टैप करके वीडियो चलाएँ।')}</p></div><div class="grid-two"><VideoCard id="sports-day" lang={lang} /><VideoCard id="house-dance" lang={lang} /></div></div></section>
-  <section class="section inside-section"><div class="wrap inside-callout"><div><h2>{t('Explore the full gallery.', 'देखने को और भी बहुत कुछ।')}</h2><p>{t('Browse campus, learning, sport, NCC and celebration photographs.', 'परिसर, पढ़ाई, खेल, एनसीसी और समारोहों की तस्वीरें देखें।')}</p></div><a class="button button-primary" href={pathFor(lang, 'gallery')+'#photos'}>{t('Open the gallery', 'गैलरी खोलें')} →</a></div></section>
-</>}
-
-{slug === 'digital' && <>
-  <section class="section inside-section" id="parent-help"><div class="wrap"><div class="section-head"><div><span class="eyebrow">{t('For current families', 'वर्तमान अभिभावकों के लिए')}</span><h2>{t('Get the right link, from the right place.', 'सही जगह से सही लिंक लें।')}</h2></div></div><div class="grid-three"><article class="feature-card"><span class="step-number">01</span><h3>{t('School updates', 'विद्यालय की सूचनाएँ')}</h3><p>{t('Ask the office which channel currently carries class notices, schedules and parent communication.', 'कक्षा की सूचनाएँ, समय-सारणी और अभिभावक संवाद के लिए वर्तमान माध्यम कार्यालय से पूछें।')}</p></article><article class="feature-card"><span class="step-number">02</span><h3>{t('Parent access', 'अभिभावक की ऑनलाइन पहुँच')}</h3><p>{t('For a parent app or login, request the official link and setup guidance directly from the school. Do not use a guessed or forwarded login link.', 'अभिभावक ऐप या लॉगिन के लिए आधिकारिक लिंक और निर्देश सीधे विद्यालय से लें। अनुमानित या अनजाने फ़ॉरवर्ड किए गए लिंक का उपयोग न करें।')}</p></article><article class="feature-card"><span class="step-number">03</span><h3>{t('Fee-payment help', 'शुल्क भुगतान में सहायता')}</h3><p>{t('Confirm the current payment method, amount and recipient with the school before paying. This website does not collect payments.', 'भुगतान से पहले वर्तमान तरीके, राशि और प्राप्तकर्ता की विद्यालय से पुष्टि करें। यह वेबसाइट भुगतान नहीं लेती।')}</p></article></div><p class="note">{t('Never share passwords, OTPs, card details or identity documents in a message or an enquiry.', 'किसी संदेश या पूछताछ में पासवर्ड, ओटीपी, कार्ड विवरण या पहचान के दस्तावेज़ कभी न भेजें।')}</p><a class="button button-primary" href={`tel:${site.phone}`}>{t('Ask the school office', 'विद्यालय कार्यालय से पूछें')} →</a></div></section>
-  <section class="section inside-section section-soft" id="computer-learning"><div class="wrap grid-two story-grid"><div><span class="eyebrow">{t('Learning spaces', 'सीखने की जगहें')}</span><h2>{t('A closer look at computer learning.', 'कंप्यूटर सीखने की जगह को जानें।')}</h2><p class="lead">{t('Our photographs show the school’s computer laboratory and teacher training with robotics kits. Visit the campus to ask how these resources fit into your child’s current class.', 'तस्वीरों में विद्यालय की कंप्यूटर प्रयोगशाला और रोबोटिक्स किट के साथ शिक्षकों का प्रशिक्षण देखें। अपने बच्चे की वर्तमान कक्षा में इनके उपयोग के बारे में विद्यालय आकर पूछें।')}</p><a href={pathFor(lang, 'gallery')+'?category=academic#photos'} class="text-link">{t('See the real learning spaces', 'पढ़ाई की असली जगहें देखें')} →</a></div><div class="photo-frame"><Photo id="computer-lab" lang={lang} sizes="(min-width: 600px) 46vw, 92vw" /></div></div></section>
-</>}
-
-{slug === 'contact' && <>
-  <section class="section inside-section" aria-labelledby="contact-options-title"><div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">{t('Contact the office','कार्यालय से संपर्क')}</p><h2 id="contact-options-title">{t('How can we help?','हम आपकी कैसे मदद कर सकते हैं?')}</h2></div></div>
-    <div class="grid-three contact-options">
-     <article class="feature-card"><span class="eyebrow">{t('For a quick answer', 'जल्दी जवाब के लिए')}</span><h3>{t('Call the school', 'स्कूल में फोन करें')}</h3><p>{t('Ask about class availability, fees or a suitable time to visit.', 'कक्षा में जगह, शुल्क या मिलने के समय के बारे में पूछें।')}</p><a class="contact-number" href={`tel:${site.phone}`}>{site.phoneDisplay}</a></article>
-     <article class="feature-card"><span class="eyebrow">{t('For admissions', 'प्रवेश के लिए')}</span><h3>{t('Ask on WhatsApp', 'WhatsApp पर पूछें')}</h3><p>{t('Message the school’s WhatsApp,', 'स्कूल के WhatsApp')} <span dir="ltr">{site.whatsappDisplay}</span>{t(', agree to a call back and choose the class. No child’s details are needed.', ' पर संदेश भेजें, फ़ोन पर संपर्क की सहमति दें और कक्षा चुनें। बच्चे की निजी जानकारी की ज़रूरत नहीं है।')}</p><a class="button button-whatsapp" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer" data-whatsapp-enquiry><WhatsAppIcon />{t('Enquire on WhatsApp', 'WhatsApp पर पूछताछ करें')}</a></article>
-     <article class="feature-card"><span class="eyebrow">{t('For directions', 'रास्ते की जानकारी')}</span><h3>{t('Find us in Amet', 'आमेट में हमारा पता')}</h3><p>{t(site.address,site.addressHi)}</p><a class="button button-outline" href="#visit">{t('Visit information', 'आने की जानकारी')} <span aria-hidden="true">→</span></a></article>
+{slug === 'faq' && (
+  <div class="inside-section">
+    <div class="wrap inside-reading">
+      {faqGroups.map(group => (
+        <section class="inside-faq-group" id={group.id} aria-labelledby={group.id + '-heading'}>
+          <h2 id={group.id + '-heading'}>{group.title}</h2>
+          <div class="inside-faq-list">
+            {schoolFaqs.filter(faq => faq.group === group.id).map(faq => (
+              <details>
+                <summary>{faq.q[lang]}<span class="inside-faq-mark" aria-hidden="true"></span></summary>
+                <p>{faq.a[lang]}</p>
+              </details>
+            ))}
+          </div>
+          <a class="inside-link" href={group.destination.href}>{group.destination.label}<span aria-hidden="true"><Arrow/></span></a>
+        </section>
+      ))}
     </div>
-  </div></section>
-  <VisitGuide lang={lang} />
-</>}
+  </div>
+)}
 
-{slug === 'faq' && <section class="section inside-section"><div class="wrap narrow">
- {faqGroups.map(group=><section class="inside-faq-group" id={group.id}><h2>{group.title}</h2><div class="faq-list">{group.items.map(index=>{const faq=schoolFaqs[index]!;return <details><summary>{faq.q[lang]}</summary><p>{faq.a[lang]}</p></details>;})}</div></section>)}
- <div class="question-followup inside-callout"><div><h2>{t('Still have a question?', 'कोई और सवाल है?')}</h2><p>{t('The school office can confirm the details for your family.', 'अपने परिवार से जुड़ी जानकारी की पुष्टि स्कूल कार्यालय से करें।')}</p></div><a class="button button-primary" href={`tel:${site.phone}`}>{t('Call the school', 'स्कूल में फोन करें')} <span aria-hidden="true">→</span></a></div>
-</div></section>}
+{slug === 'privacy' && (
+  <div class="inside-section">
+    <div class="wrap inside-reading inside-policy">
+      <section id="your-details">
+        <h2>{t('Admission enquiries', 'प्रवेश की पूछताछ')}</h2>
+        <p>{t('Choosing a class or an enquiry link opens a draft in WhatsApp. Opening the draft sends nothing. When you send it, the school can see your WhatsApp number, the class you included and the contents of your message. The chat asks an adult to agree before the office arranges a call back.', 'कक्षा या पूछताछ का लिंक चुनने पर WhatsApp में एक संदेश का मसौदा खुलता है। केवल मसौदा खोलने से संदेश नहीं जाता। जब आप भेजते हैं, विद्यालय को आपका WhatsApp नंबर, लिखी हुई कक्षा और संदेश की सामग्री दिखती है। फ़ोन पर संपर्क की व्यवस्था से पहले चैट में किसी वयस्क की सहमति ली जाती है।')}</p>
+        <p>{t('For a first enquiry, leave out the child’s full name, birth date, marks and identity documents. You can call the office to ask how to provide documents later.', 'पहली पूछताछ में बच्चे का पूरा नाम, जन्मतिथि, अंक या पहचान के दस्तावेज़ न भेजें। बाद में दस्तावेज़ कैसे देने हैं, यह कार्यालय में फ़ोन करके पूछ सकते हैं।')}</p>
+      </section>
+      <section id="providers">
+        <h2>{t('WhatsApp and external services', 'WhatsApp और बाहरी सेवाएँ')}</h2>
+        <p>{t('The school’s WhatsApp service and its office staff handle the messages you send. WhatsApp processes messages and related information under its privacy policy. The website itself has no admission form.', 'आपके भेजे संदेश विद्यालय की WhatsApp सेवा और कार्यालय के कर्मचारी देखते हैं। WhatsApp अपनी गोपनीयता नीति के अनुसार संदेश और उनसे जुड़ी जानकारी सँभालता है। इस वेबसाइट पर प्रवेश फ़ॉर्म नहीं है।')}</p>
+        <a class="inside-link" href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">
+          {t('WhatsApp privacy policy', 'WhatsApp की गोपनीयता नीति')}<span aria-hidden="true"><Arrow direction="up-right"/></span>
+        </a>
+        <p>{t('Choosing a directions link opens Google Maps. A social-media link in the news archive opens Instagram. Those services receive your visit when you follow the link.', 'रास्ते का लिंक चुनने पर Google Maps खुलता है। समाचार संग्रह का सोशल मीडिया लिंक Instagram खोलता है। इन सेवाओं को आपकी विज़िट की जानकारी तब मिलती है जब आप लिंक खोलते हैं।')}</p>
+      </section>
+      <section>
+        <h2>{t('The budget planner and your browser', 'बजट कैलकुलेटर और आपका ब्राउज़र')}</h2>
+        <p>{t('The planner adds up the figures you enter on your device. Those amounts stay in the open page and are neither stored by the planner nor sent to the school. If you choose Print, your browser opens its print dialog.', 'कैलकुलेटर आपकी लिखी राशियों का जोड़ आपके डिवाइस पर निकालता है। राशियाँ खुले पेज में ही रहती हैं। कैलकुलेटर उन्हें सहेजता या विद्यालय को भेजता नहीं है। प्रिंट चुनने पर आपके ब्राउज़र की प्रिंट विंडो खुलती है।')}</p>
+        <p>{t('Your browser may cache public pages, photographs and other files. Hosting providers may process technical request information to serve and protect this site.', 'आपका ब्राउज़र सार्वजनिक पेज, तस्वीरें और दूसरी फ़ाइलें कैश में रख सकता है। वेबसाइट चलाने और सुरक्षित रखने के लिए होस्टिंग सेवा अनुरोधों से जुड़ी तकनीकी जानकारी संसाधित कर सकती है।')}</p>
+        {measurementReady
+          ? <p>{t('Advertising measurement is optional for visitors aged 18 or over. You can change your choice at any time.', '18 साल या अधिक उम्र के आगंतुक विज्ञापन मापन चालू करने का विकल्प चुन सकते हैं। अपनी पसंद कभी भी बदल सकते हैं।')} <a href="#measurement">{t('Measurement settings', 'मापन की सेटिंग')}</a></p>
+          : <p>{t('Advertising measurement is switched off on this website.', 'इस वेबसाइट पर विज्ञापन मापन बंद है।')}</p>}
+      </section>
+      <section id="your-choices">
+        <h2>{t('Corrections and photograph requests', 'सुधार और तस्वीर से जुड़े अनुरोध')}</h2>
+        <p>{t('To ask about an enquiry, correct information or request removal of a photograph or film, call the school office. For an image, give the page address and describe where it appears so staff can find it.', 'अपनी पूछताछ के बारे में जानने, कोई जानकारी सुधरवाने या तस्वीर अथवा फ़िल्म हटाने का अनुरोध करने के लिए कार्यालय में फ़ोन करें। तस्वीर किस पेज पर और कहाँ दिखती है, यह बताएँ ताकि कर्मचारी उसे पहचान सकें।')}</p>
+        <a class="inside-link" href={'tel:' + site.phone}>{t('Call the office', 'कार्यालय में फ़ोन करें')} <span dir="ltr">{site.phoneDisplay}</span></a>
+      </section>
+    </div>
+  </div>
+)}
 
-{slug === 'privacy' && <section class="section inside-section"><div class="wrap narrow prose privacy-copy">
-  <h2 id="your-details">{t('The information we ask for', 'हम कौन-सी जानकारी माँगते हैं')}</h2><p>{t('An admission enquiry happens on the school’s WhatsApp. The chat asks an adult to agree to a call back and to choose the class they are interested in. The enquiry records only that class and the WhatsApp number it came from, so the office can call back. Please do not send a child’s full name, date of birth, marks, identity documents, passwords or payment details.', 'प्रवेश की पूछताछ स्कूल के WhatsApp पर होती है। चैट में किसी वयस्क से फ़ोन पर संपर्क की सहमति और इच्छित कक्षा पूछी जाती है। पूछताछ में केवल वह कक्षा और जिस WhatsApp नंबर से संदेश आया, वह नंबर दर्ज होता है, ताकि कार्यालय फ़ोन कर सके। बच्चे का पूरा नाम, जन्मतिथि, अंक, पहचान के दस्तावेज़, पासवर्ड या भुगतान विवरण न भेजें।')}</p>
-  <h2 id="providers">{t('When you message the school on WhatsApp', 'जब आप स्कूल को WhatsApp पर संदेश भेजते हैं')}</h2><p>{t('“Enquire on WhatsApp” opens WhatsApp with a short message already written. Nothing is sent until you send it. Messages to the school’s WhatsApp number travel through WhatsApp, under WhatsApp’s own privacy terms, and school staff can read them in the school’s WhatsApp inbox. This website does not collect enquiry details itself.', '“WhatsApp पर पूछताछ करें” दबाने पर WhatsApp एक छोटे, पहले से लिखे संदेश के साथ खुलता है। जब तक आप उसे भेजते नहीं, कुछ नहीं जाता। स्कूल के WhatsApp नंबर पर भेजे गए संदेश WhatsApp की अपनी गोपनीयता शर्तों के तहत WhatsApp से होकर जाते हैं, और स्कूल के कर्मचारी उन्हें स्कूल के WhatsApp इनबॉक्स में पढ़ सकते हैं। यह वेबसाइट स्वयं पूछताछ का विवरण नहीं लेती।')}</p><p><a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">{t('Read WhatsApp’s privacy policy', 'WhatsApp की गोपनीयता नीति पढ़ें')} →</a></p>
-  <h2>{t('Links to other services', 'दूसरी सेवाओं के लिंक')}</h2><p>{t('Opening directions takes you to Google Maps. It does not load on this site before you choose the link.', 'रास्ता देखने का लिंक Google Maps पर ले जाता है। आपके लिंक चुनने से पहले मानचित्र इस वेबसाइट पर लोड नहीं होता।')}</p>
-  <h2>{t('The budget planner', 'बजट कैलकुलेटर')}</h2><p>{t('Budget calculations happen in your browser using only the amounts you enter. The planner does not send those figures to the school or save them in browser storage. Printing uses your device’s print dialog.', 'बजट की गणना आपके ब्राउज़र में केवल आपकी लिखी राशियों से होती है। कैलकुलेटर राशियाँ विद्यालय को नहीं भेजता और ब्राउज़र स्टोरेज में नहीं सहेजता। प्रिंट करने पर आपके डिवाइस का प्रिंट संवाद खुलता है।')}</p>
-  <h2>{t('Website storage and technical services', 'वेबसाइट स्टोरेज और तकनीकी सेवाएँ')}</h2><p>{t('This website does not ask for personal details or save them in browser storage. Hosting and service providers may process technical request information needed to deliver and protect the website. Browser caching may retain public website files.', 'यह वेबसाइट निजी विवरण नहीं माँगती और उन्हें ब्राउज़र स्टोरेज में नहीं सहेजती। होस्टिंग और अन्य सेवा प्रदाता वेबसाइट चलाने और सुरक्षित रखने के लिए तकनीकी अनुरोध की जानकारी संसाधित कर सकते हैं। ब्राउज़र कैश में वेबसाइट की सार्वजनिक फ़ाइलें रह सकती हैं।')}</p>
-  {measurementReady ? <p>{t('Advertising measurement is optional and off unless a visitor aged 18 or older chooses to allow it. You can change this choice at any time.', 'विज्ञापन मापन वैकल्पिक है। यह तब तक बंद रहता है, जब तक 18 साल या उससे अधिक उम्र का आगंतुक इसकी अनुमति न दे। आप यह पसंद किसी भी समय बदल सकते हैं।')} <a href="#measurement">{t('Advertising measurement choices','विज्ञापन मापन की पसंद')}</a></p> : <p>{t('Advertising measurement is not enabled on this website.', 'इस वेबसाइट पर विज्ञापन मापन चालू नहीं है।')}</p>}
-  <h2>{t('Photographs and video', 'तस्वीरें और वीडियो')}</h2><p>{t('School photographs and videos appear across this website. If you have a concern about an image, contact the office with the page address and a description so the school can review it. Do not send identity documents in an enquiry.', 'इस वेबसाइट पर विद्यालय की तस्वीरें और वीडियो दिखाए गए हैं। किसी तस्वीर को लेकर चिंता हो तो पेज का पता और विवरण देकर कार्यालय से संपर्क करें, ताकि विद्यालय उसकी समीक्षा कर सके। पूछताछ में पहचान के दस्तावेज़ न भेजें।')}</p>
-  <h2 id="your-choices">{t('Questions, corrections or removal requests', 'सवाल, सुधार या हटाने का अनुरोध')}</h2><p>{t('Contact the school office to ask about information you have submitted, request a correction or raise a removal concern. The office can explain how your enquiry is handled and retained. This page does not promise a specific retention period or response time.', 'भेजी गई जानकारी के बारे में पूछने, सुधार करवाने या हटाने की चिंता बताने के लिए विद्यालय कार्यालय से संपर्क करें। कार्यालय आपकी पूछताछ को सँभालने और रखने के बारे में बताएगा। यह पेज जानकारी रखने की निश्चित अवधि या जवाब के समय का वादा नहीं करता।')}</p><a class="button button-primary" href={`tel:${site.phone}`}>{t('Call the school office', 'विद्यालय कार्यालय में फोन करें')} · {site.phoneDisplay}</a>
-</div></section>}
-
-{slug === 'news' && <section class="section inside-section" id="archive"><div class="wrap"><article class="archive-card"><div class="archive-date"><span>{t('Archive', 'संग्रह')}</span><time datetime="2025-01-15">{t('15 January 2025', '15 जनवरी 2025')}</time></div><div><h2>{t('Annual Sports Day Celebration 2025', 'वार्षिक खेल दिवस समारोह 2025')}</h2><p class="lead">{t('From the school archive: track and field events, a march past and an award ceremony brought students, parents and guests together.', 'विद्यालय के संग्रह से: दौड़ और मैदानी खेल, मार्च पास्ट और पुरस्कार समारोह में विद्यार्थी, अभिभावक व अतिथि साथ आए।')}</p><a class="text-link" href={`/news/2025-01-15-sports-day-${lang}/`}>{t('Read the archived story', 'संग्रह की पूरी कहानी पढ़ें')} →</a></div></article><div class="question-followup"><h2>{t('Looking for a current notice?', 'वर्तमान सूचना चाहिए?')}</h2><p>{t('Please confirm current dates, school notices and arrangements with the office. An archived article is not a current announcement.', 'वर्तमान तारीखों, विद्यालय की सूचनाओं और व्यवस्थाओं की पुष्टि कार्यालय से करें। संग्रह का लेख वर्तमान घोषणा नहीं है।')}</p><a class="button button-outline" href={pathFor(lang, 'contact')}>{t('Contact the school', 'विद्यालय से संपर्क करें')} →</a></div></div></section>}
-
-{['about','academics','digital'].includes(slug) && <section class="section inside-section"><div class="wrap inside-callout"><div><span class="eyebrow">{t('Your next step', 'आपका अगला कदम')}</span><h2>{t('A school is best understood in person.', 'विद्यालय को आकर बेहतर जान सकते हैं।')}</h2><p>{t('Ask a question, discuss a class or request a campus visit.', 'सवाल पूछें, कक्षा की जानकारी लें या परिसर देखने का समय माँगें।')}</p></div><a class="button button-primary" href={pathFor(lang,'contact')+'#visit'}>{t('Plan a campus visit', 'स्कूल आने की योजना')} →</a></div></section>}
-<style>
-  .story-grid { align-items: center; }
-  .school-facts { padding: clamp(1.5rem, 4vw, 3rem); }
-  .school-facts dl { margin: 1rem 0 0; }
-  .school-facts dl>div { border-top: 1px solid #dce3ed; padding: 1rem 0; }
-  .school-facts dt { color: #5b697c; font-size: .82rem; }
-  .school-facts dd { margin: .35rem 0 0; font-weight: 700; }
-  figure { margin: 0; }
-  figcaption { padding-top: .85rem; color: #53637a; font-size: .9rem; }
-  .team-photo { border-radius: 1.2rem; overflow: hidden; }
-  .team-photo figcaption { padding: .9rem 1rem; background: white; }
-  .team-photo :global(img) { aspect-ratio: 1.9; object-position: center 60%; }
-  .campus-cards :global(img) { aspect-ratio: 1.35; }
-  .stage-toc { margin-bottom: 1.5rem; }
-  .stage-row, .privacy-copy h2 { scroll-margin-top: 6rem; }
-  .stage-list { display: grid; gap: 1.5rem; }
-  .stage-row { display: grid; gap: 1.5rem; border-top: 1px solid #dce3ed; padding-top: 1.5rem; }
-  .stage-row h3 { font-size: clamp(1.4rem, 3vw, 2rem); margin: .5rem 0; }
-  .stage-index { display: none; }
-  .stage-photo :global(img) { aspect-ratio: 1.5; }
-  .activity-grid { display: grid; gap: 2.8rem; }
-  .activity-card { min-width: 0; }
-  .activity-card :global(img) { aspect-ratio: 1.6; }
-  .activity-copy { padding: 1.6rem .2rem 0; }
-  .activity-copy a,.stage-row a { display:inline-flex; align-items:center; min-height:44px; margin-top:.35rem; }
-  .activity-copy h2 { font-size: clamp(1.65rem, 3vw, 2.3rem); }
-  .step-number { display: block; font-weight: 700; color: #2455c4; margin-bottom: 1.5rem; }
-  .contact-options { align-items: stretch; }
-  .contact-options h3 { font-size:1.45rem; }
-  .contact-options article { display:flex; flex-direction:column; align-items:flex-start; gap:.8rem; }
-  .contact-options article .eyebrow { margin:0; color:#244879; }
-  .contact-options article :is(.button,.contact-number) { margin-top:auto; min-height:44px; display:inline-flex; align-items:center; }
-  .contact-options p { font-size: .95rem; }
-  .contact-number { display: inline-block; color: #1c409a; font-size: clamp(1.1rem, 2.1vw, 1.5rem); font-weight: 750; white-space: nowrap; }
-  address { font-style: normal; font-size: 1.12rem; line-height: 1.9; margin: 1.5rem 0; }
-  .narrow { max-width: 850px; }
-  .question-followup { margin-top: 3.5rem; padding: 2rem 0; border-top: 1px solid #dce3ed; }
-  .question-followup h2 { font-size: 1.75rem; }
-  .privacy-copy h2 { margin-top: 2.5rem; font-size: 1.5rem; }
-  .privacy-copy h2:first-child { margin-top: 0; }
-  .privacy-copy .button-primary { color: #fff; background:#142c52; text-decoration:none; margin-top:1.2rem; }
-  .privacy-copy .button-primary:hover { color:#fff; background:#244879; }
-  .archive-card { display: grid; gap: 1.5rem; padding-bottom: 2rem; }
-  .archive-date { display: flex; flex-direction: column; gap: 1rem; color: #53637a; }
-  .archive-date span { text-transform: uppercase; font-size: .76rem; letter-spacing: .12em; font-weight: 750; color: #2455c4; }
-  @media(min-width: 700px) { .activity-grid { grid-template-columns: 1fr 1fr; gap: 3.5rem 2.5rem; } .stage-row { grid-template-columns: 220px 1fr; align-items: center; gap: 2.2rem; } .archive-card { grid-template-columns: 180px 1fr; gap: 3rem; } }
-  @media(min-width: 1100px) { .stage-row { grid-template-columns: 270px 1fr 90px; gap: 3rem; } .stage-index { display: block; align-self: start; font-size: 3rem; font-weight: 300; color: #64738a; text-align: right; } }
-</style>
+{slug === 'news' && (
+  <section class="inside-section" id="archive" aria-labelledby="archive-title">
+    <div class="wrap">
+      <h2 id="archive-title" class="sr-only">{t('Dated school updates', 'तारीख के अनुसार विद्यालय समाचार')}</h2>
+      <div class="inside-archive">
+        <article>
+          <time datetime="2026-11-14">{t('14 November 2026', '14 नवंबर 2026')}</time>
+          <div>
+            <h3>{t('Children’s Day', 'बाल दिवस')}</h3>
+            <p>{t('The school shared a Children’s Day greeting on its official Instagram account.', 'विद्यालय ने अपने आधिकारिक Instagram खाते पर बाल दिवस की शुभकामनाएँ साझा कीं।')}</p>
+            <a class="inside-link" href="https://www.instagram.com/reel/DftkPI1lKot/" target="_blank" rel="noopener noreferrer">{t('View the school’s greeting on Instagram', 'Instagram पर विद्यालय का संदेश देखें')}<span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+          </div>
+        </article>
+        <article>
+          <time datetime="2025-02-10">{t('10 February 2025', '10 फ़रवरी 2025')}</time>
+          <div>
+            <h3>{t('Sports Day at Veer Patta', 'वीर पत्ता का खेल दिवस')}</h3>
+            <p>{t('The Sports Day programme paired morning athletics with afternoon matches. Relays, sack races and tug of war were on the schedule.', 'खेल दिवस के कार्यक्रम में सुबह एथलेटिक्स और दोपहर बाद मैचों का समय था। रिले, बोरी दौड़ और रस्साकशी भी कार्यक्रम में शामिल थीं।')}</p>
+            <a class="inside-link" href={'/news/2025-01-15-sports-day-' + lang + '/'}>{t('Read the Sports Day report', 'खेल दिवस की रिपोर्ट पढ़ें')}<span aria-hidden="true"><Arrow/></span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+)}

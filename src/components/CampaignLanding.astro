@@ -1,30 +1,117 @@
 ---
-import {pick,pathFor,site,admissionWhatsApp,type Lang} from '../data/site';
+import Arrow from './Arrow.astro';
+import { admissionClassGroups } from '../data/admission-classes';
+import { admissionWhatsApp, pathFor, pick, site, type Lang } from '../data/site';
+import AdmissionClassLink from './AdmissionClassLink.astro';
 import Photo from './Photo.astro';
 import WhatsAppEnquiry from './WhatsAppEnquiry.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
-interface Props {lang:Lang;stage:'pre-primary'|'class-11'}
-const {lang,stage}=Astro.props;
-const t=(en:string,hi:string)=>pick(lang,en,hi), young=stage==='pre-primary';
-const segment=young?t('Nursery & KG','नर्सरी और केजी'):t('Class 11','कक्षा 11');
-const points=young?[
- {q:t('Which class fits my child?', 'मेरे बच्चे के लिए कौन-सी कक्षा सही है?'),a:t('Ask the office about entry age, eligibility and class availability before applying.', 'आवेदन से पहले उम्र की शर्त, पात्रता और जगह की जानकारी कार्यालय से लें।')},
- {q:t('What does the school day look like?', 'बच्चे का दिन कैसे बीतेगा?'),a:t('On a visit, see the activity room and ask about the daily routine, drop-off, pickup and what to bring.', 'गतिविधि कक्ष देखें। रोज़ की दिनचर्या, आने-जाने का समय और साथ लाने वाली चीज़ों के बारे में पूछें।')},
- {q:t('What will we need to budget for?', 'फ़ीस के अलावा कौन-से खर्च पूछें?'),a:t('Ask for the current class-wise fees, and check books, uniform and transport separately.', 'संबंधित कक्षा की मौजूदा फ़ीस पूछें। किताबें, वर्दी और परिवहन के खर्च अलग से समझें।')}
-]:[
- {q:t('Which streams can we discuss?', 'कौन-से संकायों पर बात कर सकते हैं?'),a:t('Science, Commerce and Arts. Check individual subject combinations and their availability with the office.', 'विज्ञान, वाणिज्य और कला। हर संकाय में कौन-से विषय साथ ले सकते हैं, इसकी पुष्टि कार्यालय से करें।')},
- {q:t('What do I need after Class 10?', 'दसवीं के बाद क्या तैयार रखें?'),a:t('Ask about eligibility and the current document checklist. This website does not ask for marksheets or identity documents.', 'पात्रता और ज़रूरी दस्तावेज़ों की वर्तमान सूची पूछें। इस वेबसाइट पर अंकतालिका या पहचान-पत्र न भेजें।')},
- {q:t('How do we compare options?', 'संकाय चुनने से पहले क्या जानें?'),a:t('Bring the subjects you enjoy to the conversation. Confirm the timetable, fees and subject availability before deciding.', 'अपनी रुचि के विषय लिखकर लाएँ। चुनने से पहले समय-सारणी, फ़ीस और विषयों की उपलब्धता पक्की करें।')}
+
+interface Props { lang: Lang; stage: 'pre-primary' | 'class-11' }
+const { lang, stage } = Astro.props;
+const t = (en: string, hi: string) => pick(lang, en, hi);
+const earlyYears = stage === 'pre-primary';
+const segment = earlyYears ? t('Nursery & KG', 'नर्सरी और केजी') : t('Class 11', 'कक्षा 11');
+const questions = earlyYears ? [
+  {
+    question: t('Which class should we ask about?', 'किस कक्षा के बारे में पूछें?'),
+    answer: t('The school has Nursery, Junior KG and Senior KG. Ask the office about entry age, eligibility and current availability for the class you are considering.', 'स्कूल में नर्सरी, जूनियर केजी और सीनियर केजी हैं। जिस कक्षा पर आप विचार कर रहे हैं, उसके लिए प्रवेश की उम्र, पात्रता और उपलब्ध जगह की जानकारी कार्यालय से लें।'),
+  },
+  {
+    question: t('What can we ask on a visit?', 'स्कूल आने पर क्या पूछ सकते हैं?'),
+    answer: t('Ask to see the activity room. Discuss the daily routine, when to drop off and collect your child, and what to bring on a school day.', 'गतिविधि कक्ष देखने के लिए कहें। दिनचर्या, बच्चे को छोड़ने और लेने के समय और स्कूल के दिन साथ लाने वाली चीज़ों के बारे में पूछें।'),
+  },
+  {
+    question: t('Which costs should we check?', 'किन खर्चों की जानकारी लें?'),
+    answer: t('Request the current written fee details for the class. Ask about admission, books, uniform and transport as well as tuition.', 'कक्षा की मौजूदा फ़ीस का लिखित विवरण माँगें। पढ़ाई के साथ प्रवेश, किताबों, वर्दी और परिवहन के खर्च भी पूछें।'),
+  },
+] : [
+  {
+    question: t('Which streams can we consider?', 'किन संकायों के विकल्प हैं?'),
+    answer: t('Speak with the office about Science, Commerce and Arts. Check which subjects can be taken together and whether those combinations are available.', 'कार्यालय से विज्ञान, वाणिज्य और कला संकायों पर बात करें। पूछें कि किन विषयों को एक साथ ले सकते हैं और वे विकल्प अभी उपलब्ध हैं या नहीं।'),
+  },
+  {
+    question: t('Which documents will we need?', 'किन दस्तावेज़ों की ज़रूरत होगी?'),
+    answer: t('Ask for the current eligibility and document checklist after Class 10. Keep marksheets and identity documents for the process the office explains to you.', 'कक्षा 10 के बाद प्रवेश की पात्रता और दस्तावेज़ों की मौजूदा सूची पूछें। अंकतालिका और पहचान-पत्र कार्यालय की बताई प्रक्रिया के लिए रखें।'),
+  },
+  {
+    question: t('How do we compare subject choices?', 'विषय चुनने से पहले क्या जानें?'),
+    answer: t('Write down the subjects you enjoy and any options you want to keep open. Ask the office about subject combinations, the timetable and fees before you decide.', 'अपनी पसंद के विषय और आगे की पढ़ाई के विकल्प लिख लें। फ़ैसले से पहले कार्यालय से विषयों के मेल, समय-सारणी और फ़ीस के बारे में पूछें।'),
+  },
 ];
 ---
-<section class:list={['camp-hero',young?'camp-young':'camp-senior']} aria-labelledby="camp-title"><div class="wrap camp-grid">
- <div class="camp-copy"><nav class="camp-crumb" aria-label={t('Breadcrumb','पृष्ठ का मार्ग')}><a href={pathFor(lang,'admissions')}>{t('Admissions','प्रवेश')}</a><span aria-hidden="true">/</span><span>{segment}</span></nav>
-  <p class="camp-kicker"><span class="camp-line" aria-hidden="true"></span>{segment} <span aria-hidden="true">·</span> {t('Amet','आमेट')}</p>
-  <h1 id="camp-title" class="camp-heading">{young?t('Their first school,','पहला स्कूल,'):t('After Class 10,','दसवीं के बाद,')}<br/><em>{young?t('a closer look.','ज़रा पास से।'):t('which direction?','कौन-सी राह?')}</em></h1>
-  <p class="camp-intro">{young?t('See the room, ask about the school day and decide what feels right for your family. Start with a question or a visit to Veer Patta.', 'वीर पट्टा का गतिविधि कक्ष देखें। बच्चे की दिनचर्या, उपयुक्त कक्षा और स्कूल आने के समय पर हमसे बात करें।'):t('Explore Science, Commerce and Arts at Veer Patta. Check subjects, eligibility and fees directly with the school before choosing.', 'वीर पट्टा में विज्ञान, वाणिज्य और कला के विकल्प जानें। विषय, पात्रता और फ़ीस की पुष्टि करके अपनी राह चुनें।')}</p>
-  <div class="camp-buttons"><a class="button button-whatsapp" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer" data-whatsapp-enquiry><WhatsAppIcon />{t('Enquire on WhatsApp','WhatsApp पर पूछताछ करें')}</a><a class="camp-call" href={`tel:${site.phone}`}>{t('Call the school','स्कूल में फ़ोन करें')}</a></div>
- </div><figure class="camp-print"><div><Photo id={young?'early-years-track':'circulatory-model'} lang={lang} eager modern sizes="(min-width:860px) 43vw, 91vw"/></div><figcaption><b aria-hidden="true">{young?'01':'02'}</b><span>{young?t('Sports Day track games at Veer Patta, Amet','वीर पट्टा, आमेट के खेल दिवस पर ट्रैक खेल'):t('A heart and lungs model at Veer Patta, Amet','वीर पट्टा, आमेट की प्रदर्शनी में हृदय और फेफड़ों का मॉडल')}</span></figcaption></figure>
-</div></section>
-<section class="camp-brief"><div class="wrap camp-brief-grid"><header><p class="camp-kicker">{t('Before you decide','फ़ैसले से पहले')}</p><h2>{young?t('Three questions for a first visit.','पहली मुलाक़ात के तीन सवाल।'):t('Start your subject conversation.','विषय चुनने की तैयारी।')}</h2></header><div class="camp-questions">{points.map((item,i)=><details open={i===0}><summary><span class="camp-q-num" aria-hidden="true">0{i+1}</span>{item.q}<span class="camp-plus" aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></div></section>
-<section class="camp-enquiry" id="enquiry" aria-labelledby="enquiry-heading"><WhatsAppEnquiry lang={lang} /></section>
-<nav class="camp-exit" aria-label={t('More admissions options','प्रवेश के अन्य विकल्प')}><div class="wrap"><a href={pathFor(lang,'admissions')}>{t('All classes and fee planner','सभी कक्षाएँ और खर्च का अनुमान')}</a><a href={pathFor(lang,'contact')+'#visit'}>{t('Directions and visit guide','रास्ता और स्कूल आने की जानकारी')}</a><a href={pathFor(lang,young?'admissions/class-11':'admissions/pre-primary')}>{young?t('Looking for Class 11?','कक्षा 11 की जानकारी चाहिए?'):t('Looking for Nursery or KG?','नर्सरी या केजी की जानकारी चाहिए?')}</a></div></nav>
+
+<header class:list={['stage-cover', { 'stage-senior': !earlyYears }]}>
+  <div class="wrap stage-cover-layout">
+    <div>
+      <nav class="stage-crumb" aria-label={t('Breadcrumb', 'पृष्ठ का मार्ग')}>
+        <a href={pathFor(lang, 'admissions')}>{t('Admissions', 'प्रवेश')}</a><span aria-hidden="true">/</span><span>{segment}</span>
+      </nav>
+      <h1>{earlyYears ? t('Nursery & KG admissions', 'नर्सरी और केजी में प्रवेश') : t('Class 11 admissions', 'कक्षा 11 में प्रवेश')}</h1>
+      <p class="stage-intro">{earlyYears ? t('Before choosing a first school, families can visit the activity room and ask about entry age, daily routines and fees.', 'बच्चे का पहला स्कूल चुनने से पहले आप गतिविधि कक्ष देख सकते हैं और प्रवेश की उम्र, दिनचर्या और फ़ीस के बारे में पूछ सकते हैं।') : t('Discuss Science, Commerce and Arts with the school office. Check the subject combinations, eligibility and costs before choosing your stream.', 'विज्ञान, वाणिज्य और कला के विकल्पों पर स्कूल कार्यालय से बात करें। अपना संकाय चुनने से पहले विषयों के मेल, पात्रता और खर्च की जानकारी लें।')}</p>
+      {earlyYears && <p class="choose-label"><WhatsAppIcon size={18} />{t('Choose a class to open a WhatsApp draft', 'WhatsApp संदेश खोलने के लिए कक्षा चुनें')}</p>}
+      <div class="stage-actions">
+        {earlyYears ? admissionClassGroups[0].classes.map(grade => <AdmissionClassLink lang={lang} grade={grade} />) : (
+          <a class="button button-whatsapp" href={admissionWhatsApp(lang, 'Class 11')} target="_blank" rel="noopener noreferrer"
+            data-whatsapp-enquiry data-admission-class="Class 11"><WhatsAppIcon />{t('Ask about Class 11 on WhatsApp', 'WhatsApp पर कक्षा 11 के बारे में पूछें')}</a>
+        )}
+        <a class="stage-phone" href={`tel:${site.phone}`}>{t('Call the office', 'कार्यालय को फ़ोन करें')}</a>
+      </div>
+    </div>
+    <figure class="stage-photo">
+      <Photo id={earlyYears ? 'first-school-room' : 'science-bench'} lang={lang} eager modern sizes="(min-width: 800px) 42vw, 94vw" />
+      <figcaption>{earlyYears ? t('The early-years activity room, Amet', 'छोटी कक्षाओं का गतिविधि कक्ष, आमेट') : t('Inside the school science laboratory, Amet', 'विद्यालय की विज्ञान प्रयोगशाला, आमेट')}</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="stage-block" aria-labelledby="stage-questions">
+  <div class="wrap stage-details-layout">
+    <h2 id="stage-questions">{earlyYears ? t('Before your first visit', 'पहली मुलाक़ात से पहले') : t('Choosing your subjects', 'विषय चुनने से पहले')}</h2>
+    <div class="faq-list stage-questions">
+      {questions.map((item, index) => <details open={index === 0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+    </div>
+  </div>
+</section>
+
+<section class="stage-block stage-tint" id="enquiry" aria-labelledby="enquiry-heading">
+  <WhatsAppEnquiry lang={lang} grade={earlyYears ? undefined : 'Class 11'} />
+</section>
+<nav class="stage-links" aria-label={t('More admissions information', 'प्रवेश से जुड़ी अन्य जानकारी')}>
+  <div class="wrap">
+    <a href={pathFor(lang, 'admissions') + '#classes'}>{t('All classes', 'सभी कक्षाएँ')} <span aria-hidden="true"><Arrow/></span></a>
+    <a href={pathFor(lang, 'admissions') + '#budget'}>{t('School budget planner', 'स्कूल के खर्च का अनुमान')} <span aria-hidden="true"><Arrow/></span></a>
+    <a href={pathFor(lang, 'contact') + '#visit'}>{t('Directions and visits', 'रास्ता और मुलाक़ात')} <span aria-hidden="true"><Arrow/></span></a>
+  </div>
+</nav>
+
+<style>
+  .stage-cover { background: var(--cream, #f3ecdf); }
+  .stage-senior { background: #e9eeec; }
+  .stage-cover-layout { display: grid; align-items: center; gap: 1.25rem 5vw; padding-block: clamp(1.35rem, 4.8vw, 4.4rem); }
+  .stage-crumb, .choose-label { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; }
+  .stage-crumb { font-size: .87rem; margin-bottom: .85rem; }
+  .stage-crumb a, .stage-phone { text-decoration: underline; text-underline-offset: .2em; }
+  .stage-cover h1 { font-size: clamp(2.65rem, 5.8vw, 5.2rem); max-width: 14ch; }
+  .stage-intro { max-width: 47ch; margin-top: .9rem; font-size: 1.03rem; }
+  .choose-label { margin-top: 1rem; font-weight: 650; font-size: .9rem; }
+  .stage-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; margin-top: .75rem; }
+  .stage-phone { display: inline-flex; align-items: center; min-height: 44px; font-weight: 650; }
+  .stage-photo { min-width: 0; border-bottom: 1px solid #b7ab98; }
+  .stage-photo :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 2; object-fit: cover; border-radius: .25rem; }
+  .stage-photo figcaption { padding-block: .45rem; font-size: .8rem; }
+  .stage-block { padding-block: clamp(2.45rem, 5.8vw, 5.4rem); }
+  .stage-details-layout { display: grid; gap: 1.25rem 5vw; align-items: start; }
+  .stage-details-layout h2 { max-width: 16ch; }
+  .stage-questions { border-top: 2px solid var(--ink, #172e40); }
+  .stage-tint { background: var(--cream, #f3ecdf); }
+  .stage-links { border-block: 1px solid var(--line, #d8cec0); }
+  .stage-links > div { display: flex; flex-wrap: wrap; gap: .25rem 2rem; padding-block: .75rem; }
+  .stage-links a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; color: var(--maroon, #762f39); font-weight: 650; }
+  .stage-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
+  @media (min-width: 800px) {
+    .stage-cover-layout { grid-template-columns: 1fr 1fr; }
+    .stage-photo :global(img) { aspect-ratio: 1.5; }
+    .stage-details-layout { grid-template-columns: minmax(0, .85fr) minmax(0, 1.4fr); }
+  }
+</style>

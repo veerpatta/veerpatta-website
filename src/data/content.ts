@@ -1,79 +1,196 @@
 import type { Lang, PageSlug } from './site';
 
 type Bilingual = Record<Lang, string>;
-export type PageContent = { kicker: Bilingual; title: Bilingual; description: Bilingual; image: string };
+const copy = (en: string, hi: string): Bilingual => ({ en, hi });
+
+export interface PageContent {
+  kicker: Bilingual;
+  title: Bilingual;
+  description: Bilingual;
+  image?: string;
+  caption?: Bilingual;
+}
+
 export const pageContent: Record<PageSlug, PageContent> = {
   about: {
-    kicker: { en: 'Rooted in Amet', hi: 'आमेट से जुड़ा विद्यालय' },
-    title: { en: 'Meet Veerpatta School', hi: 'वीरपट्टा स्कूल को जानें' },
-    description: { en: 'Meet the teaching team and see the classrooms, courtyards and grounds at our school in Amet.', hi: 'आमेट में हमारे स्कूल के शिक्षकों, कक्षाओं, प्रांगण और मैदान की झलक देखें।' },
+    kicker: copy('Our school', 'हमारा विद्यालय'),
+    title: copy('Our school in Amet', 'आमेट में हमारा विद्यालय'),
+    description: copy(
+      'Opposite Mela Ground, the front steps lead into Shri Veer Patta Senior Secondary School. Children study here from Nursery through Class 12.',
+      'मेला ग्राउंड के सामने, मुख्य सीढ़ियों से श्री वीर पत्ता सीनियर सेकेंडरी स्कूल का परिसर शुरू होता है। यहाँ नर्सरी से कक्षा 12 तक पढ़ाई होती है।'
+    ),
     image: 'campus-approach',
+    caption: copy('The approach to the main entrance, Amet', 'मुख्य भवन की ओर जाती सीढ़ियाँ, आमेट'),
   },
   academics: {
-    kicker: { en: 'Nursery to Class 12 · RBSE', hi: 'नर्सरी से कक्षा 12 · आरबीएसई' },
-    title: { en: 'Learning from Nursery to Class 12', hi: 'नर्सरी से कक्षा 12 तक की पढ़ाई' },
-    description: { en: 'Explore the school stages, see our learning spaces and discuss the right class or stream with the school.', hi: 'कक्षाओं और पढ़ाई की जगहों को जानें। सही कक्षा या संकाय के लिए विद्यालय से बात करें।' },
-    image: 'place-value-blocks',
+    kicker: copy('Learning', 'पढ़ाई'),
+    title: copy('Learning by doing', 'करके सीखना'),
+    description: copy(
+      'Move the hands of an angle wheel. Build a model of the heart and lungs. At the school exhibition, pupils use things they have made to explain what they have learned.',
+      'कोण-चक्र की भुजाएँ घुमाकर कोण नापना या हृदय और फेफड़ों का मॉडल बनाना। विद्यालय की प्रदर्शनी में बच्चे अपनी बनाई चीज़ों से समझाते हैं कि उन्होंने क्या सीखा।'
+    ),
+    image: 'angles-board',
+    caption: copy('An angle wheel at the school exhibition', 'विद्यालय की प्रदर्शनी में कोण मापने का चक्र'),
   },
   admissions: {
-    kicker: { en: 'For your family’s next step', hi: 'आपके परिवार का अगला कदम' },
-    title: { en: 'Start with a conversation.', hi: 'शुरुआत एक बातचीत से करें।' },
-    description: { en: 'Ask about a class, understand the costs and arrange a campus visit with the school office. An enquiry is not an admission or a seat reservation.', hi: 'कक्षा और शुल्क की जानकारी लें और विद्यालय कार्यालय से परिसर भ्रमण के लिए बात करें। पूछताछ से प्रवेश या सीट आरक्षित नहीं होती।' },
-    image: 'campus-front',
+    kicker: copy('Admissions', 'प्रवेश'),
+    title: copy('Enquire about a class', 'कक्षा के बारे में पूछें'),
+    description: copy(
+      'Choose a class from Nursery to Class 12, ask the office about fees or arrange a school visit in Amet.',
+      'नर्सरी से कक्षा 12 तक अपनी कक्षा चुनें। शुल्क की जानकारी और आमेट में विद्यालय देखने का समय कार्यालय से लें।'
+    ),
   },
   beyond: {
-    kicker: { en: 'Beyond the classroom', hi: 'कक्षा से आगे' },
-    title: { en: 'School life beyond lessons', hi: 'पढ़ाई के साथ खेल और गतिविधियाँ' },
-    description: { en: 'Sport, performance, exhibitions and shared experiences, captured in real moments from our school.', hi: 'खेल, मंच, प्रदर्शनी और साथ बिताए अनुभव, हमारे विद्यालय की असली तस्वीरों में।' },
-    image: 'sprint-start',
+    kicker: copy('School life', 'विद्यालय जीवन'),
+    title: copy('On the field and on stage', 'मैदान से मंच तक'),
+    description: copy(
+      'A team race on the school grounds, an inter-house dance on the lawn and NCC cadets in parade uniform feature in the Veer Patta archive.',
+      'वीर पत्ता के संग्रह में मैदान पर टीम रेस, लॉन पर अंतर-सदनीय नृत्य और परेड की वर्दी में एनसीसी कैडेटों की झलक मिलती है।'
+    ),
+    image: 'basketball-court',
+    caption: copy('The basketball court beside the school building', 'विद्यालय भवन के पास बास्केटबॉल का मैदान'),
   },
   digital: {
-    kicker: { en: 'A clear path for parents', hi: 'अभिभावकों के लिए सरल जानकारी' },
-    title: { en: 'School links & digital learning', hi: 'स्कूल के लिंक और कंप्यूटर की पढ़ाई' },
-    description: { en: 'See our computer learning spaces and find out how to get the right school updates and online access.', hi: 'कंप्यूटर कक्ष देखें और विद्यालय की सही ऑनलाइन जानकारी व सेवाओं तक पहुँचने का तरीका जानें।' },
-    image: 'tablet-quiz',
+    kicker: copy('Digital campus', 'डिजिटल परिसर'),
+    title: copy('School links for families', 'अभिभावकों के लिए स्कूल के लिंक'),
+    description: copy(
+      'Find out where to get class notices, help with a parent login and the school’s current payment instructions.',
+      'कक्षा की सूचनाएँ कहाँ मिलेंगी, अभिभावक लॉगिन में सहायता कैसे लें और शुल्क कैसे जमा करें, इसकी जानकारी यहाँ है।'
+    ),
   },
   contact: {
-    kicker: { en: 'Let’s talk', hi: 'आइए, बात करें' },
-    title: { en: 'Contact & visit the school', hi: 'स्कूल से संपर्क और मुलाक़ात' },
-    description: { en: 'Speak with the school office, get directions to our campus or send an admission enquiry.', hi: 'स्कूल कार्यालय में फोन करें, परिसर का रास्ता देखें या प्रवेश की पूछताछ भेजें।' },
-    image: '',
+    kicker: copy('Visit & contact', 'संपर्क और मुलाक़ात'),
+    title: copy('Visit us in Amet', 'आमेट में हमसे मिलें'),
+    description: copy(
+      'Find us opposite Mela Ground. Call the school office to agree on a time to visit, or message us on WhatsApp about admission.',
+      'हमारा विद्यालय मेला ग्राउंड के सामने है। आने का समय कार्यालय में फ़ोन करके तय करें। प्रवेश की जानकारी WhatsApp पर भी ले सकते हैं।'
+    ),
   },
   faq: {
-    kicker: { en: 'Useful answers', hi: 'काम की जानकारी' },
-    title: { en: 'Answers for parents', hi: 'अभिभावकों के सवालों के जवाब' },
-    description: { en: 'A starting point for your questions about classes, admissions, fees and visiting the school.', hi: 'कक्षाओं, प्रवेश, शुल्क और विद्यालय आने से जुड़े सवालों के शुरुआती जवाब।' },
-    image: '',
+    kicker: copy('Parent questions', 'अभिभावकों के सवाल'),
+    title: copy('Questions families ask', 'अभिभावक अक्सर पूछते हैं'),
+    description: copy(
+      'Answers about admission, school fees, classes and the things to check before visiting the campus.',
+      'प्रवेश, शुल्क, कक्षाओं और विद्यालय आने से पहले ध्यान रखने वाली बातों के जवाब।'
+    ),
   },
   privacy: {
-    kicker: { en: 'Your information', hi: 'आपकी जानकारी' },
-    title: { en: 'Your information and this website', hi: 'आपकी जानकारी और यह वेबसाइट' },
-    description: { en: 'What this website asks for, where an enquiry goes and how to raise a privacy concern.', hi: 'यह वेबसाइट क्या जानकारी माँगती है, पूछताछ कहाँ जाती है और गोपनीयता से जुड़ी चिंता कैसे बताएँ।' },
-    image: '',
+    kicker: copy('Privacy', 'गोपनीयता'),
+    title: copy('Your information', 'आपकी जानकारी'),
+    description: copy(
+      'How admission enquiries work on WhatsApp, what stays on your device and how to contact the school about a correction or a photograph.',
+      'WhatsApp पर प्रवेश की पूछताछ कैसे होती है, आपके डिवाइस पर क्या रहता है और किसी सुधार या तस्वीर के बारे में विद्यालय से कैसे बात करें।'
+    ),
   },
   news: {
-    kicker: { en: 'From the school', hi: 'विद्यालय से' },
-    title: { en: 'School news archive', hi: 'स्कूल के पुराने समाचार' },
-    description: { en: 'Stories from the school archive. For current notices and dates, please contact the office.', hi: 'विद्यालय के संग्रह से कुछ कहानियाँ। वर्तमान सूचनाओं और तारीखों के लिए कार्यालय से संपर्क करें।' },
-    image: '',
+    kicker: copy('School news', 'विद्यालय समाचार'),
+    title: copy('From the school archive', 'विद्यालय के समाचार संग्रह से'),
+    description: copy(
+      'Updates and photographs from Veer Patta in Amet. For this term’s notices and dates, contact the school office.',
+      'आमेट के वीर पत्ता विद्यालय से समाचार और तस्वीरें। इस सत्र की सूचनाएँ और तारीखें विद्यालय कार्यालय से लें।'
+    ),
   },
 };
 
 export const schoolStages = [
-  { label: { en: 'Nursery & KG', hi: 'नर्सरी और केजी' }, title: { en: 'A beginning full of discovery', hi: 'नई खोजों से भरी शुरुआत' }, text: { en: 'A first look at school life. Visit the early-years spaces and talk about age requirements and settling into a new routine.', hi: 'स्कूली जीवन का पहला परिचय। छोटे बच्चों की जगहें देखें और आयु की शर्तों व नई दिनचर्या के बारे में बात करें।' }, image: 'early-years-track' },
-  { label: { en: 'Classes 1–5', hi: 'कक्षा 1–5' }, title: { en: 'Build the foundations', hi: 'मज़बूत नींव की ओर' }, text: { en: 'Reading, writing and numbers form the foundation. Ask the team about the curriculum, classroom language and daily learning routine.', hi: 'पढ़ना, लिखना और गणित सीखने की नींव हैं। पाठ्यक्रम, पढ़ाई की भाषा और रोज़ की दिनचर्या के बारे में जानकारी लें।' }, image: 'planets-project' },
-  { label: { en: 'Classes 6–8', hi: 'कक्षा 6–8' }, title: { en: 'Explore more questions', hi: 'और सवाल, और खोज' }, text: { en: 'The middle-school years open up new subjects. Talk with the school about subject learning, practice and classroom expectations.', hi: 'माध्यमिक कक्षाओं की तैयारी में नए विषय जुड़ते हैं। विषयों, अभ्यास और कक्षा की अपेक्षाओं पर विद्यालय से बात करें।' }, image: 'angles-board' },
-  { label: { en: 'Classes 9–10', hi: 'कक्षा 9–10' }, title: { en: 'Look ahead with purpose', hi: 'लक्ष्य की ओर अगला कदम' }, text: { en: 'Understand the RBSE secondary stage. Ask about subjects, assessment and the approach to preparing for board examinations.', hi: 'आरबीएसई माध्यमिक स्तर को समझें। विषयों, मूल्यांकन और बोर्ड परीक्षा की तैयारी के बारे में पूछें।' }, image: 'circulatory-model' },
-  { label: { en: 'Classes 11–12', hi: 'कक्षा 11–12' }, title: { en: 'Choose your direction', hi: 'अपनी दिशा चुनें' }, text: { en: 'Science, Commerce and Arts. Confirm the current subject combinations, eligibility and availability directly with the school office.', hi: 'विज्ञान, वाणिज्य और कला। वर्तमान विषय-संयोजन, पात्रता और उपलब्धता की पुष्टि विद्यालय कार्यालय से करें।' }, image: 'greenhouse-model' },
+  {
+    id: 'early-years',
+    label: copy('Nursery & KG', 'नर्सरी और केजी'),
+    title: copy('Starting school', 'विद्यालय के शुरुआती दिन'),
+    text: copy(
+      'The activity room has low tables and small chairs. On a visit, families can see the room and discuss entry age and the first few days of school.',
+      'गतिविधि कक्ष में छोटे बच्चों के लिए नीची मेज़ें और छोटी कुर्सियाँ हैं। परिसर आकर कक्ष देखें और प्रवेश की उम्र व शुरुआती दिनों की दिनचर्या के बारे में पूछें।'
+    ),
+  },
+  {
+    id: 'primary',
+    label: copy('Classes 1–5', 'कक्षा 1–5'),
+    title: copy('Reading, language and numbers', 'भाषा, पढ़ना और गणित'),
+    text: copy(
+      'Primary pupils work on reading, writing and number sense. In ELGA, children from Classes 1–5 learn English in groups matched to their current level.',
+      'प्राथमिक कक्षाओं में पढ़ने, लिखने और संख्याओं की समझ पर काम होता है। ELGA में कक्षा 1–5 के बच्चे अंग्रेज़ी की अपनी मौजूदा समझ के अनुसार समूह में सीखते हैं।'
+    ),
+  },
+  {
+    id: 'middle',
+    label: copy('Classes 6–8', 'कक्षा 6–8'),
+    title: copy('Middle school subjects', 'उच्च प्राथमिक कक्षाओं के विषय'),
+    text: copy(
+      'Children study a wider range of subjects in middle school. Families can discuss the timetable, languages and practical work with the school.',
+      'इन कक्षाओं में पढ़ाई का दायरा बढ़ता है। परिवार विषयों की समय-सारणी, भाषाओं और प्रायोगिक कार्य के बारे में विद्यालय से बात कर सकते हैं।'
+    ),
+  },
+  {
+    id: 'secondary',
+    label: copy('Classes 9–10', 'कक्षा 9–10'),
+    title: copy('The secondary years', 'माध्यमिक कक्षाएँ'),
+    text: copy(
+      'Pupils work towards the RBSE Class 10 board examination. Ask the school about the subjects and the assessment schedule for the current session.',
+      'विद्यार्थी राजस्थान बोर्ड की दसवीं की परीक्षा की तैयारी करते हैं। इस सत्र के विषयों और परीक्षा कार्यक्रम की जानकारी विद्यालय से लें।'
+    ),
+  },
+  {
+    id: 'senior-secondary',
+    label: copy('Classes 11–12', 'कक्षा 11–12'),
+    title: copy('Science, Commerce or Arts', 'विज्ञान, वाणिज्य या कला'),
+    text: copy(
+      'After Class 10, pupils choose a stream. The office can confirm subject combinations and eligibility before a family makes its Class 11 decision.',
+      'दसवीं के बाद विद्यार्थी अपना संकाय चुनते हैं। कक्षा 11 के लिए निर्णय लेने से पहले कार्यालय से विषय-संयोजन और पात्रता की पुष्टि करें।'
+    ),
+  },
+];
+
+export const schoolHouses = [
+  { name: copy('Rana Pratap', 'राणा प्रताप'), colour: copy('Red', 'लाल'), key: 'red' },
+  { name: copy('Rana Kumbha', 'राणा कुम्भा'), colour: copy('Blue', 'नीला'), key: 'blue' },
+  { name: copy('Rana Sanga', 'राणा सांगा'), colour: copy('Yellow', 'पीला'), key: 'yellow' },
+  { name: copy('Bappa Rawal', 'बप्पा रावल'), colour: copy('Green', 'हरा'), key: 'green' },
 ];
 
 export const schoolFaqs = [
-  { q: { en: 'Which classes and board does the school offer?', hi: 'विद्यालय में कौन-सी कक्षाएँ और बोर्ड हैं?' }, a: { en: 'The school offers Nursery through Class 12 under RBSE. Senior-secondary streams are Science, Commerce and Arts. Ask the office for current subject combinations.', hi: 'विद्यालय में आरबीएसई के अंतर्गत नर्सरी से कक्षा 12 तक पढ़ाई होती है। सीनियर सेकेंडरी स्तर पर विज्ञान, वाणिज्य और कला संकाय हैं। वर्तमान विषय-संयोजन के लिए कार्यालय से पूछें।' } },
-  { q: { en: 'How do I enquire about admission?', hi: 'प्रवेश की जानकारी कैसे लें?' }, a: { en: 'Message the school’s WhatsApp, +91 83022 07823, or call the office. On WhatsApp, an adult agrees to a call back and chooses the class; the office then calls back and explains the next steps.', hi: 'स्कूल के WhatsApp +91 83022 07823 पर संदेश भेजें, या कार्यालय में फ़ोन करें। WhatsApp पर कोई वयस्क फ़ोन पर संपर्क की सहमति देकर कक्षा चुनता है; फिर कार्यालय फ़ोन करके आगे की प्रक्रिया समझाता है।' } },
-  { q: { en: 'Does submitting an enquiry reserve a seat?', hi: 'क्या पूछताछ भेजने से सीट आरक्षित हो जाती है?' }, a: { en: 'No. An enquiry is a request for information. Availability, eligibility, documents and admission confirmation must be discussed with the school.', hi: 'नहीं। पूछताछ केवल जानकारी का अनुरोध है। उपलब्धता, पात्रता, दस्तावेज़ और प्रवेश की पुष्टि के लिए विद्यालय से बात करनी होगी।' } },
-  { q: { en: 'What are the fees?', hi: 'शुल्क कितना है?' }, a: { en: 'Ask the office for a current, written quote for the class you are considering, including any admission, books, uniform and transport charges. The budget planner uses only amounts you enter and is not a school fee quote.', hi: 'इच्छित कक्षा के लिए वर्तमान लिखित शुल्क विवरण माँगें। प्रवेश, किताबों, वर्दी और परिवहन के अलग शुल्क भी पूछें। बजट कैलकुलेटर केवल आपकी लिखी राशियों पर चलता है, यह विद्यालय का शुल्क विवरण नहीं है।' } },
-  { q: { en: 'Is transport available for our area?', hi: 'क्या हमारे क्षेत्र में परिवहन उपलब्ध है?' }, a: { en: 'Please confirm your area, pick-up point, timings, charges and current route availability with the office before making plans. A route is not guaranteed by this website.', hi: 'योजना बनाने से पहले अपने क्षेत्र, पिक-अप स्थान, समय, शुल्क और वर्तमान मार्ग की उपलब्धता की पुष्टि कार्यालय से करें। वेबसाइट किसी मार्ग की गारंटी नहीं देती।' } },
-  { q: { en: 'Can we visit before deciding?', hi: 'क्या फैसला लेने से पहले विद्यालय देख सकते हैं?' }, a: { en: 'Contact the office to request a campus visit. Wait for the school to confirm a suitable day and time before travelling.', hi: 'परिसर देखने के लिए कार्यालय से समय माँगें। आने से पहले विद्यालय से दिन और समय की पुष्टि कर लें।' } },
-  { q: { en: 'Which documents should I prepare?', hi: 'कौन-से दस्तावेज़ तैयार करने होंगे?' }, a: { en: 'Requirements can depend on the class and previous school. Ask the office for the current checklist before collecting documents. Do not send identity documents in a WhatsApp enquiry or through this website.', hi: 'दस्तावेज़ों की ज़रूरत कक्षा और पिछले विद्यालय पर निर्भर हो सकती है। दस्तावेज़ जुटाने से पहले कार्यालय से वर्तमान सूची लें। WhatsApp पूछताछ में या इस वेबसाइट से पहचान के दस्तावेज़ न भेजें।' } },
-  { q: { en: 'Where do I get a parent login or fee-payment link?', hi: 'अभिभावक लॉगिन या शुल्क भुगतान का लिंक कहाँ मिलेगा?' }, a: { en: 'Ask the school office for the current official link and access instructions. Never share a password, OTP or payment details in a message or an enquiry.', hi: 'वर्तमान आधिकारिक लिंक और उपयोग की जानकारी विद्यालय कार्यालय से लें। किसी संदेश या पूछताछ में पासवर्ड, ओटीपी या भुगतान विवरण कभी न लिखें।' } },
+  {
+    group: 'classes-and-visits',
+    q: copy('Which classes and board does the school offer?', 'विद्यालय में कौन-सी कक्षाएँ हैं और बोर्ड कौन-सा है?'),
+    a: copy('The school teaches Nursery through Class 12 and follows the Rajasthan Board of Secondary Education (RBSE). Science, Commerce and Arts are available in Classes 11–12.', 'विद्यालय में नर्सरी से कक्षा 12 तक पढ़ाई होती है और यह माध्यमिक शिक्षा बोर्ड, राजस्थान (आरबीएसई) से संबद्ध है। कक्षा 11–12 में विज्ञान, वाणिज्य और कला संकाय उपलब्ध हैं।'),
+  },
+  {
+    group: 'admissions-and-fees',
+    q: copy('How do I ask about a class?', 'किसी कक्षा में प्रवेश की जानकारी कैसे लें?'),
+    a: copy('Choose a class on the admissions page to open a WhatsApp draft, or call the school office. If you send the message, the chat asks an adult to agree to a call back.', 'प्रवेश पेज पर कक्षा चुनें। WhatsApp में एक संदेश खुलेगा जिसे आप भेज सकते हैं। चैट में किसी वयस्क से फ़ोन पर बात करने की सहमति ली जाती है। आप सीधे कार्यालय में फ़ोन भी कर सकते हैं।'),
+  },
+  {
+    group: 'admissions-and-fees',
+    q: copy('Does an enquiry reserve a seat?', 'क्या पूछताछ भेजने से सीट आरक्षित हो जाती है?'),
+    a: copy('An enquiry starts a conversation. The school office confirms availability, explains the document requirements and tells you how to complete admission.', 'पूछताछ से बातचीत शुरू होती है। सीट की उपलब्धता, ज़रूरी दस्तावेज़ और प्रवेश की पुष्टि के लिए विद्यालय कार्यालय से बात करें।'),
+  },
+  {
+    group: 'admissions-and-fees',
+    q: copy('How do we find out the fees?', 'शुल्क की जानकारी कहाँ मिलेगी?'),
+    a: copy('Ask the office for a written fee breakdown for your class. Include books, uniform and transport if you need them. The budget planner can add up the amounts the office gives you.', 'अपनी कक्षा का लिखित शुल्क विवरण कार्यालय से लें। किताबों, वर्दी और ज़रूरत हो तो परिवहन का खर्च भी पूछें। मिली हुई राशियों का जोड़ बजट कैलकुलेटर में निकाल सकते हैं।'),
+  },
+  {
+    group: 'classes-and-visits',
+    q: copy('How do I check a transport route?', 'परिवहन के मार्ग की जानकारी कैसे लें?'),
+    a: copy('Tell the office your area or village. Ask whether a route currently serves it and confirm the pick-up point, times and charges before making arrangements.', 'कार्यालय को अपने इलाके या गाँव का नाम बताएँ। वहाँ अभी बस आती है या नहीं, चढ़ने का स्थान, समय और शुल्क की पुष्टि कर लें।'),
+  },
+  {
+    group: 'classes-and-visits',
+    q: copy('Can our family visit the school?', 'क्या हमारा परिवार विद्यालय देखने आ सकता है?'),
+    a: copy('Call the office to agree on a day and time. The school is opposite Mela Ground in Amet. If you need step-free access, ask about the entrance when arranging your visit.', 'विद्यालय आमेट में मेला ग्राउंड के सामने है। आने से पहले कार्यालय में फ़ोन करके दिन और समय तय कर लें। बिना सीढ़ियों वाला रास्ता चाहिए तो फ़ोन पर प्रवेश द्वार के बारे में भी पूछें।'),
+  },
+  {
+    group: 'admissions-and-fees',
+    q: copy('Which documents will I need?', 'कौन-से दस्तावेज़ लगेंगे?'),
+    a: copy('The list depends on the class and previous school. Ask the office for the current checklist and how to present the documents. Keep identity documents out of the initial WhatsApp enquiry.', 'दस्तावेज़ों की सूची कक्षा और पिछले विद्यालय के अनुसार बदल सकती है। कार्यालय से वर्तमान सूची और दस्तावेज़ देने का तरीका पूछें। पहली WhatsApp पूछताछ में पहचान के दस्तावेज़ न भेजें।'),
+  },
+  {
+    group: 'current-families',
+    q: copy('Where do I get a parent login or payment link?', 'अभिभावक लॉगिन या शुल्क भुगतान का लिंक कहाँ मिलेगा?'),
+    a: copy('Call the office for the current official link or payment instructions. Keep passwords, one-time passcodes and payment details private.', 'वर्तमान आधिकारिक लिंक या शुल्क जमा करने का तरीका कार्यालय से लें। पासवर्ड, ओटीपी और भुगतान की निजी जानकारी अपने पास रखें।'),
+  },
+  {
+    group: 'classes-and-visits',
+    q: copy('How do English groups work in primary school?', 'प्राथमिक कक्षाओं में अंग्रेज़ी के समूह कैसे बनते हैं?'),
+    a: copy('In Classes 1–5, ELGA groups children by their current English learning level. Pupils from different classes can learn together in the same English group.', 'कक्षा 1–5 में ELGA के तहत बच्चों के समूह अंग्रेज़ी की उनकी मौजूदा समझ के अनुसार बनते हैं। अलग-अलग कक्षाओं के बच्चे एक ही समूह में अंग्रेज़ी सीख सकते हैं।'),
+  },
 ];

@@ -1,0 +1,109 @@
+{
+  "photos": {
+    "amet-campus-terrace": {"widths": [640, 960, 1440], "w": 1440, "h": 1036, "avifWidths": [640, 960, 1440], "pos": "48% 48%", "gallery": "campus", "alt": {"en": "The school entrance and palms above the stone terraces and front lawn in Amet", "hi": "आमेट में पत्थर की दीवारों और लॉन के ऊपर विद्यालय का प्रवेश द्वार और ताड़ के पेड़"}},
+    "place-value-table": {"widths": [384, 720, 1080], "w": 1080, "h": 640, "avifWidths": [384, 720, 1080], "gallery": "academic", "alt": {"en": "A hand sets yellow blocks on a place-value chart at the school exhibition", "hi": "विद्यालय की प्रदर्शनी में स्थानीय मान की तालिका पर पीले ब्लॉक रखते हुए हाथ"}},
+    "dance-footwork": {"widths": [320, 448], "w": 448, "h": 252, "avifWidths": [320, 448], "gallery": "cultural", "alt": {"en": "Yellow skirts and pink sashes swing above the grass during the inter-house dance", "hi": "अंतर-सदनीय नृत्य में लॉन पर घूमते पीले घाघरे और गुलाबी दुपट्टे"}},
+    "angles-board": {"widths": [480, 800, 1200], "w": 1200, "h": 800, "avifWidths": [480, 800, 1200], "gallery": "academic", "alt": {"en": "Hands turn a pointer on a handmade angle wheel at the school exhibition", "hi": "विद्यालय की प्रदर्शनी में हाथ से बनाए कोण-चक्र की सुई घुमाते हुए हाथ"}},
+    "basketball-court": {"widths": [480, 800, 1200], "w": 1200, "h": 560, "avifWidths": [480, 800, 1200], "gallery": "sports", "alt": {"en": "Basketball hoops at opposite ends of the blue school court", "hi": "विद्यालय के नीले कोर्ट के दोनों सिरों पर बास्केटबॉल के घेरे"}},
+    "first-school-room": {"widths": [384, 416, 640, 896, 1120], "w": 1120, "h": 840, "avifWidths": [416, 720, 1120], "gallery": "academic", "alt": {"en": "Round blue tables and small chairs in the activity room", "hi": "गतिविधि कक्ष में गोल नीली मेज़ें और छोटी कुर्सियाँ"}},
+    "robotics-circuit": {"widths": [384, 640, 960], "w": 960, "h": 720, "avifWidths": [384, 640, 960], "pos": "48% 50%", "gallery": "academic", "alt": {"en": "An Arduino board and breadboard connected by coloured jumper wires on a blue worktable", "hi": "नीली मेज़ पर रंगीन तारों से जुड़े आर्डुइनो बोर्ड और ब्रेडबोर्ड"}},
+    "campus-front": {"widths": [480, 800, 1200, 1600], "w": 1600, "h": 992, "avifWidths": [480, 800, 1200, 1600], "gallery": "campus", "alt": {"en": "Main entrance of the school with palm trees and the front staircase", "hi": "विद्यालय का मुख्य प्रवेश द्वार, ताड़ के पेड़ और सामने की सीढ़ियाँ"}},
+    "circulatory-model": {"widths": [480, 800, 1200], "w": 1200, "h": 708, "avifWidths": [480, 800, 1200], "gallery": "academic", "alt": {"en": "A pupils’ model of the heart and lungs, with tubes for the flow of blood", "hi": "रक्त प्रवाह दिखाने वाली नलियों के साथ हृदय और फेफड़ों का विद्यार्थियों का मॉडल"}},
+    "science-bench": {"widths": [416, 720, 828], "w": 828, "h": 558, "avifWidths": [416, 720, 828], "gallery": "academic", "alt": {"en": "Glassware, stands and equipment on the school science bench", "hi": "स्कूल की विज्ञान प्रयोगशाला की मेज़ पर काँच के उपकरण और स्टैंड"}},
+    "ncc-sashes": {"widths": [320, 512], "w": 512, "h": 288, "avifWidths": [320, 512], "gallery": "ncc", "alt": {"en": "Striped belts and red ribbons at waist level in the school’s NCC group photograph", "hi": "विद्यालय के एनसीसी समूह की तस्वीर में कैडेटों की धारीदार पेटियाँ और लाल फ़ीते"}},
+    "assembly-courtyard": {"widths": [480, 800, 1200], "w": 1200, "h": 904, "avifWidths": [480, 800, 1200], "gallery": "campus", "alt": {"en": "A blue canopy above the paved assembly courtyard", "hi": "पक्के प्रार्थना प्रांगण के ऊपर नीली छत"}},
+    "greenhouse-model": {"widths": [480, 800, 1200], "w": 1200, "h": 600, "avifWidths": [480, 800, 1200], "pos": "70% 50%", "gallery": "academic", "alt": {"en": "A pupils’ greenhouse model with a small town, trees and a sun at the school exhibition", "hi": "स्कूल प्रदर्शनी में छोटे शहर, पेड़ों और सूरज के साथ विद्यार्थियों का ग्रीनहाउस मॉडल"}},
+    "cricket-nets": {"widths": [480, 800], "w": 800, "h": 542, "gallery": "sports", "alt": {"en": "Cricket practice nets beside the school building", "hi": "विद्यालय भवन के पास क्रिकेट अभ्यास नेट"}},
+    "campus-approach": {"widths": [480, 800, 1200], "w": 1200, "h": 630, "gallery": "campus", "alt": {"en": "Stone steps leading up to the main building", "hi": "मुख्य भवन तक जाती पत्थर की सीढ़ियाँ"}},
+    "computer-lab-wide": {"widths": [480, 800, 1200], "w": 1200, "h": 921, "avifWidths": [480, 800, 1200], "gallery": "academic", "alt": {"en": "Computer lab with rows of desktop workstations", "hi": "डेस्कटॉप वर्कस्टेशन की कतारों वाली कंप्यूटर लैब"}},
+    "race-lanes": {"widths": [240, 448], "w": 448, "h": 162, "avifWidths": [240, 448], "gallery": "sports", "alt": {"en": "Shoes, cones and chalk lines on the grounds during a team race", "hi": "टीम दौड़ के दौरान मैदान पर जूते, कोन और चूने की रेखाएँ"}},
+    "arched-stairs": {"widths": [480, 800, 1200], "w": 1200, "h": 1641, "gallery": "campus", "alt": {"en": "Arched staircase in the main building", "hi": "मुख्य भवन की मेहराबदार सीढ़ियाँ"}},
+    "planets-project": {"widths": [480, 800, 1200], "w": 1200, "h": 718, "avifWidths": [480, 800, 1200], "gallery": "academic", "alt": {"en": "Painted planets and a solar-system chart made by pupils for the school exhibition", "hi": "स्कूल प्रदर्शनी के लिए विद्यार्थियों के बनाए ग्रह और सौरमंडल का चार्ट"}},
+    "classroom": {"widths": [480, 800, 1200], "w": 1200, "h": 1034, "gallery": "academic", "alt": {"en": "A bright classroom with neat rows of desks", "hi": "डेस्कों की साफ़-सुथरी कतारों वाली रोशन कक्षा"}},
+    "school-office": {"widths": [480, 800, 1200], "w": 1200, "h": 914, "avifWidths": [480, 800, 1200], "gallery": "campus", "alt": {"en": "A desk, chairs and trophy shelves in the school office", "hi": "विद्यालय कार्यालय में मेज़, कुर्सियाँ और ट्रॉफ़ियों वाली अलमारियाँ"}},
+    "volleyball-court": {"widths": [480, 800], "w": 800, "h": 516, "gallery": "sports", "alt": {"en": "A volleyball net stretched across the ground in front of a school building", "hi": "विद्यालय भवन के सामने मैदान में तना वॉलीबॉल नेट"}},
+    "veranda-courtyard": {"widths": [480, 800, 1200], "w": 1200, "h": 904, "gallery": "campus", "alt": {"en": "Covered walkway beside the paved courtyard", "hi": "पक्के प्रांगण के साथ ढका हुआ गलियारा"}},
+    "tablet-quiz": {"widths": [480, 800, 1200], "w": 1200, "h": 750, "avifWidths": [480, 800, 1200], "gallery": "academic", "alt": {"en": "A hand points to a quiz timer on a tablet at the school exhibition", "hi": "विद्यालय की प्रदर्शनी में टैबलेट पर क्विज़ का टाइमर दिखाते हुए हाथ"}},
+    "open-air-stage": {"widths": [480, 800], "w": 800, "h": 528, "gallery": "cultural", "alt": {"en": "Steps lead to the open-air stage beside the grounds", "hi": "मैदान के पास खुले मंच की ओर जाती सीढ़ियाँ"}},
+    "classroom-benches": {"widths": [416, 480, 800, 1200], "w": 1200, "h": 921, "avifWidths": [416, 720, 1120], "gallery": "academic", "alt": {"en": "Classroom with blue benches and learning charts", "hi": "नीली बेंचों और शिक्षण चार्टों वाली कक्षा"}},
+    "paved-courtyard": {"widths": [480, 800, 1200], "w": 1200, "h": 650, "gallery": "campus", "alt": {"en": "The wide paved courtyard between the classroom blocks", "hi": "कक्षा भवनों के बीच चौड़ा पक्का प्रांगण"}},
+    "science-lab": {"widths": [480, 800, 1200], "w": 1200, "h": 1630, "pos": "center 60%", "gallery": "academic", "alt": {"en": "Science laboratory with workbenches and apparatus", "hi": "वर्कबेंच और उपकरणों से सुसज्जित विज्ञान प्रयोगशाला"}},
+    "robotics-kit": {"widths": [320, 480, 608], "w": 608, "h": 294, "avifWidths": [320, 480, 608], "gallery": "academic", "alt": {"en": "Kit trays, connecting strips and hands at a teacher robotics workshop", "hi": "शिक्षकों की रोबोटिक्स कार्यशाला में हाथ, पुर्ज़ों की ट्रे और जोड़ने वाली पट्टियाँ"}},
+    "veranda": {"widths": [480, 800, 1200], "w": 1200, "h": 1600, "gallery": "campus", "alt": {"en": "Long shaded veranda outside the classrooms", "hi": "कक्षाओं के बाहर लंबा छायादार बरामदा"}},
+    "amet-campus-wide": {"widths": [480, 800, 1200], "w": 1200, "h": 434, "avifWidths": [480, 800, 1200], "pos": "51% 60%", "alt": {"en": "The blue-trimmed school building above oleander bushes and a stone terrace", "hi": "कनेर की झाड़ियों और पत्थर की दीवार के ऊपर नीली किनारी वाला विद्यालय भवन"}},
+    "campus-spaces-poster": {"widths": [480, 800, 1200], "w": 1200, "h": 675, "avifWidths": [480, 800, 1200], "alt": {"en": "The front steps, glass doors and palm outside the school building", "hi": "विद्यालय भवन के सामने सीढ़ियाँ, काँच के दरवाज़े और ताड़ का पेड़"}},
+    "activity-room": {"widths": [416, 480, 800, 1200], "w": 1200, "h": 917, "avifWidths": [416, 720, 1120], "alt": {"en": "Activity room with low round tables for young learners", "hi": "छोटे बच्चों के लिए गोल मेज़ों वाला गतिविधि कक्ष"}},
+    "computer-lab": {"widths": [480, 800, 1200], "w": 1200, "h": 900, "avifWidths": [480, 800, 1200], "alt": {"en": "Computer lab workstations", "hi": "कंप्यूटर लैब के वर्कस्टेशन"}},
+    "building-palm": {"widths": [480, 800, 1200], "w": 1200, "h": 921, "alt": {"en": "Front steps with railings and palm trees", "hi": "रेलिंग वाली सामने की सीढ़ियाँ और ताड़ के पेड़"}},
+    "exhibition-project": {"widths": [240, 390], "w": 390, "h": 132, "avifWidths": [240, 390], "alt": {"en": "Hands moving coloured shapes on a project at the school exhibition", "hi": "स्कूल की प्रदर्शनी में एक प्रोजेक्ट पर रंगीन आकृतियाँ रखते हुए हाथ"}}
+  },
+  "videos": {
+    "campus-spaces": {
+      "file": "campus-spaces-720.mp4",
+      "bytes": 1862112,
+      "poster": "campus-spaces-poster",
+      "seconds": 20,
+      "caption": {
+        "en": "A walk through the campus",
+        "hi": "परिसर की एक सैर"
+      },
+      "description": {
+        "en": "Five school photographs take you from the entrance to the activity room, computer lab, science bench and basketball court.",
+        "hi": "विद्यालय की पाँच तस्वीरों में प्रवेश द्वार से गतिविधि कक्ष, कंप्यूटर लैब, विज्ञान की मेज़ और बास्केटबॉल कोर्ट तक की सैर करें।"
+      },
+      "scenes": [
+        {
+          "start": 0,
+          "en": "Steps and a palm tree outside the main entrance.",
+          "hi": "विद्यालय के मुख्य द्वार पर सीढ़ियाँ और ताड़ का पेड़।"
+        },
+        {
+          "start": 4,
+          "en": "Round blue tables and small chairs in the activity room.",
+          "hi": "गतिविधि कक्ष में गोल नीली मेज़ें और छोटी कुर्सियाँ।"
+        },
+        {
+          "start": 8,
+          "en": "Rows of monitors and keyboards in the computer lab.",
+          "hi": "कंप्यूटर लैब में कतार से रखे मॉनिटर और कीबोर्ड।"
+        },
+        {
+          "start": 12,
+          "en": "Glassware, stands and a sink on the science bench.",
+          "hi": "विज्ञान की मेज़ पर काँच के बर्तन, स्टैंड और सिंक।"
+        },
+        {
+          "start": 16,
+          "en": "Tree shadows fall across the blue basketball court beside the school building.",
+          "hi": "विद्यालय भवन के पास नीले बास्केटबॉल कोर्ट पर पेड़ों की परछाइयाँ।"
+        }
+      ]
+    },
+    "lawn-dance-detail": {
+      "file": "lawn-dance-detail-448.mp4",
+      "bytes": 373133,
+      "poster": "dance-footwork",
+      "seconds": 8,
+      "caption": {
+        "en": "Steps on the school lawn",
+        "hi": "लॉन पर नृत्य के कदम"
+      },
+      "description": {
+        "en": "A close-up from the inter-house dance shows how the dancers turn and step together on the grass.",
+        "hi": "अंतर-सदनीय नृत्य के इस अंश में घास पर साथ कदम मिलाते और घूमते कलाकारों की झलक है।"
+      },
+      "scenes": [
+        {
+          "start": 0,
+          "en": "Pink sashes and yellow skirts swing as the dancers step across the grass.",
+          "hi": "घास पर पड़ते कदमों के साथ गुलाबी दुपट्टे और पीले घाघरे लहराते हैं।"
+        },
+        {
+          "start": 4,
+          "en": "The yellow hems lift and settle as the dancers turn.",
+          "hi": "नर्तक घूमते हैं और उनके पीले घाघरों के घेरे फैलकर फिर सिमटते हैं।"
+        }
+      ]
+    }
+  }
+}

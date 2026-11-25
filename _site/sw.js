@@ -1,16 +1,27 @@
-/* Network-first pages: fresh information, with a small offline fallback. */
-const CACHE='vpps-v15-whatsapp-admissions';
-self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(['/en/','/hi/','/404.html'])).then(()=>self.skipWaiting()));});
-self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('vpps-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
-self.addEventListener('fetch',event=>{
- const req=event.request,url=new URL(req.url);
- if(req.method!=='GET'||url.origin!==self.location.origin||req.headers.has('range')||/\.(mp4|webm)$/i.test(url.pathname))return;
- if(req.mode==='navigate')event.respondWith(fetch(req).then(res=>{
-  if(res.ok){
-   // Clone while the body is fresh, before it can be consumed by the page.
-   const copy=res.clone();
-   event.waitUntil(caches.open(CACHE).then(cache=>cache.put(req,copy)).catch(()=>{}));
-  }
-  return res;
- }).catch(()=>caches.match(req).then(hit=>hit||caches.match('/404.html'))));
+/* Navigations use the network first, so online parents see the current release. */
+const CACHE = 'vpps-v16-amet-school';
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['/en/', '/hi/'])).then(() => self.skipWaiting()));
+});
+self.addEventListener('activate', event => {
+  event.waitUntil(caches.keys().then(keys => Promise.all(
+    keys.filter(key => key.startsWith('vpps-') && key !== CACHE).map(key => caches.delete(key))
+  )).then(() => self.clients.claim()));
+});
+self.addEventListener('fetch', event => {
+  const req = event.request;
+  if (req.mode !== 'navigate' || req.method !== 'GET' || new URL(req.url).origin !== self.location.origin || req.headers.has('range')) return;
+  event.respondWith(fetch(req).then(response => {
+    if (response.ok) {
+      const copy = response.clone();
+      event.waitUntil(caches.open(CACHE).then(cache => cache.put(req, copy)).catch(() => {}));
+    }
+    return response;
+  }).catch(async () => {
+    const cached = await caches.match(req);
+    if (cached) return cached;
+    return new Response('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Veer Patta · Offline</title><main><h1>Veer Patta</h1><p>Connect to the internet to open this page.</p><p lang="hi">यह पृष्ठ देखने के लिए इंटरनेट से जुड़ें।</p><a href="/en/">English homepage</a> · <a href="/hi/" lang="hi">हिंदी मुखपृष्ठ</a></main></html>', {
+      status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' }
+    });
+  }));
 });
