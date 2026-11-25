@@ -2,6 +2,9 @@
 import { site, pick, pathFor, admissionWhatsApp, type Lang, type PageSlug } from '../data/site';
 import WhatsAppIcon from './WhatsAppIcon.astro';
 import { pageContent, schoolStages, schoolFaqs } from '../data/content';
+import LearningPractice from './LearningPractice.astro';
+import BoardResults from './BoardResults.astro';
+import HouseLife from './HouseLife.astro';
 import Photo from './Photo.astro';
 import VideoCard from './VideoCard.astro';
 import PageHead from './PageHead.astro';
@@ -14,7 +17,7 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
 const page = pageContent[slug];
 const link = (href: string, en: string, hi: string, external = false) => ({href,label:t(en,hi),external});
 const stageIds = ['early-years','primary','middle','secondary','senior-secondary'];
-const stageLink = (index: number) => index === 0 ? pathFor(lang,'admissions/pre-primary') : index === 4 ? pathFor(lang,'admissions/class-11') : pathFor(lang,'admissions')+'#enquiry';
+const stageLink = (index: number) => index === 0 ? pathFor(lang,'admissions/pre-primary') : index === 4 ? pathFor(lang,'admissions/class-11') : pathFor(lang,'admissions')+'#choose-class';
 const faqGroups = [
   {id:'admissions-and-fees',title:t('Admissions, fees & documents','प्रवेश, शुल्क और दस्तावेज़'),items:[1,2,3,6]},
   {id:'classes-and-visits',title:t('Classes, transport & visits','कक्षाएँ, बस और परिसर'),items:[0,4,5]},
@@ -22,10 +25,10 @@ const faqGroups = [
 ];
 const privacyLinks = [link('#your-details','What we ask for','कौन-सी जानकारी माँगते हैं'),link('#providers','Who gets it','किसे भेजते हैं'),link('#your-choices','Corrections & removals','सुधार और हटाने के अनुरोध')];
 const pageLinks = {
-  about:[link('#campus','See the campus','परिसर देखें'),link(pathFor(lang,'contact')+'#visit','Plan a visit','स्कूल आने की योजना')],
-  academics:[link('#stages','Find your child’s class','अपने बच्चे की कक्षा देखें'),link(pathFor(lang,'admissions/class-11'),'Class 11 admissions','कक्षा 11 का प्रवेश')],
+  about:[link(pathFor(lang,'academics')+'#english','How pupils learn','बच्चे कैसे सीखते हैं'),link('#campus','See the campus','परिसर देखें'),link(pathFor(lang,'contact')+'#visit','Plan a visit','स्कूल आने की योजना')],
+  academics:[link('#english','Try a lesson','एक अभ्यास आज़माएँ'),link('#board-results','2026 board results','2026 के बोर्ड परिणाम'),link('#stages','Find your child’s class','अपने बच्चे की कक्षा देखें'),link(pathFor(lang,'admissions/class-11'),'Class 11 admissions','कक्षा 11 का प्रवेश')],
   admissions:[],
-  beyond:[link('#school-activities','Explore activities','गतिविधियाँ देखें'),link(pathFor(lang,'gallery')+'#videos','Watch school films','स्कूल के वीडियो देखें')],
+  beyond:[link('#houses','The four houses','चारों सदन'),link('#school-activities','Explore activities','गतिविधियाँ देखें'),link(pathFor(lang,'gallery')+'#videos','Watch school films','स्कूल के वीडियो देखें')],
   digital:[link('#parent-help','Find the right school link','स्कूल का सही लिंक पाएँ'),link('#computer-learning','See learning spaces','कंप्यूटर कक्ष देखें')],
   contact:[link('tel:'+site.phone,site.phoneDisplay,site.phoneDisplay),link('#visit','Plan a visit','स्कूल आने की योजना')],
   faq:[link('#admissions-and-fees','Admissions & fees','प्रवेश और शुल्क'),link('#classes-and-visits','Classes & visits','कक्षाएँ और परिसर'),link('#current-families','For current families','वर्तमान अभिभावक')],
@@ -34,7 +37,7 @@ const pageLinks = {
 };
 const pageCaptions = {
   about:t('The approach to Veerpatta’s main building, Amet','आमेट में वीरपट्टा के मुख्य भवन तक जाने का रास्ता'),
-  academics:t('Place-value blocks at the school exhibition','स्कूल प्रदर्शनी में स्थानीय मान के ब्लॉक'),
+  academics:t('A solar-system chart and planets made for the school exhibition','स्कूल प्रदर्शनी के लिए बनाए गए ग्रह और सौरमंडल का चार्ट'),
   beyond:t('Sports Day: runners ready at the start line','खेल दिवस: स्टार्ट लाइन पर तैयार धावक'),
   digital:t('A tablet activity at the school exhibition','स्कूल प्रदर्शनी में टैबलेट पर एक गतिविधि'),
 };
@@ -56,13 +59,17 @@ const activities = [
 </>}
 
 {slug === 'academics' && <>
+  <LearningPractice lang={lang}/>
   <section class="section inside-section" id="stages"><div class="wrap"><div class="section-head"><div><span class="eyebrow">{t('One journey, different stages', 'एक सफ़र, अलग-अलग पड़ाव')}</span><h2>{t('Find your child’s next step.', 'अपने बच्चे का अगला पड़ाव जानें।')}</h2></div><p>{t('Use these stages to start a conversation. The office can explain the current curriculum, entry requirements and class availability.', 'इन पड़ावों से जानकारी लेना शुरू करें। कार्यालय वर्तमान पाठ्यक्रम, प्रवेश की शर्तें और कक्षा की उपलब्धता बताएगा।')}</p></div><nav class="stage-toc" aria-label={t('Jump to a school stage','सीधे कक्षा का स्तर देखें')}><ul class="inside-toc">{schoolStages.map((stage,i)=><li><a href={'#'+stageIds[i]}>{stage.label[lang]}</a></li>)}</ul></nav><div class="stage-list">{schoolStages.map((stage, i) => <article class="stage-row" id={stageIds[i]}><div class="stage-photo photo-frame"><Photo id={stage.image} lang={lang} sizes="(min-width: 900px) 320px, 92vw" /></div><div><span class="eyebrow">{stage.label[lang]}</span><h3>{stage.title[lang]}</h3><p>{stage.text[lang]}</p><a class="text-link" href={stageLink(i)}>{i===0?t('Pre-primary admissions','प्री-प्राइमरी प्रवेश'):i===4?t('Class 11 admissions','कक्षा 11 का प्रवेश'):t('Ask about this stage','इस स्तर की जानकारी लें')} →</a></div><span class="stage-index" aria-hidden="true">0{i + 1}</span></article>)}</div></div></section>
   <section class="section inside-section"><div class="wrap feature-card"><span class="eyebrow">{t('Before choosing a stream', 'संकाय चुनने से पहले')}</span><h2>{t('Make the choice with clear information.', 'पूरी जानकारी लेकर संकाय चुनें।')}</h2><p class="lead">{t('For Classes 11–12, discuss interests, subject combinations, eligibility and next steps with the school. Science, Commerce and Arts are available as streams; individual subject choices need confirmation.', 'कक्षा 11–12 के लिए रुचियों, विषय-संयोजन, पात्रता और आगे की दिशा पर विद्यालय से बात करें। विज्ञान, वाणिज्य और कला संकाय हैं; अलग-अलग विषयों की उपलब्धता की पुष्टि करें।')}</p><a class="button button-primary" href={pathFor(lang, 'admissions/class-11')}>{t('Explore Class 11 admissions', 'कक्षा 11 के प्रवेश की जानकारी')} →</a></div></section>
 </>}
 
+{slug === 'academics' && <BoardResults lang={lang}/>}
+
 {slug === 'beyond' && <>
+  <HouseLife lang={lang}/>
   <section class="section inside-section" id="school-activities"><div class="wrap activity-grid">{activities.map((activity) => <article class="activity-card"><div class="photo-frame"><Photo id={activity.image} lang={lang} sizes="(min-width: 700px) 46vw, 92vw" /></div><div class="activity-copy"><span class="eyebrow">{activity.tag}</span><h2>{activity.title}</h2><p>{activity.text}</p><a href={pathFor(lang,'gallery')+'?category='+activity.category+'#photos'} class="text-link">{t('See related photos','इससे जुड़ी तस्वीरें देखें')} →</a></div></article>)}</div></section>
-  <section class="section inside-section section-soft"><div class="wrap"><div class="section-head"><div><span class="eyebrow">{t('A school in motion', 'गतिविधियों से भरा विद्यालय')}</span><h2>{t('Watch a little of school life.', 'स्कूली जीवन के कुछ पल देखें।')}</h2></div><p>{t('Short clips from the school’s media archive. Tap to load a video when you are ready.', 'विद्यालय के मीडिया संग्रह से छोटे वीडियो। तैयार होने पर टैप करके वीडियो चलाएँ।')}</p></div><div class="grid-two"><VideoCard id="sports-day" lang={lang} /><VideoCard id="house-dance" lang={lang} /></div></div></section>
+  <section class="section inside-section section-soft"><div class="wrap"><div class="section-head"><div><span class="eyebrow">{t('A school in motion', 'गतिविधियों से भरा विद्यालय')}</span><h2>{t('Watch a little of school life.', 'स्कूली जीवन के कुछ पल देखें।')}</h2></div><p>{t('Short clips from the school’s media archive. Tap to load a video when you are ready.', 'विद्यालय के मीडिया संग्रह से छोटे वीडियो। तैयार होने पर टैप करके वीडियो चलाएँ।')}</p></div><div class="grid-two"><VideoCard id="sports-day" lang={lang} /><div id="house-film"><VideoCard id="house-dance" lang={lang} /></div></div></div></section>
   <section class="section inside-section"><div class="wrap inside-callout"><div><h2>{t('Explore the full gallery.', 'देखने को और भी बहुत कुछ।')}</h2><p>{t('Browse campus, learning, sport, NCC and celebration photographs.', 'परिसर, पढ़ाई, खेल, एनसीसी और समारोहों की तस्वीरें देखें।')}</p></div><a class="button button-primary" href={pathFor(lang, 'gallery')+'#photos'}>{t('Open the gallery', 'गैलरी खोलें')} →</a></div></section>
 </>}
 

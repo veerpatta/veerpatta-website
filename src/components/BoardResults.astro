@@ -1,0 +1,11 @@
+---
+import {pick,site,type Lang} from '../data/site';
+interface Props {lang:Lang}
+const {lang}=Astro.props,t=(en:string,hi:string)=>pick(lang,en,hi);
+const rows=[[t('Class 10','कक्षा 10'),'29 / 29','92.17%'],[t('Class 12 · Arts','कक्षा 12 · कला'),'13 / 13','91.4%'],[t('Class 12 · Science','कक्षा 12 · विज्ञान'),'9 / 9','93%'],[t('Class 12 · Commerce','कक्षा 12 · वाणिज्य'),'11 / 11','86%']];
+---
+<section id="board-results" class="section results"><div class="wrap"><div><p class="eyebrow">{t('RBSE · 2026','आरबीएसई · 2026')}</p>
+<h2>{t('Board examination results','बोर्ड परीक्षा परिणाम')}</h2><p>{t('All 29 Class 10 candidates passed, including 24 with first division. Across the three Class 12 streams, all 33 candidates passed.','कक्षा 10 के सभी 29 विद्यार्थी उत्तीर्ण हुए, जिनमें 24 ने प्रथम श्रेणी प्राप्त की। कक्षा 12 के तीनों संकायों के सभी 33 विद्यार्थी उत्तीर्ण हुए।')}</p></div>
+<table><caption>{t('Veer Patta · 2025–26 examination session','वीर पट्टा · परीक्षा सत्र 2025–26')}</caption><thead><tr><th scope="col">{t('Class / stream','कक्षा / संकाय')}</th><th scope="col">{t('Passed / sat','उत्तीर्ण / शामिल')}</th><th scope="col">{t('Highest score','सर्वोच्च प्रतिशत')}</th></tr></thead><tbody>{rows.map(([label,pass,top])=><tr><th scope="row">{label}</th><td>{pass}</td><td>{top}</td></tr>)}</tbody></table>
+<p class="results-source">{t('Source: school’s 2026 RBSE examination summaries.','स्रोत: विद्यालय का 2026 आरबीएसई परीक्षा परिणाम सारांश।')} <a href={`tel:${site.phone}`}>{t('Ask the office about a stream','संकाय के बारे में कार्यालय से पूछें')} →</a></p></div></section>
+<style>.results{background:#142e43;color:#fff}.results h2,.results .eyebrow{color:#fff}.results p{max-width:62ch;color:#e0e7e9}.results table{border-collapse:collapse;width:100%;margin:1.2rem 0;font-variant-numeric:tabular-nums}.results caption{text-align:left;color:#ffe0a1;padding:.8rem 0}.results th,.results td{text-align:start;border-bottom:1px solid #536977;padding:.8rem .3rem;font-size:clamp(.85rem,2vw,1rem)}.results th:first-child{width:41%}.results .results-source{font-size:.88rem}.results-source a{display:inline-block;color:#ffe0a1;text-decoration:underline;text-underline-offset:4px}</style>

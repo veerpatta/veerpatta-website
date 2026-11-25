@@ -1,0 +1,22 @@
+---
+import {pick,pathFor,site,type Lang} from '../data/site';
+import Photo from './Photo.astro';
+interface Props {lang:Lang}
+const {lang}=Astro.props,t=(en:string,hi:string)=>pick(lang,en,hi);
+const houses=[
+ [t('Rana Pratap','राणा प्रताप'),t('Red','लाल'),'#9e3933'],
+ [t('Rana Kumbha','राणा कुम्भा'),t('Blue','नीला'),'#28588b'],
+ [t('Rana Sanga','राणा सांगा'),t('Yellow','पीला'),'#d4a52a'],
+ [t('Bappa Rawal','बप्पा रावल'),t('Green','हरा'),'#34724d']
+];
+---
+<section class="section house-section" id="houses"><div class="wrap houses">
+ <div><p class="eyebrow">{t('Inter-house activities','अंतर-सदनीय गतिविधियाँ')}</p><h2>{t('Four houses, one school lawn.','चार सदन, एक मैदान।')}</h2>
+ <p>{t('Look at the house flags at the sports oath, then watch a house team perform on the lawn. These are two ways pupils take part together at Veer Patta.','खेल शपथ में सदनों के झंडे देखें, फिर लॉन पर सदन की नृत्य प्रस्तुति देखें। वीर पट्टा में विद्यार्थी इस तरह भी अपनी टीम के साथ भाग लेते हैं।')}</p>
+ <ul>{houses.map(([name,colour,swatch])=><li><i style={`background:${swatch}`} aria-hidden="true"></i><strong>{name}</strong><span>{colour}</span></li>)}</ul>
+ <a class="text-link" href="#house-film">{t('Watch the inter-house dance','सदनों की नृत्य प्रस्तुति देखें')} ↓</a></div>
+ <figure><Photo id="sports-oath" lang={lang} sizes="(min-width:800px) 45vw, 95vw"/><figcaption>{t('House captains take the sports oath at Veer Patta.','वीर पट्टा में खेल शपथ लेते सदन कप्तान।')}</figcaption></figure>
+</div></section>
+<section class="section ncc-note" id="ncc"><div class="wrap"><p class="eyebrow">{t('From the school programme','विद्यालय के कार्यक्रम से')}</p><h2>{t('NCC on Sports Day','खेल दिवस पर एनसीसी')}</h2><p>{t('The programme for 27 January 2026 included a torch relay, the sports oath and recognition for NCC A certificate recipients. The gallery shows the cadets on the field. Ask the office about current eligibility and the activity schedule.','27 जनवरी 2026 के कार्यक्रम में मशाल रिले, खेल शपथ और एनसीसी ए प्रमाणपत्र पाने वालों का सम्मान शामिल था। गैलरी में मैदान पर कैडेटों की तस्वीरें देखें। मौजूदा पात्रता और गतिविधियों का समय कार्यालय से पूछें।')}</p>
+ <div><a class="text-link" href={pathFor(lang,'gallery')+'?category=ncc#photos'}>{t('See NCC photographs','एनसीसी की तस्वीरें देखें')} →</a><a class="text-link" href={`tel:${site.phone}`}>{t('Ask about participation','भाग लेने की जानकारी लें')} →</a></div></div></section>
+<style>.house-section{background:#f6f0df}.houses{display:grid;gap:2rem}.houses h2,.ncc-note h2{font-family:Georgia,serif}.houses p,.ncc-note p{max-width:65ch;line-height:1.7}.houses ul{list-style:none;margin:1.2rem 0;padding:0;border-top:1px solid #aeb6a8}.houses li{display:flex;align-items:center;gap:12px;border-bottom:1px solid #c3ccbc;padding:.55rem 0}.houses li i{width:.85rem;height:.85rem;border-radius:50%;border:1px solid #0003}.houses li span{margin-inline-start:auto}.houses figure{margin:0}.houses figure img{width:100%;height:auto}.houses figcaption{font-size:.86rem;margin-top:.7rem}.ncc-note .text-link{margin:1rem 1.5rem 0 0}@media(min-width:800px){.houses{grid-template-columns:.92fr 1.08fr;align-items:center;gap:5vw}}</style>

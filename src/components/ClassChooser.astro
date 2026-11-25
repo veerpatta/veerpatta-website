@@ -1,0 +1,41 @@
+---
+import { pick, site, admissionWhatsApp, type Lang } from '../data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+interface Props { lang: Lang }
+const {lang} = Astro.props;
+const t = (en: string, hi: string) => pick(lang, en, hi);
+const grades = (low: number, high: number) => Array.from({length: high-low+1}, (_, i) => t(`Class ${low+i}`, `कक्षा ${low+i}`));
+const groups = [
+  { name: t('Early years','शुरुआती कक्षाएँ'), options: [t('Nursery','नर्सरी'),'JKG','SKG'], note: t('Ask about entry age, the settling-in routine and what to bring on the first day.','प्रवेश की आयु, शुरुआती दिनों की दिनचर्या और पहले दिन साथ लाने की चीज़ें पूछें।') },
+  { name: t('Primary','प्राथमिक'), options: grades(1,5), note: t('Ask how reading groups work, which books are used and what your child can practise at home.','पढ़ने के समूह, किताबों और घर पर अभ्यास के बारे में पूछें।') },
+  { name: t('Middle school','उच्च प्राथमिक'), options: grades(6,8), note: t('Ask about subject teachers, books and moving from your previous school.','विषय शिक्षकों, पुस्तकों और दूसरे स्कूल से प्रवेश की प्रक्रिया के बारे में पूछें।') },
+  { name: t('Secondary','माध्यमिक'), options: grades(9,10), note: t('Ask about the RBSE course, board registration and documents for a transfer.','आरबीएसई पाठ्यक्रम, बोर्ड पंजीकरण और स्कूल बदलने के लिए ज़रूरी दस्तावेज़ पूछें।') },
+  { name: t('Senior secondary','उच्च माध्यमिक'), options: grades(11,12), note: t('Science, Commerce and Arts are offered. Check the subject combination and admission requirements with the office.','विज्ञान, वाणिज्य और कला संकाय हैं। विषय-संयोजन और प्रवेश की शर्तें कार्यालय से पक्की करें।') },
+];
+---
+<div class="class-chooser" id="choose-class">
+  <div class="chooser-head"><h2>{t('Choose a class','कक्षा चुनें')}</h2>
+    <p>{t('Select a class to prepare your WhatsApp enquiry. You decide when to send it.','कक्षा चुनकर WhatsApp पर पूछताछ का संदेश तैयार करें। संदेश आप खुद भेजेंगे।')}</p></div>
+  {groups.map(group => <section class="class-group"><h3>{group.name}</h3>
+    <div class="class-options">{group.options.map(label => <details name="admission-class" class="class-option">
+      <summary>{label}</summary>
+      <div class="class-answer"><strong>{label}</strong><p>{group.note}</p>
+        <a class="button button-whatsapp" href={admissionWhatsApp(lang,label)} target="_blank" rel="noopener noreferrer" data-class-enquiry={label}>
+          <WhatsAppIcon size={18}/>{t(`Ask about ${label}`,`${label} के लिए पूछें`)}
+        </a>
+      </div>
+    </details>)}</div>
+  </section>)}
+  <p class="chooser-fallback">{t('For current fees, seats or a visit,','मौजूदा शुल्क, सीटों या मुलाक़ात के लिए')} <a href={`tel:${site.phone}`}>{t('call the school office','स्कूल कार्यालय को फ़ोन करें')} · <bdi>{site.phoneDisplay}</bdi></a></p>
+</div>
+<style>
+.class-chooser{background:#fffdf7;border:1px solid #c9c7b9;padding:clamp(17px,4vw,32px);border-radius:6px;box-shadow:0 5px 0 #dedbcb;color:#152f43}
+.chooser-head h2{font-size:clamp(1.65rem,3vw,2.2rem);margin:0 0 .4rem}.chooser-head p,.class-answer p,.chooser-fallback{font-size:.94rem;line-height:1.55}
+.class-group{margin-top:1.25rem}.class-group h3{font-family:inherit;font-weight:700;font-size:.86rem;line-height:1.5;margin:0 0 .4rem;color:#394d51}
+.class-options{display:flex;flex-wrap:wrap;gap:6px}.class-option{display:contents}
+.class-option:not([open])::details-content{display:none}.class-option[open]::details-content{order:1;flex:1 0 100%}
+.class-option summary{list-style:none;display:grid;place-items:center;min-width:58px;min-height:44px;padding:6px 12px;border:1px solid #a8b3ad;border-radius:5px;font-size:.9rem;font-weight:700;cursor:pointer;background:white}
+.class-option summary::-webkit-details-marker{display:none}.class-option summary:hover{border-color:#123f40}.class-option[open] summary{background:#164848;color:white;border-color:#164848}
+.class-answer{order:1;flex-basis:100%;padding:16px;border-left:3px solid #a36217;background:#f0f2e7}.class-answer p{margin:.3rem 0 .9rem}.class-answer strong{font-size:1.08rem}
+.chooser-fallback{border-top:1px solid #d4d7c8;margin-top:1.25rem;padding-top:1rem}.chooser-fallback a{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+</style>

@@ -1,15 +1,25 @@
 ---
 import Photo from './Photo.astro';
 import {pick,pathFor,type Lang} from '../data/site';
-interface Props { lang:Lang }
-const {lang}=Astro.props;
-const t=(en:string,hi:string)=>pick(lang,en,hi);
+interface Props {lang:Lang}
+const {lang}=Astro.props,t=(en:string,hi:string)=>pick(lang,en,hi);
 ---
-<section class="school-cover" aria-labelledby="cover-title"><div class="cover-inside">
- <div class="cover-copy"><div class="cover-overline"><span class="cover-sun" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5"/></svg></span>{t('A school in Amet, Rajasthan','आमेट, राजस्थान का अपना स्कूल')}</div>
- <h1 id="cover-title">{t('Come inside.','आइए, स्कूल को')}<br/><em>{t('See school life.','अंदर से देखें।')}</em></h1>
- <p>{t('Walk through Veer Patta, find your child’s class and ask about a school visit. Start with the things you’d like to see for yourself.', 'वीर पट्टा की कक्षाएँ और परिसर देखें। अपने बच्चे की कक्षा चुनें और स्कूल आने का समय पूछें।')}</p>
- <div class="cover-buttons"><a class="cover-main" href={pathFor(lang,'admissions')}>{t('Explore admissions','प्रवेश की जानकारी')}<svg width="19" height="19" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10h14m-6-6 6 6-6 6"/></svg></a><a class="cover-film" href="#school-film"><span aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor"><path d="M3 1.2 11 6 3 10.8z"/></svg></span>{t('School film','स्कूल की फ़िल्म')}</a></div>
- <div class="cover-folio" aria-hidden="true"><span>VPPS</span><i></i><span>AMET • RAJASTHAN</span></div></div>
- <figure class="cover-scene"><Photo id="hero-exhibition-phone" lang={lang} modern eager sizes="(min-width: 860px) 51vw, 100vw" art={{id:'hero-exhibition-panel',media:'(min-width: 860px)',sizes:'51vw'}}/><figcaption><span class="cover-photo-num" aria-hidden="true">01</span><span>{t('Learning exhibition','शिक्षण प्रदर्शनी')}<b>{t('Pupils show their shapes project','आकृतियों का प्रोजेक्ट दिखाते विद्यार्थी')}</b></span><a href={pathFor(lang,'gallery')} aria-label={t('Explore more school photographs','स्कूल की और तस्वीरें देखें')}><svg width="23" height="23" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 16 16 4m0 0H6m10 0v10"/></svg></a></figcaption></figure>
+<section class="amet-cover" aria-labelledby="cover-title"><div class="amet-spread">
+ <div class="amet-intro"><p class="amet-place">{t('Amet, Rajasthan · RBSE','आमेट, राजस्थान · आरबीएसई')}</p>
+ <h1 id="cover-title">{t('A school day at','एक दिन')} <em>{t('Veer Patta.','वीर पट्टा में।')}</em></h1>
+ <p class="amet-deck">{t('From first words in primary school to choosing a Class 11 stream. See what happens in the classroom and out on our lawn opposite Mela Ground.','प्राथमिक में पहला शब्द पढ़ने से लेकर कक्षा 11 में संकाय चुनने तक। मेला ग्राउंड के सामने हमारे विद्यालय की कक्षाओं और मैदान की झलक देखें।')}</p>
+ <div class="amet-actions"><a class="button cover-main" href={pathFor(lang,'admissions')+'#choose-class'}>{t('Find your class','अपनी कक्षा चुनें')} <span aria-hidden="true">→</span></a>
+ <a class="cover-film" href="#school-film"><span aria-hidden="true">▷</span>{t('School film','स्कूल की फ़िल्म')}</a></div></div>
+ <figure class="amet-figure"><Photo id="amet-lawn-phone" lang={lang} eager sizes="100vw" art={{id:'amet-lawn',media:'(min-width: 760px)',sizes:'(min-width:1440px) 800px, 55vw'}}/>
+ <figcaption><span>{t('On the school lawn, Amet','विद्यालय का मैदान, आमेट')}</span><a href={pathFor(lang,'beyond')}>{t('School life','स्कूल जीवन')} <span aria-hidden="true">↗</span></a></figcaption></figure>
 </div></section>
+<style>
+.amet-cover{color:#152e35;background:#f8f2e4;border-bottom:1px solid #c2c7bc}.amet-spread{display:grid;max-width:1480px;margin:auto}.amet-intro{padding:clamp(19px,4vw,58px) max(18px,calc((100vw - 1300px)/2));min-width:0}
+.amet-place{display:flex;align-items:center;gap:.75rem;font-size:.78rem;font-weight:750;letter-spacing:.055em;color:#375249}.amet-place:before{content:'';width:2rem;height:3px;background:#b17720}
+.amet-intro h1{font-family:Georgia,'Noto Serif Devanagari',serif;font-size:clamp(2.5rem,7.9vw,6.6rem);font-weight:500;line-height:1.01;letter-spacing:-.05em;margin:.65rem 0}
+.amet-intro h1 em{color:#255c4d;white-space:nowrap;font-weight:500}.amet-deck{max-width:43ch;font-size:clamp(.96rem,1.45vw,1.13rem);line-height:1.55;color:#334a48}
+.amet-actions{display:flex;align-items:center;gap:1.15rem;flex-wrap:wrap;margin-top:1.1rem}.amet-actions .cover-main{background:#164a43;color:white;border-radius:4px}.amet-actions .cover-film{display:inline-flex;align-items:center;gap:.45rem;color:#1d3938;font-weight:700;min-height:44px}.amet-actions .cover-film span{color:#1d3938;border:1px solid #9da998}
+.amet-figure{position:relative;min-width:0;margin:0;align-self:stretch;background:#e2ddc7;display:flex;flex-direction:column}.amet-figure :global(picture){flex:1;aspect-ratio:1.75;height:auto}.amet-figure :global(img){height:100%;width:100%;object-fit:cover}.amet-figure figcaption{padding:.6rem max(18px,3vw);display:flex;gap:.7rem;align-items:center;justify-content:space-between;background:#173e37;color:white;font-size:.81rem}.amet-figure a{color:#fff4d4;text-decoration:underline;text-underline-offset:3px}
+:global(html[lang=hi]) .amet-intro h1{line-height:1.25;letter-spacing:-.025em}:global(html[lang=hi]) .amet-intro h1 em{font-style:normal}
+@media(min-width:760px){.amet-spread{grid-template-columns:.9fr 1.1fr}.amet-intro{align-self:center;padding:clamp(35px,5.1vw,80px)}.amet-intro h1 em{display:block}.amet-figure :global(picture){position:relative;aspect-ratio:auto;min-height:300px}.amet-figure :global(img){position:absolute;inset:0}.amet-figure figcaption{padding:.75rem 1.25rem}}
+</style>

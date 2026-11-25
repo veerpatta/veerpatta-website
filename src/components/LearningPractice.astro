@@ -1,0 +1,43 @@
+---
+import {pick,pathFor,type Lang} from '../data/site';
+import Photo from './Photo.astro';
+interface Props {lang:Lang}
+const {lang}=Astro.props;
+const t=(en:string,hi:string)=>pick(lang,en,hi);
+const steps=[
+ [t('Hear a sound','ध्वनि सुनें'),t('Say “map” slowly. Listen for the first sound, then try blending the three sounds back into the word.','“map” धीरे बोलें। पहली ध्वनि पहचानें, फिर तीनों ध्वनियों को जोड़कर पूरा शब्द बोलें।')],
+ [t('Read for meaning','पढ़कर अर्थ समझें'),t('Read “A map is in my bag.” Ask where the map is. The answer comes from the sentence.','“A map is in my bag.” पढ़ें। पूछें कि नक्शा कहाँ है। जवाब वाक्य में ही मिलेगा।')],
+ [t('Make a sentence','अपना वाक्य बनाएँ'),t('Replace “map” with another object. Say the new sentence aloud, then write it down.','“map” की जगह किसी और चीज़ का नाम रखें। नया वाक्य बोलें, फिर लिखें।')]
+];
+---
+<section class="practice section" id="english"><div class="wrap">
+  <div class="practice-intro"><div><p class="eyebrow">{t('English in Classes 1–5','कक्षा 1–5 में अंग्रेज़ी')}</p>
+  <h2>{t('An English group can span two classes.','एक अंग्रेज़ी समूह में अलग कक्षाओं के बच्चे।')}</h2></div>
+  <p>{t('At Veer Patta, the primary ELGA approach groups pupils by the English skill they are practising. A Class 2 reader and a Class 3 reader working on the same skill can practise together. The office can explain the current groups for your class.','वीर पट्टा में प्राथमिक स्तर पर ELGA के समूह अंग्रेज़ी के कौशल के अनुसार बनते हैं। जैसे, कक्षा 2 और 3 के बच्चे एक ही कौशल पर काम कर रहे हों तो साथ अभ्यास कर सकते हैं। अपनी कक्षा के मौजूदा समूहों की जानकारी कार्यालय से लें।')}</p></div>
+  <div class="practice-note"><h3>{t('What LEAD means by ELGA','LEAD का ELGA क्या है?')}</h3>
+    <p>{t('English Language and General Awareness (ELGA) builds from letter sounds and familiar words towards understanding a story, using grammar and expressing an idea in writing. LEAD describes the levels by skill.','English Language and General Awareness (ELGA) में अक्षरों की ध्वनि और परिचित शब्दों से शुरुआत होती है। आगे कहानी समझने, व्याकरण का प्रयोग करने और अपने विचार लिखने का अभ्यास होता है। LEAD इन स्तरों को कौशल के आधार पर बताता है।')}</p>
+    <a class="text-link" href="https://leadschool.in/parents/english-language-and-general-awareness/">{t('LEAD’s guide to ELGA','ELGA पर LEAD की जानकारी')} ↗</a></div>
+  <div class="practice-sample"><h3>{t('Try one word together','एक शब्द के साथ अभ्यास करें')}</h3>
+    <p>{t('A short example for home. Open each step.','घर पर आज़माने के लिए एक उदाहरण। हर चरण खोलकर देखें।')}</p>
+    {steps.map(([title,body])=><details><summary>{title}</summary><p>{body}</p></details>)}</div>
+</div></section>
+<section class="section maths-story" id="maths"><div class="wrap math-spread"><figure><Photo id="place-value-blocks" lang={lang} sizes="(min-width: 760px) 44vw, 95vw"/><figcaption>{t('Place-value blocks at the Veer Patta learning exhibition.','वीर पट्टा की शिक्षण प्रदर्शनी में स्थानीय मान समझाने के ब्लॉक।')}</figcaption></figure><div>
+  <p class="eyebrow">{t('Maths at the exhibition','प्रदर्शनी में गणित')}</p>
+  <h2>{t('What does the 2 in 24 mean?','24 में 2 का क्या अर्थ है?')}</h2>
+  <p>{t('Try this with a child. Make two groups of ten and four single counters. Draw those groups, then write 24. Ask what changes if one single counter moves away.','बच्चे के साथ दस-दस के दो समूह बनाएँ और चार गोटियाँ अलग रखें। समूहों का चित्र बनाएँ, फिर 24 लिखें। पूछें कि एक गोटी हटाने पर क्या बदलेगा।')}</p>
+  <p>{t('LEAD describes this movement from objects to pictures to symbols in mathematics. The photograph shows the school’s exhibition materials. The question is an example you can try on a visit.','गणित में LEAD पहले वस्तुओं से, फिर चित्रों से और उसके बाद अंकों से समझाने की विधि बताता है। तस्वीर स्कूल की प्रदर्शनी की है। यह सवाल आप स्कूल आकर भी आज़मा सकते हैं।')}</p>
+  <a class="text-link" href="https://leadschool.in/school-owner/why-lead/unmatched-curriculum/">{t('LEAD’s subject teaching methods','विषय पढ़ाने की LEAD की पद्धतियाँ')} ↗</a>
+</div></div></section>
+<section class="section explain-work"><div class="wrap">
+  <h2>{t('Let the pupil explain the model','मॉडल की कहानी बच्चे से सुनें')}</h2>
+  <p>{t('Look at the solar-system model in our exhibition photographs. Ask, “Which planet would you show me first, and why?” Give the pupil time to point, describe and take a question. LEAD’s student-led conferences use this idea of pupils presenting their own learning.','हमारी प्रदर्शनी की तस्वीर में सौरमंडल का मॉडल देखें। बच्चे से पूछें, “पहले कौन सा ग्रह दिखाओगे और क्यों?” उसे दिखाने, समझाने और आपका सवाल सुनने का समय दें। LEAD के छात्र-नेतृत्व वाले सम्मेलनों में विद्यार्थी इसी तरह अपना सीखा हुआ काम समझाते हैं।')}</p>
+  <div><a class="text-link" href={pathFor(lang,'gallery')+'?category=academic#photos'}>{t('See the school projects','स्कूल की परियोजनाएँ देखें')} →</a>
+    <a class="text-link" href="https://leadschool.in/parents/student-events/student-led-conferences/">{t('LEAD’s student-led conferences','LEAD के छात्र-नेतृत्व वाले सम्मेलन')} ↗</a></div>
+</div></section>
+<style>
+.explain-work{background:#edf1e7}.explain-work p{max-width:65ch;line-height:1.7;margin:1rem 0}.explain-work .text-link{margin:.4rem 1.4rem .4rem 0}
+.practice{background:#f5f1e5}.practice-intro,.math-spread{display:grid;gap:1.5rem}.practice-intro p,.math-spread p{line-height:1.7}.practice-intro h2,.math-spread h2{font-family:Georgia,serif;font-weight:600;max-width:19ch}.practice-note{border-block:1px solid #b5c1b7;padding:1.2rem 0;margin:1.6rem 0}.practice-note p{max-width:76ch}
+.practice-sample details{border-bottom:1px solid #c7c9bd}.practice-sample summary{font-weight:700;padding:.85rem 0;cursor:pointer}.practice-sample details p{padding-bottom:.9rem}.practice-sample>p{margin:.45rem 0}
+.math-spread figure{margin:0}.math-spread figure img{width:100%;height:auto;border-radius:3px}.math-spread figcaption{font-size:.86rem;color:#44544e;margin-top:.6rem}.math-spread p{margin:1rem 0}
+@media(min-width:760px){.practice-intro,.math-spread{grid-template-columns:1fr 1fr;align-items:center;gap:clamp(2rem,6vw,6rem)}.practice-sample{max-width:52rem}}
+</style>

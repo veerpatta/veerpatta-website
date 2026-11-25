@@ -1,7 +1,14 @@
 ---
 import {pick,pathFor,type Lang} from '../data/site';
-import Photo from './Photo.astro';
-interface Props{lang:Lang} const {lang}=Astro.props,t=(en:string,hi:string)=>pick(lang,en,hi);
-const tracks=[{slug:'pre-primary',photo:'early-years-track',label:t('First school','पहला स्कूल'),name:t('Nursery & KG','नर्सरी और केजी')},{slug:'class-11',photo:'circulatory-model',label:t('After Class 10','दसवीं के बाद'),name:t('Class 11','कक्षा 11')}];
+import ClassChooser from './ClassChooser.astro';
+interface Props {lang:Lang}
+const {lang}=Astro.props,t=(en:string,hi:string)=>pick(lang,en,hi);
 ---
-<section class="ad-hub"><div class="wrap"><p class="camp-kicker"><span class="camp-line" aria-hidden="true"></span>{t('Admissions · Amet','प्रवेश · आमेट')}</p><h1>{t('Which class are you looking for?','किस कक्षा की जानकारी चाहिए?')}</h1><p class="ad-hub-intro">{t('Start with a class guide, or contact the school about any class from Nursery through Class 12.', 'अपनी कक्षा की जानकारी से शुरू करें। नर्सरी से कक्षा 12 तक किसी भी कक्षा के बारे में कार्यालय से पूछ सकते हैं।')}</p><div class="hub-links">{tracks.map(x=><a class="hub-link" href={pathFor(lang,'admissions/'+x.slug)}><Photo id={x.photo} lang={lang} sizes="110px"/><span><small>{x.label}</small><strong>{x.name}</strong></span><span class="hub-arrow" aria-hidden="true">→</span></a>)}</div><div class="hub-misc"><a href="#enquiry">{t('Ask on WhatsApp about any class','किसी भी कक्षा के बारे में WhatsApp पर पूछें')}</a><a href="#budget">{t('Plan your school budget','खर्च का अपना अनुमान बनाएँ')}</a><a href={pathFor(lang,'contact')+'#visit'}>{t('Plan a visit','आने का समय पूछें')}</a></div></div></section>
+<section class="intake-cover"><div class="wrap intake-grid"><div>
+ <p class="eyebrow">{t('Admissions · Amet','प्रवेश · आमेट')}</p><h1>{t('Which class are you looking for?','किस कक्षा की जानकारी चाहिए?')}</h1>
+ <p>{t('Start with your child’s class. The school office can confirm current availability, subject choices and a time to visit.','अपने बच्चे की कक्षा से शुरुआत करें। मौजूदा सीटों, विषयों और मुलाक़ात के समय की पुष्टि कार्यालय से करें।')}</p>
+ <nav aria-label={t('Admission guides','प्रवेश की जानकारी')}><a href={pathFor(lang,'admissions/pre-primary')}>{t('Starting school · Nursery & KG','स्कूल की शुरुआत · नर्सरी और केजी')} →</a><a href={pathFor(lang,'admissions/class-11')}>{t('After Class 10 · choosing a stream','दसवीं के बाद · संकाय का चयन')} →</a><a href="#budget">{t('Plan your budget','खर्च का अनुमान लगाएँ')} ↓</a><a href={pathFor(lang,'contact')+'#visit'}>{t('Arrange a visit','स्कूल आने का समय लें')} →</a></nav>
+</div><ClassChooser lang={lang}/></div></section>
+<style>.intake-cover{background:#f3efdf;padding:clamp(24px,5vw,66px) 0}.intake-grid{display:grid;gap:1.4rem}.intake-grid h1{font:550 clamp(2.25rem,5vw,4.8rem)/1.09 Georgia,'Noto Serif Devanagari',serif;color:#193b37;max-width:16ch;margin:.7rem 0}.intake-grid>div>p{max-width:44ch;line-height:1.65}.intake-grid nav{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem;margin-top:1rem}.intake-grid nav a{display:inline-flex;align-items:center;min-height:42px;font-size:.9rem;color:#194c46;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+:global(html[lang=hi]) .intake-grid h1{line-height:1.27}
+@media(min-width:820px){.intake-grid{grid-template-columns:.86fr 1.14fr;align-items:start;gap:5vw}.intake-grid nav{display:grid;justify-items:start}}</style>

@@ -14,14 +14,17 @@ export const site = {
   addressHi: 'मेला ग्राउंड के सामने, आमेट, राजस्थान 313332',
   maps: 'https://maps.google.com/?q=Shri+Veer+Patta+Senior+Secondary+School+Amet+Rajasthan',
   url: 'https://vpps.co.in',
-  release: 'whatsapp-admissions-20261121'
+  release: 'amet-school-journeys-20261125'
 };
 /** A wa.me link to the school's WhatsApp. `message` is typed into the chat for the parent; nothing is sent until they send it. */
 export const whatsappUrl = (message = ''): string =>
   `https://wa.me/${site.whatsapp.replace(/\D/g, '')}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
 /** The words the school's WhatsApp reads as "start an admission enquiry", in the page's language. */
 export const admissionWhatsAppText = (lang: Lang): string => pick(lang, 'Admission enquiry', 'प्रवेश पूछताछ');
-export const admissionWhatsApp = (lang: Lang): string => whatsappUrl(admissionWhatsAppText(lang));
+export const admissionWhatsApp = (lang: Lang, classLabel?: string): string => {
+  const opening = admissionWhatsAppText(lang);
+  return whatsappUrl(classLabel ? opening + ' · ' + classLabel : opening);
+};
 export const navigation = (lang:Lang) => [
   {slug:'',label:pick(lang,'Home','होम')},
   {slug:'about',label:pick(lang,'Our school','हमारा स्कूल')},

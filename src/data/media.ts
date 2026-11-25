@@ -1,5 +1,9 @@
 export interface SchoolPhoto { widths:number[]; w:number; h:number; avif?:boolean; pos?:string; gallery?:string; alt:{en:string;hi:string} }
+const lawnAlt = {en:'Pupils on the lawn below the Veer Patta school building in Amet',hi:'आमेट में वीर पट्टा विद्यालय भवन के सामने मैदान में विद्यार्थी'};
 export const photos:Record<string,SchoolPhoto> = {
+  'amet-lawn': {widths:[520,880,1440],w:1440,h:837,avif:true,alt:lawnAlt},
+  'amet-lawn-phone': {widths:[460,780,1100],w:1100,h:728,avif:true,alt:lawnAlt},
+  'lab-instruments': {widths:[440,760,1080],w:1080,h:794,avif:true,alt:{en:'Apparatus and a sink at a workbench in the school science lab',hi:'विद्यालय की विज्ञान प्रयोगशाला की मेज़ पर उपकरण और सिंक'}},
   "campus-lawn": {
     "widths": [
       480,

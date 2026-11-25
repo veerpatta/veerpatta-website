@@ -7,7 +7,7 @@ for(const lang of ['en','hi']) for(const slug of routes) {
  if(!existsSync(file)) errors.push(`missing ${file}`);
  else {
   const html=readFileSync(file,'utf8');
-  if(!html.includes('content="whatsapp-admissions-20261121"')) errors.push(`old output ${file}`);
+  if(!html.includes('content="amet-school-journeys-20261125"')) errors.push(`old output ${file}`);
   if(!html.includes(`lang="${lang}"`)) errors.push(`language mismatch ${file}`);
   if(/\{%|\{\{/.test(html)) errors.push(`unrendered template ${file}`);
  }
