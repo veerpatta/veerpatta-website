@@ -1,7 +1,6 @@
 ---
 import Arrow from '../../components/Arrow.astro';
 import PageHead from '../../components/PageHead.astro';
-import Photo from '../../components/Photo.astro';
 import { pathFor, pick, type Lang } from '../../data/site';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
@@ -16,14 +15,17 @@ const { lang } = Astro.props as { lang: Lang };
 const t = (en: string, hi: string) => pick(lang, en, hi);
 const title = t('Sports Day at Veer Patta, 2025', 'वीर पत्ता का खेल दिवस 2025');
 const description = t(
-  'The school held its Sports Day on Monday, 10 February 2025 at the Veer Patta Sports Ground in Amet. The invitation scheduled athletics in the morning and matches in the afternoon.',
-  'सोमवार, 10 फ़रवरी 2025 को आमेट के वीर पत्ता खेल मैदान में विद्यालय का खेल दिवस हुआ। आमंत्रण पत्र में सुबह एथलेटिक्स और दोपहर बाद मैचों का समय दिया गया था।'
+  'Four young pupils in yellow take to the track at Veer Patta Sports Ground in Amet. The school held its Sports Day here on Monday, 10 February 2025.',
+  'आमेट के वीर पत्ता खेल मैदान में पीली टी-शर्ट पहने चार छोटे बच्चे ट्रैक पर उतरे। सोमवार, 10 फ़रवरी 2025 को यहाँ विद्यालय का खेल दिवस हुआ।'
 );
 ---
 <SiteLayout lang={lang} slug="news" title={title} description={description} canonicalPath={'/news/2025-01-15-sports-day-' + lang + '/'}>
   <article>
-    <PageHead lang={lang} kicker={t('School archive', 'विद्यालय का समाचार संग्रह')} title={title}
-      description={description} links={[{ href: pathFor(lang, 'news') + '#archive', label: t('Back to school news', 'विद्यालय समाचार पर लौटें') }]} />
+    <div class="inside-article-head">
+      <PageHead lang={lang} kicker={t('School archive', 'विद्यालय का समाचार संग्रह')} title={title}
+        image="junior-track-games-2025" caption={t('Early-years pupils during track games on 10 February 2025.', '10 फ़रवरी 2025 को ट्रैक पर खेलते छोटे बच्चे।')}
+        description={description} links={[{ href: pathFor(lang, 'news') + '#archive', label: t('Back to school news', 'विद्यालय समाचार पर लौटें') }]} />
+    </div>
     <section class="inside-section">
       <div class="wrap inside-story-layout">
         <div class="inside-story-date">
@@ -34,10 +36,6 @@ const description = t(
           <h2>{t('From the day’s programme', 'उस दिन का कार्यक्रम')}</h2>
           <p>{t('The morning athletics session was scheduled from 9 am to noon. The programme listed 100-metre and 200-metre races and relays, alongside sack races, three-legged races and tug of war.', 'सुबह 9 से दोपहर 12 बजे तक एथलेटिक्स का समय था। कार्यक्रम में 100 और 200 मीटर की दौड़, रिले, बोरी दौड़, तीन टाँग की दौड़ और रस्साकशी शामिल थीं।')}</p>
           <p>{t('The invitation set aside 3 pm to 6 pm for matches at the school sports ground.', 'आमंत्रण पत्र में विद्यालय के खेल मैदान पर मैचों के लिए दोपहर 3 से शाम 6 बजे तक का समय रखा गया था।')}</p>
-          <figure class="inside-figure inside-archive-photo">
-            <Photo id="race-lanes" lang={lang} sizes="(min-width: 600px) 448px, 90vw" />
-            <figcaption>{t('From the school sports archive. Green and orange cones mark the team-race lanes.', 'विद्यालय के खेल चित्र-संग्रह से। हरे और नारंगी कोन टीम रेस की लेनों को चिह्नित करते हैं।')}</figcaption>
-          </figure>
           <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=sports#photos'}>{t('See more of the sports collection', 'खेल-संग्रह की और तस्वीरें देखें')}<span aria-hidden="true"><Arrow/></span></a>
         </div>
       </div>

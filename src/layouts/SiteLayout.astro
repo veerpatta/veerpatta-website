@@ -1,5 +1,6 @@
 ---
 import Arrow from '../components/Arrow.astro';
+import { photos } from '../data/media';
 import '../styles/site.css';
 import '../styles/fieldbook.css';
 import '../styles/school.css';
@@ -11,14 +12,22 @@ interface Props {lang:Lang;slug?:string;title?:string;description?:string;canoni
 const {lang,slug='',title,description,canonicalPath,notFound=false}=Astro.props;
 const name=pick(lang,site.name,site.nameHi);
 const pageTitle=title?`${title} | ${name}`:pick(lang,'Veer Patta School, Amet | School life, admissions & campus visits','वीर पत्ता स्कूल, आमेट | स्कूल जीवन, प्रवेश और परिसर की मुलाक़ात');
-const desc=description||pick(lang,'Discover Veer Patta Senior Secondary School in Amet. RBSE, Nursery to Class 12, real campus photos, student life and simple admissions guidance.','आमेट के वीर पत्ता सीनियर सेकेंडरी स्कूल को जानें। आरबीएसई, नर्सरी से कक्षा 12, परिसर की असली तस्वीरें, स्कूल जीवन और आसान प्रवेश जानकारी।');
+const desc=description||pick(lang,'Meet Veer Patta pupils at their learning exhibition, on the sports field and around the Amet campus. RBSE, Nursery to Class 12. Explore admissions or plan a visit.','आमेट के वीर पत्ता विद्यालय में बच्चों की प्रदर्शनी, खेल दिवस और परिसर की झलक देखें। राजस्थान बोर्ड, नर्सरी से 12वीं तक। प्रवेश और विद्यालय आने की जानकारी लें।');
 const canonical=site.url+(canonicalPath||pathFor(lang,slug));
 const altLang=lang==='en'?'hi':'en';
 const altPath=canonicalPath?canonicalPath.replace(/-(en|hi)\/$/,`-${altLang}/`):pathFor(altLang,slug);
 const nav=navigation(lang);
 const admissions=slug==='admissions'||slug.startsWith('admissions/');
 const defaultPath=canonicalPath?canonicalPath.replace(/-(en|hi)\/$/,'-en/'):pathFor(slug==='admissions/pre-primary'||slug==='admissions/class-11'?'hi':'en',slug);
-const shareImage=slug==='admissions/pre-primary'?'first-school-room-1120':slug==='admissions/class-11'?'science-bench-828':'amet-campus-wide-1200';
+const sharePhotos: Record<string, string> = {
+  '': 'exhibition-pupils-amet', about: 'school-lawn-cricket', academics: 'angle-wheel-demonstration',
+  admissions: 'classroom-participation', 'admissions/pre-primary': 'junior-track-games-2025',
+  'admissions/class-11': 'greenhouse-exhibition-group', beyond: 'sports-podium-amet', digital: 'student-headset-desk',
+  gallery: 'interhouse-dance-lawn', contact: 'campus-approach', news: 'junior-track-games-2025',
+};
+const shareId = sharePhotos[slug] ?? 'amet-campus-terrace';
+const share = photos[shareId];
+const shareImage = `${shareId}-${share.w}`;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -28,7 +37,7 @@ const shareImage=slug==='admissions/pre-primary'?'first-school-room-1120':slug==
   <meta name="site-release" content={site.release} /><meta name="theme-color" content="#172e40" />
   {notFound && <meta name="robots" content="noindex,follow" />}{!notFound && <><link rel="canonical" href={canonical} /><link rel="alternate" hreflang={lang} href={canonical} /><link rel="alternate" hreflang={altLang} href={site.url+altPath} /><link rel="alternate" hreflang="x-default" href={site.url+defaultPath} /></>}
   <link rel="icon" type="image/png" href="/assets/images/vpps-emblem-48.png" /><link rel="manifest" href="/manifest.webmanifest" />
-  <meta property="og:type" content="website" /><meta property="og:site_name" content={name} /><meta property="og:title" content={pageTitle} /><meta property="og:description" content={desc} /><meta property="og:url" content={canonical} /><meta property="og:image" content={`${site.url}/assets/media/photos/${shareImage}.webp`} /><meta property="og:locale" content={lang==='hi'?'hi_IN':'en_IN'} /><meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:type" content="website" /><meta property="og:site_name" content={name} /><meta property="og:title" content={pageTitle} /><meta property="og:description" content={desc} /><meta property="og:url" content={canonical} /><meta property="og:image" content={`${site.url}/assets/media/photos/${shareImage}.webp`} /><meta property="og:image:alt" content={share.alt[lang]} /><meta property="og:locale" content={lang==='hi'?'hi_IN':'en_IN'} /><meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'School',name:site.name,alternateName:site.fullName,url:site.url,telephone:site.phone,address:{'@type':'PostalAddress',streetAddress:'Opp. Mela Ground',addressLocality:'Amet',addressRegion:'Rajasthan',postalCode:'313332',addressCountry:'IN'}})} />
  </head>
  <body>
