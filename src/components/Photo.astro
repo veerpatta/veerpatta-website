@@ -5,10 +5,10 @@ import type { Lang } from '../data/site';
 interface Art { id: string; media: string; sizes: string }
 interface Props {
   id: string; lang: Lang; eager?: boolean; sizes?: string; class?: string;
-  modern?: boolean; art?: Art;
+  modern?: boolean; art?: Art; phoneMaxWidth?: number;
 }
 
-const { id, lang, eager = false, sizes = '(min-width: 1000px) 50vw, 100vw', class: className, art } = Astro.props;
+const { id, lang, eager = false, sizes = '(min-width: 1000px) 50vw, 100vw', class: className, art, phoneMaxWidth } = Astro.props;
 const photo = photos[id];
 if (!photo) throw new Error(`Unknown public photograph: ${id}`);
 const wide = art && photos[art.id];
@@ -16,6 +16,12 @@ if (art && !wide) throw new Error(`Unknown public photograph: ${art.id}`);
 
 const srcset = (key: string, widths: number[], extension: string) =>
   widths.map(width => `/assets/media/photos/${key}-${width}.${extension} ${width}w`).join(', ');
+// Keep AVIF and WebP inside the phone budget even on high-density displays.
+// The smallest available WebP also covers callers below the first listed width.
+const phone = phoneMaxWidth === undefined ? undefined : {
+  webp: photo.widths.filter(width => width <= phoneMaxWidth || width === photo.widths[0]),
+  avif: photo.avifWidths?.filter(width => width <= phoneMaxWidth),
+};
 const fallback = photo.widths.find(width => width >= 600 && width <= 800) ?? photo.widths[photo.widths.length - 1];
 const attrs = {
   src: `/assets/media/photos/${id}-${fallback}.webp`,
@@ -27,11 +33,15 @@ const attrs = {
   style: photo.pos ? `object-position:${photo.pos}` : undefined,
 };
 ---
-{art || photo.avifWidths ? (
+{art || phone || photo.avifWidths ? (
   <picture class="modern-photo">
     {art && wide && <>
       {wide.avifWidths && <source media={art.media} type="image/avif" srcset={srcset(art.id, wide.avifWidths, 'avif')} sizes={art.sizes} width={wide.w} height={wide.h} />}
       <source media={art.media} type="image/webp" srcset={srcset(art.id, wide.widths, 'webp')} sizes={art.sizes} width={wide.w} height={wide.h} />
+    </>}
+    {phone && <>
+      {phone.avif && phone.avif.length > 0 && <source media="(max-width: 599px)" type="image/avif" srcset={srcset(id, phone.avif, 'avif')} sizes={sizes} />}
+      <source media="(max-width: 599px)" type="image/webp" srcset={srcset(id, phone.webp, 'webp')} sizes={sizes} />
     </>}
     {photo.avifWidths && <source type="image/avif" srcset={srcset(id, photo.avifWidths, 'avif')} sizes={sizes} />}
     <img {...attrs} />

@@ -57,3 +57,20 @@ test('screenshots and reduced-motion layout',async({page})=>{
  await page.setViewportSize({width:1440,height:1000});await page.goto('/en/');await loadPhotos();await page.screenshot({path:'test-results/home-en-desktop.png',fullPage:true});
  await page.setViewportSize({width:375,height:812});await page.goto('/hi/');await loadPhotos();await page.screenshot({path:'test-results/home-hi-mobile.png',fullPage:true});await page.emulateMedia({reducedMotion:'reduce'});expect(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
 });
+
+test('high-density phones load the smaller homepage photographs', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ viewport: { width: 412, height: 839 }, deviceScaleFactor: 3, isMobile: true });
+  const page = await context.newPage();
+  await page.goto(`${baseURL}/hi/`);
+  const photos = [
+    { selector: '.front-photo img', file: /amet-campus-wide-(480|800)\.(?:avif|webp)$/ },
+    { selector: '.project-spread figure img', file: /circulatory-model-(480|640)\.(?:avif|webp)$/ },
+    { selector: '#school-film [data-video-src] img', file: /campus-spaces-poster-(480|640)\.(?:avif|webp)$/ },
+  ];
+  for (const photo of photos) {
+    const image = page.locator(photo.selector);
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0 ? img.currentSrc : '')).toMatch(photo.file);
+  }
+  await context.close();
+});
