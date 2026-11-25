@@ -1,19 +1,75 @@
-import {test,expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-for(const lang of ['hi','en'])for(const stage of ['pre-primary','class-11']){
- test(`${lang}/${stage}: WhatsApp is the first action, Call School stays and the page posts nothing`,async({page})=>{
-  await page.setViewportSize({width:390,height:844});const outside:string[]=[],posts:string[]=[];
-  await page.route('**/*',async r=>{const u=r.request().url();if(r.request().method()!=='GET')posts.push(u);if(!u.startsWith('http://127.0.0.1:4321/')){outside.push(u);return r.abort();}return r.continue();});
-  await page.goto(`/${lang}/admissions/${stage}/?utm_source=mock`);
-  const h=page.getByRole('heading',{level:1});await expect(h).toHaveCount(1);
-  expect(await page.locator('link[rel=canonical]').getAttribute('href')).toBe(`https://vpps.co.in/${lang}/admissions/${stage}/`);
-  const first=page.locator('.camp-buttons a').first();await expect(first).toBeInViewport();await expect(first).toHaveAttribute('data-whatsapp-enquiry','');
-  const links=page.locator('[data-whatsapp-enquiry]');expect(await links.count()).toBe(3);
-  for(const link of await links.all()){const url=new URL((await link.getAttribute('href'))!);expect(url.origin+url.pathname).toBe('https://wa.me/918302207823');expect(url.searchParams.get('text')).toBe(lang==='hi'?'प्रवेश पूछताछ':'Admission enquiry');await expect(link).toHaveAttribute('target','_blank');}
-  await expect(page.locator('.camp-buttons a[href^="tel:"]')).toHaveAttribute('href','tel:+917976199548');
-  await expect(page.locator('#enquiry form')).toHaveCount(0);await expect(page.locator('#enquiry')).toContainText('+91 83022 07823');
-  expect(posts).toEqual([]);expect(outside).toEqual([]);
- });
+
+const classes = ['Nursery', 'JKG', 'SKG', ...Array.from({ length: 12 }, (_, i) => `Class ${i + 1}`)];
+function expectedDraft(lang: string, grade: string | null) {
+  if (!grade) return lang === 'en' ? 'Admission enquiry' : 'प्रवेश पूछताछ';
+  const earlyHindi: Record<string, string> = { Nursery: 'नर्सरी', JKG: 'जूनियर केजी', SKG: 'सीनियर केजी' };
+  const translated = earlyHindi[grade] ?? grade.replace('Class ', 'कक्षा ');
+  return lang === 'en' ? `Admission enquiry for ${grade}` : `${translated} के लिए प्रवेश पूछताछ`;
+}
+
+for (const lang of ['en', 'hi']) {
+  test(`${lang} has 15 native class drafts with JavaScript disabled`, async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    const external: string[] = [];
+    await context.route('**/*', route => {
+      if (new URL(route.request().url()).origin === 'http://127.0.0.1:4321') return route.continue();
+      external.push(route.request().url());
+      return route.abort();
+    });
+    await page.goto(`http://127.0.0.1:4321/${lang}/admissions/#classes`);
+    const choices = page.locator('#classes [data-admission-class]');
+    await expect(choices).toHaveCount(15);
+    for (const [i, grade] of classes.entries()) {
+      const choice = choices.nth(i);
+      await expect(choice).toBeVisible();
+      await expect(choice).toHaveAttribute('data-admission-class', grade);
+      const url = new URL((await choice.getAttribute('href'))!);
+      expect(url.origin + url.pathname).toBe('https://wa.me/918302207823');
+      expect([...url.searchParams.keys()]).toEqual(['text']);
+      expect(url.searchParams.get('text')).toBe(expectedDraft(lang, grade));
+      await expect(choice).toHaveAttribute('target', '_blank');
+      await expect(choice).toHaveAttribute('rel', /noopener/);
+    }
+    await expect(page.locator('#enquiry form')).toHaveCount(0);
+    await expect(page.locator('#enquiry a[href^="tel:"]')).toHaveAttribute('href', 'tel:+917976199548');
+    expect(external).toEqual([]);
+    await context.close();
+  });
+}
+
+for (const lang of ['hi', 'en']) for (const stage of ['pre-primary', 'class-11']) {
+  test(`${lang}/${stage} opens a draft for each named class and offers a separate office call`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const outside: string[] = [], posts: string[] = [];
+    await page.route('**/*', route => {
+      const url = route.request().url();
+      if (route.request().method() !== 'GET') posts.push(url);
+      if (!url.startsWith('http://127.0.0.1:4321/')) { outside.push(url); return route.abort(); }
+      return route.continue();
+    });
+    await page.goto(`/${lang}/admissions/${stage}/?utm_source=mock`);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
+    await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `https://vpps.co.in/${lang}/admissions/${stage}/`);
+    const actions = page.locator('.stage-actions [data-admission-class]');
+    expect(await actions.evaluateAll(links => links.map(link => link.getAttribute('data-admission-class'))))
+      .toEqual(stage === 'pre-primary' ? ['Nursery', 'JKG', 'SKG'] : ['Class 11']);
+    await expect(actions.first()).toBeInViewport();
+    for (const link of await page.locator('[data-whatsapp-enquiry]').all()) {
+      const grade = await link.getAttribute('data-admission-class');
+      const url = new URL((await link.getAttribute('href'))!);
+      expect(url.origin + url.pathname).toBe('https://wa.me/918302207823');
+      expect(url.searchParams.get('text')).toBe(expectedDraft(lang, grade));
+      await expect(link).toHaveAttribute('target', '_blank');
+    }
+    await expect(page.locator('.stage-actions a[href^="tel:"]')).toHaveAttribute('href', 'tel:+917976199548');
+    await expect(page.locator('#enquiry form')).toHaveCount(0);
+    await expect(page.locator('#enquiry')).toContainText('+91 83022 07823');
+    expect(posts).toEqual([]);
+    expect(outside).toEqual([]);
+  });
  test(`${lang}/${stage}: seven widths, native fallbacks, serious/critical axe`,async({page,browser})=>{
   await page.goto(`/${lang}/admissions/${stage}/`);for(const width of [320,375,414,768,1024,1280,1920]){await page.setViewportSize({width,height:800});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${width}px`).toBe(true);}
   await page.setViewportSize({width:390,height:844});const a=await new AxeBuilder({page}).analyze();expect(a.violations.filter(x=>x.impact==='critical'||x.impact==='serious').map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);

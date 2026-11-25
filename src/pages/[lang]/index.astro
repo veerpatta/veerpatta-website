@@ -1,0 +1,11 @@
+---
+import Home from '../../components/Home.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import type { Lang } from '../../data/site';
+
+export function getStaticPaths() {
+  return (['en', 'hi'] as const).map(lang => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+---
+<SiteLayout lang={lang}><Home lang={lang}/></SiteLayout>

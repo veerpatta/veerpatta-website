@@ -1,0 +1,30 @@
+---
+import { admissionClassName, type AdmissionClass } from '../data/admission-classes';
+import { admissionWhatsApp, pick, type Lang } from '../data/site';
+interface Props { lang: Lang; grade: AdmissionClass }
+const { lang, grade } = Astro.props;
+const className = admissionClassName(lang, grade);
+const name = grade === 'JKG' || grade === 'SKG' ? `${className} (${grade})` : className;
+---
+<a class="class-link" href={admissionWhatsApp(lang, grade)} target="_blank" rel="noopener noreferrer"
+  aria-label={pick(lang, `Open a WhatsApp draft for ${name}`, `${name} के लिए WhatsApp संदेश खोलें`)}
+  data-whatsapp-enquiry data-admission-class={grade}>
+  {name}
+</a>
+<style>
+  .class-link {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem 1rem;
+    border: 1px solid #ac9e8b;
+    border-radius: .3rem;
+    background: var(--paper, #fffcf5);
+    color: var(--ink, #172e40);
+    font-weight: 650;
+    line-height: 1.45;
+    touch-action: manipulation;
+  }
+  .class-link:hover, .class-link:focus-visible { border-color: var(--maroon, #762f39); background: #f7efe3; }
+</style>

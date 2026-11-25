@@ -1,7 +1,109 @@
 ---
-import {pick,pathFor,type Lang} from '../data/site';
+import Arrow from './Arrow.astro';
+import { admissionClassGroups } from '../data/admission-classes';
+import { pathFor, pick, site, type Lang } from '../data/site';
+import AdmissionClassLink from './AdmissionClassLink.astro';
 import Photo from './Photo.astro';
-interface Props{lang:Lang} const {lang}=Astro.props,t=(en:string,hi:string)=>pick(lang,en,hi);
-const tracks=[{slug:'pre-primary',photo:'early-years-track',label:t('First school','पहला स्कूल'),name:t('Nursery & KG','नर्सरी और केजी')},{slug:'class-11',photo:'circulatory-model',label:t('After Class 10','दसवीं के बाद'),name:t('Class 11','कक्षा 11')}];
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = (en: string, hi: string) => pick(lang, en, hi);
 ---
-<section class="ad-hub"><div class="wrap"><p class="camp-kicker"><span class="camp-line" aria-hidden="true"></span>{t('Admissions · Amet','प्रवेश · आमेट')}</p><h1>{t('Which class are you looking for?','किस कक्षा की जानकारी चाहिए?')}</h1><p class="ad-hub-intro">{t('Start with a class guide, or contact the school about any class from Nursery through Class 12.', 'अपनी कक्षा की जानकारी से शुरू करें। नर्सरी से कक्षा 12 तक किसी भी कक्षा के बारे में कार्यालय से पूछ सकते हैं।')}</p><div class="hub-links">{tracks.map(x=><a class="hub-link" href={pathFor(lang,'admissions/'+x.slug)}><Photo id={x.photo} lang={lang} sizes="110px"/><span><small>{x.label}</small><strong>{x.name}</strong></span><span class="hub-arrow" aria-hidden="true">→</span></a>)}</div><div class="hub-misc"><a href="#enquiry">{t('Ask on WhatsApp about any class','किसी भी कक्षा के बारे में WhatsApp पर पूछें')}</a><a href="#budget">{t('Plan your school budget','खर्च का अपना अनुमान बनाएँ')}</a><a href={pathFor(lang,'contact')+'#visit'}>{t('Plan a visit','आने का समय पूछें')}</a></div></div></section>
+
+<header class="admissions-cover">
+  <div class="wrap admissions-cover-inner">
+    <div>
+      <nav class="admissions-crumb" aria-label={t('Breadcrumb', 'पृष्ठ का मार्ग')}>
+        <a href={pathFor(lang)}>{t('Home', 'होम')}</a><span aria-hidden="true">/</span><span>{t('Admissions', 'प्रवेश')}</span>
+      </nav>
+      <h1>{t('School admissions', 'विद्यालय में प्रवेश')}</h1>
+      <p>{t('Ask the office about entry requirements, fees or a visit for any class from Nursery through Class 12.', 'नर्सरी से कक्षा 12 तक प्रवेश की शर्तों, फ़ीस या स्कूल आने के बारे में कार्यालय से बात करें।')}</p>
+      <div class="admissions-cover-actions">
+        <a href="#classes" class="button choose-class">{t('Choose a class', 'कक्षा चुनें')} <span aria-hidden="true"><Arrow direction="down"/></span></a>
+        <a href={`tel:${site.phone}`} class="admissions-phone">{t('Call the office', 'कार्यालय को फ़ोन करें')}</a>
+      </div>
+    </div>
+    <figure>
+      <Photo id="school-office" lang={lang} eager sizes="(min-width: 850px) 38vw, (min-width: 550px) 33vw, 94vw" />
+      <figcaption>{t('School office, Amet', 'विद्यालय कार्यालय, आमेट')}</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="class-directory" id="classes" aria-labelledby="classes-heading">
+  <div class="wrap directory-layout">
+    <div class="directory-intro">
+      <h2 id="classes-heading">{t('Choose your class', 'अपनी कक्षा चुनें')}</h2>
+      <p>{t('Select a class to open a WhatsApp draft. You can edit it before sending.', 'कक्षा चुनें। WhatsApp पर संदेश खुलेगा, जिसे आप भेजने से पहले बदल सकते हैं।')}</p>
+    </div>
+    <div class="directory-groups">
+      {admissionClassGroups.map(group => (
+        <div class="directory-group">
+          <h3>{group.name[lang]}</h3>
+          <ul class="class-choices" role="list">
+            {group.classes.map(grade => <li><AdmissionClassLink lang={lang} grade={grade} /></li>)}
+          </ul>
+        </div>
+      ))}
+      <div class="directory-foot">
+        <p class="directory-destination"><WhatsAppIcon size={17} /> {t('School WhatsApp', 'स्कूल का WhatsApp')} <bdi>{site.whatsappDisplay}</bdi></p>
+        <a class="guide-link" href="#enquiry">{t('What happens after I send it?', 'संदेश भेजने के बाद क्या होगा?')} <span aria-hidden="true"><Arrow direction="down"/></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="admissions-guides" aria-label={t('Class guides and fee planner', 'कक्षा की जानकारी और खर्च का अनुमान')}>
+  <div class="wrap">
+    <a href={pathFor(lang, 'admissions/pre-primary')}>{t('Nursery & KG guide', 'नर्सरी और केजी की जानकारी')} <span aria-hidden="true"><Arrow/></span></a>
+    <a href={pathFor(lang, 'admissions/class-11')}>{t('Class 11 subject guide', 'कक्षा 11 के विषय')} <span aria-hidden="true"><Arrow/></span></a>
+    <a href="#budget">{t('School budget planner', 'स्कूल के खर्च का अनुमान')} <span aria-hidden="true"><Arrow direction="down"/></span></a>
+  </div>
+</nav>
+
+<style>
+  .admissions-cover { background: var(--cream, #f3ecdf); }
+  .admissions-cover-inner { display: grid; align-items: center; gap: 1.4rem 4vw; padding-block: clamp(1.3rem, 4vw, 4rem); }
+  .admissions-cover h1 { line-height: 1.08; font-size: clamp(2.65rem, 6vw, 5.6rem); }
+  .admissions-crumb { display: flex; align-items: center; gap: .7rem; margin-bottom: .8rem; font-size: .88rem; }
+  .admissions-crumb a, .admissions-phone, .guide-link { text-decoration: underline; text-underline-offset: .22em; }
+  .admissions-cover p, .directory-intro p { margin-top: .85rem; max-width: 45ch; line-height: 1.65; font-size: 1.02rem; }
+  .admissions-cover-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem 1.3rem; margin-top: 1.25rem; }
+  .choose-class { background: var(--maroon, #762f39); color: white; }
+  .choose-class:hover { background: #5c2530; }
+  .admissions-phone, .guide-link { display: inline-flex; align-items: center; min-height: 44px; font-size: .92rem; font-weight: 650; }
+  .admissions-cover figure { position: relative; overflow: hidden; border-radius: .22rem; }
+  .admissions-cover figure :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 70%; display: block; }
+  .admissions-cover figure { aspect-ratio: 3.1; }
+  .admissions-cover figcaption { position: absolute; bottom: 0; left: 0; background: #172e40; color: #fff; padding: .28rem .7rem; font-size: .76rem; }
+  .class-directory { padding-block: clamp(2.4rem, 6vw, 5.4rem); background: var(--paper, #fffcf5); }
+  .directory-layout { display: grid; gap: 1.6rem 5vw; align-items: start; }
+  .directory-intro h2 { font-size: clamp(2rem, 3.8vw, 3.6rem); max-width: 14ch; }
+  .guide-link { gap: .65rem; color: var(--maroon, #762f39); }
+  .directory-groups { border-top: 2px solid var(--ink, #172e40); }
+  .directory-group { display: grid; gap: .6rem; border-bottom: 1px solid var(--line, #d8cec0); padding-block: 1rem 1.15rem; }
+  .directory-group h3 { font-family: var(--sans); font-size: 1rem; line-height: 1.5; letter-spacing: 0; }
+  .class-choices { margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .55rem; list-style: none; }
+  .class-choices li { min-width: 0; }
+  .directory-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .15rem 1.5rem; margin-top: .7rem; }
+  .directory-destination { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem .55rem; font-size: .86rem; }
+  .directory-destination bdi { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .admissions-guides { border-block: 1px solid var(--line, #d8cec0); }
+  .admissions-guides > div { display: flex; gap: .2rem 2rem; flex-wrap: wrap; padding-block: .65rem; }
+  .admissions-guides a { display: inline-flex; align-items: center; min-height: 44px; gap: .65rem; color: var(--maroon, #762f39); font-size: .96rem; font-weight: 650; }
+  .admissions-guides a:hover { text-decoration: underline; text-underline-offset: .2em; }
+  :global(html[lang=hi]) .admissions-cover h1, :global(html[lang=hi]) .directory-intro h2 { line-height: 1.32; }
+  @media (min-width: 550px) {
+    .admissions-cover-inner { grid-template-columns: 1.35fr .85fr; }
+    .admissions-cover figure { aspect-ratio: 1.16; }
+  }
+  @media (min-width: 850px) {
+    .directory-layout { grid-template-columns: minmax(0, .85fr) minmax(0, 1.4fr); }
+    .admissions-cover figure { aspect-ratio: 1.95; }
+    .admissions-cover-inner { gap: clamp(3rem, 6vw, 7rem); }
+  }
+  @media (min-width: 1150px) {
+    .directory-group { grid-template-columns: .7fr 1.5fr; align-items: baseline; gap: 1.2rem; }
+  }
+</style>

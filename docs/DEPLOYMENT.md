@@ -195,3 +195,14 @@ Verify the request path matches `/assets/media/videos/*`, the Worker still has `
 - [Repository validation workflow](../.github/workflows/build.yml)
 
 Updated for the Astro migration, 8 November 2026.
+
+## Amet school redesign rollback point, 25 November 2026
+
+Before the bilingual redesign, production served the committed homepage from
+`3d0a82e512510a345b493cea99578ef9b907dec8` (PR #111). The English homepage
+matched the committed bytes, SHA-256
+`951220589e493a73d2cad3ef03b658f4a2745775ee20958f557788da67820d9d`.
+Cloudflare reported Worker version `89bb4e92-5f90-4a95-90da-8f319cea7845`
+for successful build `186e4a82-aa29-4372-a2e3-e0ce8949b062`. This version
+uses the previous media catalogue and service-worker cache. Review its photo
+permissions before restoring its public assets.

@@ -1,0 +1,120 @@
+---
+import Arrow from './Arrow.astro';
+import { schoolStages } from '../data/content';
+import { pathFor, pick, type Lang } from '../data/site';
+import Photo from './Photo.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = (en: string, hi: string) => pick(lang, en, hi);
+
+const exhibits = [
+  {
+    image: 'place-value-table',
+    name: t('Place value', 'स्थानीय मान'),
+    text: t('Colourful blocks sit in columns on a place-value chart. Moving a block changes what it stands for.', 'स्थानीय मान के चार्ट पर अलग-अलग खानों में रंगीन ब्लॉक रखे हैं। एक खाने से दूसरे में ले जाने पर ब्लॉक का मान बदल जाता है।'),
+  },
+  {
+    image: 'circulatory-model',
+    name: t('How blood circulates', 'रक्त का संचार'),
+    text: t('Tubes trace a route between a model heart and lungs. A pupil can follow the path with a finger while explaining it to a visitor.', 'हृदय और फेफड़ों के मॉडल में नलियाँ खून का रास्ता दिखाती हैं। बच्चा उँगली से उस रास्ते को दिखाते हुए आगंतुक को समझा सकता है।'),
+  },
+  {
+    image: 'greenhouse-model',
+    name: t('A greenhouse in miniature', 'ग्रीनहाउस का छोटा मॉडल'),
+    text: t('Trees, buildings and a bright sun share the exhibition table. This model turns an environmental science topic into a scene visitors can look at closely.', 'प्रदर्शनी की मेज़ पर पेड़, इमारतें और चमकता सूरज बने हैं। पर्यावरण विज्ञान के एक विषय को इस मॉडल में पास से देख सकते हैं।'),
+  },
+];
+
+const streamResults = [
+  { stream: t('Arts', 'कला'), sat: 13, passed: 13, high: '91.4%' },
+  { stream: t('Commerce', 'वाणिज्य'), sat: 11, passed: 11, high: '86%' },
+  { stream: t('Science', 'विज्ञान'), sat: 9, passed: 9, high: '93%' },
+];
+---
+<section id="exhibitions" class="inside-section" aria-labelledby="exhibits-title">
+  <div class="wrap">
+    <div class="inside-section-head">
+      <h2 id="exhibits-title">{t('From the exhibition tables', 'प्रदर्शनी की मेज़ों से')}</h2>
+      <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=academic#photos'}>
+        {t('Learning in photographs', 'पढ़ाई की तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
+      </a>
+    </div>
+    <div class="inside-photo-series">
+      {exhibits.map(exhibit => (
+        <figure class="inside-figure inside-photo-story">
+          <Photo id={exhibit.image} lang={lang} sizes="(min-width: 1350px) 420px, (min-width: 770px) 31vw, 94vw" />
+          <figcaption><strong>{exhibit.name}</strong><span>{exhibit.text}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="inside-section inside-results" id="results" aria-labelledby="results-title">
+  <div class="wrap">
+    <div class="inside-section-head">
+      <h2 id="results-title">{t('RBSE board results, 2026', 'राजस्थान बोर्ड परिणाम 2026')}</h2>
+    </div>
+    <div class="inside-split inside-results__grid">
+      <div class="inside-result">
+        <h3>{t('Class 10', 'कक्षा 10')}</h3>
+        <p class="inside-result__figure">{t('29 of 29 passed', '29 में से 29 उत्तीर्ण')}</p>
+        <p>{t('24 pupils earned a first division. The highest score was 92.17%.', '24 विद्यार्थियों ने प्रथम श्रेणी प्राप्त की। सर्वाधिक अंक 92.17% रहे।')}</p>
+      </div>
+      <div class="inside-result">
+        <h3>{t('Class 12', 'कक्षा 12')}</h3>
+        <p class="inside-result__figure">{t('33 of 33 passed', '33 में से 33 उत्तीर्ण')}</p>
+        <p>{t('The highest score across the three streams was 93%.', 'तीनों संकायों में सर्वाधिक अंक 93% रहे।')}</p>
+        <table class="inside-results__table">
+          <caption class="sr-only">{t('Class 12 results by stream, 2026', '2026 में कक्षा 12 का संकायवार परिणाम')}</caption>
+          <thead><tr><th scope="col">{t('Stream', 'संकाय')}</th><th scope="col">{t('Appeared', 'परीक्षार्थी')}</th><th scope="col">{t('Passed', 'उत्तीर्ण')}</th><th scope="col">{t('Highest score', 'सर्वाधिक अंक')}</th></tr></thead>
+          <tbody>{streamResults.map(row => <tr><th scope="row">{row.stream}</th><td>{row.sat}</td><td>{row.passed}</td><td>{row.high}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="elga" class="inside-section inside-elga" aria-labelledby="elga-title">
+  <div class="wrap inside-split">
+    <div>
+      <p class="inside-label">{t('English in Classes 1–5', 'कक्षा 1–5 में अंग्रेज़ी')}</p>
+      <h2 id="elga-title">{t('An English group at the right level', 'अपनी समझ के अनुसार अंग्रेज़ी का समूह')}</h2>
+    </div>
+    <div class="inside-copy">
+      <p>{t('ELGA stands for English Language and General Awareness. In Classes 1–5, children learn English in groups according to their current English level. A child in Class 2 and a child in Class 3 can be in the same group.', 'ELGA का पूरा नाम English Language and General Awareness है। कक्षा 1–5 में अंग्रेज़ी सीखने के लिए समूह बच्चों की मौजूदा समझ के आधार पर बनते हैं। मसलन, दूसरी और तीसरी कक्षा के दो बच्चे एक ही समूह में अंग्रेज़ी सीख सकते हैं।')}</p>
+      <p>{t('Veer Patta uses the LEAD programme up to Class 10.', 'वीर पत्ता में कक्षा 10 तक LEAD कार्यक्रम का उपयोग होता है।')}</p>
+    </div>
+  </div>
+</section>
+
+<section id="stages" class="inside-section" aria-labelledby="stages-title">
+  <div class="wrap">
+    <div class="inside-section-head">
+      <h2 id="stages-title">{t('From Nursery to Class 12', 'नर्सरी से कक्षा 12 तक')}</h2>
+      <a class="inside-link" href={pathFor(lang, 'admissions') + '#classes'}>
+        {t('Enquire by class', 'अपनी कक्षा के बारे में पूछें')}<span aria-hidden="true"><Arrow/></span>
+      </a>
+    </div>
+    <nav class="inside-stage-links" aria-label={t('Jump to a school stage', 'कक्षा के स्तर पर जाएँ')}>
+      <ul class="inside-toc">
+        {schoolStages.map(stage => <li><a href={'#' + stage.id}>{stage.label[lang]}</a></li>)}
+      </ul>
+    </nav>
+    <div class="inside-stages">
+      {schoolStages.map(stage => (
+        <article class="inside-stage" id={stage.id}>
+          <p class="inside-label">{stage.label[lang]}</p>
+          <div>
+            <h3>{stage.title[lang]}</h3>
+            <p>{stage.text[lang]}</p>
+            {stage.id === 'early-years' && <a class="inside-link" href={pathFor(lang, 'admissions/pre-primary')}>{t('Nursery & KG admissions', 'नर्सरी और केजी में प्रवेश')}<span aria-hidden="true"><Arrow/></span></a>}
+            {stage.id === 'primary' && <a class="inside-link" href="#elga">{t('How ELGA groups work', 'ELGA के समूह कैसे बनते हैं')}<span aria-hidden="true">↑</span></a>}
+            {stage.id === 'senior-secondary' && <a class="inside-link" href={pathFor(lang, 'admissions/class-11')}>{t('Class 11 admissions', 'कक्षा 11 में प्रवेश')}<span aria-hidden="true"><Arrow/></span></a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,5 +1,16 @@
 # Revamp media provenance and review
 
+## Public media selection, 25 November 2026
+
+The current catalogue in `src/data/media.ts` and the public staging script control the photographs and films included in the Worker. The notes below this section describe earlier releases.
+
+- The two homepage crops come from original school photographs taken on 5 March 2026. The wide view shows the facade above the oleanders. The taller view follows the terrace towards the main building. Both crops exclude the people visible in the originals.
+- The school’s curated library allows website selection and requires parental consent for pupil photographs. Permission for the proposed identifiable exhibition portrait could not be established. The Learning page and class directory use details of actual models, equipment and rooms. The site does not identify exhibit makers or infer their grades from photographs.
+- The emblem is the Brand Kit’s official emblem-only master. The delayed-navigation GIF holds the emblem still and animates three dots beneath it. Reduced-motion navigation uses the static emblem.
+- All resized images, close crops and silent media edits are derivatives. Original files remain in the school library. Keep the reviewed, versioned filenames when serving long-cached images. Use a new filename if a published asset changes.
+- The four house colours come from the school’s identity records. The 2026 board figures on Learning were checked against the school’s original Class 10 and Class 12 results workbooks. Only school and stream aggregates are published. The school’s LEAD relationship is described in text.
+
+
 Reviewed 8 November 2026. This revamp uses the school's existing repository photographs and video assets. No new private Drive photographs, pupil portraits, ID cards, or raw videos were downloaded into the public site. No source photo was replaced.
 
 ## New campus-story film

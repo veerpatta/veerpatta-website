@@ -14,6 +14,11 @@ for (const lang of ['en','hi']) {
    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(321);
    const badTargets=await page.locator('.inside-actions a[href^="#"]').evaluateAll(nodes=>nodes.map(a=>a.getAttribute('href')!.slice(1)).filter(id=>!document.getElementById(id)));
    expect(badTargets,slug).toEqual([]);
+   const overflowingCaptions = await page.locator('.inside-photo-story').evaluateAll(figures => figures.filter(figure => {
+    const caption = figure.querySelector('figcaption');
+    return caption && caption.getBoundingClientRect().bottom > figure.getBoundingClientRect().bottom + 1;
+   }).length);
+   expect(overflowingCaptions, slug).toBe(0);
   }
  });
  test(`${lang}: parent paths connect class choices, gallery filters and the visit guide`,async({page})=>{
@@ -45,8 +50,9 @@ for (const lang of ['en','hi']) {
   await expect(page.locator('#photos [data-photo-open]').first()).toBeVisible();
   await expect(page.locator('#videos [data-video-src]').first()).toHaveAttribute('href',/\.mp4$/);
   await page.goto(`${baseURL}/${lang}/news/`);
+  await expect(page.locator('#archive time[datetime="2025-02-10"]')).toBeVisible();
   await page.locator(`a[href="/news/2025-01-15-sports-day-${lang}/"]`).click();
-  await expect(page.locator('main time')).toHaveAttribute('datetime','2025-01-15');
+  await expect(page.locator('main time')).toHaveAttribute('datetime','2025-02-10');
   await expect(page.locator(`main a[href="/${lang}/news/#archive"]`)).toBeVisible();
   await context.close();
  });

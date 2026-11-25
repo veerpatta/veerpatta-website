@@ -1,10 +1,12 @@
+import { admissionClassName, type AdmissionClass } from './admission-classes.ts';
+
 export type Lang = 'en' | 'hi';
 export type PageSlug = 'about'|'academics'|'admissions'|'beyond'|'digital'|'contact'|'faq'|'privacy'|'news';
 export const pick = <T>(lang:Lang,en:T,hi:T):T => lang === 'hi' ? hi : en;
 export const pathFor = (lang:Lang,slug=''):string => `/${lang}/${slug ? slug+'/' : ''}`;
 export const site = {
   name: 'Veer Patta Senior Secondary School',
-  nameHi: 'वीर पट्टा सीनियर सेकेंडरी स्कूल',
+  nameHi: 'वीर पत्ता सीनियर सेकेंडरी स्कूल',
   fullName: 'Shri Veer Patta Senior Secondary School',
   phone: '+917976199548', phoneDisplay: '+91 79761 99548',
   // The school's WhatsApp number, verified 21 Nov 2026: messages to it reach the school's WhatsApp service, which takes an
@@ -14,14 +16,18 @@ export const site = {
   addressHi: 'मेला ग्राउंड के सामने, आमेट, राजस्थान 313332',
   maps: 'https://maps.google.com/?q=Shri+Veer+Patta+Senior+Secondary+School+Amet+Rajasthan',
   url: 'https://vpps.co.in',
-  release: 'whatsapp-admissions-20261121'
+  release: 'amet-school-20261125'
 };
 /** A wa.me link to the school's WhatsApp. `message` is typed into the chat for the parent; nothing is sent until they send it. */
 export const whatsappUrl = (message = ''): string =>
   `https://wa.me/${site.whatsapp.replace(/\D/g, '')}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
-/** The words the school's WhatsApp reads as "start an admission enquiry", in the page's language. */
-export const admissionWhatsAppText = (lang: Lang): string => pick(lang, 'Admission enquiry', 'प्रवेश पूछताछ');
-export const admissionWhatsApp = (lang: Lang): string => whatsappUrl(admissionWhatsAppText(lang));
+/** A new enquiry may carry the chosen class. The school asks for adult consent inside WhatsApp. */
+export function admissionWhatsAppText(lang: Lang, grade?: AdmissionClass): string {
+  if (!grade) return pick(lang, 'Admission enquiry', 'प्रवेश पूछताछ');
+  return pick(lang, `Admission enquiry for ${grade}`, `${admissionClassName('hi', grade)} के लिए प्रवेश पूछताछ`);
+}
+export const admissionWhatsApp = (lang: Lang, grade?: AdmissionClass): string =>
+  whatsappUrl(admissionWhatsAppText(lang, grade));
 export const navigation = (lang:Lang) => [
   {slug:'',label:pick(lang,'Home','होम')},
   {slug:'about',label:pick(lang,'Our school','हमारा स्कूल')},
