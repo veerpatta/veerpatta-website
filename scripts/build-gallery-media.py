@@ -6,6 +6,7 @@ assets/media. The accompanying gallery catalogue selects public derivatives.
 """
 from io import BytesIO
 from pathlib import Path
+from tempfile import TemporaryDirectory
 import subprocess
 
 from PIL import Image
@@ -50,7 +51,7 @@ def dance_detail():
     sizes(Image.open(BytesIO(frame)).convert("RGB"), "dance-footwork", [320, 448])
 
 
-def campus_film():
+def campus_film(working_dir):
     # Each source rectangle is deliberately 16:9. The first frame excludes a
     # distant bystander at the left edge of the published entrance photograph.
     shots = [
@@ -60,7 +61,7 @@ def campus_film():
         ("science-bench-828.webp", (0, 46, 824, 510)),
         ("basketball-court-1200.webp", (94, 0, 1086, 558)),
     ]
-    output = VIDEOS / "campus-spaces-720.mp4"
+    output = working_dir / "campus-master.mp4"
     command = FFMPEG + ["-f", "rawvideo", "-pix_fmt", "rgb24", "-s", "1280x720",
                         "-framerate", str(FPS), "-i", "-"] + H264 + ["-maxrate", "720k", "-bufsize", "1440k", str(output)]
     with subprocess.Popen(command, stdin=subprocess.PIPE) as enc:
@@ -86,7 +87,23 @@ def campus_film():
             raise RuntimeError("ffmpeg failed to encode the campus film")
 
 
+    # A low-burst, short-GOP H.264 encode plays and seeks in the mobile
+    # WebKit player. Keep its high-resolution poster as a separate image.
+    subprocess.run(FFMPEG + [
+        "-i", str(output), "-vf", "scale=854:480:flags=lanczos,setsar=1",
+        "-c:v", "libx264", "-profile:v", "baseline", "-level:v", "3.0",
+        "-pix_fmt", "yuv420p", "-threads", "2", "-crf", "26",
+        "-maxrate", "410k", "-bufsize", "410k", "-bf", "0", "-g", "48",
+        "-keyint_min", "48", "-x264-params", "ref=1:scenecut=0:nal-hrd=vbr",
+        "-an", "-map_metadata", "-1", "-movflags", "+faststart",
+        str(VIDEOS / "campus-spaces-480.mp4"),
+    ], check=True)
+
+
 if __name__ == "__main__":
     still_details()
     dance_detail()
-    campus_film()
+    with TemporaryDirectory() as temporary:
+        campus_film(Path(temporary))
+    for file in ("campus-spaces-480.mp4", "lawn-dance-detail-448.mp4"):
+        print(f"{file}: {(VIDEOS / file).stat().st_size} bytes (published-media.json)")
