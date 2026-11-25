@@ -4,20 +4,13 @@
   font-weight: 400;
   font-display: swap;
 }
-@font-face {
-  font-family: 'Noto Serif Devanagari Web';
-  src: local('Noto Serif Devanagari'), url('../fonts/noto-serif-devanagari.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
-  unicode-range: U+0900-097F, U+200C-200D;
-}
 :root {
   --ink:#172e40; --navy:#172e40; --navy-deep:#112735; --maroon:#762f39;
   --blue:#762f39; --paper:#fffcf5; --cream:#f3ecdf; --line:#d8cec0; --saffron:#f5c86b;
   --muted:#46545d; --radius:5px;
   --serif:'DM Serif Text',Georgia,serif;
   --sans:system-ui,'Noto Sans Devanagari',sans-serif;
-  --heading-hi:'Noto Serif Devanagari Web','Noto Serif Devanagari',serif;
+  --heading-hi:'Noto Serif Devanagari','Kohinoor Devanagari','Nirmala UI',serif;
 }
 html[lang=hi] :is(h1,h2) {font-family:var(--heading-hi);letter-spacing:normal;line-height:1.38}
 html[lang=hi] :is(h3,p,summary,.button) {letter-spacing:normal}

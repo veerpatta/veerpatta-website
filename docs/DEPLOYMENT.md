@@ -206,3 +206,9 @@ Cloudflare reported Worker version `89bb4e92-5f90-4a95-90da-8f319cea7845`
 for successful build `186e4a82-aa29-4372-a2e3-e0ce8949b062`. This version
 uses the previous media catalogue and service-worker cache. Review its photo
 permissions before restoring its public assets.
+
+The first verified redesign deployment is also a rollback point for the
+phone image-size adjustment. Its Git revision is
+`040488658cf6c148c543fc3908d967a9907ef243` and its Worker version is
+`91a244d1-c3e3-49a2-91b9-e0e9c710ef4d`. It includes the reviewed media
+catalogue, the 480p campus film and the bilingual class-specific admissions flow.
