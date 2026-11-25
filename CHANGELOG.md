@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **Speed pass (2026-11-25)**:
+  - Built CSS and JS under `/_astro/` (hashed names) are cached for a year; the logo and icons, and the school film clips, for a month like the photos. Before, every repeat visit re-checked them
+  - The small per-page stylesheet and the site script are now inside each page, so a first visit on a slow connection waits for one CSS file instead of three files
+  - AVIF copies for eight more photos (campus front, assembly courtyard, school hall, office, both computer-lab views, function stage, basketball court), made from the published WebP and kept only where they look the same (SSIM 0.985 or higher) and are at least 12% smaller. The other WebP-only photos stay as they are, because a smaller AVIF would have softened them
+  - Photo `sizes` now match the real layout for the School life mosaic, campus and activity cards, the computer-lab and admissions visit photos and the large film poster, so phones and desktops stop downloading a larger file than they show
+  - Lazy photos show a soft paper tint while they load
+  - Home page on phones: the NCC photo no longer slides over the "Find your people" card, and its ✳ shows as a plain mark rather than a green emoji
+  - The school name link and the film's play button speak the same words they show
+
 - **Admissions on WhatsApp (2026-11-21)**:
   - The admission enquiry now happens on the school's WhatsApp, +91 83022 07823, in English or Hindi. "Enquire on WhatsApp" opens the chat with "Admission enquiry" / "प्रवेश पूछताछ" already written; the chat asks an adult to agree to a call back and to choose the class, and the office's Admissions board gets the enquiry. The website collects nothing itself
   - The Formspree forms are gone from the admissions page, both class guides and the quick-enquiry dialog. "Call school" (+91 79761 99548) stays everywhere, and the phone bar's second button now opens WhatsApp

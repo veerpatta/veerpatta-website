@@ -749,3 +749,7 @@ photos['tablet-quiz'] = {widths:[480,800,1200],w:1200,h:750,avif:true,gallery:'a
 photos['sprint-start'] = {widths:[480,800,1200],w:1200,h:750,avif:true,gallery:'sports',alt:{en:'Runners crouch at the start line in chalk-marked lanes on Sports Day',hi:'खेल दिवस पर चूने से बनी लेनों में स्टार्ट लाइन पर तैयार धावक'}};
 photos['football-goal'] = {widths:[480,800,1200],w:1200,h:883,avif:true,pos:'58% 50%',gallery:'sports',alt:{en:'A football goal on the school lawn, with pupils playing beyond it',hi:'स्कूल के लॉन पर फ़ुटबॉल गोल, पीछे खेलते विद्यार्थी'}};
 photos['film-dance-poster'] = {widths:[480,800,960],w:960,h:540,avif:true,alt:{en:'Pupils dance on the school lawn in front of the main building, a moment from the school film',hi:'मुख्य भवन के सामने स्कूल के लॉन पर नृत्य करते विद्यार्थी, स्कूल फ़िल्म का एक दृश्य'}};
+// 25 Nov 2026: AVIF copies made from the published WebP by
+// scripts/add_avif_2026_11.py, only where every width looks the same
+// (SSIM >= 0.985) and is at least 12% smaller. The rest stay WebP-only.
+for (const id of ['assembly-courtyard','basketball-court','campus-front','computer-lab','computer-lab-wide','function-stage','school-hall','school-office']) photos[id].avif = true;

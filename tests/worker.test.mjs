@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker from '../worker.js';
+import worker, { VIDEO_CACHE } from '../worker.js';
 
 const bytes = Uint8Array.from({ length: 10 }, (_, index) => index);
 const videoUrl = 'https://school.example/assets/media/videos/example.mp4';
 
-function fixture({ method = 'GET', range, url = videoUrl, status = 200, body = bytes } = {}) {
+function fixture({ method = 'GET', range, url = videoUrl, status = 200, body = bytes, cache = 'public, max-age=3600' } = {}) {
   const calls = [];
   let upstream;
   const request = new Request(url, {
@@ -21,7 +21,7 @@ function fixture({ method = 'GET', range, url = videoUrl, status = 200, body = b
           headers: {
             'Content-Type': url.endsWith('.mp4') ? 'video/mp4' : 'text/html',
             'Content-Length': String(body.byteLength ?? body.length),
-            'Cache-Control': 'public, max-age=3600',
+            ...(cache === null ? {} : { 'Cache-Control': cache }),
             ETag: '"example-video"',
           },
         });
@@ -142,3 +142,13 @@ test('a non-video request without a range retains the upstream page and content 
   assert.equal(await response.text(), html);
   assert.equal(mock.calls[0].url, 'https://school.example/en/');
 });
+
+for (const cache of ['public, max-age=0, must-revalidate', 'no-cache', null]) {
+  test(`a video the asset store marks ${JSON.stringify(cache)} is kept for a month instead`, async () => {
+    for (const range of [undefined, 'bytes=0-1']) {
+      const response = await fixture({ range, cache }).run();
+      assert.equal(response.headers.get('Cache-Control'), VIDEO_CACHE);
+    }
+    assert.equal(VIDEO_CACHE, 'public, max-age=2592000');
+  });
+}
