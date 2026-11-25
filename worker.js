@@ -8,6 +8,7 @@
 // the asset store, without running any code.
 
 const SINGLE_RANGE = /^bytes=(\d*)-(\d*)$/;
+export const VIDEO_CACHE = 'public, max-age=2592000';
 
 export default {
   async fetch(request, env) {
@@ -20,6 +21,12 @@ export default {
 
     const headers = new Headers(asset.headers);
     headers.set('Accept-Ranges', 'bytes');
+    // _headers rules do not reach responses built here, and the asset store's
+    // own default (max-age=0, must-revalidate) makes a returning visitor
+    // re-check a 4 MB clip every time. Keep clips for a month, like photos
+    // (public/_headers); a replaced clip needs a new file name.
+    const cache = headers.get('Cache-Control');
+    if (!cache || /max-age=0\b|no-cache/.test(cache)) headers.set('Cache-Control', VIDEO_CACHE);
 
     const range = request.method === 'GET' && SINGLE_RANGE.exec((request.headers.get('Range') || '').trim());
     if (!range || (range[1] === '' && range[2] === '')) {
