@@ -11,6 +11,7 @@ import Photo from './Photo.astro';
 import SchoolLife from './SchoolLife.astro';
 import VisitGuide from './VisitGuide.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
+import WhatsAppQr from './WhatsAppQr.astro';
 
 interface Props { lang: Lang; slug: PageSlug }
 const { lang, slug } = Astro.props;
@@ -150,6 +151,11 @@ const services = [
             <a class="button button-whatsapp" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer" data-whatsapp-enquiry>
               <WhatsAppIcon />{t('Enquire on WhatsApp', 'WhatsApp पर पूछताछ करें')}
             </a>
+            <p>{t('Parents of our pupils can also ask here about fees, attendance and results.', 'हमारे विद्यार्थियों के अभिभावक यहीं शुल्क, उपस्थिति और परिणाम के बारे में भी पूछ सकते हैं।')}</p>
+            <figure class="inside-contact__qr">
+              <WhatsAppQr label={t('QR code for the school WhatsApp number', 'विद्यालय के WhatsApp नंबर का QR कोड')} />
+              <figcaption>{t('On a computer? Scan this with your phone camera to open the chat.', 'कंप्यूटर पर हैं? चैट खोलने के लिए फ़ोन के कैमरे से यह स्कैन करें।')}</figcaption>
+            </figure>
           </article>
         </div>
       </div>

@@ -218,6 +218,13 @@
 }
 a.inside-contact__number { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .22em; }
 .inside-contact .button-whatsapp { margin-block-start: 1rem; }
+/* The QR is for a parent reading on a computer: on a phone the button is the way in. */
+.inside-contact__qr { display: none; }
+@media (min-width: 768px) {
+  .inside-contact__qr { display: flex; align-items: center; gap: 1rem; margin: 1.25rem 0 0; }
+  .inside-contact__qr .whatsapp-qr { inline-size: 7.5rem; block-size: 7.5rem; flex: none; background: #fff; border: 1px solid var(--inside-rule); border-radius: .5rem; padding: .25rem; }
+  .inside-contact__qr figcaption { max-width: 26ch; font-size: .95rem; }
+}
 .visit-guide__grid { align-items: start; }
 .visit-guide address { display: grid; gap: .13rem; font-style: normal; font-size: 1.05rem; line-height: 1.6; margin: 1rem 0 1.2rem; }
 .visit-guide__note { margin-block-start: 1.5rem; padding-block-start: 1.25rem; border-top: 1px solid var(--inside-rule); }
