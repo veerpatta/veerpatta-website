@@ -65,6 +65,10 @@ test('high-density phones load the smaller homepage photographs', async ({ brows
   const stageSources = await page.locator('.stage-image img').evaluateAll(images => images.map(image => image.getAttribute('src')));
   expect(stageSources).toHaveLength(4);
   expect(new Set(stageSources).size).toBe(4);
+  for (const thumbnail of await page.locator('.stage-image img').all()) {
+    await thumbnail.scrollIntoViewIfNeeded();
+    await expect.poll(() => thumbnail.evaluate((img: HTMLImageElement) => img.currentSrc)).toMatch(/-288\.(?:avif|webp)$/);
+  }
   await expect(page.locator('.front-photo img')).toHaveAttribute('fetchpriority', 'high');
   const photos = [
     { selector: '.front-photo img', file: /exhibition-pupils-amet-(480|640|800)\.(?:avif|webp)$/ },

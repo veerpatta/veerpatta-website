@@ -1,5 +1,23 @@
 import {normaliseCategory} from './gallery';
 const hi=document.documentElement.lang==='hi';
+const languageLinks = document.querySelectorAll<HTMLAnchorElement>('[data-language-switch]');
+function updateLanguageLinks() {
+  const current = new URL(location.href);
+  const section = document.getElementById(current.hash.slice(1));
+  const category = current.pathname.endsWith('/gallery/')
+    ? normaliseCategory(current.searchParams.get('category'))
+    : 'all';
+  for (const link of languageLinks) {
+    const destination = new URL(link.pathname, location.origin);
+    if (category !== 'all') destination.searchParams.set('category', category);
+    if (section?.parentElement?.closest('main')) destination.hash = current.hash;
+    link.href = destination.pathname + destination.search + destination.hash;
+  }
+}
+updateLanguageLinks();
+window.addEventListener('hashchange', updateLanguageLinks);
+window.addEventListener('pageshow', updateLanguageLinks);
+
 const menu=document.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
 if(menu){
  document.addEventListener('click',e=>{if(menu.open && !menu.contains(e.target as Node)) menu.open=false;});
@@ -66,6 +84,7 @@ if (filters) {
     for (const chip of chips) chip.setAttribute('aria-pressed', String(chip.dataset.galleryFilter === category));
     const unit = hi ? (count === 1 ? 'तस्वीर' : 'तस्वीरें') : (count === 1 ? 'photograph' : 'photographs');
     if (countLabel) countLabel.textContent = `${count} ${unit}`;
+    updateLanguageLinks();
   };
   const readFilter = () => applyFilter(new URLSearchParams(location.search).get('category'));
   readFilter();

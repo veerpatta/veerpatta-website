@@ -10,7 +10,7 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
 const stages = [
   { label:t('Nursery & KG', 'नर्सरी और केजी'), photo:'junior-track-games-2025', body:t('Start with a glimpse of the early-years track games. Plan a first visit for Nursery, Junior KG or Senior KG.', 'छोटे बच्चों के खेलों की झलक देखें। नर्सरी, जूनियर केजी या सीनियर केजी के लिए विद्यालय आने की जानकारी लें।'), href:'admissions/pre-primary/' },
   { label:t('Classes 1–5', 'कक्षा 1–5'), photo:'place-value-table', body:t('Place-value blocks, projects and English groups that follow each child’s learning level.', 'स्थानीय मान के लिए ब्लॉक, प्रोजेक्ट और सीखने के स्तर के अनुसार अंग्रेज़ी के समूह।'), href:'academics/#elga' },
-  { label:t('Classes 6–10', 'कक्षा 6–10'), photo:'student-headset-desk', body:t('Explore projects from our student-led conference and the path to the Class 10 board exams.', 'विद्यार्थी सम्मेलन के प्रोजेक्ट देखें और दसवीं की बोर्ड परीक्षा तक की पढ़ाई के बारे में जानें।'), href:'academics/#middle' },
+  { label:t('Classes 6–10', 'कक्षा 6–10'), photo:'basketball-court', body:t('Spot geometry on the basketball court. Follow the stages of learning up to the Class 10 board exams.', 'बास्केटबॉल कोर्ट पर ज्यामिति तलाशें। जानें कि छठी से दसवीं की बोर्ड परीक्षा तक पढ़ाई कैसे आगे बढ़ती है।'), href:'academics/#middle' },
   { label:t('Classes 11–12', 'कक्षा 11–12'), photo:'greenhouse-exhibition-group', body:t('After Class 10, explore Arts, Science and Commerce. Ask the office which subjects you can take together.', 'दसवीं के बाद कला, विज्ञान और वाणिज्य के बारे में जानें। विषयों के विकल्प समझने के लिए कार्यालय से बात करें।'), href:'admissions/class-11/' }
 ];
 ---
@@ -20,7 +20,7 @@ const stages = [
     <div class="spread-heading"><h2 id="stages-title">{t('Find your child’s class', 'अपने बच्चे की कक्षा चुनें')}</h2><a class="index-link" href={pathFor(lang,'admissions')+'#classes'}>{t('All admission options', 'प्रवेश के सभी विकल्प')} <span aria-hidden="true"><Arrow/></span></a></div>
     <div class="stage-index">{stages.map(stage =>
       <a class="stage-link" href={pathFor(lang)+stage.href}>
-        <div class="stage-image"><Photo id={stage.photo} lang={lang} modern sizes="(min-width: 1000px) 23vw, (min-width: 600px) 43vw, 105px"/></div>
+        <div class="stage-image"><Photo id={stage.photo} lang={lang} sizes="(min-width: 1460px) 315px, (min-width: 1000px) 23vw, (min-width: 600px) 43vw, (min-width: 391px) 90px, 80px"/></div>
         <div class="stage-text"><h3>{stage.label}</h3><p>{stage.body}</p></div><span class="stage-go" aria-hidden="true"><Arrow direction="up-right"/></span>
       </a>)}</div>
   </div>

@@ -10,18 +10,19 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
 <section class="front" aria-labelledby="cover-title">
   <div class="wrap front-spread">
     <div class="front-copy">
-      <p class="location-line">{t('RBSE · Amet, Rajasthan', 'राजस्थान बोर्ड · आमेट')}</p>
-      <h1 id="cover-title">{t('When pupils', 'जब बच्चे')} <span>{t('do the teaching.', 'समझाते हैं।')}</span></h1>
-      <p class="front-intro">{t('At our learning exhibition, pupils show families how their projects work. Explore school life from Nursery to Class 12, or come and meet us opposite Mela Ground.', 'हमारी प्रदर्शनी में बच्चे खुद परिवारों को अपने प्रोजेक्ट समझाते हैं। नर्सरी से 12वीं तक के स्कूली जीवन की झलक देखें या मेला ग्राउंड के सामने हमसे मिलने आएँ।')}</p>
+      <p class="location-line">{t('Amet · RBSE · Nursery to Class 12', 'आमेट · राजस्थान बोर्ड · नर्सरी से 12वीं')}</p>
+      <h1 id="cover-title">{t('Veer Patta,', 'बच्चों की नज़र से')} <span>{t('through pupils’ eyes.', 'देखिए वीर पत्ता।')}</span></h1>
+      <p class="front-intro">{t('At our learning exhibition, the children show visitors how their geometry projects work. Come and meet us opposite Mela Ground.', 'हमारी प्रदर्शनी में बच्चे खुद समझाते हैं कि ज्यामिति के उनके मॉडल कैसे काम करते हैं। हमसे मिलने मेला ग्राउंड के सामने स्कूल आइए।')}</p>
       <div class="front-actions">
         <a class="front-admit" href={pathFor(lang, 'admissions')}>{t('Admissions', 'प्रवेश की जानकारी')} <span aria-hidden="true"><Arrow/></span></a>
         <a class="front-wa" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon size={18} />{t('WhatsApp enquiry', 'WhatsApp पर पूछें')}</a>
         <a class="front-call" href={`tel:${site.phone}`}>{t('Call school', 'स्कूल को फ़ोन करें')}</a>
       </div>
+      <a class="front-visit" href={pathFor(lang, 'contact') + '#visit'}>{t('Plan a school visit', 'स्कूल आने का रास्ता देखें')} <Arrow/></a>
     </div>
     <figure class="front-photo">
       <Photo id="exhibition-pupils-amet" lang={lang} eager phoneMaxWidth={800} sizes="(min-width: 1530px) 880px, (min-width: 800px) 57.5vw, 100vw"/>
-      <figcaption><span>{t('Learning exhibition · Amet', 'सीखने की प्रदर्शनी · आमेट')}</span><a href={pathFor(lang,'academics')+'#exhibitions'}>{t('Explore the projects', 'प्रोजेक्ट देखें')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a></figcaption>
+      <figcaption><span>{t('Learning exhibition, 2026', 'स्कूल की प्रदर्शनी, 2026')}</span><a href={pathFor(lang,'academics')+'#exhibitions'}>{t('See the projects', 'प्रोजेक्ट देखें')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a></figcaption>
     </figure>
   </div>
 </section>

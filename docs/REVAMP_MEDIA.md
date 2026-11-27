@@ -1,5 +1,18 @@
 # Revamp media provenance and review
 
+## Parent website review, 27 November 2026
+
+The 2026 exhibition original in the Brand Kit and the approved 1046 × 679
+homepage crop below show the same geometry demonstration. The Learning page
+uses a separate close-up of a visitor turning an angle wheel. The loading
+GIF uses the Brand Kit’s emblem, with only the dots moving between frames.
+The 288-pixel phone thumbnails are resizes of the reviewed photographs.
+
+The school’s 2026 board workbooks confirm the school and stream figures on
+Learning. The school’s programme for 27 January 2026 lists the torch relay,
+sports oath and NCC A certificate recognition. The November identity record
+confirms the house colours and the Amet–Kelwa Road address.
+
 ## Student photography, 25 November 2026
 
 The current homepage shows children demonstrating a geometry project at the

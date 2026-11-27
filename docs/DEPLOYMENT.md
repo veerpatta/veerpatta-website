@@ -220,3 +220,12 @@ matched Git revision `21a9089cac9983d4cf39ae865ab57328b2e11492`.
 Cloudflare served Worker `33c7e397-8284-46d8-893f-93922393f662`
 from build `512e9f72-37e4-48cb-9117-c689036f8eb0`. This revision includes
 the v16 service worker, phone image caps and bilingual admissions class chooser.
+
+## Parent website release rollback point, 27 November 2026
+
+Immediately before this release, Worker version `10f55ce0-e476-428e-9392-abee95f1ed77`
+served all production traffic. The Workers Builds check for Git
+`07b7f4c688ab3c4d551bdc33e3a538bfc7d5bc23` was build
+`3a140c24-8a2e-4b39-a14d-cdc5a9f79057`. The English and Hindi homepages,
+English Contact, Hindi Admissions and the v17 service worker matched that
+commit after accounting for Cloudflare's edge-injected performance beacon.

@@ -1,5 +1,5 @@
 /* Navigations use the network first, so online parents see the current release. */
-const CACHE = 'vpps-v17-amet-students';
+const CACHE = 'vpps-v18-amet-families';
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['/en/', '/hi/'])).then(() => self.skipWaiting()));
 });

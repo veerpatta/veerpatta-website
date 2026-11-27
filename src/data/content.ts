@@ -64,9 +64,11 @@ export const pageContent: Record<PageSlug, PageContent> = {
     kicker: copy('Visit & contact', 'संपर्क और मुलाक़ात'),
     title: copy('Visit us in Amet', 'आमेट में हमसे मिलें'),
     description: copy(
-      'Find us opposite Mela Ground. Call the school office to agree on a time to visit, or message us on WhatsApp about admission.',
-      'हमारा विद्यालय मेला ग्राउंड के सामने है। आने का समय कार्यालय में फ़ोन करके तय करें। प्रवेश की जानकारी WhatsApp पर भी ले सकते हैं।'
+      'Look for the main building opposite Mela Ground on Amet–Kelwa Road. Call the office to arrange a visit or ask about your child’s class on WhatsApp.',
+      'आमेट–केलवा रोड पर मेला ग्राउंड के सामने स्कूल का मुख्य भवन है। आने का समय फ़ोन पर तय कर लें। बच्चे की कक्षा के बारे में WhatsApp पर भी पूछ सकते हैं।'
     ),
+    image: 'campus-approach',
+    caption: copy('The approach to the school from Mela Ground.', 'मेला ग्राउंड की ओर से स्कूल तक आने का रास्ता।'),
   },
   faq: {
     kicker: copy('Parent questions', 'अभिभावकों के सवाल'),

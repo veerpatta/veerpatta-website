@@ -26,7 +26,7 @@ for (const lang of ['en', 'hi']) {
   for (const slug of routes) {
     const file = join(output, lang, slug, 'index.html');
     const html = documents.get(file) || '';
-    if (!html.includes('content="amet-students-20261125"')) errors.add(`Stale or missing route ${file}`);
+    if (!html.includes('content="amet-families-20261127"')) errors.add(`Stale or missing route ${file}`);
     if (!html.includes(`<html lang="${lang}"`)) errors.add(`Wrong language ${file}`);
     if (/\{%|\{\{/.test(html)) errors.add(`Unrendered template ${file}`);
   }
