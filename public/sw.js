@@ -1,7 +1,12 @@
 /* Navigations use the network first, so online parents see the current release. */
-const CACHE = 'vpps-v18-amet-families';
+const CACHE = 'vpps-v19-amet-admissions';
+const OFFLINE_PAGES = ['/en/', '/hi/', '/en/admissions/', '/hi/admissions/'];
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['/en/', '/hi/'])).then(() => self.skipWaiting()));
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(cache => cache.addAll(OFFLINE_PAGES))
+      .then(() => self.skipWaiting())
+  );
 });
 self.addEventListener('activate', event => {
   event.waitUntil(caches.keys().then(keys => Promise.all(
