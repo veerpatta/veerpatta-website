@@ -229,3 +229,10 @@ served all production traffic. The Workers Builds check for Git
 `3a140c24-8a2e-4b39-a14d-cdc5a9f79057`. The English and Hindi homepages,
 English Contact, Hindi Admissions and the v17 service worker matched that
 commit after accounting for Cloudflare's edge-injected performance beacon.
+
+The initial parent website release at Git
+`96a90e730cef16ccfcdd4549bae92a0b7ec8aa31` served all production
+traffic on Worker `d66b4952-825b-467b-91c8-0ae161a098f5`.
+This is the rollback point for the subsequent admissions offline fix.
+That version caches visited pages, but an update can evict the last
+admissions visit before the connection returns.

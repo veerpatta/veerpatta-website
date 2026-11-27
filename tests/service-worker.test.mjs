@@ -2,6 +2,40 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
+
+test('a worker update caches both admissions pages before replacing the previous worker', async () => {
+  const listeners = {};
+  const cachedPaths = new Set();
+  let completeDownload;
+  let readyToReplace = false;
+  const download = new Promise(resolve => { completeDownload = resolve; });
+  const cache = {
+    async addAll(paths) {
+      await download;
+      for (const path of paths) cachedPaths.add(path);
+    }
+  };
+  const source = fs.readFileSync('public/sw.js', 'utf8');
+  vm.runInNewContext(source, {
+    self: {
+      addEventListener(type, listener) { listeners[type] = listener; },
+      skipWaiting() { readyToReplace = true; }
+    },
+    caches: { open: async () => cache }
+  });
+
+  let install;
+  listeners.install({ waitUntil(promise) { install = promise; } });
+  assert.equal(readyToReplace, false);
+  completeDownload();
+  await install;
+  for (const lang of ['en', 'hi']) {
+    assert.ok(cachedPaths.has(`/${lang}/`));
+    assert.ok(cachedPaths.has(`/${lang}/admissions/`));
+  }
+  assert.equal(readyToReplace, true);
+});
+
 test('service worker clones navigation before asynchronous cache opens and keeps write alive',async()=>{
  const listeners={},waits=[],writes=[];let release;const gate=new Promise(resolve=>release=resolve);
  const source=fs.readFileSync('public/sw.js','utf8');
