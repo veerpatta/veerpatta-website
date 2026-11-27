@@ -57,3 +57,28 @@ test('screenshots and reduced-motion layout',async({page})=>{
  await page.setViewportSize({width:1440,height:1000});await page.goto('/en/');await loadPhotos();await page.screenshot({path:'test-results/home-en-desktop.png',fullPage:true});
  await page.setViewportSize({width:375,height:812});await page.goto('/hi/');await loadPhotos();await page.screenshot({path:'test-results/home-hi-mobile.png',fullPage:true});await page.emulateMedia({reducedMotion:'reduce'});expect(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
 });
+
+test('high-density phones load the smaller homepage photographs', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ viewport: { width: 412, height: 839 }, deviceScaleFactor: 3, isMobile: true });
+  const page = await context.newPage();
+  await page.goto(`${baseURL}/hi/`);
+  const stageSources = await page.locator('.stage-image img').evaluateAll(images => images.map(image => image.getAttribute('src')));
+  expect(stageSources).toHaveLength(4);
+  expect(new Set(stageSources).size).toBe(4);
+  for (const thumbnail of await page.locator('.stage-image img').all()) {
+    await thumbnail.scrollIntoViewIfNeeded();
+    await expect.poll(() => thumbnail.evaluate((img: HTMLImageElement) => img.currentSrc)).toMatch(/-288\.(?:avif|webp)$/);
+  }
+  await expect(page.locator('.front-photo img')).toHaveAttribute('fetchpriority', 'high');
+  const photos = [
+    { selector: '.front-photo img', file: /exhibition-pupils-amet-(480|640|800)\.(?:avif|webp)$/ },
+    { selector: '.project-spread figure img', file: /nutrition-presentation-(384|480|640)\.(?:avif|webp)$/ },
+    { selector: '#school-film [data-video-src] img', file: /campus-spaces-poster-(480|640)\.(?:avif|webp)$/ },
+  ];
+  for (const photo of photos) {
+    const image = page.locator(photo.selector);
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0 ? img.currentSrc : '')).toMatch(photo.file);
+  }
+  await context.close();
+});

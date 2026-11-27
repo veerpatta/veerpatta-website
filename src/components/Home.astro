@@ -8,10 +8,10 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = (en: string, hi: string) => pick(lang, en, hi);
 const stages = [
-  { label:t('Nursery & KG', 'नर्सरी और केजी'), photo:'first-school-room', body:t('A look at the activity room and questions to ask before a first school visit.', 'गतिविधि कक्ष की झलक और पहली मुलाक़ात में पूछने लायक बातें।'), href:'admissions/pre-primary/' },
+  { label:t('Nursery & KG', 'नर्सरी और केजी'), photo:'junior-track-games-2025', body:t('Start with a glimpse of the early-years track games. Plan a first visit for Nursery, Junior KG or Senior KG.', 'छोटे बच्चों के खेलों की झलक देखें। नर्सरी, जूनियर केजी या सीनियर केजी के लिए विद्यालय आने की जानकारी लें।'), href:'admissions/pre-primary/' },
   { label:t('Classes 1–5', 'कक्षा 1–5'), photo:'place-value-table', body:t('Place-value blocks, projects and English groups that follow each child’s learning level.', 'स्थानीय मान के लिए ब्लॉक, प्रोजेक्ट और सीखने के स्तर के अनुसार अंग्रेज़ी के समूह।'), href:'academics/#elga' },
-  { label:t('Classes 6–10', 'कक्षा 6–10'), photo:'basketball-court', body:t('Find right angles on our court and explore the path to the Class 10 RBSE examination.', 'हमारे कोर्ट पर समकोण खोजें और दसवीं की राजस्थान बोर्ड परीक्षा तक की पढ़ाई को जानें।'), href:'academics/#middle' },
-  { label:t('Classes 11–12', 'कक्षा 11–12'), photo:'science-bench', body:t('Science, Commerce or Arts. Discuss subject combinations with the school office.', 'विज्ञान, वाणिज्य या कला। विषयों का चुनाव करने से पहले विद्यालय कार्यालय से बात करें।'), href:'admissions/class-11/' }
+  { label:t('Classes 6–10', 'कक्षा 6–10'), photo:'basketball-court', body:t('Spot geometry on the basketball court. Follow the stages of learning up to the Class 10 board exams.', 'बास्केटबॉल कोर्ट पर ज्यामिति तलाशें। जानें कि छठी से दसवीं की बोर्ड परीक्षा तक पढ़ाई कैसे आगे बढ़ती है।'), href:'academics/#middle' },
+  { label:t('Classes 11–12', 'कक्षा 11–12'), photo:'greenhouse-exhibition-group', body:t('After Class 10, explore Arts, Science and Commerce. Ask the office which subjects you can take together.', 'दसवीं के बाद कला, विज्ञान और वाणिज्य के बारे में जानें। विषयों के विकल्प समझने के लिए कार्यालय से बात करें।'), href:'admissions/class-11/' }
 ];
 ---
 <SchoolHero lang={lang}/>
@@ -20,16 +20,16 @@ const stages = [
     <div class="spread-heading"><h2 id="stages-title">{t('Find your child’s class', 'अपने बच्चे की कक्षा चुनें')}</h2><a class="index-link" href={pathFor(lang,'admissions')+'#classes'}>{t('All admission options', 'प्रवेश के सभी विकल्प')} <span aria-hidden="true"><Arrow/></span></a></div>
     <div class="stage-index">{stages.map(stage =>
       <a class="stage-link" href={pathFor(lang)+stage.href}>
-        <div class="stage-image"><Photo id={stage.photo} lang={lang} modern sizes="(min-width: 1000px) 23vw, (min-width: 600px) 43vw, 105px"/></div>
+        <div class="stage-image"><Photo id={stage.photo} lang={lang} sizes="(min-width: 1460px) 315px, (min-width: 1000px) 23vw, (min-width: 600px) 43vw, (min-width: 391px) 90px, 80px"/></div>
         <div class="stage-text"><h3>{stage.label}</h3><p>{stage.body}</p></div><span class="stage-go" aria-hidden="true"><Arrow direction="up-right"/></span>
       </a>)}</div>
   </div>
 </section>
 <section class="home-project" aria-labelledby="project-title"><div class="wrap project-spread">
-  <figure><Photo id="circulatory-model" lang={lang} sizes="(min-width: 800px) 50vw, 100vw"/><figcaption>{t('Heart and lungs model, school learning exhibition', 'विद्यालय की प्रदर्शनी में हृदय और फेफड़ों का मॉडल')}</figcaption></figure>
-  <div><p class="location-line">{t('At the exhibition', 'सीखने की प्रदर्शनी')}</p>
-  <h2 id="project-title">{t('How does blood move through the body?', 'शरीर में खून कैसे बहता है?')}</h2>
-  <p>{t('Follow the tubes on this model of the heart and lungs. At the exhibition, a working angle wheel and a miniature greenhouse show other ways pupils have turned schoolwork into models.', 'मॉडल में लगी नलियों का रास्ता देखकर समझिए कि खून कहाँ से गुज़रता है। प्रदर्शनी में बच्चों ने कोण मापने का चक्र और एक छोटा ग्रीनहाउस भी बनाया।')}</p>
+  <figure><Photo id="nutrition-presentation" lang={lang} phoneMaxWidth={640} sizes="(min-width: 800px) 50vw, 100vw"/><figcaption>{t('Pupils present their food pyramid · 2023', 'बच्चों का बनाया भोजन पिरामिड · 2023')}</figcaption></figure>
+  <div><p class="location-line">{t('From the school album', 'विद्यालय के एल्बम से')}</p>
+  <h2 id="project-title">{t('What goes on each shelf?', 'किस खाने को कहाँ रखें?')}</h2>
+  <p>{t('Look closely at this handmade food pyramid. For their 2023 student-led conference, pupils arranged pictures of food in tiers and presented the model to visitors. Which foods can your child spot?', 'ज़रा इस पिरामिड को देखिए। 2023 के विद्यार्थी सम्मेलन के लिए बच्चों ने खाने की चीज़ों के चित्र अलग-अलग स्तरों पर सजाए और अपना मॉडल आगंतुकों को दिखाया। आपके बच्चे को कौन-कौन सी चीज़ें दिखती हैं?')}</p>
   <a class="index-link" href={pathFor(lang,'academics')+'#exhibitions'}>{t('Explore the exhibition', 'प्रदर्शनी देखें')} <span aria-hidden="true"><Arrow/></span></a></div>
 </div></section>
 <section class="school-album" id="school-film"><div class="wrap album-grid">
@@ -39,7 +39,7 @@ const stages = [
   <VideoCard id="campus-spaces" lang={lang} large/>
 </div></section>
 <section class="life-directory"><div class="wrap life-directory-inner">
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5"/></svg>
-  <div><h2>{t('School life in Amet', 'आमेट में स्कूली जीवन')}</h2><p>{t('Meet the four houses and read about NCC at Veer Patta.', 'वीर पत्ता के चारों सदनों और एनसीसी के बारे में जानें।')}</p></div>
-  <a class="index-link" href={pathFor(lang,'beyond')}>{t('Explore school life', 'स्कूल जीवन देखें')} <span aria-hidden="true"><Arrow/></span></a>
+  <figure class="life-race"><Photo id="house-colour-chair-race" lang={lang} phoneMaxWidth={480} sizes="(min-width: 800px) 320px, 88vw"/><figcaption>{t('On the track at Sports Day, 2026', 'खेल दिवस, 2026 · दौड़ के मैदान में')}</figcaption></figure>
+  <div><h2>{t('On the school team', 'एक टीम के साथी')}</h2><p>{t('See pupils in their house colours at Sports Day, follow the steps of an inter-house dance and meet our NCC cadets.', 'खेल दिवस पर सदनों के रंग, अंतर-सदनीय नृत्य के कदम और एनसीसी कैडेटों की तस्वीरें देखें।')}</p>
+  <a class="index-link" href={pathFor(lang,'beyond')}>{t('Explore school life', 'स्कूल जीवन देखें')} <span aria-hidden="true"><Arrow/></span></a></div>
 </div></section>

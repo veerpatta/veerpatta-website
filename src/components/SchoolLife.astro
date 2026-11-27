@@ -9,7 +9,32 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = (en: string, hi: string) => pick(lang, en, hi);
 ---
-<section class="inside-section" id="houses" aria-labelledby="houses-title">
+<section id="school-activities" class="inside-section" aria-labelledby="activities-title">
+  <div class="wrap">
+    <div class="inside-section-head"><h2 id="activities-title">{t('Sports and performance', 'खेल और प्रस्तुतियाँ')}</h2></div>
+    <div class="inside-life-pair">
+      <article class="inside-life-entry">
+        <h3>{t('A chair in every lane', 'हर लेन में एक कुर्सी')}</h3>
+        <Photo id="house-colour-chair-race" lang={lang} phoneMaxWidth={640} sizes="(min-width: 770px) 43vw, 94vw" />
+        <p>{t('At the 2026 Sports Day, pupils in house colours bend over small chairs, one in each chalk lane. Look at the line of red, yellow and green chairs stretching across the track.', '2026 के खेल दिवस में अपने सदन के रंग की टी-शर्ट पहने बच्चे छोटी कुर्सियों पर झुके हैं। मैदान पर चूने से बनी हर लेन में एक लाल, पीली या हरी कुर्सी रखी है।')}</p>
+        <p>{t('The programme for Sports Day on 10 February 2025 included sprints, relays and tug of war.', '10 फ़रवरी 2025 के खेल दिवस के कार्यक्रम में दौड़, रिले और रस्साकशी थीं।')} <a class="inside-inline-link" href={'/news/2025-01-15-sports-day-' + lang + '/'}>{t('Read the 2025 report', '2025 की रिपोर्ट पढ़ें')}</a></p>
+        <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=sports#photos'}>
+          {t('Sports photographs', 'खेल की तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
+        </a>
+      </article>
+      <article class="inside-life-entry">
+        <h3>{t('Inter-house dance', 'अंतर-सदनीय नृत्य')}</h3>
+        <VideoCard id="lawn-dance-detail" lang={lang} />
+        <p>{t('Watch how the group steps across the grass and turns together. As the dancers turn, their yellow skirts flare and the pink sashes swing.', 'देखें कि नृत्य करते बच्चे घास पर किस तरह साथ कदम रखते और घूमते हैं। मुड़ते समय पीले घाघरों के घेरे फैलते हैं और गुलाबी दुपट्टे लहराते हैं।')}</p>
+        <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=cultural#photos'}>
+          {t('Dance and performance photographs', 'नृत्य और प्रस्तुतियों की तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="inside-section inside-soft" id="houses" aria-labelledby="houses-title">
   <div class="wrap">
     <div class="inside-section-head inside-section-head--intro">
       <h2 id="houses-title">{t('Four houses, four colours', 'चार सदन, चार रंग')}</h2>
@@ -27,42 +52,19 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
   </div>
 </section>
 
-<section id="school-activities" class="inside-section inside-soft" aria-labelledby="activities-title">
-  <div class="wrap">
-    <div class="inside-section-head"><h2 id="activities-title">{t('Sports and performance', 'खेल और प्रस्तुतियाँ')}</h2></div>
-    <div class="inside-life-pair">
-      <article class="inside-life-entry">
-        <Photo id="race-lanes" lang={lang} sizes="(min-width: 770px) 43vw, 94vw" />
-        <h3>{t('Sports Day on the grounds', 'मैदान पर खेल दिवस')}</h3>
-        <p>{t('On 10 February 2025, the school held Sports Day at the Veer Patta Sports Ground. The programme included individual sprints, relay races and tug of war.', '10 फ़रवरी 2025 को वीर पत्ता खेल मैदान में विद्यालय का खेल दिवस हुआ। कार्यक्रम में छोटी दूरी की दौड़, रिले और रस्साकशी शामिल थीं।')}</p>
-        <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=sports#photos'}>
-          {t('Sports photographs', 'खेल की तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
-        </a>
-      </article>
-      <article class="inside-life-entry">
-        <VideoCard id="lawn-dance-detail" lang={lang} />
-        <h3>{t('Inter-house dance', 'अंतर-सदनीय नृत्य')}</h3>
-        <p>{t('At the inter-house dance competition, the school lawn becomes a stage. Groups perform together outdoors, with the main building as their backdrop.', 'अंतर-सदनीय नृत्य प्रतियोगिता के दिन विद्यालय का लॉन ही मंच बन जाता है। मुख्य भवन के सामने खुले मैदान में बच्चे अपने समूह के साथ प्रस्तुति देते हैं।')}</p>
-        <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=cultural#photos'}>
-          {t('Dance and performance photographs', 'नृत्य और प्रस्तुतियों की तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
-        </a>
-      </article>
-    </div>
-  </div>
-</section>
-
 <section id="ncc" class="inside-section" aria-labelledby="ncc-title">
   <div class="wrap inside-split inside-ncc">
     <div class="inside-copy">
       <p class="inside-label">{t('NCC', 'एनसीसी')}</p>
-      <h2 id="ncc-title">{t('National Cadet Corps', 'राष्ट्रीय कैडेट कोर')}</h2>
-      <p>{t('The school’s Sports Day programme for 27 January 2026 listed the torch relay, sports oath and recognition of NCC A certificate recipients.', 'विद्यालय के 27 जनवरी 2026 के खेल दिवस कार्यक्रम में मशाल रिले, खेल शपथ और एनसीसी ए प्रमाणपत्र पाने वाले कैडेटों का सम्मान शामिल था।')}</p>
-      <p>{t('The school archive includes NCC cadets in parade uniform. If your child is interested in NCC, ask the office whether enrolment is available this session, which classes can apply and what activities are planned.', 'विद्यालय के संग्रह में परेड की वर्दी पहने एनसीसी कैडेटों की तस्वीरें हैं। यदि आपके बच्चे की एनसीसी में रुचि है, तो कार्यालय से पूछें कि इस सत्र में नामांकन खुला है या नहीं, किन कक्षाओं के बच्चे आवेदन कर सकते हैं और कौन-सी गतिविधियाँ तय हैं।')}</p>
+      <h2 id="ncc-title">{t('Cadets at the exhibition', 'प्रदर्शनी में एनसीसी कैडेट')}</h2>
+      <p>{t('At a 2022 school exhibition, National Cadet Corps cadets stood beside a table of handwritten cards. In khaki uniforms and striped sashes, they showed the display to a visitor.', '2022 की विद्यालय प्रदर्शनी में राष्ट्रीय कैडेट कोर के कैडेटों ने मेज़ पर हाथ से लिखे कार्ड सजाए। खाकी वर्दी और धारीदार कमरबंद पहने कैडेट आगंतुक को अपना प्रदर्शन दिखा रहे हैं।')}</p>
+      <p>{t('The programme for Sports Day on 27 January 2026 listed a torch relay, the sports oath and recognition for cadets who earned the NCC A certificate.', '27 जनवरी 2026 के खेल दिवस के कार्यक्रम में मशाल दौड़, खेल शपथ और एनसीसी का ए प्रमाणपत्र पाने वाले कैडेटों का सम्मान शामिल था।')}</p>
+      <p>{t('Families interested in NCC can ask the office about this session’s enrolment, eligible classes and activities.', 'इस सत्र में कौन-सी कक्षाओं के बच्चे एनसीसी में शामिल हो सकते हैं और क्या गतिविधियाँ होंगी, यह कार्यालय से पूछें।')}</p>
       <a class="inside-link" href={pathFor(lang, 'contact')}>{t('Ask the school office', 'विद्यालय कार्यालय से पूछें')}<span aria-hidden="true"><Arrow/></span></a>
     </div>
     <figure class="inside-figure">
-      <Photo id="ncc-sashes" lang={lang} sizes="(min-width: 1260px) 580px, (min-width: 770px) 46vw, 94vw" />
-      <figcaption>{t('Striped belts and sashes on the school cadets’ uniforms.', 'विद्यालय के कैडेटों की वर्दी पर धारीदार बेल्ट और कमरबंद।')}</figcaption>
+      <Photo id="cadets-at-display" lang={lang} phoneMaxWidth={720} sizes="(min-width: 1260px) 580px, (min-width: 770px) 46vw, 94vw" />
+      <figcaption>{t('The NCC display table at the school exhibition in 2022.', '2022 की विद्यालय प्रदर्शनी में एनसीसी कैडेटों की मेज़।')}</figcaption>
     </figure>
   </div>
 </section>

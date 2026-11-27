@@ -10,18 +10,19 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
 <section class="front" aria-labelledby="cover-title">
   <div class="wrap front-spread">
     <div class="front-copy">
-      <p class="location-line">{t('Opposite Mela Ground · Amet', 'मेला ग्राउंड के सामने · आमेट')}</p>
-      <h1 id="cover-title">{t('Inside', 'आइए,')} <span>{t('Veer Patta.', 'वीर पत्ता चलें।')}</span></h1>
-      <p class="front-intro">{t('Nursery to Class 12 in Amet, Rajasthan. See what pupils make at our RBSE school, find your child’s class and arrange a visit.', 'आमेट के हमारे राजस्थान बोर्ड विद्यालय में नर्सरी से 12वीं तक पढ़ाई होती है। बच्चों के प्रोजेक्ट देखें, कक्षा चुनें और विद्यालय आने का समय तय करें।')}</p>
+      <p class="location-line">{t('Amet · RBSE · Nursery to Class 12', 'आमेट · राजस्थान बोर्ड · नर्सरी से 12वीं')}</p>
+      <h1 id="cover-title">{t('Veer Patta,', 'बच्चों की नज़र से')} <span>{t('through pupils’ eyes.', 'देखिए वीर पत्ता।')}</span></h1>
+      <p class="front-intro">{t('At our learning exhibition, the children show visitors how their geometry projects work. Come and meet us opposite Mela Ground.', 'हमारी प्रदर्शनी में बच्चे खुद समझाते हैं कि ज्यामिति के उनके मॉडल कैसे काम करते हैं। हमसे मिलने मेला ग्राउंड के सामने स्कूल आइए।')}</p>
       <div class="front-actions">
         <a class="front-admit" href={pathFor(lang, 'admissions')}>{t('Admissions', 'प्रवेश की जानकारी')} <span aria-hidden="true"><Arrow/></span></a>
         <a class="front-wa" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon size={18} />{t('WhatsApp enquiry', 'WhatsApp पर पूछें')}</a>
         <a class="front-call" href={`tel:${site.phone}`}>{t('Call school', 'स्कूल को फ़ोन करें')}</a>
       </div>
+      <a class="front-visit" href={pathFor(lang, 'contact') + '#visit'}>{t('Plan a school visit', 'स्कूल आने का रास्ता देखें')} <Arrow/></a>
     </div>
     <figure class="front-photo">
-      <Photo id="amet-campus-wide" lang={lang} eager sizes="100vw" art={{id:'amet-campus-terrace',media:'(min-width: 800px)',sizes:'(min-width: 1530px) 880px, 57.5vw'}}/>
-      <figcaption><span>{t('Main building, Amet · March 2026', 'विद्यालय भवन, आमेट · मार्च 2026')}</span><a href={pathFor(lang,'contact')+'#visit'}>{t('Visit us', 'रास्ता देखें')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a></figcaption>
+      <Photo id="exhibition-pupils-amet" lang={lang} eager phoneMaxWidth={800} sizes="(min-width: 1530px) 880px, (min-width: 800px) 57.5vw, 100vw"/>
+      <figcaption><span>{t('Learning exhibition, 2026', 'स्कूल की प्रदर्शनी, 2026')}</span><a href={pathFor(lang,'academics')+'#exhibitions'}>{t('See the projects', 'प्रोजेक्ट देखें')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a></figcaption>
     </figure>
   </div>
 </section>

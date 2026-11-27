@@ -1,6 +1,5 @@
 ---
 import Arrow from './Arrow.astro';
-import PageHead from './PageHead.astro';
 import Photo from './Photo.astro';
 import VideoCard from './VideoCard.astro';
 import { photos, galleryIds, videos } from '../data/media';
@@ -18,13 +17,47 @@ const labels: Record<GalleryCategory, string> = {
   cultural: t('Arts & stage', 'कला और मंच'),
   ncc: t('NCC', 'एनसीसी'),
 };
+const openingPhotos = [
+  'exhibition-pupils-amet', 'sports-podium-amet', 'house-colour-chair-race',
+  'language-exhibition', 'cadets-at-display', 'dance-footwork',
+  'nutrition-presentation', 'student-headset-desk',
+];
+const albumIds = [
+  ...openingPhotos.filter(id => galleryIds.includes(id)),
+  ...galleryIds.filter(id => !openingPhotos.includes(id)),
+];
 ---
-<PageHead lang={lang}
-  kicker={t('School album', 'विद्यालय का एल्बम')}
-  title={t('The school in photographs', 'तस्वीरों में हमारा विद्यालय')}
-  description={t('Walk through the campus, take a seat at the exhibition table and step onto the playing field.', 'परिसर की सैर करें, प्रदर्शनी की मेज़ पर रखे मॉडल देखें और खेल के मैदान की झलक पाएँ।')}
-  image="assembly-courtyard" caption={t('The paved assembly courtyard under its blue canopy.', 'नीली छत के नीचे विद्यालय का प्रार्थना प्रांगण।')}
-  links={[{ href: '#photos', label: t('Browse photographs', 'तस्वीरें देखें') }, { href: '#videos', label: t('Watch the short films', 'छोटी फ़िल्में देखें') }]} />
+<header class="album-opening">
+  <div class="wrap album-cover">
+    <div class="album-cover-copy">
+      <nav class="album-crumb" aria-label={t('Breadcrumb', 'पृष्ठ का क्रम')}>
+        <a href={pathFor(lang)}>{t('Home', 'मुखपृष्ठ')}</a><span aria-hidden="true">/</span><span aria-current="page">{t('School album', 'विद्यालय का एल्बम')}</span>
+      </nav>
+      <h1>{t('School life in pictures', 'तस्वीरों में स्कूल का जीवन')}</h1>
+      <p>{t('See pupils at the exhibition tables, on the playing field and on the dance lawn. The album also takes you through the classrooms and grounds in Amet.', 'प्रदर्शनी की मेज़ों पर, खेल के मैदान में और नृत्य के दौरान विद्यार्थियों की झलक देखें। एल्बम में आमेट के विद्यालय की कक्षाएँ और परिसर भी हैं।')}</p>
+      <div class="album-shortcuts">
+        <a class="button button-primary" href="#photos">{t('Browse photographs', 'तस्वीरें देखें')} <span aria-hidden="true"><Arrow direction="down" /></span></a>
+        <a href="#videos" class="album-film-link">{t('Watch the short films', 'छोटी फ़िल्में देखें')} <span aria-hidden="true"><Arrow direction="down" /></span></a>
+      </div>
+    </div>
+    <div class="album-cover-photos">
+      <figure class="album-cover-print album-dance">
+        <div class="album-cover-frame">
+          <Photo id="interhouse-dance-lawn" lang={lang} eager phoneMaxWidth={480}
+            sizes="(min-width: 1460px) 280px, (min-width: 800px) 21vw, (min-width: 600px) 295px, 49vw" />
+        </div>
+        <figcaption>{t('Inter-house dance on the lawn, 14 August 2025.', 'लॉन पर अंतर-सदनीय नृत्य, 14 अगस्त 2025।')}</figcaption>
+      </figure>
+      <figure class="album-cover-print album-planets">
+        <div class="album-cover-frame">
+          <Photo id="solar-system-visitors" lang={lang} phoneMaxWidth={384}
+            sizes="(min-width: 1460px) 355px, (min-width: 800px) 26vw, (min-width: 600px) 255px, 42vw" />
+        </div>
+        <figcaption>{t('Visitors explore the pupils’ solar system.', 'विद्यार्थियों के बनाए सौरमंडल को देखते बच्चे।')}</figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
 
 <section class="album-section" id="photos" aria-labelledby="album-photos">
   <div class="wrap">
@@ -39,11 +72,11 @@ const labels: Record<GalleryCategory, string> = {
       {galleryCategories.map(category => <button type="button" data-gallery-filter={category} aria-pressed={category === 'all'}>{labels[category]}</button>)}
     </div>
     <div class="album-grid">
-      {galleryIds.map(id => {
+      {albumIds.map(id => {
         const photo = photos[id];
         return <figure class="album-print" data-gallery-category={photo.gallery}>
           <a href={`/assets/media/photos/${id}-${photo.w}.webp`} data-photo-open data-photo-caption={photo.alt[lang]}>
-            <Photo id={id} lang={lang} sizes="(min-width: 1400px) 400px, (min-width: 980px) 30vw, (min-width: 580px) 45vw, 92vw"/>
+            <Photo id={id} lang={lang} phoneMaxWidth={640} sizes="(min-width: 1400px) 400px, (min-width: 980px) 30vw, (min-width: 580px) 45vw, 92vw"/>
             <span class="album-enlarge" aria-hidden="true">
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 2h5v5M14 2 8.5 7.5M7 14H2V9m0 5 5.5-5.5"/></svg>
             </span>
@@ -60,7 +93,7 @@ const labels: Record<GalleryCategory, string> = {
     <header class="album-section-head">
       <div>
         <h2 id="album-films">{t('Short films', 'छोटी फ़िल्में')}</h2>
-        <p>{t('Choose a film to load it. Both are silent and have scene descriptions in English and Hindi.', 'जिस फ़िल्म को देखना हो, उसे चलाएँ। दोनों फ़िल्में बिना आवाज़ की हैं और दृश्यों का विवरण हिंदी और अंग्रेज़ी में दिया है।')}</p>
+        <p>{t('Choose a film to load it. Read the scene descriptions in English or Hindi.', 'जिस फ़िल्म को देखना हो, उसे चलाएँ। दृश्यों का विवरण हिंदी या अंग्रेज़ी में पढ़ सकते हैं।')}</p>
       </div>
     </header>
     <div class="album-film-grid">{Object.keys(videos).map(id => <VideoCard id={id} lang={lang} />)}</div>
@@ -75,14 +108,39 @@ const labels: Record<GalleryCategory, string> = {
   </div>
 </section>
 <style>
+  .album-opening { background: #edf5ec; border-bottom: 1px solid #cfdbcb; }
+  .album-cover { display: grid; align-items: center; gap: 1.45rem 5vw; padding-block: clamp(1.2rem, 3.9vw, 3.7rem); }
+  .album-crumb, .album-shortcuts { display: flex; align-items: center; flex-wrap: wrap; }
+  .album-crumb { gap: .65rem; margin-bottom: .65rem; font-size: .86rem; }
+  .album-crumb a, .album-film-link { text-decoration: underline; text-underline-offset: .2em; }
+  .album-crumb a { display: inline-flex; align-items: center; min-height: 44px; }
+  .album-cover-copy h1 { max-width: 14ch; font-size: clamp(2.55rem, 5.7vw, 5.3rem); }
+  .album-cover-copy > p { margin-top: .9rem; max-width: 46ch; font-size: 1.03rem; }
+  .album-shortcuts { gap: .25rem 1.15rem; margin-top: 1.1rem; }
+  .album-film-link { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; font-size: .92rem; font-weight: 650; }
+  .album-cover-photos { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .95fr); gap: .65rem; align-items: center; width: min(100%, 570px); margin-inline: auto; }
+  .album-cover-print { min-width: 0; margin: 0; padding: .27rem; border: 1px solid #cad4c3; border-radius: .32rem; background: #fffdf7; box-shadow: .2rem .2rem 0 #b1cbaa; }
+  .album-cover-frame { overflow: hidden; border-radius: .15rem; }
+  .album-cover-frame :global(picture), .album-cover-frame :global(img) { display: block; width: 100%; height: 100%; }
+  .album-cover-frame :global(img) { object-fit: cover; }
+  .album-dance .album-cover-frame { aspect-ratio: 4 / 5; }
+  .album-planets .album-cover-frame { aspect-ratio: 2.1; }
+  .album-planets :global(img) { object-position: 38% center; }
+  .album-cover-print figcaption { color: #2a4434; padding: .43rem .2rem .15rem; font-size: .8rem; line-height: 1.45; }
+  @media (min-width: 800px) {
+    .album-cover { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
+    .album-cover-photos { grid-template-columns: minmax(0, .85fr) minmax(0, 1.1fr); gap: 1.05rem; width: 100%; }
+    .album-cover-print { padding: .4rem; }
+    .album-cover-print figcaption { font-size: .85rem; }
+  }
   .album-section { padding-block:clamp(2.5rem,5.8vw,5.2rem); }
   .album-section-head, .album-visit-inner { display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:1rem 2rem; }
   .album-section-head h2, .album-visit h2 { color:var(--ink); font-family:var(--serif); font-size:clamp(2rem,4.3vw,3.6rem); line-height:1.15; margin:0; }
   .album-section-head p, .album-visit p { color:var(--muted); max-width:58ch; margin:.55rem 0 0; }
-  .album-section-head .album-count { color:var(--maroon,#762f39); font-size:.83rem; font-weight:700; }
+  .album-section-head .album-count { color:var(--blue); font-size:.83rem; font-weight:700; }
   .album-filters { display:flex; flex-wrap:wrap; gap:.35rem .55rem; margin-top:1.1rem; }
   .album-filters button { border:1px solid #bdb2a3; font:inherit; font-weight:600; font-size:.86rem; color:var(--ink); background:transparent; min-height:44px; padding:.35rem .85rem; border-radius:2rem; }
-  .album-filters button[aria-pressed=true] { border-color:var(--maroon,#762f39); color:white; background:var(--maroon,#762f39); }
+  .album-filters button[aria-pressed=true] { border-color:var(--blue); color:white; background:var(--blue); }
   .album-filters button:hover:not([aria-pressed=true]) { background:var(--cream); }
   .album-grid { display:grid; gap:1.7rem clamp(1rem,2.5vw,2.25rem); margin-top:1.4rem; padding-top:1.45rem; border-top:1px solid var(--line); }
   .album-print { margin:0; min-width:0; }

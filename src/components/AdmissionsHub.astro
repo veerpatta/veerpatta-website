@@ -17,16 +17,19 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
       <nav class="admissions-crumb" aria-label={t('Breadcrumb', 'पृष्ठ का मार्ग')}>
         <a href={pathFor(lang)}>{t('Home', 'होम')}</a><span aria-hidden="true">/</span><span>{t('Admissions', 'प्रवेश')}</span>
       </nav>
-      <h1>{t('School admissions', 'विद्यालय में प्रवेश')}</h1>
-      <p>{t('Ask the office about entry requirements, fees or a visit for any class from Nursery through Class 12.', 'नर्सरी से कक्षा 12 तक प्रवेश की शर्तों, फ़ीस या स्कूल आने के बारे में कार्यालय से बात करें।')}</p>
+      <h1>{t('Admissions at Veer Patta', 'वीर पत्ता में प्रवेश')}</h1>
+      <p>{t('Choose your child’s class to start an enquiry on WhatsApp. The office can confirm fees, entry requirements and a time to visit.', 'बच्चे की कक्षा चुनकर WhatsApp पर प्रवेश की बात शुरू करें। फ़ीस, प्रवेश की शर्तों और स्कूल आने के समय की जानकारी कार्यालय से लें।')}</p>
       <div class="admissions-cover-actions">
         <a href="#classes" class="button choose-class">{t('Choose a class', 'कक्षा चुनें')} <span aria-hidden="true"><Arrow direction="down"/></span></a>
         <a href={`tel:${site.phone}`} class="admissions-phone">{t('Call the office', 'कार्यालय को फ़ोन करें')}</a>
       </div>
     </div>
-    <figure>
-      <Photo id="campus-approach" lang={lang} eager sizes="(min-width: 850px) 38vw, (min-width: 550px) 33vw, 94vw" />
-      <figcaption>{t('The path up to the main building, opposite Mela Ground', 'मेला ग्राउंड के सामने, विद्यालय के मुख्य भवन तक जाने का रास्ता')}</figcaption>
+    <figure class="admissions-photo">
+      <div class="admissions-photo-frame">
+        <Photo id="classroom-participation" lang={lang} eager phoneMaxWidth={800}
+          sizes="(min-width: 1460px) 650px, (min-width: 760px) 46vw, (min-width: 600px) 92vw, 27vw" />
+      </div>
+      <figcaption>{t('A pupil takes her turn to speak. From the school’s Children’s Day film, 2026.', 'अपनी बात कहती एक छात्रा। स्कूल की बाल दिवस फ़िल्म से, 2026।')}</figcaption>
     </figure>
   </div>
 </header>
@@ -39,7 +42,7 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
     </div>
     <div class="directory-groups">
       {admissionClassGroups.map(group => (
-        <div class="directory-group">
+        <div class="directory-group" id={group.id}>
           <h3>{group.name[lang]}</h3>
           <ul class="class-choices" role="list">
             {group.classes.map(grade => <li><AdmissionClassLink lang={lang} grade={grade} /></li>)}
@@ -63,26 +66,31 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
 </nav>
 
 <style>
-  .admissions-cover { background: var(--cream, #f3ecdf); }
-  .admissions-cover-inner { display: grid; align-items: center; gap: 1.4rem 4vw; padding-block: clamp(1.3rem, 4vw, 4rem); }
+  .admissions-cover { background: #eef4f8; border-bottom: 1px solid #c9d9e3; }
+  .admissions-cover-inner { display: grid; align-items: center; gap: 1.25rem 5vw; padding-block: clamp(1.2rem, 3.8vw, 3.6rem); }
   .admissions-cover h1 { line-height: 1.08; font-size: clamp(2.65rem, 6vw, 5.6rem); }
   .admissions-crumb { display: flex; align-items: center; gap: .7rem; margin-bottom: .8rem; font-size: .88rem; }
   .admissions-crumb a, .admissions-phone, .guide-link { text-decoration: underline; text-underline-offset: .22em; }
   .admissions-cover p, .directory-intro p { margin-top: .85rem; max-width: 45ch; line-height: 1.65; font-size: 1.02rem; }
   .admissions-cover-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem 1.3rem; margin-top: 1.25rem; }
-  .choose-class { background: var(--maroon, #762f39); color: white; }
-  .choose-class:hover { background: #5c2530; }
+  .choose-class { background: var(--blue); color: white; }
+  .choose-class:hover { background: var(--navy-deep); }
   .admissions-phone, .guide-link { display: inline-flex; align-items: center; min-height: 44px; font-size: .92rem; font-weight: 650; }
-  .admissions-cover figure { position: relative; overflow: hidden; border-radius: .22rem; }
-  .admissions-cover figure :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 70%; display: block; }
-  .admissions-cover figure { aspect-ratio: 3.1; }
-  .admissions-cover figcaption { position: absolute; bottom: 0; left: 0; background: #172e40; color: #fff; padding: .28rem .7rem; font-size: .76rem; }
+  .admissions-photo { min-width: 0; padding: .35rem; background: #fffdf7; border: 1px solid #d7c99f; border-radius: .55rem; box-shadow: .3rem .3rem 0 #ebcb76; }
+  .admissions-photo-frame { aspect-ratio: 1.35; overflow: hidden; border-radius: .3rem; }
+  .admissions-photo-frame :global(picture), .admissions-photo-frame :global(img) { width: 100%; height: 100%; display: block; }
+  .admissions-photo-frame :global(img) { object-fit: cover; }
+  .admissions-photo figcaption { color: var(--ink); padding: .38rem .4rem .08rem; font-size: .83rem; line-height: 1.45; }
   .class-directory { padding-block: clamp(2.4rem, 6vw, 5.4rem); background: var(--paper, #fffcf5); }
   .directory-layout { display: grid; gap: 1.6rem 5vw; align-items: start; }
   .directory-intro h2 { font-size: clamp(2rem, 3.8vw, 3.6rem); max-width: 14ch; }
-  .guide-link { gap: .65rem; color: var(--maroon, #762f39); }
-  .directory-groups { border-top: 2px solid var(--ink, #172e40); }
-  .directory-group { display: grid; gap: .6rem; border-bottom: 1px solid var(--line, #d8cec0); padding-block: 1rem 1.15rem; }
+  .guide-link { gap: .65rem; color: var(--blue); }
+  .directory-groups { display: grid; gap: .55rem; }
+  .directory-group { scroll-margin-block-start: .5rem; }
+  .directory-group { display: grid; gap: .6rem; padding: .85rem 1rem 1rem; border-inline-start: 3px solid #b08224; border-radius: 0 .4rem .4rem 0; background: #fcf5e1; }
+  .directory-group:nth-child(2) { background: #edf4f7; border-color: #558394; }
+  .directory-group:nth-child(3) { background: #eef4e9; border-color: #678153; }
+  .directory-group:nth-child(4) { background: #f8edf0; border-color: #a05c6b; }
   .directory-group h3 { font-family: var(--sans); font-size: 1rem; line-height: 1.5; letter-spacing: 0; }
   .class-choices { margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .55rem; list-style: none; }
   .class-choices li { min-width: 0; }
@@ -91,17 +99,25 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
   .directory-destination bdi { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .admissions-guides { border-block: 1px solid var(--line, #d8cec0); }
   .admissions-guides > div { display: flex; gap: .2rem 2rem; flex-wrap: wrap; padding-block: .65rem; }
-  .admissions-guides a { display: inline-flex; align-items: center; min-height: 44px; gap: .65rem; color: var(--maroon, #762f39); font-size: .96rem; font-weight: 650; }
+  .admissions-guides a { display: inline-flex; align-items: center; min-height: 44px; gap: .65rem; color: var(--blue); font-size: .96rem; font-weight: 650; }
   .admissions-guides a:hover { text-decoration: underline; text-underline-offset: .2em; }
   :global(html[lang=hi]) .admissions-cover h1, :global(html[lang=hi]) .directory-intro h2 { line-height: 1.32; }
-  @media (min-width: 550px) {
-    .admissions-cover-inner { grid-template-columns: 1.35fr .85fr; }
-    .admissions-cover figure { aspect-ratio: 1.16; }
+  @media (max-width: 599px) {
+    .admissions-cover-inner { gap: 1rem; }
+    .admissions-photo { display: flex; align-items: center; gap: .8rem; padding: .35rem; box-shadow: none; }
+    .admissions-photo-frame { flex: 0 0 30%; aspect-ratio: 1.4; }
+    .admissions-photo figcaption { padding: .25rem .5rem .25rem 0; }
+    .class-directory { padding-block-start: 1.65rem; }
+    .directory-intro h2 { max-width: none; font-size: clamp(1.8rem, 7.4vw, 2.4rem); }
+  }
+  @media (min-width: 760px) {
+    .admissions-cover-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .admissions-photo-frame { aspect-ratio: 1.5; }
+    .admissions-photo { padding: .5rem; }
+    .admissions-photo figcaption { padding: .55rem .4rem .15rem; }
   }
   @media (min-width: 850px) {
     .directory-layout { grid-template-columns: minmax(0, .85fr) minmax(0, 1.4fr); }
-    .admissions-cover figure { aspect-ratio: 1.95; }
-    .admissions-cover-inner { gap: clamp(3rem, 6vw, 7rem); }
   }
   @media (min-width: 1150px) {
     .directory-group { grid-template-columns: .7fr 1.5fr; align-items: baseline; gap: 1.2rem; }

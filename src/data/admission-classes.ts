@@ -2,18 +2,22 @@ import type { Lang } from './site.ts';
 
 export const admissionClassGroups = [
   {
+    id: 'early-years-classes',
     name: { en: 'Early years', hi: 'पूर्व-प्राथमिक' },
     classes: ['Nursery', 'JKG', 'SKG'],
   },
   {
+    id: 'primary-classes',
     name: { en: 'Primary', hi: 'प्राथमिक' },
     classes: ['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5'],
   },
   {
+    id: 'middle-classes',
     name: { en: 'Middle school', hi: 'उच्च प्राथमिक' },
     classes: ['Class 6', 'Class 7', 'Class 8'],
   },
   {
+    id: 'secondary-classes',
     name: { en: 'Secondary & senior secondary', hi: 'माध्यमिक और उच्च माध्यमिक' },
     classes: ['Class 9', 'Class 10', 'Class 11', 'Class 12'],
   },

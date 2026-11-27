@@ -1,6 +1,63 @@
 # Revamp media provenance and review
 
-## Public media selection, 25 November 2026
+## Parent website review, 27 November 2026
+
+The 2026 exhibition original in the Brand Kit and the approved 1046 × 679
+homepage crop below show the same geometry demonstration. The Learning page
+uses a separate close-up of a visitor turning an angle wheel. The loading
+GIF uses the Brand Kit’s emblem, with only the dots moving between frames.
+The 288-pixel phone thumbnails are resizes of the reviewed photographs.
+
+The school’s 2026 board workbooks confirm the school and stream figures on
+Learning. The school’s programme for 27 January 2026 lists the torch relay,
+sports oath and NCC A certificate recognition. The November identity record
+confirms the house colours and the Amet–Kelwa Road address.
+
+## Student photography, 25 November 2026
+
+The current homepage shows children demonstrating a geometry project at the
+school's Amet learning exhibition. The approved November campus-visit marketing
+creative also contained the Sports Day medallists and the pupils playing
+cricket in front of the school. Each published crop comes from the original
+photograph. Image registration matched all three to the approved artwork
+within 0.21 pixels at campaign resolution.
+
+The school's curation guide permits website and marketing use of these
+originals. Its marketing studio recorded human approval and school-confirmed
+guardian marketing consent for every identifiable person in the matched
+creative. The reviewed crops restrict the frame to the people covered by that
+record. Consent documentation stays with the school.
+
+| Website photograph | Original dimensions | Approved rectangle (left, top, right, bottom) |
+| --- | --- | --- |
+| `exhibition-pupils-amet` | 1600 × 720 | 152, 18, 1198, 697 |
+| `sports-podium-amet` | 1280 × 576 | 214, 9, 1064, 566 |
+| `school-lawn-cricket` | 4096 × 3072 | 1160, 1400, 3458, 2830 |
+
+Other archive selections show a pupil using headphones, pupils demonstrating
+language activities and a nutrition model at the 2023 student-led conference,
+cadets at a 2022 display, early-years pupils on the track on 10 February 2025
+and children at the 2026 Sports Day chair race.
+Their framing keeps faces, name tags and other individual identifiers outside
+the selected image. Years in captions refer to the photographed events.
+
+The school's separately approved November 2026 Children’s Day reel and story
+supply two classroom frames with recorded parent marketing consent. One shows a
+pupil speaking beside a wooden desk, and the other shows the class together.
+The publication date identifies the film. The precise class level and date
+of filming are unconfirmed. The dance portrait comes from a 14 August 2025
+camera frame matched to the same approved reel. Its crop stays within the
+approved portrait sequence.
+
+GPT Image supplied exposure references for the exhibition group, angle-wheel
+demonstration, pupil at the computer, early-years track and speaking pupil. A bounded global brightness curve
+derived from each reference was applied to the camera image. The maximum
+adjustment was six levels on an eight-bit channel. Spatial detail, handwriting,
+faces, clothing and the differences between colour channels come from the
+source photograph. The library retains its originals. Website derivatives
+have new names and are served in AVIF and WebP.
+
+## Earlier public media selection, 25 November 2026
 
 The current catalogue in `src/data/media.ts` and the public staging script control the photographs and films included in the Worker. The notes below this section describe earlier releases.
 

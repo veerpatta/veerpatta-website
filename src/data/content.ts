@@ -14,23 +14,23 @@ export interface PageContent {
 export const pageContent: Record<PageSlug, PageContent> = {
   about: {
     kicker: copy('Our school', 'हमारा विद्यालय'),
-    title: copy('Our school in Amet', 'आमेट में हमारा विद्यालय'),
+    title: copy('Meet the pupils of Veer Patta', 'वीर पत्ता के विद्यार्थियों से मिलिए'),
     description: copy(
-      'Opposite Mela Ground, the front steps lead into Shri Veer Patta Senior Secondary School. Children study here from Nursery through Class 12.',
-      'मेला ग्राउंड के सामने, मुख्य सीढ़ियों से श्री वीर पत्ता सीनियर सेकेंडरी स्कूल का परिसर शुरू होता है। यहाँ नर्सरी से कक्षा 12 तक पढ़ाई होती है।'
+      'Pupils play cricket on the lawn in front of their school in Amet. Opposite Mela Ground, Veer Patta brings together children from Nursery through Class 12 for lessons, exhibitions, sports and house events.',
+      'आमेट में विद्यालय भवन के सामने लॉन पर बच्चे क्रिकेट खेलते हैं। मेला ग्राउंड के सामने स्थित वीर पत्ता में नर्सरी से कक्षा 12 तक पढ़ाई होती है। प्रदर्शनी, खेल और सदनों के कार्यक्रमों में भी बच्चे साथ आते हैं।'
     ),
-    image: 'campus-approach',
-    caption: copy('The approach to the main entrance, Amet', 'मुख्य भवन की ओर जाती सीढ़ियाँ, आमेट'),
+    image: 'school-lawn-cricket',
+    caption: copy('Cricket on the school lawn in Amet, March 2026.', 'आमेट में विद्यालय के लॉन पर क्रिकेट, मार्च 2026।'),
   },
   academics: {
     kicker: copy('Learning', 'पढ़ाई'),
-    title: copy('Learning by doing', 'करके सीखना'),
+    title: copy('Pupils explain what they make', 'बच्चे अपने मॉडल समझाते हैं'),
     description: copy(
-      'Move the hands of an angle wheel. Build a model of the heart and lungs. At the school exhibition, pupils use things they have made to explain what they have learned.',
-      'कोण-चक्र की भुजाएँ घुमाकर कोण नापना या हृदय और फेफड़ों का मॉडल बनाना। विद्यालय की प्रदर्शनी में बच्चे अपनी बनाई चीज़ों से समझाते हैं कि उन्होंने क्या सीखा।'
+      'At the learning exhibition, a pupil shows a visitor how to use a handmade angle wheel. Other pupils use blocks to explain tens and ones and coloured tubes to trace the path of blood between the heart and lungs.',
+      'विद्यालय की प्रदर्शनी में एक बच्चा आगंतुक को अपना बनाया कोण-चक्र चलाना सिखाता है। दूसरे प्रोजेक्ट में बच्चों ने ब्लॉक से दहाई-इकाई समझाई और रंगीन नलियों से हृदय और फेफड़ों के बीच खून का रास्ता दिखाया।'
     ),
-    image: 'angles-board',
-    caption: copy('An angle wheel at the school exhibition', 'विद्यालय की प्रदर्शनी में कोण मापने का चक्र'),
+    image: 'angle-wheel-demonstration',
+    caption: copy('A pupil points to the markings as a visitor turns the red pointer.', 'आगंतुक लाल सुई घुमाते हैं और एक विद्यार्थी चक्र की रेखाओं की ओर इशारा करता है।'),
   },
   admissions: {
     kicker: copy('Admissions', 'प्रवेश'),
@@ -42,29 +42,33 @@ export const pageContent: Record<PageSlug, PageContent> = {
   },
   beyond: {
     kicker: copy('School life', 'विद्यालय जीवन'),
-    title: copy('On the field and on stage', 'मैदान से मंच तक'),
+    title: copy('On the field with our pupils', 'विद्यार्थियों के साथ मैदान में'),
     description: copy(
-      'A team race on the school grounds, an inter-house dance on the lawn and NCC cadets in parade uniform feature in the Veer Patta archive.',
-      'वीर पत्ता के संग्रह में मैदान पर टीम रेस, लॉन पर अंतर-सदनीय नृत्य और परेड की वर्दी में एनसीसी कैडेटों की झलक मिलती है।'
+      'Three medallists take their places on the podium at the 2026 Annual Sports Day. The school album also follows pupils into the race lanes, onto the lawn for an inter-house dance and behind an NCC exhibition table.',
+      '2026 के वार्षिक खेल दिवस में पदक पहने तीन खिलाड़ी विजय मंच पर खड़े हैं। विद्यालय के एल्बम में दौड़ की लेनों में बच्चे, लॉन पर सदनों का नृत्य और प्रदर्शनी की मेज़ पर एनसीसी कैडेट भी दिखते हैं।'
     ),
-    image: 'basketball-court',
-    caption: copy('The basketball court beside the school building', 'विद्यालय भवन के पास बास्केटबॉल का मैदान'),
+    image: 'sports-podium-amet',
+    caption: copy('Medallists on the podium at the Annual Sports Day, 2026.', 'वार्षिक खेल दिवस 2026 में विजय मंच पर पदक विजेता।'),
   },
   digital: {
     kicker: copy('Digital campus', 'डिजिटल परिसर'),
-    title: copy('School links for families', 'अभिभावकों के लिए स्कूल के लिंक'),
+    title: copy('Digital learning and parent links', 'डिजिटल पढ़ाई और अभिभावकों के लिए लिंक'),
     description: copy(
-      'Find out where to get class notices, help with a parent login and the school’s current payment instructions.',
-      'कक्षा की सूचनाएँ कहाँ मिलेंगी, अभिभावक लॉगिन में सहायता कैसे लें और शुल्क कैसे जमा करें, इसकी जानकारी यहाँ है।'
+      'At the 2023 student-led conference, a pupil used MIT App Inventor at a computer. Families can ask the office how to find class notices, access their parent login or pay school fees.',
+      '2023 के विद्यार्थी सम्मेलन में एक बच्चे ने कंप्यूटर पर MIT App Inventor का इस्तेमाल किया। कक्षा की सूचनाएँ, अभिभावक लॉगिन और शुल्क जमा करने का तरीका कार्यालय से जान सकते हैं।'
     ),
+    image: 'student-headset-desk',
+    caption: copy('Headphones on and a hand on the mouse at the student-led conference, 2023.', '2023 के सम्मेलन में एक विद्यार्थी हेडफ़ोन लगाकर कंप्यूटर पर काम कर रहा है।'),
   },
   contact: {
     kicker: copy('Visit & contact', 'संपर्क और मुलाक़ात'),
     title: copy('Visit us in Amet', 'आमेट में हमसे मिलें'),
     description: copy(
-      'Find us opposite Mela Ground. Call the school office to agree on a time to visit, or message us on WhatsApp about admission.',
-      'हमारा विद्यालय मेला ग्राउंड के सामने है। आने का समय कार्यालय में फ़ोन करके तय करें। प्रवेश की जानकारी WhatsApp पर भी ले सकते हैं।'
+      'Look for the main building opposite Mela Ground on Amet–Kelwa Road. Call the office to arrange a visit or ask about your child’s class on WhatsApp.',
+      'आमेट–केलवा रोड पर मेला ग्राउंड के सामने स्कूल का मुख्य भवन है। आने का समय फ़ोन पर तय कर लें। बच्चे की कक्षा के बारे में WhatsApp पर भी पूछ सकते हैं।'
     ),
+    image: 'campus-approach',
+    caption: copy('The approach to the school from Mela Ground.', 'मेला ग्राउंड की ओर से स्कूल तक आने का रास्ता।'),
   },
   faq: {
     kicker: copy('Parent questions', 'अभिभावकों के सवाल'),
@@ -86,8 +90,8 @@ export const pageContent: Record<PageSlug, PageContent> = {
     kicker: copy('School news', 'विद्यालय समाचार'),
     title: copy('From the school archive', 'विद्यालय के समाचार संग्रह से'),
     description: copy(
-      'Updates and photographs from Veer Patta in Amet. For this term’s notices and dates, contact the school office.',
-      'आमेट के वीर पत्ता विद्यालय से समाचार और तस्वीरें। इस सत्र की सूचनाएँ और तारीखें विद्यालय कार्यालय से लें।'
+      'The school’s Children’s Day film, early-years track games in Amet and a conference led by pupils. For this term’s notices and dates, contact the school office.',
+      'बाल दिवस की फ़िल्म, आमेट में छोटे बच्चों के खेल और विद्यार्थियों के सम्मेलन की झलकियाँ। इस सत्र की सूचनाएँ और तारीख़ें विद्यालय कार्यालय से लें।'
     ),
   },
 };

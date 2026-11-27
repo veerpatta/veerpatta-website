@@ -10,19 +10,32 @@ const t = (en: string, hi: string) => pick(lang, en, hi);
 
 const exhibits = [
   {
+    image: 'language-exhibition',
+    name: t('Inviting a visitor to play', 'आगंतुक को खेल में शामिल करना'),
+    text: t('At the 2023 student-led conference, pupils set out numbered envelopes for a language activity. A visitor reads a pink slip at their table beside a chart about words for being and having.', '2023 में बच्चों ने अपने सम्मेलन में भाषा के एक खेल के लिए नंबर वाले लिफ़ाफ़े सजाए। मेज़ पर एक आगंतुक गुलाबी पर्ची पढ़ रही हैं। पास के चार्ट पर अंग्रेज़ी में “होना” और “पास होना” बताने वाले शब्द हैं।'),
+    question: t('What fits in “I ___ a book”?', '“I ___ a book” में कौन-सा शब्द आएगा?'),
+    answer: t('“I have a book.” Now change “I” to “she” and say it again. The sentence becomes “She has a book.”', '“I have a book.” अब “I” की जगह “she” रखकर बोलें। वाक्य होगा “She has a book.”'),
+  },
+  {
     image: 'place-value-table',
-    name: t('Place value', 'स्थानीय मान'),
-    text: t('Colourful blocks sit in columns on a place-value chart. Moving a block changes what it stands for.', 'स्थानीय मान के चार्ट पर अलग-अलग खानों में रंगीन ब्लॉक रखे हैं। एक खाने से दूसरे में ले जाने पर ब्लॉक का मान बदल जाता है।'),
+    name: t('Building a number', 'ब्लॉक से संख्या बनाना'),
+    text: t('A pupil moves yellow blocks on a place-value chart. To read a two-digit number, look at the tens column first, then the ones.', 'एक बच्चा स्थानीय मान की तालिका पर पीले ब्लॉक रख रहा है। दो अंकों की संख्या पढ़ते समय पहले दहाई और फिर इकाई वाले खाने का अंक देखें।'),
+    question: t('How would you build 24?', '24 कैसे बनाएँगे?'),
+    answer: t('Set out two tens and four ones. Add one more ten. Now you have three tens and four ones, or 34.', 'दो दहाई और चार इकाई रखें। एक दहाई और जोड़ें। अब तीन दहाई और चार इकाई हैं, यानी 34।'),
   },
   {
     image: 'circulatory-model',
-    name: t('How blood circulates', 'रक्त का संचार'),
-    text: t('Tubes trace a route between a model heart and lungs. A pupil can follow the path with a finger while explaining it to a visitor.', 'हृदय और फेफड़ों के मॉडल में नलियाँ खून का रास्ता दिखाती हैं। बच्चा उँगली से उस रास्ते को दिखाते हुए आगंतुक को समझा सकता है।'),
+    name: t('Tracing the path of blood', 'खून का रास्ता समझना'),
+    text: t('Pupils connected a cardboard heart and lungs with red and blue tubes. You can follow the route from one organ to the other on their model.', 'बच्चों ने गत्ते से बने हृदय और फेफड़ों को लाल और नीली नलियों से जोड़ा। मॉडल में एक अंग से दूसरे तक खून का रास्ता दिखता है।'),
+    question: t('Where does blood go after the lungs?', 'फेफड़ों से खून कहाँ जाता है?'),
+    answer: t('It returns to the heart carrying oxygen. The heart then pumps it to the rest of the body.', 'ऑक्सीजन लेकर खून वापस हृदय में पहुँचता है। फिर हृदय उसे शरीर के बाकी हिस्सों तक भेजता है।'),
   },
   {
     image: 'greenhouse-model',
-    name: t('A greenhouse in miniature', 'ग्रीनहाउस का छोटा मॉडल'),
-    text: t('Trees, buildings and a bright sun share the exhibition table. This model turns an environmental science topic into a scene visitors can look at closely.', 'प्रदर्शनी की मेज़ पर पेड़, इमारतें और चमकता सूरज बने हैं। पर्यावरण विज्ञान के एक विषय को इस मॉडल में पास से देख सकते हैं।'),
+    name: t('Making a miniature greenhouse', 'छोटा ग्रीनहाउस बनाना'),
+    text: t('Painted trees and little cars share the exhibition table with a greenhouse. Beside the yellow sun, pupils put in a clear panel so visitors can look inside.', 'प्रदर्शनी की मेज़ पर रंगीन पेड़, छोटी गाड़ियाँ और एक ग्रीनहाउस रखा है। पीले सूरज के पास बच्चों ने ग्रीनहाउस की दीवार पारदर्शी बनाई है। उससे अंदर झाँक सकते हैं।'),
+    question: t('Why give a greenhouse clear sides?', 'ग्रीनहाउस की दीवारें पारदर्शी क्यों होती हैं?'),
+    answer: t('They let sunlight reach the plants. Look through the clear panel on the model to see the little green plants inside.', 'पारदर्शी दीवारों से धूप पौधों तक पहुँचती है। मॉडल की दीवार से झाँकें तो अंदर छोटे हरे पौधे दिखाई देते हैं।'),
   },
 ];
 
@@ -35,48 +48,26 @@ const streamResults = [
 <section id="exhibitions" class="inside-section" aria-labelledby="exhibits-title">
   <div class="wrap">
     <div class="inside-section-head">
-      <h2 id="exhibits-title">{t('From the exhibition tables', 'प्रदर्शनी की मेज़ों से')}</h2>
+      <h2 id="exhibits-title">{t('What the pupils made', 'बच्चों ने क्या बनाया')}</h2>
       <a class="inside-link" href={pathFor(lang, 'gallery') + '?category=academic#photos'}>
         {t('Learning in photographs', 'पढ़ाई की तस्वीरें')}<span aria-hidden="true"><Arrow/></span>
       </a>
     </div>
-    <div class="inside-photo-series">
+    <div class="inside-photo-series inside-project-stories">
       {exhibits.map(exhibit => (
         <figure class="inside-figure inside-photo-story">
-          <Photo id={exhibit.image} lang={lang} sizes="(min-width: 1350px) 420px, (min-width: 770px) 31vw, 94vw" />
-          <figcaption><strong>{exhibit.name}</strong><span>{exhibit.text}</span></figcaption>
+          <Photo id={exhibit.image} lang={lang} phoneMaxWidth={800} sizes="(min-width: 1350px) 625px, (min-width: 770px) 46vw, 94vw" />
+          <figcaption>
+            <strong>{exhibit.name}</strong><span>{exhibit.text}</span>
+            <details class="inside-exhibit-question"><summary>{exhibit.question}</summary><p>{exhibit.answer}</p></details>
+          </figcaption>
         </figure>
       ))}
     </div>
     <div class="inside-copy exhibit-question">
-      <h3>{t('Let the pupil explain', 'मॉडल को बच्चे की नज़र से देखें')}</h3>
-      <p>{t('At the heart-and-lungs model, try asking, “Where would you start tracing the blood, and where does it go next?” Give the pupil time to point and explain. In a LEAD student-led conference, pupils present their own learning and answer questions. This is a question a family can try with the school photograph.', 'हृदय और फेफड़ों वाले मॉडल को देखकर पूछें, “खून का रास्ता कहाँ से दिखाओगे? फिर वह कहाँ जाएगा?” बच्चे को इशारे से दिखाने और समझाने का समय दें। LEAD के छात्र-नेतृत्व वाले सम्मेलन में विद्यार्थी अपना सीखा हुआ काम समझाते हैं और सवाल लेते हैं। इस तस्वीर के साथ आप घर पर भी यह सवाल आज़मा सकते हैं।')}</p>
-      <a class="inside-link" href="https://leadschool.in/parents/student-events/student-led-conferences/">{t('LEAD’s guide to student-led conferences', 'छात्र-नेतृत्व वाले सम्मेलन पर LEAD की जानकारी')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
-    </div>
-  </div>
-</section>
-
-<section class="inside-section inside-results" id="results" aria-labelledby="results-title">
-  <div class="wrap">
-    <div class="inside-section-head">
-      <h2 id="results-title">{t('RBSE board results, 2026', 'राजस्थान बोर्ड परिणाम 2026')}</h2>
-    </div>
-    <div class="inside-split inside-results__grid">
-      <div class="inside-result">
-        <h3>{t('Class 10', 'कक्षा 10')}</h3>
-        <p class="inside-result__figure">{t('29 of 29 passed', '29 में से 29 उत्तीर्ण')}</p>
-        <p>{t('24 pupils earned a first division. The highest score was 92.17%.', '24 विद्यार्थियों ने प्रथम श्रेणी प्राप्त की। सर्वाधिक अंक 92.17% रहे।')}</p>
-      </div>
-      <div class="inside-result">
-        <h3>{t('Class 12', 'कक्षा 12')}</h3>
-        <p class="inside-result__figure">{t('33 of 33 passed', '33 में से 33 उत्तीर्ण')}</p>
-        <p>{t('The highest score across the three streams was 93%.', 'तीनों संकायों में सर्वाधिक अंक 93% रहे।')}</p>
-        <table class="inside-results__table">
-          <caption class="sr-only">{t('Class 12 results by stream, 2026', '2026 में कक्षा 12 का संकायवार परिणाम')}</caption>
-          <thead><tr><th scope="col">{t('Stream', 'संकाय')}</th><th scope="col">{t('Appeared', 'परीक्षार्थी')}</th><th scope="col">{t('Passed', 'उत्तीर्ण')}</th><th scope="col">{t('Highest score', 'सर्वाधिक अंक')}</th></tr></thead>
-          <tbody>{streamResults.map(row => <tr><th scope="row">{row.stream}</th><td>{row.sat}</td><td>{row.passed}</td><td>{row.high}</td></tr>)}</tbody>
-        </table>
-      </div>
+      <h3>{t('Which model would your child explain?', 'आपका बच्चा कौन-सा मॉडल समझाना चाहेगा?')}</h3>
+      <p>{t('Pick a photograph together. Ask your child to point out one detail and explain what it does. At a student-led conference, the pupil takes questions from visitors.', 'साथ बैठकर एक तस्वीर चुनें। बच्चे से कहें कि मॉडल का कोई एक हिस्सा दिखाकर बताए कि वह कैसे काम करता है। विद्यार्थी सम्मेलन में बच्चे इसी तरह आने वालों के सवालों के जवाब देते हैं।')}</p>
+      <a class="inside-link" href="https://leadschool.in/parents/student-events/student-led-conferences/">{t('LEAD’s guide to student-led conferences', 'विद्यार्थी सम्मेलन के बारे में LEAD की जानकारी (अंग्रेज़ी)')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
     </div>
   </div>
 </section>
@@ -90,16 +81,16 @@ const streamResults = [
     <div class="inside-copy">
       <p>{t('ELGA stands for English Language and General Awareness. In Classes 1–5, children learn English in groups according to their current English level. A child in Class 2 and a child in Class 3 can be in the same group.', 'ELGA का पूरा नाम English Language and General Awareness है। कक्षा 1–5 में अंग्रेज़ी सीखने के लिए समूह बच्चों की मौजूदा समझ के आधार पर बनते हैं। मसलन, दूसरी और तीसरी कक्षा के दो बच्चे एक ही समूह में अंग्रेज़ी सीख सकते हैं।')}</p>
       <p>{t('Veer Patta uses the LEAD programme up to Class 10.', 'वीर पत्ता में कक्षा 10 तक LEAD कार्यक्रम का उपयोग होता है।')}</p>
-      <p>{t('LEAD describes a progression from letter sounds and words to understanding stories and expressing ideas in writing. Ask the school office what your child’s group is practising this term.', 'LEAD की पद्धति में अक्षरों की ध्वनियों और शब्दों से शुरू करके कहानी समझने और अपने विचार लिखने तक अभ्यास किया जाता है। इस सत्र में आपके बच्चे के समूह का अभ्यास क्या है, यह विद्यालय कार्यालय से पूछें।')}</p>
-      <a class="inside-link" href="https://leadschool.in/parents/english-language-and-general-awareness/">{t('How LEAD describes ELGA', 'ELGA के बारे में LEAD से पढ़ें')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+      <p>{t('LEAD describes work on letter sounds, reading and writing. On a visit, ask the teacher what children in each group are practising.', 'LEAD के अनुसार इसमें अक्षरों की ध्वनियाँ पहचानने, पढ़ने और लिखने का अभ्यास होता है। स्कूल आएँ तो शिक्षक से पूछें कि अलग-अलग समूहों के बच्चे अभी क्या सीख रहे हैं।')}</p>
+      <a class="inside-link" href="https://leadschool.in/parents/english-language-and-general-awareness/">{t('How LEAD describes ELGA', 'ELGA के बारे में LEAD से पढ़ें (अंग्रेज़ी)')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
       <details class="family-practice" id="reading-practice">
         <summary>{t('Try a reading activity together', 'साथ मिलकर पढ़ने का एक अभ्यास करें')}</summary>
-        <p>{t('An example for home. Say “map” slowly and listen for its first sound. Read “A map is in my bag.” Where is the map? Replace “map” with another object and say the new sentence aloud.', 'घर पर करने का एक उदाहरण। “map” धीरे बोलें और उसकी पहली ध्वनि सुनें। फिर पढ़ें, “A map is in my bag.” नक्शा कहाँ है? अब “map” की जगह किसी और चीज़ का नाम रखकर नया वाक्य बोलें।')}</p>
+        <p>{t('Say “map” slowly. What sound comes first? Now read ', '“मैप” धीरे बोलें। शुरू में कौन-सी आवाज़ सुनाई दी? अब यह वाक्य पढ़ें ')}<span lang="en">“A map is in my bag.”</span> {t('Where is the map? Try the sentence again with something from your own bag.', 'नक्शा कहाँ है? अपने बैग में रखी किसी और चीज़ का नाम लेकर यही वाक्य फिर बोलें।')}</p>
       </details>
       <details class="family-practice" id="maths-practice">
-        <summary>{t('Build 24 with objects', 'चीज़ों से 24 बनाकर देखें')}</summary>
-        <p>{t('The exhibition photograph shows a place-value chart. At home, make two groups of ten and four single counters. Draw the groups, then write 24. What changes if you take one counter away? This is an example of moving from objects to pictures to symbols, a method LEAD describes for maths.', 'प्रदर्शनी की तस्वीर में स्थानीय मान का चार्ट है। घर पर दस-दस के दो समूह बनाएँ और चार गोटियाँ अलग रखें। समूहों का चित्र बनाएँ, फिर 24 लिखें। एक गोटी हटाने पर क्या बदलेगा? यह वस्तुओं से चित्र और फिर अंकों तक पहुँचने का उदाहरण है। LEAD गणित में इस पद्धति का वर्णन करता है।')}</p>
-        <a class="inside-link" href="https://leadschool.in/school-owner/why-lead/unmatched-curriculum/">{t('LEAD’s subject teaching methods', 'विषय पढ़ाने की LEAD की पद्धतियाँ')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+        <summary>{t('Try the place-value table at home', 'घर पर दहाई और इकाई का खेल खेलें')}</summary>
+        <p>{t('Count out 24 counters. Put ten in one group and ten in another. How many are left? Draw what you made. Now take one counter away and write the new number.', '24 गोटियाँ लें। दस-दस की दो टोलियाँ बनाएँ। कितनी गोटियाँ बचीं? जैसा बनाया, वैसा कागज़ पर बनाएँ। अब एक गोटी हटाकर नई संख्या लिखें।')}</p>
+        <a class="inside-link" href="https://leadschool.in/school-owner/why-lead/unmatched-curriculum/">{t('How LEAD teaches maths with objects and pictures', 'वस्तुओं और चित्रों से गणित सिखाने की LEAD की पद्धति (अंग्रेज़ी)')} <span aria-hidden="true"><Arrow direction="up-right"/></span></a>
       </details>
     </div>
   </div>
@@ -128,10 +119,36 @@ const streamResults = [
             {stage.id === 'middle' && <p>{t('Try this on a visit to the basketball court. Find a corner where two painted lines meet at a right angle. Where is the matching corner across the court?', 'विद्यालय आएँ तो बास्केटबॉल कोर्ट पर देखें। वह कोना खोजें जहाँ दो रेखाएँ मिलकर समकोण बनाती हैं। कोर्ट की दूसरी ओर ऐसा ही कोना कहाँ है?')}</p>}
             {stage.id === 'early-years' && <a class="inside-link" href={pathFor(lang, 'admissions/pre-primary')}>{t('Nursery & KG admissions', 'नर्सरी और केजी में प्रवेश')}<span aria-hidden="true"><Arrow/></span></a>}
             {stage.id === 'primary' && <a class="inside-link" href="#elga">{t('How ELGA groups work', 'ELGA के समूह कैसे बनते हैं')}<span aria-hidden="true">↑</span></a>}
+            {['primary', 'middle', 'secondary'].includes(stage.id) && <a class="inside-link stage-enquiry" href={pathFor(lang, 'admissions') + '#' + stage.id + '-classes'}>{t('Enquire for', 'प्रवेश की जानकारी लें')}{' · '}{stage.label[lang]}<Arrow/></a>}
             {stage.id === 'senior-secondary' && <a class="inside-link" href={pathFor(lang, 'admissions/class-11')}>{t('Class 11 admissions', 'कक्षा 11 में प्रवेश')}<span aria-hidden="true"><Arrow/></span></a>}
           </div>
         </article>
       ))}
+    </div>
+  </div>
+</section>
+
+<section class="inside-section inside-results" id="results" aria-labelledby="results-title">
+  <div class="wrap">
+    <div class="inside-section-head">
+      <h2 id="results-title">{t('RBSE board results, 2026', 'राजस्थान बोर्ड परिणाम 2026')}</h2>
+    </div>
+    <div class="inside-split inside-results__grid">
+      <div class="inside-result">
+        <h3>{t('Class 10', 'कक्षा 10')}</h3>
+        <p class="inside-result__figure">{t('29 of 29 passed', '29 में से 29 उत्तीर्ण')}</p>
+        <p>{t('24 pupils earned a first division. The highest score was 92.17%.', '24 विद्यार्थियों ने प्रथम श्रेणी प्राप्त की। सर्वाधिक अंक 92.17% रहे।')}</p>
+      </div>
+      <div class="inside-result">
+        <h3>{t('Class 12', 'कक्षा 12')}</h3>
+        <p class="inside-result__figure">{t('33 of 33 passed', '33 में से 33 उत्तीर्ण')}</p>
+        <p>{t('The highest score across the three streams was 93%.', 'तीनों संकायों में सर्वाधिक अंक 93% रहे।')}</p>
+        <table class="inside-results__table">
+          <caption class="sr-only">{t('Class 12 results by stream, 2026', '2026 में कक्षा 12 का संकायवार परिणाम')}</caption>
+          <thead><tr><th scope="col">{t('Stream', 'संकाय')}</th><th scope="col">{t('Appeared', 'परीक्षार्थी')}</th><th scope="col">{t('Passed', 'उत्तीर्ण')}</th><th scope="col">{t('Highest score', 'सर्वाधिक अंक')}</th></tr></thead>
+          <tbody>{streamResults.map(row => <tr><th scope="row">{row.stream}</th><td>{row.sat}</td><td>{row.passed}</td><td>{row.high}</td></tr>)}</tbody>
+        </table>
+      </div>
     </div>
   </div>
 </section>

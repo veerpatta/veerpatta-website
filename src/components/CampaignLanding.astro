@@ -48,7 +48,7 @@ const questions = earlyYears ? [
         <a href={pathFor(lang, 'admissions')}>{t('Admissions', 'प्रवेश')}</a><span aria-hidden="true">/</span><span>{segment}</span>
       </nav>
       <h1>{earlyYears ? t('Nursery & KG admissions', 'नर्सरी और केजी में प्रवेश') : t('Class 11 admissions', 'कक्षा 11 में प्रवेश')}</h1>
-      <p class="stage-intro">{earlyYears ? t('Before choosing a first school, families can visit the activity room and ask about entry age, daily routines and fees.', 'बच्चे का पहला स्कूल चुनने से पहले आप गतिविधि कक्ष देख सकते हैं और प्रवेश की उम्र, दिनचर्या और फ़ीस के बारे में पूछ सकते हैं।') : t('Discuss Science, Commerce and Arts with the school office. Check the subject combinations, eligibility and costs before choosing your stream.', 'विज्ञान, वाणिज्य और कला के विकल्पों पर स्कूल कार्यालय से बात करें। अपना संकाय चुनने से पहले विषयों के मेल, पात्रता और खर्च की जानकारी लें।')}</p>
+      <p class="stage-intro">{earlyYears ? t('Come and see the activity room with your child. Ask about the school day, entry age and fees for Nursery, Junior KG or Senior KG.', 'अपने बच्चे के साथ गतिविधि कक्ष देखने आएँ। नर्सरी, जूनियर केजी या सीनियर केजी की दिनचर्या, प्रवेश की उम्र और फ़ीस के बारे में पूछें।') : t('Which subjects have you enjoyed in Class 10? Talk with the office about your options in Science, Commerce and Arts, then check subject combinations, eligibility and fees.', 'कक्षा 10 में आपको कौन-से विषय पसंद आए? विज्ञान, वाणिज्य और कला के विकल्पों पर कार्यालय से बात करें। विषयों के मेल, पात्रता और फ़ीस की जानकारी भी लें।')}</p>
       {earlyYears && <p class="choose-label"><WhatsAppIcon size={18} />{t('Choose a class to open a WhatsApp draft', 'WhatsApp संदेश खोलने के लिए कक्षा चुनें')}</p>}
       <div class="stage-actions">
         {earlyYears ? admissionClassGroups[0].classes.map(grade => <AdmissionClassLink lang={lang} grade={grade} />) : (
@@ -59,8 +59,11 @@ const questions = earlyYears ? [
       </div>
     </div>
     <figure class="stage-photo">
-      <Photo id={earlyYears ? 'first-school-room' : 'science-bench'} lang={lang} eager modern sizes="(min-width: 800px) 42vw, 94vw" />
-      <figcaption>{earlyYears ? t('The early-years activity room, Amet', 'छोटी कक्षाओं का गतिविधि कक्ष, आमेट') : t('Inside the school science laboratory, Amet', 'विद्यालय की विज्ञान प्रयोगशाला, आमेट')}</figcaption>
+      <div class="stage-photo-frame">
+        <Photo id={earlyYears ? 'junior-track-games-2025' : 'greenhouse-exhibition-group'} lang={lang} eager phoneMaxWidth={800}
+          sizes="(min-width: 1460px) 650px, (min-width: 800px) 46vw, 92vw" />
+      </div>
+      <figcaption>{earlyYears ? t('Early-years pupils set off on Sports Day, 10 February 2025.', 'खेल दिवस पर दौड़ शुरू करते छोटी कक्षाओं के बच्चे, 10 फ़रवरी 2025।') : t('Pupils show their greenhouse model at the 2023 student-led conference.', '2023 के विद्यार्थी सम्मेलन में अपना ग्रीनहाउस मॉडल दिखाते विद्यार्थी।')}</figcaption>
     </figure>
   </div>
 </header>
@@ -86,8 +89,8 @@ const questions = earlyYears ? [
 </nav>
 
 <style>
-  .stage-cover { background: var(--cream, #f3ecdf); }
-  .stage-senior { background: #e9eeec; }
+  .stage-cover { --stage-border: #d8ab51; --stage-ink: #6b4b12; background: #fff4df; }
+  .stage-senior { --stage-border: #74a3a6; --stage-ink: #295b63; background: #edf6f4; }
   .stage-cover-layout { display: grid; align-items: center; gap: 1.25rem 5vw; padding-block: clamp(1.35rem, 4.8vw, 4.4rem); }
   .stage-crumb, .choose-label { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; }
   .stage-crumb { font-size: .87rem; margin-bottom: .85rem; }
@@ -97,9 +100,12 @@ const questions = earlyYears ? [
   .choose-label { margin-top: 1rem; font-weight: 650; font-size: .9rem; }
   .stage-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; margin-top: .75rem; }
   .stage-phone { display: inline-flex; align-items: center; min-height: 44px; font-weight: 650; }
-  .stage-photo { min-width: 0; border-bottom: 1px solid #b7ab98; }
-  .stage-photo :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 2; object-fit: cover; border-radius: .25rem; }
-  .stage-photo figcaption { padding-block: .45rem; font-size: .8rem; }
+  .stage-photo { min-width: 0; }
+  .stage-photo-frame { overflow: hidden; aspect-ratio: 16 / 9; border-radius: .45rem 1.8rem .45rem .45rem; box-shadow: .27rem .27rem 0 var(--stage-border); }
+  .stage-senior .stage-photo-frame { aspect-ratio: 2.5; }
+  .stage-photo-frame :global(picture), .stage-photo-frame :global(img) { display: block; width: 100%; height: 100%; }
+  .stage-photo-frame :global(img) { object-fit: cover; }
+  .stage-photo figcaption { padding: .75rem .1rem 0; font-size: .86rem; line-height: 1.5; color: var(--stage-ink); }
   .stage-block { padding-block: clamp(2.45rem, 5.8vw, 5.4rem); }
   .stage-details-layout { display: grid; gap: 1.25rem 5vw; align-items: start; }
   .stage-details-layout h2 { max-width: 16ch; }
@@ -107,11 +113,10 @@ const questions = earlyYears ? [
   .stage-tint { background: var(--cream, #f3ecdf); }
   .stage-links { border-block: 1px solid var(--line, #d8cec0); }
   .stage-links > div { display: flex; flex-wrap: wrap; gap: .25rem 2rem; padding-block: .75rem; }
-  .stage-links a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; color: var(--maroon, #762f39); font-weight: 650; }
+  .stage-links a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; color: var(--blue); font-weight: 650; }
   .stage-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
   @media (min-width: 800px) {
     .stage-cover-layout { grid-template-columns: 1fr 1fr; }
-    .stage-photo :global(img) { aspect-ratio: 1.5; }
     .stage-details-layout { grid-template-columns: minmax(0, .85fr) minmax(0, 1.4fr); }
   }
 </style>

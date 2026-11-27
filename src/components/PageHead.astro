@@ -45,7 +45,7 @@ const { lang, kicker, title, description, image, caption, links = [] } = Astro.p
       </div>
       {image && (
         <figure class="inside-head__media">
-          <Photo id={image} lang={lang} eager sizes="(min-width: 1350px) 650px, (min-width: 770px) 48vw, 94vw" />
+          <Photo id={image} lang={lang} eager phoneMaxWidth={800} sizes="(min-width: 1350px) 650px, (min-width: 770px) 48vw, 94vw" />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
       )}

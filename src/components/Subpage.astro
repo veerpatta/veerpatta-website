@@ -11,6 +11,7 @@ import Photo from './Photo.astro';
 import SchoolLife from './SchoolLife.astro';
 import VisitGuide from './VisitGuide.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
+import WhatsAppQr from './WhatsAppQr.astro';
 
 interface Props { lang: Lang; slug: PageSlug }
 const { lang, slug } = Astro.props;
@@ -19,7 +20,7 @@ const page = pageContent[slug];
 const link = (href: string, en: string, hi: string) => ({ href, label: t(en, hi) });
 const pageLinks = {
   about: [
-    link('#campus', 'Inside the campus', 'परिसर देखें'),
+    link('#campus', 'Pupils at work and play', 'पढ़ाई और खेल की झलक'),
     link(pathFor(lang, 'contact') + '#visit', 'Plan a visit', 'आने की जानकारी'),
   ],
   academics: [
@@ -29,11 +30,13 @@ const pageLinks = {
   ],
   admissions: [],
   beyond: [
-    link('#houses', 'Meet the houses', 'चारों सदन देखें'),
     link('#school-activities', 'Sport and dance', 'खेल और नृत्य'),
+    link('#houses', 'Meet the houses', 'चारों सदन देखें'),
     link('#ncc', 'NCC', 'एनसीसी'),
   ],
-  digital: [],
+  digital: [
+    link('#parent-help', 'Find help with a school link', 'स्कूल के लिंक की जानकारी लें'),
+  ],
   contact: [
     link('tel:' + site.phone, 'Call ' + site.phoneDisplay, 'फ़ोन करें ' + site.phoneDisplay),
     link('#visit', 'Directions to the campus', 'विद्यालय का रास्ता'),
@@ -84,9 +87,11 @@ const services = [
 ];
 ---
 {slug !== 'admissions' && (
+  <div class="inside-article-head">
   <PageHead lang={lang} kicker={page.kicker[lang]} title={page.title[lang]}
     description={page.description[lang]} image={page.image} caption={page.caption?.[lang]}
     links={pageLinks[slug]} />
+  </div>
 )}
 
 {slug === 'admissions' && <Admissions lang={lang} />}
@@ -110,16 +115,16 @@ const services = [
     <section id="computer-learning" class="inside-section inside-soft" aria-labelledby="computer-title">
       <div class="wrap">
         <div class="inside-section-head">
-          <h2 id="computer-title">{t('Computers and circuits', 'कंप्यूटर और सर्किट')}</h2>
+          <h2 id="computer-title">{t('A pupil’s quiz and a teacher workshop', 'विद्यार्थी का क्विज़ और शिक्षकों की कार्यशाला')}</h2>
           <a class="inside-link" href={pathFor(lang, 'academics') + '#exhibitions'}>{t('See pupil projects', 'बच्चों के प्रोजेक्ट देखें')}<span aria-hidden="true"><Arrow/></span></a>
         </div>
         <div class="inside-life-pair">
           <figure class="inside-figure inside-photo-story">
-            <Photo id="computer-lab-wide" lang={lang} sizes="(min-width: 1260px) 585px, (min-width: 770px) 47vw, 94vw" />
-            <figcaption><strong>{t('The computer laboratory', 'कंप्यूटर प्रयोगशाला')}</strong><span>{t('Workstations line the walls of the school’s computer lab. On a visit, families can ask what their child’s class is working on this term.', 'विद्यालय की कंप्यूटर प्रयोगशाला में दीवारों के साथ कंप्यूटर लगे हैं। परिसर आने पर पूछें कि आपके बच्चे की कक्षा इस सत्र में यहाँ क्या सीख रही है।')}</span></figcaption>
+            <Photo id="tablet-quiz" lang={lang} phoneMaxWidth={800} sizes="(min-width: 1260px) 585px, (min-width: 770px) 47vw, 94vw" />
+            <figcaption><strong>{t('Time’s up on the tablet', 'टैबलेट पर क्विज़ का समय पूरा')}</strong><span>{t('At the learning exhibition, a pupil holds a tablet towards the people gathered at the table. A red timer fills the screen at the end of the quiz.', 'विद्यालय की प्रदर्शनी में एक विद्यार्थी मेज़ के पास खड़े लोगों को टैबलेट दिखा रहा है। क्विज़ का समय पूरा होने पर स्क्रीन पर लाल रंग का टाइमर दिखता है।')}</span></figcaption>
           </figure>
           <figure class="inside-figure inside-photo-story">
-            <Photo id="robotics-circuit" lang={lang} sizes="(min-width: 1260px) 585px, (min-width: 770px) 47vw, 94vw" />
+            <Photo id="robotics-circuit" lang={lang} phoneMaxWidth={640} sizes="(min-width: 1260px) 585px, (min-width: 770px) 47vw, 94vw" />
             <figcaption><strong>{t('At a teacher workshop', 'शिक्षकों की कार्यशाला में')}</strong><span>{t('Coloured wires join an Arduino board, a breadboard and a sensor. Teachers worked with this circuit during a robotics training session in 2026.', 'रंगीन तारों से एक आर्डुइनो बोर्ड, ब्रेडबोर्ड और सेंसर जुड़े हैं। 2026 की रोबोटिक्स कार्यशाला में शिक्षकों ने इसी सर्किट पर काम किया।')}</span></figcaption>
           </figure>
         </div>
@@ -146,6 +151,11 @@ const services = [
             <a class="button button-whatsapp" href={admissionWhatsApp(lang)} target="_blank" rel="noopener noreferrer" data-whatsapp-enquiry>
               <WhatsAppIcon />{t('Enquire on WhatsApp', 'WhatsApp पर पूछताछ करें')}
             </a>
+            <p>{t('Parents of our pupils can also ask here about fees, attendance and results.', 'हमारे विद्यार्थियों के अभिभावक यहीं शुल्क, उपस्थिति और परिणाम के बारे में भी पूछ सकते हैं।')}</p>
+            <figure class="inside-contact__qr">
+              <WhatsAppQr label={t('QR code for the school WhatsApp number', 'विद्यालय के WhatsApp नंबर का QR कोड')} />
+              <figcaption>{t('On a computer? Scan this with your phone camera to open the chat.', 'कंप्यूटर पर हैं? चैट खोलने के लिए फ़ोन के कैमरे से यह स्कैन करें।')}</figcaption>
+            </figure>
           </article>
         </div>
       </div>
@@ -194,7 +204,7 @@ const services = [
       <section>
         <h2>{t('The budget planner and your browser', 'बजट कैलकुलेटर और आपका ब्राउज़र')}</h2>
         <p>{t('The planner adds up the figures you enter on your device. Those amounts stay in the open page and are neither stored by the planner nor sent to the school. If you choose Print, your browser opens its print dialog.', 'कैलकुलेटर आपकी लिखी राशियों का जोड़ आपके डिवाइस पर निकालता है। राशियाँ खुले पेज में ही रहती हैं। कैलकुलेटर उन्हें सहेजता या विद्यालय को भेजता नहीं है। प्रिंट चुनने पर आपके ब्राउज़र की प्रिंट विंडो खुलती है।')}</p>
-        <p>{t('Your browser may cache public pages, photographs and other files. Hosting providers may process technical request information to serve and protect this site.', 'आपका ब्राउज़र सार्वजनिक पेज, तस्वीरें और दूसरी फ़ाइलें कैश में रख सकता है। वेबसाइट चलाने और सुरक्षित रखने के लिए होस्टिंग सेवा अनुरोधों से जुड़ी तकनीकी जानकारी संसाधित कर सकती है।')}</p>
+        <p>{t('Your browser may save public pages and photographs so they open again more quickly. Cloudflare delivers this website and measures how its pages load.', 'आपका ब्राउज़र सार्वजनिक पेज और तस्वीरें सहेज सकता है ताकि वे अगली बार जल्दी खुलें। यह वेबसाइट Cloudflare के ज़रिए खुलती है। Cloudflare यह भी मापता है कि पेज कितनी जल्दी खुलते हैं।')}</p>
         {measurementReady
           ? <p>{t('Advertising measurement is optional for visitors aged 18 or over. You can change your choice at any time.', '18 साल या अधिक उम्र के आगंतुक विज्ञापन मापन चालू करने का विकल्प चुन सकते हैं। अपनी पसंद कभी भी बदल सकते हैं।')} <a href="#measurement">{t('Measurement settings', 'मापन की सेटिंग')}</a></p>
           : <p>{t('Advertising measurement is switched off on this website.', 'इस वेबसाइट पर विज्ञापन मापन बंद है।')}</p>}
@@ -215,18 +225,44 @@ const services = [
       <div class="inside-archive">
         <article>
           <time datetime="2026-11-14">{t('14 November 2026', '14 नवंबर 2026')}</time>
-          <div>
-            <h3>{t('Children’s Day', 'बाल दिवस')}</h3>
-            <p>{t('The school shared a Children’s Day greeting on its official Instagram account.', 'विद्यालय ने अपने आधिकारिक Instagram खाते पर बाल दिवस की शुभकामनाएँ साझा कीं।')}</p>
-            <a class="inside-link" href="https://www.instagram.com/reel/DftkPI1lKot/" target="_blank" rel="noopener noreferrer">{t('View the school’s greeting on Instagram', 'Instagram पर विद्यालय का संदेश देखें')}<span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+          <div class="inside-archive-feature">
+            <div>
+              <h3>{t('A classroom moment on Children’s Day', 'बाल दिवस के संदेश में कक्षा की एक झलक')}</h3>
+              <p>{t('A pupil stands beside her desk to speak while her classmates listen. The school included this classroom moment in the Children’s Day film it shared on Instagram.', 'एक छात्रा अपनी बेंच के पास खड़ी होकर बोलती है। उसके सहपाठी सुन रहे हैं। विद्यालय ने कक्षा की यह झलक अपनी बाल दिवस फ़िल्म में शामिल की और उसे Instagram पर साझा किया।')}</p>
+              <a class="inside-link" href="https://www.instagram.com/reel/DftkPI1lKot/" target="_blank" rel="noopener noreferrer">{t('Watch the school’s film on Instagram', 'Instagram पर विद्यालय की फ़िल्म देखें')}<span aria-hidden="true"><Arrow direction="up-right"/></span></a>
+            </div>
+            <figure class="inside-figure">
+              <Photo id="classroom-participation" lang={lang} phoneMaxWidth={640} sizes="(min-width: 960px) 290px, (min-width: 640px) 42vw, 92vw" />
+              <figcaption>{t('From the school’s Children’s Day film, 2026.', 'विद्यालय की बाल दिवस फ़िल्म से, 2026।')}</figcaption>
+            </figure>
           </div>
         </article>
         <article>
           <time datetime="2025-02-10">{t('10 February 2025', '10 फ़रवरी 2025')}</time>
-          <div>
-            <h3>{t('Sports Day at Veer Patta', 'वीर पत्ता का खेल दिवस')}</h3>
-            <p>{t('The Sports Day programme paired morning athletics with afternoon matches. Relays, sack races and tug of war were on the schedule.', 'खेल दिवस के कार्यक्रम में सुबह एथलेटिक्स और दोपहर बाद मैचों का समय था। रिले, बोरी दौड़ और रस्साकशी भी कार्यक्रम में शामिल थीं।')}</p>
-            <a class="inside-link" href={'/news/2025-01-15-sports-day-' + lang + '/'}>{t('Read the Sports Day report', 'खेल दिवस की रिपोर्ट पढ़ें')}<span aria-hidden="true"><Arrow/></span></a>
+          <div class="inside-archive-feature">
+            <div>
+              <h3>{t('Sports Day at Veer Patta', 'वीर पत्ता का खेल दिवस')}</h3>
+              <p>{t('Four young pupils in yellow step out on the chalk lanes at the school sports ground. The day’s programme included relays, sack races and tug of war.', 'विद्यालय के खेल मैदान में पीली टी-शर्ट पहने चार छोटे बच्चे चूने से बनी लेनों में आगे बढ़ते हैं। उस दिन के कार्यक्रम में रिले, बोरी दौड़ और रस्साकशी भी थीं।')}</p>
+              <a class="inside-link" href={'/news/2025-01-15-sports-day-' + lang + '/'}>{t('Read the Sports Day report', 'खेल दिवस की रिपोर्ट पढ़ें')}<span aria-hidden="true"><Arrow/></span></a>
+            </div>
+            <figure class="inside-figure">
+              <Photo id="junior-track-games-2025" lang={lang} phoneMaxWidth={640} sizes="(min-width: 960px) 290px, (min-width: 640px) 42vw, 92vw" />
+              <figcaption>{t('Early-years track games, 10 February 2025.', 'छोटे बच्चों के ट्रैक खेल, 10 फ़रवरी 2025।')}</figcaption>
+            </figure>
+          </div>
+        </article>
+        <article>
+          <time datetime="2023">2023</time>
+          <div class="inside-archive-feature">
+            <div>
+              <h3>{t('Pupils welcome visitors to their conference', 'बच्चों ने सम्मेलन में अपने प्रोजेक्ट दिखाए')}</h3>
+              <p>{t('Pupils welcomed visitors to a language activity with numbered envelopes and slips of paper. At another display, they presented a food pyramid they had made.', 'बच्चों ने नंबर वाले लिफ़ाफ़ों और कागज़ की पर्चियों से आगंतुकों को भाषा की एक गतिविधि में शामिल किया। दूसरी मेज़ पर विद्यार्थियों ने अपना बनाया भोजन-पिरामिड समझाया।')}</p>
+              <a class="inside-link" href={pathFor(lang, 'academics') + '#exhibitions'}>{t('Explore the pupils’ projects', 'बच्चों के प्रोजेक्ट देखें')}<span aria-hidden="true"><Arrow/></span></a>
+            </div>
+            <figure class="inside-figure">
+              <Photo id="language-exhibition" lang={lang} phoneMaxWidth={640} sizes="(min-width: 960px) 290px, (min-width: 640px) 42vw, 92vw" />
+              <figcaption>{t('A visitor tries the pupils’ language activity, 2023.', '2023 में बच्चों की भाषा गतिविधि में भाग लेती एक आगंतुक।')}</figcaption>
+            </figure>
           </div>
         </article>
       </div>
